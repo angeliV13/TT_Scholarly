@@ -19,7 +19,6 @@ function userLogin($user_name, $password, $type){
     }else{
         return 'Incorrect Username/Password';
     }
-
 }
 
 ?>
