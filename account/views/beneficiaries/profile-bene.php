@@ -40,7 +40,10 @@
       
         <!-- BENEFICIARIES INFORMATION -->
         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-
+            <div class = "py-3">
+              <button type="button" class="btn btn-outline-success">Save</button>
+              <button type="button" class="btn btn-outline-warning">Edit Profile</button>
+            </div>
           <!-- PERSONAL INFORMATION -->
           <div class="tab-pane fade show active" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
             <div class="card">
@@ -72,11 +75,8 @@
                         <label for="inputDate" class="form-label">Birth Date</label>
                         <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
                       </div>
-                      <div class="col-md-2 position-relative">
-                        <label for="inputBirthOrder" class="form-label">Birth Order</label>
-                        <input type="inputBirthOrder" class="form-control" id="inputBirthOrder" aria-describedby="inputBirthOrder" value="" required>
-                      </div>
-                      <div class="col-md-6 position-relative">
+                      
+                      <div class="col-md-8 position-relative">
                         <label for="inputBirthPlace" class="form-label">Place of Birth</label>
                         <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
                       </div>
@@ -139,13 +139,13 @@
 
                     <!-- LANGUAGE -->
                     <div class="col-md-3 position-relative">
-                        <label for="inputLanguage" class="form-label">Language</label>
-                        <input type="Language" class="form-control" id="inputLanguage" aria-describedby="inputLanguage" value="" required>
+                        <label for="inputMotherTongue" class="form-label">Mother Tongue</label>
+                        <input type="Language" class="form-control" id="inputMotherTongue" aria-describedby="inputMotherTongue" value="" required>
                     </div>
                     <!-- END LANGUAGE -->
                     
                     <!-- START RELIGION -->
-                    <div class="col-md-3 position-relative">
+                    <div class="col-md-4 position-relative">
                         <label for="inputReligion" class="form-label">Religion</label>
                         <select class="form-select" id="inputReligion" required>
                           <option selected disabled value="">Choose...</option>
@@ -158,20 +158,20 @@
                     <!-- END RELIGION -->
 
                     <!-- SEX -->
-                    <div class="col-md-3 position-relative">
-                        <label for="inputSex" class="form-label">Sex</label>
-                        <select class="form-select" id="inputSex" required>
+                    <div class="col-md-4 position-relative">
+                        <label for="inputGender" class="form-label">Gender</label>
+                        <select class="form-select" id="inputGender" required>
                           <option selected disabled value="">Choose...</option>
                           <option>...</option>
                         </select>
                         <div class="invalid-tooltip">
-                          Please select a valid Sex.
+                          Please select a valid Gender.
                         </div>
                       </div>
                     <!--END SEX -->
 
                     <!--CIVIL STATUS -->
-                      <div class="col-md-3 position-relative">
+                      <div class="col-md-4 position-relative">
                         <label for="inputCivilStatus" class="form-label">Civil Status</label>
                         <select class="form-select" id="inputCivilStatus" required>
                           <option selected disabled value="">Choose...</option>
@@ -221,16 +221,6 @@
                   <form class="row g-4 needs-validation" novalidate>
                       <!-- FULL NAME -->
                       <div class="col-md-6 position-relative">
-                        <label for="inputGraduatingHonors" class="form-label">Are you Graduating with Honors?</label>
-                        <select class="form-select" id="inputGraduatingHonors" required>
-                          <option selected disabled value="">Choose...</option>
-                          <option>...</option>
-                        </select>
-                        <div class="invalid-tooltip">
-                          Please select Yes or No.
-                        </div>
-                      </div>
-                      <div class="col-md-6 position-relative">
                         <label for="inputGraduatingSem" class="form-label">Are you Graduating this Semester/Term?</label>
                         <select class="form-select" id="inputGraduatingSem" required>
                           <option selected disabled value="">Choose...</option>
@@ -238,6 +228,16 @@
                         </select>
                         <div class="invalid-tooltip">
                         Please select Yes or No.
+                        </div>
+                      </div>
+                      <div class="col-md-6 position-relative">
+                        <label for="inputGraduatingHonors" class="form-label">Are you Graduating with Honors?</label>
+                        <select class="form-select" id="inputGraduatingHonors" required>
+                          <option selected disabled value="">Choose...</option>
+                          <option>...</option>
+                        </select>
+                        <div class="invalid-tooltip">
+                          Please select Yes or No.
                         </div>
                       </div>
                       <div class="col-md-4 position-relative">
@@ -776,8 +776,8 @@
                   <!-- Custom Styled Validation with Tooltips -->
                     <form class="row g-4 needs-validation" novalidate>
                       <!-- GENERAL FAMILY INFORMATION -->
-                      <div class="col-md-3 position-relative">
-                        <label for="inputLivingFamily" class="form-label">Living with Family?</label>
+                      <div class="col-md-4 position-relative">
+                        <label for="inputLivingFamily" class="form-label">Are you Living with Family?</label>
                         <select class="form-select" id="inputLivingFamily" required>
                           <option selected disabled value="">Choose...</option>
                           <option>...</option>
@@ -787,6 +787,10 @@
                         <label for="inputFamilyTotal" class="form-label">Total number of Family</label>
                         <input type="FamilyTotal" class="form-control" id="inputFamilyTotal" aria-describedby="inputFamilyTotal" value="" required>
                       </div>
+                      <div class="col-md-2 position-relative">
+                        <label for="inputBirthOrder" class="form-label">Birth Order</label>
+                        <input type="inputBirthOrder" class="form-control" id="inputBirthOrder" aria-describedby="inputBirthOrder" value="" required>
+                      </div>
                       <div class="col-md-3 position-relative">
                         <label for="inputSourceLiving" class="form-label"> Source ofLiving?</label>
                         <select class="form-select" id="inputSourceLiving" required>
@@ -794,14 +798,14 @@
                           <option>...</option>
                         </select>
                       </div>
-                      <div class="col-md-3 position-relative">
+                      <div class="col-md-5 position-relative">
                         <label for="inputHomeType" class="form-label"> Is your Home Rent or Owned?</label>
                         <select class="form-select" id="inputHomeType" required>
                           <option selected disabled value="">Choose...</option>
                           <option>...</option>
                         </select>
                       </div>
-                      <div class="col-md-5 position-relative">
+                      <div class="col-md-8 position-relative">
                         <label for="inputOthers" class="form-label">If not specified in the list, kindly input here.</label>
                         <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
                       </div>
@@ -1401,6 +1405,7 @@
               </div>
             </div>
           </div>
+            
         </div>
         <!-- End Bordered Tabs Justified -->
       </div>

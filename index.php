@@ -60,7 +60,7 @@
           <li><a href="#calendarAct">Calendar of Activities </a></li>
           <li><a href="#headAd">Administrators</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a class="btn-book-a-table" href="#book-a-table">Login</a></li>
+          <li><a class="btn-book-a-table" href="account/index.php">Login</a></li>
         </ul>
       </nav><!-- .navbar -->
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list" style="color: rgb(255, 255, 255);"></i>
