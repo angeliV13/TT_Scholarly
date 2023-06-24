@@ -40,15 +40,12 @@
       
         <!-- BENEFICIARIES INFORMATION -->
         <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-            <div class = "py-3">
-              <button type="button" class="btn btn-outline-success">Save</button>
-              <button type="button" class="btn btn-outline-warning">Edit Profile</button>
-            </div>
+           
           <!-- PERSONAL INFORMATION -->
           <div class="tab-pane fade show active" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
             <div class="card">
               <div class="card-body">
-                  <h5 class="card-title"></h5> 
+                  <h5 class="card-title">Primary Information</h5> 
                   <!-- Custom Styled Validation with Tooltips -->
                     <form class="row g-4 needs-validation" novalidate>
                       <!-- FULL NAME -->
@@ -217,7 +214,7 @@
           <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
             <div class="card">
               <div class="card-body">
-                  <h5 class="card-title"></h5>
+                  <h5 class="card-title"> Genereal Education Information</h5>
                   <form class="row g-4 needs-validation" novalidate>
                       <!-- FULL NAME -->
                       <div class="col-md-6 position-relative">
@@ -270,10 +267,7 @@
             </div>
             <div class="card">
               <div class="card-body">
-                      <input class="form-check-input text-right" type="checkbox" value="" aria-label="...">
-                      First checkbox
                   <h5 class="card-title" >College Level</h5> 
-
                   <!-- Custom Styled Validation with Tooltips -->
                   <form class="row g-4 needs-validation" novalidate>
                     <!-- COLLEGE -->
@@ -772,7 +766,7 @@
           <div class="tab-pane fade" id="bordered-justified-family-background" role="tabpanel" aria-labelledby="family-background">
             <div class="card">
               <div class="card-body">
-                  <h5 class="card-title"></h5> 
+                  <h5 class="card-title">General Family Information</h5> 
                   <!-- Custom Styled Validation with Tooltips -->
                     <form class="row g-4 needs-validation" novalidate>
                       <!-- GENERAL FAMILY INFORMATION -->
@@ -805,7 +799,7 @@
                           <option>...</option>
                         </select>
                       </div>
-                      <div class="col-md-8 position-relative">
+                      <div class="col-md-7 position-relative">
                         <label for="inputOthers" class="form-label">If not specified in the list, kindly input here.</label>
                         <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
                       </div>
@@ -834,10 +828,10 @@
                                   <thead>
                                     <tr class="text-center">
                                       <th>No</th>
-                                      <th>Name of Sibling</th>
-                                      <th>Academic </th>
-                                      <th>Semester</th>
-                                      <th>Year Level</th>
+                                      <th>Name of Sibling (LN/FN/MN)</th>
+                                      <th>Birth Order </th>
+                                      <th>Age</th>
+                                      <th>Occupation</th>
                                       <th>Actions</th>
                                     </tr>
                                   </thead>
@@ -1405,7 +1399,10 @@
               </div>
             </div>
           </div>
-            
+             <div class = "col-md-12 bg-light text-right">
+              <button type="button" class="btn btn-outline-success">Save</button>
+              <button type="button" class="btn btn-outline-warning">Edit Profile</button>
+            </div>
         </div>
         <!-- End Bordered Tabs Justified -->
       </div>
