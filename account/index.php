@@ -9,6 +9,9 @@ else{
   $gn_nav = 'dashboard.php';
 }
 
+// if(isset($_SESSION['student'])){
+  
+
 ?>
 
 <!DOCTYPE html>
@@ -77,3 +80,11 @@ else{
 </body>
 
 </html>
+
+<?php 
+// }
+// else{
+//   header("Location: login.html");
+// }
+
+?>
