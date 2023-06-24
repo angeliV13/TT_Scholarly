@@ -1,16 +1,14 @@
 <?php
-    $host = 'localhost';
-    $user = 'root';
-    $password = '';
-    $database = 'db_scholarsystem';
-    $port = 3306;
+    $dbhost = 'localhost';
+    $dbuser = 'root';
+    $dbpassword = '';
+    $dbdatabase = 'db_scholarsystem';
+    $dbport = 3306;
 
-    $conn=mysqli_connect($host, $user, $password, $database, $port);
+    $conn=mysqli_connect($dbhost, $dbuser, $dbpassword, $dbdatabase, $dbport);
 
     // Check connection
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    }else{
-        echo "It works";
     }
 ?>
