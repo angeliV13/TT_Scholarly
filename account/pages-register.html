@@ -46,7 +46,7 @@
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div class="col-lg-12 col-md-12 d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
@@ -65,45 +65,142 @@
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
-                      <div class="invalid-feedback">Please, enter your name!</div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputFirstName" class="form-label">First name</label>
+                      <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputMiddleName" class="form-label">Middle name</label>
+                      <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputLastName" class="form-label">Last name</label>
+                      <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                      <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                    <div class="col-md-4 position-relative">
+                      <label for="inputDate" class="form-label">Birth Date</label>
+                      <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                    </div>
+                    
+                    <div class="col-md-5 position-relative">
+                      <label for="inputBirthPlace" class="form-label">Place of Birth</label>
+                      <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputReligion" class="form-label">Religion</label>
+                      <select class="form-select" id="inputReligion" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a Religion.
                       </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-md-4 position-relative">
+                      <label for="inputGender" class="form-label">Gender</label>
+                      <select class="form-select" id="inputGender" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Gender.
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 position-relative">
+                      <label for="inputCivilStatus" class="form-label">Civil Status</label>
+                      <select class="form-select" id="inputCivilStatus" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Civil Status.
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 position-relative">
+                      <label for="telephone" class="form-label">Contact Number</label>
+                      <div class="input-group">
+                        <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
+                        <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                    </div>
+                    <div class="col-md-12 position-relative">
+                      <label for="inputAddress" class="form-label">House/Block/Lot No. / Street / Subdivision/Village *</label>
+                      <input type="Address" class="form-control" id="inputAddress" aria-describedby="inputAddress" value="" required>
+                    </div>
+                    <div class="col-md-4 position-relative">
+                      <label for="inputBarangay" class="form-label">Barangay</label>
+                      <select class="form-select" id="inputBarangay" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Barangay.
+                      </div>
+                    </div>
+                    <div class="col-md-4 position-relative">
+                      <label for="inputMunicipality" class="form-label">Municipality</label>
+                      <select class="form-select" id="inputMunicipality" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Municipality.
+                      </div>
+                    </div>
+                    <div class="col-md-4 position-relative">
+                      <label for="inputProvince" class="form-label">Province</label>
+                      <select class="form-select" id="inputProvince" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Province.
+                      </div>
+                    </div>
+                   
+                    <div class="col-6">
+                      <label for="yourEmail" class="form-label">Email Address</label>
+                      <input type="email" name="email" class="form-control" id="yourEmail" required>
+                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                    </div>
+                    <div class="col-6">
+                      <label for="verifyCode" class="form-label">Email Verification Code</label>
+                      <input type="verifyCode" name="verifyCode" class="form-control" id="verifyCode" required>
+                    </div>
+
+                    <div class="col-6">
                       <label for="yourPassword" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-6">
+                      <label for="verifyPassword" class="form-label">Confirm Password</label>
+                      <input type="password" name="password" class="form-control" id="verifyPassword" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-6 justify-content-center">
                       <div class="form-check">
                         <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+                        <label class="form-check-label" for="acceptTerms">I agree and accept the <span><a href="#">terms and conditions</a></span></label>
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Create Account</button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                    <div class="col-12 text-center">
+                      <p class="small row-cols-1 mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
                     </div>
                   </form>
 
