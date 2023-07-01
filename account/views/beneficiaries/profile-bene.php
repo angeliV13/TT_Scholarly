@@ -1399,7 +1399,7 @@
               </div>
             </div>
           </div>
-             <div class = "col-md-12 bg-light text-right">
+             <div class = "float-end">
               <button type="button" class="btn btn-outline-success">Save</button>
               <button type="button" class="btn btn-outline-warning">Edit Profile</button>
             </div>
