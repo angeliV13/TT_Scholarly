@@ -1,18 +1,28 @@
 <?php
 
-include('path_identifier.php');
-
-if (isset($_GET['nav'])) {
-  $gn_nav = get_path($_GET['nav']); // Checks if link is registered
-} else {
-  $gn_nav = 'dashboard.php';
-}
-
 session_start();
 
+// Show the Users Panel if ID is found
 if (isset($_SESSION['id'])) {
+  // Definintion for User Data
+  // USER ID, USERNAME, EMAIL, ACC_TYPE, ACCESS_LVL, ACC_STAT
+  $user_data = [];
 
-  echo ($_SESSION['id']);
+  // Getting the User Info
+  include('controller/njs_get_user_data.php');
+
+  // Getting the Path
+  include('path_identifier.php');
+
+  //Is there a link?
+  if (isset($_GET['nav'])) {
+    // Checks if link is registered
+    $nav      = get_path($_GET['nav'], $user_data[3]);
+  } else {
+    $nav      = get_path('dashboard', $user_data[3]);
+  }
+  //Getting the Appropriate Sidebar
+  $sidebar  = get_sidebar($user_data[3], 0);
 
 ?>
 
@@ -23,7 +33,7 @@ if (isset($_SESSION['id'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <title>Dashboard - Thrive Thomasino Scholarly</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -57,11 +67,9 @@ if (isset($_SESSION['id'])) {
 
     <?php include('header.php'); ?>
 
-    <?php //include('views/sidebar/admin_sidebar.html'); 
-    ?>
-    <?php include('views/sidebar/bene_sidebar.html'); ?>
+    <?php include($sidebar); ?>
 
-    <?php include($gn_nav); ?>
+    <?php include($nav); ?>
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
@@ -90,6 +98,7 @@ if (isset($_SESSION['id'])) {
   </html>
 
 <?php
+  // Redirect to Login
 } else {
   header("Location: login.html");
 }

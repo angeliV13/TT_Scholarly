@@ -7,7 +7,7 @@ $("#login_form").submit(function (event) {
       data: {
         user_name: $("#user_name").val(),
         password: $("#password").val(),
-        type: 2,
+        type: 1,
       },
       success: function (data) {
         if (data == "Success") {
