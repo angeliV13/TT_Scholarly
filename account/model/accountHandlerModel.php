@@ -7,7 +7,11 @@ function userLogin($user_name, $password, $type)
     include("dbconnection.php");
 
     // Checks if Account Exists
-    $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type = '" . $type . "'";
+    if($type <= 1){
+        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= '" . $type . "'";
+    }else{
+        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= '" . $type . "'";
+    }
     $query = mysqli_query($conn, $sql) or die("Error LQ001: " . mysqli_error($conn));
 
     if(mysqli_num_rows($query) <> 0)
