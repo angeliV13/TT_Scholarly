@@ -2,9 +2,9 @@
 
 require("../model/accountHandlerModel.php");
 
-if (isset($_POST['action'])) 
+if (isset($_REQUEST['action'])) 
 {
-    $action = $_POST['action'];
+    $action = $_REQUEST['action'];
 
     if ($action == 1) // Login
     {
@@ -51,5 +51,20 @@ if (isset($_POST['action']))
         {
             echo 'Error RC001: ' . $result;
         }
+    }
+    else if ($action == 3) // Email Confirmation
+    {
+        $data = [
+            'code'      => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
+            'email'     => isset($_REQUEST['email']) ? $_REQUEST['email'] : '',
+        ];
+
+        echo email_confirmation($data);
+    }
+    else if ($action == 4) // Resend Email
+    {
+        $data = [
+            'email'     => isset($_POST['email']) ? $_POST['email'] : '',
+        ];
     }
 }

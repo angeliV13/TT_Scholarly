@@ -375,7 +375,7 @@ include('includes/main.php');
           },
           success: function(response) {
             swal.close();
-            if (response == "Success"){
+            if (response == "Success") {
               Swal.fire({
                 icon: 'success',
                 title: 'Success',
@@ -387,72 +387,7 @@ include('includes/main.php');
                 timer: 2000
               }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
-
-                  Swal.fire({
-                    html : '<p class="text-center">Please enter the code we sent to your email.</p><input type="text" id="code" class="form-control" placeholder="Enter Code" required><div class="invalid-feedback">Please enter the code we sent to your email.</div>',
-                    showCancelButton: true,
-                    confirmButtonText: 'Verify',
-                    cancelButtonText: 'Resend',
-                    showLoaderOnConfirm: true,
-                    preConfirm: (code) => {
-                      return fetch(`controller/accountHandler.php?code=${code}&email=${email}&action=3`)
-                        .then(response => {
-                          if (!response.ok) {
-                            throw new Error(response.statusText)
-                          }
-                          return response.json()
-                        })
-                        .catch(error => {
-                          Swal.showValidationMessage(
-                            `Request failed: ${error}`
-                          )
-                        })
-                    },
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    allowEnterKey: false,
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      if (result.value.status == "Success"){
-                        Swal.fire({
-                          icon: 'success',
-                          title: 'Success',
-                          text: 'Account Verified Successfully! You can now login to your account.',
-                          showConfirmButton: false,
-                          allowOutsideClick: false,
-                          allowEscapeKey: false,
-                          allowEnterKey: false,
-                          timer: 2000
-                        }).then((result) => {
-                          if (result.dismiss === Swal.DismissReason.timer) {
-                            window.location.href = "login.php";
-                          }
-                        })
-                      } else {
-                        Swal.fire({
-                          icon: 'error',
-                          title: 'Oops...',
-                          text: 'Invalid Code!',
-                          showConfirmButton: false,
-                          allowOutsideClick: false,
-                          allowEscapeKey: false,
-                          allowEnterKey: false,
-                          timer: 2000
-                        })
-                      }
-                    } else {
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Code Resent Successfully! Please check your email.',
-                        showConfirmButton: false,
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        allowEnterKey: false,
-                        timer: 2000
-                      })
-                    }
-                  })
+                  emailConfirmation(response, email);
                 }
               })
             } else {
@@ -467,6 +402,160 @@ include('includes/main.php');
         })
       }
     })
+
+    function emailConfirmation(code, email, counter = 0, countdown) {
+      Swal.fire({
+        html: '<p class="text-center">Please enter the code we sent to your email.</p><input type="text" id="code" class="form-control" placeholder="Enter Code" required><div class="invalid-feedback">Please enter the code we sent to your email.</div> <p class="text-center">Didn\'t receive the code? Resend in <b>5:00</b></p>',
+        timer: 300000,
+        timerProgressBar: true,
+        willOpen: () => {
+          Swal.getConfirmButton().removeAttribute('disabled')
+          Swal.getCancelButton().setAttribute('disabled', 'disabled')
+          timerInterval = setInterval(() => {
+            const b = Swal.getHtmlContainer().querySelector('b')
+            if (b) {
+              b.textContent = Math.floor(Swal.getTimerLeft() / 60000) + ":" + Math.floor((Swal.getTimerLeft() % 60000) / 1000)
+            }
+          }, 100)
+
+          if (timerInterval == 0) {
+            Swal.getConfirmButton().setAttribute('disabled', 'disabled')
+            Swal.getCancelButton().removeAttribute('disabled')
+          }
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Verify',
+        cancelButtonText: 'Resend',
+        showLoaderOnConfirm: true,
+        preConfirm: (code) => {
+          let codeVal = document.getElementById("code").value;
+          let rep = "";
+          $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+              code: codeVal,
+              email: email,
+              action: 3
+            },
+            success: function(data) {
+              console.log(data);
+              if (data == "Success") {
+                return data;
+              } else {
+                return data;
+              }
+            }
+          })
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+      }).then((result) => {
+        console.log(result);
+        if (result.isConfirmed) {
+          if (code == "Success") {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Account Verified Successfully! You can now login to your account.',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href = "login.php";
+              }
+            });
+          } else if (code == 'Error EC003: Token Expired') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Token Already Expired!',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                emailConfirmation(code, email, counter, Swal.getTimerLeft());
+              }
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Invalid Code!',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                emailConfirmation(code, email, counter, Swal.getTimerLeft());
+              }
+            })
+          }
+        } else {
+          $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+              email: email,
+              action: 4
+            },
+            beforeSend: function() {
+              Swal.fire({
+                title: 'Please wait...',
+                html: 'Resending Code',
+                allowOutsideClick: false,
+                imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
+                showConfirmButton: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+              })
+            },
+            success: function(data) {
+              if (data == "success") {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success',
+                  text: 'Code Resent Successfully! Please check your email.',
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    emailConfirmation(code, email, counter + 1);
+                  }
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong. Please try again.',
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    emailConfirmation(code, email, counter);
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
+    }
   </script>
 
 </body>

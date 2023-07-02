@@ -81,7 +81,51 @@ function check_exist($email)
     include("dbconnection.php");
 
     $sql = "SELECT * FROM account WHERE email = '" . $email . "'";
-    $query = mysqli_query($conn, $sql) or die("Error CE001: " . mysqli_error($conn));
+    $query = $conn->query($sql);
 
-    return mysqli_num_rows($query);
+    return $query->num_rows;
+}
+
+function email_confirmation($data)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT id, user_id, date_generated FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    if ($query)
+    {
+        $row = $query->fetch_assoc();
+        $id = $row['id'];
+        $user_id = $row['user_id'];
+        $date_generated = $row['date_generated'];
+
+        $timeLeft = getDateTimeDiff($date_generated, date("Y-m-d H:i:s"));
+
+        if ($timeLeft <= 0)
+        {
+            return 'Error EC003: Token Expired';
+        }
+        else
+        {
+            $sql = "UPDATE account SET account_status = 1 WHERE id = '" . $user_id . "' AND account_status = 0 LIMIT 1";
+            $query = $conn->query($sql);
+
+            $sql = "UPDATE email_token SET verified_flag = 1, date_verified = NOW() WHERE id = '" . $id . "' AND token = '" . $data['code'] . "' LIMIT 1";
+            $query = $conn->query($sql);
+
+            if ($query)
+            {
+                echo 'Success';
+            }
+            else
+            {
+                echo 'Error EC002: ' . $conn->error;
+            }
+        }
+    }
+    else
+    {
+        echo 'Error EC001: ' . $conn->error;
+    }
 }
