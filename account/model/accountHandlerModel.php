@@ -8,9 +8,9 @@ function userLogin($user_name, $password, $type)
 
     // Checks if Account Exists
     if($type <= 1){
-        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= '" . $type . "'";
+        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= " . $type ;//. "'";
     }else{
-        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= '" . $type . "'";
+        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= " . $type ;//. "'";
     }
     $query = mysqli_query($conn, $sql) or die("Error LQ001: " . mysqli_error($conn));
 
