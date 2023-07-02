@@ -1,4 +1,4 @@
-$("#login_form").submit(function (event) {
+$("#login_form_a").submit(function (event) {
   event.preventDefault();
   if ($("#user_name").val() != "" && $("#password").val() != "") {
     $.ajax({
@@ -7,7 +7,7 @@ $("#login_form").submit(function (event) {
       data: {
         user_name: $("#user_name").val(),
         password: $("#password").val(),
-        type: 2,
+        type: 1,
         action: 1,
       },
       success: function (data) {
@@ -30,7 +30,7 @@ $("#login_form").submit(function (event) {
   return false;
 });
 
-$("#login_a_form").submit(function (event) {
+$("#login_form_b").submit(function (event) {
   event.preventDefault();
   if ($("#user_name").val() != "" && $("#password").val() != "") {
     $.ajax({
@@ -39,7 +39,7 @@ $("#login_a_form").submit(function (event) {
       data: {
         user_name: $("#user_name").val(),
         password: $("#password").val(),
-        type: 1,
+        type: 2,
         action: 1,
       },
       success: function (data) {

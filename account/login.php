@@ -35,7 +35,7 @@ include('includes/main.php')
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form id="login_form" method="post" class="row g-3 needs-validation">
+                  <form id="login_form_b" method="post" class="row g-3 needs-validation">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
