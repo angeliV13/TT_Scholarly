@@ -1,6 +1,7 @@
 <?php
 
-function get_user_data($id){
+function get_user_data($id)
+{
     include("dbconnection.php");
 
     $user_data = [];
@@ -13,6 +14,7 @@ function get_user_data($id){
     {
         extract($row);
     }  
+    
     array_push($user_data, $id, $user_name, $email, $account_type, $access_level, $account_status);
     
     return $user_data;

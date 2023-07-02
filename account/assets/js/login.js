@@ -3,11 +3,11 @@ $("#login_form").submit(function (event) {
   if ($("#user_name").val() != "" && $("#password").val() != "") {
     $.ajax({
       type: "POST",
-      url: "controller/login.php",
+      url: "controller/accountHandler.php",
       data: {
         user_name: $("#user_name").val(),
         password: $("#password").val(),
-        type: 1,
+        action: 1,
       },
       success: function (data) {
         if (data == "Success") {

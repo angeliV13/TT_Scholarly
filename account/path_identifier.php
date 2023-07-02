@@ -3,8 +3,10 @@
 //Link Checker and Registration
 function get_path($lv_path, $type = '')
 {
-        if ($type == 1) {
-                switch ($lv_path) {
+        if ($type == 1) 
+        {
+                switch ($lv_path) 
+                {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
@@ -49,8 +51,11 @@ function get_path($lv_path, $type = '')
                         default:
                                 return 'error.html';
                 }
-        }elseif($type == 2){
-                switch($lv_path){
+        }
+        elseif ($type == 2)
+        {
+                switch($lv_path)
+                {
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
                         case 'assessment-bene':
@@ -68,8 +73,10 @@ function get_path($lv_path, $type = '')
         }
 }
 
-function get_sidebar($type, $access_level = 0){
-        switch($type){
+function get_sidebar($type, $access_level = 0)
+{
+        switch($type)
+        {
                 case 0:
                         return 'views/sidebar/admin.html';
                 case 1:
@@ -78,5 +85,20 @@ function get_sidebar($type, $access_level = 0){
                         return 'views/sidebar/bene.html';
                 case 4:
                         return 'views/sidebar/bene.html';
+        }
+}
+
+function get_title($page = 'NA')
+{
+        switch($page)
+        {
+                case 0:
+                        return 'Login | Thrive Thomasino Scholarly';
+                case 1:
+                        return 'Register Account | Thrive Thomasino Scholarly';
+                case 2:
+                        return 'Dashboard | Thrive Thomasino Scholarly';
+                default:
+                        return 'Thrive Thomasino Scholarly';
         }
 }
