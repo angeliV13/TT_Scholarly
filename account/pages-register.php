@@ -387,7 +387,6 @@ include('includes/main.php');
                 timer: 2000
               }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
-                  // create an input field where the user can enter the code and a timer for 5 minutes, also add two buttons, resend and verify
 
                   Swal.fire({
                     html : '<p class="text-center">Please enter the code we sent to your email.</p><input type="text" id="code" class="form-control" placeholder="Enter Code" required><div class="invalid-feedback">Please enter the code we sent to your email.</div>',
@@ -396,7 +395,7 @@ include('includes/main.php');
                     cancelButtonText: 'Resend',
                     showLoaderOnConfirm: true,
                     preConfirm: (code) => {
-                      return fetch(`controller/verifyEmail.php?code=${code}&email=${email}&action=3`)
+                      return fetch(`controller/accountHandler.php?code=${code}&email=${email}&action=3`)
                         .then(response => {
                           if (!response.ok) {
                             throw new Error(response.statusText)
