@@ -41,6 +41,7 @@ if (isset($_SESSION['id']))
   </body>
 
   <?php include('includes/libraries/javascript.php') ?>
+  <?php include('includes/libraries/inside_javascript.php') ?>
 
   </html>
 

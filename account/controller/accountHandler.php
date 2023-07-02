@@ -67,4 +67,8 @@ if (isset($_REQUEST['action']))
             'email'     => isset($_POST['email']) ? $_POST['email'] : '',
         ];
     }
+    else if ($action == 5) // Sign Out
+    {
+        echo user_sign_out();
+    }
 }

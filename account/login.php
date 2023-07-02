@@ -5,6 +5,10 @@ include('path_identifier.php');
 
 $title = get_title(0);
 
+session_start();
+
+if(!isset($_SESSION['id'])){
+
 include('includes/main.php') 
 
 ?>
@@ -89,3 +93,12 @@ include('includes/main.php')
 </body>
 
 </html>
+
+<?php
+  // Redirect to Index
+} 
+else 
+{
+  header("Location: index.php");
+}
+?>

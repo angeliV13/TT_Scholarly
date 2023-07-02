@@ -33,6 +33,16 @@ function userLogin($user_name, $password, $type)
     }
 }
 
+function user_sign_out(){
+    session_start();
+    if (isset($_SESSION['id']))
+    {
+        unset($_SESSION['id']);
+        return 'Success';
+    }
+    return 'No Session Found';
+}
+
 function registerAccount($data)
 {
     include("dbconnection.php");
