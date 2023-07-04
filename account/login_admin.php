@@ -5,10 +5,6 @@ include('path_identifier.php');
 
 $title = get_title(0);
 
-session_start();
-
-if(!isset($_SESSION['id'])){
-
 include('includes/main.php') 
 
 ?>
@@ -39,12 +35,12 @@ include('includes/main.php')
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form id="login_form_b" method="post" class="row g-3 needs-validation">
+                  <form id="login_form_a" method="post" class="row g-3 needs-validation">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group ">
-                        <input type="inputUserName" name="username" class="form-control" id="user_name" required>
+                      <div class="input-group has-validation">
+                        <input type="text" name="username" class="form-control" id="user_name" required>
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
                     </div>
@@ -59,18 +55,8 @@ include('includes/main.php')
                       <button id="btn_login" class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12 text-center">
-<<<<<<< HEAD
                       <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
                       <p class=" small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
-=======
-<<<<<<<< HEAD:account/login.html
-                      <p class="small row-cols-1 mb-0">Don't have account? <a href="register.html">Create an Account now!</a></p>
-                      <p class = " small mb-0"> <a href="register.html">Forgot Password</a> </p>
-========
-                      <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
-                      <p class=" small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
->>>>>>>> c30d604d207d76fabc047582db30e67ac3775081:account/login.php
->>>>>>> c30d604d207d76fabc047582db30e67ac3775081
                     </div>
                     <!-- <div class="col-12 text-center">
                       <p class = " small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
@@ -103,12 +89,3 @@ include('includes/main.php')
 </body>
 
 </html>
-
-<?php
-  // Redirect to Index
-} 
-else 
-{
-  header("Location: index.php");
-}
-?>
