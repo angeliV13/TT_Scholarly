@@ -167,15 +167,23 @@
                       </div>
                     </div>
                    
-                    <div class="col-6">
+                    <div class="col-4 position-relative">
                       <label for="yourEmail" class="form-label">Email Address</label>
                       <input type="email" name="email" class="form-control" id="yourEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
-                    <div class="col-6">
-                      <label for="verifyCode" class="form-label">Email Verification Code</label>
+                    <div class="col-md-1 position-relative">
+                      <button type="button" class="btn btn-primary btn-sm">Small</button>
+                    </div>
+
+                    <div class="col-md-4 position-relative">
+                     <label for="verifyCode" class="form-label">Email Verification Code </label>
                       <input type="verifyCode" name="verifyCode" class="form-control" id="verifyCode" required>
                     </div>
+
+                    <div class="col-md-1 position-relative pt-5">
+                      <button type="button" class="btn btn-primary btn-sm">Small</button>
+                    </div> 
 
                     <div class="col-6">
                       <label for="yourPassword" class="form-label">Password</label>
@@ -189,18 +197,19 @@
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
-                    <div class="col-6 justify-content-center">
-                      <div class="form-check">
+                    <div class="col-12 justify-content-center">
+                      <div class="form-check d-flex justify-content-center">
                         <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
                         <label class="form-check-label" for="acceptTerms">I agree and accept the <span><a href="#">terms and conditions</a></span></label>
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                   
+                    <div class="col-12 d-flex justify-content-center">
+                      <p class="small ">Already have an account? <a href="login.html">Log in</a></p>
                     </div>
-                    <div class="col-12 text-center">
-                      <p class="small row-cols-1 mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                    <div class="col-12 d-flex justify-content-center">
+                      <button class="btn btn-primary " type="submit">Create Account</button>
                     </div>
                   </form>
 
