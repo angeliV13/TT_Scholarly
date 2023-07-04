@@ -46,6 +46,12 @@ function get_path($lv_path, $type = '')
 
                         case 'admin-profile':
                                 return 'views/admin/admin-profile.php';
+
+                        case 'app-profile':
+                                return 'views/applicants/app-profile.php';
+
+                        case 'applicants.html':
+                                return 'views/sidebar/applicants.html';
                         default:
                                 return 'error.html';
                 }
@@ -80,3 +86,6 @@ function get_sidebar($type, $access_level = 0){
                         return 'views/sidebar/bene.html';
         }
 }
+
+
+
