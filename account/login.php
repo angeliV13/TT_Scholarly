@@ -59,18 +59,9 @@ include('includes/main.php')
                       <button id="btn_login" class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12 text-center">
-<<<<<<< HEAD
+
                       <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
                       <p class=" small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
-=======
-<<<<<<<< HEAD:account/login.html
-                      <p class="small row-cols-1 mb-0">Don't have account? <a href="register.html">Create an Account now!</a></p>
-                      <p class = " small mb-0"> <a href="register.html">Forgot Password</a> </p>
-========
-                      <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
-                      <p class=" small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
->>>>>>>> c30d604d207d76fabc047582db30e67ac3775081:account/login.php
->>>>>>> c30d604d207d76fabc047582db30e67ac3775081
                     </div>
                     <!-- <div class="col-12 text-center">
                       <p class = " small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>

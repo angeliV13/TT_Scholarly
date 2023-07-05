@@ -48,6 +48,12 @@ function get_path($lv_path, $type = '')
 
                         case 'admin-profile':
                                 return 'views/admin/admin-profile.php';
+                        
+                        case 'app-profile':
+                                return 'views/applicants/app-profile.php';
+                        
+                        case 'applicants':
+                                return 'views/sidebar/applicants.html';
                         default:
                                 return 'error.html';
                 }
@@ -66,6 +72,12 @@ function get_path($lv_path, $type = '')
 
                         case 'renewal-bene':
                                 return 'views/beneficiaries/renewal-bene.php';
+                        
+                        case 'app-profile':
+                                return 'views/applicants/app-profile.php';
+                        
+                        case 'applicants':
+                                return 'views/sidebar/applicants.html';
 
                         default:
                                 return 'error.html';
@@ -85,6 +97,10 @@ function get_sidebar($type, $access_level = 0)
                         return 'views/sidebar/bene.html';
                 case 4:
                         return 'views/sidebar/bene.html';
+                case 5:
+                        return 'views/sidebar/applicants.html';
+                case 6:
+                        return 'views/sidebar/applicants.html';
         }
 }
 
