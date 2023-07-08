@@ -17,7 +17,7 @@
   <div class="column">
     <div class="card">
         <div class="header-group mb-3">
-          <h5 class="card-header bg-primary" style="color:white">FOR INTERVIEW</h5>
+          <h5 class="card-header bg-primary" style="color:white">FOR ASSESSMENT</h5>
         </div>
         <div class="card-body">
           <div class= "table-responsive">

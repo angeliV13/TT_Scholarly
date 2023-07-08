@@ -68,22 +68,25 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
                                 return 'pages-contact.html';
+                        
+                        //      Applicants Section
                         case 'new-applicants':
-                                return 'views/admin/new-applicants.php';
+                                return 'views/admin/applicant_new.php';
+
                         case 'interview':
-                                return 'views/admin/interview.php';
+                                return 'views/admin/applicant_interview.php';
 
                         case 'assessment':
-                                return 'views/admin/assessment.php';
+                                return 'views/admin/applicant_assessment.php';
 
                         case 'examination':
-                                return 'views/admin/examination.php';
+                                return 'views/admin/applicant_examination.php';
 
                         case 'removed-applicants':
-                                return 'views/admin/removed-applicants.php';
+                                return 'views/admin/applicant_removed.php';
 
                         case 'beneficiaries':
-                                return 'views/admin/beneficiaries.php';
+                                return 'views/admin/bene_list.php';
 
                         case 'bene-assessment':
                                 return 'views/admin/bene-assessment.php';
@@ -92,19 +95,19 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/bene-renewal.php';
 
                         case 'removed-bene':
-                                return 'views/admin/removed-bene.php';
+                                return 'views/admin/bene_removed.php';
 
                         case 'graduates':
-                                return 'views/admin/graduates.php';
+                                return 'views/admin/graduates_list.php';
 
                         case 'graduating':
-                                return 'views/admin/graduating.php';
+                                return 'views/admin/graduating_list.php';
 
                         case 'Adaccount-management':
-                                return 'views/admin/Adaccount-management.php';
+                                return 'views/admin/account_management.php';
 
                         case 'admin-profile':
-                                return 'views/admin/admin-profile.php';
+                                return 'views/admin/profile_admin.php';
 
                         case 'app-profile':
                                 return 'maintenance.html';
@@ -124,16 +127,16 @@ function get_path($lv_path, $type = '99')
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
                         case 'assessment-bene':
-                                return 'views/beneficiaries/assessment-bene.php';
+                                return 'views/beneficiaries/assessment_bene.php';
 
                         case 'profile-bene':
-                                return 'views/beneficiaries/profile-bene.php';
+                                return 'views/beneficiaries/profile_bene.php';
 
                         case 'renewal-bene':
-                                return 'views/beneficiaries/renewal-bene.php';
+                                return 'views/beneficiaries/renewal_bene.php';
 
                         case 'app-profile':
-                                return 'views/applicants/app-profile.php';
+                                return 'views/applicants/profile_bene.php';
 
                         case 'applicants':
                                 return 'maintenance.html';
