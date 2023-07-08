@@ -10,7 +10,7 @@ function userLogin($user_name, $password, $type)
 
     $sql = ($type <= 1) ? "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= " . $type : "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= " . $type;
 
-    $query = $conn->query($sql) or die("Error LC001: " . $conn->error);
+    $query = $conn->query($sql) or die("Error LQ001: " . $conn->error);
 
     if($query->num_rows > 0)
     {
@@ -22,6 +22,7 @@ function userLogin($user_name, $password, $type)
         session_start();
 
         $_SESSION['id'] = $id;
+        $_SESSION['account_type'] = $account_type;
 
         return 'Success';
     }
@@ -37,8 +38,18 @@ function user_sign_out()
 
     if (isset($_SESSION['id']))
     {
+        $account_type = $_SESSION['account_type'];
         unset($_SESSION['id']);
-        return 'Success';
+        unset($_SESSION['account_type']);
+        if($account_type>=2){
+            return 'login.php';
+        }
+        else if($account_type<=1)
+        {
+            return 'login_admin.php';
+        }
+
+        
     }
 
     return 'No Session Found';

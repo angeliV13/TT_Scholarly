@@ -14,9 +14,7 @@ $("#sign_out").click(function () {
           action: 5,
         },
         success: function (data) {
-          if (data == "Success") {
-            window.location.href = "index.php";
-          } else {
+          if (data == "No Session Found") {
             Swal.fire({
               title: "Alert!",
               html: data,
@@ -29,6 +27,8 @@ $("#sign_out").click(function () {
                 window.location.href = "index.php";
               }
             });
+          } else {
+            window.location.href = data;
           }
         },
       });
