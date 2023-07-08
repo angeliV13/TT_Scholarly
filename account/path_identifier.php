@@ -3,8 +3,8 @@
 //Link Checker and Registration
 function get_path($lv_path, $type = '99')
 {
-        if ($type == 0)         //Admin
-        {
+        if ($type == 0)         //Super Admin 
+        {                       //NOT FINAL
                 switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
@@ -52,9 +52,10 @@ function get_path($lv_path, $type = '99')
                                 return 'views/applicants/app-profile.php';
 
                         case 'applicants':
-                                return 'views/sidebar/applicants.html';
+                                return 'maintenance.html';
+
                         case 'tts_settings':
-                                return 'views/sidebar/applicants.html';
+                                return 'maintenance.html';
                         default:
                                 return 'error.html';
                 }
@@ -106,12 +107,14 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/admin-profile.php';
 
                         case 'app-profile':
-                                return 'views/applicants/app-profile.php';
+                                return 'maintenance.html';
 
                         case 'applicants':
-                                return 'views/sidebar/applicants.html';
+                                return 'maintenance.html';
+
                         case 'tts_settings':
-                                return 'views/sidebar/applicants.html';
+                                return 'maintenance.html';
+
                         default:
                                 return 'error.html';
                 }
@@ -133,7 +136,7 @@ function get_path($lv_path, $type = '99')
                                 return 'views/applicants/app-profile.php';
 
                         case 'applicants':
-                                return 'views/sidebar/applicants.html';
+                                return 'maintenance.html';
 
                         default:
                                 return 'error.html';
@@ -142,15 +145,15 @@ function get_path($lv_path, $type = '99')
         {
                 switch ($lv_path) {
                         case 'dashboard':
-                                return 'views/beneficiaries/dashboard.php';
+                                return 'maintenance.html';
                         case 'assessment-bene':
-                                return 'views/beneficiaries/assessment-bene.php';
+                                return 'maintenance.html';
 
                         case 'profile-appl':
-                                return 'views/beneficiaries/profile-appl.php';
+                                return 'maintenance.html';
 
                         case 'examination':
-                                return 'views/beneficiaries/examination.php';
+                                return 'maintenance.html';
 
                         default:
                                 return 'error.html';
