@@ -37,20 +37,12 @@ if (isset($_REQUEST['action']))
             'province'          => isset($_POST['provice']) ? $_POST['provice'] : '',
             'city'              => isset($_POST['city']) ? $_POST['city'] : '',
             'barangay'          => isset($_POST['barangay']) ? $_POST['barangay'] : '',
+            'username'          => isset($_POST['username']) ? $_POST['username'] : '',
             'email'             => isset($_POST['email']) ? $_POST['email'] : '',
             'password'          => isset($_POST['password']) ? $_POST['password'] : '',
         ];
 
-        $result = registerAccount($data);
-
-        if ($result == 'Success') 
-        {
-            echo 'Success';
-        } 
-        else 
-        {
-            echo 'Error RC001: ' . $result;
-        }
+        echo registerAccount($data);
     }
     else if ($action == 3) // Email Confirmation
     {
@@ -63,12 +55,28 @@ if (isset($_REQUEST['action']))
     }
     else if ($action == 4) // Resend Email
     {
-        $data = [
-            'email'     => isset($_POST['email']) ? $_POST['email'] : '',
-        ];
+        echo resend_email(isset($_POST['email']) ? $_POST['email'] : '');
     }
     else if ($action == 5) // Sign Out
     {
         echo user_sign_out();
+    }
+    else if ($action == 6) // Delete Account for failed verification
+    {
+        echo delete_account(isset($_POST['email']) ? $_POST['email'] : '');
+    }
+    else if ($action == 7) // Forgot Password
+    {
+        echo forgot_password(isset($_POST['email']) ? $_POST['email'] : '');
+    }
+    else if ($action == 8) // Password Reset
+    {
+        $data = [
+            'code'              => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
+            'email'             => isset($_REQUEST['email']) ? $_REQUEST['email'] : '',
+            'newPassword'       => isset($_REQUEST['newPassword']) ? $_REQUEST['newPassword'] : '',
+        ];
+
+        echo password_reset($data);
     }
 }

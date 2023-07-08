@@ -156,7 +156,13 @@ include('includes/main.php');
                         Please select a valid Barangay.
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
+                      <label for="username" class="form-label">Username</label>
+                      <input type="text" name="Username" class="form-control" id="username">
+                      <div class="invalid-feedback">Please enter a valid Username!</div>
+                    </div>
+
+                    <div class="col-6">
                       <label for="yourEmail" class="form-label">Email Address</label>
                       <input type="email" name="Email Address" class="form-control" id="yourEmail">
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
@@ -273,6 +279,7 @@ include('includes/main.php');
       let middleName = $("#inputMiddleName").val();
       let lastName = check_error(document.getElementById("inputLastName"));
       let suffix = $("#inputSuffix").val();
+      let username = check_error(document.getElementById("username"));
 
       let birthDate = check_error(document.getElementById("inputDate"), options = {
         type: "date",
@@ -338,7 +345,7 @@ include('includes/main.php');
         returnVal: "text"
       });
 
-      if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && email !== undefined && password !== undefined) {
+      if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && username && email !== undefined && password !== undefined) {
         $.ajax({
           url: "controller/accountHandler.php",
           type: "POST",
@@ -358,6 +365,7 @@ include('includes/main.php');
             provice: provice,
             city: city,
             barangay: barangay,
+            username: username,
             email: email,
             password: password,
             action: 2
@@ -387,7 +395,7 @@ include('includes/main.php');
                 timer: 2000
               }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
-                  emailConfirmation(response, email);
+                  emailConfirmation(email);
                 }
               })
             } else {
@@ -403,7 +411,7 @@ include('includes/main.php');
       }
     })
 
-    function emailConfirmation(code, email, counter = 0, countdown) {
+    function emailConfirmation(email, counter = 0) {
       Swal.fire({
         html: '<p class="text-center">Please enter the code we sent to your email.</p><input type="text" id="code" class="form-control" placeholder="Enter Code" required><div class="invalid-feedback">Please enter the code we sent to your email.</div> <p class="text-center">Didn\'t receive the code? Resend in <b>5:00</b></p>',
         timer: 300000,
@@ -414,47 +422,81 @@ include('includes/main.php');
           timerInterval = setInterval(() => {
             const b = Swal.getHtmlContainer().querySelector('b')
             if (b) {
-              b.textContent = Math.floor(Swal.getTimerLeft() / 60000) + ":" + Math.floor((Swal.getTimerLeft() % 60000) / 1000)
-            }
-          }, 100)
+              const hours = Math.floor(Swal.getTimerLeft() / 3600000)
+              const minutes = Math.floor((Swal.getTimerLeft() % 3600000) / 60000)
+              const seconds = Math.floor((Swal.getTimerLeft() % 60000) / 1000)
 
-          if (timerInterval == 0) {
-            Swal.getConfirmButton().setAttribute('disabled', 'disabled')
-            Swal.getCancelButton().removeAttribute('disabled')
-          }
+              if (seconds < 10) {
+                b.textContent = `${minutes}:0${seconds}`
+              } else {
+                b.textContent = `${minutes}:${seconds}`
+              }
+
+              if (Swal.getTimerLeft() == 0) {
+                Swal.getConfirmButton().setAttribute('disabled', 'disabled')
+                Swal.getCancelButton().removeAttribute('disabled')
+              }
+            }
+          }, 100);
         },
         showCancelButton: true,
         confirmButtonText: 'Verify',
         cancelButtonText: 'Resend',
         showLoaderOnConfirm: true,
-        preConfirm: (code) => {
-          let codeVal = document.getElementById("code").value;
-          let rep = "";
-          $.ajax({
-            url: "controller/accountHandler.php",
-            type: "POST",
-            data: {
-              code: codeVal,
-              email: email,
-              action: 3
-            },
-            success: function(data) {
-              console.log(data);
-              if (data == "Success") {
-                return data;
+        preConfirm: (value) => {
+          let code = document.getElementById("code").value;
+
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              if (code.trim() === '') {
+                Swal.showValidationMessage(
+                  `Please enter the code we sent to your email.`
+                )
+                resolve(false);
+                Swal.getCancelButton().addAttribute('disabled', 'disabled');
               } else {
-                return data;
+                $.ajax({
+                  url: "controller/accountHandler.php",
+                  type: "POST",
+                  data: {
+                    code: code,
+                    email: email,
+                    action: 3
+                  },
+                  success: function(data) {
+                    console.log(data);
+                    if (data == "Success") {
+                      resolve("Success");
+                    } else if (data == 'Error EC003: Token Expired') {
+                      Swal.showValidationMessage(
+                        `Token already expired. Please press the resend button to continue.`
+                      );
+                      Swal.getCancelButton().setAttribute('disabled', 'disabled');
+                      resolve(false);
+                    } else if (data == 'Invalid Token') {
+                      Swal.showValidationMessage(
+                        `Error: ${data}`
+                      );
+                      Swal.getCancelButton().setAttribute('disabled', 'disabled');
+                      resolve(false);
+                    }
+                  }
+                })
               }
-            }
-          })
+            }, 1000)
+          });
         },
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
       }).then((result) => {
-        console.log(result);
+        // console.log(code);
         if (result.isConfirmed) {
-          if (code == "Success") {
+          const data = result.value;
+
+          console.log(data);
+
+          if (data == "Success") {
             Swal.fire({
               icon: 'success',
               title: 'Success',
@@ -469,11 +511,11 @@ include('includes/main.php');
                 window.location.href = "login.php";
               }
             });
-          } else if (code == 'Error EC003: Token Expired') {
+          } else {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Token Already Expired!',
+              text: 'Something went wrong. Please try again. Error: ' + data,
               showConfirmButton: false,
               allowOutsideClick: false,
               allowEscapeKey: false,
@@ -481,81 +523,83 @@ include('includes/main.php');
               timer: 2000
             }).then((result) => {
               if (result.dismiss === Swal.DismissReason.timer) {
-                emailConfirmation(code, email, counter, Swal.getTimerLeft());
+                emailConfirmation(email);
+              }
+            })
+          }
+
+        } 
+        else if (result.dismiss === Swal.DismissReason.timer) {
+          resend_email(email, 'Your token has expired. ');
+        } else {
+          resend_email(email);
+        }
+      })
+    }
+
+    function resend_email(email, text = ''){
+      $.ajax({
+        url: "controller/accountHandler.php",
+        type: "POST",
+        data: {
+          email: email,
+          action: 4
+        },
+        beforeSend: function() {
+          Swal.fire({
+            title: 'Please wait...',
+            html: `${text}Resending Code`,
+            allowOutsideClick: false,
+            imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
+            showConfirmButton: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+          })
+        },
+        success: function(data) {
+          if (data == "Success") {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Code Resent Successfully! Please check your email.',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                emailConfirmation(email);
               }
             })
           } else {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Invalid Code!',
+              text: 'Something went wrong. Please register again later. Error: ' + data,
               showConfirmButton: false,
               allowOutsideClick: false,
               allowEscapeKey: false,
               allowEnterKey: false,
               timer: 2000
             }).then((result) => {
-              if (result.dismiss === Swal.DismissReason.timer) {
-                emailConfirmation(code, email, counter, Swal.getTimerLeft());
-              }
+              $.ajax({
+                url : "controller/accountHandler.php",
+                type : "POST",
+                data : {
+                  email : email,
+                  action : 6
+                },
+                success : function(data){
+
+                }
+              })
             })
           }
-        } else {
-          $.ajax({
-            url: "controller/accountHandler.php",
-            type: "POST",
-            data: {
-              email: email,
-              action: 4
-            },
-            beforeSend: function() {
-              Swal.fire({
-                title: 'Please wait...',
-                html: 'Resending Code',
-                allowOutsideClick: false,
-                imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
-                showConfirmButton: false,
-                allowEscapeKey: false,
-                allowEnterKey: false,
-              })
-            },
-            success: function(data) {
-              if (data == "success") {
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Success',
-                  text: 'Code Resent Successfully! Please check your email.',
-                  showConfirmButton: false,
-                  allowOutsideClick: false,
-                  allowEscapeKey: false,
-                  allowEnterKey: false,
-                  timer: 2000
-                }).then((result) => {
-                  if (result.dismiss === Swal.DismissReason.timer) {
-                    emailConfirmation(code, email, counter + 1);
-                  }
-                })
-              } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Something went wrong. Please try again.',
-                  showConfirmButton: false,
-                  allowOutsideClick: false,
-                  allowEscapeKey: false,
-                  allowEnterKey: false,
-                  timer: 2000
-                }).then((result) => {
-                  if (result.dismiss === Swal.DismissReason.timer) {
-                    emailConfirmation(code, email, counter);
-                  }
-                })
-              }
-            }
-          })
         }
       })
     }
+
   </script>
 
 </body>
