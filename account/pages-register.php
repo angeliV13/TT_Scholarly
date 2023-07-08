@@ -183,7 +183,53 @@ include('includes/main.php');
                     <div class="col-6 justify-content-center">
                       <div class="form-check">
                         <input class="form-check-input" name="Terms and Condition" type="checkbox" value="1" id="acceptTerms">
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <span><a href="#">terms and conditions</a></span></label>
+                        <label class="form-check-label" for="acceptTerms">I agree and accept the <span><a href="#" data-bs-toggle="modal" data-bs-target="#modalDialogTerms">Policy and Terms</a></span></label>
+                        <div class="modal fade" id="modalDialogTerms" tabindex="-1">
+                          <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Policy and Terms</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p class="small">
+                                  I declare that all information we provided is true, 
+                                  correct and complete statement pursuant to the provisions of pertinent laws, 
+                                  rules and regulations of the Republic of the Philippines. 
+                                  I authorize the agency head/authorized representative to 
+                                  verify/validate the contents stated herein.
+                                </p>
+                                <h6 class="fs-3 fw-bolder text-center my-3 text-">
+                                  Privacy Statement
+                                </h6>
+                                <p class="small">
+                                The City of Santo Tomas Batangas collects your personal information for the primary 
+                                purpose of providing our services to you, providing information to our clients/or 
+                                endorsing the same to other City of Santo Tomas Batangas department/government/private entities. 
+                                And in accordance with the law, you are entitled to access and rectify your personal data.
+                                
+                                Where reasonable and practicable to do so, 
+                                we will collect your personal information only from you. 
+                                However, in some circumstances we may be provided with information by third parties. 
+                                In such a case we will take reasonable steps to ensure that you are made aware 
+                                of the information provided to us by the third party.
+                                
+                                In terms of security, the City of Santo Tomas Batangas takes technical 
+                                and organizational measures to ensure that all information processed by 
+                                personal information controller is protected from unauthorized access, 
+                                changes or destruction.
+                                
+                                By registering, you are are giving your consent to process your personal information 
+                                based on the Data Protection Policy.
+
+                                </p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>
                     </div>
@@ -528,8 +574,7 @@ include('includes/main.php');
             })
           }
 
-        } 
-        else if (result.dismiss === Swal.DismissReason.timer) {
+        } else if (result.dismiss === Swal.DismissReason.timer) {
           resend_email(email, 'Your token has expired. ');
         } else {
           resend_email(email);
@@ -537,7 +582,7 @@ include('includes/main.php');
       })
     }
 
-    function resend_email(email, text = ''){
+    function resend_email(email, text = '') {
       $.ajax({
         url: "controller/accountHandler.php",
         type: "POST",
@@ -584,13 +629,13 @@ include('includes/main.php');
               timer: 2000
             }).then((result) => {
               $.ajax({
-                url : "controller/accountHandler.php",
-                type : "POST",
-                data : {
-                  email : email,
-                  action : 6
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                  email: email,
+                  action: 6
                 },
-                success : function(data){
+                success: function(data) {
 
                 }
               })
@@ -599,7 +644,6 @@ include('includes/main.php');
         }
       })
     }
-
   </script>
 
 </body>
