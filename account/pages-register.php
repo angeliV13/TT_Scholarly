@@ -244,9 +244,9 @@ include('includes/main.php');
                 </div>
               </div>
 
-              <div class="credits">
+              <!-- <div class="credits">
                 Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
+              </div> -->
 
             </div>
           </div>

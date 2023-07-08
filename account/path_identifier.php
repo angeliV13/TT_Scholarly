@@ -5,8 +5,7 @@ function get_path($lv_path, $type = '99')
 {
         if ($type == 0)         //Admin
         {
-                switch ($lv_path) 
-                {
+                switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
@@ -48,11 +47,13 @@ function get_path($lv_path, $type = '99')
 
                         case 'admin-profile':
                                 return 'views/admin/admin-profile.php';
-                        
+
                         case 'app-profile':
                                 return 'views/applicants/app-profile.php';
-                        
+
                         case 'applicants':
+                                return 'views/sidebar/applicants.html';
+                        case 'tts_settings':
                                 return 'views/sidebar/applicants.html';
                         default:
                                 return 'error.html';
@@ -61,8 +62,7 @@ function get_path($lv_path, $type = '99')
 
         if ($type == 1)         //Admin
         {
-                switch ($lv_path) 
-                {
+                switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
@@ -104,20 +104,20 @@ function get_path($lv_path, $type = '99')
 
                         case 'admin-profile':
                                 return 'views/admin/admin-profile.php';
-                        
+
                         case 'app-profile':
                                 return 'views/applicants/app-profile.php';
-                        
+
                         case 'applicants':
+                                return 'views/sidebar/applicants.html';
+                        case 'tts_settings':
                                 return 'views/sidebar/applicants.html';
                         default:
                                 return 'error.html';
                 }
-        }
-        elseif ($type == 2)     //Beneficiaries        
+        } elseif ($type == 2)     //Beneficiaries        
         {
-                switch($lv_path)
-                {
+                switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
                         case 'assessment-bene':
@@ -128,22 +128,19 @@ function get_path($lv_path, $type = '99')
 
                         case 'renewal-bene':
                                 return 'views/beneficiaries/renewal-bene.php';
-                        
+
                         case 'app-profile':
                                 return 'views/applicants/app-profile.php';
-                        
+
                         case 'applicants':
                                 return 'views/sidebar/applicants.html';
 
                         default:
                                 return 'error.html';
                 }
-        }
-
-        elseif ($type == 3)     //Applicant
+        } elseif ($type == 3)     //Applicant
         {
-                switch($lv_path)
-                {
+                switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
                         case 'assessment-bene':
@@ -163,17 +160,16 @@ function get_path($lv_path, $type = '99')
 
 function get_sidebar($type, $access_level = 0)
 {
-        switch($type)
-        {
+        switch ($type) {
                 case 0:
                         return 'views/sidebar/super_admin.html';
                 case 1:
-                        if($access_level == 1){
+                        if ($access_level == 1) {
                                 return 'views/sidebar/semi_super_admin.html';
-                        }else{
-                                return 'views/sidebar/admin.html';   
+                        } else {
+                                return 'views/sidebar/admin.html';
                         }
-                        
+
                 case 2:
                         return 'views/sidebar/bene.html';
                 case 3:
@@ -183,8 +179,7 @@ function get_sidebar($type, $access_level = 0)
 
 function get_title($page = 'NA')
 {
-        switch($page)
-        {
+        switch ($page) {
                 case 0:
                         return 'Login | Thrive Thomasino Scholarly';
                 case 1:
