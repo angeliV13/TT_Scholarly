@@ -171,7 +171,14 @@
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">
-              <?php echo isset($user_data[1]) ? $user_data[1] : 'No User';  ?>
+              <?php 
+                if(isset($_SESSION['name'])) {
+                  echo $_SESSION['name']; 
+                }elseif(isset($user_data[1])){
+                  echo $user_data[1];
+                }else{
+                  echo 'No User';  
+                }?>
             </span>
           </a><!-- End Profile Image Icon -->
 

@@ -17,12 +17,22 @@ function userLogin($user_name, $password, $type)
         while ($row = $query->fetch_assoc())
         {
             extract($row);
+
         }       
+
+        $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
+
+        $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
+        while ($row = $query->fetch_assoc())
+        {
+            extract($row);
+        } 
 
         session_start();
 
         $_SESSION['id'] = $id;
         $_SESSION['account_type'] = $account_type;
+        $_SESSION['name'] = $first_name . ' ' . $last_name;
 
         return 'Success';
     }
@@ -41,6 +51,7 @@ function user_sign_out()
         $account_type = $_SESSION['account_type'];
         unset($_SESSION['id']);
         unset($_SESSION['account_type']);
+        unset($_SESSION['name']);
         if($account_type>=2){
             return 'login.php';
         }

@@ -116,7 +116,7 @@ function get_path($lv_path, $type = '99')
                                 return 'maintenance.html';
 
                         case 'tts_settings':
-                                return 'maintenance.html';
+                                return 'views/admin/basic_setup.php';
 
                         default:
                                 return 'error.html';
