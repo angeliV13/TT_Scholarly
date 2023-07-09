@@ -1,0 +1,41 @@
+/*--------------------------------------------------------------
+# Upload Button
+--------------------------------------------------------------*/
+.upload_file {
+    position: relative;
+    overflow: hidden;
+    /* font-size: 13px;
+    color: #012970; */
+  }
+  #fileUploadSchoolId{
+    position: absolute;
+    overflow: hidden;
+    font-size: 50px;
+    opacity:0;
+    right:0;
+    top:0;
+  }
+  #fileUploadClearance{
+    position: absolute;
+    overflow: hidden;
+    font-size: 50px;
+    opacity:0;
+    right:0;
+    top:0;
+  }
+  #fileUploadSchoolCor{
+    position: absolute;
+    overflow: hidden;
+    font-size: 50px;
+    opacity:0;
+    right:0;
+    top:0;
+  }
+  #fileUploadGrade{
+    position: absolute;
+    overflow: hidden;
+    font-size: 50px;
+    opacity:0;
+    right:0;
+    top:0;
+  }

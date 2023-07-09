@@ -26,31 +26,13 @@
                       <td>BSU </td>
                       <td>
                         <div class="btn-group-vertical d-flex" >
-                          <!-- <button class="btn btn-primary" data-bs-toggle="modal">View File</button> -->
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
-                            <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                              <div class="modal-dialog modal-dialog-scrollable">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">School ID</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div class="file-loading">
-                                      <input id="input-b7" name="input-b7[]" multiple type="file" class="file" data-allowed-file-extensions='["csv", "txt"]'>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="Delete">Delete</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Not Applicable</button>
-                          <!-- <button class="btn btn-warning" data-bs-toggle="modal">Save</button> -->
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
+                          <!--BUTTON FOR "NOT APPLICABLE"-->
+                          <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
+                          <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
+                          <div class = "upload_file file btn btn-lg btn-primary">Upload
+                            <input id ="fileUploadSchoolId" type="file" name="schoolIdFile" onchange="getFileData(this);"/>
+                          </div>
+                          
                         </div>
                       </td>
                     </tr>
@@ -60,30 +42,29 @@
                       <td>Approved/Rejected</td>
                       <td>BSU </td>
                       <td>
-                        <div class="btn-group-vertical d-flex" >
-                          <!-- <button class="btn btn-primary" data-bs-toggle="modal">View File</button> -->
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
-                            <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                              <div class="modal-dialog modal-dialog-scrollable">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">School ID</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="Delete">Delete</button>
+                      <div class="btn-group-vertical d-flex" >
+                          <!--BUTTON FOR "NOT APPLICABLE"-->
+                          <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
+                          <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
+
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <!--BUTTON FOR "UPLOAD"-->
+                              <button type="button" class="btn btn-warning">Upload</button>
+                              <input class =fileUploadClearance type="file" name="file" onchange="getFileData(this);"/>
+
+                            <!--BUTTON FOR "VIEW FILE"-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
+                              <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">School ID</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Not Applicable</button>
-                          <!-- <button class="btn btn-warning" data-bs-toggle="modal">Save</button> -->
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -93,30 +74,29 @@
                       <td>Approved/Rejected</td>
                       <td>BSU </td>
                       <td>
-                        <div class="btn-group-vertical d-flex" >
-                          <!-- <button class="btn btn-primary" data-bs-toggle="modal">View File</button> -->
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
-                            <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                              <div class="modal-dialog modal-dialog-scrollable">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">School ID</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="Delete">Delete</button>
+                      <div class="btn-group-vertical d-flex" >
+                          <!--BUTTON FOR "NOT APPLICABLE"-->
+                          <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
+                          <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
+
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <!--BUTTON FOR "UPLOAD"-->
+                              <button type="button" class="btn btn-warning">Upload</button>
+                              <input class =fileUploadCor type="file" name="file" onchange="getFileData(this);"/>
+
+                            <!--BUTTON FOR "VIEW FILE"-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
+                              <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">School ID</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Not Applicable</button>
-                          <!-- <button class="btn btn-warning" data-bs-toggle="modal">Save</button> -->
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -126,30 +106,29 @@
                       <td>Approved/Rejected</td>
                       <td>BSU </td>
                       <td>
-                        <div class="btn-group-vertical d-flex" >
-                          <!-- <button class="btn btn-primary" data-bs-toggle="modal">View File</button> -->
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
-                            <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                              <div class="modal-dialog modal-dialog-scrollable">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">School ID</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="Delete">Delete</button>
+                      <div class="btn-group-vertical d-flex" >
+                          <!--BUTTON FOR "NOT APPLICABLE"-->
+                          <input type="checkbox" class="btn-check " id="btn-check-dark" autocomplete="off">
+                          <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
+
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                            <!--BUTTON FOR "UPLOAD"-->
+                              <button type="button" class="btn btn-warning">Upload</button>
+                              <input class =fileUploadGrade type="file" name="file" onchange="getFileData(this);"/>
+
+                            <!--BUTTON FOR "VIEW FILE"-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
+                              <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">School ID</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Not Applicable</button>
-                          <!-- <button class="btn btn-warning" data-bs-toggle="modal">Save</button> -->
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
+                          </div>
                         </div>
                       </td>
                     </tr>
