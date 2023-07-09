@@ -7,15 +7,9 @@ $title = get_title(0);
 
 session_start();
 
-<<<<<<< Updated upstream
 if(isset($_SESSION['id'])) header("Location: index.php");
 
 include('includes/main.php') 
-=======
-if(!isset($_SESSION['id'])){
-
-include('includes/main.php');
->>>>>>> Stashed changes
 
 ?>
 
@@ -65,14 +59,9 @@ include('includes/main.php');
                       <button id="btn_login" class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12 text-center">
-<<<<<<< Updated upstream
 
                       <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
                       <p class=" small mb-0"> <a href="#" id="forgotPass">Forgot Password</a> </p>
-=======
-                      <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
-                      <p class=" small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
->>>>>>> Stashed changes
                     </div>
                     <!-- <div class="col-12 text-center">
                       <p class = " small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
@@ -106,15 +95,3 @@ include('includes/main.php');
 </body>
 
 </html>
-<<<<<<< Updated upstream
-=======
-
-<?php
-  // Redirect to Index
-} 
-else 
-{
-  header("Location: index.php");
-}
-?>
->>>>>>> Stashed changes

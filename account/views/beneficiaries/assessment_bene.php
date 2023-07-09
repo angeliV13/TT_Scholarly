@@ -25,7 +25,7 @@
                       <td>Approved/Rejected</td>
                       <td>BSU </td>
                       <td>
-                        <div class="btn-group d-flex" >
+                        <div class="btn-group-vertical d-flex" >
                           <!-- <button class="btn btn-primary" data-bs-toggle="modal">View File</button> -->
                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
                             <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
