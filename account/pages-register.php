@@ -156,6 +156,7 @@ include('includes/main.php');
                         Please select a valid Barangay.
                       </div>
                     </div>
+<<<<<<< Updated upstream
                     <div class="col-6">
                       <label for="username" class="form-label">Username</label>
                       <input type="text" name="Username" class="form-control" id="username">
@@ -163,6 +164,9 @@ include('includes/main.php');
                     </div>
 
                     <div class="col-6">
+=======
+                    <div class="col-12">
+>>>>>>> Stashed changes
                       <label for="yourEmail" class="form-label">Email Address</label>
                       <input type="email" name="Email Address" class="form-control" id="yourEmail">
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
@@ -279,7 +283,10 @@ include('includes/main.php');
       let middleName = $("#inputMiddleName").val();
       let lastName = check_error(document.getElementById("inputLastName"));
       let suffix = $("#inputSuffix").val();
+<<<<<<< Updated upstream
       let username = check_error(document.getElementById("username"));
+=======
+>>>>>>> Stashed changes
 
       let birthDate = check_error(document.getElementById("inputDate"), options = {
         type: "date",
@@ -345,7 +352,11 @@ include('includes/main.php');
         returnVal: "text"
       });
 
+<<<<<<< Updated upstream
       if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && username && email !== undefined && password !== undefined) {
+=======
+      if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && email !== undefined && password !== undefined) {
+>>>>>>> Stashed changes
         $.ajax({
           url: "controller/accountHandler.php",
           type: "POST",
@@ -365,7 +376,10 @@ include('includes/main.php');
             provice: provice,
             city: city,
             barangay: barangay,
+<<<<<<< Updated upstream
             username: username,
+=======
+>>>>>>> Stashed changes
             email: email,
             password: password,
             action: 2
@@ -395,7 +409,11 @@ include('includes/main.php');
                 timer: 2000
               }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
+<<<<<<< Updated upstream
                   emailConfirmation(email);
+=======
+                  emailConfirmation(response, email);
+>>>>>>> Stashed changes
                 }
               })
             } else {
@@ -411,7 +429,11 @@ include('includes/main.php');
       }
     })
 
+<<<<<<< Updated upstream
     function emailConfirmation(email, counter = 0) {
+=======
+    function emailConfirmation(code, email, counter = 0, countdown) {
+>>>>>>> Stashed changes
       Swal.fire({
         html: '<p class="text-center">Please enter the code we sent to your email.</p><input type="text" id="code" class="form-control" placeholder="Enter Code" required><div class="invalid-feedback">Please enter the code we sent to your email.</div> <p class="text-center">Didn\'t receive the code? Resend in <b>5:00</b></p>',
         timer: 300000,
@@ -422,6 +444,7 @@ include('includes/main.php');
           timerInterval = setInterval(() => {
             const b = Swal.getHtmlContainer().querySelector('b')
             if (b) {
+<<<<<<< Updated upstream
               const hours = Math.floor(Swal.getTimerLeft() / 3600000)
               const minutes = Math.floor((Swal.getTimerLeft() % 3600000) / 60000)
               const seconds = Math.floor((Swal.getTimerLeft() % 60000) / 1000)
@@ -438,11 +461,22 @@ include('includes/main.php');
               }
             }
           }, 100);
+=======
+              b.textContent = Math.floor(Swal.getTimerLeft() / 60000) + ":" + Math.floor((Swal.getTimerLeft() % 60000) / 1000)
+            }
+          }, 100)
+
+          if (timerInterval == 0) {
+            Swal.getConfirmButton().setAttribute('disabled', 'disabled')
+            Swal.getCancelButton().removeAttribute('disabled')
+          }
+>>>>>>> Stashed changes
         },
         showCancelButton: true,
         confirmButtonText: 'Verify',
         cancelButtonText: 'Resend',
         showLoaderOnConfirm: true,
+<<<<<<< Updated upstream
         preConfirm: (value) => {
           let code = document.getElementById("code").value;
 
@@ -485,11 +519,34 @@ include('includes/main.php');
               }
             }, 1000)
           });
+=======
+        preConfirm: (code) => {
+          let codeVal = document.getElementById("code").value;
+          let rep = "";
+          $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+              code: codeVal,
+              email: email,
+              action: 3
+            },
+            success: function(data) {
+              console.log(data);
+              if (data == "Success") {
+                return data;
+              } else {
+                return data;
+              }
+            }
+          })
+>>>>>>> Stashed changes
         },
         allowOutsideClick: false,
         allowEscapeKey: false,
         allowEnterKey: false,
       }).then((result) => {
+<<<<<<< Updated upstream
         // console.log(code);
         if (result.isConfirmed) {
           const data = result.value;
@@ -497,6 +554,11 @@ include('includes/main.php');
           console.log(data);
 
           if (data == "Success") {
+=======
+        console.log(result);
+        if (result.isConfirmed) {
+          if (code == "Success") {
+>>>>>>> Stashed changes
             Swal.fire({
               icon: 'success',
               title: 'Success',
@@ -511,11 +573,19 @@ include('includes/main.php');
                 window.location.href = "login.php";
               }
             });
+<<<<<<< Updated upstream
           } else {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Something went wrong. Please try again. Error: ' + data,
+=======
+          } else if (code == 'Error EC003: Token Expired') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Token Already Expired!',
+>>>>>>> Stashed changes
               showConfirmButton: false,
               allowOutsideClick: false,
               allowEscapeKey: false,
@@ -523,6 +593,7 @@ include('includes/main.php');
               timer: 2000
             }).then((result) => {
               if (result.dismiss === Swal.DismissReason.timer) {
+<<<<<<< Updated upstream
                 emailConfirmation(email);
               }
             })
@@ -600,6 +671,83 @@ include('includes/main.php');
       })
     }
 
+=======
+                emailConfirmation(code, email, counter, Swal.getTimerLeft());
+              }
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Invalid Code!',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                emailConfirmation(code, email, counter, Swal.getTimerLeft());
+              }
+            })
+          }
+        } else {
+          $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+              email: email,
+              action: 4
+            },
+            beforeSend: function() {
+              Swal.fire({
+                title: 'Please wait...',
+                html: 'Resending Code',
+                allowOutsideClick: false,
+                imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
+                showConfirmButton: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+              })
+            },
+            success: function(data) {
+              if (data == "success") {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success',
+                  text: 'Code Resent Successfully! Please check your email.',
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    emailConfirmation(code, email, counter + 1);
+                  }
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong. Please try again.',
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    emailConfirmation(code, email, counter);
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
+    }
+>>>>>>> Stashed changes
   </script>
 
 </body>

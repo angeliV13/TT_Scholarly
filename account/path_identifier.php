@@ -118,3 +118,18 @@ function get_title($page = 'NA')
                         return 'Thrive Thomasino Scholarly';
         }
 }
+
+function get_title($page = 'NA')
+{
+        switch($page)
+        {
+                case 0:
+                        return 'Login | Thrive Thomasino Scholarly';
+                case 1:
+                        return 'Register Account | Thrive Thomasino Scholarly';
+                case 2:
+                        return 'Dashboard | Thrive Thomasino Scholarly';
+                default:
+                        return 'Thrive Thomasino Scholarly';
+        }
+}
