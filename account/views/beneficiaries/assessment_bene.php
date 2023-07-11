@@ -29,10 +29,22 @@
                           <!--BUTTON FOR "NOT APPLICABLE"-->
                           <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
                           <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
-                          <div class = "upload_file file btn btn-lg btn-primary">Upload
-                            <input id ="fileUploadSchoolId" type="file" name="schoolIdFile" onchange="getFileData(this);"/>
+                          <div class="btn-group" role="group" aria-label="Basic example"> 
+                            <div class = "upload_file file btn btn-primary">Upload
+                              <input id ="fileUploadSchoolId" type="file" name="schoolIdFile" onchange="getFileData(this);"/>
+                            </div>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
+                                <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+                                  <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title">School ID</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                           </div>
-                          
                         </div>
                       </td>
                     </tr>
@@ -46,19 +58,16 @@
                           <!--BUTTON FOR "NOT APPLICABLE"-->
                           <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
                           <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
-
-                          <div class="btn-group" role="group" aria-label="Basic example">
-                            <!--BUTTON FOR "UPLOAD"-->
-                              <button type="button" class="btn btn-warning">Upload</button>
-                              <input class =fileUploadClearance type="file" name="file" onchange="getFileData(this);"/>
-
-                            <!--BUTTON FOR "VIEW FILE"-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
+                          <div class="btn-group" role="group" aria-label="Basic example"> 
+                            <div class = "upload_file file btn btn-primary">Upload
+                              <input id ="fileUploadClearance" type="file" name="clearance" onchange="getFileData(this);"/>
+                            </div>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
                               <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title">School ID</h5>
+                                      <h5 class="modal-title">School Clearance</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                   </div>
@@ -74,23 +83,20 @@
                       <td>Approved/Rejected</td>
                       <td>BSU </td>
                       <td>
-                      <div class="btn-group-vertical d-flex" >
+                        <div class="btn-group-vertical d-flex" >
                           <!--BUTTON FOR "NOT APPLICABLE"-->
                           <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
                           <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
-
-                          <div class="btn-group" role="group" aria-label="Basic example">
-                            <!--BUTTON FOR "UPLOAD"-->
-                              <button type="button" class="btn btn-warning">Upload</button>
-                              <input class =fileUploadCor type="file" name="file" onchange="getFileData(this);"/>
-
-                            <!--BUTTON FOR "VIEW FILE"-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
+                          <div class="btn-group" role="group" aria-label="Basic example"> 
+                            <div class = "upload_file file btn btn-primary">Upload
+                              <input id ="fileUploadClearance" type="file" name="schoolIdFile" onchange="getFileData(this);"/>
+                            </div>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
                               <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title">School ID</h5>
+                                      <h5 class="modal-title">Certificate of Registration</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                   </div>
@@ -108,21 +114,18 @@
                       <td>
                       <div class="btn-group-vertical d-flex" >
                           <!--BUTTON FOR "NOT APPLICABLE"-->
-                          <input type="checkbox" class="btn-check " id="btn-check-dark" autocomplete="off">
+                          <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
                           <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
-
-                          <div class="btn-group" role="group" aria-label="Basic example">
-                            <!--BUTTON FOR "UPLOAD"-->
-                              <button type="button" class="btn btn-warning">Upload</button>
-                              <input class =fileUploadGrade type="file" name="file" onchange="getFileData(this);"/>
-
-                            <!--BUTTON FOR "VIEW FILE"-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
+                          <div class="btn-group" role="group" aria-label="Basic example"> 
+                            <div class = "upload_file file btn btn-primary">Upload
+                              <input id ="fileUploadClearance" type="file" name="schoolIdFile" onchange="getFileData(this);"/>
+                            </div>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
                               <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title">School ID</h5>
+                                      <h5 class="modal-title">Grade Report</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                   </div>
