@@ -23,6 +23,7 @@ if (isset($_SESSION['id']))
 
   //Getting the Appropriate Sidebar
   $sidebar  = get_sidebar($user_data[3], 0);
+  
 
 ?>
 

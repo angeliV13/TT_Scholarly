@@ -32,7 +32,7 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
+  <!-- x
   * Template Name: Yummy
   * Updated: May 30 2023 with Bootstrap v5.3.0
   * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/

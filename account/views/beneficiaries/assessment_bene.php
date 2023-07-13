@@ -3,7 +3,7 @@
   <div class="column">
     <div class="card">
         <div class="header-group mb-3">
-          <h5 class="card-header bg-primary d-flex justify-content-center" style="color:white">Assessment Requirements</h5>
+          <h5 class="card-header bg-primary" style="color:white">Assessment Requirements</h5>
         </div>
         <div class="card-body">
           <div class= "table-responsive">

@@ -48,14 +48,12 @@ function get_path($lv_path, $type = '99')
                         case 'admin-profile':
                                 return 'views/admin/admin-profile.php';
 
-                        case 'app-profile':
-                                return 'views/applicants/app-profile.php';
-
                         case 'applicants':
                                 return 'maintenance.html';
 
                         case 'tts_settings':
                                 return 'maintenance.html';
+                                
                         default:
                                 return 'error.html';
                 }
@@ -124,8 +122,10 @@ function get_path($lv_path, $type = '99')
         } elseif ($type == 2)     //Beneficiaries        
         {
                 switch ($lv_path) {
+
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
+
                         case 'assessment-bene':
                                 return 'views/beneficiaries/assessment_bene.php';
 
@@ -147,13 +147,15 @@ function get_path($lv_path, $type = '99')
         } elseif ($type == 3)     //Applicant
         {
                 switch ($lv_path) {
-                        case 'dashboard':
-                                return 'maintenance.html';
-                        case 'assessment-bene':
-                                return 'maintenance.html';
 
-                        case 'profile-appl':
-                                return 'maintenance.html';
+                        case 'dashboard_applicant':
+                                return 'views/applicants/dashboard_applicant.php';
+
+                        case 'profile_applicant':
+                                return 'views/applicants/profile_applicant.php';
+
+                        case 'app-profile':
+                                return 'views/applicants/profile_bene.php';
 
                         case 'examination':
                                 return 'maintenance.html';
@@ -169,6 +171,7 @@ function get_sidebar($type, $access_level = 0)
         switch ($type) {
                 case 0:
                         return 'views/sidebar/super_admin.html';
+
                 case 1:
                         if ($access_level == 1) {
                                 return 'views/sidebar/semi_super_admin.html';
