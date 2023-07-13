@@ -54,11 +54,12 @@ $('#btn_na_Grade').click(function (){
 function getFileData(myFile){
     var file  = myFile.files[0];
     var filename = file.name;
-    alert(filename);
+    // alert(filename);
 }
 
 
 //  Saving
-$('#btn_na_SchoolId').click(function (){
-
+$('#submitAssessment').click(function (){
+    // var schoolIdFile = $('#fileUploadSchoolId').files[0];
+    // alert(schoolIdFile.name);
 });
