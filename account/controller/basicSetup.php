@@ -7,7 +7,16 @@ require("../model/basicSetupModel.php");
         $action = $_REQUEST['action'];
 
         switch ($action){
-            case 1:     //Generate Academic Year
+            case 1: 
+                if(isset($_REQUEST['getTable'])){   //Table Generations
+                    $getTable = $_REQUEST['getTable'];
+                    if($getTable == 1)                      //Generate Acad Year Table
+                    {
+                        echo getAcadYearTable();
+                    }
+                }
+                break;
+            case 2:                                 //Generate Academic Year
                 echo generate_ay();
         }
     }

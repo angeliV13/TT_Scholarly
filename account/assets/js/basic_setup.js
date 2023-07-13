@@ -1,3 +1,36 @@
+$(document).ready(function () {
+  let acadYearTable = $("#acad_year_table").DataTable({
+    lengthChange: false,
+    searching: false,
+    ordering: false,
+    serverSide: true,
+    processing: true,
+    ajax: {
+      url: "controller/basicSetup.php",
+      type: "POST", 
+      data: {
+        action      : 1,
+        getTable    : 1,
+      },
+      // success: function (row, data, index) {
+      //   console.log(row);
+      //   console.log(data);
+      //   console.log(index);
+      // },
+      error: function (data) {
+        console.log(data);
+      },
+    },
+    createdRow: function (row, data, index) {},
+    columnDefs: [],
+    bInfo: false,
+    paging: false,
+    fixedColumns: false,
+    deferRender: false,
+    stateSave: false,
+  });
+});
+
 $("#generate_ay").on("click", function (e) {
   Swal.fire({
     title: "Generate Academic Year?",
@@ -11,7 +44,7 @@ $("#generate_ay").on("click", function (e) {
         type: "POST",
         url: "controller/basicSetup.php",
         data: {
-          action: 1,
+          action: 2,
         },
         success: function (data) {
           if (data == "Insert Success") {
@@ -22,10 +55,10 @@ $("#generate_ay").on("click", function (e) {
             });
           } else {
             Swal.fire({
-                title: "Error!",
-                icon: 'error',
-                html: data,
-              });
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
           }
         },
       });

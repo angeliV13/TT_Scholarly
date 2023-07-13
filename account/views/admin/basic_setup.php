@@ -17,20 +17,20 @@
                             </div>
 
                         </div>
-                        <div id="acad_table_view" class="table-responsive nav-content collapse">
+                        <div id="acad_table_view" class="table-responsive nav-content ">
 
                             <!-- Table with stripped rows -->
-                            <table class="table table-striped" width="200%" cellspacing="200%">
+                            <table id="acad_year_table" class="table datatable table-striped" width="100%" >
                                 <thead>
-                                    <tr class="small text-center">
-                                        <th>No</th>
-                                        <th>Academic Year</th>
-                                        <th>Created by</th>
-                                        <th class="text-center">Actions</th>
+                                    <tr class="small">
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Academic Year</th>
+                                        <th class="text-center">Created by</th>
+                                        <th class="text-center" style="width: 30%;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
-                                    <tr>
+                                    <!-- <tr>
                                         <th scope="row">1</th>
                                         <td>2021 - 2022</td>
                                         <td>Super Admin 1
@@ -38,7 +38,7 @@
                                             <span class="small">May 6, 2023</span>
                                         </td>
                                         <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
+                                            <div class="row mx-auto">
                                                 <a href="#" class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="#ay_default_modal">Make Default</a>
                                                 <a href="#" class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="#ay_delete_modal">Delete</a>
                                             </div>
@@ -52,12 +52,12 @@
                                             <span class="small">May 7, 2023</span>
                                         </td>
                                         <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
+                                            <div class="row mx-auto">
                                                 <button class="col-6 btn btn-warning disabled" data-bs-toggle="modal" data-bs-target="">Default</button>
                                                 <button class="col-6 btn btn-danger disabled" data-bs-toggle="modal" data-bs-target="">Delete</button>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
