@@ -5,6 +5,10 @@ include('path_identifier.php');
 
 $title = get_title(0);
 
+
+if(isset($_SESSION['id'])) header("Location: index.php");
+
+
 include('includes/main.php') 
 
 ?>

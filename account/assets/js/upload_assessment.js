@@ -59,7 +59,79 @@ function getFileData(myFile){
 
 
 //  Saving
-$('#submitAssessment').click(function (){
-    // var schoolIdFile = $('#fileUploadSchoolId').files[0];
-    // alert(schoolIdFile.name);
+$('#submitAssessment').submit(function (e){
+    var schoolIdCheck   = $('#fileUploadSchoolId').prop('disabled');
+    var clearanceCheck  = $('#fileUploadClearance').prop('disabled');
+    var corCheck        = $('#fileUploadCor').prop('disabled');
+    var gradeCheck      = $('#fileUploadGrade').prop('disabled');
+    var schoolIdFile    = document.getElementById('fileUploadSchoolId').files[0];
+    var clearanceFile   = document.getElementById('fileUploadClearance').files[0];
+    var corFile         = document.getElementById('fileUploadCor').files[0];
+    var gradeFile       = document.getElementById('fileUploadGrade').files[0];
+    var validSchoolId   = false;
+    var validClearance  = false;
+    var validCor        = false;
+    var validGrade      = false;
+
+    //Validation
+    validSchoolId   = getFileChecks( schoolIdCheck     , schoolIdFile );
+    validClearance  = getFileChecks( clearanceCheck    , clearanceFile);
+    validCor        = getFileChecks( corCheck          , corFile      );
+    validGrade      = getFileChecks( gradeCheck        , gradeFile    );    
+
+    //Check if Requirements are Submitted
+    if(validSchoolId == false || validClearance == false || validCor == false || validGrade == false){
+        Swal.fire({
+            title: "Missing Assessment",
+            text: "Assessments documents are missing",
+            icon: "error",
+        });
+    }else{
+        Swal.fire({
+            title: "Submit Assessment?",
+            text: "Are you sure you want to submit your assessment requirements? This cannot be undone",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Submit",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $.ajax({
+                type: "POST",
+                url: "controller/uploadRequirements.php",
+                data: {
+                  action    :   1,
+                },
+                success: function (data) {
+                  if (data == "Insert Success") {
+                    Swal.fire({
+                      title: "Success!",
+                      icon: "success",
+                      html: "Upload Success",
+                    });
+                  } else {
+                    Swal.fire({
+                      title: "Error!",
+                      icon: "error",
+                      html: data,
+                    });
+                  }
+                },
+              });
+            }
+          });
+    }
+ 
+    return false;
 });
+
+function getFileChecks(check , file){
+    if(check    == false){
+        if(file != undefined){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }    
+}

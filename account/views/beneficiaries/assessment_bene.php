@@ -7,7 +7,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <form>
+          <form id="submitAssessment">
             <!-- Table with stripped rows -->
             <table class="table table-bordered table-hover" id="viewAdmin" width="100%" cellspacing="0">
               <thead>
@@ -139,7 +139,7 @@
               </tbody>
             </table>
             <div class="d-grid gap-2 col-6 mx-auto">
-              <button id="submitAssessment" type="submit" class="btn btn-primary">Save</button>
+              <button id="" type="submit" class="btn btn-primary">Save</button>
             </div>
           </form>
         </div>
