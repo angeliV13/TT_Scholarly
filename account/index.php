@@ -7,23 +7,28 @@ $title = get_title();
 
 session_start();
 
+if (!isset($_SESSION['id'])) header("Location: login.php");
+
 // Show the Users Panel if ID is found
-if (isset($_SESSION['id'])) 
-{
-  // Definintion for User Data
-  // USER ID, USERNAME, EMAIL, ACC_TYPE, ACCESS_LVL, ACC_STAT
-  $user_data = [];
 
-  // Getting the User Info
-  include('controller/njs_get_user_data.php');
+// Definintion for User Data
+// USER ID, USERNAME, EMAIL, ACC_TYPE, ACCESS_LVL, ACC_STAT
+$user_data = [];
 
-  //Is there a link?
+// Getting the User Info
+include('controller/njs_get_user_data.php');
 
-  $nav = isset($_GET['nav']) ? get_path($_GET['nav'], $user_data[3]) : get_path('dashboard', $user_data[3]); // 1st check if there is a link, if not, go to dashboard
+//Is there a link?
 
-  //Getting the Appropriate Sidebar
-  $sidebar  = get_sidebar($user_data[3], 0);
-  
+$nav = isset($_GET['nav']) ? get_path($_GET['nav'], $user_data[3]) : get_path('dashboard', $user_data[3]); // 1st check if there is a link, if not, go to dashboard
+
+//Getting the Appropriate Sidebar
+$sidebar  = get_sidebar($user_data[3], 0);
+
+$notification = show_notification();
+
+$notifCount = $notification['count'];
+$notifBody = $notification['body']; 
 
 ?>
 
@@ -43,15 +48,6 @@ if (isset($_SESSION['id']))
 
   <?php include('includes/libraries/javascript.php') ?>
   <?php include('includes/libraries/inside_javascript.php') ?>
+  <script src="assets/js/table.js"></script>
 
   </html>
-
-<?php
-  // Redirect to Login
-} 
-else 
-{
-  header("Location: login.php");
-}
-
-?>

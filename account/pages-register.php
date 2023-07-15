@@ -35,7 +35,7 @@ include('includes/main.php');
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate id="register">
+                  <form class="row g-3" novalidate id="register">
                     <div class="col-md-3 position-relative">
                       <label for="inputFirstName" class="form-label">First name</label>
                       <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" name="First Name">

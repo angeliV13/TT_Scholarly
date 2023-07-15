@@ -1,5 +1,7 @@
 <?php
 
+include("functionModel.php");
+
 function get_user_data($id)
 {
     include("dbconnection.php");

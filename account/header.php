@@ -29,11 +29,13 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
+            <?php echo ($notifCount > 0 AND $notifCount != null) ? '<span class="badge bg-primary badge-number">' . $notifCount . '</span>' : ''; ?> 
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
+            <?php echo $notifBody; ?>
+            
+            <!-- <li class="dropdown-header">
               You have 4 new notifications
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
@@ -91,10 +93,11 @@
 
             <li>
               <hr class="dropdown-divider">
-            </li>
+            </li
             <li class="dropdown-footer">
               <a href="#">Show all notifications</a>
-            </li>
+            </li> -->
+        
 
           </ul><!-- End Notification Dropdown Items -->
 

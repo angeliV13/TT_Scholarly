@@ -5,7 +5,8 @@ function get_path($lv_path, $type = '99')
 {
         if ($type == 0)         //Super Admin 
         {                       //NOT FINAL
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
@@ -61,7 +62,8 @@ function get_path($lv_path, $type = '99')
 
         if ($type == 1)         //Admin
         {
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
@@ -119,9 +121,11 @@ function get_path($lv_path, $type = '99')
                         default:
                                 return 'error.html';
                 }
-        } elseif ($type == 2)     //Beneficiaries        
+        } 
+        elseif ($type == 2)     //Beneficiaries        
         {
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
 
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
@@ -144,9 +148,11 @@ function get_path($lv_path, $type = '99')
                         default:
                                 return 'error.html';
                 }
-        } elseif ($type == 3)     //Applicant
+        } 
+        elseif ($type == 3)     //Applicant
         {
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
 
                         case 'dashboard_applicant':
                                 return 'views/applicants/dashboard_applicant.php';
@@ -168,14 +174,18 @@ function get_path($lv_path, $type = '99')
 
 function get_sidebar($type, $access_level = 0)
 {
-        switch ($type) {
+        switch ($type) 
+        {
                 case 0:
                         return 'views/sidebar/super_admin.html';
 
                 case 1:
-                        if ($access_level == 1) {
+                        if ($access_level == 1) 
+                        {
                                 return 'views/sidebar/semi_super_admin.html';
-                        } else {
+                        } 
+                        else 
+                        {
                                 return 'views/sidebar/admin.html';
                         }
 
@@ -188,7 +198,8 @@ function get_sidebar($type, $access_level = 0)
 
 function get_title($page = 'NA')
 {
-        switch ($page) {
+        switch ($page) 
+        {
                 case 0:
                         return 'Login | Thrive Thomasino Scholarly';
                 case 1:
