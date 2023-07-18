@@ -1,6 +1,6 @@
 // script.js
 
-function updateYearLevelOptions() {
+function examYearLevelOptions() {
     const educationLevelSelect = document.getElementById("inputEducationLevel");
     const yearLevelSelect = document.getElementById("inputYearLevel");
   
@@ -8,16 +8,16 @@ function updateYearLevelOptions() {
   
     if (educationLevelSelect.value === "College") {
       // Display options for college year levels
-      const collegeYearLevels = [" ", "1st Year", "2nd Year", "3rd Year", "4th Year","All Year Level"];
-      collegeYearLevels.forEach(function (yearLevel) {
+      const collegeYearLevels = ["1st Year", "2nd Year", "3rd Year", "4th Year", "All Year Level"];
+      collegeYearLevels.forEach(function(yearLevel) {
         const option = document.createElement("option");
         option.text = yearLevel;
         yearLevelSelect.add(option);
       });
     } else {
       // Display options for non-college year levels
-      const seniorHighSchoolYearLevels = [" ", "Grade 11", "Grade 12","All Year Level"];
-      seniorHighSchoolYearLevels.forEach(function (yearLevel) {
+      const seniorHighSchoolYearLevels = ["Grade 11", "Grade 12", "All Year Level"];
+      seniorHighSchoolYearLevels.forEach(function(yearLevel) {
         const option = document.createElement("option");
         option.text = yearLevel;
         yearLevelSelect.add(option);
@@ -25,5 +25,5 @@ function updateYearLevelOptions() {
     }
   }
   
-  updateYearLevelOptions();
+  examYearLevelOptions();
   

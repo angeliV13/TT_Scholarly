@@ -48,10 +48,21 @@
                                     <h6 class="font-bold">Education Level:</h6>
                                 </label>
                                 <div class="col-sm-4 mt-4">
-                                    <select class="form-select" id="inputEducationLevel" onchange="updateYearLevelOptions()">
+                                    <select class="form-select" id="inputEducationLevel">
                                         <option selected disabled value="">Choose</option>
                                         <option>Senior High School</option>
                                         <option>College</option>
+                                    </select>
+                                </div>
+
+                                <label for="inputSchool" class="col-sm-2 col-form-label mt-4">
+                                    <h6 class="font-bold">Name of School</h6>
+                                </label>
+                                <div class="col-sm-4 mt-4">
+                                    <select class="form-select" id="inputSchool" onchange="updateYearLevelOptions()">
+                                        <option selected disabled value="">Choose</option>
+                                        <option>BSU</option>
+                                        <option>FAITH</option>
                                     </select>
                                 </div>
 

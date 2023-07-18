@@ -52,6 +52,9 @@ function get_path($lv_path, $type = '99')
                         case 'applicants':
                                 return 'maintenance.html';
 
+                        case 'exam_settings':
+                                return 'views/admin/exam_settings.php';
+
                         case 'tts_settings':
                                 return 'maintenance.html';
                                 
@@ -114,6 +117,9 @@ function get_path($lv_path, $type = '99')
 
                         case 'applicants':
                                 return 'maintenance.html';
+
+                        case 'exam_settings':
+                                return 'views/admin/exam_settings.php';
 
                         case 'tts_settings':
                                 return 'views/admin/basic_setup.php';
