@@ -2,6 +2,22 @@
 
 include("functionModel.php");
 
+function getUserNameFromId($id){
+    include("dbconnection.php");
+
+    // Checks if Account Exists
+
+    $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
+
+    $query = $conn->query($sql) or die("Error UAQ000: " . $conn->error);
+    while ($row = $query->fetch_assoc())
+    {
+        extract($row);
+    } 
+
+    return $first_name . ' ' . $last_name;
+}
+
 function userLogin($user_name, $password, $type)
 {
     include("dbconnection.php");
@@ -20,19 +36,19 @@ function userLogin($user_name, $password, $type)
 
         }       
 
-        $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
+        // $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
 
-        $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
-        while ($row = $query->fetch_assoc())
-        {
-            extract($row);
-        } 
+        // $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
+        // while ($row = $query->fetch_assoc())
+        // {
+        //     extract($row);
+        // } 
 
         session_start();
 
         $_SESSION['id'] = $id;
         $_SESSION['account_type'] = $account_type;
-        $_SESSION['name'] = $first_name . ' ' . $last_name;
+        $_SESSION['name'] = getUserNameFromId($id);
 
         return 'Success';
     }

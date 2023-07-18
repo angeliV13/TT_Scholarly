@@ -1,4 +1,20 @@
 <?php
+// ---------------------------------------------------
+// Connection to Account Handler
+function accountHandlerAccess($access, $id){
+    include("dbconnection.php");
+
+    $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
+
+    $query = $conn->query($sql) or die("Error UAQ000: " . $conn->error);
+    while ($row = $query->fetch_assoc())
+    {
+        extract($row);
+    } 
+
+    return $first_name . ' ' . $last_name;
+}
+// ---------------------------------------------------
 
 function getDefaultAcadYearId(){
     include("dbconnection.php");
@@ -15,6 +31,19 @@ function getDefaultAcadYearId(){
         }
     }
 }
+
+function getCheckboxValueDB($value){
+    return ($value == 1) ? 'checked' : ''; 
+}
+
+function getAudience($shs, $colEAPub, $colEAPriv, $colSc){
+    $audience = ($shs          == 1) ? 'Senior High <br>' : '';
+    $audience .= ($colEAPub     == 1) ? 'College EA Public <br>' : '';
+    $audience .= ($colEAPriv    == 1) ? 'College EA Private <br>' : '';
+    $audience .= ($colSc        == 1) ? 'College Scholarship <br>' : '';
+    return $audience;
+}
+
 
 // Acad Years
 
@@ -47,7 +76,7 @@ function getAcadYearTable()
             $data[] = [
                 $counter,
                 $ay,
-                $modified_by . '<br><span class="small">' . $modified_date . '</span>',
+                accountHandlerAccess( 1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
                 $button,
             ];
 
@@ -162,25 +191,25 @@ function getSetAssessmentTable(){
                                             <label for="assessmentStartDate" class="form-label col-3">Audience</label>
                                             <div class="col">
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox_'.$id.'" '. getCheckboxValueDB($shs) .'>
                                                     <label class="mx-2 form-check-label" for="assessmentShsCheckBox_'.$id.'">
                                                         Senior High School
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPubCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPubCheckBox_'.$id.'" '. getCheckboxValueDB($colEAPub) .'>
                                                     <label class="mx-2 form-check-label" for="assessmentColEACheckBox_'.$id.'">
                                                         College Educational Assistance - Public
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPrivCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPrivCheckBox_'.$id.'" '. getCheckboxValueDB($colEAPriv) .'>
                                                     <label class="mx-2 form-check-label" for="assessmentColEACheckBox_'.$id.'">
                                                         College Educational Assistance - Private
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentColScCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentColScCheckBox_'.$id.'" '. getCheckboxValueDB($colSc) .'>
                                                     <label class="mx-2 form-check-label" for="assessmentColScCheckBox_'.$id.'">
                                                         College Scholars
                                                     </label>
@@ -200,9 +229,9 @@ function getSetAssessmentTable(){
                 $counter,
                 $start_date,
                 $end_date,
-                $audience,
-                $created_by . '<br><span class="small">' . $created_date . '</span>',
-                $modified_by . '<br><span class="small">' . $modified_date . '</span>',
+                getAudience($shs, $colEAPub, $colEAPriv, $colSc),
+                accountHandlerAccess( 1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
+                accountHandlerAccess( 1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
                 $button,
             ];
 
@@ -235,8 +264,8 @@ function addSetAssessment($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $co
     $audience .= ($colEAPriv== true) ? '3' : '';
     $audience .= ($colSc    == true) ? '4' : '';
 
-    $sql = "INSERT INTO set_assessment (`id`, `ay_id`, `start_date`, `end_date`, `audience`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
-            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."', '".$audience."', '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
+    $sql = "INSERT INTO set_assessment (`id`, `ay_id`, `start_date`, `end_date`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
     $query = $conn->query($sql) or die("Error BSQ008: " . $conn->error);
 
     return 'Assessment Date Added';
@@ -251,14 +280,12 @@ function editSetAssessment($id, $startDate, $endDate, $shs, $colEAPub, $colEAPri
     date_default_timezone_set("Asia/Manila");
     $date = date("Y-m-d");
 
-    $audience  = ($shs      == true) ? '1' : '';
-    $audience .= ($colEAPub == true) ? '2' : '';
-    $audience .= ($colEAPriv== true) ? '3' : '';
-    $audience .= ($colSc    == true) ? '4' : '';
-
     $sql = "UPDATE set_assessment SET   `start_date`= '".$startDate."',
                                         `end_date`= '".$endDate."' ,
-                                        `audience`= '".$audience."' ,
+                                        `shs`= ".$shs." ,
+                                        `colEAPub`= ".$colEAPub." ,
+                                        `colEAPriv`= ".$colEAPriv." ,
+                                        `colSc`= ".$colSc." ,
                                         `modified_by`='".$sessionId."' ,
                                         `modified_date`='".$date."' 
                                 WHERE   id = '".$id."'";
@@ -322,25 +349,25 @@ function getSetRenewalTable(){
                                             <label for="renewalStartDate" class="form-label col-3">Audience</label>
                                             <div class="col">
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="renewalShsCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="renewalShsCheckBox_'.$id.'" '. getCheckboxValueDB($shs) .'>
                                                     <label class="mx-2 form-check-label" for="renewalShsCheckBox_'.$id.'">
                                                         Senior High School
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="renewalColEAPubCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="renewalColEAPubCheckBox_'.$id.'" '. getCheckboxValueDB($colEAPub) .'>
                                                     <label class="mx-2 form-check-label" for="renewalColEACheckBox_'.$id.'">
                                                         College Educational Assistance - Public
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="renewalColEAPrivCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="renewalColEAPrivCheckBox_'.$id.'" '. getCheckboxValueDB($colEAPriv) .'>
                                                     <label class="mx-2 form-check-label" for="renewalColEACheckBox_'.$id.'">
                                                         College Educational Assistance - Private
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="renewalColScCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="renewalColScCheckBox_'.$id.'" '. getCheckboxValueDB($colSc) .'>
                                                     <label class="mx-2 form-check-label" for="renewalColScCheckBox_'.$id.'">
                                                         College Scholars
                                                     </label>
@@ -360,9 +387,9 @@ function getSetRenewalTable(){
                 $counter,
                 $start_date,
                 $end_date,
-                $audience,
-                $created_by . '<br><span class="small">' . $created_date . '</span>',
-                $modified_by . '<br><span class="small">' . $modified_date . '</span>',
+                getAudience($shs, $colEAPub, $colEAPriv, $colSc),
+                accountHandlerAccess( 1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
+                accountHandlerAccess( 1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
                 $button,
             ];
 
@@ -395,8 +422,8 @@ function addSetRenewal($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc
     $audience .= ($colEAPriv== true) ? '3' : '';
     $audience .= ($colSc    == true) ? '4' : '';
 
-    $sql = "INSERT INTO set_renewal (`id`, `ay_id`, `start_date`, `end_date`, `audience`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
-            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."', '".$audience."', '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
+    $sql = "INSERT INTO set_renewal (`id`, `ay_id`, `start_date`, `end_date`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
     $query = $conn->query($sql) or die("Error BSQ012: " . $conn->error);
 
     return 'Renewal Date Added';
@@ -411,14 +438,12 @@ function editSetRenewal($id, $startDate, $endDate, $shs, $colEAPub, $colEAPriv, 
     date_default_timezone_set("Asia/Manila");
     $date = date("Y-m-d");
 
-    $audience  = ($shs      == true) ? '1' : '';
-    $audience .= ($colEAPub == true) ? '2' : '';
-    $audience .= ($colEAPriv== true) ? '3' : '';
-    $audience .= ($colSc    == true) ? '4' : '';
-
     $sql = "UPDATE set_renewal SET   `start_date`= '".$startDate."',
                                         `end_date`= '".$endDate."' ,
-                                        `audience`= '".$audience."' ,
+                                        `shs`= ".$shs." ,
+                                        `colEAPub`= ".$colEAPub." ,
+                                        `colEAPriv`= ".$colEAPriv." ,
+                                        `colSc`= ".$colSc." ,
                                         `modified_by`='".$sessionId."' ,
                                         `modified_date`='".$date."' 
                                 WHERE   id = '".$id."'";
@@ -486,25 +511,25 @@ function getSetExamTable(){
                                             <label for="examStartDate" class="form-label col-3">Audience</label>
                                             <div class="col">
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="examShsCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="examShsCheckBox_'.$id.'" '. getCheckboxValueDB($shs) .'>
                                                     <label class="mx-2 form-check-label" for="examShsCheckBox_'.$id.'">
                                                         Senior High School
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="examColEAPubCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="examColEAPubCheckBox_'.$id.'" '. getCheckboxValueDB($colEAPub) .'>
                                                     <label class="mx-2 form-check-label" for="examColEACheckBox_'.$id.'">
                                                         College Educational Assistance - Public
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="examColEAPrivCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="examColEAPrivCheckBox_'.$id.'" '. getCheckboxValueDB($colEAPriv) .'>
                                                     <label class="mx-2 form-check-label" for="examColEACheckBox_'.$id.'">
                                                         College Educational Assistance - Private
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="examColScCheckBox_'.$id.'">
+                                                    <input class="form-check-input" type="checkbox" value="" id="examColScCheckBox_'.$id.'" '. getCheckboxValueDB($colSc) .'>
                                                     <label class="mx-2 form-check-label" for="examColScCheckBox_'.$id.'">
                                                         College Scholars
                                                     </label>
@@ -525,9 +550,9 @@ function getSetExamTable(){
                 $start_date,
                 $end_date,
                 $time,
-                $audience,
-                $created_by . '<br><span class="small">' . $created_date . '</span>',
-                $modified_by . '<br><span class="small">' . $modified_date . '</span>',
+                getAudience($shs, $colEAPub, $colEAPriv, $colSc),
+                accountHandlerAccess( 1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
+                accountHandlerAccess( 1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
                 $button,
             ];
 
@@ -555,13 +580,9 @@ function addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $c
     $date = date("Y-m-d");
 
     $acadYearId = getDefaultAcadYearId();
-    $audience  = ($shs      == true) ? '1' : '';
-    $audience .= ($colEAPub == true) ? '2' : '';
-    $audience .= ($colEAPriv== true) ? '3' : '';
-    $audience .= ($colSc    == true) ? '4' : '';
 
-    $sql = "INSERT INTO set_exam (`id`, `ay_id`, `start_date`, `end_date`, `time`, `audience`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
-            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."','".$time."', '".$audience."', '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
+    $sql = "INSERT INTO set_exam (`id`, `ay_id`, `start_date`, `end_date`, `time`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."','".$time."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
     $query = $conn->query($sql) or die("Error BSQ016: " . $conn->error);
 
     return 'Exam Date Added';
@@ -576,15 +597,13 @@ function editSetExam($id, $startDate, $time, $endDate, $shs, $colEAPub, $colEAPr
     date_default_timezone_set("Asia/Manila");
     $date = date("Y-m-d");
 
-    $audience  = ($shs      == true) ? '1' : '';
-    $audience .= ($colEAPub == true) ? '2' : '';
-    $audience .= ($colEAPriv== true) ? '3' : '';
-    $audience .= ($colSc    == true) ? '4' : '';
-
     $sql = "UPDATE set_exam SET   `start_date`= '".$startDate."',
                                         `end_date`= '".$endDate."' ,
                                         `time`= '".$time."' ,
-                                        `audience`= '".$audience."' ,
+                                        `shs`= ".$shs." ,
+                                        `colEAPub`= ".$colEAPub." ,
+                                        `colEAPriv`= ".$colEAPriv." ,
+                                        `colSc`= ".$colSc." ,
                                         `modified_by`='".$sessionId."' ,
                                         `modified_date`='".$date."' 
                                 WHERE   id = '".$id."'";
