@@ -214,7 +214,7 @@
           <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"> Genereal Education Information</h5>
+                <h5 class="card-title"> General Education Information</h5>
                 <form class="row g-4 needs-validation" novalidate>
                   <!-- FULL NAME -->
                   <div class="col-md-6 position-relative">

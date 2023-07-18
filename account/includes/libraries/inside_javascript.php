@@ -5,9 +5,13 @@
 switch($_SESSION['account_type']){
     case 0:     //Super Admin
         echo '<script src="assets/js/basic_setup.js"></script>';
+        echo '<script src="assets/js/applicantList.js"></script>';
+        echo '<script src="assets/js/updateYearLevelOptions.js"></script>';
         break;
     case 1:     //Admin
         echo '<script src="assets/js/basic_setup.js"></script>';
+        echo '<script src="assets/js/applicantList.js"></script>';
+        echo '<script src="assets/js/updateYearLevelOptions.js"></script>';
         break;
     case 2:
         echo '<script src="assets/js/upload_assessment.js"></script>';
