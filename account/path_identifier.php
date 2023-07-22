@@ -10,7 +10,7 @@ function get_path($lv_path, $type = '99')
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
-                                return 'pages-contact.html';
+                                return 'maintenance.php';
                         case 'new-applicants':
                                 return 'views/admin/new-applicants.php';
                         case 'interview':
@@ -50,16 +50,16 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/admin-profile.php';
 
                         case 'applicants':
-                                return 'maintenance.html';
+                                return 'maintenance.php';
 
                         case 'exam_settings':
                                 return 'views/admin/exam_settings.php';
 
                         case 'tts_settings':
-                                return 'maintenance.html';
+                                return 'maintenance.php';
                                 
                         default:
-                                return 'error.html';
+                                return 'error.php';
                 }
         }
 
@@ -70,7 +70,7 @@ function get_path($lv_path, $type = '99')
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
-                                return 'pages-contact.html';
+                                return 'pages-contact.php';
                         
                         //      Applicants Section
                         case 'new-applicants':
@@ -113,10 +113,10 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/profile_admin.php';
 
                         case 'app-profile':
-                                return 'maintenance.html';
+                                return 'maintenance.php';
 
                         case 'applicants':
-                                return 'maintenance.html';
+                                return 'maintenance.php';
 
                         case 'exam_settings':
                                 return 'views/admin/exam_settings.php';
@@ -125,7 +125,7 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/basic_setup.php';
 
                         default:
-                                return 'error.html';
+                                return 'error.php';
                 }
         } 
         elseif ($type == 2)     //Beneficiaries        
@@ -149,10 +149,10 @@ function get_path($lv_path, $type = '99')
                                 return 'views/applicants/profile_bene.php';
 
                         case 'applicants':
-                                return 'maintenance.html';
+                                return 'maintenance.php';
 
                         default:
-                                return 'error.html';
+                                return 'error.php';
                 }
         } 
         elseif ($type == 3)     //Applicant
@@ -170,10 +170,10 @@ function get_path($lv_path, $type = '99')
                                 return 'views/applicants/profile_bene.php';
 
                         case 'examination':
-                                return 'maintenance.html';
+                                return 'maintenance.php';
 
                         default:
-                                return 'error.html';
+                                return 'error.php';
                 }
         }
 }
@@ -183,22 +183,22 @@ function get_sidebar($type, $access_level = 0)
         switch ($type) 
         {
                 case 0:
-                        return 'views/sidebar/super_admin.html';
+                        return 'views/sidebar/super_admin.php';
 
                 case 1:
                         if ($access_level == 1) 
                         {
-                                return 'views/sidebar/semi_super_admin.html';
+                                return 'views/sidebar/semi_super_admin.php';
                         } 
                         else 
                         {
-                                return 'views/sidebar/admin.html';
+                                return 'views/sidebar/admin.php';
                         }
 
                 case 2:
-                        return 'views/sidebar/bene.html';
+                        return 'views/sidebar/bene.php';
                 case 3:
-                        return 'views/sidebar/applicants.html';
+                        return 'views/sidebar/applicants.php';
         }
 }
 
