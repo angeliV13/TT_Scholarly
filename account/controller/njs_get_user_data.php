@@ -10,6 +10,18 @@ if(isset($_SESSION['id']))
 
     $accType = $accountType[0];
     $accAccess = $accountType[1];
+
+    if($user_data[3] >= 2){ //Checking Account Type if beneficiary or applicant
+        $assessmentAccess   = assessmentAccess();
+        $renewalAccess      = renewalAccess();
+        if($accountType == 3){
+           $examAccess      = examAccess();
+        }
+    }
+    
 }
+
+date_default_timezone_set("Asia/Manila");
+$dateNow = date('Y-m-d');
 
 ?>

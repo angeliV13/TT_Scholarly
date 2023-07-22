@@ -16,7 +16,7 @@ if (!isset($_SESSION['id'])) header("Location: login.php");
 // USER ID, USERNAME, EMAIL, ACC_TYPE, ACCESS_LVL, ACC_STAT
 $user_data = [];
 
-// Getting the User Info
+// Getting the User Info AND current DATE
 include('controller/njs_get_user_data.php');
 
 //Is there a link?
