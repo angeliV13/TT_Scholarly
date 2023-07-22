@@ -19,3 +19,6 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+
+    <!-- Functions -->
+  <script src="assets/js/functions.js"></script>

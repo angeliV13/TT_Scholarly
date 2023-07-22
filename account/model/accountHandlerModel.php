@@ -355,3 +355,94 @@ function password_reset($data)
         echo 'User Not Found';
     }
 }
+
+function change_password($old, $new)
+{
+    include("dbconnection.php");
+
+    session_start();
+
+    $sql = "SELECT id FROM account WHERE id = '" . $_SESSION['id'] . "' AND password = '" . $old . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        if ($old == $new)
+        {
+            echo 'New Password must be different from the Old Password';
+            return;
+        }
+
+        $sql = "UPDATE account SET password = '" . $new . "' WHERE id = '" . $_SESSION['id'] . "' LIMIT 1";
+        $query = $conn->query($sql);
+
+        if ($query)
+        {
+            echo 'Success';
+        }
+        else
+        {
+            echo 'Error EQ002: ' . $conn->error;
+        }
+    }
+    else
+    {
+        echo 'Invalid Password';
+    }
+}
+
+function update_profile($data)
+{
+    include("dbconnection.php");
+
+    session_start();
+
+    $id = $_SESSION['id'];
+    $fileLocation = "assets/img/uploads/profileImg/";
+    $fileLocationQuery = "../assets/img/uploads/profileImg/";
+
+    $sql = "UPDATE account SET email = '" . $data['email'] . "' WHERE id = '" . $id . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    $sql = "UPDATE user_info SET first_name = '" . $data['firstName'] . "', middle_name = '" . $data['middleName'] . "', last_name = '" . $data['lastName'] . "', 
+            address_line = '" . $data['addressLine'] . "', barangay = '" . $data['barangay'] . "', municipality = '" . $data['municipality'] . "', 
+            province = '" . $data['province'] . "', zip_code = '" . $data['zipCode'] . "', contact_number = '" . $data['contactNo'] . "'";
+
+    if ($data['file'] != "")
+    {
+        $files = $data['file'];
+        $fileName = $files['name'];
+
+        if ($fileName != "")
+        {
+            $fileTmpName = $files['tmp_name'];
+
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+
+            $allowed = array('jpg', 'jpeg', 'png');
+
+            if (in_array($fileActualExt, $allowed))
+            {
+                $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                $fileDestination = $fileLocation . $fileNameNew;
+                $fileDestinationQuery = $fileLocationQuery . $fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestinationQuery);
+
+                $sql .= ", profile_img = '" . $fileDestination . "'";
+            }
+        }
+    }
+
+    $sql .= " WHERE account_id = '" . $id . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    if ($query)
+    {
+        echo 'Success';
+    }
+    else
+    {
+        echo 'Error EQ002: ' . $conn->error;
+    }
+}

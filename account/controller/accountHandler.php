@@ -79,4 +79,32 @@ if (isset($_REQUEST['action']))
 
         echo password_reset($data);
     }
+    else if ($action == 9) // Change Password
+    {
+        echo change_password(
+            isset($_POST['currentPassword']) ? $_POST['currentPassword'] : '',
+            isset($_POST['newPassword']) ? $_POST['newPassword'] : '',
+        );
+    }
+    else if ($action == 10) // Edit Profile
+    {
+        $data = [
+            'firstName'        => isset($_POST['firstName']) ? $_POST['firstName'] : '',
+            'middleName'       => isset($_POST['middleName']) ? $_POST['middleName'] : '',
+            'lastName'         => isset($_POST['lastName']) ? $_POST['lastName'] : '',
+            'addressLine'      => isset($_POST['addressLine']) ? $_POST['addressLine'] : '',
+            'barangay'         => isset($_POST['barangay']) ? $_POST['barangay'] : '',
+            'municipality'     => isset($_POST['municipality']) ? $_POST['municipality'] : '',
+            'province'         => isset($_POST['province']) ? $_POST['province'] : '',
+            'zipCode'          => isset($_POST['zipCode']) ? $_POST['zipCode'] : '',
+            'contactNo'        => isset($_POST['contactNo']) ? $_POST['contactNo'] : '',
+            'email'            => isset($_POST['email']) ? $_POST['email'] : '',
+            'removeText'       => isset($_POST['removeText']) ? $_POST['removeText'] : '',
+            'file'             => isset($_FILES['file']) ? $_FILES['file'] : '',
+        ];
+        
+        // print_r($data);
+
+        echo update_profile($data);
+    }
 }

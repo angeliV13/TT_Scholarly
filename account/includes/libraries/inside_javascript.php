@@ -1,8 +1,10 @@
 
 <script src="assets/js/header.js"></script>
+<script src="assets/js/editProfile.js"></script>
 
 <?php
-switch($_SESSION['account_type']){
+switch($_SESSION['account_type'])
+{
     case 0:     //Super Admin
         echo '<script src="assets/js/basic_setup.js"></script>';
         echo '<script src="assets/js/applicantList.js"></script>';

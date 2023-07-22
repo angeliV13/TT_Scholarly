@@ -262,8 +262,6 @@ include('includes/main.php');
   <?php include('includes/libraries/javascript.php') ?>
 
   <script src="assets/js/locations.js"></script>
-  <script src="assets/js/functions.js"></script>
-
   <script>
     let my_handlers = {
 
