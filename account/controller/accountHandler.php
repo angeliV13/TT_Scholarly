@@ -83,7 +83,7 @@ if (isset($_REQUEST['action']))
     {
         echo change_password(
             isset($_POST['currentPassword']) ? $_POST['currentPassword'] : '',
-            isset($_POST['newPassword']) ? $_POST['newPassword'] : '',
+            isset($_POST['newPassword']) ? $_POST['newPassword'] : ''
         );
     }
     else if ($action == 10) // Edit Profile
