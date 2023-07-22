@@ -2,6 +2,7 @@
 
 // Getting the Path
 include('path_identifier.php');
+include('global_variables.php');
 
 $title = get_title();
 

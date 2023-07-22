@@ -172,16 +172,9 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">
-              <?php 
-                if(isset($_SESSION['name'])) {
-                  echo $_SESSION['name']; 
-                }elseif(isset($user_data[1])){
-                  echo $user_data[1];
-                }else{
-                  echo 'No User';  
-                }?>
+              <?php echo isset($_SESSION) ? $_SESSION['name'] : $user_data[1]; ?>
             </span>
           </a><!-- End Profile Image Icon -->
 

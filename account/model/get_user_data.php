@@ -41,19 +41,44 @@ function get_user_info($id)
     return $user_info;
 }
 
-function getAccountType($type)
+function getAccountType($type, $level)
 {
+    $data = [];
+
     switch ($type)
     {
         case 0:
-            return "Super Admin";
+            $typeName = "Super Admin";
+            break;
         case 1:
-            return "Admin";
+            $typeName = "Admin";
+            break;
         case 2:
-            return "Beneficiaries";
+            $typeName = "Beneficiaries";
+            break;
         case 3:
-            return "Applicants";
+            $typeName = "Applicants";
+            break;
         default:
-            return "Unknown";
+            $typeName = "Unknown";
     }
+
+    switch ($level)
+    {
+        case 0:
+            $levelName = "No Super Admin Access";
+            break;
+        case 1:
+            $levelName = "Super Admin w/ limited Access";
+            break;
+        case 2:
+            $levelName = "Super Admin w/ Full Access";
+            break;
+        default:
+            $levelName = "Unknown";
+    }
+
+    array_push($data, $typeName, $levelName);
+
+    return $data;
 }

@@ -19,7 +19,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="<?php echo $user_info['profile_img'] == null ? "assets/img/profile-img.jpg" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle">
+              <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle">
               <h2><?php echo $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
               <h3><?php echo $accType ?></h3>
               <!-- <div class="social-links mt-2">
@@ -85,6 +85,11 @@
                     <div class="col-lg-9 col-md-8"><?php echo $user_data[2] ?></div>
                   </div>
 
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Access Level</div>
+                    <div class="col-lg-9 col-md-8"><?php echo $accAccess ?></div>
+                  </div>
+
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -122,41 +127,6 @@
                       <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="Last Name" type="text" class="form-control" id="lastName" value="<?php echo $user_info['last_name'] ?>">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="addressLine" class="col-md-4 col-lg-3 col-form-label">Address Line</label>
-                      <div class="col-md-8 col-lg-9">
-                        <textarea name="Address Line" class="form-control" id="addressLine" style="height: 100px"><?php echo $user_info['address_line'] ?></textarea>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="barangay" class="col-md-4 col-lg-3 col-form-label">Barangay</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Barangay" type="text" class="form-control" id="barangay" value="<?php echo $user_info['barangay'] ?>">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="municipality" class="col-md-4 col-lg-3 col-form-label">Municipality</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Municipality" type="text" class="form-control" id="municipality" value="<?php echo $user_info['municipality'] ?>">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="province" class="col-md-4 col-lg-3 col-form-label">Province</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Province" type="text" class="form-control" id="province" value="<?php echo $user_info['province'] ?>">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="zipCode" class="col-md-4 col-lg-3 col-form-label">Zip Code</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Zip Code" type="text" class="form-control" id="zipCode" value="<?php echo $user_info['zip_code'] ?>">
                       </div>
                     </div>
 
