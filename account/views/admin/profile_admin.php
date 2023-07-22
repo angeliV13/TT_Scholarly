@@ -82,7 +82,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user_data[3] ?></div>
+                    <div class="col-lg-9 col-md-8"><?php echo $user_data[2] ?></div>
                   </div>
 
                 </div>
@@ -173,7 +173,7 @@
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="Email Address" type="email" class="form-control" id="Email" value="<?php echo $user_data[3] ?>">
+                        <input name="Email Address" type="email" class="form-control" id="Email" value="<?php echo $user_data[2] ?>">
                       </div>
                     </div>
 
