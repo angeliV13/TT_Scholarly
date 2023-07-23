@@ -37,6 +37,7 @@ if (isset($_REQUEST['action']))
             'province'          => isset($_POST['provice']) ? $_POST['provice'] : '',
             'city'              => isset($_POST['city']) ? $_POST['city'] : '',
             'barangay'          => isset($_POST['barangay']) ? $_POST['barangay'] : '',
+            'zipCode'           => isset($_POST['zipCode']) ? $_POST['zipCode'] : '',
             'username'          => isset($_POST['username']) ? $_POST['username'] : '',
             'email'             => isset($_POST['email']) ? $_POST['email'] : '',
             'password'          => isset($_POST['password']) ? $_POST['password'] : '',

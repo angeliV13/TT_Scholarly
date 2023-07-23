@@ -47,104 +47,128 @@
               <div class="card-body">
                 <h5 class="card-title">Primary Information</h5>
                 <!-- Custom Styled Validation with Tooltips -->
-                <form class="row g-4 needs-validation" novalidate>
+                <form class="row g-4" method="POST">
                   <!-- FULL NAME -->
                   <div class="col-md-3 position-relative">
                     <label for="inputFirstName" class="form-label">First name</label>
-                    <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="<?php echo $user_info['first_name'] ?>" required>
+                    <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="<?php echo $user_info['first_name'] ?>" disabled>
                   </div>
                   <div class="col-md-3 position-relative">
                     <label for="inputMiddleName" class="form-label">Middle name</label>
-                    <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="<?php echo $user_info['middle_name'] ?>" required>
+                    <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="<?php echo $user_info['middle_name'] ?>" disabled>
                   </div>
                   <div class="col-md-3 position-relative">
                     <label for="inputLastName" class="form-label">Last name</label>
-                    <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="<?php echo $user_info['last_name'] ?>" required>
+                    <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="<?php echo $user_info['last_name'] ?>" disabled>
                   </div>
                   <div class="col-md-3 position-relative">
                     <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                    <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="<?php echo $user_info['suffix'] ?>" required>
+                    <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="<?php echo $user_info['suffix'] ?>" disabled>
                   </div>
                   <!-- END FULL NAME -->
 
                   <!-- BIRTH -->
                   <div class="col-md-4 position-relative">
                     <label for="inputDate" class="form-label">Birth Date</label>
-                    <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="<?php echo $user_info['birth_date'] ?>" required>
+                    <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="<?php echo $user_info['birth_date'] ?>" disabled>
                   </div>
 
-                  <div class="col-md-8 position-relative">
+                  <div class="col-md-4 position-relative">
                     <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                    <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="<?php echo $user_info['birth_place'] ?>" required>
+                    <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="<?php echo $user_info['birth_place'] ?>" disabled>
                   </div>
                   <!-- END BIRTH -->
 
                   <!-- ADDRESS -->
                   <div class="col-md-4 position-relative">
                     <label for="inputAddress" class="form-label">Address</label>
-                    <input type="Address" class="form-control" id="inputAddress" aria-describedby="inputAddress" value="<?php echo $user_info['address_line'] ?>" required>
+                    <input type="Address" class="form-control" id="inputAddress" aria-describedby="inputAddress" value="<?php echo $user_info['address_line'] ?>" disabled>
+                  </div>
+
+                  <div class="col-md-3 position-relative">
+                    <label for="barangay" class="form-label">Barangay</label>
+                    <?php if ($user_info['barangay'] != ""): ?>
+                      <input class="form-control" type="text" value="<?php echo $user_info['barangay'] ?>" disabled>
+                    <?php else: ?>
+                      <select class="form-select" id="barangay">
+                        <option selected disabled value="">Choose...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Barangay.
+                      </div>
+                    <?php endif; ?>
                   </div>
                   <div class="col-md-3 position-relative">
-                    <label for="inputBarangay" class="form-label">Barangay</label>
-                    <select class="form-select" id="inputBarangay" required>
-                      <option selected disabled value="">Choose...</option>
-                      <option>...</option>
-                    </select>
-                    <div class="invalid-tooltip">
-                      Please select a valid Barangay.
-                    </div>
-                  </div>
-                  <div class="col-md-2 position-relative">
-                    <label for="inputMunicipality" class="form-label">Municipality</label>
-                    <select class="form-select" id="inputMunicipality" required>
-                      <option selected disabled value="">Choose...</option>
-                      <option>...</option>
-                    </select>
-                    <div class="invalid-tooltip">
-                      Please select a valid Municipality.
-                    </div>
+                    <label for="city" class="form-label">Municipality</label>
+                    <?php if ($user_info['municipality'] != ""): ?>
+                      <input class="form-control" type="text" value="<?php echo $user_info['municipality'] ?>" disabled>
+                    <?php else: ?>
+                      <select class="form-select" id="city">
+                        <option selected disabled value="">Choose...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Municipality.
+                      </div>
+                    <?php endif; ?>
                   </div>
                   <div class="col-md-3 position-relative">
-                    <label for="inputProvince" class="form-label">Province</label>
-                    <select class="form-select" id="inputProvince" required>
-                      <option selected disabled value="">Choose...</option>
-                      <option>...</option>
-                    </select>
-                    <div class="invalid-tooltip">
-                      Please select a valid Province.
-                    </div>
+                    <label for="province" class="form-label">Province</label>
+                    <?php if ($user_info['province'] != ""): ?>
+                      <input class="form-control" type="text" value="<?php echo $user_info['province'] ?>" disabled>
+                    <?php else: ?>
+                      <select class="form-select" id="province">
+                        <option selected disabled value="">Choose...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Province.
+                      </div>
+                    <?php endif; ?>
+                  </div>
+
+                  <div class="col-md-3 position-relative">
+                    <label for="region" class="form-label">Region</label>
+                    <?php if ($user_info['region'] != ""): ?>
+                      <input class="form-control" type="text" value="<?php echo $user_info['region'] ?>" disabled>
+                    <?php else: ?>
+                      <select class="form-select" id="region">
+                        <option selected disabled value="">Choose...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Province.
+                      </div>
+                    <?php endif; ?>
                   </div>
                   <div class="col-md-2 position-relative">
                     <label for="inputZipCode" class="form-label">ZIP Code</label>
-                    <input type="zipCode" class="form-control" id="inputZipCode" aria-describedby="inputZipCode" value="<?php echo $user_info['zip_code'] ?>" required>
+                    <input type="zipCode" class="form-control" id="inputZipCode" aria-describedby="inputZipCode" value="<?php echo $user_info['zip_code'] ?>" disabled>
                   </div>
                   <!-- END ADDRESS -->
 
                   <!-- CITIZENSHIP -->
                   <div class="col-md-3 position-relative">
                     <label for="inputCitizenship" class="form-label">Citizenship</label>
-                    <input type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="<?php echo $user_info['citizenship'] ?>" required>
+                    <input type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="<?php echo $user_info['citizenship'] ?>">
                   </div>
                   <!-- END CITIZENSHIP -->
 
                   <!-- RESIDENCY -->
                   <div class="col-md-4 position-relative">
                     <label for="inputResidency" class="form-label">Years of Residency in Santo Tomas</label>
-                    <input type="residency" class="form-control" id="inputResidency" aria-describedby="inputResidency" value="<?php echo $user_info['years_of_residency'] ?>" required>
+                    <input type="number" class="form-control" id="inputResidency" aria-describedby="inputResidency" value="<?php echo $user_info['years_of_residency'] ?>">
                   </div>
                   <!-- END RESIDENCY -->
 
                   <!-- LANGUAGE -->
                   <div class="col-md-3 position-relative">
                     <label for="inputMotherTongue" class="form-label">Mother Tongue</label>
-                    <input type="Language" class="form-control" id="inputMotherTongue" aria-describedby="inputMotherTongue" value="<?php echo $user_info['language'] ?>" required>
+                    <input type="Language" class="form-control" id="inputMotherTongue" aria-describedby="inputMotherTongue" value="<?php echo $user_info['language'] ?>">
                   </div>
                   <!-- END LANGUAGE -->
 
                   <!-- START RELIGION -->
                   <div class="col-md-4 position-relative">
                     <label for="inputReligion" class="form-label">Religion</label>
-                    <select class="form-select" id="inputReligion" required>
+                    <select class="form-select" id="inputReligion" disabled>
                       <option selected disabled value="">Choose...</option>
                       <?php foreach ($religionArr as $key => $value) : ?>
                         <option value="<?php echo $key ?>" <?php echo $key == $user_info['religion'] ? "selected" : "" ?>><?php echo $value ?></option>
@@ -159,7 +183,7 @@
                   <!-- SEX -->
                   <div class="col-md-4 position-relative">
                     <label for="inputGender" class="form-label">Gender</label>
-                    <select class="form-select" id="inputGender" required>
+                    <select class="form-select" id="inputGender" disabled>
                       <option selected disabled value="">Choose...</option>
                       <?php foreach ($genderArr as $key => $value) : ?>
                         <option value="<?php echo $key ?>" <?php echo $key == $user_info['gender'] ? "selected" : "" ?>><?php echo $value ?></option>
@@ -174,7 +198,7 @@
                   <!--CIVIL STATUS -->
                   <div class="col-md-4 position-relative">
                     <label for="inputCivilStatus" class="form-label">Civil Status</label>
-                    <select class="form-select" id="inputCivilStatus" required>
+                    <select class="form-select" id="inputCivilStatus" disabled>
                       <option selected disabled value="">Choose...</option>
                       <?php foreach ($civilArr as $key => $value) : ?>
                         <option value="<?php echo $key ?>" <?php echo $key == $user_info['civil_status'] ? "selected" : "" ?>><?php echo $value ?></option>
@@ -204,12 +228,12 @@
                     <label for="telephone" class="form-label">Contact Number</label>
                     <div class="input-group">
                       <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                      <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" value="<?php echo $user_info['contact_number'] ?>" required>
+                      <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" value="<?php echo substr($user_info['contact_number'], 2) ?>">
                     </div>
                   </div>
                   <div class="col-md-7 position-relative">
                     <label for="EmailAddress" class="form-label">Email Address</label>
-                    <input type="EmailAddress" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="<?php echo $user_data[2] ?>" required>
+                    <input type="EmailAddress" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="<?php echo $user_data[2] ?>">
                   </div>
                 </form><!-- End Custom Styled Validation with Tooltips -->
               </div>
@@ -227,7 +251,8 @@
                     <label for="inputGraduatingSem" class="form-label">Are you Graduating this Semester/Term?</label>
                     <select class="form-select" id="inputGraduatingSem" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <option value="0">Yes</option>
+                      <option value="1">No</option>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Yes or No.
@@ -237,7 +262,8 @@
                     <label for="inputGraduatingHonors" class="form-label">Are you Graduating with Honors?</label>
                     <select class="form-select" id="inputGraduatingHonors" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <option value="0">Yes</option>
+                      <option value="1">No</option>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Yes or No.
@@ -247,7 +273,9 @@
                     <label for="inputSpecifyAward" class="form-label">Specify your Award/Honor</label>
                     <select class="form-select" id="inputSpecifyAward" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <option value="0">With Highest Honors</option>
+                      <option value="1">With High Honors</option>
+                      <option value="2">With Honors</option>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Awards/Honor.
@@ -261,7 +289,9 @@
                     <label for="inputYearGraduation" class="form-label">If not Graduating, what year are you Graduating?</label>
                     <select class="form-select" id="inputYearGraduation" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php for ($i = 2012; $i <= date("Y"); $i++) : ?>
+                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                      <?php endfor; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select expected Year of Graduation.
@@ -281,7 +311,9 @@
                     <label for="inputCollegeSchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputCollegeSchoolName" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php foreach ($college AS $key => $col) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $col ?></option>
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select School.
@@ -295,27 +327,39 @@
                     <label for="inputCollegeYearLevel" class="form-label">Year Level</label>
                     <select class="form-select" id="inputCollegeYearLevel" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php for ($i = 4; $i >= 1; $i--) : ?>
+                        <?php if ($i == 1) : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>st Year</option>
+                        <?php elseif ($i == 2) : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>nd Year</option>
+                        <?php elseif ($i == 3) : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>rd Year</option>
+                        <?php else : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>th Year</option>
+                        <?php endif; ?>
+                      <?php endfor; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Year Level.
                     </div>
                   </div>
                   <div class="col-md-3 position-relative">
-                    <label for="inputCourse" class="form-label">Course taking</label>
+                    <label for="inputCourse" class="form-label">Course Taken</label>
                     <select class="form-select" id="inputCourse" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php foreach ($course AS $key => $cr) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $cr ?></option>
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Course.
                     </div>
                   </div>
-                  <div class="col-md-5 position-relative">
+                  <div class="col-md-6 position-relative">
                     <label for="inputOtherCourse" class="form-label">If not specified in the list, kindly input the Course.</label>
                     <input type="Others" class="form-control" id="inputOtherCourse" aria-describedby="inputOtherCourse" value="" required>
                   </div>
-                  <div class="col-md-4 position-relative">
+                  <div class="col-md-3 position-relative">
                     <label for="inputMajor" class="form-label">Major in</label>
                     <input type="Major" class="form-control" id="inputMajor" aria-describedby="inputMajor" value="" required>
                   </div>
@@ -395,7 +439,9 @@
                     <label for="inputSeniorSchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputSchool" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php foreach ($seniorHigh AS $key => $shs) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $shs ?></option>
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select School.
@@ -409,23 +455,27 @@
                     <label for="inputSeniorYearLevel" class="form-label">Year Level</label>
                     <select class="form-select" id="inputSeniorYearLevel" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php for ($i = 12; $i >= 11; $i--) : ?>
+                        <option value="<?php echo $i ?>">Grade <?php echo $i ?></option>
+                      <?php endfor; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Year Level.
                     </div>
                   </div>
                   <div class="col-md-3 position-relative">
-                    <label for="inputTrack" class="form-label">Course taking</label>
+                    <label for="inputTrack" class="form-label">Strand Taken</label>
                     <select class="form-select" id="inputTrack" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php foreach ($strand AS $key => $str) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $str ?></option>
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Course.
                     </div>
                   </div>
-                  <div class="col-md-5 position-relative">
+                  <div class="col-md-9 position-relative">
                     <label for="inputOtherTrack" class="form-label">If not specified in the list, kindly input the Course.</label>
                     <input type="Others" class="form-control" id="inputOtherTrack" aria-describedby="inputOtherTrack" value="" required>
                   </div>
@@ -531,7 +581,9 @@
                     <label for="inputHighSchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputHighSchoolName" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php foreach ($juniorHigh AS $key => $jhs) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $jhs ?></option>
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select School.
@@ -545,7 +597,17 @@
                     <label for="inputHighYearLevel" class="form-label">Year Level</label>
                     <select class="form-select" id="inputHighYearLevel" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php for ($i = 4; $i >= 1; $i--) : ?>
+                        <?php if ($i == 1) : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>st Year</option>
+                        <?php elseif ($i == 2) : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>nd Year</option>
+                        <?php elseif ($i == 3) : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>rd Year</option>
+                        <?php else : ?>
+                          <option value="<?php echo $i ?>"><?php echo $i ?>th Year</option>
+                        <?php endif; ?>
+                      <?php endfor; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Year Level.
@@ -653,7 +715,9 @@
                     <label for="inputElementarySchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputElementarySchoolName" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php foreach ($elementary AS $key => $elem) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $elem ?></option>
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select School.
@@ -667,7 +731,9 @@
                     <label for="inputHighYearLevel" class="form-label">Year Level</label>
                     <select class="form-select" id="inputHighYearLevel" required>
                       <option selected disabled value="">Choose...</option>
-                      <option>...</option>
+                      <?php for ($i = 6; $i >= 1; $i--): ?>
+                        <option value="<?php echo $i ?>">Grade <?php echo $i ?></option>
+                      <?php endfor; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select Year Level.

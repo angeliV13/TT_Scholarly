@@ -20,5 +20,8 @@
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
 
+    <!-- Locations -->
+  <script src="assets/js/locations.js"></script>
+
     <!-- Functions -->
   <script src="assets/js/functions.js"></script>

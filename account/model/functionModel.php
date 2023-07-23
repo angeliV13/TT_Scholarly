@@ -161,7 +161,7 @@ function show_notification()
             $data[] = $row;
         }
 
-        $sql = "SELECT notif_name, notif_icon FROM notification_type WHERE id IN (";
+        $sql = "SELECT id, notif_name, notif_icon FROM notification_type WHERE id IN (";
 
         $ids = implode(',', array_map(function ($el) {
             return $el['notif_type'];
@@ -187,13 +187,14 @@ function show_notification()
         }
 
         $body .= '<li class="dropdown-header">';
-        $body .= 'You have ' . $count . ' new notifications';
+        $body .= 'You have ' . $count . ' new notification(s)';
         $body .= '<a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>';
         $body .= '</li>';
         $body .= '<li><hr class="dropdown-divider"></li>';
 
         foreach ($data as $key => $value)
         {
+            $body .= '<a href="' . $value['notif_link'] . '">';
             $body .= '<li class="notification-item">';
             $body .= '<i class="' . $value['notif_icon'] . '"></i>';
             $body .= '<div>';
@@ -203,6 +204,7 @@ function show_notification()
             $body .= '</div>';
             $body .= '</li>';
             $body .= '<li><hr class="dropdown-divider"></li>';
+            $body .= '</a>';
         }
 
         $body .= '<li class="dropdown-footer">';
@@ -230,14 +232,19 @@ function insert_notification($data)
 
     $lastId = (get_lastID(['table' => 'system_notification', 'column' => 'id']) > 0) ? get_lastID(['table' => 'system_notification', 'column' => 'id']) + 1 : 1;
 
+    $new_link = (strpos($notif_link, '?') !== false) ? $notif_link . '&notif=' . $lastId : $notif_link . '?notif=' . $lastId;
+
     if (is_array($user_id))
     {
-        $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link) VALUES ";
+        $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link, notif_date) VALUES ";
 
-        foreach ($user_id as $id)
+        foreach ($user_id as $key => $id)
         {
-            $sql .= "('$id', '$notif_type', '$lastId', '$notif_body', '$notif_link'),";
+            $notif_text = "Hi " . $id . ", <br>" . $notif_body;
+            $sql .= "('$key', '$notif_type', '$lastId', '$notif_text', '$new_link', NOW()),";
         }
+
+        $sql = rtrim($sql, ",");
     }
     else
     {
@@ -249,12 +256,91 @@ function insert_notification($data)
     return ($query) ? 'success' : $conn->error;
 }
 
-function update_notification($notificationId)
+function update_notification($notificationId, $id = 'NA')
 {
-    include("dbconnection.php");
+    include("dbconnection.php"); 
 
     $sql = "UPDATE notification SET status = 1 WHERE notificationId = " . $notificationId;
+
+    if ($id != 'NA')
+    {
+        $sql .= " AND user_id = " . $id;
+    }
+
     $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
 
     return ($query) ? 'success' : $conn->error;
+}
+
+function get_user_id_type($type)
+{
+    // 0 - Super Admin
+    // 1 - Admin
+    // 2 - Beneficiaries
+    // 3 - Applicants
+    // 4 - All Admins
+    // 5 - All Registered Users
+    // 6 - All Users
+
+    include("dbconnection.php");
+
+    $data = [];
+
+    switch ($type)
+    {
+        case 0:
+            $getType = "AND account_type = 0";
+            break;
+        case 1:
+            $getType = "AND account_type = 1";
+            break;
+        case 2:
+            $getType = "AND account_type = 2";
+            break;
+        case 3:
+            $getType = "AND account_type = 3";
+            break;
+        case 4:
+            $getType = "AND account_type IN (0, 1)";
+            break;
+        case 5:
+            $getType = "AND account_type IN (2, 3)";
+            break;
+        case 6:
+            $getType = "";
+            break;
+    }
+
+    $sql = "SELECT id, user_name FROM account WHERE account_status = 1 " . $getType;
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data[$row['id']] = $row['user_name']; 
+        }
+    }
+
+    return $data;
+}
+
+function get_education_courses($type)
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SELECT id, name FROM education_courses WHERE type = " . $type;
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data[$row['id']] = $row['name']; 
+        }
+    }
+
+    return $data;
 }

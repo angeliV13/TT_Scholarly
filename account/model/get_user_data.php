@@ -1,7 +1,5 @@
 <?php
 
-include("functionModel.php");
-
 function get_user_data($id)
 {
     include("dbconnection.php");
@@ -84,7 +82,8 @@ function getAccountType($type, $level)
 }
 
 
-function getCurrentAY(){
+function getCurrentAY()
+{
     include("dbconnection.php");
 
     // Checks if Account Exists
@@ -117,6 +116,7 @@ function assessmentAccess()
     }  
 
     array_push($assessment_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+
     return $assessment_data;
 }
 

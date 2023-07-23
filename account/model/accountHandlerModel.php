@@ -1,8 +1,7 @@
 <?php
 
-include("functionModel.php");
-
-function getUserNameFromId($id){
+function getUserNameFromId($id)
+{
     include("dbconnection.php");
 
     // Checks if Account Exists
@@ -118,6 +117,17 @@ function registerAccount($data)
     $sendEmail = sendEmail($data['email'], 'Account Verification', $msg);
 
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+    $notifData = [
+        'user_id'       => get_user_id_type(4),
+        'notif_type'    => 1,
+        'notif_body'    => $data['firstName'] . ' ' . $data['lastName'] . ' has registered an account.',
+        'notif_link'    => '?nav=Adaccount-management',
+    ];
+
+    $notif = insert_notification($notifData);
+
+    if ($notif !== 'success') return 'Error: ' . $notif;
     
     $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . $data['password'] . "', '" . $data['email'] . "', 3, 0)";
     $query = mysqli_query($conn, $sql) or die("Error RQ001: " . mysqli_error($conn));
@@ -126,8 +136,8 @@ function registerAccount($data)
     {
         $last_id = mysqli_insert_id($conn);
 
-        $sql = "INSERT INTO user_info (account_id, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number)
-        VALUES ('$last_id', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]')";
+        $sql = "INSERT INTO user_info (account_id, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code)
+        VALUES ('$last_id', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]')";
         $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
         if ($query)
@@ -197,7 +207,7 @@ function email_confirmation($data)
             $sql = "UPDATE account SET account_status = 1 WHERE id = '" . $user_id . "' AND account_status = 0 LIMIT 1";
             $query = $conn->query($sql);
 
-            $sql = "UPDATE email_token SET date_verified = NOW() WHERE user_id = '" . $id . "' AND token = '" . $data['code'] . "' AND type = 0 LIMIT 1";
+            $sql = "UPDATE email_token SET date_verified = NOW() WHERE user_id = '" . $user_id . "' AND token = '" . $data['code'] . "' AND type = 0 LIMIT 1";
             $query = $conn->query($sql);
 
             if ($query)

@@ -14,9 +14,9 @@
       $scholar_type = 2;
       $scholarType = 1 + $scholar_type;
 
-      if($assessmentAccess[$scholarType] == 1 &&
-          $assessmentAccess[0] <= $dateNow &&
-          $assessmentAccess[1] >= $dateNow){
+      // if($assessmentAccess[$scholarType] == 1 &&
+      //     $assessmentAccess[0] <= $dateNow &&
+      //     $assessmentAccess[1] >= $dateNow){
       ?>
       <!-- Start Assessment Requirements Nav -->
       <li class="nav-item">
@@ -26,11 +26,11 @@
         </a>
       </li><!-- Applicants Nav -->
       <?php
-      }
+      // }
 
-      if($renewalAccess[$scholarType] == 1 &&
-          $renewalAccess[0] <= $dateNow &&
-          $renewalAccess[1] >= $dateNow){
+      // if($renewalAccess[$scholarType] == 1 &&
+      //     $renewalAccess[0] <= $dateNow &&
+      //     $renewalAccess[1] >= $dateNow){
       ?>
 
       <li class="nav-item">
@@ -40,7 +40,7 @@
         </a>
       </li><!-- Applicants Nav -->
       <?php
-      }
+      // }
       ?>
 
     </ul>
