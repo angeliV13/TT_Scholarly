@@ -32,7 +32,7 @@
                       <label class="btn btn-outline-dark" for="btn_na_SchoolId">Not Applicable</label>
                       <div class="btn-group" role="group">
                         <div id="divUploadSchoolId" class="upload_file file btn btn-primary">Upload
-                          <input id="fileUploadSchoolId" type="file" name="schoolIdFile" onchange="getFileData(this);" />
+                          <input id="fileUploadSchoolId" type="file" name="schoolIdFile" accept="application/pdf" onchange="getFileData(this, 'textUploadSchoolId');" />
                         </div>
                         <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
                         <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
@@ -46,6 +46,7 @@
                           </div>
                         </div>
                       </div>
+                      <p id="textUploadSchoolId" class="small mx-auto"></p>
                     </div>
                   </td>
                 </tr>
@@ -61,7 +62,7 @@
                       <label class="btn btn-outline-dark" for="btn_na_Clearance">Not Applicable</label>
                       <div class="btn-group" role="group">
                         <div id="divUploadClearance" class="upload_file file btn btn-primary">Upload
-                          <input id="fileUploadClearance" type="file" name="clearance" onchange="getFileData(this);" />
+                          <input id="fileUploadClearance" type="file" name="clearance" accept="application/pdf" onchange="getFileData(this, 'textUploadClearance');" />
                         </div>
                         <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
                         <div class="modal fade" id="fileUploadClearanceModal" tabindex="-1">
@@ -75,6 +76,7 @@
                           </div>
                         </div>
                       </div>
+                      <p id="textUploadClearance" class="small mx-auto"></p>
                     </div>
                   </td>
                 </tr>
@@ -90,7 +92,7 @@
                       <label class="btn btn-outline-dark" for="btn_na_Cor">Not Applicable</label>
                       <div class="btn-group" role="group">
                         <div id="divUploadCor" class="upload_file file btn btn-primary">Upload
-                          <input id="fileUploadCor" type="file" name="corFile" onchange="getFileData(this);" />
+                          <input id="fileUploadCor" type="file" name="corFile" accept="application/pdf" onchange="getFileData(this, 'textUploadCor');" />
                         </div>
                         <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
                         <div class="modal fade" id="viewUploadCorModal" tabindex="-1">
@@ -104,6 +106,7 @@
                           </div>
                         </div>
                       </div>
+                      <p id="textUploadCor" class="small mx-auto"></p>
                     </div>
                   </td>
                 </tr>
@@ -119,7 +122,7 @@
                       <label class="btn btn-outline-dark" for="btn_na_Grade">Not Applicable</label>
                       <div class="btn-group" role="group">
                         <div id="divUploadGrade" class="upload_file file btn btn-primary">Upload
-                          <input id="fileUploadGrade" type="file" name="gradeFile" onchange="getFileData(this);" />
+                          <input id="fileUploadGrade" type="file" name="gradeFile" accept="application/pdf" onchange="getFileData(this, 'textUploadGrade');" />
                         </div>
                         <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
                         <div class="modal fade" id="viewUploadGradeModal" tabindex="-1">
@@ -133,7 +136,7 @@
                           </div>
                         </div>
                       </div>
-                      
+                      <p id="textUploadGrade" class="small mx-auto"></p>
                     </div>
                   </td>
                 </tr>

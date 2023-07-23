@@ -1,7 +1,7 @@
 <?php
 
 function getFileChecks($check , $file){
-    if($check    == false){
+    if($check == false){
         if($file['name'] != ''){
             return true;
         }
@@ -12,8 +12,8 @@ function getFileChecks($check , $file){
     }    
 }
 
-function submitAssessment(){
-    
+function submitAssessment($schoolId, $clearance, $cor, $grade, $schoolIdFile, $clearanceFile, $corFile, $gradeFile){
+        
 }
 
 ?>

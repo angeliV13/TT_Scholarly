@@ -5,7 +5,7 @@ require("../model/basicSetupModel.php");
 if(isset($_REQUEST['action'])){
     $action = $_REQUEST['action'];
     switch($action){
-        case 1:
+        case 1:         // Upload of Assessment Requirements
             $schoolIdCheck   = $_POST['schoolIdCheck'];
             $clearanceCheck  = $_POST['clearanceCheck'];
             $corCheck        = $_POST['corCheck'];
@@ -28,7 +28,7 @@ if(isset($_REQUEST['action'])){
             if($validSchoolId == false || $validClearance == false || $validCor == false || $validGrade == false){
                 echo 'VC001: Error in File Validation';
             }else{
-                
+                echo submitAssessment($schoolIdCheck, $clearanceCheck, $corCheck, $gradeCheck, $schoolIdFile, $clearanceFile, $corFile, $gradeFile);
             }
 
             break;
