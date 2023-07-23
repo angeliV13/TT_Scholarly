@@ -1,3 +1,35 @@
+// //Reading Assessment Table for Beneficiaries
+// let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
+//     lengthChange: false,
+//     searching: false,
+//     ordering: false,
+//     serverSide: true,
+//     processing: true,
+//     ajax: {
+//       url: "controller/uploadRequirements.php",
+//       type: "POST",
+//       data: {
+//         action: 0,
+//         getTable: 1,
+//       },
+//       // success: function (row, data, index) {
+//       //   console.log(row);
+//       //   console.log(data);
+//       //   console.log(index);
+//       // },
+//       error: function (data) {
+//         console.log(data);
+//       },
+//     },
+//     createdRow: function (row, data, index) {},
+//     columnDefs: [],
+//     bInfo: false,
+//     paging: false,
+//     fixedColumns: false,
+//     deferRender: false,
+//     stateSave: false,
+//   });
+
 // School ID
 $("#btn_na_SchoolId").click(function () {
   if ($(this).is(":checked")) {
@@ -72,6 +104,17 @@ $("#submitAssessment").submit(function (e) {
   var validCor          = false;
   var validGrade        = false;
 
+  var form_data = new FormData();  
+  form_data.append('action', 2);
+  form_data.append('schoolIdCheck', schoolIdCheck);
+  form_data.append('clearanceCheck', clearanceCheck);
+  form_data.append('corCheck', corCheck);
+  form_data.append('gradeCheck', gradeCheck);                
+  form_data.append('schoolIdFile', schoolIdFile);
+  form_data.append('clearanceFile', clearanceFile);
+  form_data.append('corFile', corFile);
+  form_data.append('gradeFile', gradeFile);
+
   //Validation
   validSchoolId = getFileChecks(schoolIdCheck, schoolIdFile);
   validClearance = getFileChecks(clearanceCheck, clearanceFile);
@@ -102,17 +145,20 @@ $("#submitAssessment").submit(function (e) {
         $.ajax({
           type: "POST",
           url: "controller/uploadRequirements.php",
-          data: {
-            action: 1,
-            schoolIdCheck   : schoolIdCheck,
-            clearanceCheck  : clearanceCheck,
-            corCheck        : corCheck,
-            gradeCheck      : gradeCheck,
-            schoolIdFile    : schoolIdFile,
-            clearanceFile   : clearanceFile,
-            corFile         : corFile,
-            gradeFile       : gradeFile,
-          },
+          processData: false,
+          contentType: false,
+          data: form_data,
+        //   data: {
+        //     action: 1,
+        //     schoolIdCheck   : schoolIdCheck,
+        //     clearanceCheck  : clearanceCheck,
+        //     corCheck        : corCheck,
+        //     gradeCheck      : gradeCheck,
+        //     schoolIdFile    : schoolIdFile,
+        //     clearanceFile   : clearanceFile,
+        //     corFile         : corFile,
+        //     gradeFile       : gradeFile,
+        //   },
           success: function (data) {
             if (data == "Insert Success") {
               Swal.fire({
@@ -121,11 +167,12 @@ $("#submitAssessment").submit(function (e) {
                 html: "Upload Success",
               });
             } else {
-              Swal.fire({
-                title: "Error!",
-                icon: "error",
-                html: data,
-              });
+                console.log(data);
+            //   Swal.fire({
+            //     title: "Error!",
+            //     icon: "error",
+            //     html: data,
+            //   });
             }
           },
         });
@@ -136,6 +183,7 @@ $("#submitAssessment").submit(function (e) {
   return false;
 });
 
+// Checking File
 function getFileChecks(check, file) {
   if (check == false) {
     if (file != undefined) {

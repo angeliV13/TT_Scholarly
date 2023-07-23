@@ -9,7 +9,7 @@
         <div class="table-responsive">
           <form id="submitAssessment">
             <!-- Table with stripped rows -->
-            <table class="table table-bordered table-hover" id="viewAdmin" width="100%" cellspacing="0">
+            <table class="table table-bordered table-hover" id="assessmentBeneTable" width="100%" cellspacing="0">
               <thead>
                 <tr class="text-center">
                   <th>No</th>

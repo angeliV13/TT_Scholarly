@@ -15,10 +15,10 @@ switch($_SESSION['account_type'])
         echo '<script src="assets/js/applicantList.js"></script>';
         echo '<script src="assets/js/updateYearLevelOptions.js"></script>';
         break;
-    case 2:
+    case 2:     // Beneficiaries
         echo '<script src="assets/js/upload_assessment.js"></script>';
         break;
-    case 3:
+    case 3:     // Applicant
         echo '<script src="assets/js/upload_assessment.js"></script>';
         break;
 }
