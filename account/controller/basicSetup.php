@@ -7,6 +7,15 @@ if (isset($_REQUEST['action'])) {
     $action = $_REQUEST['action'];
 
     switch ($action) {
+        case 0.1:
+            echo getDefaultSemesterId();
+            break;
+        case 0.2:
+            if(isset($_REQUEST['sem'])){
+                $sem = $_REQUEST['sem'];
+                echo switchSemester($sem);
+            }
+            break;
         case 1:                             //Table Generations
             if (isset($_REQUEST['getTable'])) {
                 $getTable = $_REQUEST['getTable'];

@@ -1,4 +1,23 @@
 $(document).ready(function () {
+  $.ajax({
+    type: "POST",
+    url: "controller/basicSetup.php",
+    data: {
+      action: 0.1,
+    },
+    success: function (data) {
+      if (data != 0) {
+        $("#sem" + data).prop('checked', true);
+      } else {
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          html: data,
+        });
+      }
+    },
+  });
+
   // Acad Year Table
   let acadYearTable = $("#acadYearTable").DataTable({
     lengthChange: false,
@@ -242,6 +261,56 @@ function deleteAY(id) {
     }
   });
 }
+
+//------------------------------------------------------------------
+// Semester
+$("input[name=semOptions]").on("change", function (e) {
+  
+  let sem         = $(this).val();
+  let semId       = "sem" + sem;
+
+  if(sem == 1){
+    $("#sem2").prop('checked', true);
+  }
+  else if (sem == 2){
+    $("#sem1").prop('checked', true);
+  }
+  
+  $(this).prop('checked', false);
+  Swal.fire({
+    title: "Change Semester?",
+    text: "Are you sure you want to switch semester?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Switch",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/basicSetup.php",
+        data: {
+          action: 0.2,
+          sem   : sem,
+        },
+        success: function (data) {
+          if (data == "Success") {
+            location.reload();
+            // $("#"+semId).prop('checked', true);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+
+  return false;
+});
+
 // -----------------------------------------------------------------
 // Set Assessment
 function addSetAssessment() {

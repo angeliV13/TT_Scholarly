@@ -32,6 +32,22 @@ function getDefaultAcadYearId(){
     }
 }
 
+function getDefaultSemesterId(){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM semester WHERE default_sem = 1";
+    $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc())
+        {
+            extract($row);
+
+            return $id;
+        }
+    }
+}
+
 function getCheckboxValueDB($value){
     return ($value == 1) ? 'checked' : ''; 
 }
@@ -42,6 +58,19 @@ function getAudience($shs, $colEAPub, $colEAPriv, $colSc){
     $audience .= ($colEAPriv    == 1) ? 'College EA Private <br>' : '';
     $audience .= ($colSc        == 1) ? 'College Scholarship <br>' : '';
     return $audience;
+}
+// ----------------------------------------------------
+// Change Semester
+function switchSemester($sem = 1){
+    include("dbconnection.php");
+
+    $sql = "UPDATE semester SET default_sem = 0 WHERE default_sem = 1";
+    $query = $conn->query($sql) or die("Error BSQ010: " . $conn->error);
+
+    $sql = "UPDATE semester SET default_sem = 1 WHERE id = '". $sem ."'";
+    $query = $conn->query($sql) or die("Error BSQ011: " . $conn->error);
+    
+    return 'Success';
 }
 
 
@@ -128,6 +157,7 @@ function defaultAY($from_ay){
     include("dbconnection.php");
 
     $acadYearId = getDefaultAcadYearId();
+    $semester   = switchSemester();
 
     $sql = "UPDATE acad_year SET default_ay = 0 WHERE id = '". $acadYearId ."'";
     $query = $conn->query($sql) or die("Error BSQ004: " . $conn->error);
@@ -157,8 +187,9 @@ function getSetAssessmentTable(){
     $counter = 1;
 
     $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
 
-    $sql = "SELECT * FROM set_assessment WHERE ay_id = '". $acadYearId ."' ORDER BY id DESC";
+    $sql = "SELECT * FROM set_assessment WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."'ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ007: " . $conn->error);
 
     if ($query->num_rows <>  0) {
@@ -259,13 +290,15 @@ function addSetAssessment($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $co
     $date = date("Y-m-d");
 
     $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
+
     $audience  = ($shs      == true) ? '1' : '';
     $audience .= ($colEAPub == true) ? '2' : '';
     $audience .= ($colEAPriv== true) ? '3' : '';
     $audience .= ($colSc    == true) ? '4' : '';
 
-    $sql = "INSERT INTO set_assessment (`id`, `ay_id`, `start_date`, `end_date`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
-            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
+    $sql = "INSERT INTO set_assessment (`id`, `ay_id`, `sem_id`, `start_date`, `end_date`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '".$acadYearId."', '".$semId."',  '".$startDate."', '".$endDate."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
     $query = $conn->query($sql) or die("Error BSQ008: " . $conn->error);
 
     return 'Assessment Date Added';
@@ -315,8 +348,9 @@ function getSetRenewalTable(){
     $counter = 1;
 
     $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
 
-    $sql = "SELECT * FROM set_renewal WHERE ay_id = '". $acadYearId ."' ORDER BY id DESC";
+    $sql = "SELECT * FROM set_renewal WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."'ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ011: " . $conn->error);
 
     if ($query->num_rows <>  0) {
@@ -417,13 +451,15 @@ function addSetRenewal($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc
     $date = date("Y-m-d");
 
     $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
+
     $audience  = ($shs      == true) ? '1' : '';
     $audience .= ($colEAPub == true) ? '2' : '';
     $audience .= ($colEAPriv== true) ? '3' : '';
     $audience .= ($colSc    == true) ? '4' : '';
 
-    $sql = "INSERT INTO set_renewal (`id`, `ay_id`, `start_date`, `end_date`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
-            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
+    $sql = "INSERT INTO set_renewal (`id`, `ay_id`, `sem_id`, `start_date`, `end_date`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '".$acadYearId."', '".$semId."',  '".$startDate."', '".$endDate."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
     $query = $conn->query($sql) or die("Error BSQ012: " . $conn->error);
 
     return 'Renewal Date Added';
@@ -473,8 +509,9 @@ function getSetExamTable(){
     $counter = 1;
 
     $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
 
-    $sql = "SELECT * FROM set_exam WHERE ay_id = '". $acadYearId ."' ORDER BY id DESC";
+    $sql = "SELECT * FROM set_exam WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."'ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ015: " . $conn->error);
 
     if ($query->num_rows <>  0) {
@@ -580,9 +617,10 @@ function addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $c
     $date = date("Y-m-d");
 
     $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
 
-    $sql = "INSERT INTO set_exam (`id`, `ay_id`, `start_date`, `end_date`, `time`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
-            VALUES (NULL, '".$acadYearId."', '".$startDate."', '".$endDate."','".$time."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
+    $sql = "INSERT INTO set_exam (`id`, `ay_id`, `sem_id`, `start_date`, `end_date`, `time`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '".$acadYearId."', '".$semId."',  '".$startDate."', '".$endDate."','".$time."', ".$shs.",".$colEAPub.",".$colEAPriv.",".$colSc.", '".$sessionId."', '".$date."', '".$sessionId."', '".$date."')";
     $query = $conn->query($sql) or die("Error BSQ016: " . $conn->error);
 
     return 'Exam Date Added';

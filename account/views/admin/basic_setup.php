@@ -37,6 +37,24 @@
                         </div>
                     </div>
                 </div>
+                <!-- Semester -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">Set Semester</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <input type="radio" class="btn-check" name="semOptions" id="sem1" value="1" autocomplete="off">
+                                    <label class="btn btn-outline-danger" for="sem1">1st Semester</label>
+
+                                    <input type="radio" class="btn-check" name="semOptions" id="sem2" value="2" autocomplete="off">
+                                    <label class="btn btn-outline-danger" for="sem2">2nd Semester</label>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Assessment -->
                 <div class="card">
                     <div class="card-body ">
