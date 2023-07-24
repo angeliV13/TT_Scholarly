@@ -1,34 +1,34 @@
 // //Reading Assessment Table for Beneficiaries
-// let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
-//     lengthChange: false,
-//     searching: false,
-//     ordering: false,
-//     serverSide: true,
-//     processing: true,
-//     ajax: {
-//       url: "controller/uploadRequirements.php",
-//       type: "POST",
-//       data: {
-//         action: 0,
-//         getTable: 1,
-//       },
-//       // success: function (row, data, index) {
-//       //   console.log(row);
-//       //   console.log(data);
-//       //   console.log(index);
-//       // },
-//       error: function (data) {
-//         console.log(data);
-//       },
-//     },
-//     createdRow: function (row, data, index) {},
-//     columnDefs: [],
-//     bInfo: false,
-//     paging: false,
-//     fixedColumns: false,
-//     deferRender: false,
-//     stateSave: false,
-//   });
+let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
+    lengthChange: false,
+    searching: false,
+    ordering: false,
+    serverSide: true,
+    processing: true,
+    ajax: {
+      url: "controller/uploadRequirements.php",
+      type: "POST",
+      data: {
+        action: 1,
+        getTable: 1,
+      },
+      // success: function (row, data, index) {
+      //   console.log(row);
+      //   console.log(data);
+      //   console.log(index);
+      // },
+      error: function (data) {
+        console.log(data);
+      },
+    },
+    createdRow: function (row, data, index) {},
+    columnDefs: [],
+    bInfo: false,
+    paging: false,
+    fixedColumns: false,
+    deferRender: false,
+    stateSave: false,
+  });
 
 // School ID
 $("#btn_na_SchoolId").click(function () {

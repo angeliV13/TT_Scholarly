@@ -189,7 +189,7 @@ function getSetAssessmentTable(){
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
 
-    $sql = "SELECT * FROM set_assessment WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."'ORDER BY id DESC";
+    $sql = "SELECT * FROM set_assessment WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ007: " . $conn->error);
 
     if ($query->num_rows <>  0) {
@@ -350,7 +350,7 @@ function getSetRenewalTable(){
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
 
-    $sql = "SELECT * FROM set_renewal WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."'ORDER BY id DESC";
+    $sql = "SELECT * FROM set_renewal WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ011: " . $conn->error);
 
     if ($query->num_rows <>  0) {
@@ -511,7 +511,7 @@ function getSetExamTable(){
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
 
-    $sql = "SELECT * FROM set_exam WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."'ORDER BY id DESC";
+    $sql = "SELECT * FROM set_exam WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ015: " . $conn->error);
 
     if ($query->num_rows <>  0) {

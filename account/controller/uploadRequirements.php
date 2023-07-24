@@ -9,7 +9,7 @@ if(isset($_REQUEST['action'])){
         case 1:
             $getTable = $_POST['getTable'];
             if($getTable == 1){
-                // echo getAssessmentBeneTable();
+                echo getAssessmentBeneTable();
             }
             break;
         case 2:         // Upload of Assessment Requirements

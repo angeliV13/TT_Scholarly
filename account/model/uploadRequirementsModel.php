@@ -1,19 +1,5 @@
 <?php
 
-function generateRandomString($length = 5) // generates a random string
-{
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-
-    for ($i = 0; $i < $length; $i++) 
-    {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-
-    return $randomString;
-}
-
 function getFileChecks($check , $file){
     if($check == false){
         if($file['name'] != ''){
@@ -28,52 +14,6 @@ function getFileChecks($check , $file){
         return 2;
     }  
 }
-
-// function getAssessmentBeneTable(){
-//     include("dbconnection.php");
-
-//     $totalData = 0;
-//     $data = [];
-//     $counter = 1;
-
-//     $sql = "SELECT * FROM assessment_file ORDER BY id DESC LIMIT 5";
-//     $query = $conn->query($sql) or die("Error BSQ001: " . $conn->error);
-
-//     if ($query->num_rows <>  0) {
-//         while ($row = $query->fetch_assoc())
-//         {
-//             extract($row);
-
-//             $button =   '<div class="btn-group d-flex align-content-center">
-//                             <a href="#" class="col-6 btn btn-warning btn-sm" onclick="defaultAY('. $from_ay .')">Make Default</a>
-//                             <a href="#" class="col-6 btn btn-danger btn-sm" onclick="deleteAY('. $from_ay .')">Delete</a>
-//                         </div>';
-//             if($default_ay == 1){
-//                 $button = '<div class="align-content-center">
-//                                 <p class="text-center fst-italic">Default Academic Year</p>
-//                             </div>';
-//             }
-
-//             $data[] = [
-//                 $counter,
-//                 $ay,
-//                 accountHandlerAccess( 1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
-//                 $button,
-//             ];
-
-//             $counter++;
-//         }
-//     }
-
-//     $json_data = array(
-//         "draw"            => 1,   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
-//         "recordsTotal"    => intval($totalData),  // total number of records
-//         "recordsFiltered" => intval($totalData), // total number of records after searching, if there is no searching then totalFiltered = totalData
-//         "data"            => $data   // total data array
-//     );
-
-//     echo json_encode($json_data);  // send data as json format
-// }
 
 function getDefaultAcadYearId(){
     include("dbconnection.php");
@@ -91,10 +31,205 @@ function getDefaultAcadYearId(){
     }
 }
 
-function uploadFile($ay, $userid, $target_dir, $file, $type, $code){
+function getDefaultSemesterId(){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM semester WHERE default_sem = 1";
+    $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc())
+        {
+            extract($row);
+
+            return $id;
+        }
+    }
+}
+
+function getRequirementsTable(){
+    include("dbconnection.php");
+
+    $requirementData = [];
+
+    $sql = "SELECT id, requirement_name, requirement_code FROM requirements WHERE assessment = 1 ORDER BY id ASC";
+    $query = $conn->query($sql) or die("Error URQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        $requirementData = $query->fetch_all();
+    }
+
+    return $requirementData;
+}
+
+function getAssessmentBeneTable(){
+    session_start();  
+    include("dbconnection.php");
+
+    $acadYearId = getDefaultAcadYearId();
+    $semId      = getDefaultSemesterId();
+    $userid     = $_SESSION['id'];
+
+    $reqData    = getRequirementsTable();
+    $data       = [];
+    $totalData  = 0;
+    $counter    = 1;
+
+    $sql = "SELECT * FROM assessment_file WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."' AND account_id = '". $userid ."'ORDER BY id ASC";
+    $query = $conn->query($sql) or die("Error URQ001: " . $conn->error);
+
+    // Generate if no Table Entries Found
+    if ($query->num_rows ==  0) {
+        $sql = "INSERT INTO `assessment_file`
+                        (`id`, `account_id`, `ay_id`, `sem_id`, `requirement`, `file`, `status`, `remarks`, `upload_date`, `modified_date`, `checked_date`) 
+                VALUES  ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','1','',0, 'Not Submitted', '', '', ''),
+                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','2','',0, 'Not Submitted', '', '', ''),
+                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','3','',0, 'Not Submitted', '', '', ''),
+                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','4','',0, 'Not Submitted', '', '', '')";
+        $query = $conn->query($sql) or die("Error URQ002: " . $conn->error);
+
+        $sql = "SELECT * FROM assessment_file WHERE ay_id = '". $acadYearId ."' AND sem_id = '". $semId ."' AND account_id = '". $userid ."'ORDER BY id DESC";
+        $query = $conn->query($sql) or die("Error URQ003: " . $conn->error);
+    }
+
+    while ($row = $query->fetch_assoc())
+        {
+            extract($row);
+
+            if($status == 0){
+                $statusText = 'No Action';
+            }elseif($status == 1){
+                $statusText = 'Approved';
+            }elseif($status == 2){
+                $statusText = 'Rejected';
+            }
+
+            $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
+                                    <!--BUTTON FOR "NOT APPLICABLE"-->
+                                    <input type="checkbox" class="btn-check" id="btn_na_SchoolId" autocomplete="off">
+                                    <label class="btn btn-outline-dark" for="btn_na_SchoolId">Not Applicable</label>
+                                    <div class="btn-group" role="group">
+                                    <div id="divUploadSchoolId" class="upload_file file btn btn-primary">Upload
+                                        <input id="fileUploadSchoolId" type="file" name="schoolIdFile" accept="application/pdf" onchange="getFileData(this, \'textUploadSchoolId\');" />
+                                    </div>
+                                    <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
+                                    <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title">School ID</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <p id="textUploadSchoolId" class="small mx-auto">'. $file .'</p>
+                                </div>';
+            $buttonClearance =  '<div class="btn-group-vertical d-flex">
+                                    <!--BUTTON FOR "NOT APPLICABLE"-->
+                                    <input type="checkbox" class="btn-check" id="btn_na_Clearance" autocomplete="off">
+                                    <label class="btn btn-outline-dark" for="btn_na_Clearance">Not Applicable</label>
+                                    <div class="btn-group" role="group">
+                                    <div id="divUploadClearance" class="upload_file file btn btn-primary">Upload
+                                        <input id="fileUploadClearance" type="file" name="clearance" accept="application/pdf" onchange="getFileData(this, \'textUploadClearance\');" />
+                                    </div>
+                                    <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
+                                    <div class="modal fade" id="fileUploadClearanceModal" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title">School Clearance</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <p id="textUploadClearance" class="small mx-auto">'. $file .'</p>
+                                </div>';
+            $buttonCor =        '<div class="btn-group-vertical d-flex">
+                                    <!--BUTTON FOR "NOT APPLICABLE"-->
+                                    <input type="checkbox" class="btn-check" id="btn_na_Cor" autocomplete="off">
+                                    <label class="btn btn-outline-dark" for="btn_na_Cor">Not Applicable</label>
+                                    <div class="btn-group" role="group">
+                                    <div id="divUploadCor" class="upload_file file btn btn-primary">Upload
+                                        <input id="fileUploadCor" type="file" name="corFile" accept="application/pdf" onchange="getFileData(this, \'textUploadCor\');" />
+                                    </div>
+                                    <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
+                                    <div class="modal fade" id="viewUploadCorModal" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title">Certificate of Registration</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <p id="textUploadCor" class="small mx-auto">'. $file .'</p>
+                                </div>';
+            $buttonGrade =         '<div class="btn-group-vertical d-flex">
+                                    <!--BUTTON FOR "NOT APPLICABLE"-->
+                                    <input type="checkbox" class="btn-check" id="btn_na_Grade" autocomplete="off">
+                                    <label class="btn btn-outline-dark" for="btn_na_Grade">Not Applicable</label>
+                                    <div class="btn-group" role="group">
+                                    <div id="divUploadGrade" class="upload_file file btn btn-primary">Upload
+                                        <input id="fileUploadGrade" type="file" name="gradeFile" accept="application/pdf" onchange="getFileData(this, \'textUploadGrade\');" />
+                                    </div>
+                                    <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
+                                    <div class="modal fade" id="viewUploadGradeModal" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title">Grade</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <p id="textUploadGrade" class="small mx-auto">'. $file .'</p>
+                                </div>';
+
+            if($counter == 1){
+                $button = $buttonSchoolId;
+            }elseif($counter == 2){
+                $button = $buttonClearance;
+            }elseif($counter == 3){
+                $button = $buttonCor;
+            }elseif($counter == 4){
+                $button = $buttonGrade;
+            }
+
+            $data[] = [
+                $counter,
+                $reqData[$counter-1][1],
+                $statusText,
+                $remarks,
+                $button,
+            ];
+            
+            $counter++;
+        }
+
+    $json_data = array(
+        "draw"            => 1,   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+        "recordsTotal"    => intval($totalData),  // total number of records
+        "recordsFiltered" => intval($totalData), // total number of records after searching, if there is no searching then totalFiltered = totalData
+        "data"            => $data   // total data array
+    );
+
+    echo json_encode($json_data);  // send data as json format
+}
+
+
+
+function uploadFile($target_dir, $file, $file_name){
 
     $errors = "";
-    $file_name  = $ay . "_" . $userid . "_" . $code . "_" . $type;  
+      
     $file_size  = $file['size'];
     $file_tmp   = $file['tmp_name'];
     // $file_ext   = strtolower(end(explode('.', $name_of_file)));
@@ -122,30 +257,40 @@ function uploadFile($ay, $userid, $target_dir, $file, $type, $code){
 
 function submitAssessment($target_dir, $schoolId, $clearance, $cor, $grade, $schoolIdFile, $clearanceFile, $corFile, $gradeFile){
     session_start();  
-    include("dbconnection.php");
 
     $ay     = getDefaultAcadYearId();
+    $sem    = getDefaultSemesterId();
     $userid = $_SESSION['id'];
-    $uniqueCode = generateRandomString();
 
     if($schoolId == 'false'){
-        $type = "schoolid";
-        $value = uploadFile($ay, $userid, $target_dir, $schoolIdFile, $type, $code);
+        $type       = "schoolid";
+        $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+        $value      = uploadFile($target_dir, $schoolIdFile, $file_name);
+        // if($value == 'Success'){
+        //     updateAssessmentRequirement($ay, $sem, $userid, 1);
+        // }
     }
     if($clearance == 'false'){
-        $type = "clearance";
-        $value = uploadFile($ay, $userid, $target_dir, $clearanceFile, $type, $code);
+        $type       = "clearance";
+        $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+        $value      = uploadFile($target_dir, $clearanceFile, $file_name);
     }
     if($cor == 'false'){
-        $type = "cor";
-        $value = uploadFile($ay, $userid, $target_dir, $corFile, $type, $code);
+        $type       = "cor";
+        $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+        $value      = uploadFile($target_dir, $corFile, $file_name);
     }
     if($grade == 'false'){
-        $type = "grade";
-        $value = uploadFile($ay, $userid, $target_dir, $gradeFile, $type, $code);
-    }
+        $type       = "grades";
+        $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+        $value      = uploadFile($target_dir, $gradeFile, $file_name);
+    }  
 
-    return $value;
+    return updateAssessmentRequirement($ay, $sem, $userid);
+}
+
+function updateAssessmentRequirement($ay, $sem, $userid){
+
 }
 
 ?>
