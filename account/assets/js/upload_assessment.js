@@ -1,4 +1,5 @@
 // //Reading Assessment Table for Beneficiaries
+$(document).ready(function () {
 let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
     lengthChange: false,
     searching: false,
@@ -29,6 +30,7 @@ let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
     deferRender: false,
     stateSave: false,
   });
+});
 
 // School ID
 $("#btn_na_SchoolId").click(function () {
