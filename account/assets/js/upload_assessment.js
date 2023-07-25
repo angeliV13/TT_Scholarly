@@ -33,62 +33,113 @@ $(document).ready(function () {
 });
 
 // School ID
-$("#btn_na_SchoolId").click(function () {
-  if ($(this).is(":checked")) {
+function schoolId(){
+  if ($("#btn_na_SchoolId").is(":checked")) {
     $("#divUploadSchoolId").addClass("disabled");
     $("#fileUploadSchoolId").prop("disabled", true);
     $("#viewUploadSchoolId").addClass("disabled");
+    $("#textUploadSchoolId").text("");
   } else {
     $("#divUploadSchoolId").removeClass("disabled");
     $("#fileUploadSchoolId").prop("disabled", false);
     $("#viewUploadSchoolId").removeClass("disabled");
   }
-});
+}
+// $("#btn_na_SchoolId").click(function () {
+//   if ($(this).is(":checked")) {
+//     $("#divUploadSchoolId").addClass("disabled");
+//     $("#fileUploadSchoolId").prop("disabled", true);
+//     $("#viewUploadSchoolId").addClass("disabled");
+//   } else {
+//     $("#divUploadSchoolId").removeClass("disabled");
+//     $("#fileUploadSchoolId").prop("disabled", false);
+//     $("#viewUploadSchoolId").removeClass("disabled");
+//   }
+// });
 
 // Clearance
-$("#btn_na_Clearance").click(function () {
-  if ($(this).is(":checked")) {
+function schoolClearance(){
+  if ($("#btn_na_Clearance").is(":checked")) {
     $("#divUploadClearance").addClass("disabled");
     $("#fileUploadClearance").prop("disabled", true);
     $("#viewUploadClearance").addClass("disabled");
+    $("#textUploadClearance").text("");
   } else {
     $("#divUploadClearance").removeClass("disabled");
     $("#fileUploadClearance").prop("disabled", false);
     $("#viewUploadClearance").removeClass("disabled");
   }
-});
+}
+// $("#btn_na_Clearance").click(function () {
+//   if ($(this).is(":checked")) {
+//     $("#divUploadClearance").addClass("disabled");
+//     $("#fileUploadClearance").prop("disabled", true);
+//     $("#viewUploadClearance").addClass("disabled");
+//   } else {
+//     $("#divUploadClearance").removeClass("disabled");
+//     $("#fileUploadClearance").prop("disabled", false);
+//     $("#viewUploadClearance").removeClass("disabled");
+//   }
+// });
 
 // Certificate of Registration
-$("#btn_na_Cor").click(function () {
-  if ($(this).is(":checked")) {
+function cor() {
+  if ($("#btn_na_Cor").is(":checked")) {
     $("#divUploadCor").addClass("disabled");
     $("#fileUploadCor").prop("disabled", true);
     $("#viewUploadCor").addClass("disabled");
+    $("#textUploadCor").text("");
   } else {
     $("#divUploadCor").removeClass("disabled");
     $("#fileUploadCor").prop("disabled", false);
     $("#viewUploadCor").removeClass("disabled");
   }
-});
+}
+
+// $("#btn_na_Cor").click(function () {
+//   if ($(this).is(":checked")) {
+//     $("#divUploadCor").addClass("disabled");
+//     $("#fileUploadCor").prop("disabled", true);
+//     $("#viewUploadCor").addClass("disabled");
+//   } else {
+//     $("#divUploadCor").removeClass("disabled");
+//     $("#fileUploadCor").prop("disabled", false);
+//     $("#viewUploadCor").removeClass("disabled");
+//   }
+// });
 
 // Grade Report
-$("#btn_na_Grade").click(function () {
-  if ($(this).is(":checked")) {
+function grade() {
+  if ($("#btn_na_Grade").is(":checked")) {
     $("#divUploadGrade").addClass("disabled");
     $("#fileUploadGrade").prop("disabled", true);
     $("#viewUploadGrade").addClass("disabled");
+    $("#textUploadGrade").text("");
   } else {
     $("#divUploadGrade").removeClass("disabled");
     $("#fileUploadGrade").prop("disabled", false);
     $("#viewUploadGrade").removeClass("disabled");
   }
-});
+}
+
+// $("#btn_na_Grade").click(function () {
+//   if ($(this).is(":checked")) {
+//     $("#divUploadGrade").addClass("disabled");
+//     $("#fileUploadGrade").prop("disabled", true);
+//     $("#viewUploadGrade").addClass("disabled");
+//   } else {
+//     $("#divUploadGrade").removeClass("disabled");
+//     $("#fileUploadGrade").prop("disabled", false);
+//     $("#viewUploadGrade").removeClass("disabled");
+//   }
+// });
 
 // Getting the Data File
 function getFileData(myFile, inputId) {
   let file = myFile.files[0];
   let filename = file.name;
-  $("#" + inputId).text(filename);
+  $("#textUpload" + inputId).text(filename);
+  $("#preview" + inputId).attr("src",URL.createObjectURL(event.target.files[0]));
 }
 
 //  Saving

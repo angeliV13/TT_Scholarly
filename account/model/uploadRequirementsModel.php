@@ -106,11 +106,11 @@ function getAssessmentBeneTable(){
 
             $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
                                     <!--BUTTON FOR "NOT APPLICABLE"-->
-                                    <input type="checkbox" class="btn-check" id="btn_na_SchoolId" autocomplete="off">
+                                    <input type="checkbox" class="btn-check" id="btn_na_SchoolId" onclick="schoolId()">
                                     <label class="btn btn-outline-dark" for="btn_na_SchoolId">Not Applicable</label>
                                     <div class="btn-group" role="group">
                                     <div id="divUploadSchoolId" class="upload_file file btn btn-primary">Upload
-                                        <input id="fileUploadSchoolId" type="file" name="schoolIdFile" accept="application/pdf" onchange="getFileData(this, \'textUploadSchoolId\');" />
+                                        <input id="fileUploadSchoolId" type="file" name="schoolIdFile" accept="application/pdf" onchange="getFileData(this, \'SchoolId\');" />
                                     </div>
                                     <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
                                     <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
@@ -120,6 +120,10 @@ function getAssessmentBeneTable(){
                                             <h5 class="modal-title">School ID</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
+                                            <div class="modal-body">
+                                                <embed id="previewSchoolId" src="uploads/assessment/'.$file.'.pdf" frameborder="0" width="100%" height="400px">
+                                            </div>
+
                                         </div>
                                         </div>
                                     </div>
@@ -128,11 +132,11 @@ function getAssessmentBeneTable(){
                                 </div>';
             $buttonClearance =  '<div class="btn-group-vertical d-flex">
                                     <!--BUTTON FOR "NOT APPLICABLE"-->
-                                    <input type="checkbox" class="btn-check" id="btn_na_Clearance" autocomplete="off">
+                                    <input type="checkbox" class="btn-check" id="btn_na_Clearance" onclick="schoolClearance()">
                                     <label class="btn btn-outline-dark" for="btn_na_Clearance">Not Applicable</label>
                                     <div class="btn-group" role="group">
                                     <div id="divUploadClearance" class="upload_file file btn btn-primary">Upload
-                                        <input id="fileUploadClearance" type="file" name="clearance" accept="application/pdf" onchange="getFileData(this, \'textUploadClearance\');" />
+                                        <input id="fileUploadClearance" type="file" name="clearance" accept="application/pdf" onchange="getFileData(this, \'Clearance\');" />
                                     </div>
                                     <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
                                     <div class="modal fade" id="fileUploadClearanceModal" tabindex="-1">
@@ -142,6 +146,9 @@ function getAssessmentBeneTable(){
                                             <h5 class="modal-title">School Clearance</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
+                                            <div class="modal-body">
+                                                <embed id="previewClearance" src="uploads/assessment/'.$file.'.pdf" frameborder="0" width="100%" height="400px">
+                                            </div>
                                         </div>
                                         </div>
                                     </div>
@@ -150,11 +157,11 @@ function getAssessmentBeneTable(){
                                 </div>';
             $buttonCor =        '<div class="btn-group-vertical d-flex">
                                     <!--BUTTON FOR "NOT APPLICABLE"-->
-                                    <input type="checkbox" class="btn-check" id="btn_na_Cor" autocomplete="off">
+                                    <input type="checkbox" class="btn-check" id="btn_na_Cor" onclick="cor()">
                                     <label class="btn btn-outline-dark" for="btn_na_Cor">Not Applicable</label>
                                     <div class="btn-group" role="group">
                                     <div id="divUploadCor" class="upload_file file btn btn-primary">Upload
-                                        <input id="fileUploadCor" type="file" name="corFile" accept="application/pdf" onchange="getFileData(this, \'textUploadCor\');" />
+                                        <input id="fileUploadCor" type="file" name="corFile" accept="application/pdf" onchange="getFileData(this, \'Cor\');" />
                                     </div>
                                     <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
                                     <div class="modal fade" id="viewUploadCorModal" tabindex="-1">
@@ -164,6 +171,9 @@ function getAssessmentBeneTable(){
                                             <h5 class="modal-title">Certificate of Registration</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
+                                            <div class="modal-body">
+                                                <embed id="previewCor" src="uploads/assessment/'.$file.'.pdf" frameborder="0" width="100%" height="400px">
+                                            </div>
                                         </div>
                                         </div>
                                     </div>
@@ -172,11 +182,11 @@ function getAssessmentBeneTable(){
                                 </div>';
             $buttonGrade =         '<div class="btn-group-vertical d-flex">
                                     <!--BUTTON FOR "NOT APPLICABLE"-->
-                                    <input type="checkbox" class="btn-check" id="btn_na_Grade" autocomplete="off">
+                                    <input type="checkbox" class="btn-check" id="btn_na_Grade" onclick="grade()">
                                     <label class="btn btn-outline-dark" for="btn_na_Grade">Not Applicable</label>
                                     <div class="btn-group" role="group">
                                     <div id="divUploadGrade" class="upload_file file btn btn-primary">Upload
-                                        <input id="fileUploadGrade" type="file" name="gradeFile" accept="application/pdf" onchange="getFileData(this, \'textUploadGrade\');" />
+                                        <input id="fileUploadGrade" type="file" name="gradeFile" accept="application/pdf" onchange="getFileData(this, \'Grade\');" />
                                     </div>
                                     <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
                                     <div class="modal fade" id="viewUploadGradeModal" tabindex="-1">
@@ -185,6 +195,9 @@ function getAssessmentBeneTable(){
                                             <div class="modal-header">
                                             <h5 class="modal-title">Grade</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <embed id="previewGrade" src="uploads/assessment/'.$file.'.pdf" frameborder="0" width="100%" height="400px">
                                             </div>
                                         </div>
                                         </div>
@@ -266,9 +279,10 @@ function submitAssessment($target_dir, $schoolId, $clearance, $cor, $grade, $sch
         $type       = "schoolid";
         $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
         $value      = uploadFile($target_dir, $schoolIdFile, $file_name);
-        // if($value == 'Success'){
-        //     updateAssessmentRequirement($ay, $sem, $userid, 1);
-        // }
+
+        if($value == 'Success'){
+            echo updateAssessmentRequirement($ay, $sem, $userid, $file_name, 1);
+        }
     }
     if($clearance == 'false'){
         $type       = "clearance";
@@ -285,11 +299,25 @@ function submitAssessment($target_dir, $schoolId, $clearance, $cor, $grade, $sch
         $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
         $value      = uploadFile($target_dir, $gradeFile, $file_name);
     }  
-
-    return updateAssessmentRequirement($ay, $sem, $userid);
 }
 
-function updateAssessmentRequirement($ay, $sem, $userid){
+function updateAssessmentRequirement($ay, $sem, $userid, $file, $requirement){
+    $date = date("Y-m-d");
+
+    include("dbconnection.php");
+
+    $sql = "UPDATE `assessment_file` 
+                SET `file`          = '{$file}'     ,
+                    `status`        = 0             ,
+                    `remarks`       = 'Submitted'   ,
+                    `upload_date`   = '{$date}'     ,
+                    `modified_date` = '{$date}'     
+            WHERE   `account_id`    = '{$userid}'
+            AND     `ay_id`         = '{$ay}'
+            AND     `sem_id`        = '{$sem}'
+            AND     `requirement`   = '{$requirement}'";
+
+    $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
 
 }
 
