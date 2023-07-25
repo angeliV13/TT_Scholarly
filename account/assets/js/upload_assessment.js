@@ -1,34 +1,34 @@
 // //Reading Assessment Table for Beneficiaries
 $(document).ready(function () {
-let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
-    lengthChange: false,
-    searching: false,
-    ordering: false,
-    serverSide: true,
-    processing: true,
-    ajax: {
-      url: "controller/uploadRequirements.php",
-      type: "POST",
-      data: {
-        action: 1,
-        getTable: 1,
+  let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
+      lengthChange: false,
+      searching: false,
+      ordering: false,
+      serverSide: true,
+      processing: true,
+      ajax: {
+        url: "controller/uploadRequirements.php",
+        type: "POST",
+        data: {
+          action: 1,
+          getTable: 1,
+        },
+        // success: function (row, data, index) {
+        //   console.log(row);
+        //   console.log(data);
+        //   console.log(index);
+        // },
+        error: function (data) {
+          console.log(data);
+        },
       },
-      // success: function (row, data, index) {
-      //   console.log(row);
-      //   console.log(data);
-      //   console.log(index);
-      // },
-      error: function (data) {
-        console.log(data);
-      },
-    },
-    createdRow: function (row, data, index) {},
-    columnDefs: [],
-    bInfo: false,
-    paging: false,
-    fixedColumns: false,
-    deferRender: false,
-    stateSave: false,
+      createdRow: function (row, data, index) {},
+      columnDefs: [],
+      bInfo: false,
+      paging: false,
+      fixedColumns: false,
+      deferRender: false,
+      stateSave: false,
   });
 });
 
