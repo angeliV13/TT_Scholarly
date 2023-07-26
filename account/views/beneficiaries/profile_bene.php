@@ -5,7 +5,7 @@
       <div class="col-xl-40">
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle" > 
+            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle">
             <h2><?php echo $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
             <h3><?php echo $accType ?></h3>
             <!-- <div class="social-links mt-2">
@@ -87,9 +87,9 @@
 
                   <div class="col-md-3 position-relative">
                     <label for="barangay" class="form-label">Barangay</label>
-                    <?php if ($user_info['barangay'] != ""): ?>
+                    <?php if ($user_info['barangay'] != "") : ?>
                       <input class="form-control" type="text" value="<?php echo $user_info['barangay'] ?>" disabled>
-                    <?php else: ?>
+                    <?php else : ?>
                       <select class="form-select" id="barangay">
                         <option selected disabled value="">Choose...</option>
                       </select>
@@ -100,9 +100,9 @@
                   </div>
                   <div class="col-md-3 position-relative">
                     <label for="city" class="form-label">Municipality</label>
-                    <?php if ($user_info['municipality'] != ""): ?>
+                    <?php if ($user_info['municipality'] != "") : ?>
                       <input class="form-control" type="text" value="<?php echo $user_info['municipality'] ?>" disabled>
-                    <?php else: ?>
+                    <?php else : ?>
                       <select class="form-select" id="city">
                         <option selected disabled value="">Choose...</option>
                       </select>
@@ -113,9 +113,9 @@
                   </div>
                   <div class="col-md-3 position-relative">
                     <label for="province" class="form-label">Province</label>
-                    <?php if ($user_info['province'] != ""): ?>
+                    <?php if ($user_info['province'] != "") : ?>
                       <input class="form-control" type="text" value="<?php echo $user_info['province'] ?>" disabled>
-                    <?php else: ?>
+                    <?php else : ?>
                       <select class="form-select" id="province">
                         <option selected disabled value="">Choose...</option>
                       </select>
@@ -127,9 +127,9 @@
 
                   <div class="col-md-3 position-relative">
                     <label for="region" class="form-label">Region</label>
-                    <?php if ($user_info['region'] != ""): ?>
+                    <?php if ($user_info['region'] != "") : ?>
                       <input class="form-control" type="text" value="<?php echo $user_info['region'] ?>" disabled>
-                    <?php else: ?>
+                    <?php else : ?>
                       <select class="form-select" id="region">
                         <option selected disabled value="">Choose...</option>
                       </select>
@@ -172,7 +172,7 @@
                       <option selected disabled value="">Choose...</option>
                       <?php foreach ($religionArr as $key => $value) : ?>
                         <option value="<?php echo $key ?>" <?php echo $key == $user_info['religion'] ? "selected" : "" ?>><?php echo $value ?></option>
-                      <?php endforeach; ?> 
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select a Religion.
@@ -187,7 +187,7 @@
                       <option selected disabled value="">Choose...</option>
                       <?php foreach ($genderArr as $key => $value) : ?>
                         <option value="<?php echo $key ?>" <?php echo $key == $user_info['gender'] ? "selected" : "" ?>><?php echo $value ?></option>
-                      <?php endforeach; ?> 
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select a valid Gender.
@@ -202,7 +202,7 @@
                       <option selected disabled value="">Choose...</option>
                       <?php foreach ($civilArr as $key => $value) : ?>
                         <option value="<?php echo $key ?>" <?php echo $key == $user_info['civil_status'] ? "selected" : "" ?>><?php echo $value ?></option>
-                      <?php endforeach; ?> 
+                      <?php endforeach; ?>
                     </select>
                     <div class="invalid-tooltip">
                       Please select a valid Civil Status.
@@ -311,7 +311,7 @@
                     <label for="inputCollegeSchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputCollegeSchoolName" required>
                       <option selected disabled value="">Choose...</option>
-                      <?php foreach ($college AS $key => $col) : ?>
+                      <?php foreach ($college as $key => $col) : ?>
                         <option value="<?php echo $key ?>"><?php echo $col ?></option>
                       <?php endforeach; ?>
                     </select>
@@ -347,7 +347,7 @@
                     <label for="inputCourse" class="form-label">Course Taken</label>
                     <select class="form-select" id="inputCourse" required>
                       <option selected disabled value="">Choose...</option>
-                      <?php foreach ($course AS $key => $cr) : ?>
+                      <?php foreach ($course as $key => $cr) : ?>
                         <option value="<?php echo $key ?>"><?php echo $cr ?></option>
                       <?php endforeach; ?>
                     </select>
@@ -439,7 +439,7 @@
                     <label for="inputSeniorSchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputSchool" required>
                       <option selected disabled value="">Choose...</option>
-                      <?php foreach ($seniorHigh AS $key => $shs) : ?>
+                      <?php foreach ($seniorHigh as $key => $shs) : ?>
                         <option value="<?php echo $key ?>"><?php echo $shs ?></option>
                       <?php endforeach; ?>
                     </select>
@@ -467,7 +467,7 @@
                     <label for="inputTrack" class="form-label">Strand Taken</label>
                     <select class="form-select" id="inputTrack" required>
                       <option selected disabled value="">Choose...</option>
-                      <?php foreach ($strand AS $key => $str) : ?>
+                      <?php foreach ($strand as $key => $str) : ?>
                         <option value="<?php echo $key ?>"><?php echo $str ?></option>
                       <?php endforeach; ?>
                     </select>
@@ -581,7 +581,7 @@
                     <label for="inputHighSchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputHighSchoolName" required>
                       <option selected disabled value="">Choose...</option>
-                      <?php foreach ($juniorHigh AS $key => $jhs) : ?>
+                      <?php foreach ($juniorHigh as $key => $jhs) : ?>
                         <option value="<?php echo $key ?>"><?php echo $jhs ?></option>
                       <?php endforeach; ?>
                     </select>
@@ -715,7 +715,7 @@
                     <label for="inputElementarySchoolName" class="form-label">Name of School Attended</label>
                     <select class="form-select" id="inputElementarySchoolName" required>
                       <option selected disabled value="">Choose...</option>
-                      <?php foreach ($elementary AS $key => $elem) : ?>
+                      <?php foreach ($elementary as $key => $elem) : ?>
                         <option value="<?php echo $key ?>"><?php echo $elem ?></option>
                       <?php endforeach; ?>
                     </select>
@@ -731,7 +731,7 @@
                     <label for="inputHighYearLevel" class="form-label">Year Level</label>
                     <select class="form-select" id="inputHighYearLevel" required>
                       <option selected disabled value="">Choose...</option>
-                      <?php for ($i = 6; $i >= 1; $i--): ?>
+                      <?php for ($i = 6; $i >= 1; $i--) : ?>
                         <option value="<?php echo $i ?>">Grade <?php echo $i ?></option>
                       <?php endfor; ?>
                     </select>

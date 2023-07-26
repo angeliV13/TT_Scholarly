@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h5 class="card-title">PROFILE</h5>
           <a href="#" data-bs-toggle="modal" data-bs-target="" class="btn btn-sm btn-danger shadow-sm">
-          <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Edit Profile</a>
+            <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Edit Profile</a>
         </div>
         <!-- Bordered Tabs Justified -->
         <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
@@ -208,10 +208,10 @@
                   <h5 class="card-title">General Education Background</h5>
                   <div class="d-flex align-items-center">
                     <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm">
-                        <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Generate Academic Year
+                      <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Generate Academic Year
                     </button>
                     <a class="collapsed mx-3" data-bs-target="#educational" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-chevron-down ms-auto"></i>
+                      <i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                   </div>
                 </div>
@@ -270,9 +270,9 @@
 
           <!--FAMILY BACKGROUND-->
           <div class="tab-pane fade" id="bordered-justified-family-background" role="tabpanel" aria-labelledby="family-background">
-                     
-          <!--FAMILY INFORMATION-->
-          <div class="card">
+
+            <!--FAMILY INFORMATION-->
+            <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Family Background</h5>
 
@@ -720,7 +720,7 @@
               </div>
             </div>
           </div>
-          
+
           <!--ADDITIONAL BACKGROUND-->
           <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
             <div class="card">
@@ -751,8 +751,8 @@
               <!-- <li class="page-item"><a class="page-link" href="#" data-bs-slide-to="1">Next</a></li> -->
             </ul>
           </nav><!-- End Basic Pagination -->
+        </div>
       </div>
-    </div>
     </div>
     <script src="pagination.js"></script>
   </section>
