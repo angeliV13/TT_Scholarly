@@ -152,7 +152,7 @@ function get_path($lv_path, $type = '99')
                 {
 >>>>>>> Stashed changes
                         case 'dashboard':
-                                return 'views/beneficiaries/dashboard.php';
+                                return 'views/beneficiaries/profile_bene.php';
 
                         case 'assessment-bene':
                                 return 'views/beneficiaries/assessment_bene.php';
@@ -179,7 +179,7 @@ function get_path($lv_path, $type = '99')
                 {
 
                         case 'dashboard_applicant':
-                                return 'views/applicants/dashboard_applicant.php';
+                                return 'views/applicants/profile_applicant.php';
 
                         case 'profile_applicant':
                                 return 'views/applicants/profile_applicant.php';
@@ -216,7 +216,6 @@ function get_sidebar($type, $access_level = 0)
                         {
                                 return 'views/sidebar/admin.php';
                         }
-
                 case 2:
                         return 'views/sidebar/bene.php';
                 case 3:
@@ -226,17 +225,18 @@ function get_sidebar($type, $access_level = 0)
 
 function get_title($page = 'NA')
 {
-        switch ($page) 
-        {
-                case 0:
-                        return 'Login | Thrive Thomasino Scholarly';
-                case 1:
-                        return 'Register Account | Thrive Thomasino Scholarly';
-                case 2:
-                        return 'Dashboard | Thrive Thomasino Scholarly';
-                default:
-                        return 'Thrive Thomasino Scholarly';
-        }
+        // switch ($page) 
+        // {
+        //         case 0:
+        //                 return 'Login | Thrive Thomasino Scholarly';
+        //         case 1:
+        //                 return 'Register Account | Thrive Thomasino Scholarly';
+        //         case 2:
+        //                 return 'Dashboard | Thrive Thomasino Scholarly';
+        //         default:
+        //                 return 'Thrive Thomasino Scholarly';
+        // }
+        return 'Thrive Thomasino Scholarly';
 }
 
 function get_title($page = 'NA')

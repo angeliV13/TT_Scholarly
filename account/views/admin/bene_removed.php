@@ -1,4 +1,14 @@
 <main id="main" class="main">
+  <!-- Start of Page Title -->
+  <div class="pagetitle">
+      <h1>Removed Beneficiaries</h1>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item">Beneficiaries</li>
+          <li class="breadcrumb-item active">Removed Beneficiaries</li>
+        </ol>
+    </div>
+    <!-- End Page Title -->
     <!-- End Page Title -->
     <div class="container py-3">
       <div class="dropdown">

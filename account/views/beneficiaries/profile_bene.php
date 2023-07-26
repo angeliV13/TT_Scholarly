@@ -1,11 +1,19 @@
 <main id="main" class="main">
-  <!-- End Page Title -->
+  <!-- Start of Page Title -->
+  <div class="pagetitle d-none">
+      <h1>Profile</h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+        <li class="breadcrumb-item active">Profile</li>
+      </ol>
+    </div>
+    <!-- End Page Title -->
   <section class="section profile">
     <div class="column py-2">
       <div class="col-xl-40">
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle">
+            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-pill" > 
             <h2><?php echo $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
             <h3><?php echo $accType ?></h3>
             <!-- <div class="social-links mt-2">

@@ -1,4 +1,13 @@
 <main id="main" class="main">
+    <!-- Start of Page Title -->
+    <div class="pagetitle">
+      <h1>Basic Setup</h1>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Basic Setup</li>
+        </ol>
+    </div>
+    <!-- End Page Title -->
     <section class="section">
         <div class="column">
             <div class="col-lg-15">
