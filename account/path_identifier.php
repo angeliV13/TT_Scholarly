@@ -200,7 +200,6 @@ function get_sidebar($type, $access_level = 0)
                         {
                                 return 'views/sidebar/admin.php';
                         }
-
                 case 2:
                         return 'views/sidebar/bene.php';
                 case 3:
