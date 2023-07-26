@@ -7,15 +7,9 @@ $title = get_title(0);
 
 session_start();
 
-<<<<<<< Updated upstream
-if(isset($_SESSION['id'])) header("Location: index.php");
-
-include('includes/main.php') 
-=======
 if(!isset($_SESSION['id'])){
 
 include('includes/main.php');
->>>>>>> Stashed changes
 
 ?>
 

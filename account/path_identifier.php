@@ -3,13 +3,8 @@
 //Link Checker and Registration
 function get_path($lv_path, $type = '99')
 {
-<<<<<<< Updated upstream
-        if ($type == 0)         //Super Admin 
-        {                       //NOT FINAL
-=======
         if ($type == 1) 
         {
->>>>>>> Stashed changes
                 switch ($lv_path) 
                 {
                         case 'dashboard':
@@ -70,87 +65,10 @@ function get_path($lv_path, $type = '99')
                                 return 'error.php';
                 }
         }
-<<<<<<< Updated upstream
-
-        if ($type == 1)         //Admin
-        {
-                switch ($lv_path) 
-                {
-                        case 'dashboard':
-                                return 'views/admin/dashboard.php';
-                        case 'pages-contact':
-                                return 'pages-contact.php';
-                        
-                        //      Applicants Section
-                        case 'new-applicants':
-                                return 'views/admin/applicant_new.php';
-
-                        case 'interview':
-                                return 'views/admin/applicant_interview.php';
-
-                        case 'assessment':
-                                return 'views/admin/applicant_assessment.php';
-
-                        case 'examination':
-                                return 'views/admin/applicant_examination.php';
-
-                        case 'removed-applicants':
-                                return 'views/admin/applicant_removed.php';
-
-                        case 'beneficiaries':
-                                return 'views/admin/bene_list.php';
-
-                        case 'bene-assessment':
-                                return 'views/admin/bene-assessment.php';
-
-                        case 'bene-renewal':
-                                return 'views/admin/bene-renewal.php';
-
-                        case 'removed-bene':
-                                return 'views/admin/bene_removed.php';
-
-                        case 'graduates':
-                                return 'views/admin/graduates_list.php';
-
-                        case 'graduating':
-                                return 'views/admin/graduating_list.php';
-
-                        case 'Adaccount-management':
-                                return 'views/admin/account_management.php';
-
-                        case 'admin-profile':
-                                return 'views/admin/profile_admin.php';
-
-                        case 'app-profile':
-                                return 'maintenance.php';
-
-                        case 'applicants':
-                                return 'maintenance.php';
-
-                        case 'exam_settings':
-                                return 'views/admin/exam_settings.php';
-
-                        case 'exam_questions':
-                                return 'views/admin/exam_questions.php';
-
-                        case 'tts_settings':
-                                return 'views/admin/basic_setup.php';
-
-                        default:
-                                return 'error.php';
-                }
-        } 
-        elseif ($type == 2)     //Beneficiaries        
-        {
-                switch ($lv_path) 
-                {
-
-=======
         elseif ($type == 2)
         {
                 switch($lv_path)
                 {
->>>>>>> Stashed changes
                         case 'dashboard':
                                 return 'views/beneficiaries/profile_bene.php';
 
@@ -198,11 +116,7 @@ function get_path($lv_path, $type = '99')
 
 function get_sidebar($type, $access_level = 0)
 {
-<<<<<<< Updated upstream
-        switch ($type) 
-=======
         switch($type)
->>>>>>> Stashed changes
         {
                 case 0:
                         return 'views/sidebar/super_admin.php';
@@ -237,19 +151,4 @@ function get_title($page = 'NA')
         //                 return 'Thrive Thomasino Scholarly';
         // }
         return 'Thrive Thomasino Scholarly';
-}
-
-function get_title($page = 'NA')
-{
-        switch($page)
-        {
-                case 0:
-                        return 'Login | Thrive Thomasino Scholarly';
-                case 1:
-                        return 'Register Account | Thrive Thomasino Scholarly';
-                case 2:
-                        return 'Dashboard | Thrive Thomasino Scholarly';
-                default:
-                        return 'Thrive Thomasino Scholarly';
-        }
 }
