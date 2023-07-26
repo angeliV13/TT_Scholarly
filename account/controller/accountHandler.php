@@ -37,29 +37,13 @@ if (isset($_REQUEST['action']))
             'province'          => isset($_POST['provice']) ? $_POST['provice'] : '',
             'city'              => isset($_POST['city']) ? $_POST['city'] : '',
             'barangay'          => isset($_POST['barangay']) ? $_POST['barangay'] : '',
-<<<<<<< Updated upstream
             'zipCode'           => isset($_POST['zipCode']) ? $_POST['zipCode'] : '',
             'username'          => isset($_POST['username']) ? $_POST['username'] : '',
-=======
->>>>>>> Stashed changes
             'email'             => isset($_POST['email']) ? $_POST['email'] : '',
             'password'          => isset($_POST['password']) ? $_POST['password'] : '',
         ];
 
-<<<<<<< Updated upstream
         echo registerAccount($data);
-=======
-        $result = registerAccount($data);
-
-        if ($result == 'Success') 
-        {
-            echo 'Success';
-        } 
-        else 
-        {
-            echo 'Error RC001: ' . $result;
-        }
->>>>>>> Stashed changes
     }
     else if ($action == 3) // Email Confirmation
     {
@@ -72,19 +56,12 @@ if (isset($_REQUEST['action']))
     }
     else if ($action == 4) // Resend Email
     {
-<<<<<<< Updated upstream
         echo resend_email(isset($_POST['email']) ? $_POST['email'] : '');
-=======
-        $data = [
-            'email'     => isset($_POST['email']) ? $_POST['email'] : '',
-        ];
->>>>>>> Stashed changes
     }
     else if ($action == 5) // Sign Out
     {
         echo user_sign_out();
     }
-<<<<<<< Updated upstream
     else if ($action == 6) // Delete Account for failed verification
     {
         echo delete_account(isset($_POST['email']) ? $_POST['email'] : '');
@@ -93,7 +70,7 @@ if (isset($_REQUEST['action']))
     {
         echo forgot_password(isset($_POST['email']) ? $_POST['email'] : '');
     }
-    else if ($action == 8) // Password Reset
+    else if ($action == 3) // Password Reset
     {
         $data = [
             'code'              => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
@@ -131,6 +108,4 @@ if (isset($_REQUEST['action']))
 
         echo update_profile($data);
     }
-=======
->>>>>>> Stashed changes
 }

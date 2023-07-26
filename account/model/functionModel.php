@@ -6,7 +6,7 @@ function generateRandomString($length = 5) // generates a random string
     $charactersLength = strlen($characters);
     $randomString = '';
 
-    for ($i = 0; $i < $length; $i++) 
+    for ($i = 0; $i < $length; $i++)
     {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
@@ -77,7 +77,7 @@ function sendEmail($to, $subject, $message, $type = 1) // PHPMAILER FUNCTION
     $mail->SMTPDebug = 0;
     $mail->SMTPAuth = TRUE;
     $mail->SMTPSecure = "ssl";
-    $mail->Port     = 465;  
+    $mail->Port     = 465;
     // $mail->Username = ""; // email address
     // $mail->Password = ""; // password
     $mail->Host     = "smtp.gmail.com";
