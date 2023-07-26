@@ -5,20 +5,18 @@
 <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
 <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
 <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-<<<<<<< Updated upstream
 <!-- <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet"> -->
+
 
 <!-- Datatables CSS  -->
 <link href="assets/vendor/datatables/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
 
+
+
 <!-- Template Main CSS File -->
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/file_Upload.css" rel="stylesheet">
-=======
-<link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
 
-<!-- Template Main CSS File -->
-<link href="assets/css/style.css" rel="stylesheet">
->>>>>>> Stashed changes
+

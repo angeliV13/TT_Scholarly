@@ -14,13 +14,7 @@ $("#sign_out").click(function () {
           action: 5,
         },
         success: function (data) {
-<<<<<<< Updated upstream
           if (data == "No Session Found") {
-=======
-          if (data == "Success") {
-            window.location.href = "index.php";
-          } else {
->>>>>>> Stashed changes
             Swal.fire({
               title: "Alert!",
               html: data,
@@ -33,16 +27,19 @@ $("#sign_out").click(function () {
                 window.location.href = "index.php";
               }
             });
-<<<<<<< Updated upstream
           } else {
             window.location.href = data;
-=======
->>>>>>> Stashed changes
           }
         },
       });
     }
   });
 
+
   return false;
 });
+
+
+
+
+

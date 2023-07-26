@@ -1,7 +1,8 @@
 
-<<<<<<< Updated upstream
+
 <script src="assets/js/header.js"></script>
 <script src="assets/js/editProfile.js"></script>
+
 
 <?php
 switch($_SESSION['account_type'])
@@ -24,6 +25,6 @@ switch($_SESSION['account_type'])
         break;
 }
 ?>
-=======
-<script src="assets/js/header.js"></script>
->>>>>>> Stashed changes
+
+
+

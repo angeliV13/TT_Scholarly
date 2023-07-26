@@ -1,20 +1,24 @@
 <?php
 
+
 require("../model/accountHandlerModel.php");
 
-if (isset($_REQUEST['action'])) 
+
+if (isset($_REQUEST['action']))
 {
     $action = $_REQUEST['action'];
 
+
     if ($action == 1) // Login
     {
-        if ($_POST['user_name'] <> '' && $_POST['password'] <> '' && $_POST['type'] <> '') 
+        if ($_POST['user_name'] <> '' && $_POST['password'] <> '' && $_POST['type'] <> '')
         {
             $lv_return = userLogin($_POST['user_name'], $_POST['password'], $_POST['type']);
 
+
             echo $lv_return;
-        } 
-        else 
+        }
+        else
         {
             echo 'Error LC001: No Data Found';
         }
@@ -43,6 +47,7 @@ if (isset($_REQUEST['action']))
             'password'          => isset($_POST['password']) ? $_POST['password'] : '',
         ];
 
+
         echo registerAccount($data);
     }
     else if ($action == 3) // Email Confirmation
@@ -51,6 +56,7 @@ if (isset($_REQUEST['action']))
             'code'      => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
             'email'     => isset($_REQUEST['email']) ? $_REQUEST['email'] : '',
         ];
+
 
         echo email_confirmation($data);
     }
@@ -70,13 +76,14 @@ if (isset($_REQUEST['action']))
     {
         echo forgot_password(isset($_POST['email']) ? $_POST['email'] : '');
     }
-    else if ($action == 3) // Password Reset
+    else if ($action == 8) // Password Reset
     {
         $data = [
             'code'              => isset($_REQUEST['code']) ? $_REQUEST['code'] : '',
             'email'             => isset($_REQUEST['email']) ? $_REQUEST['email'] : '',
             'newPassword'       => isset($_REQUEST['newPassword']) ? $_REQUEST['newPassword'] : '',
         ];
+
 
         echo password_reset($data);
     }
@@ -103,9 +110,15 @@ if (isset($_REQUEST['action']))
             'removeText'       => isset($_POST['removeText']) ? $_POST['removeText'] : '',
             'file'             => isset($_FILES['file']) ? $_FILES['file'] : '',
         ];
-        
+       
         // print_r($data);
+
 
         echo update_profile($data);
     }
 }
+
+
+
+
+
