@@ -20,11 +20,8 @@ function getDateTimeDiff($date1, $date2, $type = "minutes") // function that ret
 
     switch($type)
     {
-<<<<<<< Updated upstream
         case "days":
             return floor($diff / (60 * 60 * 24));
-=======
->>>>>>> Stashed changes
         case "hours":
             return floor($diff / (60 * 60));
         case "minutes":
@@ -32,7 +29,6 @@ function getDateTimeDiff($date1, $date2, $type = "minutes") // function that ret
         case "seconds":
             return $diff;
     }
-<<<<<<< Updated upstream
 }
 
 function static_count()
@@ -347,6 +343,4 @@ function get_education_courses($type)
     }
 
     return $data;
-=======
->>>>>>> Stashed changes
 }
