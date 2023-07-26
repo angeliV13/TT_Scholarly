@@ -13,15 +13,13 @@
     <!-- End Page Title -->
 
     <section class="section profile">
-      <div class="row">
-        <div class="col-xl-4">
-
+      <div class="column py-2">
+        <div class="col-xl-40">
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-              <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle">
-              <h2><?php echo $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
-              <h3><?php echo $accType ?></h3>
+            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-circle">
+                <h2><?php echo $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
+                <h3><?php echo $accType ?></h3>
               <!-- <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -30,239 +28,195 @@
               </div> -->
             </div>
           </div>
-
         </div>
+        <div class="card">
+        <div class="card-body">
+          <h5 class="card-title pt-4 d-flex flex-column align-items-center"> BENEFICIARIES PROFILE</h5>
 
-        <div class="col-xl-8">
+          <!-- Bordered Tabs Justified -->
+          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100 active" id="personal-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
+            </li>
+            
+          </ul>
 
-          <div class="card">
-            <div class="card-body pt-3">
-              <!-- Bordered Tabs -->
-              <ul class="nav nav-tabs nav-tabs-bordered">
+          <!-- BENEFICIARIES INFORMATION -->
+          <div class="tab-content pt-2" id="borderedTabJustifiedContent">
 
-                <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
-                </li>
+            <!-- PERSONAL INFORMATION -->
+            <div class="tab-pane fade show active" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Primary Information</h5>
+                  <!-- Custom Styled Validation with Tooltips -->
+                  <form class="row g-4 needs-validation" novalidate>
+                    <!-- FULL NAME -->
+                    <div class="col-md-3 position-relative">
+                      <label for="inputFirstName" class="form-label">First name</label>
+                      <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputMiddleName" class="form-label">Middle name</label>
+                      <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputLastName" class="form-label">Last name</label>
+                      <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                      <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                    </div>
+                    <!-- END FULL NAME -->
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
-                </li>
+                    <!-- BIRTH -->
+                    <div class="col-md-4 position-relative">
+                      <label for="inputDate" class="form-label">Birth Date</label>
+                      <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                    </div>
 
-                <!-- <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
-                </li> -->
+                    <div class="col-md-8 position-relative">
+                      <label for="inputBirthPlace" class="form-label">Place of Birth</label>
+                      <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                    </div>
+                    <!-- END BIRTH -->
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
-                </li>
+                    <!-- ADDRESS -->
+                    <div class="col-md-4 position-relative">
+                      <label for="inputAddress" class="form-label">Address</label>
+                      <input type="Address" class="form-control" id="inputAddress" aria-describedby="inputAddress" value="" required>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputBarangay" class="form-label">Barangay</label>
+                      <select class="form-select" id="inputBarangay" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Barangay.
+                      </div>
+                    </div>
+                    <div class="col-md-2 position-relative">
+                      <label for="inputMunicipality" class="form-label">Municipality</label>
+                      <select class="form-select" id="inputMunicipality" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Municipality.
+                      </div>
+                    </div>
+                    <div class="col-md-3 position-relative">
+                      <label for="inputProvince" class="form-label">Province</label>
+                      <select class="form-select" id="inputProvince" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Province.
+                      </div>
+                    </div>
+                    <div class="col-md-2 position-relative">
+                      <label for="inputZipCode" class="form-label">ZIP Code</label>
+                      <input type="zipCode" class="form-control" id="inputZipCode" aria-describedby="inputZipCode" value="" required>
+                    </div>
+                    <!-- END ADDRESS -->
 
-              </ul>
-              <div class="tab-content pt-2">
+                    <!-- CITIZENSHIP -->
+                    <div class="col-md-3 position-relative">
+                      <label for="inputCitizenship" class="form-label">Citizenship</label>
+                      <input type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="" required>
+                    </div>
+                    <!-- END CITIZENSHIP -->
 
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <!-- <h5 class="card-title">About</h5>
-                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p> -->
+                    <!-- RESIDENCY -->
+                    <div class="col-md-4 position-relative">
+                      <label for="inputResidency" class="form-label">Years of Residency in Santo Tomas</label>
+                      <input type="residency" class="form-control" id="inputResidency" aria-describedby="inputResidency" value="" required>
+                    </div>
+                    <!-- END RESIDENCY -->
 
-                  <h5 class="card-title">Profile Details</h5>
+                    <!-- LANGUAGE -->
+                    <div class="col-md-3 position-relative">
+                      <label for="inputMotherTongue" class="form-label">Mother Tongue</label>
+                      <input type="Language" class="form-control" id="inputMotherTongue" aria-describedby="inputMotherTongue" value="" required>
+                    </div>
+                    <!-- END LANGUAGE -->
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user_info['first_name'] . " " . $user_info['last_name'] ?></div>
-                  </div>
+                    <!-- START RELIGION -->
+                    <div class="col-md-4 position-relative">
+                      <label for="inputReligion" class="form-label">Religion</label>
+                      <select class="form-select" id="inputReligion" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a Religion.
+                      </div>
+                    </div>
+                    <!-- END RELIGION -->
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user_info['address_line'] . " " . $user_info['barangay'] . " " . $user_info['municipality'] . ", " . $user_info['province'] . " " . $user_info['zip_code'] ?></div>
-                  </div>
+                    <!-- SEX -->
+                    <div class="col-md-4 position-relative">
+                      <label for="inputGender" class="form-label">Gender</label>
+                      <select class="form-select" id="inputGender" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Gender.
+                      </div>
+                    </div>
+                    <!--END SEX -->
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8"><?php echo ($user_info['contact_number'] == null) ? "N/A" : $user_info['contact_number'] ?></div>
-                  </div>
+                    <!--CIVIL STATUS -->
+                    <div class="col-md-4 position-relative">
+                      <label for="inputCivilStatus" class="form-label">Civil Status</label>
+                      <select class="form-select" id="inputCivilStatus" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option>...</option>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Civil Status.
+                      </div>
+                    </div>
+                    <!-- END CIVIL STATUS -->
 
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $user_data[2] ?></div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Access Level</div>
-                    <div class="col-lg-9 col-md-8"><?php echo $accAccess ?></div>
-                  </div>
-
+                    <!-- SUBMIT BUTTON-->
+                    <!-- <div class="col-12">
+                          <button class="btn btn-primary" type="submit">Submit form</button>
+                        </div> -->
+                    <!--END SUBMIT BUTTON-->
+                  </form><!-- End Custom Styled Validation with Tooltips -->
                 </div>
-
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-                  <!-- Profile Edit Form -->
-                  <form id="editInfo" method="POST" enctype="multipart/form-data">
-                    <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
-                        <img src="<?php echo $user_info['profile_img'] == null ? "assets/img/profile-img.jpg" : $user_info['profile_img'] ?>" alt="Profile" id="uploadImgShow">
-                        <input type="file" id="file" hidden accept="image/*">
-                        <input type="hidden" id="removeText">
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" id="upload"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image" id="remove"><i class="bi bi-trash"></i></a>
-                        </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Contact Information</h5>
+                  <!-- Custom Styled Validation with Tooltips -->
+                  <form class="row g-4 needs-validation" novalidate>
+                    <!-- CONTACT INFORMATION -->
+                    <div class="col-md-5 position-relative">
+                      <label for="telephone" class="form-label">Contact Number</label>
+                      <div class="input-group">
+                        <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
+                        <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
                       </div>
                     </div>
-
-                    <div class="row mb-3">
-                      <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="First Name" type="text" class="form-control" id="firstName" value="<?php echo $user_info['first_name'] ?>">
-                      </div>
+                    <div class="col-md-7 position-relative">
+                      <label for="EmailAddress" class="form-label">Email Address</label>
+                      <input type="EmailAddress" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="" required>
                     </div>
-
-                    <div class="row mb-3">
-                      <label for="middleName" class="col-md-4 col-lg-3 col-form-label">Middle Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Middle Name" type="text" class="form-control" id="middleName" value="<?php echo $user_info['middle_name'] ?>">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Last Name" type="text" class="form-control" id="lastName" value="<?php echo $user_info['last_name'] ?>">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="input-group">
-                          <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                          <input type="telephone" class="form-control" id="Phone" aria-describedby="inputGroupPrepend2" name="Contact Number" value="<?php echo $user_info['contact_number'] ?>">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Email Address" type="email" class="form-control" id="Email" value="<?php echo $user_data[2] ?>">
-                      </div>
-                    </div>
-
-                    <!-- <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                      </div>
-                    </div> -->
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary" id="editProfile">Save Changes</button>
-                    </div>
-                  </form><!-- End Profile Edit Form -->
-
+                  </form><!-- End Custom Styled Validation with Tooltips -->
                 </div>
-
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                  <!-- Settings Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">
-                            Changes made to your account
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new products and services
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                          <label class="form-check-label" for="securityNotify">
-                            Security alerts
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End settings Form -->
-
-                </div>
-
-                <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form id="changePass" method="POST">
-
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Current Password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="New Password" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Verify Password" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary" id="changePassBtn">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
-                </div>
-
-              </div><!-- End Bordered Tabs -->
-
+              </div>
             </div>
           </div>
-
+          <!-- End Bordered Tabs Justified -->
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main><!-- End #main -->
+</main><!-- End #main -->

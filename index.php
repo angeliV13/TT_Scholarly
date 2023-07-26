@@ -29,9 +29,29 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-
-  <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
-  <script></script>
+    <!-- Add Bootstrap and DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+      <script>
+        $(document).ready(function() {
+            // Initialize DataTables
+            $('#applicantListTable').DataTable({
+                "paging": true, // Enable pagination
+                "lengthChange": true, // Enable "number of entries" dropdown
+                "searching": true, // Enable search
+                "info": true, // Show information about the table
+                "language": {
+                    "paginate": {
+                        "previous": "&lt;", // Custom pagination previous button
+                        "next": "&gt;" // Custom pagination next button
+                    }
+                }
+            });
+        });
+    </script>
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
