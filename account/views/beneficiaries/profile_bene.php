@@ -1,11 +1,11 @@
 <main id="main" class="main">
   <!-- Start of Page Title -->
-  <div class="pagetitle">
+  <div class="pagetitle d-none">
       <h1>Profile</h1>
       <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Profile</li>
-        </ol>
+        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+        <li class="breadcrumb-item active">Profile</li>
+      </ol>
     </div>
     <!-- End Page Title -->
   <section class="section profile">

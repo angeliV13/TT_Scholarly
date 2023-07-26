@@ -209,15 +209,16 @@ function get_sidebar($type, $access_level = 0)
 
 function get_title($page = 'NA')
 {
-        switch ($page) 
-        {
-                case 0:
-                        return 'Login | Thrive Thomasino Scholarly';
-                case 1:
-                        return 'Register Account | Thrive Thomasino Scholarly';
-                case 2:
-                        return 'Dashboard | Thrive Thomasino Scholarly';
-                default:
-                        return 'Thrive Thomasino Scholarly';
-        }
+        // switch ($page) 
+        // {
+        //         case 0:
+        //                 return 'Login | Thrive Thomasino Scholarly';
+        //         case 1:
+        //                 return 'Register Account | Thrive Thomasino Scholarly';
+        //         case 2:
+        //                 return 'Dashboard | Thrive Thomasino Scholarly';
+        //         default:
+        //                 return 'Thrive Thomasino Scholarly';
+        // }
+        return 'Thrive Thomasino Scholarly';
 }

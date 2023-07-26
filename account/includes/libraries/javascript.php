@@ -21,6 +21,7 @@
     <script src="assets/js/main.js"></script>
 
     <!-- Template Main JS File -->
+    <script src="assets/js/title.js"></script>
     <script src="assets/js/sidebar.js"></script>
 
     <!-- Locations -->

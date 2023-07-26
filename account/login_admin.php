@@ -6,16 +6,21 @@ include('path_identifier.php');
 $title = get_title(0);
 
 
-if(isset($_SESSION['id'])) header("Location: index.php");
+if (isset($_SESSION['id'])) header("Location: index.php");
 
 
-include('includes/main.php') 
+include('includes/main.php')
 
 ?>
 
 <body class="bg-light">
 
   <main>
+    <!-- Start of Page Title -->
+    <div class="pagetitle d-none">
+      <h1>Login</h1>
+    </div>
+    <!-- End Page Title -->
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -31,7 +36,7 @@ include('includes/main.php')
               </div><!-- End Logo -->
 
               <div class="card mb-3">
-                
+
                 <div class="card-title pb-3 bg-dark">
                   <h5 class="text-center text-white fs-3">Admin Login</h5>
                 </div>
@@ -63,7 +68,7 @@ include('includes/main.php')
                     </div>
                     <div class="col-12 text-center">
                       <!-- <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p> -->
-                      <p class=" small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
+                      <p class=" small mb-0"> <a href="#" id="forgotPass">Forgot Password</a> </p>
                     </div>
                     <!-- <div class="col-12 text-center">
                       <p class = " small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>

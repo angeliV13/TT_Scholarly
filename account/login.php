@@ -16,6 +16,11 @@ include('includes/main.php')
 <body>
 
   <main>
+    <!-- Start of Page Title -->
+    <div class="pagetitle d-none">
+      <h1>Login</h1>
+    </div>
+    <!-- End Page Title -->
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">

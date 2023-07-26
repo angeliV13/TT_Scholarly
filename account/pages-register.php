@@ -12,6 +12,11 @@ include('includes/main.php');
 <body>
 
   <main>
+    <!-- Start of Page Title -->
+    <div class="pagetitle d-none">
+      <h1>Register</h1>
+    </div>
+    <!-- End Page Title -->
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -200,34 +205,34 @@ include('includes/main.php');
                               </div>
                               <div class="modal-body">
                                 <p class="small">
-                                  I declare that all information we provided is true, 
-                                  correct and complete statement pursuant to the provisions of pertinent laws, 
-                                  rules and regulations of the Republic of the Philippines. 
-                                  I authorize the agency head/authorized representative to 
+                                  I declare that all information we provided is true,
+                                  correct and complete statement pursuant to the provisions of pertinent laws,
+                                  rules and regulations of the Republic of the Philippines.
+                                  I authorize the agency head/authorized representative to
                                   verify/validate the contents stated herein.
                                 </p>
                                 <h6 class="fs-3 fw-bolder text-center my-3 text-">
                                   Privacy Statement
                                 </h6>
                                 <p class="small">
-                                The City of Santo Tomas Batangas collects your personal information for the primary 
-                                purpose of providing our services to you, providing information to our clients/or 
-                                endorsing the same to other City of Santo Tomas Batangas department/government/private entities. 
-                                And in accordance with the law, you are entitled to access and rectify your personal data.
-                                
-                                Where reasonable and practicable to do so, 
-                                we will collect your personal information only from you. 
-                                However, in some circumstances we may be provided with information by third parties. 
-                                In such a case we will take reasonable steps to ensure that you are made aware 
-                                of the information provided to us by the third party.
-                                
-                                In terms of security, the City of Santo Tomas Batangas takes technical 
-                                and organizational measures to ensure that all information processed by 
-                                personal information controller is protected from unauthorized access, 
-                                changes or destruction.
-                                
-                                By registering, you are are giving your consent to process your personal information 
-                                based on the Data Protection Policy.
+                                  The City of Santo Tomas Batangas collects your personal information for the primary
+                                  purpose of providing our services to you, providing information to our clients/or
+                                  endorsing the same to other City of Santo Tomas Batangas department/government/private entities.
+                                  And in accordance with the law, you are entitled to access and rectify your personal data.
+
+                                  Where reasonable and practicable to do so,
+                                  we will collect your personal information only from you.
+                                  However, in some circumstances we may be provided with information by third parties.
+                                  In such a case we will take reasonable steps to ensure that you are made aware
+                                  of the information provided to us by the third party.
+
+                                  In terms of security, the City of Santo Tomas Batangas takes technical
+                                  and organizational measures to ensure that all information processed by
+                                  personal information controller is protected from unauthorized access,
+                                  changes or destruction.
+
+                                  By registering, you are are giving your consent to process your personal information
+                                  based on the Data Protection Policy.
 
                                 </p>
                               </div>
