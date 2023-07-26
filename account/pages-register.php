@@ -35,7 +35,11 @@ include('includes/main.php');
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
+<<<<<<< Updated upstream
                   <form class="row g-3" novalidate id="register">
+=======
+                  <form class="row g-3 needs-validation" novalidate id="register">
+>>>>>>> Stashed changes
                     <div class="col-md-3 position-relative">
                       <label for="inputFirstName" class="form-label">First name</label>
                       <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" name="First Name">
@@ -116,11 +120,19 @@ include('includes/main.php');
                         <input type="telephone" class="form-control" id="inputContactNo" aria-describedby="inputGroupPrepend2" name="Contact Number">
                       </div>
                     </div>
+<<<<<<< Updated upstream
                     <div class="col-md-8 position-relative">
                       <label for="inputAddress" class="form-label">House/Block/Lot No. / Street / Subdivision/Village *</label>
                       <input type="Address" class="form-control" id="inputAddress" aria-describedby="inputAddress" name="Address">
                     </div>
                     <div class="col-md-4 position-relative">
+=======
+                    <div class="col-md-12 position-relative">
+                      <label for="inputAddress" class="form-label">House/Block/Lot No. / Street / Subdivision/Village *</label>
+                      <input type="Address" class="form-control" id="inputAddress" aria-describedby="inputAddress" name="Address">
+                    </div>
+                    <div class="col-md-3 position-relative">
+>>>>>>> Stashed changes
                       <label for="region" class="form-label">Region</label>
                       <select class="form-select" id="region" name="Region">
 
@@ -156,6 +168,7 @@ include('includes/main.php');
                         Please select a valid Barangay.
                       </div>
                     </div>
+<<<<<<< Updated upstream
                     <div class="col-md-3 position-relative">
                       <label for="zipCode" class="form-label">Zip Code</label>
                       <input type="text" name="Zip Code" id="zipCode" class="form-control">
@@ -170,6 +183,9 @@ include('includes/main.php');
                     </div>
 
                     <div class="col-6">
+=======
+                    <div class="col-12">
+>>>>>>> Stashed changes
                       <label for="yourEmail" class="form-label">Email Address</label>
                       <input type="email" name="Email Address" class="form-control" id="yourEmail">
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
@@ -190,6 +206,7 @@ include('includes/main.php');
                     <div class="col-6 justify-content-center">
                       <div class="form-check">
                         <input class="form-check-input" name="Terms and Condition" type="checkbox" value="1" id="acceptTerms">
+<<<<<<< Updated upstream
                         <label class="form-check-label" for="acceptTerms">I agree and accept the <span><a href="#" data-bs-toggle="modal" data-bs-target="#modalDialogTerms">Policy and Terms</a></span></label>
                         <div class="modal fade" id="modalDialogTerms" tabindex="-1">
                           <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -237,6 +254,9 @@ include('includes/main.php');
                             </div>
                           </div>
                         </div>
+=======
+                        <label class="form-check-label" for="acceptTerms">I agree and accept the <span><a href="#">terms and conditions</a></span></label>
+>>>>>>> Stashed changes
                         <div class="invalid-feedback">You must agree before submitting.</div>
                       </div>
                     </div>
@@ -251,9 +271,15 @@ include('includes/main.php');
                 </div>
               </div>
 
+<<<<<<< Updated upstream
               <!-- <div class="credits">
                 Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
               </div> -->
+=======
+              <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              </div>
+>>>>>>> Stashed changes
 
             </div>
           </div>
@@ -268,7 +294,358 @@ include('includes/main.php');
 
   <?php include('includes/libraries/javascript.php') ?>
 
+<<<<<<< Updated upstream
   <script src="assets/js/register.js"></script>
+=======
+  <script src="assets/js/locations.js"></script>
+  <script src="assets/js/functions.js"></script>
+
+  <script>
+    let my_handlers = {
+
+      fill_provinces: function() {
+
+        let region_code = $(this).val();
+        $('#province').ph_locations('fetch_list', [{
+          "region_code": region_code
+        }]);
+
+      },
+
+      fill_cities: function() {
+
+        let province_code = $(this).val();
+        $('#city').ph_locations('fetch_list', [{
+          "province_code": province_code
+        }]);
+      },
+
+
+      fill_barangays: function() {
+
+        let city_code = $(this).val();
+        $('#barangay').ph_locations('fetch_list', [{
+          "city_code": city_code
+        }]);
+      }
+    };
+
+    $(function() {
+      $('#region').on('change click', my_handlers.fill_provinces);
+      $('#province').on('change click', my_handlers.fill_cities);
+      $('#city').on('change click', my_handlers.fill_barangays);
+
+      $('#region').ph_locations({
+        'location_type': 'regions'
+      });
+      $('#province').ph_locations({
+        'location_type': 'provinces'
+      });
+      $('#city').ph_locations({
+        'location_type': 'cities'
+      });
+      $('#barangay').ph_locations({
+        'location_type': 'barangays'
+      });
+
+      $('#region').ph_locations('fetch_list');
+    });
+
+
+    // Register Account
+
+    $("#register").on("submit", function(e) {
+      e.preventDefault();
+
+      let firstName = check_error(document.getElementById("inputFirstName"));
+      let middleName = $("#inputMiddleName").val();
+      let lastName = check_error(document.getElementById("inputLastName"));
+      let suffix = $("#inputSuffix").val();
+
+      let birthDate = check_error(document.getElementById("inputDate"), options = {
+        type: "date",
+        verifyFlag: 1,
+        condition: "today",
+        conditionCheck: "birthdate"
+      });
+
+      let birthPlace = check_error(document.getElementById("inputBirthPlace"));
+      let religion = check_error(document.getElementById("inputReligion"));
+      let gender = check_error(document.getElementById("inputGender"));
+      let civilStatus = check_error(document.getElementById("inputCivilStatus"));
+      let contactNo = check_error(document.getElementById("inputContactNo"), options = {
+        type: "number",
+        verifyFlag: 1,
+        conditionCheck: "contactNumber",
+        regex: /^\d{10}$/,
+        text: "Contact Number"
+      });
+      let address = check_error(document.getElementById("inputAddress"));
+      let provice = check_error(document.getElementById("province"), options = {
+        type: "select",
+        returnVal: "text"
+      });
+      let city = check_error(document.getElementById("city"), options = {
+        type: "select",
+        returnVal: "text"
+      });
+      let barangay = check_error(document.getElementById("barangay"), options = {
+        type: "select",
+        returnVal: "text"
+      });
+      let email = check_error(document.getElementById("yourEmail"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+        text: "Email"
+      });
+
+      let arr = [document.getElementById("yourPassword"), document.getElementById("verifyPassword")];
+      let checkFlag = check_error(arr, options = {
+        type: "input",
+        verifyFlag: 1,
+      });
+
+      let password = checkFlag !== undefined ? checkFlag : undefined;
+      let verifyPassword = checkFlag !== undefined ? checkFlag : undefined;
+
+      let terms = document.getElementById("acceptTerms").checked;
+
+      if (terms == false) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please accept the terms and conditions!',
+        })
+
+        return false;
+      }
+
+      let region = check_error(document.getElementById("region"), options = {
+        type: "select",
+        returnVal: "text"
+      });
+
+      if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && email !== undefined && password !== undefined) {
+        $.ajax({
+          url: "controller/accountHandler.php",
+          type: "POST",
+          data: {
+            firstName: firstName,
+            middleName: middleName,
+            lastName: lastName,
+            suffix: suffix,
+            birthDate: birthDate,
+            birthPlace: birthPlace,
+            religion: religion,
+            gender: gender,
+            civilStatus: civilStatus,
+            contactNo: contactNo,
+            address: address,
+            region: region,
+            provice: provice,
+            city: city,
+            barangay: barangay,
+            email: email,
+            password: password,
+            action: 2
+          },
+          beforeSend: function() {
+            Swal.fire({
+              title: 'Please wait...',
+              html: 'Creating your account',
+              allowOutsideClick: false,
+              imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
+              showConfirmButton: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+            })
+          },
+          success: function(response) {
+            swal.close();
+            if (response == "Success") {
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Account Created Successfully! We have sent a code to your email. Please verify your account to continue.',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                timer: 2000
+              }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  emailConfirmation(response, email);
+                }
+              })
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: response,
+                showConfirmButton: false,
+              })
+            }
+          }
+        })
+      }
+    })
+
+    function emailConfirmation(code, email, counter = 0, countdown) {
+      Swal.fire({
+        html: '<p class="text-center">Please enter the code we sent to your email.</p><input type="text" id="code" class="form-control" placeholder="Enter Code" required><div class="invalid-feedback">Please enter the code we sent to your email.</div> <p class="text-center">Didn\'t receive the code? Resend in <b>5:00</b></p>',
+        timer: 300000,
+        timerProgressBar: true,
+        willOpen: () => {
+          Swal.getConfirmButton().removeAttribute('disabled')
+          Swal.getCancelButton().setAttribute('disabled', 'disabled')
+          timerInterval = setInterval(() => {
+            const b = Swal.getHtmlContainer().querySelector('b')
+            if (b) {
+              b.textContent = Math.floor(Swal.getTimerLeft() / 60000) + ":" + Math.floor((Swal.getTimerLeft() % 60000) / 1000)
+            }
+          }, 100)
+
+          if (timerInterval == 0) {
+            Swal.getConfirmButton().setAttribute('disabled', 'disabled')
+            Swal.getCancelButton().removeAttribute('disabled')
+          }
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Verify',
+        cancelButtonText: 'Resend',
+        showLoaderOnConfirm: true,
+        preConfirm: (code) => {
+          let codeVal = document.getElementById("code").value;
+          let rep = "";
+          $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+              code: codeVal,
+              email: email,
+              action: 3
+            },
+            success: function(data) {
+              console.log(data);
+              if (data == "Success") {
+                return data;
+              } else {
+                return data;
+              }
+            }
+          })
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+      }).then((result) => {
+        console.log(result);
+        if (result.isConfirmed) {
+          if (code == "Success") {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Account Verified Successfully! You can now login to your account.',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                window.location.href = "login.php";
+              }
+            });
+          } else if (code == 'Error EC003: Token Expired') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Token Already Expired!',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                emailConfirmation(code, email, counter, Swal.getTimerLeft());
+              }
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Invalid Code!',
+              showConfirmButton: false,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.dismiss === Swal.DismissReason.timer) {
+                emailConfirmation(code, email, counter, Swal.getTimerLeft());
+              }
+            })
+          }
+        } else {
+          $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+              email: email,
+              action: 4
+            },
+            beforeSend: function() {
+              Swal.fire({
+                title: 'Please wait...',
+                html: 'Resending Code',
+                allowOutsideClick: false,
+                imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
+                showConfirmButton: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+              })
+            },
+            success: function(data) {
+              if (data == "success") {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success',
+                  text: 'Code Resent Successfully! Please check your email.',
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    emailConfirmation(code, email, counter + 1);
+                  }
+                })
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong. Please try again.',
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+                  allowEscapeKey: false,
+                  allowEnterKey: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    emailConfirmation(code, email, counter);
+                  }
+                })
+              }
+            }
+          })
+        }
+      })
+    }
+  </script>
+>>>>>>> Stashed changes
 
 </body>
 

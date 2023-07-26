@@ -3,8 +3,13 @@
 //Link Checker and Registration
 function get_path($lv_path, $type = '99')
 {
+<<<<<<< Updated upstream
         if ($type == 0)         //Super Admin 
         {                       //NOT FINAL
+=======
+        if ($type == 1) 
+        {
+>>>>>>> Stashed changes
                 switch ($lv_path) 
                 {
                         case 'dashboard':
@@ -65,6 +70,7 @@ function get_path($lv_path, $type = '99')
                                 return 'error.php';
                 }
         }
+<<<<<<< Updated upstream
 
         if ($type == 1)         //Admin
         {
@@ -139,6 +145,12 @@ function get_path($lv_path, $type = '99')
                 switch ($lv_path) 
                 {
 
+=======
+        elseif ($type == 2)
+        {
+                switch($lv_path)
+                {
+>>>>>>> Stashed changes
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
 
@@ -186,7 +198,11 @@ function get_path($lv_path, $type = '99')
 
 function get_sidebar($type, $access_level = 0)
 {
+<<<<<<< Updated upstream
         switch ($type) 
+=======
+        switch($type)
+>>>>>>> Stashed changes
         {
                 case 0:
                         return 'views/sidebar/super_admin.php';
@@ -211,6 +227,21 @@ function get_sidebar($type, $access_level = 0)
 function get_title($page = 'NA')
 {
         switch ($page) 
+        {
+                case 0:
+                        return 'Login | Thrive Thomasino Scholarly';
+                case 1:
+                        return 'Register Account | Thrive Thomasino Scholarly';
+                case 2:
+                        return 'Dashboard | Thrive Thomasino Scholarly';
+                default:
+                        return 'Thrive Thomasino Scholarly';
+        }
+}
+
+function get_title($page = 'NA')
+{
+        switch($page)
         {
                 case 0:
                         return 'Login | Thrive Thomasino Scholarly';

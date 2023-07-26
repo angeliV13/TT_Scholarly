@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< Updated upstream
 function getUserNameFromId($id)
 {
     include("dbconnection.php");
@@ -16,12 +17,16 @@ function getUserNameFromId($id)
 
     return $first_name . ' ' . $last_name;
 }
+=======
+include("functionModel.php");
+>>>>>>> Stashed changes
 
 function userLogin($user_name, $password, $type)
 {
     include("dbconnection.php");
 
     // Checks if Account Exists
+<<<<<<< Updated upstream
 
     $sql = ($type <= 1) ? "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= " . $type : "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= " . $type;
 
@@ -48,6 +53,25 @@ function userLogin($user_name, $password, $type)
         $_SESSION['id'] = $id;
         $_SESSION['account_type'] = $account_type;
         $_SESSION['name'] = getUserNameFromId($id);
+=======
+    if($type <= 1){
+        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= " . $type ;//. "'";
+    }else{
+        $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= " . $type ;//. "'";
+    }
+    $query = mysqli_query($conn, $sql) or die("Error LQ001: " . mysqli_error($conn));
+
+    if(mysqli_num_rows($query) <> 0)
+    {
+        while ($row = mysqli_fetch_assoc($query))
+        {
+            extract($row);
+        }       
+
+        session_start();
+
+        $_SESSION['id'] = $id;
+>>>>>>> Stashed changes
 
         return 'Success';
     }
@@ -57,6 +81,7 @@ function userLogin($user_name, $password, $type)
     }
 }
 
+<<<<<<< Updated upstream
 function user_sign_out()
 {
     session_start();
@@ -78,6 +103,15 @@ function user_sign_out()
         
     }
 
+=======
+function user_sign_out(){
+    session_start();
+    if (isset($_SESSION['id']))
+    {
+        unset($_SESSION['id']);
+        return 'Success';
+    }
+>>>>>>> Stashed changes
     return 'No Session Found';
 }
 
@@ -85,6 +119,7 @@ function registerAccount($data)
 {
     include("dbconnection.php");
 
+<<<<<<< Updated upstream
     $emailCheck = [
         'table'     => 'account',
         'column'    => 'email',
@@ -130,24 +165,47 @@ function registerAccount($data)
     if ($notif !== 'success') return 'Error: ' . $notif;
     
     $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . $data['password'] . "', '" . $data['email'] . "', 3, 0)";
+=======
+    $existCount = check_exist($data['email']);
+
+    if ($existCount > 0)
+    {
+        return 'Email Already Exist';
+    }
+    
+    $sql = "INSERT INTO account (password, email, account_type, access_level) VALUES ('" . $data['password'] . "', '" . $data['email'] . "', 3, 0)";
+>>>>>>> Stashed changes
     $query = mysqli_query($conn, $sql) or die("Error RQ001: " . mysqli_error($conn));
 
     if ($query)
     {
         $last_id = mysqli_insert_id($conn);
 
+<<<<<<< Updated upstream
         $sql = "INSERT INTO user_info (account_id, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code)
         VALUES ('$last_id', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]')";
+=======
+        $sql = "INSERT INTO user_info (account_id, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number)
+        VALUES ('$last_id', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]')";
+>>>>>>> Stashed changes
         $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
         if ($query)
         {
+<<<<<<< Updated upstream
             $sql = "INSERT INTO email_token (user_id, email, token, date_generated, type) VALUES ('$last_id', '$data[email]', '" . $randomString . "', NOW(), 0)";
+=======
+            $sql = "INSERT INTO email_token (user_id, email, token, date_generated) VALUES ('$last_id', '$data[email]', '" . generateRandomString(5) . "', NOW())";
+>>>>>>> Stashed changes
             $query = mysqli_query($conn, $sql) or die("Error RQ003: " . mysqli_error($conn));
 
             if ($query)
             {
+<<<<<<< Updated upstream
                 echo 'Success';
+=======
+                return 'Success';
+>>>>>>> Stashed changes
             }
             else
             {
@@ -165,6 +223,7 @@ function registerAccount($data)
     }
 }
 
+<<<<<<< Updated upstream
 function check_exist($data)
 {
     include("dbconnection.php");
@@ -174,6 +233,13 @@ function check_exist($data)
     $value = $data['value'];
 
     $sql = "SELECT * FROM " . $table . " WHERE " . $column . " = '" . $value . "'";
+=======
+function check_exist($email)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM account WHERE email = '" . $email . "'";
+>>>>>>> Stashed changes
     $query = $conn->query($sql);
 
     return $query->num_rows;
@@ -183,20 +249,32 @@ function email_confirmation($data)
 {
     include("dbconnection.php");
 
+<<<<<<< Updated upstream
     $sql = "SELECT id, user_id, date_generated FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' ORDER BY id DESC LIMIT 1";
     $query = $conn->query($sql);
 
     if ($query->num_rows > 0)
+=======
+    $sql = "SELECT id, user_id, date_generated FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    if ($query)
+>>>>>>> Stashed changes
     {
         $row = $query->fetch_assoc();
         $id = $row['id'];
         $user_id = $row['user_id'];
         $date_generated = $row['date_generated'];
+<<<<<<< Updated upstream
         
         // add 5 minutes to date_generated
         $date_countdown = date("Y-m-d H:i:s", strtotime('+5 minutes', strtotime($date_generated)));
 
         $timeLeft = getDateTimeDiff($date_generated, $date_countdown, 'seconds');
+=======
+
+        $timeLeft = getDateTimeDiff($date_generated, date("Y-m-d H:i:s"));
+>>>>>>> Stashed changes
 
         if ($timeLeft <= 0)
         {
@@ -207,7 +285,11 @@ function email_confirmation($data)
             $sql = "UPDATE account SET account_status = 1 WHERE id = '" . $user_id . "' AND account_status = 0 LIMIT 1";
             $query = $conn->query($sql);
 
+<<<<<<< Updated upstream
             $sql = "UPDATE email_token SET date_verified = NOW() WHERE user_id = '" . $user_id . "' AND token = '" . $data['code'] . "' AND type = 0 LIMIT 1";
+=======
+            $sql = "UPDATE email_token SET verified_flag = 1, date_verified = NOW() WHERE id = '" . $id . "' AND token = '" . $data['code'] . "' LIMIT 1";
+>>>>>>> Stashed changes
             $query = $conn->query($sql);
 
             if ($query)
@@ -222,6 +304,7 @@ function email_confirmation($data)
     }
     else
     {
+<<<<<<< Updated upstream
         echo 'Invalid Token';
     }
 }
@@ -455,4 +538,8 @@ function update_profile($data)
     {
         echo 'Error EQ002: ' . $conn->error;
     }
+=======
+        echo 'Error EQ001: ' . $conn->error;
+    }
+>>>>>>> Stashed changes
 }

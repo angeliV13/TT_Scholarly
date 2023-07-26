@@ -2,8 +2,11 @@
 
 // Getting the Path
 include('path_identifier.php');
+<<<<<<< Updated upstream
 include('model/functionModel.php');
 include('global_variables.php');
+=======
+>>>>>>> Stashed changes
 
 $title = get_title();
 
@@ -12,11 +15,20 @@ session_start();
 if (!isset($_SESSION['id'])) header("Location: login.php");
 
 // Show the Users Panel if ID is found
+<<<<<<< Updated upstream
+=======
+if (isset($_SESSION['id'])) 
+{
+  // Definintion for User Data
+  // USER ID, USERNAME, EMAIL, ACC_TYPE, ACCESS_LVL, ACC_STAT
+  $user_data = [];
+>>>>>>> Stashed changes
 
 // Definintion for User Data
 // USER ID, USERNAME, EMAIL, ACC_TYPE, ACCESS_LVL, ACC_STAT
 $user_data = [];
 
+<<<<<<< Updated upstream
 // Getting the User Info AND current DATE
 include('controller/njs_get_user_data.php');
 
@@ -37,6 +49,14 @@ if (isset($_GET['notif']))
 {
     update_notification($_GET['notif'], $_SESSION['id']);
 }
+=======
+  //Is there a link?
+
+  $nav = isset($_GET['nav']) ? get_path($_GET['nav'], $user_data[3]) : get_path('dashboard', $user_data[3]); // 1st check if there is a link, if not, go to dashboard
+
+  //Getting the Appropriate Sidebar
+  $sidebar  = get_sidebar($user_data[3], 0);
+>>>>>>> Stashed changes
 
 ?>
 
@@ -56,6 +76,7 @@ if (isset($_GET['notif']))
 
   <?php include('includes/libraries/javascript.php') ?>
   <?php include('includes/libraries/inside_javascript.php') ?>
+<<<<<<< Updated upstream
   <script src="assets/js/table.js"></script>
 
   <?php if ($checkNav == "profile-bene"): ?>
@@ -118,3 +139,17 @@ if (isset($_GET['notif']))
   <?php endif; ?>
 
   </html>
+=======
+
+  </html>
+
+<?php
+  // Redirect to Login
+} 
+else 
+{
+  header("Location: login.php");
+}
+
+?>
+>>>>>>> Stashed changes

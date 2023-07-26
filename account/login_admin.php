@@ -5,15 +5,22 @@ include('path_identifier.php');
 
 $title = get_title(0);
 
+<<<<<<< Updated upstream
 
 if(isset($_SESSION['id'])) header("Location: index.php");
 
 
+=======
+>>>>>>> Stashed changes
 include('includes/main.php') 
 
 ?>
 
+<<<<<<< Updated upstream
 <body class="bg-light">
+=======
+<body>
+>>>>>>> Stashed changes
 
   <main>
     <div class="container">
@@ -31,6 +38,7 @@ include('includes/main.php')
               </div><!-- End Logo -->
 
               <div class="card mb-3">
+<<<<<<< Updated upstream
                 
                 <div class="card-title pb-3 bg-dark">
                   <h5 class="text-center text-white fs-3">Admin Login</h5>
@@ -39,6 +47,13 @@ include('includes/main.php')
 
                   <div class="pt-3 pb-3">
                     <!-- <h5 class="card-title text-center pb-0 fs-3">Login</h5> -->
+=======
+
+                <div class="card-body">
+
+                  <div class="pt-3 pb-3">
+                    <h5 class="card-title text-center pb-0 fs-3">Login</h5>
+>>>>>>> Stashed changes
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
@@ -59,10 +74,17 @@ include('includes/main.php')
                     </div>
 
                     <div class="col-12">
+<<<<<<< Updated upstream
                       <button id="btn_login" class="btn btn-dark w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12 text-center">
                       <!-- <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p> -->
+=======
+                      <button id="btn_login" class="btn btn-primary w-100" type="submit">Login</button>
+                    </div>
+                    <div class="col-12 text-center">
+                      <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
+>>>>>>> Stashed changes
                       <p class=" small mb-0"> <a href="pages-register.html">Forgot Password</a> </p>
                     </div>
                     <!-- <div class="col-12 text-center">
