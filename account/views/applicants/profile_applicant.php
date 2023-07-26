@@ -1,5 +1,13 @@
 <main id="main" class="main">
-  <!-- End Page Title -->
+  <!-- Start of Page Title -->
+  <div class="pagetitle">
+      <h1>Profile</h1>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Profile</li>
+        </ol>
+    </div>
+    <!-- End Page Title -->
   <section class="section profile">
     <div class="column py-2">
       <div class="col-xl-40">

@@ -119,3 +119,63 @@ function accountListingTable($acc_type)
 
     echo json_encode($json_data);
 }
+
+function examQuestionsTable()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM examination";
+    $query = $conn->query($sql);
+
+    $data = [];
+    $categ = "";
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            extract($row);
+
+            switch($category){
+                case 1:
+                    $categ = "English";
+                    break;
+                case 2:
+                    $categ = "Mathematics";
+                    break;
+                case 3:
+                    $categ = "General Info";
+                    break;
+                case 4:
+                    $categ = "Abstract";
+                    break;
+            }
+            $count = static_count();
+
+            $data[] = [
+                $count,
+                $categ,
+                $question,
+                $choices,
+                $answer,
+                "BUTTON",
+            ];
+
+            $totalData++;
+        }
+    }
+    else
+    {
+        $data[] = [];
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}

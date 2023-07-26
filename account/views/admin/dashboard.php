@@ -1,14 +1,14 @@
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Dashboard Admin</h1>
-      <nav>
-        <!-- <ol class="breadcrumb"> -->
-          <!-- <li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
-          <!-- <li class="breadcrumb-item active">Dashboard</li> -->
-        <!-- </ol> -->
-      </nav>
-    </div><!-- End Page Title -->
+    <!-- Start of Page Title -->
+  <div class="pagetitle">
+      <h1>Assessment</h1>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </div>
+    <!-- End Page Title -->
 
     <section class="section dashboard">
       <div class="row">
