@@ -29,7 +29,7 @@
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
-        <?php echo ($notifCount > 0 AND $notifCount != null) ? '<span class="badge bg-primary badge-number">' . $notifCount . '</span>' : ''; ?>
+        <?php echo ($notifCount > 0 AND $notifCount != null) ? '<span class="badge bg-primary badge-number">' . $notifCount . '</span>' : ''; ?> 
       </a><!-- End Notification Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
