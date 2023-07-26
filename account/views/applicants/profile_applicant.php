@@ -5,7 +5,7 @@
       <div class="col-xl-40">
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <img src="" alt="Profile" class="rounded-circle">
+            <img src="" alt="Profile" class="rounded-pill">
             <h2>NAME</h2>
             <h3>Web Designer</h3>
             <div class="social-links mt-2">
