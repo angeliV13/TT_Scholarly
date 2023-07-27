@@ -18,12 +18,12 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title">Examination Scope</h5>
                             <div class="d-flex align-items-center">
-                                <button id="save_exam_item" class="btn btn-sm btn-danger shadow-sm">
-                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Set Items
+                                <button id="editExamTotal" class="btn btn-sm btn-danger shadow-sm">
+                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Edit Total Items
                                 </button>
                             </div>
                         </div>
-                        <div class="row mb-4 py-2">
+                        <div id="totalItems" class="row mb-4 py-2">
                             <div class="col-sm-6 row position-relative">
                                 <!-- English -->
 
@@ -31,7 +31,7 @@
                                     <h6 class="font-bold">English</h6>
                                 </label>
                                 <div class="col-sm-2">
-                                    <input type="number" id="inputEnglish" class="form-control">
+                                    <input type="number" id="inputEnglish" class="form-control" disabled>
                                 </div>
 
                             </div>
@@ -42,7 +42,7 @@
                                     <h6 class="font-bold">Mathematics</h6>
                                 </label>
                                 <div class="col-sm-2">
-                                    <input type="number" id="inputMath" class="form-control">
+                                    <input type="number" id="inputMath" class="form-control" disabled>
                                 </div>
 
                             </div>
@@ -53,7 +53,7 @@
                                     <h6 class="font-bold">General Information</h6>
                                 </label>
                                 <div class="col-sm-2">
-                                    <input type="number" id="inputGenInfo" class="form-control">
+                                    <input type="number" id="inputGenInfo" class="form-control" disabled>
                                 </div>
 
                             </div>
@@ -64,7 +64,7 @@
                                     <h6 class="font-bold">Abstract Reasoning</h6>
                                 </label>
                                 <div class="col-sm-2">
-                                    <input type="number" id="inputAbstract" class="form-control">
+                                    <input type="number" id="inputAbstract" class="form-control" disabled>
                                 </div>
 
                             </div>
