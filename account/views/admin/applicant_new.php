@@ -919,35 +919,34 @@
 
                                                                                         <!-- TABLE OF SIBLINGS -->
                                                                                         <div class="column">
-                                                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                                            <<div class="d-flex justify-content-between align-items-center">
                                                                                                 <h5 class="card-title">List of Siblings</h5>
                                                                                                 <div class="d-flex align-items-center">
-                                                                                                    <button id="add_awards" class="btn btn-sm btn-danger shadow-sm">
-                                                                                                        <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Siblings
-                                                                                                    </button>
-                                                                                                    <button type="button" class="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                                        <span class="visually-hidden">Toggle Dropdown</span>
-                                                                                                    </button>
-                                                                                                    <div class="dropdown-menu">
-                                                                                                        <a class="dropdown-item" href="#">Item 1</a>
-                                                                                                        <a class="dropdown-item" href="#">Item 2</a>
-                                                                                                        <div class="dropdown-divider"></div>
-                                                                                                        <a class="dropdown-item" href="#">Item 3</a>
+                                                                                                    <div class="row-md-6 position-relative">
+                                                                                                        <!-- <label for="inputHomeType" class="mr-3">Do you have a sibling?</label> -->
+                                                                                                        <select class="form-select mr-4 " id="inputHomeType" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                            <option selected disabled value="">Do you have a Sibling/s?</option>
+                                                                                                            <option>...</option>
+                                                                                                        </select>
                                                                                                     </div>
+                                                                                                    <button id="add_awards" class="btn btn-sm btn-danger shadow-sm">
+                                                                                                        <i class="fas fa-question fa-sm text-white-100 mr-2"></i>Add Siblings
+                                                                                                    </button>
+                                                                                                    <!-- Replace the select with a button -->
                                                                                                 </div>
-                                                                                            </div>
-                                                                                            <div class="table-responsive">
-                                                                                                <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
-                                                                                                    <thead>
-                                                                                                        <tr class="text-center">
-                                                                                                            <th>No</th>
-                                                                                                            <th>Honor/Award</th>
-                                                                                                            <th>Academic Year</th>
-                                                                                                            <th>Semester</th>
-                                                                                                            <th>Year Level</th>
-                                                                                                            <th>Actions</th>
-                                                                                                        </tr>
-                                                                                                        <!-- <tr>
+                                                                                        </div>
+                                                                                        <div class="table-responsive">
+                                                                                            <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
+                                                                                                <thead>
+                                                                                                    <tr class="text-center">
+                                                                                                        <th>No</th>
+                                                                                                        <th>Honor/Award</th>
+                                                                                                        <th>Academic Year</th>
+                                                                                                        <th>Semester</th>
+                                                                                                        <th>Year Level</th>
+                                                                                                        <th>Actions</th>
+                                                                                                    </tr>
+                                                                                                    <!-- <tr>
                                                                                                             <td></td>
                                                                                                             <td></td>
                                                                                                             <td></td>
@@ -973,369 +972,428 @@
                                                                                                             <td></td>
                                                                                                             <td></td>
                                                                                                         </tr> -->
-                                                                                                    </thead>
-                                                                                                    <tbody>
-                                                                                                        <tr>
-                                                                                                            <td>1</td>
-                                                                                                            <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                            <td>College</td>
-                                                                                                            <td>1st Year</td>
-                                                                                                            <td>San Bartolome Santo Tomas Batangas</td>
-                                                                                                            <td>
-                                                                                                                <div class="btn-group d-flex">
-                                                                                                                    <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
-                                                                                                                    <button id="deleteAward" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAwardModal">Delete </button>
-                                                                                                                </div>
-                                                                                                            </td>
-                                                                                                        </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                            </div>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td>1</td>
+                                                                                                        <td>Biscocho, Val Juniel Mendoza</td>
+                                                                                                        <td>College</td>
+                                                                                                        <td>1st Year</td>
+                                                                                                        <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                        <td>
+                                                                                                            <div class="btn-group d-flex">
+                                                                                                                <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
+                                                                                                                <button id="deleteAward" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAwardModal">Delete </button>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
                                                                                         </div>
-                                                                                    </form>
                                                                                 </div>
-                                                                            </div>
-
-                                                                            <!-- FATHER'S INFORMATION -->
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title">Father's Information</h5>
-                                                                                    <!-- Custom Styled Validation with Tooltips -->
-                                                                                    <form class="row g-4 needs-validation" novalidate>
-                                                                                        <!-- FULL NAME -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputFirstName" class="form-label">First name</label>
-                                                                                            <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputMiddleName" class="form-label">Middle name</label>
-                                                                                            <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputLastName" class="form-label">Last name</label>
-                                                                                            <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                                                                            <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- BIRTH -->
-                                                                                        <div class="col-md-4 position-relative">
-                                                                                            <label for="inputDate" class="form-label">Birth Date</label>
-                                                                                            <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-5  position-relative">
-                                                                                            <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                                                                                            <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- START AGE -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputAge" class="form-label">Father's Age</label>
-                                                                                            <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- CONTACT INFORMATION -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="telephone" class="form-label">Contact Number</label>
-                                                                                            <div class="input-group">
-                                                                                                <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                                                                                <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <!-- LIVING OR DECEASED -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                                                                                            <select class="form-select" id="inputLivingDeceased" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-
-                                                                                        <!-- FATHER'S OCCUPATION  -->
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputOccupation" class="form-label"> Occupation</label>
-                                                                                            <select class="form-select" id="inputOccupation" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
-                                                                                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputCompanyName" class="form-label">Company's Name</label>
-                                                                                            <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputCompanyAddress" class="form-label">Company's Address</label>
-                                                                                            <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                                                                                            <select class="form-select" id="inputIncome" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                                                                                            <select class="form-select" id="inputEducationalAttainment" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <!-- MOTHER'S INFORMATION -->
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title">Mother's Information</h5>
-                                                                                    <!-- Custom Styled Validation with Tooltips -->
-                                                                                    <form class="row g-4 needs-validation" novalidate>
-                                                                                        <!-- FULL NAME -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputFirstName" class="form-label">First name</label>
-                                                                                            <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputMiddleName" class="form-label">Middle name</label>
-                                                                                            <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputLastName" class="form-label">Last name</label>
-                                                                                            <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                                                                            <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- BIRTH -->
-                                                                                        <div class="col-md-4 position-relative">
-                                                                                            <label for="inputDate" class="form-label">Birth Date</label>
-                                                                                            <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-5  position-relative">
-                                                                                            <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                                                                                            <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- START AGE -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputAge" class="form-label">Mother's Age</label>
-                                                                                            <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- CONTACT INFORMATION -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="telephone" class="form-label">Contact Number</label>
-                                                                                            <div class="input-group">
-                                                                                                <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                                                                                <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <!-- LIVING OR DECEASED -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                                                                                            <select class="form-select" id="inputLivingDeceased" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-
-                                                                                        <!-- MOTHER'S OCCUPATION  -->
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputOccupation" class="form-label"> Occupation</label>
-                                                                                            <select class="form-select" id="inputOccupation" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
-                                                                                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputCompanyName" class="form-label">Company's Name</label>
-                                                                                            <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputCompanyAddress" class="form-label">Company's Address</label>
-                                                                                            <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                                                                                            <select class="form-select" id="inputIncome" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                                                                                            <select class="form-select" id="inputEducationalAttainment" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <!-- GUARDIAN'S INFORMATION -->
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title">Guardian's Information</h5>
-                                                                                    <!-- Custom Styled Validation with Tooltips -->
-                                                                                    <form class="row g-4 needs-validation" novalidate>
-                                                                                        <!-- FULL NAME -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputFirstName" class="form-label">First name</label>
-                                                                                            <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputMiddleName" class="form-label">Middle name</label>
-                                                                                            <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputLastName" class="form-label">Last name</label>
-                                                                                            <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                                                                            <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- BIRTH -->
-                                                                                        <div class="col-md-4 position-relative">
-                                                                                            <label for="inputDate" class="form-label">Birth Date</label>
-                                                                                            <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-5  position-relative">
-                                                                                            <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                                                                                            <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- START AGE -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputAge" class="form-label">Guardian's Age</label>
-                                                                                            <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- START AGE -->
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputRelationship" class="form-label">Relationship</label>
-                                                                                            <input type="Age" class="form-control" id="inputRelationship" aria-describedby="inputRelationship" value="" required>
-                                                                                        </div>
-
-                                                                                        <!-- CONTACT INFORMATION -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="telephone" class="form-label">Contact Number</label>
-                                                                                            <div class="input-group">
-                                                                                                <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                                                                                <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <!-- LIVING OR DECEASED -->
-                                                                                        <div class="col-md-3 position-relative">
-                                                                                            <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                                                                                            <select class="form-select" id="inputLivingDeceased" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-
-                                                                                        <!-- GUARDIAN'S INFORMATION  -->
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputOccupation" class="form-label"> Occupation</label>
-                                                                                            <select class="form-select" id="inputOccupation" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
-                                                                                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputCompanyName" class="form-label">Company's Name</label>
-                                                                                            <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputCompanyAddress" class="form-label">Company's Address</label>
-                                                                                            <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                                                                                            <select class="form-select" id="inputIncome" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 position-relative">
-                                                                                            <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                                                                                            <select class="form-select" id="inputEducationalAttainment" required>
-                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                <option>...</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </form>
-                                                                                </div>
+                                                                                </form>
                                                                             </div>
                                                                         </div>
 
-                                                                        <!--ADDITIONAL BACKGROUND-->
-                                                                        <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title">Additional Information</h5>
-                                                                                    <!-- Custom Styled Validation with Tooltips -->
-                                                                                    <form class="row g-4 needs-validation" novalidate>
-                                                                                        <!-- ADDITIONAL INFORMATION -->
-                                                                                        <!-- ... -->
-                                                                                    </form><!-- End Custom Styled Validation with Tooltips -->
-                                                                                </div>
+                                                                        <!-- FATHER'S INFORMATION -->
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">Father's Information</h5>
+                                                                                <!-- Custom Styled Validation with Tooltips -->
+                                                                                <form class="row g-4 needs-validation" novalidate>
+                                                                                    <!-- FULL NAME -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputFirstName" class="form-label">First name</label>
+                                                                                        <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputMiddleName" class="form-label">Middle name</label>
+                                                                                        <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputLastName" class="form-label">Last name</label>
+                                                                                        <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                                                                        <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- BIRTH -->
+                                                                                    <div class="col-md-4 position-relative">
+                                                                                        <label for="inputDate" class="form-label">Birth Date</label>
+                                                                                        <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-5  position-relative">
+                                                                                        <label for="inputBirthPlace" class="form-label">Place of Birth</label>
+                                                                                        <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- START AGE -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputAge" class="form-label">Father's Age</label>
+                                                                                        <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- CONTACT INFORMATION -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="telephone" class="form-label">Contact Number</label>
+                                                                                        <div class="input-group">
+                                                                                            <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
+                                                                                            <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <!-- LIVING OR DECEASED -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
+                                                                                        <select class="form-select" id="inputLivingDeceased" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!-- FATHER'S OCCUPATION  -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOccupation" class="form-label"> Occupation</label>
+                                                                                        <select class="form-select" id="inputOccupation" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
+                                                                                        <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputCompanyName" class="form-label">Company's Name</label>
+                                                                                        <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputCompanyAddress" class="form-label">Company's Address</label>
+                                                                                        <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputIncome" class="form-label"> Average Monthly Income</label>
+                                                                                        <select class="form-select" id="inputIncome" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
+                                                                                        <select class="form-select" id="inputEducationalAttainment" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- MOTHER'S INFORMATION -->
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">Mother's Information</h5>
+                                                                                <!-- Custom Styled Validation with Tooltips -->
+                                                                                <form class="row g-4 needs-validation" novalidate>
+                                                                                    <!-- FULL NAME -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputFirstName" class="form-label">First name</label>
+                                                                                        <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputMiddleName" class="form-label">Middle name</label>
+                                                                                        <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputLastName" class="form-label">Last name</label>
+                                                                                        <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                                                                        <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- BIRTH -->
+                                                                                    <div class="col-md-4 position-relative">
+                                                                                        <label for="inputDate" class="form-label">Birth Date</label>
+                                                                                        <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-5  position-relative">
+                                                                                        <label for="inputBirthPlace" class="form-label">Place of Birth</label>
+                                                                                        <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- START AGE -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputAge" class="form-label">Mother's Age</label>
+                                                                                        <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- CONTACT INFORMATION -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="telephone" class="form-label">Contact Number</label>
+                                                                                        <div class="input-group">
+                                                                                            <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
+                                                                                            <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <!-- LIVING OR DECEASED -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
+                                                                                        <select class="form-select" id="inputLivingDeceased" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!-- MOTHER'S OCCUPATION  -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOccupation" class="form-label"> Occupation</label>
+                                                                                        <select class="form-select" id="inputOccupation" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
+                                                                                        <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputCompanyName" class="form-label">Company's Name</label>
+                                                                                        <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputCompanyAddress" class="form-label">Company's Address</label>
+                                                                                        <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputIncome" class="form-label"> Average Monthly Income</label>
+                                                                                        <select class="form-select" id="inputIncome" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
+                                                                                        <select class="form-select" id="inputEducationalAttainment" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- GUARDIAN'S INFORMATION -->
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">Guardian's Information</h5>
+                                                                                <!-- Custom Styled Validation with Tooltips -->
+                                                                                <form class="row g-4 needs-validation" novalidate>
+                                                                                    <!-- FULL NAME -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputFirstName" class="form-label">First name</label>
+                                                                                        <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputMiddleName" class="form-label">Middle name</label>
+                                                                                        <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputLastName" class="form-label">Last name</label>
+                                                                                        <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                                                                        <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- BIRTH -->
+                                                                                    <div class="col-md-4 position-relative">
+                                                                                        <label for="inputDate" class="form-label">Birth Date</label>
+                                                                                        <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-5  position-relative">
+                                                                                        <label for="inputBirthPlace" class="form-label">Place of Birth</label>
+                                                                                        <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- START AGE -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputAge" class="form-label">Guardian's Age</label>
+                                                                                        <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- START AGE -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputRelationship" class="form-label">Relationship</label>
+                                                                                        <input type="Age" class="form-control" id="inputRelationship" aria-describedby="inputRelationship" value="" required>
+                                                                                    </div>
+
+                                                                                    <!-- CONTACT INFORMATION -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="telephone" class="form-label">Contact Number</label>
+                                                                                        <div class="input-group">
+                                                                                            <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
+                                                                                            <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <!-- LIVING OR DECEASED -->
+                                                                                    <div class="col-md-3 position-relative">
+                                                                                        <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
+                                                                                        <select class="form-select" id="inputLivingDeceased" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!-- GUARDIAN'S INFORMATION  -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOccupation" class="form-label"> Occupation</label>
+                                                                                        <select class="form-select" id="inputOccupation" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
+                                                                                        <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputCompanyName" class="form-label">Company's Name</label>
+                                                                                        <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputCompanyAddress" class="form-label">Company's Address</label>
+                                                                                        <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputIncome" class="form-label"> Average Monthly Income</label>
+                                                                                        <select class="form-select" id="inputIncome" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
+                                                                                        <select class="form-select" id="inputEducationalAttainment" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- ADDITIONAL INFORMATION -->
+                                                                    <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title"></h5>
+                                                                                <form class="row g-4 needs-validation" novalidate>
+                                                                                    <!-- WORKING STUDENT -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputWorkingStudent" class="form-label">Are you a Working Student?</label>
+                                                                                        <select class="form-select" id="inputWorkingStudent" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!---OFW PARENTS -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
+                                                                                        <select class="form-select" id="inputOfwParents" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!--OFW FAMILY MEMBERS -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
+                                                                                        <select class="form-select" id="inputOfwMembers" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!---PWD PARENTS -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
+                                                                                        <select class="form-select" id="inputPwdParents" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!---PWD FAMILY MEMBERS -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
+                                                                                        <select class="form-select" id="inputOfwMembers" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!---PARENTS STATUS -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputParentStatus" class="form-label">What is your Parents Status?</label>
+                                                                                        <select class="form-select" id="inputParentStatus" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <!---STUDENT PWD -->
+                                                                                    <div class="col-md-6 position-relative">
+                                                                                        <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
+                                                                                        <select class="form-select" id="inputStudentPwd" required>
+                                                                                            <option selected disabled value="">Choose...</option>
+                                                                                            <option>...</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </form>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="btn-group" role="group">
-                                            <button id="viewRequirements" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">View Requirements</button>
-                                            <div class="modal fade" id="viewRequirementsModal" tabindex="-1">
-                                                <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">REQUIREMENTS</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <div class="btn-group" role="group">
+                                        <button id="viewRequirements" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">View Requirements</button>
+                                        <div class="modal fade" id="viewRequirementsModal" tabindex="-1">
+                                            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">REQUIREMENTS</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                 </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
             </div>
+        </div>
         </div>
         <!-- TABLE-->
         <div class="card">
