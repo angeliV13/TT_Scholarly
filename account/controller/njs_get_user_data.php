@@ -15,7 +15,7 @@ if(isset($_SESSION['id']))
     { //Checking Account Type if beneficiary or applicant
         $assessmentAccess   = assessmentAccess();
         $renewalAccess      = renewalAccess();
-        if($accType == 3)
+        if($user_data[3] == 3)
         {
            $examAccess      = examAccess();
         }

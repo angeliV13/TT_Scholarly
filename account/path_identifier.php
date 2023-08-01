@@ -222,7 +222,7 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'examination':
-                                return 'maintenance.php';
+                                return 'views/applicants/start_exam.php';
 
 
                         default:
