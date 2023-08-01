@@ -1,11 +1,11 @@
 <main id="main" class="main">
     <!-- Start of Page Title -->
-  <div class="pagetitle">
-      <h1>Examination Questions</h1>
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Examination</li>
-          <li class="breadcrumb-item active">Examination Questions</li>
+    <div class="pagetitle">
+        <h1>Examination Questions</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item">Examination</li>
+            <li class="breadcrumb-item active">Examination Questions</li>
         </ol>
     </div>
     <!-- End Page Title -->
@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title">Questions</h5>
-                        <button id="save_exam_item" class="btn btn-sm btn-danger shadow-sm">
+                        <button class="btn btn-sm btn-danger shadow-sm" data-bs-toggle="modal" data-bs-target="#add_question_modal">
                             <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Question
                         </button>
                     </div>
@@ -105,4 +105,68 @@
             </div>
         </div>
     </section>
+    <!-- Add Exam Item Modal -->
+    <div class="modal fade" id="add_question_modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Exam Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="col-sm-3">
+                            <p>Category</p>
+                        </div>
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioAddCategory" id="radioAddEnglish" value="1">
+                                <label class="form-check-label" for="radioAddEnglish">
+                                    English
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioAddCategory" id="radioAddMath" value="2">
+                                <label class="form-check-label" for="radioAddMath">
+                                    Mathematics
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioAddCategory" id="radioAddGenInfo" value="3">
+                                <label class="form-check-label" for="radioAddGenInfo">
+                                    General Information
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioAddCategory" id="radioAddAbstract" value="4">
+                                <label class="form-check-label" for="radioAddAbstract">
+                                    Abstract Reasoning
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="examAddQuestion" class="form-label col-3">Question</label>
+                        <textarea class="form-control col" rows="2" id="examAddQuestion" aria-describedby="examAddQuestion" name="examAddQuestion">
+                        </textarea>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="examAddChoices" class="form-label col-3">Choices</label>
+                        <textarea class="form-control col" rows="3" id="examAddChoices" aria-describedby="examAddChoices" name="examAddChoices">
+
+                        </textarea>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="examAddAnswer" class="form-label col-3">Answer</label>
+                        <select class="form-select col" id="examAddAnswer" aria-label="Default select example">
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="addQuestion">Add Question</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>

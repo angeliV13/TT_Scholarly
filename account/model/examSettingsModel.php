@@ -37,3 +37,22 @@ function changeExamTotalItems($english, $math, $genInfo, $abstract)
     return "Change Success";
 }
 // ---------------------------------------------------
+
+function addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnswer){
+
+    include("dbconnection.php");
+    $examChoices = "";
+
+    $examAddChoices = array_filter($examAddChoices);
+    foreach($examAddChoices as $choices){
+        $examChoices .= $choices . "<br>";
+    }
+
+    $sql = "INSERT INTO `examination`(`id`, `category`, `question`, `choices`, `answer`) 
+                VALUES (0, '{$category}', '{$examAddQuestion}', '{$examChoices}', '{$examAddAnswer}')";
+    
+    $query = $conn->query($sql) or die("Error ESQ005: " . $conn->error);
+
+    return "Success";
+
+}

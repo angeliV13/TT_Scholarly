@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  $("#examAddChoices").val("");
   let inputEnglish = $("#inputEnglish");
   let inputMath = $("#inputMath");
   let inputGenInfo = $("#inputGenInfo");
@@ -9,18 +10,17 @@ $(document).ready(function () {
     type: "POST",
     url: "controller/examSettings.php",
     data: {
-      action    : 0
+      action: 0,
     },
     success: function (data) {
       items = JSON.parse(data);
-      console.log(items);
+      // console.log(items);
       try {
         inputEnglish.val(items[0]);
         inputMath.val(items[1]);
         inputGenInfo.val(items[2]);
         inputAbstract.val(items[3]);
-      }
-      catch(err) {
+      } catch (err) {
         Swal.fire({
           title: "Error!",
           icon: "error",
@@ -87,4 +87,80 @@ $("#editExamTotal").on("click", function () {
     inputAbstract.attr("disabled", false);
     editExamTotal.text("Save");
   }
+});
+
+$("#examAddChoices").on("keyup", function () {
+  let choices = $(this).val().split("\n");
+
+  $("#examAddAnswer option").remove();
+  $("#examAddAnswer").append(
+    $("<option>", {
+      value: 0,
+      text: "Select Answer",
+    })
+  );
+
+  for (let i = 0; i < choices.length; i++) {
+    if (choices[i] != "" && choices[i].replace(/^\s+|\s+$/gm,'') != "") {
+      $("#examAddAnswer").append(
+        $("<option>", {
+          value: i + 1,
+          text: choices[i],
+        })
+      );
+    }
+  }
+});
+
+$("#addQuestion").on("click", function () {
+  let category = $("input[name='radioAddCategory']:checked").val();
+  let examAddQuestion = $("#examAddQuestion").val();
+  let examAddChoices = $("#examAddChoices").val().split("\n");
+  let examAddAnswer = $("#examAddAnswer").find(":selected").text();
+
+  if(category != undefined && examAddQuestion != "" && examAddChoices != "" && examAddAnswer != "Select Answer"){
+    Swal.fire({
+      title: "Add Question?",
+      text: "Are you sure you want to add this question to your list?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Add",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: "controller/examSettings.php",
+          data: {
+            action          : 2,
+            category        : category,
+            examAddQuestion : examAddQuestion,
+            examAddChoices  : examAddChoices,
+            examAddAnswer   : examAddAnswer,
+          },
+          success: function (data) {
+              if (data == "Success") {
+              Swal.fire({
+                title: "Success!",
+                icon: "success",
+                html: "Question added successfully",
+              });
+            } else {
+              Swal.fire({
+                title: "Error!",
+                icon: "error",
+                html: data,
+              });
+            }
+          },
+        });
+      }
+    });
+  }else{
+    Swal.fire({
+      title: "Error!",
+      icon: "error",
+      html: "Missing Entries",
+    });
+  }
+  
 });
