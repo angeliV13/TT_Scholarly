@@ -24,7 +24,6 @@
                                     <i class="bi bi-chevron-down ms-auto"></i>
                                 </a>
                             </div>
-
                         </div>
                         <div id="acad_table_view" class="table-responsive nav-content ">
 

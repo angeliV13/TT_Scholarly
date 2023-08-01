@@ -250,6 +250,31 @@ h6 {
   padding: 0 20px 20px 20px;
 }
 
+.max-height-500 {
+  max-height: 500px; /* Adjust the height as per your requirements */
+}
+
+.overflow-auto-x {
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: nowrap;
+  padding-right: 15px;
+}
+
+.card-header.sticky-top {
+  background-color: #ffffff; /* Adjust as needed to match your design */
+  z-index: 1; /* Ensure the title appears above the scrollable content */
+}
+
+.max-height-500 {
+  max-height: 500px; /* Adjust the height as per your requirements */
+  /* overflow: auto; */
+}
+
+.scrollable-container {
+  height: 500px; /* Adjust the height as per your requirements */
+  overflow: auto;
+}
 .card-img-overlay {
   background-color: rgba(255, 255, 255, 0.6);
 }
@@ -1237,6 +1262,13 @@ a {
   display: inline-block;
   /* padding: 8px 16px; */
 }
+
+  .btn-group .btn {
+    height: 50px; /* Set the desired height */
+    width: 50px; /* Set the desired width */
+    /* Add any other styles you want for the buttons */
+  }
+
 
 
 
