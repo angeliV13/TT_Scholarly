@@ -15,7 +15,7 @@
         <section class="section error-404 d-flex flex-column align-items-center justify-content-center">
           <h3 class="text-danger mb-3">Ready?</h3>
           <h2>Take a breathe once started, you need to finish it.</h2>
-          <button class="btn">Start Examination</button>
+          <button class="btn" id="startExam">Start Examination</button>
         </section>
       </div>
     </div>

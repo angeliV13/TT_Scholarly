@@ -1,6 +1,7 @@
 <?php
 
 require("../model/examSettingsModel.php");
+require("../model/basicSetupModel.php");
 
 
 if (isset($_REQUEST['action'])) {
@@ -8,7 +9,7 @@ if (isset($_REQUEST['action'])) {
 
     switch ($action) {
         case 0:
-            echo getExamTotalItems();
+            echo json_encode(getExamTotalItems());
             break;
         case 1:
             $english    = $_POST['english'];
@@ -24,6 +25,9 @@ if (isset($_REQUEST['action'])) {
             $examAddAnswer   = $_POST['examAddAnswer'];
             echo addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnswer);
             break;
+        case 3:
+            echo startExam();
+            break;   
         
     }
 }

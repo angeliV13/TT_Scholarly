@@ -24,6 +24,7 @@ switch($_SESSION['account_type'])
         break;
     case 3:     // Applicant
         echo '<script src="assets/js/upload_assessment.js"></script>';
+        echo '<script src="assets/js/startExam.js"></script>';
         break;
 }
 ?>
