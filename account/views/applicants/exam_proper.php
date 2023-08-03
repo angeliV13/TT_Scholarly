@@ -9,12 +9,13 @@
     </ol>
   </div>
   <!-- End Page Title -->
+
   <div class="card">
-    <div class="align-items-center text-center bg-dark">
-      <h5 class="card-title text-light">Mathematics</h5>
-    </div>
-    <div class="container">
-      <div id="exam_container">
+    <div id="exam_container">
+      <!-- <div class="align-items-center text-center bg-dark">
+        <h5 class="card-title text-light ">Mathematics</h5>
+      </div>
+      <div class="container">
         <div id="question_1">
           <div id="question_title_1" class="pt-4">
             <h5 class="fw-bold"><span class="me-2">(1)</span>
@@ -47,13 +48,12 @@
               </label>
             </div>
           </div>
-          <!-- Next Previous Submit-->
           <div class="py-3">
             <button class="btn btn-warning px-3">Previous</button>
             <button class="btn btn-primary px-4">Next</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </main><!-- End #main -->

@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  let arrayData;
+
   $.ajax({
     type: "POST",
     url: "controller/examSettings.php",
@@ -9,6 +11,10 @@ $(document).ready(function () {
       if (data == "Access Unauthorized") {
         location.href = "index.php";
       } else {
+        // console.log(data);
+        arrayData = JSON.parse(data);
+        console.log(arrayData);
+        $('#exam_container').append(arrayData);
 
       }
     },
@@ -16,3 +22,4 @@ $(document).ready(function () {
 
   
 });
+
