@@ -61,21 +61,22 @@ function addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnsw
 function startExam()
 {
     include("dbconnection.php");
+    session_start();
+
     $questions  = [];
     $examItems  = [];
 
     $ay         = getDefaultAcadYearId();
     $sem        = getDefaultSemesterId();
+    $userId     = $_SESSION['id'];
     $examItems  = getExamTotalItems();
     $questions  = json_encode(getRandomQuestions($examItems));
     $examTotal  = array_sum($examItems);
-
-    $sql = "SELECT * FROM `examination_applicant` WHERE ay_id = '{$ay}' AND sem_id = '{$sem}'";
-    $query = $conn->query($sql) or die("Error ESQ006: " . $conn->error);
-
-    if ($query->num_rows == 0) {
-        $sql = "INSERT INTO `examination_applicant`(`id`, `ay_id`, `sem_id`, `start_exam`, `questions`, `answers`, `points`, `total`, `percentage`) 
-                    VALUES ( 0 , '{$ay}', '{$sem}', 1, '{$questions}', '', 0, {$examTotal}, 0)";
+    $examExists = checkExamExist($ay, $sem, $userId);
+    
+    if ($examExists->num_rows == 0) {
+        $sql = "INSERT INTO `examination_applicant`(`id`, `user_id`, `ay_id`, `sem_id`, `start_exam`, `questions`, `answers`, `points`, `total`, `percentage`) 
+                    VALUES ( 0 , '{$userId}', '{$ay}', '{$sem}', 1, '{$questions}', '', 0, {$examTotal}, 0)";
         $query = $conn->query($sql) or die("Error ESQ006: " . $conn->error);
 
         if ($query) {
@@ -101,9 +102,46 @@ function getRandomQuestions($examItems)
         $query = $conn->query($sql) or die("Error ESQ007: " . $conn->error);
 
         if($query->num_rows > 0){
-            $data[] = $query->fetch_all();
+            while($row = $query->fetch_assoc()){
+                extract($row);
+
+                $data[] = [
+                    $category,
+                    $id,
+                ];
+            }
         }
         
     }
     return $data;
+}
+
+function checkExamExist($ay, $sem, $userId){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM `examination_applicant` WHERE user_id = '{$userId}' AND ay_id = '{$ay}' AND sem_id = '{$sem}'";
+    $query = $conn->query($sql) or die("Error ESQ008: " . $conn->error);
+
+    return $query;
+}
+
+function getExam(){
+    include("dbconnection.php");
+    session_start();
+
+    $questions  = [];
+
+    $ay         = getDefaultAcadYearId();
+    $sem        = getDefaultSemesterId();
+    $userId     = $_SESSION['id'];
+    $examExists = checkExamExist($ay, $sem, $userId);
+
+    if($examExists->num_rows > 0){
+        while($row = $examExists->fetch_assoc()){
+            extract($row);
+        }
+        return json_encode($questions);
+    }else{
+        return 'Access Unauthorized';
+    }
 }

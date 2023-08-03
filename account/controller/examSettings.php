@@ -28,6 +28,9 @@ if (isset($_REQUEST['action'])) {
         case 3:
             echo startExam();
             break;   
+        case 4:
+            echo getExam();
+            break;
         
     }
 }

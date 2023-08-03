@@ -16,11 +16,12 @@ $("#startExam").click(function (e) {
         },
         success: function (data) {
           if (data == "Success") {
-            Swal.fire({
-              title: "Success!",
-              icon: "success",
-              html: "Upload Success",
-            });
+            location.href = "index.php?nav=examination_proper";
+            // Swal.fire({
+            //   title: "Success!",
+            //   icon: "success",
+            //   html: "Upload Success",
+            // });
           } else {
             console.log(data);
             Swal.fire({

@@ -25,6 +25,11 @@ switch($_SESSION['account_type'])
     case 3:     // Applicant
         echo '<script src="assets/js/upload_assessment.js"></script>';
         echo '<script src="assets/js/startExam.js"></script>';
+        if(isset($_GET['nav'])){
+            if($_GET['nav'] == 'examination_proper'){
+                echo '<script src="assets/js/examination_proper.js"></script>';
+            }
+        }
         break;
 }
 ?>
