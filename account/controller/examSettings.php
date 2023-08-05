@@ -31,6 +31,14 @@ if (isset($_REQUEST['action'])) {
         case 4:
             echo getExam();
             break;
+        case 5:
+            $questionArrayValue = $_POST['questionArrayValue'] - 1;
+            $questionAnswer     = $_POST['questionAnswer'];
+            echo saveExam($questionArrayValue, $questionAnswer);
+            break;
+        case 6:
+            echo submitExam();
+            break;
         
     }
 }

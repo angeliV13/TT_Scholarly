@@ -11,7 +11,8 @@
   <!-- End Page Title -->
 
   <div class="card">
-    <div id="exam_container">
+
+    <form id="exam_container">
       <!-- <div class="align-items-center text-center bg-dark">
         <h5 class="card-title text-light ">Mathematics</h5>
       </div>
@@ -54,6 +55,8 @@
           </div>
         </div>
       </div> -->
-    </div>
-  </div>
+      
+    </form>
+    
+  </div><button id="submitExam" class="btn btn-success d-none" type="button" >Submit Examination</button>
 </main><!-- End #main -->
