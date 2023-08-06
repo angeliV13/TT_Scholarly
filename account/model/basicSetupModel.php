@@ -92,7 +92,7 @@ function getAcadYearTable()
         {
             extract($row);
 
-            $button =   '<div class="btn-group d-flex align-content-center">
+            $button =   '<div class="row mx-auto ">
                             <a href="#" class="col-6 btn btn-warning btn-sm" onclick="defaultAY('. $from_ay .')">Make Default</a>
                             <a href="#" class="col-6 btn btn-danger btn-sm" onclick="deleteAY('. $from_ay .')">Delete</a>
                         </div>';

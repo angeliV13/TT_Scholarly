@@ -20,27 +20,27 @@
             <a href="index.php?nav=new-applicants">
               <i class="bi bi-circle"></i><span><Label>List of New Applicants</Label></span>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="index.php?nav=interview">
               <i class="bi bi-circle"></i><span>For Interview</span>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="index.php?nav=assessment">
               <i class="bi bi-circle"></i><span>For Assessment</span>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="index.php?nav=examination ">
               <i class="bi bi-circle"></i><span>For Qualification Examination</span>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="index.php?nav=removed-applicants ">
               <i class="bi bi-circle"></i><span>List of Removed Applicants</span>
             </a>
-          </li> 
+          </li>
         </ul>
       </li><!-- Applicants Nav -->
 
@@ -54,22 +54,22 @@
             <a href="index.php?nav=beneficiaries">
               <i class="bi bi-circle"></i><span>List of Beneficiaries</span>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="index.php?nav=bene-assessment">
               <i class="bi bi-circle"></i><span>For Assessment</span>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="index.php?nav=bene-renewal">
               <i class="bi bi-circle"></i><span>For Renewal</span>
             </a>
-          </li> 
+          </li>
           <li>
             <a href="index.php?nav=removed-bene">
               <i class="bi bi-circle"></i><span>Removed Beneficiaries</span>
             </a>
-          </li> 
+          </li>
         </ul>
       </li><!-- End Beneficiaries Nav -->
 
@@ -139,13 +139,26 @@
         </ul>
       </li><!-- End Reports Nav -->
 
-      <!-- Start Account Management Nav -->
+      <!-- Basic Setup Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php?nav=tts_settings">
-          <i class="ri-settings-line"></i><span>Basic Setup</span>
+        <a class="nav-link collapsed" data-bs-target="#basicSetup-nav" data-bs-toggle="collapse" href=" ">
+          <i class="ri-door-lock-line"></i><span>Basic Setup</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="basicSetup-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a class="nav-link collapsed" href="index.php?nav=tts_settings">
+              <i class="ri-settings-line"></i><span>Settings</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link collapsed" href="index.php?nav=tts_indicators">
+              <i class="ri-settings-line"></i><span>Indicators</span>
+            </a>
+          </li>
+        </ul>
 
-      </li><!-- End Reports Nav -->
+
+      </li><!-- End Basic Setup Nav -->
 
       <li class="nav-heading">Account Information</li>
       <li class="nav-item">

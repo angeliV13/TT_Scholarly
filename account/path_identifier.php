@@ -162,7 +162,7 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'tts_settings':
-                                return 'views/admin/basic_setup.php';
+                                return 'views/admin/basic_settings.php';
 
 
                         default:

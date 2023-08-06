@@ -4,7 +4,8 @@
       <h1>Basic Setup</h1>
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Basic Setup</li>
+          <li class="breadcrumb-item">Basic Setup</li>
+          <li class="breadcrumb-item active">Settings</li>
         </ol>
     </div>
     <!-- End Page Title -->
