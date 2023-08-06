@@ -6,8 +6,7 @@ function get_path($lv_path, $type = '99')
 {
         if ($type == 0)         //Super Admin
         {                       //NOT FINAL
-                switch ($lv_path)
-                {
+                switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
@@ -76,7 +75,7 @@ function get_path($lv_path, $type = '99')
 
                         case 'tts_settings':
                                 return 'maintenance.php';
-                               
+
                         default:
                                 return 'error.php';
                 }
@@ -85,14 +84,13 @@ function get_path($lv_path, $type = '99')
 
         if ($type == 1)         //Admin
         {
-                switch ($lv_path)
-                {
+                switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
                         case 'pages-contact':
                                 return 'pages-contact.php';
-                       
-                        //      Applicants Section
+
+                                //      Applicants Section
                         case 'new-applicants':
                                 return 'views/admin/applicant_new.php';
 
@@ -165,14 +163,19 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/basic_settings.php';
 
 
+                        case 'tts_indicators_ea':
+                                return 'views/admin/basic_indicators_ea.php';
+
+                                case 'tts_indicators_sc':
+                                        return 'views/admin/basic_indicators_sc.php';
+
+
                         default:
                                 return 'error.php';
                 }
-        }
-        elseif ($type == 2)     //Beneficiaries        
+        } elseif ($type == 2)     //Beneficiaries        
         {
-                switch ($lv_path)
-                {
+                switch ($lv_path) {
 
 
                         case 'dashboard':
@@ -202,11 +205,9 @@ function get_path($lv_path, $type = '99')
                         default:
                                 return 'error.php';
                 }
-        }
-        elseif ($type == 3)     //Applicant
+        } elseif ($type == 3)     //Applicant
         {
-                switch ($lv_path)
-                {
+                switch ($lv_path) {
 
 
                         case 'dashboard_applicant':
@@ -223,7 +224,7 @@ function get_path($lv_path, $type = '99')
 
                         case 'examination':
                                 return 'views/applicants/start_exam.php';
-                        
+
                         case 'examination_proper':
                                 return 'views/applicants/exam_proper.php';
 
@@ -237,19 +238,15 @@ function get_path($lv_path, $type = '99')
 
 function get_sidebar($type, $access_level = 0)
 {
-        switch ($type)
-        {
+        switch ($type) {
                 case 0:
                         return 'views/sidebar/super_admin.php';
 
 
                 case 1:
-                        if ($access_level == 1)
-                        {
+                        if ($access_level == 1) {
                                 return 'views/sidebar/semi_super_admin.php';
-                        }
-                        else
-                        {
+                        } else {
                                 return 'views/sidebar/admin.php';
                         }
                 case 2:
@@ -275,8 +272,3 @@ function get_title($page = 'NA')
         // }
         return 'Thrive Thomasino Scholarly';
 }
-
-
-
-
-

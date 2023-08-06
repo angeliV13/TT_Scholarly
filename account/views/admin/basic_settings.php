@@ -1,7 +1,7 @@
 <main id="main" class="main">
     <!-- Start of Page Title -->
     <div class="pagetitle">
-      <h1>Basic Setup</h1>
+      <h1>Settings</h1>
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item">Basic Setup</li>
@@ -52,7 +52,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title">Set Semester</h5>
                             <div class="d-flex align-items-center">
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <div class="btn-group-toggle" data-toggle="buttons">
                                     <input type="radio" class="btn-check" name="semOptions" id="sem1" value="1" autocomplete="off">
                                     <label class="btn btn-outline-danger" for="sem1">1st Semester</label>
 

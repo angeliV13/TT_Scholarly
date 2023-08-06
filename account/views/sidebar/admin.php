@@ -151,8 +151,13 @@
             </a>
           </li>
           <li>
-            <a class="nav-link collapsed" href="index.php?nav=tts_indicators">
-              <i class="ri-settings-line"></i><span>Indicators</span>
+            <a class="nav-link collapsed" href="index.php?nav=tts_indicators_ea">
+              <i class="ri-settings-line"></i><span>Educ Assistance Indicators</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link collapsed" href="index.php?nav=tts_indicators_sc">
+              <i class="ri-settings-line"></i><span>Full Scholar Indicators</span>
             </a>
           </li>
         </ul>
