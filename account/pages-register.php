@@ -3,7 +3,7 @@
 
 // Getting the Path
 include('path_identifier.php');
-
+include('global_variables.php');
 
 $title = get_title(1);
 
@@ -52,7 +52,7 @@ include('includes/main.php');
                   </div>
 
 
-                  <form class="row g-3" novalidate id="register">
+                  <form class="row g-3" novalidate id="register" enctype="multipart/form-data">
                     <div class="col-md-3 position-relative">
                       <label for="inputFirstName" class="form-label">First name</label>
                       <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" name="First Name">
@@ -87,12 +87,9 @@ include('includes/main.php');
                       <label for="inputReligion" class="form-label">Religion</label>
                       <select class="form-select" id="inputReligion" name="Religion">
                         <option selected disabled value="">Choose...</option>
-                        <option value="0">Roman Catholic</option>
-                        <option value="1">Islam</option>
-                        <option value="2">Iglesia ni Cristo</option>
-                        <option value="3">Born Again</option>
-                        <option value="4">Others</option>
-                        <option value="5">Prefer not to say</option>
+                        <?php foreach ($religionArr as $key => $value) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                      <?php endforeach; ?>
                       </select>
                       <div class="invalid-tooltip">
                         Please select a Religion.
@@ -104,11 +101,9 @@ include('includes/main.php');
                       <label for="inputGender" class="form-label">Gender</label>
                       <select class="form-select" id="inputGender" name="Gender">
                         <option selected disabled value="">Choose...</option>
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
-                        <option value="2">Nonbinary</option>
-                        <option value="3">Others</option>
-                        <option value="4">Prefer not to say</option>
+                        <?php foreach ($genderArr as $key => $value) : ?>
+                          <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                        <?php endforeach; ?>
                       </select>
                       <div class="invalid-tooltip">
                         Please select a valid Gender.
@@ -120,11 +115,9 @@ include('includes/main.php');
                       <label for="inputCivilStatus" class="form-label">Civil Status</label>
                       <select class="form-select" id="inputCivilStatus" name="Civil Status">
                         <option selected disabled value="">Choose...</option>
-                        <option value="0">Single</option>
-                        <option value="1">Married</option>
-                        <option value="2">Widowed</option>
-                        <option value="3">Separated</option>
-                        <option value="4">Prefer not to say</option>
+                        <?php foreach ($civilArr as $key => $value) : ?>
+                          <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                        <?php endforeach; ?>
                       </select>
                       <div class="invalid-tooltip">
                         Please select a valid Civil Status.
@@ -190,6 +183,27 @@ include('includes/main.php');
                         Please input your Zip Code.
                       </div>
                     </div>
+
+                    <div class="col-6">
+                      <label for="fbName" class="form-label mr-2">Facebook Name</label> 
+                      <input type="checkbox" name="sameAsName" id="sameAsName" class="form-check-input" disabled>
+                      <label for="sameAsName" class="form-check-label">Same as Full Name</label>
+                      <input type="text" class="form-control" id="fbName">
+                      <div class="invalid-feedback">Please enter a valid Facebook Name!</div>
+                    </div>
+
+                    <div class="col-6">
+                      <label for="fbUrl" class="form-label">Facebook URL</label>
+                      <input type="url" name="Facebook URL" class="form-control" id="fbUrl">
+                      <div class="invalid-feedback">Please enter a valid Facebook URL!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="fbImg" class="form-label">Facebook Profile Image</label>
+                      <input type="file" name="Facebook Image" class="form-control" id="fbImg">
+                      <div class="invalid-feedback">Please enter a valid Profile Image!</div>
+                    </div>
+
                     <div class="col-6">
                       <label for="username" class="form-label">Username</label>
                       <input type="text" name="Username" class="form-control" id="username">

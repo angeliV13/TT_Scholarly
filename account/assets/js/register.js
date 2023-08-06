@@ -51,6 +51,23 @@ let my_handlers = {
 
   // Register Account
 
+  // if firstName and lastName is not empty, then make the sameAsName clickable
+  $("#inputFirstName, #inputLastName").on("keyup", function() {
+    if ($("#inputFirstName").val() !== "" && $("#inputLastName").val() !== "") {
+      $("#sameAsName").removeAttr("disabled");
+    } else {
+      $("#sameAsName").attr("disabled", "disabled");
+    }
+  })
+
+  $("#sameAsName").on("click", function() {
+    if ($(this).is(":checked")) {
+      $("#fbName").val($("#inputFirstName").val() + " " + $("#inputMiddleName").val() + " " + $("#inputLastName").val());
+    } else {
+      $("#fbName").val("");
+    }
+  })
+
   $("#register").on("submit", function(e) {
     e.preventDefault();
 
@@ -92,7 +109,7 @@ let my_handlers = {
       returnVal: "text"
     });
     let email = check_error(document.getElementById("yourEmail"), options = {
-      type: "input",
+      type: "email",
       verifyFlag: 1,
       regex: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
       text: "Email"
@@ -104,6 +121,22 @@ let my_handlers = {
     let checkFlag = check_error(arr, options = {
       type: "input",
       verifyFlag: 1,
+    });
+
+    let fbName = check_error(document.getElementById("fbName"));
+    let facebookProfileURLRegex = /^(https?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
+    let fbUrl = check_error(document.getElementById("fbUrl"), options = {
+      type: "input",
+      verifyFlag: 1,
+      regex: facebookProfileURLRegex,
+      text: "Facebook Profile URL"
+    });
+
+    let fbImg = check_error(document.getElementById("fbImg"), options = {
+      type: "file",
+      verifyFlag: 1,
+      condition: "jpg,png,jpeg",
+      text: "Facebook Profile Picture"
     });
 
     let password = checkFlag !== undefined ? checkFlag : undefined;
@@ -126,32 +159,38 @@ let my_handlers = {
       returnVal: "text"
     });
 
-    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined) {
+    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined) {
+      let formData = new FormData();
+      formData.append("firstName", firstName);
+      formData.append("middleName", middleName);
+      formData.append("lastName", lastName);
+      formData.append("suffix", suffix);
+      formData.append("birthDate", birthDate);
+      formData.append("birthPlace", birthPlace);
+      formData.append("religion", religion);
+      formData.append("gender", gender);
+      formData.append("civilStatus", civilStatus);
+      formData.append("contactNo", contactNo);
+      formData.append("address", address);
+      formData.append("region", region);
+      formData.append("provice", provice);
+      formData.append("city", city);
+      formData.append("barangay", barangay);
+      formData.append("zipCode", zipCode);
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("fbName", fbName);
+      formData.append("fbUrl", fbUrl);
+      formData.append("fbImg", fbImg);
+      formData.append("action", 2);
+
       $.ajax({
         url: "controller/accountHandler.php",
         type: "POST",
-        data: {
-          firstName: firstName,
-          middleName: middleName,
-          lastName: lastName,
-          suffix: suffix,
-          birthDate: birthDate,
-          birthPlace: birthPlace,
-          religion: religion,
-          gender: gender,
-          civilStatus: civilStatus,
-          contactNo: contactNo,
-          address: address,
-          region: region,
-          provice: provice,
-          city: city,
-          barangay: barangay,
-          zipCode: zipCode,
-          username: username,
-          email: email,
-          password: password,
-          action: 2
-        },
+        data: formData,
+        processData: false,
+        contentType: false,
         beforeSend: function() {
           Swal.fire({
             title: 'Please wait...',
@@ -165,6 +204,7 @@ let my_handlers = {
         },
         success: function(response) {
           swal.close();
+          console.log(response);
           if (response == "Success") {
             Swal.fire({
               icon: 'success',

@@ -139,7 +139,7 @@ function account_credentials($type)
 
 function sms_verification($contact, $msg) // function that sends an OTP to the user's contact number
 {
-    require_once('../../vendor/autoload.php');
+    require_once('../vendor/autoload.php');
 
 
     include("dbconnection.php");
@@ -153,6 +153,10 @@ function sms_verification($contact, $msg) // function that sends an OTP to the u
     $sid = $row['sid'];
     $token = $row['token'];
     $twilio_number = $row['number'];
+
+    echo $sid . "<br>";
+    echo $token . "<br>";
+    echo $twilio_number . "<br>";
 
 
     $client = new Twilio\Rest\Client($sid, $token);
@@ -342,12 +346,9 @@ function get_user_id_type($type)
     // 5 - All Registered Users
     // 6 - All Users
 
-
     include("dbconnection.php");
 
-
     $data = [];
-
 
     switch ($type)
     {
@@ -396,9 +397,7 @@ function get_education_courses($type)
 {
     include("dbconnection.php");
 
-
     $data = [];
-
 
     $sql = "SELECT id, name FROM education_courses WHERE type = " . $type;
     $query = $conn->query($sql);
@@ -412,8 +411,57 @@ function get_education_courses($type)
         }
     }
 
+    return $data;
+}
+
+function get_school()
+{
+    include ("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SELECT * FROM school";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data[] = $row;
+        }
+    }
 
     return $data;
+}
+
+function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'queryPath' => '', 'errorValidation' => ['0' => 'Invalid File Type']])
+{
+    if ($file != "")
+    {
+        $fileName = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+        $fileExt = explode('.', $fileName);
+        $fileActualExt = strtolower(end($fileExt));
+
+        if (in_array($fileActualExt, $options['type']))
+        {
+            $fileNewName = uniqid('', true) . "." . $fileActualExt;
+            $fileDestination = $mainPath . $fileNewName;
+            $fileDestinationQuery = $viewPath . $fileNewName;
+            if (move_uploaded_file($fileTmpName, $fileDestinationQuery))
+            {
+                return ['success' => true, 'path' => $fileDestination];
+            }
+            else
+            {
+                return ['success' => false, 'error' => 'Error LC001: File Upload Failed'];
+            }
+        }
+        else
+        {
+            return $options['errorValidation'][0];
+        }
+    }
 }
 
 

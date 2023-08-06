@@ -33,10 +33,14 @@ $notification = show_notification();
 $notifCount = $notification['count'];
 $notifBody = $notification['body']; 
 
+$school = get_school();
+
 if (isset($_GET['notif']))
 {
     update_notification($_GET['notif'], $_SESSION['id']);
 }
+
+// sms_verification('+639606880520', 'Sample Message');
 
 ?>
 
@@ -58,7 +62,7 @@ if (isset($_GET['notif']))
   <?php include('includes/libraries/inside_javascript.php') ?>
   <script src="assets/js/table.js"></script>
 
-  <?php if ($checkNav == "profile-bene"): ?>
+  <?php if ($checkNav == "profile-bene" OR in_array($_SESSION['account_type'], ['2', '3'])): ?>
 
     <script src="assets/js/editProfile.js"></script>
     <script>

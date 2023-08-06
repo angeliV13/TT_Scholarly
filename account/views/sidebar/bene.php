@@ -10,38 +10,35 @@
         </a>
       </li><!-- End Dashboard Nav -->
       
-      <?php 
-      $scholar_type = 2;
-      $scholarType = 1 + $scholar_type;
+      <?php $scholar_type = 2; $scholarType = 1 + $scholar_type; ?>
 
-      if($assessmentAccess[$scholarType] == 1 &&
-          $assessmentAccess[0] <= $dateNow &&
-          $assessmentAccess[1] >= $dateNow){
-      ?>
-      <!-- Start Assessment Requirements Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
-          <i class="bi bi-person"></i>
-          <span>Assessment</span>
-        </a>
-      </li><!-- Applicants Nav -->
-      <?php
-      }
+      <?php if ($assessmentAccess != null): ?>
 
-      if($renewalAccess[$scholarType] == 1 &&
-          $renewalAccess[0] <= $dateNow &&
-          $renewalAccess[1] >= $dateNow){
-      ?>
+        <?php if ($assessmentAccess[$scholarType] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow) : ?>
+          <!-- Start Assessment Requirements Nav -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
+              <i class="bi bi-person"></i>
+              <span>Assessment</span>
+            </a>
+          </li><!-- Applicants Nav -->
+        <?php endif; ?>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php?nav=renewal-bene">
-          <i class="bi bi-person"></i>
-          <span>Renewal</span>
-        </a>
-      </li><!-- Applicants Nav -->
-      <?php
-      }
-      ?>
+      <?php endif; ?>
+
+      <?php if ($renewalAccess != null) : ?>
+
+        <?php if ($renewalAccess[$scholarType] == 1 && $renewalAccess[0] <= $dateNow && $renewalAccess[1] >= $dateNow) : ?>
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="index.php?nav=renewal-bene">
+              <i class="bi bi-person"></i>
+              <span>Renewal</span>
+            </a>
+          </li><!-- Applicants Nav -->
+        <?php endif; ?>
+
+      <?php endif; ?>
 
     </ul>
 

@@ -45,7 +45,14 @@ if (isset($_REQUEST['action']))
             'username'          => isset($_POST['username']) ? $_POST['username'] : '',
             'email'             => isset($_POST['email']) ? $_POST['email'] : '',
             'password'          => isset($_POST['password']) ? $_POST['password'] : '',
+            'fbName'            => isset($_POST['fbName']) ? $_POST['fbName'] : '',
+            'fbUrl'             => isset($_POST['fbUrl']) ? $_POST['fbUrl'] : '',
+            'fbImg'             => isset($_FILES['fbImg']) ? $_FILES['fbImg'] : NULL,
         ];
+
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
 
 
         echo registerAccount($data);

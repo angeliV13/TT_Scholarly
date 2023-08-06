@@ -37,6 +37,8 @@ function check_error(
           return handleNumberType(input, regex, text, conditionCheck);
         } else if (type === "date") {
           return handleDateType(input, condition, conditionCheck);
+        } else if (type === "file") {
+          return fileCheck(input, condition);
         } else {
           return handleDefaultType(input, regex, text);
         }
@@ -48,6 +50,27 @@ function check_error(
         }
       }
     }
+  }
+}
+
+function fileCheck(input, condition){
+  const conditionList = (condition.includes(",")) ? condition.split(",") : condition;
+  const fileType = input.value.split(".").pop();
+
+  if (conditionList.includes(fileType)){
+    // console.log(input.files[0]);
+    return input.files[0];
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: `File type must be ${condition}!`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        input.focus();
+        
+      }
+    });
   }
 }
 
