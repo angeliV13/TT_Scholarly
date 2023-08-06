@@ -223,6 +223,9 @@ function get_path($lv_path, $type = '99')
 
                         case 'examination':
                                 return 'views/applicants/start_exam.php';
+                        
+                        case 'examination_proper':
+                                return 'views/applicants/exam_proper.php';
 
 
                         default:
