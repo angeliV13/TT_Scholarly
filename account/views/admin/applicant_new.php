@@ -9,78 +9,54 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title">List of Applicants</h5>
                             <div class="d-flex align-items-center">
-                                <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm">
-                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Set Filter
-                                </button>
+                                <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm"> <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Set Filter </button>
                             </div>
                         </div>
                         <div class="row mb-5  justify-content-between">
                             <form class="row position-relative">
                                 <!-- Filter options -->
-                                <!-- Scholarship Type -->
-                                <label for="inputScholarType" class="col-sm-2 col-form-label">
+                                <!-- Scholarship Type --> <label for="inputScholarType" class="col-sm-2 col-form-label">
                                     <h6 class="font-bold">Scholarship Type:</h6>
                                 </label>
-                                <div class="col-sm-4" id="">
-                                    <select class="form-select" id="inputScholarType">
+                                <div class="col-sm-4" id=""> <select class="form-select" id="inputScholarType">
                                         <option selected disabled value="">Choose</option>
                                         <option>Educational Assistance Program</option>
                                         <option>Full Scholarship Program</option>
-                                    </select>
-                                </div>
-
-                                <!-- Education Level -->
-                                <label for="inputEducationLevel" class="col-sm-2 col-form-label">
+                                    </select> </div> <!-- Education Level --> <label for="inputEducationLevel" class="col-sm-2 col-form-label">
                                     <h6 class="font-bold">Education Level:</h6>
                                 </label>
-                                <div class="col-sm-4 ">
-                                    <select class="form-select" id="inputEducationLevel">
+                                <div class="col-sm-4 "> <select class="form-select" id="inputEducationLevel">
                                         <option selected disabled value="">Choose</option>
                                         <option>Senior High School</option>
                                         <option>College - Private</option>
                                         <option>College - Public</option>
-                                    </select>
-                                </div>
-
-                                <label for="inputSchool" class="col-sm-2 col-form-label mt-4">
+                                    </select> </div> <label for="inputSchool" class="col-sm-2 col-form-label mt-4">
                                     <h6 class="font-bold">Name of School</h6>
                                 </label>
-                                <div class="col-sm-4 mt-4">
-                                    <select class="form-select" id="inputSchool" onchange="updateYearLevelOptions()">
+                                <div class="col-sm-4 mt-4"> <select class="form-select" id="inputSchool" onchange="updateYearLevelOptions()">
                                         <option selected disabled value="">Choose</option>
                                         <option>BSU</option>
                                         <option>FAITH</option>
-                                    </select>
-                                </div>
-
-                                <!-- Year Level -->
-                                <label for="inputYearLevel" class="mt-4 col-sm-2 col-form-label">
+                                    </select> </div> <!-- Year Level --> <label for="inputYearLevel" class="mt-4 col-sm-2 col-form-label">
                                     <h6 class="font-bold">Year Level:</h6>
                                 </label>
-                                <div id="yearLevelContainer" class="col-sm-4 mt-4">
-                                    <select class="form-select" id="inputYearLevel">
+                                <div id="yearLevelContainer" class="col-sm-4 mt-4"> <select class="form-select" id="inputYearLevel">
                                         <option selected disabled value="">Choose</option>
-                                    </select>
-                                </div>
+                                    </select> </div>
                             </form>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-        <!-- TAB FOR COLLEGE LEVEL-->
+        </div> <!-- TAB FOR COLLEGE LEVEL-->
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title">College</h5>
                     <div class="d-flex align-items-center">
-                        <button class="btn btn-sm btn-danger" onclick="window.print()">
-                            <i class="bi bi-printer"></i> Print List
-                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="window.print()"> <i class="bi bi-printer"></i> Print List </button>
                         <a class="collapsed mx-3" data-bs-target="#shs_table_view" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-chevron-down ms-auto"></i>
-                        </a>
+                            <i class="bi bi-chevron-down ms-auto"></i> </a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -99,32 +75,6 @@
                                 <th>Barangay</th>
                                 <th>Action</th>
                             </tr>
-                            <!-- <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr> -->
                         </thead>
                         <tbody>
                             <tr>
@@ -140,12 +90,14 @@
                                 <td>San Bartolome</td>
                                 <td>
                                     <div class="btn-group-vertical d-flex">
+                                        <!--CHECK PROFILE BUTTON-->
                                         <button id="viewProfile" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewProfileModal">Check Profile</button>
                                         <div class="modal fade" id="viewProfileModal" tabindex="-1">
                                             <div class="modal-dialog modal-dialog-scrollable modal-fullscreen modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title d-flex justify-content-between align-items-center">PROFILE</h5>
+                                                        <h5 class="modal-title d-flex justify-content-between align-items-center">
+                                                            PROFILE</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -157,164 +109,132 @@
                                                                         <div class="d-flex justify-content-between align-items-center">
                                                                             <h5 class="card-title">Profile Checking</h5>
                                                                             <div class="d-flex align-items-center">
-                                                                                <!-- <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm">
-                                                                                <i class="fas fa-question fa-sm text-white-50 mr-2"></i> Year
-                                                                            </button> -->
-                                                                                <a class="collapsed mx-3" data-bs-target="#others_form_view" data-bs-toggle="collapse" href="#">
-                                                                                    <i class="bi bi-chevron-down ms-auto"></i>
-                                                                                </a>
                                                                             </div>
                                                                         </div>
                                                                         <!--SUB FORMS-->
-                                                                        <div id="others_form_view" class="max-height-500 overflow-auto-x">
+                                                                        <div class="overflow-auto-x" style="height: 100%">
                                                                             <!-- Multi Columns Form -->
                                                                             <form class="row g-3 py-2">
-                                                                                <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">Applicant's other Information</h4>
-                                                                                <hr class="my-2">
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputText" class="form-label">Income</label>
-                                                                                    <input type="text" class="form-control" />
+                                                                                <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
+                                                                                    Applicant's other Information
+                                                                                </h4>
+                                                                                <hr class="my-3">
+                                                                                <div class="row mb-3">
+                                                                                    <label for="inputIncome" class="col-sm-3 col-form-label">Income:</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <div class="input-group mb-2">
+                                                                                            <input type="inputIncome" class="form-control" placeholder="Applicant's Income" style="width: 80%" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                                                                            <input type="inputIncomepoints" class="col form-control" />
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputText" class="form-label">Points</label>
-                                                                                    <input type="text" class="form-control" />
+                                                                                <div class="row mb-3">
+                                                                                    <label for="inputGrade" class="col-sm-3 col-form-label">Grades (GWA):</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <div class="input-group mb-2">
+                                                                                            <input type="inputGradepoints" class="form-control" placeholder="Applicant's General Weightd Average" style="width: 80%" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                                                                            <input type="inputGradepoints" class="col form-control" />
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputText" class="form-label">Grade</label>
-                                                                                    <input type="text" class="form-control" />
+                                                                                <div class="row mb-3">
+                                                                                    <label for="inputSchooltype" class="col-sm-3 col-form-label">School Type:</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <div class="input-group mb-2">
+                                                                                            <input type="inputSchooltype" class="form-control" placeholder="School Type" style="width: 80%" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                                                                            <input type="inputSchooltype" class="col form-control" />
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputText" class="form-label">Points</label>
-                                                                                    <input type="text" class="form-control" />
+                                                                                <div class="row mb-3">
+                                                                                    <label for="inputResidency" class="col-sm-3 col-form-label">Residency:</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <div class="input-group mb-2">
+                                                                                            <input type="inputPointsResidency" class="form-control" placeholder="Applicant's Year/s of Residency" style="width: 80%" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                                                                            <input type="inputPointsResidency" class="col form-control" />
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputText" class="form-label">School Type</label>
-                                                                                    <input type="text" class="form-control" />
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputText" class="form-label">Points</label>
-                                                                                    <input type="text" class="form-control" />
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputText" class="form-label">Residency</label>
-                                                                                    <input type="text" class="form-control" />
-                                                                                </div>
-                                                                                <div class="col-md-6 my-3">
-                                                                                    <label for="inputText" class="form-label">Points</label>
-                                                                                    <input type="text" class="form-control" />
-                                                                                </div>
-
                                                                                 <div class="d-flex justify-content-between align-items-center">
-                                                                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">Applicant's additional Information</h4>
+                                                                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
+                                                                                        Applicant's additional
+                                                                                        Information</h4>
                                                                                 </div>
                                                                                 <hr class="my-2">
-                                                                                <div class="d-flex col-md-6">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        Applicant PWD
-                                                                                    </label>
+                                                                                <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="applicantPwdCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="applicantPwdCheckBox"> Applicant PWD </label>
                                                                                 </div>
-                                                                                <div class="d-flex col-md-6">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        Self-Supporting
-                                                                                    </label>
+                                                                                <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="selfSupportingCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="selfSupportingCheckBox"> Self-Supporting </label>
                                                                                 </div>
-                                                                                <div class="d-flex col-md-6">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        Continuing Student
-                                                                                    </label>
+                                                                                <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="continuingStudentCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="continuingStudentCheckBox"> Continuing Student </label>
                                                                                 </div>
-
                                                                                 <div class="d-flex justify-content-between align-items-center">
-                                                                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">Family's additional Information</h4>
+                                                                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
+                                                                                        Family's additional
+                                                                                        Information</h4>
                                                                                 </div>
                                                                                 <hr class="my-2">
-
-                                                                                <div class="d-flex">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        Parents/Other family members PWD
-                                                                                    </label>
+                                                                                <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="parFamPwdCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="parFamPwdCheckBox"> Parents/Other family members PWD </label>
                                                                                 </div>
-                                                                                <div class="d-flex ">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        Single Parent
-                                                                                    </label>
+                                                                                <div class="d-flex "> <input class="form-check-input" type="checkbox" value="" id="singleParentCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="singleParentCheckBox"> Single Parent </label>
                                                                                 </div>
-                                                                                <div class="d-flex col-md-6">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        Parent Deceased
-                                                                                    </label>
+                                                                                <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="parentDeceasedCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="parentDeceasedCheckBox"> Parent Deceased </label>
                                                                                 </div>
-
                                                                                 <div class="d-flex justify-content-between align-items-center">
-                                                                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text ">Other Information</h4>
+                                                                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text ">
+                                                                                        Other Information</h4>
                                                                                 </div>
                                                                                 <hr class="my-2">
-                                                                                <div class="d-flex">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        City Employee Immediate Family Member <br>(Job Order)</br>
-                                                                                    </label>
+                                                                                <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="jobOrderCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="jobOrderCheckBox"> City Employee Immediate Family Member <br>(Job Order)</br> </label>
                                                                                 </div>
-                                                                                <div class="d-flex">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentShsCheckBox">
-                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                        Informed thru/Recommended by <br> Mayor/Vice Mayor/Councilor </br>
-                                                                                    </label>
+                                                                                <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="recommendedCheckBox">
+                                                                                    <label class="mx-2 form-check-label" for="recommendedCheckBox"> Informed thru/Recommended by <br> Mayor/Vice Mayor/Councilor </br> </label>
                                                                                 </div>
                                                                                 <div class="column">
                                                                                     <div class="card">
                                                                                         <div class="card-body ">
                                                                                             <div class="d-flex justify-content-between align-items-center">
-                                                                                                <h5 class="card-title">Remarks</h5>
+                                                                                                <h5 class="card-title">
+                                                                                                    Remarks</h5>
                                                                                                 <div class="d-flex align-items-center d-grid gap-2">
                                                                                                     <div class="form-check form-switch">
-                                                                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                        <label class="form-check-label" for="flexSwitchCheckDefault">Not Applicable</label>
+                                                                                                        <input class="form-check-input" type="checkbox" id="notAppRemarkCheckDefault">
+                                                                                                        <label class="form-check-label" for="notAppRemarkCheckDefault">Not Applicable</label>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <!-- Quill Editor Default -->
                                                                                             <div class="quill-editor-default" style="height: 300px;">
                                                                                                 <p>Hello World!</p>
-                                                                                                <p>This is Quill <strong>default</strong> editor</p>
+                                                                                                <p>This is Quill
+                                                                                                    <strong>default</strong>
+                                                                                                    editor
+                                                                                                </p>
                                                                                             </div>
                                                                                             <!-- End Quill Editor Default -->
                                                                                             <div class="d-flex align-items-center d-grid my-3">
                                                                                                 <div class="d-flex col-md-7">
-                                                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                                        For Qualification Exam
-                                                                                                    </label>
+                                                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="forQualiExamDefault1">
+                                                                                                    <label class="mx-2 form-check-label" for="forQualiExamCheckBox"> For Qualification Exam </label>
                                                                                                 </div>
                                                                                                 <div class="d-flex col-md-12">
-                                                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                                                                    <label class="mx-2 form-check-label" for="assessmentShsCheckBox">
-                                                                                                        For Interview
-                                                                                                    </label>
+                                                                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="forInterviewDefault2">
+                                                                                                    <label class="mx-2 form-check-label" for="forInterviewCheckBox"> For Interview </label>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <!-- <div class="card-footer d-grid gap-2 d-flex justify-content-end">
-                                                                                            <button id="viewRequirements" type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">Save</button>
-                                                                                            <button id="viewRequirements" type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal"></button>
-                                                                                        </div> -->
                                                                                     </div>
                                                                                 </div>
-
-                                                                            </form><!-- End Multi Columns Form -->
+                                                                            </form>
+                                                                            <!-- End Multi Columns Form -->
                                                                         </div>
                                                                     </div>
-                                                                    <div class="card-footer d-grid gap-2 d-flex justify-content-center">
-                                                                        <button type="button" class="btn btn-primary btn-sm">Save</button>
-                                                                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
-                                                                    </div>
-
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-8">
@@ -324,12 +244,18 @@
                                                                             <div class="col col-lg-500 col-xl-500">
                                                                                 <div class="card">
                                                                                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
-                                                                                        <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                                                                                        <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height:300px">
                                                                                             <img src="assets/img/profile-img.jpg" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                                                                                         </div>
-                                                                                        <div class="ms-4" style="margin-top: 130px;">
-                                                                                            <h5>Angeli M. Reyes</h5>
-                                                                                            <p>Educational Assistance Scholarship - College level</p>
+                                                                                        <div class="ms-4 adjustable-line-spacing" style="margin-top: 115px;">
+                                                                                            <h5 class="fw-bold">JUAN
+                                                                                                DELA CRUZ</h5>
+                                                                                            <p>Educational
+                                                                                                Assistance
+                                                                                                Scholarship -
+                                                                                                College level
+                                                                                                <br>EAC-213991</br>
+                                                                                            </p>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="my-2 p-4 text-black" style="background-color: #ffff; height:10px;">
@@ -354,20 +280,23 @@
                                                                                                 <!--PERSONAL INFORMATION-->
                                                                                                 <div class="tab-pane fade show active" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
                                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <h5 class="card-title">Primary Information</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Primary
+                                                                                                            Information
+                                                                                                        </h5>
                                                                                                         <div class="d-flex align-items-center d-grid gap-3">
-                                                                                                            <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Remarks:</label>
-                                                                                                            <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">Approve</label>
+                                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                                            <div class="form-check form-radio">
+                                                                                                                <input class="form-check-input" type="radio" name="personalInfoApproveRadioDefault" id="personalInfoApproveRadioDefault1">
+                                                                                                                <label class="mx-2 form-check-label" for="personalInfoApproveCheckBox"> Approve </label>
                                                                                                             </div>
-                                                                                                            <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">For Review </label>
+                                                                                                            <div class="form-check form-radio">
+                                                                                                                <input class="form-check-input" type="radio" name="personalInfoReviewDefault" id="personalInfoReviewDefault2">
+                                                                                                                <label class="mx-2 form-check-label" for="personalInfoReviewCheckBox"> For Review </label>
                                                                                                             </div>
-                                                                                                            <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">For Modification</label>
+                                                                                                            <div class="form-check form-radio">
+                                                                                                                <input class="form-check-input" type="radio" name="personalInfoModiDefault" id="personalInfoModiDefault3">
+                                                                                                                <label class="mx-2 form-check-label" for="personalInModiCheckBox"> For Modification </label>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
@@ -390,7 +319,6 @@
                                                                                                             <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
                                                                                                             <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
                                                                                                         </div>
-
                                                                                                         <!-- CONTACT NUMBER AND EMAIL ADDRESS -->
                                                                                                         <div class="col-md-5 position-relative">
                                                                                                             <label for="telephone" class="form-label">Contact Number</label>
@@ -403,18 +331,15 @@
                                                                                                             <label for="EmailAddress" class="form-label">Email Address</label>
                                                                                                             <input type="EmailAddress" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="" required>
                                                                                                         </div>
-
                                                                                                         <!-- BIRTH -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputDate" class="form-label">Birth Date</label>
                                                                                                             <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
                                                                                                         </div>
-
                                                                                                         <div class="col-md-8 position-relative">
                                                                                                             <label for="inputBirthPlace" class="form-label">Place of Birth</label>
                                                                                                             <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
                                                                                                         </div>
-
                                                                                                         <!-- ADDRESS -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputAddress" class="form-label">Address</label>
@@ -427,7 +352,11 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select a valid Barangay.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                a
+                                                                                                                valid
+                                                                                                                Barangay.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-2 position-relative">
@@ -437,7 +366,11 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select a valid Municipality.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                a
+                                                                                                                valid
+                                                                                                                Municipality.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-3 position-relative">
@@ -447,32 +380,32 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select a valid Province.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                a
+                                                                                                                valid
+                                                                                                                Province.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-2 position-relative">
                                                                                                             <label for="inputZipCode" class="form-label">ZIP Code</label>
                                                                                                             <input type="zipCode" class="form-control" id="inputZipCode" aria-describedby="inputZipCode" value="" required>
                                                                                                         </div>
-
                                                                                                         <!-- CITIZENSHIP -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputCitizenship" class="form-label">Citizenship</label>
                                                                                                             <input type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="" required>
                                                                                                         </div>
-
                                                                                                         <!-- RESIDENCY -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputResidency" class="form-label">Years of Residency in Santo Tomas</label>
                                                                                                             <input type="residency" class="form-control" id="inputResidency" aria-describedby="inputResidency" value="" required>
                                                                                                         </div>
-
                                                                                                         <!-- LANGUAGE -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputMotherTongue" class="form-label">Mother Tongue</label>
                                                                                                             <input type="Language" class="form-control" id="inputMotherTongue" aria-describedby="inputMotherTongue" value="" required>
                                                                                                         </div>
-
                                                                                                         <!-- START RELIGION -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputReligion" class="form-label">Religion</label>
@@ -481,10 +414,12 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select a Religion.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                a
+                                                                                                                Religion.
                                                                                                             </div>
                                                                                                         </div>
-
                                                                                                         <!-- SEX -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputGender" class="form-label">Gender</label>
@@ -493,10 +428,13 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select a valid Gender.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                a
+                                                                                                                valid
+                                                                                                                Gender.
                                                                                                             </div>
                                                                                                         </div>
-
                                                                                                         <!--CIVIL STATUS -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputCivilStatus" class="form-label">Civil Status</label>
@@ -505,30 +443,38 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select a valid Civil Status.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                a
+                                                                                                                valid
+                                                                                                                Civil
+                                                                                                                Status.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </form>
                                                                                                 </div>
-
                                                                                                 <!--EDUCATIONAL BACKGROUND-->
                                                                                                 <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
                                                                                                     <!--GENERAL EDUC-->
                                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <h5 class="card-title">General Educational Information</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            General
+                                                                                                            Educational
+                                                                                                            Information
+                                                                                                        </h5>
                                                                                                         <div class="d-flex align-items-center d-grid gap-3">
-                                                                                                            <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Remarks:</label>
+                                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
                                                                                                             <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">Approve</label>
+                                                                                                                <input class="form-check-input" type="checkbox" id="approveEducInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="approveEducInfoCheckDefault">Approve</label>
                                                                                                             </div>
                                                                                                             <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">For Review </label>
+                                                                                                                <input class="form-check-input" type="checkbox" id="reviewPriInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="reviewEducInfoCheckDefault">For Review </label>
                                                                                                             </div>
                                                                                                             <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">For Modification</label>
+                                                                                                                <input class="form-check-input" type="checkbox" id="modiPriInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="modiEducInfoCheckDefault">For Modification</label>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
@@ -542,7 +488,11 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Yes or No.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Yes
+                                                                                                                or
+                                                                                                                No.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-6 position-relative">
@@ -552,7 +502,11 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Yes or No.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Yes
+                                                                                                                or
+                                                                                                                No.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-4 position-relative">
@@ -562,7 +516,9 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Awards/Honor.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Awards/Honor.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-8 position-relative">
@@ -576,15 +532,22 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select expected Year of Graduation.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                expected
+                                                                                                                Year
+                                                                                                                of
+                                                                                                                Graduation.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <!-- END FULL NAME -->
                                                                                                     </form>
-
                                                                                                     <!--COLLEGE LEVEL-->
                                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <h5 class="card-title">College Level</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            College
+                                                                                                            Level
+                                                                                                        </h5>
                                                                                                     </div>
                                                                                                     <!-- Custom Styled Validation with Tooltips -->
                                                                                                     <form class="row g-4 pt-3 needs-validation" novalidate>
@@ -596,7 +559,9 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select School.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                School.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-6 position-relative">
@@ -610,7 +575,10 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Year Level.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Year
+                                                                                                                Level.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-3 position-relative">
@@ -620,7 +588,9 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Course.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Course.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-5 position-relative">
@@ -637,7 +607,11 @@
                                                                                                         </div>
                                                                                                         <div class="column">
                                                                                                             <div class="d-flex justify-content-between align-items-center">
-                                                                                                                <h5 class="card-title">List of Awards</h5>
+                                                                                                                <h5 class="card-title">
+                                                                                                                    List
+                                                                                                                    of
+                                                                                                                    Awards
+                                                                                                                </h5>
                                                                                                                 <div class="d-flex align-items-center d-grid gap-2">
                                                                                                                     <div class="form-check form-switch">
                                                                                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -650,47 +624,43 @@
                                                                                                                 <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
                                                                                                                     <thead>
                                                                                                                         <tr class="text-center">
-                                                                                                                            <th>No</th>
-                                                                                                                            <th>Honor/Award</th>
-                                                                                                                            <th>Academic Year</th>
-                                                                                                                            <th>Semester</th>
-                                                                                                                            <th>Year Level</th>
-                                                                                                                            <th>Actions</th>
+                                                                                                                            <th>No
+                                                                                                                            </th>
+                                                                                                                            <th>Honor/Award
+                                                                                                                            </th>
+                                                                                                                            <th>Academic
+                                                                                                                                Year
+                                                                                                                            </th>
+                                                                                                                            <th>Semester
+                                                                                                                            </th>
+                                                                                                                            <th>Year
+                                                                                                                                Level
+                                                                                                                            </th>
+                                                                                                                            <th>Actions
+                                                                                                                            </th>
                                                                                                                         </tr>
-                                                                                                                        <!-- <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr> -->
+                                                                                                                        <!-- <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> -->
                                                                                                                     </thead>
                                                                                                                     <tbody>
                                                                                                                         <tr>
-                                                                                                                            <td>1</td>
-                                                                                                                            <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                            <td>College</td>
-                                                                                                                            <td>1st Year</td>
-                                                                                                                            <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                            <td>1
+                                                                                                                            </td>
+                                                                                                                            <td>Biscocho,
+                                                                                                                                Val
+                                                                                                                                Juniel
+                                                                                                                                Mendoza
+                                                                                                                            </td>
+                                                                                                                            <td>College
+                                                                                                                            </td>
+                                                                                                                            <td>1st
+                                                                                                                                Year
+                                                                                                                            </td>
+                                                                                                                            <td>San
+                                                                                                                                Bartolome
+                                                                                                                                Santo
+                                                                                                                                Tomas
+                                                                                                                                Batangas
+                                                                                                                            </td>
                                                                                                                             <td>
                                                                                                                                 <div class="btn-group d-flex">
                                                                                                                                     <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -703,10 +673,13 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </form>
-
                                                                                                     <!--SHS LEVEL-->
                                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <h5 class="card-title">Senior Highschool Level</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Senior
+                                                                                                            Highschool
+                                                                                                            Level
+                                                                                                        </h5>
                                                                                                     </div>
                                                                                                     <!-- Custom Styled Validation with Tooltips -->
                                                                                                     <form class="row g-4 needs-validation" novalidate>
@@ -714,13 +687,12 @@
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputSeniorSchoolName" class="form-label">Name of School Attended</label>
                                                                                                             <select class="form-select" id="inputSchool" required>
-                                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                                <?php foreach ($seniorHigh as $key => $shs) : ?>
-                                                                                                                    <option value="<?php echo $key ?>"><?php echo $shs ?></option>
-                                                                                                                <?php endforeach; ?>
+                                                                                                                <option selected disabled value="">Choose...</option> <?php foreach ($seniorHigh as $key => $shs) : ?> <option value="<?php echo $key ?>"><?php echo $shs ?></option> <?php endforeach; ?>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select School.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                School.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-6 position-relative">
@@ -730,25 +702,24 @@
                                                                                                         <div class="col-md-2 position-relative">
                                                                                                             <label for="inputSeniorYearLevel" class="form-label">Year Level</label>
                                                                                                             <select class="form-select" id="inputSeniorYearLevel" required>
-                                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                                <?php for ($i = 12; $i >= 11; $i--) : ?>
-                                                                                                                    <option value="<?php echo $i ?>">Grade <?php echo $i ?></option>
-                                                                                                                <?php endfor; ?>
+                                                                                                                <option selected disabled value="">Choose...</option> <?php for ($i = 12; $i >= 11; $i--) : ?> <option value="<?php echo $i ?>">Grade <?php echo $i ?></option> <?php endfor; ?>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Year Level.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Year
+                                                                                                                Level.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputTrack" class="form-label">Strand Taken</label>
                                                                                                             <select class="form-select" id="inputTrack" required>
-                                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                                <?php foreach ($strand as $key => $str) : ?>
-                                                                                                                    <option value="<?php echo $key ?>"><?php echo $str ?></option>
-                                                                                                                <?php endforeach; ?>
+                                                                                                                <option selected disabled value="">Choose...</option> <?php foreach ($strand as $key => $str) : ?> <option value="<?php echo $key ?>"><?php echo $str ?></option> <?php endforeach; ?>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Course.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Course.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-9 position-relative">
@@ -761,7 +732,11 @@
                                                                                                         </div>
                                                                                                         <div class="column">
                                                                                                             <div class="d-flex justify-content-between align-items-center">
-                                                                                                                <h5 class="card-title">List of Awards</h5>
+                                                                                                                <h5 class="card-title">
+                                                                                                                    List
+                                                                                                                    of
+                                                                                                                    Awards
+                                                                                                                </h5>
                                                                                                                 <div class="d-flex align-items-center d-grid gap-2">
                                                                                                                     <div class="form-check form-switch">
                                                                                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -774,47 +749,43 @@
                                                                                                                 <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
                                                                                                                     <thead>
                                                                                                                         <tr class="text-center">
-                                                                                                                            <th>No</th>
-                                                                                                                            <th>Honor/Award</th>
-                                                                                                                            <th>Academic Year</th>
-                                                                                                                            <th>Semester</th>
-                                                                                                                            <th>Year Level</th>
-                                                                                                                            <th>Actions</th>
+                                                                                                                            <th>No
+                                                                                                                            </th>
+                                                                                                                            <th>Honor/Award
+                                                                                                                            </th>
+                                                                                                                            <th>Academic
+                                                                                                                                Year
+                                                                                                                            </th>
+                                                                                                                            <th>Semester
+                                                                                                                            </th>
+                                                                                                                            <th>Year
+                                                                                                                                Level
+                                                                                                                            </th>
+                                                                                                                            <th>Actions
+                                                                                                                            </th>
                                                                                                                         </tr>
-                                                                                                                        <!-- <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr> -->
+                                                                                                                        <!-- <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> -->
                                                                                                                     </thead>
                                                                                                                     <tbody>
                                                                                                                         <tr>
-                                                                                                                            <td>1</td>
-                                                                                                                            <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                            <td>College</td>
-                                                                                                                            <td>1st Year</td>
-                                                                                                                            <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                            <td>1
+                                                                                                                            </td>
+                                                                                                                            <td>Biscocho,
+                                                                                                                                Val
+                                                                                                                                Juniel
+                                                                                                                                Mendoza
+                                                                                                                            </td>
+                                                                                                                            <td>College
+                                                                                                                            </td>
+                                                                                                                            <td>1st
+                                                                                                                                Year
+                                                                                                                            </td>
+                                                                                                                            <td>San
+                                                                                                                                Bartolome
+                                                                                                                                Santo
+                                                                                                                                Tomas
+                                                                                                                                Batangas
+                                                                                                                            </td>
                                                                                                                             <td>
                                                                                                                                 <div class="btn-group d-flex">
                                                                                                                                     <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -827,10 +798,13 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </form>
-
                                                                                                     <!--HS LEVEL-->
                                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <h5 class="card-title">High School Level</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            High
+                                                                                                            School
+                                                                                                            Level
+                                                                                                        </h5>
                                                                                                     </div>
                                                                                                     <!-- Custom Styled Validation with Tooltips -->
                                                                                                     <form class="row g-4 pt-3 needs-validation" novalidate>
@@ -838,13 +812,12 @@
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputHighSchoolName" class="form-label">Name of School Attended</label>
                                                                                                             <select class="form-select" id="inputHighSchoolName" required>
-                                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                                <?php foreach ($juniorHigh as $key => $jhs) : ?>
-                                                                                                                    <option value="<?php echo $key ?>"><?php echo $jhs ?></option>
-                                                                                                                <?php endforeach; ?>
+                                                                                                                <option selected disabled value="">Choose...</option> <?php foreach ($juniorHigh as $key => $jhs) : ?> <option value="<?php echo $key ?>"><?php echo $jhs ?></option> <?php endforeach; ?>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select School.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                School.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-6 position-relative">
@@ -854,21 +827,13 @@
                                                                                                         <div class="col-md-2 position-relative">
                                                                                                             <label for="inputHighYearLevel" class="form-label">Year Level</label>
                                                                                                             <select class="form-select" id="inputHighYearLevel" required>
-                                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                                <?php for ($i = 4; $i >= 1; $i--) : ?>
-                                                                                                                    <?php if ($i == 1) : ?>
-                                                                                                                        <option value="<?php echo $i ?>"><?php echo $i ?>st Year</option>
-                                                                                                                    <?php elseif ($i == 2) : ?>
-                                                                                                                        <option value="<?php echo $i ?>"><?php echo $i ?>nd Year</option>
-                                                                                                                    <?php elseif ($i == 3) : ?>
-                                                                                                                        <option value="<?php echo $i ?>"><?php echo $i ?>rd Year</option>
-                                                                                                                    <?php else : ?>
-                                                                                                                        <option value="<?php echo $i ?>"><?php echo $i ?>th Year</option>
-                                                                                                                    <?php endif; ?>
-                                                                                                                <?php endfor; ?>
+                                                                                                                <option selected disabled value="">Choose...</option> <?php for ($i = 4; $i >= 1; $i--) : ?> <?php if ($i == 1) : ?> <option value="<?php echo $i ?>"><?php echo $i ?>st Year</option> <?php elseif ($i == 2) : ?> <option value="<?php echo $i ?>"><?php echo $i ?>nd Year</option> <?php elseif ($i == 3) : ?> <option value="<?php echo $i ?>"><?php echo $i ?>rd Year</option> <?php else : ?> <option value="<?php echo $i ?>"><?php echo $i ?>th Year</option> <?php endif; ?> <?php endfor; ?>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Year Level.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Year
+                                                                                                                Level.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-12 position-relative">
@@ -877,7 +842,11 @@
                                                                                                         </div>
                                                                                                         <div class="column">
                                                                                                             <div class="d-flex justify-content-between align-items-center">
-                                                                                                                <h5 class="card-title">List of Awards</h5>
+                                                                                                                <h5 class="card-title">
+                                                                                                                    List
+                                                                                                                    of
+                                                                                                                    Awards
+                                                                                                                </h5>
                                                                                                                 <div class="d-flex align-items-center d-grid gap-2">
                                                                                                                     <div class="form-check form-switch">
                                                                                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -890,47 +859,43 @@
                                                                                                                 <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
                                                                                                                     <thead>
                                                                                                                         <tr class="text-center">
-                                                                                                                            <th>No</th>
-                                                                                                                            <th>Honor/Award</th>
-                                                                                                                            <th>Academic Year</th>
-                                                                                                                            <th>Semester</th>
-                                                                                                                            <th>Year Level</th>
-                                                                                                                            <th>Actions</th>
+                                                                                                                            <th>No
+                                                                                                                            </th>
+                                                                                                                            <th>Honor/Award
+                                                                                                                            </th>
+                                                                                                                            <th>Academic
+                                                                                                                                Year
+                                                                                                                            </th>
+                                                                                                                            <th>Semester
+                                                                                                                            </th>
+                                                                                                                            <th>Year
+                                                                                                                                Level
+                                                                                                                            </th>
+                                                                                                                            <th>Actions
+                                                                                                                            </th>
                                                                                                                         </tr>
-                                                                                                                        <!-- <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr> -->
+                                                                                                                        <!-- <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> -->
                                                                                                                     </thead>
                                                                                                                     <tbody>
                                                                                                                         <tr>
-                                                                                                                            <td>1</td>
-                                                                                                                            <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                            <td>College</td>
-                                                                                                                            <td>1st Year</td>
-                                                                                                                            <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                            <td>1
+                                                                                                                            </td>
+                                                                                                                            <td>Biscocho,
+                                                                                                                                Val
+                                                                                                                                Juniel
+                                                                                                                                Mendoza
+                                                                                                                            </td>
+                                                                                                                            <td>College
+                                                                                                                            </td>
+                                                                                                                            <td>1st
+                                                                                                                                Year
+                                                                                                                            </td>
+                                                                                                                            <td>San
+                                                                                                                                Bartolome
+                                                                                                                                Santo
+                                                                                                                                Tomas
+                                                                                                                                Batangas
+                                                                                                                            </td>
                                                                                                                             <td>
                                                                                                                                 <div class="btn-group d-flex">
                                                                                                                                     <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -943,10 +908,12 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </form>
-
                                                                                                     <!--ELEM LEVEL-->
                                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <h5 class="card-title">Elementary Level</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Elementary
+                                                                                                            Level
+                                                                                                        </h5>
                                                                                                     </div>
                                                                                                     <!-- Custom Styled Validation with Tooltips -->
                                                                                                     <form class="row g-4 pt-3 needs-validation" novalidate>
@@ -954,13 +921,12 @@
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputElementarySchoolName" class="form-label">Name of School Attended</label>
                                                                                                             <select class="form-select" id="inputElementarySchoolName" required>
-                                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                                <?php foreach ($elementary as $key => $elem) : ?>
-                                                                                                                    <option value="<?php echo $key ?>"><?php echo $elem ?></option>
-                                                                                                                <?php endforeach; ?>
+                                                                                                                <option selected disabled value="">Choose...</option> <?php foreach ($elementary as $key => $elem) : ?> <option value="<?php echo $key ?>"><?php echo $elem ?></option> <?php endforeach; ?>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select School.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                School.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-6 position-relative">
@@ -970,13 +936,13 @@
                                                                                                         <div class="col-md-2 position-relative">
                                                                                                             <label for="inputHighYearLevel" class="form-label">Year Level</label>
                                                                                                             <select class="form-select" id="inputHighYearLevel" required>
-                                                                                                                <option selected disabled value="">Choose...</option>
-                                                                                                                <?php for ($i = 6; $i >= 1; $i--) : ?>
-                                                                                                                    <option value="<?php echo $i ?>">Grade <?php echo $i ?></option>
-                                                                                                                <?php endfor; ?>
+                                                                                                                <option selected disabled value="">Choose...</option> <?php for ($i = 6; $i >= 1; $i--) : ?> <option value="<?php echo $i ?>">Grade <?php echo $i ?></option> <?php endfor; ?>
                                                                                                             </select>
                                                                                                             <div class="invalid-tooltip">
-                                                                                                                Please select Year Level.
+                                                                                                                Please
+                                                                                                                select
+                                                                                                                Year
+                                                                                                                Level.
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-12 position-relative">
@@ -985,7 +951,11 @@
                                                                                                         </div>
                                                                                                         <div class="column">
                                                                                                             <div class="d-flex justify-content-between align-items-center">
-                                                                                                                <h5 class="card-title">List of Awards</h5>
+                                                                                                                <h5 class="card-title">
+                                                                                                                    List
+                                                                                                                    of
+                                                                                                                    Awards
+                                                                                                                </h5>
                                                                                                                 <div class="d-flex align-items-center d-grid gap-2">
                                                                                                                     <div class="form-check form-switch">
                                                                                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -998,47 +968,43 @@
                                                                                                                 <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
                                                                                                                     <thead>
                                                                                                                         <tr class="text-center">
-                                                                                                                            <th>No</th>
-                                                                                                                            <th>Honor/Award</th>
-                                                                                                                            <th>Academic Year</th>
-                                                                                                                            <th>Semester</th>
-                                                                                                                            <th>Year Level</th>
-                                                                                                                            <th>Actions</th>
+                                                                                                                            <th>No
+                                                                                                                            </th>
+                                                                                                                            <th>Honor/Award
+                                                                                                                            </th>
+                                                                                                                            <th>Academic
+                                                                                                                                Year
+                                                                                                                            </th>
+                                                                                                                            <th>Semester
+                                                                                                                            </th>
+                                                                                                                            <th>Year
+                                                                                                                                Level
+                                                                                                                            </th>
+                                                                                                                            <th>Actions
+                                                                                                                            </th>
                                                                                                                         </tr>
-                                                                                                                        <!-- <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr> -->
+                                                                                                                        <!-- <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> -->
                                                                                                                     </thead>
                                                                                                                     <tbody>
                                                                                                                         <tr>
-                                                                                                                            <td>1</td>
-                                                                                                                            <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                            <td>College</td>
-                                                                                                                            <td>1st Year</td>
-                                                                                                                            <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                            <td>1
+                                                                                                                            </td>
+                                                                                                                            <td>Biscocho,
+                                                                                                                                Val
+                                                                                                                                Juniel
+                                                                                                                                Mendoza
+                                                                                                                            </td>
+                                                                                                                            <td>College
+                                                                                                                            </td>
+                                                                                                                            <td>1st
+                                                                                                                                Year
+                                                                                                                            </td>
+                                                                                                                            <td>San
+                                                                                                                                Bartolome
+                                                                                                                                Santo
+                                                                                                                                Tomas
+                                                                                                                                Batangas
+                                                                                                                            </td>
                                                                                                                             <td>
                                                                                                                                 <div class="btn-group d-flex">
                                                                                                                                     <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -1052,26 +1018,27 @@
                                                                                                         </div>
                                                                                                     </form>
                                                                                                 </div>
-
                                                                                                 <!--FAMILY BACKGROUND-->
                                                                                                 <div class="tab-pane fade" id="bordered-justified-family-background" role="tabpanel" aria-labelledby="family-background">
                                                                                                     <!--FAMILY INFORMATION-->
-
                                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                                        <h5 class="card-title">Family Background</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Family
+                                                                                                            Background
+                                                                                                        </h5>
                                                                                                         <div class="d-flex align-items-center d-grid gap-3">
-                                                                                                            <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Remarks:</label>
+                                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
                                                                                                             <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">Approve</label>
+                                                                                                                <input class="form-check-input" type="checkbox" id="approveEducInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="approveFamInfoCheckDefault">Approve</label>
                                                                                                             </div>
                                                                                                             <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">For Review </label>
+                                                                                                                <input class="form-check-input" type="checkbox" id="reviewPriInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="reviewFamInfoCheckDefault">For Review </label>
                                                                                                             </div>
                                                                                                             <div class="form-check form-switch">
-                                                                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                                                                                <label class="form-check-label" for="flexSwitchCheckDefault">For Modification</label>
+                                                                                                                <input class="form-check-input" type="checkbox" id="modiPriInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="modiFamInfoCheckDefault">For Modification</label>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
@@ -1118,11 +1085,13 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!-- TABLE OF SIBLINGS -->
                                                                                                         <div class="column">
                                                                                                             <div class="d-flex justify-content-between align-items-center">
-                                                                                                                <h5 class="card-title">Sibling's Information</h5>
+                                                                                                                <h5 class="card-title">
+                                                                                                                    Sibling's
+                                                                                                                    Information
+                                                                                                                </h5>
                                                                                                                 <div class="d-flex align-items-center d-grid gap-2">
                                                                                                                     <div class="form-check form-switch">
                                                                                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -1135,47 +1104,45 @@
                                                                                                                 <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
                                                                                                                     <thead>
                                                                                                                         <tr class="text-center">
-                                                                                                                            <th>No</th>
-                                                                                                                            <th>Name of Sibling (LN/FN/MN)</th>
-                                                                                                                            <th>Birth Order </th>
-                                                                                                                            <th>Age</th>
-                                                                                                                            <th>Occupation</th>
-                                                                                                                            <th>Actions</th>
+                                                                                                                            <th>No
+                                                                                                                            </th>
+                                                                                                                            <th>Name
+                                                                                                                                of
+                                                                                                                                Sibling
+                                                                                                                                (LN/FN/MN)
+                                                                                                                            </th>
+                                                                                                                            <th>Birth
+                                                                                                                                Order
+                                                                                                                            </th>
+                                                                                                                            <th>Age
+                                                                                                                            </th>
+                                                                                                                            <th>Occupation
+                                                                                                                            </th>
+                                                                                                                            <th>Actions
+                                                                                                                            </th>
                                                                                                                         </tr>
-                                                                                                                        <!-- <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                                <td></td>
-                                                                                                            </tr> -->
+                                                                                                                        <!-- <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr> -->
                                                                                                                     </thead>
                                                                                                                     <tbody>
                                                                                                                         <tr>
-                                                                                                                            <td>1</td>
-                                                                                                                            <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                            <td>College</td>
-                                                                                                                            <td>1st Year</td>
-                                                                                                                            <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                            <td>1
+                                                                                                                            </td>
+                                                                                                                            <td>Biscocho,
+                                                                                                                                Val
+                                                                                                                                Juniel
+                                                                                                                                Mendoza
+                                                                                                                            </td>
+                                                                                                                            <td>College
+                                                                                                                            </td>
+                                                                                                                            <td>1st
+                                                                                                                                Year
+                                                                                                                            </td>
+                                                                                                                            <td>San
+                                                                                                                                Bartolome
+                                                                                                                                Santo
+                                                                                                                                Tomas
+                                                                                                                                Batangas
+                                                                                                                            </td>
                                                                                                                             <td>
                                                                                                                                 <div class="btn-group d-flex">
                                                                                                                                     <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -1185,11 +1152,24 @@
                                                                                                                         </tr>
                                                                                                                     </tbody>
                                                                                                                     <tr>
-                                                                                                                        <td>1</td>
-                                                                                                                        <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                        <td>College</td>
-                                                                                                                        <td>1st Year</td>
-                                                                                                                        <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                        <td>1
+                                                                                                                        </td>
+                                                                                                                        <td>Biscocho,
+                                                                                                                            Val
+                                                                                                                            Juniel
+                                                                                                                            Mendoza
+                                                                                                                        </td>
+                                                                                                                        <td>College
+                                                                                                                        </td>
+                                                                                                                        <td>1st
+                                                                                                                            Year
+                                                                                                                        </td>
+                                                                                                                        <td>San
+                                                                                                                            Bartolome
+                                                                                                                            Santo
+                                                                                                                            Tomas
+                                                                                                                            Batangas
+                                                                                                                        </td>
                                                                                                                         <td>
                                                                                                                             <div class="btn-group d-flex">
                                                                                                                                 <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -1198,11 +1178,24 @@
                                                                                                                         </td>
                                                                                                                     </tr>
                                                                                                                     <tr>
-                                                                                                                        <td>1</td>
-                                                                                                                        <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                        <td>College</td>
-                                                                                                                        <td>1st Year</td>
-                                                                                                                        <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                        <td>1
+                                                                                                                        </td>
+                                                                                                                        <td>Biscocho,
+                                                                                                                            Val
+                                                                                                                            Juniel
+                                                                                                                            Mendoza
+                                                                                                                        </td>
+                                                                                                                        <td>College
+                                                                                                                        </td>
+                                                                                                                        <td>1st
+                                                                                                                            Year
+                                                                                                                        </td>
+                                                                                                                        <td>San
+                                                                                                                            Bartolome
+                                                                                                                            Santo
+                                                                                                                            Tomas
+                                                                                                                            Batangas
+                                                                                                                        </td>
                                                                                                                         <td>
                                                                                                                             <div class="btn-group d-flex">
                                                                                                                                 <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -1211,11 +1204,24 @@
                                                                                                                         </td>
                                                                                                                     </tr>
                                                                                                                     <tr>
-                                                                                                                        <td>1</td>
-                                                                                                                        <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                        <td>College</td>
-                                                                                                                        <td>1st Year</td>
-                                                                                                                        <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                        <td>1
+                                                                                                                        </td>
+                                                                                                                        <td>Biscocho,
+                                                                                                                            Val
+                                                                                                                            Juniel
+                                                                                                                            Mendoza
+                                                                                                                        </td>
+                                                                                                                        <td>College
+                                                                                                                        </td>
+                                                                                                                        <td>1st
+                                                                                                                            Year
+                                                                                                                        </td>
+                                                                                                                        <td>San
+                                                                                                                            Bartolome
+                                                                                                                            Santo
+                                                                                                                            Tomas
+                                                                                                                            Batangas
+                                                                                                                        </td>
                                                                                                                         <td>
                                                                                                                             <div class="btn-group d-flex">
                                                                                                                                 <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -1224,11 +1230,24 @@
                                                                                                                         </td>
                                                                                                                     </tr>
                                                                                                                     <tr>
-                                                                                                                        <td>1</td>
-                                                                                                                        <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                        <td>College</td>
-                                                                                                                        <td>1st Year</td>
-                                                                                                                        <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                        <td>1
+                                                                                                                        </td>
+                                                                                                                        <td>Biscocho,
+                                                                                                                            Val
+                                                                                                                            Juniel
+                                                                                                                            Mendoza
+                                                                                                                        </td>
+                                                                                                                        <td>College
+                                                                                                                        </td>
+                                                                                                                        <td>1st
+                                                                                                                            Year
+                                                                                                                        </td>
+                                                                                                                        <td>San
+                                                                                                                            Bartolome
+                                                                                                                            Santo
+                                                                                                                            Tomas
+                                                                                                                            Batangas
+                                                                                                                        </td>
                                                                                                                         <td>
                                                                                                                             <div class="btn-group d-flex">
                                                                                                                                 <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -1237,11 +1256,24 @@
                                                                                                                         </td>
                                                                                                                     </tr>
                                                                                                                     <tr>
-                                                                                                                        <td>1</td>
-                                                                                                                        <td>Biscocho, Val Juniel Mendoza</td>
-                                                                                                                        <td>College</td>
-                                                                                                                        <td>1st Year</td>
-                                                                                                                        <td>San Bartolome Santo Tomas Batangas</td>
+                                                                                                                        <td>1
+                                                                                                                        </td>
+                                                                                                                        <td>Biscocho,
+                                                                                                                            Val
+                                                                                                                            Juniel
+                                                                                                                            Mendoza
+                                                                                                                        </td>
+                                                                                                                        <td>College
+                                                                                                                        </td>
+                                                                                                                        <td>1st
+                                                                                                                            Year
+                                                                                                                        </td>
+                                                                                                                        <td>San
+                                                                                                                            Bartolome
+                                                                                                                            Santo
+                                                                                                                            Tomas
+                                                                                                                            Batangas
+                                                                                                                        </td>
                                                                                                                         <td>
                                                                                                                             <div class="btn-group d-flex">
                                                                                                                                 <button id="editAward" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAwardModal">Edit </button>
@@ -1252,11 +1284,14 @@
                                                                                                                 </table>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                    </form><!-- End Custom Styled Validation with Tooltips -->
-
+                                                                                                    </form>
+                                                                                                    <!-- End Custom Styled Validation with Tooltips -->
                                                                                                     <!-- FATHER'S INFORMATION -->
                                                                                                     <div class="d-flex justify-content-between align-items-center py-3">
-                                                                                                        <h5 class="card-title">Father's Information</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Father's
+                                                                                                            Information
+                                                                                                        </h5>
                                                                                                         <div class="d-flex align-items-center d-grid gap-2">
                                                                                                             <div class="form-check form-switch">
                                                                                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -1284,7 +1319,6 @@
                                                                                                             <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END FULL NAME -->
-
                                                                                                         <!-- BIRTH -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputDate" class="form-label">Birth Date</label>
@@ -1295,14 +1329,12 @@
                                                                                                             <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END BIRTH -->
-
                                                                                                         <!-- START AGE -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputAge" class="form-label">Father's Age</label>
                                                                                                             <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
                                                                                                         </div>
                                                                                                         <!-- START AGE -->
-
                                                                                                         <!-- CONTACT INFORMATION -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="telephone" class="form-label">Contact Number</label>
@@ -1312,7 +1344,6 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <!-- END CONTACT INFORMATION -->
-
                                                                                                         <!-- LIVING OR DECEASED -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
@@ -1321,7 +1352,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!-- FATHER'S OCCUPATION  -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputOccupation" class="form-label"> Occupation</label>
@@ -1357,11 +1387,14 @@
                                                                                                             </select>
                                                                                                         </div>
                                                                                                         <!-- END FULL NAME -->
-                                                                                                    </form><!-- End Custom Styled Validation with Tooltips -->
-
+                                                                                                    </form>
+                                                                                                    <!-- End Custom Styled Validation with Tooltips -->
                                                                                                     <!-- MOTHER'S INFORMATION -->
                                                                                                     <div class="d-flex justify-content-between align-items-center pt-3">
-                                                                                                        <h5 class="card-title">Mother's Information</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Mother's
+                                                                                                            Information
+                                                                                                        </h5>
                                                                                                         <div class="d-flex align-items-center d-grid gap-2">
                                                                                                             <div class="form-check form-switch">
                                                                                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -1389,7 +1422,6 @@
                                                                                                             <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END FULL NAME -->
-
                                                                                                         <!-- BIRTH -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputDate" class="form-label">Birth Date</label>
@@ -1400,14 +1432,12 @@
                                                                                                             <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END BIRTH -->
-
                                                                                                         <!-- START AGE -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputAge" class="form-label">Mother's Age</label>
                                                                                                             <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
                                                                                                         </div>
                                                                                                         <!-- START AGE -->
-
                                                                                                         <!-- CONTACT INFORMATION -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="telephone" class="form-label">Contact Number</label>
@@ -1417,7 +1447,6 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <!-- END CONTACT INFORMATION -->
-
                                                                                                         <!-- LIVING OR DECEASED -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
@@ -1426,7 +1455,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!-- MOTHER'S OCCUPATION  -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputOccupation" class="form-label"> Occupation</label>
@@ -1462,11 +1490,14 @@
                                                                                                             </select>
                                                                                                         </div>
                                                                                                         <!-- END MOTHER'S INFORMATION -->
-                                                                                                    </form><!-- End Custom Styled Validation with Tooltips -->
-
+                                                                                                    </form>
+                                                                                                    <!-- End Custom Styled Validation with Tooltips -->
                                                                                                     <!-- GUARDIAN'S INFORMATION -->
                                                                                                     <div class="d-flex justify-content-between align-items- py-3">
-                                                                                                        <h5 class="card-title">Guardian's Information</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Guardian's
+                                                                                                            Information
+                                                                                                        </h5>
                                                                                                         <div class="d-flex align-items-center d-grid gap-2">
                                                                                                             <div class="form-check form-switch">
                                                                                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -1494,7 +1525,6 @@
                                                                                                             <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END FULL NAME -->
-
                                                                                                         <!-- BIRTH -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputDate" class="form-label">Birth Date</label>
@@ -1505,21 +1535,18 @@
                                                                                                             <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END BIRTH -->
-
                                                                                                         <!-- START AGE -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputAge" class="form-label">Guardian's Age</label>
                                                                                                             <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
                                                                                                         </div>
                                                                                                         <!-- START AGE -->
-
                                                                                                         <!-- START AGE -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputRelationship" class="form-label">Relationship</label>
                                                                                                             <input type="Age" class="form-control" id="inputRelationship" aria-describedby="inputRelationship" value="" required>
                                                                                                         </div>
                                                                                                         <!-- START AGE -->
-
                                                                                                         <!-- CONTACT INFORMATION -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="telephone" class="form-label">Contact Number</label>
@@ -1529,7 +1556,6 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <!-- END CONTACT INFORMATION -->
-
                                                                                                         <!-- LIVING OR DECEASED -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
@@ -1538,7 +1564,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!-- GUARDIAN'S INFORMATION  -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputOccupation" class="form-label"> Occupation</label>
@@ -1574,11 +1599,16 @@
                                                                                                             </select>
                                                                                                         </div>
                                                                                                         <!-- END GUARDIAN'S INFORMATION -->
-                                                                                                    </form><!-- End Custom Styled Validation with Tooltips -->
-
+                                                                                                    </form>
+                                                                                                    <!-- End Custom Styled Validation with Tooltips -->
                                                                                                     <!-- GUARDIAN'S INFORMATION -->
                                                                                                     <div class="d-flex justify-content-between align-items- py-3">
-                                                                                                        <h5 class="card-title">Spouse Information (If Married)</h5>
+                                                                                                        <h5 class="card-title">
+                                                                                                            Spouse
+                                                                                                            Information
+                                                                                                            (If
+                                                                                                            Married)
+                                                                                                        </h5>
                                                                                                         <div class="d-flex align-items-center d-grid gap-2">
                                                                                                             <div class="form-check form-switch">
                                                                                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
@@ -1606,7 +1636,6 @@
                                                                                                             <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END FULL NAME -->
-
                                                                                                         <!-- BIRTH -->
                                                                                                         <div class="col-md-4 position-relative">
                                                                                                             <label for="inputDate" class="form-label">Birth Date</label>
@@ -1617,14 +1646,12 @@
                                                                                                             <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
                                                                                                         </div>
                                                                                                         <!-- END BIRTH -->
-
                                                                                                         <!-- START AGE -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputAge" class="form-label">Guardian's Age</label>
                                                                                                             <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
                                                                                                         </div>
                                                                                                         <!-- START AGE -->
-
                                                                                                         <!-- START AGE -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputLivingDeceased" class="form-label"> Relationship </label>
@@ -1632,11 +1659,9 @@
                                                                                                                 <option selected disabled value="">Choose...</option>
                                                                                                                 <option>Husband</option>
                                                                                                                 <option>Wife</option>
-
                                                                                                             </select>
                                                                                                         </div>
                                                                                                         <!-- START AGE -->
-
                                                                                                         <!-- CONTACT INFORMATION -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="telephone" class="form-label">Contact Number</label>
@@ -1646,7 +1671,6 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <!-- END CONTACT INFORMATION -->
-
                                                                                                         <!-- LIVING OR DECEASED -->
                                                                                                         <div class="col-md-3 position-relative">
                                                                                                             <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
@@ -1655,7 +1679,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!-- SPOUSE INFORMATION  -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputOccupation" class="form-label"> Occupation</label>
@@ -1691,12 +1714,32 @@
                                                                                                             </select>
                                                                                                         </div>
                                                                                                         <!-- END SPOUSE INFORMATION -->
-                                                                                                    </form><!-- End Custom Styled Validation with Tooltips -->
+                                                                                                    </form>
+                                                                                                    <!-- End Custom Styled Validation with Tooltips -->
                                                                                                 </div>
-
                                                                                                 <!--ADDITIONAL BACKGROUND-->
                                                                                                 <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
-                                                                                                    <h5 class="card-title">Additional Information</h5>
+                                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                                        <h5 class="card-title">
+                                                                                                            Additional
+                                                                                                            Information
+                                                                                                        </h5>
+                                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                                            <div class="form-check form-switch">
+                                                                                                                <input class="form-check-input" type="checkbox" id="approveEducInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="approveAddInfoCheckDefault">Approve</label>
+                                                                                                            </div>
+                                                                                                            <div class="form-check form-switch">
+                                                                                                                <input class="form-check-input" type="checkbox" id="reviewPriInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="reviewAddInfoCheckDefault">For Review </label>
+                                                                                                            </div>
+                                                                                                            <div class="form-check form-switch">
+                                                                                                                <input class="form-check-input" type="checkbox" id="modiPriInfoCheckDefault">
+                                                                                                                <label class="form-check-label" for="modiAddInfoCheckDefault">For Modification</label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
                                                                                                     <!-- Custom Styled Validation with Tooltips -->
                                                                                                     <form class="row g-4 needs-validation" novalidate>
                                                                                                         <!-- WORKING STUDENT -->
@@ -1707,7 +1750,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!---OFW PARENTS -->
                                                                                                         <div class="col-md-8 position-relative">
                                                                                                             <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
@@ -1716,7 +1758,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!--OFW FAMILY MEMBERS -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
@@ -1725,7 +1766,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!---PWD PARENTS -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
@@ -1734,7 +1774,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!---PWD FAMILY MEMBERS -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
@@ -1743,7 +1782,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!---PARENTS STATUS -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputParentStatus" class="form-label">What is your Parents Status?</label>
@@ -1752,7 +1790,6 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-
                                                                                                         <!---STUDENT PWD -->
                                                                                                         <div class="col-md-6 position-relative">
                                                                                                             <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
@@ -1761,21 +1798,36 @@
                                                                                                                 <option>...</option>
                                                                                                             </select>
                                                                                                         </div>
-                                                                                                    </form><!-- End Custom Styled Validation with Tooltips -->
+                                                                                                    </form>
+                                                                                                    <!-- End Custom Styled Validation with Tooltips -->
                                                                                                 </div>
                                                                                                 <!-- PAGINATION -->
                                                                                                 <div class="pt-3 d-grid gap-2 d-flex justify-content-end align-items-center" src="pagination.js">
                                                                                                     </script>
                                                                                                     <nav aria-label="pagination">
                                                                                                         <ul class="pagination" id="borderedTabJustifiedPagination">
-                                                                                                            <li class="page-item"><a class="page-link" href="#bordered-justified-personal-information" data-bs-slide-to="0">Back to first page</a></li>
-                                                                                                            <li class="page-item"><a class="page-link" href="#bordered-justified-personal-information" data-bs-slide-to="0">1</a></li>
-                                                                                                            <li class="page-item"><a class="page-link" href="#bordered-justified-educational-background" data-bs-slide-to="1">2</a></li>
-                                                                                                            <li class="page-item"><a class="page-link" href="#bordered-justified-family-background" data-bs-slide-to="2">3</a></li>
-                                                                                                            <li class="page-item"><a class="page-link" href="#bordered-justified-additional-information" data-bs-slide-to="3">4</a></li>
+                                                                                                            <li class="page-item">
+                                                                                                                <a class="page-link" href="#bordered-justified-personal-information" data-bs-slide-to="0">Back
+                                                                                                                    to
+                                                                                                                    first
+                                                                                                                    page</a>
+                                                                                                            </li>
+                                                                                                            <li class="page-item">
+                                                                                                                <a class="page-link" href="#bordered-justified-personal-information" data-bs-slide-to="0">1</a>
+                                                                                                            </li>
+                                                                                                            <li class="page-item">
+                                                                                                                <a class="page-link" href="#bordered-justified-educational-background" data-bs-slide-to="1">2</a>
+                                                                                                            </li>
+                                                                                                            <li class="page-item">
+                                                                                                                <a class="page-link" href="#bordered-justified-family-background" data-bs-slide-to="2">3</a>
+                                                                                                            </li>
+                                                                                                            <li class="page-item">
+                                                                                                                <a class="page-link" href="#bordered-justified-additional-information" data-bs-slide-to="3">4</a>
+                                                                                                            </li>
                                                                                                             <!-- <li class="page-item"><a class="page-link" href="#" data-bs-slide-to="1">Next</a></li> -->
                                                                                                         </ul>
-                                                                                                    </nav><!-- End Basic Pagination -->
+                                                                                                    </nav>
+                                                                                                    <!-- End Basic Pagination -->
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -1787,15 +1839,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer  d-grid gap-2 d-flex justify-content-end" style="height: 55px;">
-                                                        <button type="button" class="btn btn-warning btn-sm">Submit</button>
-                                                        <button type="button" class="btn btn-danger btn-sm">Cancel Submission</button>
+                                                        <div class="modal-footer  d-grid gap-2 d-flex justify-content-end" style="height: 55px;">
+                                                            <button type="button" class="btn btn-warning btn-sm">Submit</button>
+                                                            <button type="button" class="btn btn-danger btn-sm">Cancel Submission</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!--VIEW REQUIREMENTS BUTTON-->
                                         <button id="viewRequirements" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">View Requirements</button>
                                         <div class="modal fade" id="viewRequirementsModal" tabindex="-1">
@@ -1806,59 +1857,337 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="d-flex justify-content-between align-items-center">
-                                                                    <h5 class="card-title">General Requirements</h5>
-                                                                    <div class="d-flex align-items-center">
-                                                                        <!-- <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm">
-                                                                                <i class="fas fa-question fa-sm text-white-50 mr-2"></i> Year
-                                                                            </button> -->
-                                                                        <a class="collapsed mx-3" data-bs-target="#GenRequirementS_form_view" data-bs-toggle="collapse" href="#">
-                                                                            <i class="bi bi-chevron-down ms-auto"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- Vertical Pills Tabs -->
-                                                                <div id="GenRequirementS_form_view" class="max-height-500">
-                                                                    <div class="d-flex align-items-start">
-                                                                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                                            <button class="nav-link active" id="v-pills-cor-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cor" type="button" role="tab" aria-controls="v-pills-cor" aria-selected="true">Certificate of Registration</button>
-                                                                            <button class="nav-link" id="v-pills-birthcert-tab" data-bs-toggle="pill" data-bs-target="#v-pills-birthcert" type="button" role="tab" aria-controls="v-pills-birthcert" aria-selected="false">Birth Certificate</button>
-                                                                            <button class="nav-link" id="v-pills-goodmoral-tab" data-bs-toggle="pill" data-bs-target="#v-pills-goodmoral" type="button" role="tab" aria-controls="v-pills-goodmoral" aria-selected="false">Certificate of Good
-                                                                                Moral Character</button>
-                                                                            <button class="nav-link" id="v-pills-gradereport-tab" data-bs-toggle="pill" data-bs-target="#v-pills-gradereport" type="button" role="tab" aria-controls="v-pills-gradereport" aria-selected="false">Grade Report</button>
+                                                        <!-- Vertical Pills Tabs -->
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="d-flex justify-content-center align-items-center">
+                                                                            <h5 class="card-title">GENERAL REQUIREMENTS
+                                                                            </h5>
                                                                         </div>
-                                                                        <div class="tab-content" id="v-pills-tabContent">
-                                                                            <div class="tab-pane fade show active" id="v-pills-cor" role="tabpanel" aria-labelledby="v-pills-cor-tab">
-                                                                                Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
-                                                                            </div>
-                                                                            <div class="tab-pane fade" id="v-pills-birthcert" role="tabpanel" aria-labelledby="v-pills-birthcert-tab">
-                                                                                Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
-                                                                            </div>
-                                                                            <div class="tab-pane fade" id="v-pills-goodmoral" role="tabpanel" aria-labelledby="v-pills-goodmoral-tab">
-                                                                                Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                                                                            </div>
-                                                                            <div class="tab-pane fade" id="v-pills-gradereport" role="tabpanel" aria-labelledby="v-pills-gradereport-tab">
-                                                                                Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                                                                        <div class="max-width-100">
+                                                                            <!-- Set a max width for the container -->
+                                                                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                                                <button class="nav-link active flex-fill" id="v-pills-cor-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cor" type="button" role="tab" aria-controls="v-pills-cor" aria-selected="true">Certificate of Registration</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-birthCert-tab" data-bs-toggle="pill" data-bs-target="#v-pills-birthCert" type="button" role="tab" aria-controls="v-pills-birthCert" aria-selected="true">Certificate of Birth</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-goodmoral-tab" data-bs-toggle="pill" data-bs-target="#v-pills-goodmoral" type="button" role="tab" aria-controls="v-pills-goodmoral" aria-selected="false">Certificate of Good Moral Character</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-gradereport-tab" data-bs-toggle="pill" data-bs-target="#v-pills-gradereport" type="button" role="tab" aria-controls="v-pills-gradereport" aria-selected="false">Grade Report</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-2x2pic-tab" data-bs-toggle="pill" data-bs-target="#v-pills-2x2pic" type="button" role="tab" aria-controls="v-pills-2x2pic" aria-selected="false">ID Photo (2x2 size)</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-vicinitymap-tab" data-bs-toggle="pill" data-bs-target="#v-pills-vicinitymap" type="button" role="tab" aria-controls="v-pills-vicinitymap" aria-selected="false">Vicinity Map</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance" type="button" role="tab" aria-controls="v-pills-brgyclearance" aria-selected="false">Barangay Clearance</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-votecertpar-tab" data-bs-toggle="pill" data-bs-target="#v-pills-votecertpar" type="button" role="tab" aria-controls="v-pills-votecertpar" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-votecertapp-tab" data-bs-toggle="pill" data-bs-target="#v-pills-votecertapp" type="button" role="tab" aria-controls="v-pills-votecertapp" aria-selected="false">Voter’s Certificate of the Applicant</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-certtax-tab" data-bs-toggle="pill" data-bs-target="#v-pills-certtax" type="button" role="tab" aria-controls="v-pills-certtax" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <!-- End Vertical Pills Tabs -->
                                                             </div>
-                                                        </div>
+                                                            <div class="col-lg-9">
+                                                                <div class="row d-flex justify-content-center align-items-center h-500" style="width: 100%">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="tab-content" id="v-pills-tabContent">
+                                                                                <!-- CERT OF REGISTRATION -->
+                                                                                <div class="tab-pane fade show active pt-3" id="v-pills-cor" role="tabpanel" aria-labelledby="v-pills-cor-tab" style="height: 00%; width: 100%">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">CERTIFICATE OF REGISTRATION</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="corApproveApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="corReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="corModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                </div>
+
+                                                                                <!-- BIRTH CERT -->
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-birthCert" role="tabpanel" aria-labelledby="v-pills-birthCert-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">CERTIFICATE OF BIRTH</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="birthApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="birthReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="birthModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                </div>
+
+                                                                                <!-- CERT OF GOOD MORAL -->
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-goodmoral" role="tabpanel" aria-labelledby="v-pills-goodmoral-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">CERTIFICATE OF GOOD MORAL</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="birthApproveApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="birthReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="birthModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                </div>
+
+                                                                                <!-- GRADE REPORT -->
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-gradereport" role="tabpanel" aria-labelledby="v-pills-gradereport-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">GRADE REPORT</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="birthApproveApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="birthReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="birthModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                    Nesciunt totam et. Consequuntur
+                                                                                    magnam aliquid eos nulla dolor
+                                                                                    iure eos quia. Accusantium
+                                                                                    distinctio omnis et atque
+                                                                                    fugiat. Itaque doloremque
+                                                                                    aliquid sint quasi quia
+                                                                                    distinctio similique. Voluptate
+                                                                                    nihil recusandae mollitia
+                                                                                    dolores. Ut laboriosam
+                                                                                    voluptatum dicta.
+                                                                                </div>
+
+                                                                                <!-- ID PHOTO 2X2 -->
+                                                                                <div class="tab-pane fade" id="v-pills-2x2pic" role="tabpanel" aria-labelledby="v-pills-2x2pic-tab">
+                                                                                    Saepe animi et soluta ad odit
+                                                                                    soluta sunt. Nihil quos omnis
+                                                                                    animi debitis cumque.
+                                                                                    Accusantium quibusdam
+                                                                                    perspiciatis qui qui omnis
+                                                                                    magnam. Officiis accusamus
+                                                                                    impedit molestias nostrum
+                                                                                    veniam. Qui amet ipsum iure.
+                                                                                    Dignissimos fuga tempore dolor.
+                                                                                </div>
+
+                                                                                <!-- VICINITY MAP -->
+                                                                                <div class="tab-pane fade" id="v-pills-vicinitymap" role="tabpanel" aria-labelledby="v-pills-vicinitymap-tab">
+                                                                                    Saepe animi et soluta ad odit
+                                                                                    soluta sunt. Nihil quos omnis
+                                                                                    animi debitis cumque.
+                                                                                    Accusantium quibusdam
+                                                                                    perspiciatis qui qui omnis
+                                                                                    magnam. Officiis accusamus
+                                                                                    impedit molestias nostrum
+                                                                                    veniam. Qui amet ipsum iure.
+                                                                                    Dignissimos fuga tempore dolor.
+                                                                                </div>
+
+                                                                                <!-- BARANGAY CLEARANCE -->
+                                                                                <div class="tab-pane fade" id="v-pills-brgyclearance" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
+                                                                                    Saepe animi et soluta ad odit
+                                                                                    soluta sunt. Nihil quos omnis
+                                                                                    animi debitis cumque.
+                                                                                    Accusantium quibusdam
+                                                                                    perspiciatis qui qui omnis
+                                                                                    magnam. Officiis accusamus
+                                                                                    impedit molestias nostrum
+                                                                                    veniam. Qui amet ipsum iure.
+                                                                                    Dignissimos fuga tempore dolor.
+                                                                                </div>
+
+                                                                                <!-- PARENT'S VOTERS CERT -->
+                                                                                <div class="tab-pane fade" id="v-pills-votecertpar" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
+                                                                                    Saepe animi et soluta ad odit
+                                                                                    soluta sunt. Nihil quos omnis
+                                                                                    animi debitis cumque.
+                                                                                    Accusantium quibusdam
+                                                                                    perspiciatis qui qui omnis
+                                                                                    magnam. Officiis accusamus
+                                                                                    impedit molestias nostrum
+                                                                                    veniam. Qui amet ipsum iure.
+                                                                                    Dignissimos fuga tempore dolor.
+                                                                                </div>
+
+                                                                                <!-- APPLICANTS VOTERS CERT -->
+                                                                                <div class="tab-pane fade" id="v-pills-votecertapp" role="tabpanel" aria-labelledby="v-pills-votecertapp-tab">
+                                                                                    Saepe animi et soluta ad odit
+                                                                                    soluta sunt. Nihil quos omnis
+                                                                                    animi debitis cumque.
+                                                                                    Accusantium quibusdam
+                                                                                    perspiciatis qui qui omnis
+                                                                                    magnam. Officiis accusamus
+                                                                                    impedit molestias nostrum
+                                                                                    veniam. Qui amet ipsum iure.
+                                                                                    Dignissimos fuga tempore dolor.
+                                                                                </div>
+
+                                                                                <!-- INCOME TAX CERT -->
+                                                                                <div class="tab-pane fade" id="v-pills-certtax" role="tabpanel" aria-labelledby="v-pills-certtax-tab">
+                                                                                    Saepe animi et soluta ad odit
+                                                                                    soluta sunt. Nihil quos omnis
+                                                                                    animi debitis cumque.
+                                                                                    Accusantium quibusdam
+                                                                                    perspiciatis qui qui omnis
+                                                                                    magnam. Officiis accusamus
+                                                                                    impedit molestias nostrum
+                                                                                    veniam. Qui amet ipsum iure.
+                                                                                    Dignissimos fuga tempore dolor.
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> <!-- End Vertical Pills Tabs -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="btn-group" role="group">
-                                            <button id="viewRequirements" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">Removed Applicant</button>
-                                            <div class="modal fade" id="viewRequirementsModal" tabindex="-1">
-                                                <!-- Modal content goes here -->
-                                            </div>
-                                        </div>
+                                        <!-- REMOVE BUTTON -->
+                                        <button id="viewRequirements" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">Removed Applicant</button>
                                     </div>
+                                    <div class="btn-group" role="group"> </div>
                                 </td>
                             </tr>
                         </tbody>

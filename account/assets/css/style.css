@@ -258,7 +258,7 @@ h6 {
   overflow-x: hidden;
   overflow-y: auto;
   white-space: nowrap;
-  padding-right: 15px;
+  padding-right: 5px;
 }
 
 .card-header.sticky-top {
@@ -271,6 +271,9 @@ h6 {
   /* overflow: auto; */
 }
 
+.adjustable-line-spacing {
+  line-height: 1.5; /* You can adjust this value to change the line spacing */
+}
 .scrollable-container {
   height: 500px; /* Adjust the height as per your requirements */
   overflow: auto;
@@ -365,9 +368,13 @@ h6 {
   color: #2c384e;
 }
 
+.nav-pills .nav-link {
+  text-align: left;
+}
+
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #4154f1;
+  color: #62668d;
 }
 
 .nav-tabs-bordered .nav-link.active {
