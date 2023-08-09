@@ -11,7 +11,7 @@ if (isset($_REQUEST['action'])) {
             echo getDefaultSemesterId();
             break;
         case 0.2:
-            if(isset($_REQUEST['sem'])){
+            if (isset($_REQUEST['sem'])) {
                 $sem = $_REQUEST['sem'];
                 echo switchSemester($sem);
             }
@@ -31,6 +31,12 @@ if (isset($_REQUEST['action'])) {
                 } elseif ($getTable == 4)                  //Generate Renewal Table
                 {
                     echo getSetExamTable();
+                } elseif ($getTable == 5)                  //Generate Indicator EA Income
+                {
+                    echo getIndicatorEATable($_POST['tableCategory']);
+                } elseif ($getTable == 6)                  //Generate Indicator EA Income
+                {
+                    echo getIndicatorSCTable($_POST['tableCategory']);
                 }
             }
             break;
@@ -161,6 +167,17 @@ if (isset($_REQUEST['action'])) {
                 echo deleteSetExam($id);
             } else {
                 echo 'No Exam Exists';
+            }
+            break;
+        case 5.1:                           //Update Indicator
+            if (isset($_POST['id'])) {
+                $id         = $_POST['id'];
+                $type       = $_POST['type'];    
+                $value      = $_POST['value'];
+                $category   = $_POST['category'];
+                $applicant  = $_POST['applicant'];
+
+                echo updateIndicator($id, $type, $value, $category, $applicant);
             }
             break;
     }

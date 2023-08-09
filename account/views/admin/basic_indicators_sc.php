@@ -1,12 +1,12 @@
 <main id="main" class="main">
     <!-- Start of Page Title -->
     <div class="pagetitle">
-        <h1>Educational Assistance Indicators</h1>
+        <h1>Scholar Indicators</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item">Basic Setup</li>
             <li class="breadcrumb-item">Indicators</li>
-            <li class="breadcrumb-item active">Educational Assistance</li>
+            <li class="breadcrumb-item active">Full Scholar</li>
         </ol>
     </div>
     <!-- End Page Title -->
@@ -15,12 +15,12 @@
             <div class="col-lg-12">
 
                 <!-- Total In Indicators -->
-                <div id="totalEAIndicator" class="row mb-4 py-2">
+                <div id="totalSCIndicator" class="row mb-4 py-2">
                     <div class="col-sm-6 row position-relative">
-                        <!-- Income -->
+                        <!-- Examination -->
 
-                        <label for="inputIncomeIndicator" class="col-sm-4 col-form-label">
-                            <h6 class="font-bold">Income</h6>
+                        <label for="inputExaminationSCIndicator" class="col-sm-4 col-form-label">
+                            <h6 class="font-bold">Examination</h6>
                         </label>
                         <div class="col-sm-2">
                             <input type="number" id="inputIncome" class="form-control" disabled>
@@ -30,7 +30,7 @@
                     <div class="col-sm-6 row position-relative">
                         <!-- Grade -->
 
-                        <label for="inputGradeIndicator" class="col-sm-4 col-form-label">
+                        <label for="inputGradeSCIndicator" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Grade</h6>
                         </label>
                         <div class="col-sm-2">
@@ -39,10 +39,10 @@
 
                     </div>
                     <div class="col-sm-6 row position-relative">
-                        <!-- School Type -->
+                        <!-- Income -->
 
-                        <label for="inputSchoolTypeIndicator" class="col-sm-4 col-form-label">
-                            <h6 class="font-bold">School Type</h6>
+                        <label for="inputIncomeSCIndicator" class="col-sm-4 col-form-label">
+                            <h6 class="font-bold">Income</h6>
                         </label>
                         <div class="col-sm-2">
                             <input type="number" id="inputSchoolTypeIndicator" class="form-control" disabled>
@@ -52,7 +52,7 @@
                     <div class="col-sm-6 row position-relative">
                         <!-- Residency -->
 
-                        <label for="inputResidencyIndicator" class="col-sm-4 col-form-label">
+                        <label for="inputResidencySCIndicator" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Residency</h6>
                         </label>
                         <div class="col-sm-2">
@@ -62,19 +62,19 @@
                     </div>
                 </div>
 
-                <!-- Income -->
+                <!-- Examination -->
                 <div class="card">
                     <div class="card-body ">
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Income</h5>
-                                <button id="indicatorIncomeAdd" onclick="indicatorEAIncomeAdd()" class=" btn btn-sm btn-danger shadow-sm">
-                                    Add Income
+                                <button id="indicatorExaminationAdd" onclick="indicatorSCExaminationAdd()" class=" btn btn-sm btn-danger shadow-sm">
+                                    Add Examination Score
                                 </button>
                             </div>
 
                             <!-- Table with stripped rows -->
-                            <table id="indicatorEAIncomeTable" class="table table-striped" width="100%" cellspacing="100%">
+                            <table id="indicatorSCExaminationTable" class="table table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class="small">
                                         <th class="text-center">No</th>
@@ -85,10 +85,45 @@
                                 </thead>
                                 <tbody class=" small text-center">
                                     <tr>
-                                        <td scope="row">1</td>
+                                        <!-- <td scope="row">1</td>
                                         <td>0</td>
                                         <td>100</td>
-                                        <td>69</td>
+                                        <td>69</td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Income -->
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">Income</h5>
+                                <button id="indicatorIncomeAdd" onclick="indicatorSCIncomeAdd()" class=" btn btn-sm btn-danger shadow-sm">
+                                    Add Income
+                                </button>
+                            </div>
+
+                            <!-- Table with stripped rows -->
+                            <table id="indicatorSCIncomeTable" class="table table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class="small">
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Range from</th>
+                                        <th class="text-center">Range to</th>
+                                        <th class="text-center">Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody class=" small text-center">
+                                    <tr>
+                                        <!-- <td scope="row">1</td>
+                                        <td>0</td>
+                                        <td>100</td>
+                                        <td>69</td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -103,13 +138,13 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Grade</h5>
-                                <button id="indicatorGradeAdd" onclick="indicatorEAGradeAdd()" class=" btn btn-sm btn-danger shadow-sm">
+                                <button id="indicatorGradeAdd" onclick="indicatorSCGradeAdd()" class=" btn btn-sm btn-danger shadow-sm">
                                     Add Grade
                                 </button>
                             </div>
 
                             <!-- Table with stripped rows -->
-                            <table id="indicatorEAGradeTable" class="table table-striped" width="100%" cellspacing="100%">
+                            <table id="indicatorSCGradeTable" class="table table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class="small">
                                         <th class="text-center">No</th>
@@ -120,43 +155,10 @@
                                 </thead>
                                 <tbody class=" small text-center">
                                     <tr>
-                                        <td scope="row">1</td>
+                                        <!-- <td scope="row">1</td>
                                         <td>89</td>
                                         <td>100</td>
-                                        <td>69</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- School Type -->
-                <div class="card">
-                    <div class="card-body ">
-                        <div class="table-responsive">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">School Type</h5>
-                                <button id="indicatorSchoolTypeAdd" onclick="indicatorEASchoolTypeAdd()" class=" btn btn-sm btn-danger shadow-sm">
-                                    Add School Type
-                                </button>
-                            </div>
-
-                            <!-- Table with stripped rows -->
-                            <table id="indicatorEASchoolTypeTable" class="table table-striped" width="100%" cellspacing="100%">
-                                <thead>
-                                    <tr class="small">
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">School</th>
-                                        <th class="text-center">Points</th>
-                                    </tr>
-                                </thead>
-                                <tbody class=" small text-center">
-                                    <tr>
-                                        <td scope="row">1</td>
-                                        <td>Public within Batangas</td>
-                                        <td>69</td>
+                                        <td>69</td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -171,13 +173,13 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Residency</h5>
-                                <button id="indicatorResidencyAdd" onclick="indicatorEAResidencyAdd()" class=" btn btn-sm btn-danger shadow-sm">
+                                <button id="indicatorResidencyAdd" onclick="indicatorSCResidencyAdd()" class=" btn btn-sm btn-danger shadow-sm">
                                     Add Residency
                                 </button>
                             </div>
 
                             <!-- Table with stripped rows -->
-                            <table id="indicatorEAResidencyTable" class="table table-striped" width="100%" cellspacing="100%">
+                            <table id="indicatorSCResidencyTable" class="table table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class="small">
                                         <th class="text-center">No</th>
@@ -186,11 +188,11 @@
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
-                                    <tr>
+                                    <!-- <tr>
                                         <td scope="row">1</td>
                                         <td>Less than 1 year of stay</td>
                                         <td>69</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
