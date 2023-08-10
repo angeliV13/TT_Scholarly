@@ -14,10 +14,11 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col col-lg-500 col-xl-500">
             <div class="card">
-              <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+              <div class="rounded-top text-white d-flex flex-row mb-3" style="background-color: #000; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height:300px">
                   <img src="assets/img/profile-img.jpg" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                 </div>
+
                 <div class="ms-4 adjustable-line-spacing" style="margin-top: 115px;">
                   <h5 class="fw-bold">JUAN
                     DELA CRUZ</h5>
@@ -28,8 +29,14 @@
                     <br>EAC-213991</br>
                   </p>
                 </div>
+
               </div>
-              <div class="my-2 p-4 text-black" style="background-color: #ffff; height:10px;">
+              <div class="gap-2 d-flex justify-content-end">
+                  <button type="button" class="btn bstn-warning btn-sm">Submit</button>
+                  <button type="button" class="btn btn-danger btn-sm">Cancel Submission</button>
+                </div>
+              <div class="p-4 text-black" style="background-color: #ffff; height:10px;">
+                
                 <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
                   <li class="nav-item flex-fill" role="presentation">
                     <button class="nav-link w-100 active" id="personal-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
@@ -236,17 +243,17 @@
                         </h5>
                         <div class="d-flex align-items-center d-grid gap-3">
                           <label class="form-check-label fw-bold">Remarks:</label>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="approveEducInfoCheckDefault">
-                            <label class="form-check-label" for="approveEducInfoCheckDefault">Approve</label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="educApproveRadioDefault" id="educApproveRadioDefault1">
+                            <label class="mx-2 form-check-label" for="educApproveCheckBox"> Approve </label>
                           </div>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="reviewPriInfoCheckDefault">
-                            <label class="form-check-label" for="reviewEducInfoCheckDefault">For Review </label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="educReviewDefault" id="educReviewDefault2">
+                            <label class="mx-2 form-check-label" for="educReviewCheckBox"> For Review </label>
                           </div>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="modiPriInfoCheckDefault">
-                            <label class="form-check-label" for="modiEducInfoCheckDefault">For Modification</label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="educModiDefault" id="educModiDefault3">
+                            <label class="mx-2 form-check-label" for="educModiCheckBox"> For Modification </label>
                           </div>
                         </div>
                       </div>
@@ -801,17 +808,17 @@
                         </h5>
                         <div class="d-flex align-items-center d-grid gap-3">
                           <label class="form-check-label fw-bold">Remarks:</label>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="approveEducInfoCheckDefault">
-                            <label class="form-check-label" for="approveFamInfoCheckDefault">Approve</label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="famApproveRadioDefault" id="famApproveRadioDefault1">
+                            <label class="mx-2 form-check-label" for="famApproveCheckBox"> Approve </label>
                           </div>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="reviewPriInfoCheckDefault">
-                            <label class="form-check-label" for="reviewFamInfoCheckDefault">For Review </label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="famReviewDefault" id="famReviewDefault2">
+                            <label class="mx-2 form-check-label" for="famReviewCheckBox"> For Review </label>
                           </div>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="modiPriInfoCheckDefault">
-                            <label class="form-check-label" for="modiFamInfoCheckDefault">For Modification</label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="famModiDefault" id="famModiDefault3">
+                            <label class="mx-2 form-check-label" for="famModiCheckBox"> For Modification </label>
                           </div>
                         </div>
                       </div>
@@ -1500,17 +1507,17 @@
                         </h5>
                         <div class="d-flex align-items-center d-grid gap-3">
                           <label class="form-check-label fw-bold">Remarks:</label>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="approveEducInfoCheckDefault">
-                            <label class="form-check-label" for="approveAddInfoCheckDefault">Approve</label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="addInfoApproveRadioDefault" id="addInfoApproveRadioDefault1">
+                            <label class="mx-2 form-check-label" for="addInfoApproveCheckBox"> Approve </label>
                           </div>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="reviewPriInfoCheckDefault">
-                            <label class="form-check-label" for="reviewAddInfoCheckDefault">For Review </label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="addInfoReviewDefault" id="addInfoReviewDefault2">
+                            <label class="mx-2 form-check-label" for="addInfoReviewCheckBox"> For Review </label>
                           </div>
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="modiPriInfoCheckDefault">
-                            <label class="form-check-label" for="modiAddInfoCheckDefault">For Modification</label>
+                          <div class="form-check form-radio">
+                            <input class="form-check-input" type="radio" name="addInfoModiDefault" id="addInfoModiDefault3">
+                            <label class="mx-2 form-check-label" for="addInfoModiCheckBox"> For Modification </label>
                           </div>
                         </div>
                       </div>
@@ -1611,7 +1618,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </main><!-- End #main -->

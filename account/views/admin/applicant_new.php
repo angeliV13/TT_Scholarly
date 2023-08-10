@@ -129,17 +129,17 @@
                                                                                     Applicant's other Information
                                                                                 </h4>
                                                                                 <hr class="my-3">
-                                                                                <div class="row mb-3">
+                                                                                <div class="row mb-4">
                                                                                     <label for="inputIncome" class="col-sm-3 col-form-label">Income:</label>
                                                                                     <div class="col-sm-9">
                                                                                         <div class="input-group mb-2">
-                                                                                            <input type="inputIncome" class="form-control" placeholder="Applicant's Income" style="width: 80%" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                                                                            <input type="inputIncome" class="form-control" placeholder="Applicant's Income" style="width: 85%" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                                                                                             <input type="inputIncomepoints" class="col form-control" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row mb-3">
-                                                                                    <label for="inputGrade" class="col-sm-3 col-form-label">Grades (GWA):</label>
+                                                                                    <label for="inputGrade" class="col-sm-3 col-form-label">GWA:</label>
                                                                                     <div class="col-sm-9">
                                                                                         <div class="input-group mb-2">
                                                                                             <input type="inputGradepoints" class="form-control" placeholder="Applicant's General Weightd Average" style="width: 80%" aria-label="Recipient's username" aria-describedby="basic-addon2" />
