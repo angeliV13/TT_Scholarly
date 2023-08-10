@@ -26,11 +26,11 @@
               <i class="bi bi-circle"></i><span>For Interview</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="index.php?nav=assessment">
               <i class="bi bi-circle"></i><span>For Assessment</span>
             </a>
-          </li>
+          </li> -->
           <li>
             <a href="index.php?nav=examination ">
               <i class="bi bi-circle"></i><span>For Qualification Examination</span>

@@ -9,10 +9,9 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title">List of Applicants</h5>
                             <div class="d-flex align-items-center">
-                                <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm"> <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Set Filter </button>
                             </div>
                         </div>
-                        <div class="row mb-5  justify-content-between">
+                        <div class="row mb-1 justify-content-between">
                             <form class="row position-relative">
                                 <!-- Filter options -->
                                 <!-- Scholarship Type --> <label for="inputScholarType" class="col-sm-2 col-form-label">
@@ -40,9 +39,15 @@
                                     </select> </div> <!-- Year Level --> <label for="inputYearLevel" class="mt-4 col-sm-2 col-form-label">
                                     <h6 class="font-bold">Year Level:</h6>
                                 </label>
-                                <div id="yearLevelContainer" class="col-sm-4 mt-4"> <select class="form-select" id="inputYearLevel">
+                                <div id="yearLevelContainer" class="col-sm-4 mt-4">
+                                    <select class="form-select" id="inputYearLevel">
                                         <option selected disabled value="">Choose</option>
-                                    </select> </div>
+                                    </select>
+                                </div>
+                                <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
+                                    <button id="setFilter" class="btn btn-sm btn-danger shadow-sm">Set Filter </button>
+                                    <button class="btn btn-sm btn-danger" onclick="window.print()"> <i class="bi bi-printer"></i> Print List </button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -52,12 +57,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">College</h5>
-                    <div class="d-flex align-items-center">
-                        <button class="btn btn-sm btn-danger" onclick="window.print()"> <i class="bi bi-printer"></i> Print List </button>
-                        <a class="collapsed mx-3" data-bs-target="#shs_table_view" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-chevron-down ms-auto"></i> </a>
-                    </div>
+                    <h5 class="card-title">Applicants</h5>
                 </div>
                 <div class="table-responsive">
                     <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
@@ -89,7 +89,7 @@
                                 <td>+639280653170</td>
                                 <td>San Bartolome</td>
                                 <td>
-                                    <div class="btn-group-vertical d-flex">
+                                    <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                                         <!--CHECK PROFILE BUTTON-->
                                         <button id="viewProfile" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewProfileModal">Check Profile</button>
                                         <div class="modal fade" id="viewProfileModal" tabindex="-1">
@@ -453,6 +453,7 @@
                                                                                                         </div>
                                                                                                     </form>
                                                                                                 </div>
+
                                                                                                 <!--EDUCATIONAL BACKGROUND-->
                                                                                                 <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
                                                                                                     <!--GENERAL EDUC-->
@@ -1018,6 +1019,7 @@
                                                                                                         </div>
                                                                                                     </form>
                                                                                                 </div>
+
                                                                                                 <!--FAMILY BACKGROUND-->
                                                                                                 <div class="tab-pane fade" id="bordered-justified-family-background" role="tabpanel" aria-labelledby="family-background">
                                                                                                     <!--FAMILY INFORMATION-->
@@ -1717,6 +1719,7 @@
                                                                                                     </form>
                                                                                                     <!-- End Custom Styled Validation with Tooltips -->
                                                                                                 </div>
+
                                                                                                 <!--ADDITIONAL BACKGROUND-->
                                                                                                 <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
                                                                                                     <div class="d-flex justify-content-between align-items-center">
@@ -1801,6 +1804,7 @@
                                                                                                     </form>
                                                                                                     <!-- End Custom Styled Validation with Tooltips -->
                                                                                                 </div>
+
                                                                                                 <!-- PAGINATION -->
                                                                                                 <div class="pt-3 d-grid gap-2 d-flex justify-content-end align-items-center" src="pagination.js">
                                                                                                     </script>
@@ -1853,8 +1857,11 @@
                                             <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">REQUIREMENTS</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title ">APPLICANT'S REQUIREMENTS</h5>
+                                                        <div class="d-grid gap-2 d-flex justify-content-end">
+                                                            <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- Vertical Pills Tabs -->
@@ -1862,9 +1869,8 @@
                                                             <div class="col-lg-3">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <div class="d-flex justify-content-center align-items-center">
-                                                                            <h5 class="card-title">GENERAL REQUIREMENTS
-                                                                            </h5>
+                                                                        <div class="d-flex justify-content-between align-items-center">
+                                                                            <h5 class="card-title">GENERAL REQUIREMENTS</h5>
                                                                         </div>
                                                                         <div class="max-width-100">
                                                                             <!-- Set a max width for the container -->
@@ -1878,9 +1884,10 @@
                                                                                 <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance" type="button" role="tab" aria-controls="v-pills-brgyclearance" aria-selected="false">Barangay Clearance</button>
                                                                                 <button class="nav-link flex-fill" id="v-pills-votecertpar-tab" data-bs-toggle="pill" data-bs-target="#v-pills-votecertpar" type="button" role="tab" aria-controls="v-pills-votecertpar" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
                                                                                 <button class="nav-link flex-fill" id="v-pills-votecertapp-tab" data-bs-toggle="pill" data-bs-target="#v-pills-votecertapp" type="button" role="tab" aria-controls="v-pills-votecertapp" aria-selected="false">Voter’s Certificate of the Applicant</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-certtax-tab" data-bs-toggle="pill" data-bs-target="#v-pills-certtax" type="button" role="tab" aria-controls="v-pills-certtax" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation</button>
+                                                                                <button class="nav-link flex-fill" id="v-pills-certtax-tab" data-bs-toggle="pill" data-bs-target="#v-pills-certtax" type="button" role="tab" aria-controls="v-pills-certtax" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation (Parents)</button>
                                                                             </div>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1892,7 +1899,7 @@
                                                                                 <!-- CERT OF REGISTRATION -->
                                                                                 <div class="tab-pane fade show active pt-3" id="v-pills-cor" role="tabpanel" aria-labelledby="v-pills-cor-tab" style="height: 00%; width: 100%">
                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">CERTIFICATE OF REGISTRATION</h5>
+                                                                                        <h6 class="card-title">Certificate of Registration</h6>
                                                                                         <div class="d-flex align-items-center d-grid gap-3">
                                                                                             <label class="form-check-label fw-bold">Remarks:</label>
                                                                                             <div class="form-check form-radio">
@@ -1909,36 +1916,15 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- BIRTH CERT -->
@@ -1948,101 +1934,59 @@
                                                                                         <div class="d-flex align-items-center d-grid gap-3">
                                                                                             <label class="form-check-label fw-bold">Remarks:</label>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="birthApproveCheckBox"> Approve </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthCertApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="birthCertApproveCheckBox"> Approve </label>
                                                                                             </div>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="birthReviewCheckBox"> For Review </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthCertReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="birthCertReviewCheckBox"> For Review </label>
                                                                                             </div>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="birthModiCheckBox"> For Modification </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthCertModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="birthCertModiCheckBox"> For Modification </label>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- CERT OF GOOD MORAL -->
                                                                                 <div class="tab-pane fade pt-3" id="v-pills-goodmoral" role="tabpanel" aria-labelledby="v-pills-goodmoral-tab">
                                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">CERTIFICATE OF GOOD MORAL</h5>
+                                                                                        <h5 class="card-title">CERTIFICATE OF GOOD MORAL CHARACTER</h5>
                                                                                         <div class="d-flex align-items-center d-grid gap-3">
                                                                                             <label class="form-check-label fw-bold">Remarks:</label>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="birthApproveApproveCheckBox"> Approve </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="goodMoralApproveCheckBox"> Approve </label>
                                                                                             </div>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="birthReviewCheckBox"> For Review </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="goodMoralReviewCheckBox"> For Review </label>
                                                                                             </div>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="birthModiCheckBox"> For Modification </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="goodMoralModiCheckBox"> For Modification </label>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- GRADE REPORT -->
@@ -2052,140 +1996,251 @@
                                                                                         <div class="d-flex align-items-center d-grid gap-3">
                                                                                             <label class="form-check-label fw-bold">Remarks:</label>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="birthApproveApproveCheckBox"> Approve </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
                                                                                             </div>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="birthReviewCheckBox"> For Review </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="gradeReportReviewCheckBox"> For Review </label>
                                                                                             </div>
                                                                                             <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="birthModiCheckBox"> For Modification </label>
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="gradeReportModiCheckBox"> For Modification </label>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
-                                                                                    Nesciunt totam et. Consequuntur
-                                                                                    magnam aliquid eos nulla dolor
-                                                                                    iure eos quia. Accusantium
-                                                                                    distinctio omnis et atque
-                                                                                    fugiat. Itaque doloremque
-                                                                                    aliquid sint quasi quia
-                                                                                    distinctio similique. Voluptate
-                                                                                    nihil recusandae mollitia
-                                                                                    dolores. Ut laboriosam
-                                                                                    voluptatum dicta.
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- ID PHOTO 2X2 -->
-                                                                                <div class="tab-pane fade" id="v-pills-2x2pic" role="tabpanel" aria-labelledby="v-pills-2x2pic-tab">
-                                                                                    Saepe animi et soluta ad odit
-                                                                                    soluta sunt. Nihil quos omnis
-                                                                                    animi debitis cumque.
-                                                                                    Accusantium quibusdam
-                                                                                    perspiciatis qui qui omnis
-                                                                                    magnam. Officiis accusamus
-                                                                                    impedit molestias nostrum
-                                                                                    veniam. Qui amet ipsum iure.
-                                                                                    Dignissimos fuga tempore dolor.
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-2x2pic" role="tabpanel" aria-labelledby="v-pills-2x2pic-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">ID Photo</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="gradeReportReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="2x2PhotoModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- VICINITY MAP -->
-                                                                                <div class="tab-pane fade" id="v-pills-vicinitymap" role="tabpanel" aria-labelledby="v-pills-vicinitymap-tab">
-                                                                                    Saepe animi et soluta ad odit
-                                                                                    soluta sunt. Nihil quos omnis
-                                                                                    animi debitis cumque.
-                                                                                    Accusantium quibusdam
-                                                                                    perspiciatis qui qui omnis
-                                                                                    magnam. Officiis accusamus
-                                                                                    impedit molestias nostrum
-                                                                                    veniam. Qui amet ipsum iure.
-                                                                                    Dignissimos fuga tempore dolor.
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-vicinitymap" role="tabpanel" aria-labelledby="v-pills-vicinitymap-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">VICINITY MAP</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="vicinityMapApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="vicinityMapReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="vicinityMapModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- BARANGAY CLEARANCE -->
-                                                                                <div class="tab-pane fade" id="v-pills-brgyclearance" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
-                                                                                    Saepe animi et soluta ad odit
-                                                                                    soluta sunt. Nihil quos omnis
-                                                                                    animi debitis cumque.
-                                                                                    Accusantium quibusdam
-                                                                                    perspiciatis qui qui omnis
-                                                                                    magnam. Officiis accusamus
-                                                                                    impedit molestias nostrum
-                                                                                    veniam. Qui amet ipsum iure.
-                                                                                    Dignissimos fuga tempore dolor.
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-brgyclearance" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">BARANGAY CLEARANCE</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="bgryClearanceApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="bgryClearanceReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="bgryClearanceModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- PARENT'S VOTERS CERT -->
-                                                                                <div class="tab-pane fade" id="v-pills-votecertpar" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
-                                                                                    Saepe animi et soluta ad odit
-                                                                                    soluta sunt. Nihil quos omnis
-                                                                                    animi debitis cumque.
-                                                                                    Accusantium quibusdam
-                                                                                    perspiciatis qui qui omnis
-                                                                                    magnam. Officiis accusamus
-                                                                                    impedit molestias nostrum
-                                                                                    veniam. Qui amet ipsum iure.
-                                                                                    Dignissimos fuga tempore dolor.
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-votecertpar" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">PARENTS VOTER'S ID / CERTIFICATION</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertparApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="votecertparApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertparReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="votecertpareviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertparModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="votecertparModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- APPLICANTS VOTERS CERT -->
-                                                                                <div class="tab-pane fade" id="v-pills-votecertapp" role="tabpanel" aria-labelledby="v-pills-votecertapp-tab">
-                                                                                    Saepe animi et soluta ad odit
-                                                                                    soluta sunt. Nihil quos omnis
-                                                                                    animi debitis cumque.
-                                                                                    Accusantium quibusdam
-                                                                                    perspiciatis qui qui omnis
-                                                                                    magnam. Officiis accusamus
-                                                                                    impedit molestias nostrum
-                                                                                    veniam. Qui amet ipsum iure.
-                                                                                    Dignissimos fuga tempore dolor.
+                                                                                <div class="tab-pane fade pt-3" id="v-pills-votecertapp" role="tabpanel" aria-labelledby="v-pills-votecertapp-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">APPLICANT VOTER'S ID / CERTIFICATION</h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertappApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="votecertappApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertappReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="votecertappReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertpaModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="votecertappModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                                 <!-- INCOME TAX CERT -->
-                                                                                <div class="tab-pane fade" id="v-pills-certtax" role="tabpanel" aria-labelledby="v-pills-certtax-tab">
-                                                                                    Saepe animi et soluta ad odit
-                                                                                    soluta sunt. Nihil quos omnis
-                                                                                    animi debitis cumque.
-                                                                                    Accusantium quibusdam
-                                                                                    perspiciatis qui qui omnis
-                                                                                    magnam. Officiis accusamus
-                                                                                    impedit molestias nostrum
-                                                                                    veniam. Qui amet ipsum iure.
-                                                                                    Dignissimos fuga tempore dolor.
+                                                                                <div class="tab-pane fade pt-3  " id="v-pills-certtax" role="tabpanel" aria-labelledby="v-pills-certtax-tab">
+                                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                                        <h5 class="card-title">INCOME TAX RETURN OR CERTIFICATE OF <br>EMPLOYMENT AND COMPENSATION</br></h5>
+                                                                                        <div class="d-flex align-items-center d-grid gap-3">
+                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="certtaxApproveRadioDefault1">
+                                                                                                <label class="mx-2 form-check-label" for="certtaxApproveCheckBox"> Approve </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="certtaxReviewDefault2">
+                                                                                                <label class="mx-2 form-check-label" for="certtaxReviewCheckBox"> For Review </label>
+                                                                                            </div>
+                                                                                            <div class="form-check form-radio">
+                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="certtaxModiDefault3">
+                                                                                                <label class="mx-2 form-check-label" for="certtaxModiCheckBox"> For Modification </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="card" style="height:100%">
+                                                                                                <div class="card-body">
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- QUILLO DRAGGABLE -->
+                                                                                <div class="col-lg-5">
+                                                                                    <div id="mydiv">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body">
+                                                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                                                    <h5 class="card-title" id="mydivheader">Requirements Remarks</h5>
+                                                                                                    <button type="button" class="btn-close" data-bs-dismiss="mydivheader" aria-label="Close" id="dismissButton"></button>
+                                                                                                </div>
+                                                                                                <!-- Quill Editor Full -->
+                                                                                                <div class="quill-editor-full" style="height: 300px">
+                                                                                                    <p>Hello World!</p>
+                                                                                                    <p>This is Quill <strong>full</strong> editor</p>
+                                                                                                </div>
+                                                                                                <!-- End Quill Editor Full -->
+                                                                                                <div class="d-grid gap-2 pt-3 d-flex justify-content-end">
+                                                                                                    <button type="button" class="btn btn-warning btn-sm">Save Remarks</button>
+                                                                                                    <button type="button" class="btn btn-danger btn-sm">Edit Remarks</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div> <!-- End Vertical Pills Tabs -->
-                                                    </div>
+                                                        </div>
+                                                    </div> <!-- End Vertical Pills Tabs -->
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- REMOVE BUTTON -->
-                                        <button id="viewRequirements" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">Removed Applicant</button>
+                                        <button id="removeApplicant" type="button" class="btn btn-danger">Removed Applicant</button>
                                     </div>
                                     <div class="btn-group" role="group"> </div>
                                 </td>
@@ -2197,3 +2252,5 @@
         </div>
     </section>
 </main>
+<!-- DRAGGABLE -->
+<script src="assets/js/mydiv.js"></script>
