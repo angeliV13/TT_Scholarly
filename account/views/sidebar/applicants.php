@@ -8,10 +8,20 @@
           <span>Profile</span>
         </a>
       </li><!-- End Dashboard Nav -->
-      <?php $scholar_type = 2; $scholarType = 1 + $scholar_type; ?>
 
-      <?php if ($examAccess != null): ?>
-        <?php if ($examAccess[$scholarType] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow): ?>
+      <!--  -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php?nav=profile_applicant.php">
+          <i class="bi bi-files"></i>
+          <span>General Requirements</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <?php $scholar_type = 2;
+      $scholarType = 1 + $scholar_type; ?>
+
+      <?php if ($examAccess != null) : ?>
+        <?php if ($examAccess[$scholarType] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow) : ?>
           <!-- Start Exam Nav -->
           <li class="nav-item">
             <a class="nav-link collapsed" href="index.php?nav=examination">

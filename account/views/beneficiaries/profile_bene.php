@@ -1,19 +1,19 @@
 <main id="main" class="main">
   <!-- Start of Page Title -->
   <div class="pagetitle d-none">
-      <h1>Profile</h1>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-        <li class="breadcrumb-item active">Profile</li>
-      </ol>
-    </div>
-    <!-- End Page Title -->
+    <h1>Profile</h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+      <li class="breadcrumb-item active">Profile</li>
+    </ol>
+  </div>
+  <!-- End Page Title -->
   <section class="section profile">
     <div class="column py-2">
       <div class="col-xl-40">
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-pill" > 
+            <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-pill">
             <h2><?php echo $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
             <h3><?php echo $accType ?></h3>
             <!-- <div class="social-links mt-2">
@@ -77,7 +77,7 @@
                     <!-- END FULL NAME -->
 
                     <!-- BIRTH -->
-                    
+
                     <div class="col-md-4 position-relative">
                       <label for="birth_date" class="form-label">Birth Date</label>
                       <input form="benefInfo" type="date" name="Birthdate" class="form-control" id="birth_date" aria-describedby="inputDate" value="<?php echo $user_info['birth_date'] ?>" <?php echo $user_info['birth_date'] != null ? "disabled" : "" ?>>
@@ -271,8 +271,8 @@
                       <label for="graduating_flag" class="form-label">Are you Graduating this Semester/Term?</label>
                       <select class="form-select" id="graduating_flag" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                       <div class="invalid-tooltip">
                         Please select Yes or No.
@@ -334,7 +334,7 @@
                         <option selected disabled value="">Choose...</option>
                         <?php foreach ($school as $key => $col) : ?>
                           <?php if ($col['school_type'] == 0) : ?>
-                            <option value="<?php echo $key ?>" <?php echo $education[2] != null AND $education[2] == $key ? "selected" : "" ?>><?php echo $col['school_name'] ?></option>
+                            <option value="<?php echo $key ?>" <?php echo $education[2] != null and $education[2] == $key ? "selected" : "" ?>><?php echo $col['school_name'] ?></option>
                           <?php endif; ?>
                         <?php endforeach; ?>
                       </select>
@@ -388,7 +388,7 @@
                     </div>
                     <div class="col-md-12 position-relative">
                       <label for="c_school_address" class="form-label">School Address</label>
-                      <input type="text" class="form-control" id="c_school_address" aria-describedby="c_school_address" >
+                      <input type="text" class="form-control" id="c_school_address" aria-describedby="c_school_address">
                     </div>
                     <div class="column">
                       <div class="container py-3">
@@ -736,7 +736,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Elementary Level</h5>
                   <!-- Custom Styled Validation with Tooltips -->
-                  <div class="row g-4" >
+                  <div class="row g-4">
                     <!-- COLLEGE -->
                     <div class="col-md-4 position-relative">
                       <label for="e_school" class="form-label">Name of School Attended</label>
@@ -880,8 +880,8 @@
                       <label for="family_flag" class="form-label">Are you Living with Family?</label>
                       <select class="form-select" id="family_flag" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                     </div>
                     <div class="col-md-3 position-relative">
@@ -897,7 +897,7 @@
                       <select class="form-select" id="source" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
                         <?php foreach ($incomeArr as $key => $inc) : ?>
-                          <option value="<?php echo $key ?>" <?php echo $gen_info[2] != null AND $gen_info[2] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
+                          <option value="<?php echo $key ?>" <?php echo $gen_info[2] != null and $gen_info[2] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -905,8 +905,8 @@
                       <label for="rent_flag" class="form-label"> Is your Home Rent or Owned?</label>
                       <select class="form-select" id="rent_flag" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Owned</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>Rent</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Owned</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>Rent</option>
                       </select>
                     </div>
                     <!-- <div class="col-md-7 position-relative">
@@ -918,7 +918,7 @@
                       <select class="form-select" id="monthly_payment" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
                         <?php foreach ($incomeArr as $key => $inc) : ?>
-                          <option value="<?php echo $key ?>" <?php echo $gen_info[2] != null AND $gen_info[2] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
+                          <option value="<?php echo $key ?>" <?php echo $gen_info[2] != null and $gen_info[2] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
                         <?php endforeach; ?>
                       </select>
                     </div>
@@ -1463,8 +1463,8 @@
                       <label for="inputWorkingStudent" class="form-label">Are you a Working Student?</label>
                       <select class="form-select" id="inputWorkingStudent" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                     </div>
 
@@ -1473,8 +1473,8 @@
                       <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
                       <select class="form-select" id="inputOfwParents" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                     </div>
 
@@ -1483,8 +1483,8 @@
                       <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
                       <select class="form-select" id="inputOfwMembers" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                     </div>
 
@@ -1493,8 +1493,8 @@
                       <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
                       <select class="form-select" id="inputPwdParents" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                     </div>
 
@@ -1503,8 +1503,8 @@
                       <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
                       <select class="form-select" id="inputOfwMembers" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                     </div>
 
@@ -1524,8 +1524,8 @@
                       <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
                       <select class="form-select" id="inputStudentPwd" <?php echo $gen_info[2] != null ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
-                        <option value="0" <?php echo $gen_info[2] != null AND $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
-                        <option value="1" <?php echo $gen_info[2] != null AND $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
+                        <option value="0" <?php echo $gen_info[2] != null and $gen_info[2] == 0 ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo $gen_info[2] != null and $gen_info[2] == 1 ? "selected" : "" ?>>No</option>
                       </select>
                     </div>
 
