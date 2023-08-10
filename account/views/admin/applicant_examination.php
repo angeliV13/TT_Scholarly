@@ -1,4 +1,13 @@
 <main id="main" class="main">
+    <!-- Start of Page Title -->
+    <div class="pagetitle">
+      <h1>List of Examiners</h1>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Applicants</li>
+          <li class="breadcrumb-item active">List of Examiners</li>
+        </ol>
+    </div>
     <section class="section">
         <div class="column">
             <div class="col-lg-30">
