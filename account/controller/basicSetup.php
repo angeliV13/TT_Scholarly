@@ -3,38 +3,48 @@
 require("../model/basicSetupModel.php");
 
 
-if (isset($_REQUEST['action'])) {
+if (isset($_REQUEST['action'])) 
+{
     $action = $_REQUEST['action'];
 
-    switch ($action) {
+    switch ($action) 
+    {
         case 0.1:
             echo getDefaultSemesterId();
             break;
         case 0.2:
-            if (isset($_REQUEST['sem'])) {
+            if (isset($_REQUEST['sem'])) 
+            {
                 $sem = $_REQUEST['sem'];
                 echo switchSemester($sem);
             }
+
             break;
         case 1:                             //Table Generations
-            if (isset($_REQUEST['getTable'])) {
+            if (isset($_REQUEST['getTable'])) 
+            {
                 $getTable = $_REQUEST['getTable'];
                 if ($getTable == 1)                        //Generate Acad Year Table
                 {
                     echo getAcadYearTable();
-                } elseif ($getTable == 2)                  //Generate Assessment Table
+                } 
+                elseif ($getTable == 2)                  //Generate Assessment Table
                 {
                     echo getSetAssessmentTable();
-                } elseif ($getTable == 3)                  //Generate Renewal Table
+                } 
+                elseif ($getTable == 3)                  //Generate Renewal Table
                 {
                     echo getSetRenewalTable();
-                } elseif ($getTable == 4)                  //Generate Renewal Table
+                } 
+                elseif ($getTable == 4)                  //Generate Renewal Table
                 {
                     echo getSetExamTable();
-                } elseif ($getTable == 5)                  //Generate Indicator EA Income
+                } 
+                elseif ($getTable == 5)                  //Generate Indicator EA Income
                 {
                     echo getIndicatorEATable($_POST['tableCategory']);
-                } elseif ($getTable == 6)                  //Generate Indicator EA Income
+                } 
+                elseif ($getTable == 6)                  //Generate Indicator EA Income
                 {
                     echo getIndicatorSCTable($_POST['tableCategory']);
                 }
@@ -44,22 +54,29 @@ if (isset($_REQUEST['action'])) {
             echo generate_ay();
             break;
         case 1.2:                           //Default Academic Year
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id = $_POST['id'];
 
                 echo defaultAY($id);
-            } else {
+            } 
+            else 
+            {
                 echo 'No AY Exists';
             }
             break;
         case 1.3:                           //Delete Academic Year
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id = $_POST['id'];
 
                 echo deleteAY($id);
-            } else {
+            } 
+            else 
+            {
                 echo 'No AY Exists';
             }
+
             break;
 
         case 2.1:                           //Add Assessment Date
@@ -74,7 +91,8 @@ if (isset($_REQUEST['action'])) {
 
             break;
         case 2.2:                           //Update Assessment Date
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id         = $_POST['id'];
                 $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
@@ -88,13 +106,17 @@ if (isset($_REQUEST['action'])) {
 
             break;
         case 2.3:                           //Delete Assessment Date
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id = $_POST['id'];
 
                 echo deleteSetAssessment($id);
-            } else {
+            } 
+            else 
+            {
                 echo 'No Assessment Exists';
             }
+
             break;
         case 3.1:                           //Add Renewal Date
 
@@ -109,7 +131,8 @@ if (isset($_REQUEST['action'])) {
 
             break;
         case 3.2:                           //Update Renewal Date
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id         = $_POST['id'];
                 $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
@@ -123,11 +146,14 @@ if (isset($_REQUEST['action'])) {
 
             break;
         case 3.3:                           //Delete Set Renewal
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id = $_POST['id'];
 
                 echo deleteSetRenewal($id);
-            } else {
+            } 
+            else 
+            {
                 echo 'No Renewal Exists';
             }
             break;
@@ -146,7 +172,8 @@ if (isset($_REQUEST['action'])) {
 
             break;
         case 4.2:                           //Update Exam Date
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id         = $_POST['id'];
                 $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
@@ -161,16 +188,20 @@ if (isset($_REQUEST['action'])) {
 
             break;
         case 4.3:                           //Delete Set Exam
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id = $_POST['id'];
 
                 echo deleteSetExam($id);
-            } else {
+            } 
+            else 
+            {
                 echo 'No Exam Exists';
             }
             break;
         case 5.1:                           //Update Indicator
-            if (isset($_POST['id'])) {
+            if (isset($_POST['id'])) 
+            {
                 $id         = $_POST['id'];
                 $type       = $_POST['type'];    
                 $value      = $_POST['value'];
@@ -179,6 +210,31 @@ if (isset($_REQUEST['action'])) {
 
                 echo updateIndicator($id, $type, $value, $category, $applicant);
             }
+
+            break;
+        case 6: // Add Notification
+            $data = [
+                'notifFunc'     => isset($_POST['notifFunc']) ? $_POST['notifFunc'] : '',
+                'notifName'     => isset($_POST['notifName']) ? $_POST['notifName'] : '',
+                'notifIcon'     => isset($_POST['notifIcon']) ? $_POST['notifIcon'] : '',
+                'filledCheck'   => isset($_POST['filledCheck']) ? $_POST['filledCheck'] : '',
+                'notifUsers'    => isset($_POST['notifUsers']) ? $_POST['notifUsers'] : '',
+            ];
+
+            echo addNotificationType($data);
+
+            break;
+        case 6.1: // Update Notification
+            $data = [
+                'notifId'       => isset($_POST['notifId']) ? $_POST['notifId'] : '',
+                'notifName'     => isset($_POST['notifName']) ? $_POST['notifName'] : '',
+                'notifIcon'     => isset($_POST['notifIcon']) ? $_POST['notifIcon'] : '',
+                'filledCheck'   => isset($_POST['filledCheck']) ? $_POST['filledCheck'] : '',
+                'notifUsers'    => isset($_POST['notifUsers']) ? $_POST['notifUsers'] : '',
+            ];
+
+            echo updateNotificationType($data);
+
             break;
     }
 }

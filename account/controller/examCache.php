@@ -2,19 +2,24 @@
 
 require("../model/examCacheModel.php");
 
-if (isset($_REQUEST['action'])) {
+if (isset($_REQUEST['action'])) 
+{
     $action = $_REQUEST['action'];
 
-    switch ($action){
+    switch ($action)
+    {
         case 1:
             $page = "index.php?nav=examination_proper";
             $cacheMaxAge = 86400; //Equivalent to One Day
 
             $cachedData = examCacheRead($page, $cacheMaxAge, true);
 
-            if($cachedData != NULL){
+            if($cachedData != NULL)
+            {
                 echo $cachedData;
-            }else{
+            }
+            else
+            {
                 ob_start();
                 include($page);
 

@@ -113,49 +113,6 @@ function get_user_family($id)
     }
 }
 
-function getAccountType($type, $level)
-{
-    $data = [];
-
-    switch ($type)
-    {
-        case 0:
-            $typeName = "Super Admin";
-            break;
-        case 1:
-            $typeName = "Admin";
-            break;
-        case 2:
-            $typeName = "Beneficiaries";
-            break;
-        case 3:
-            $typeName = "Applicants";
-            break;
-        default:
-            $typeName = "Unknown";
-    }
-
-    switch ($level)
-    {
-        case 0:
-            $levelName = "No Super Admin Access";
-            break;
-        case 1:
-            $levelName = "Super Admin w/ limited Access";
-            break;
-        case 2:
-            $levelName = "Super Admin w/ Full Access";
-            break;
-        default:
-            $levelName = "Unknown";
-    }
-
-    array_push($data, $typeName, $levelName);
-
-    return $data;
-}
-
-
 function getCurrentAY()
 {
     include("dbconnection.php");

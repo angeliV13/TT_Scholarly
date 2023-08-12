@@ -7,21 +7,35 @@ function generateRandomString($length = 5) // generates a random string
     $charactersLength = strlen($characters);
     $randomString = '';
 
-
     for ($i = 0; $i < $length; $i++)
     {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
 
-
     return $randomString;
+}
+
+function generateEacNumber()
+{
+    $characters = '0123456789';
+    $charactersLength = strlen($characters);
+
+    $randomString = $eac = '';
+
+    for ($i = 0; $i < 5; $i++)
+    {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+
+    $eac = 'EAC-' . $randomString;
+
+    return $eac;
 }
 
 
 function getDateTimeDiff($date1, $date2, $type = "minutes") // function that returns the difference between two dates
 {
     $diff = abs(strtotime($date2) - strtotime($date1));
-
 
     switch($type)
     {
@@ -41,9 +55,7 @@ function static_count()
 {
     static $count = 0;
 
-
     $count++;
-
 
     return $count;
 }
@@ -281,24 +293,19 @@ function insert_notification($data)
     $notif_body = $data['notif_body'];
     $notif_link = $data['notif_link'];
 
-
     $lastId = (get_lastID(['table' => 'system_notification', 'column' => 'id']) > 0) ? get_lastID(['table' => 'system_notification', 'column' => 'id']) + 1 : 1;
 
-
     $new_link = (strpos($notif_link, '?') !== false) ? $notif_link . '&notif=' . $lastId : $notif_link . '?notif=' . $lastId;
-
 
     if (is_array($user_id))
     {
         $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link, notif_date) VALUES ";
-
 
         foreach ($user_id as $key => $id)
         {
             $notif_text = "Hi " . $id . ", <br>" . $notif_body;
             $sql .= "('$key', '$notif_type', '$lastId', '$notif_text', '$new_link', NOW()),";
         }
-
 
         $sql = rtrim($sql, ",");
     }
@@ -307,9 +314,7 @@ function insert_notification($data)
         $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link) VALUES ($notif_type', '$lastId', '$notif_body', '$notif_link')";
     }
 
-
     $query = $conn->query($sql) or die("Error LC002: " . mysqli_error($conn));
-
 
     return ($query) ? 'success' : $conn->error;
 }
@@ -335,6 +340,81 @@ function update_notification($notificationId, $id = 'NA')
     return ($query) ? 'success' : $conn->error;
 }
 
+function get_notif_func($id = 0, $all = false, $queries = "")
+{
+    include ("dbconnection.php");
+
+    $sql = "SELECT id, notif_func FROM system_notification";
+
+    $sql .= ($all) ? "" : " WHERE id = '$id'";
+
+    $sql .= ($all) ? " WHERE " . $queries : "";
+
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        if ($all)
+        {
+            $data = [];
+
+            while ($row = $query->fetch_assoc())
+            {
+                $data[$row['id']] = $row['notif_func'];
+            }
+
+            return $data;
+        }
+        else
+        {
+            $row = $query->fetch_assoc();
+
+            return $row['notif_func'];
+        }
+    }
+}
+
+function getAccountType($type, $level = 0)
+{
+    $data = [];
+
+    switch ($type)
+    {
+        case 0:
+            $typeName = "Super Admin";
+            break;
+        case 1:
+            $typeName = "Admin";
+            break;
+        case 2:
+            $typeName = "Beneficiaries";
+            break;
+        case 3:
+            $typeName = "Applicants";
+            break;
+        default:
+            $typeName = "Unknown";
+    }
+
+    switch ($level)
+    {
+        case 0:
+            $levelName = "No Super Admin Access";
+            break;
+        case 1:
+            $levelName = "Super Admin w/ limited Access";
+            break;
+        case 2:
+            $levelName = "Super Admin w/ Full Access";
+            break;
+        default:
+            $levelName = "Unknown";
+    }
+
+    array_push($data, $typeName, $levelName);
+
+    return $data;
+}
 
 function get_user_id_type($type)
 {
@@ -388,6 +468,52 @@ function get_user_id_type($type)
         }
     }
 
+
+    return $data;
+}
+
+function get_user_id_notification($type = [])
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $getType = "";
+
+    if (count($type) > 0)
+    {
+        $getType = "AND account_type IN (" . implode(",", $type) . ")";
+    }
+
+    $sql = "SELECT id, user_name FROM account WHERE account_status = 1 " . $getType;
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data[$row['id']] = $row['user_name'];
+        }
+    }
+
+    return $data;
+}
+
+function get_notif_type($id)
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SELECT notified_users FROM notification_type WHERE id = " . $id;
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $data = explode(",", $row['notified_users']);
+    }
 
     return $data;
 }
@@ -462,6 +588,20 @@ function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'que
             return $options['errorValidation'][0];
         }
     }
+}
+
+function check_exist($data)
+{
+    include("dbconnection.php");
+
+    $table = $data['table'];
+    $column = $data['column'];
+    $value = $data['value'];
+
+    $sql = "SELECT * FROM " . $table . " WHERE " . $column . " = '" . $value . "'";
+    $query = $conn->query($sql);
+
+    return $query->num_rows;
 }
 
 

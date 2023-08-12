@@ -179,3 +179,65 @@ function examQuestionsTable()
 
     echo json_encode($json_data);
 }
+
+function notificationTable()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM notification_type";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $notifiedUsers = "";
+            $notifFunc = $row['notif_function'];
+            $notifName = $row['notif_name'];
+            $darkFlag = ($row['dark_flag'] == 1) ? "Yes" : "No";
+            $icon = ($darkFlag == "Yes") ? $row['notif_icon'] . "-fill" : $row['notif_icon'];
+            $notifIcon = "<i class='" . $icon . "' style='font-size:1.5rem;'></i>";
+            $notif = (strpos($row['notified_users'], ",")) ? explode(",", $row['notified_users']) : $row['notified_users'];
+            $button = "<button type='button' class='editNotif btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#editNotifModal' data-id='" . $row['id'] . "' data-name='" . $row['notif_name'] . "' data-icon='" . $row['notif_icon'] . "' data-dark='" . $row['dark_flag'] . "' data-func='" . get_notif_func($row['notif_function']) . " ' data-users='" . $row['notified_users'] . "'>Edit</button>";
+
+
+            if (is_array($notif))
+            {
+                foreach ($notif as $user)
+                {
+                    $notifiedUsers .= getAccountType($user)[0] . "<br>";
+                }
+            }
+            else
+            {
+                $notifiedUsers = getAccountType($notif)[0];
+            }
+
+            $data[] = [
+                static_count(),
+                get_notif_func($notifFunc),
+                $notifName,
+                $notifIcon,
+                $darkFlag,
+                $notifiedUsers,
+                $button,
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+

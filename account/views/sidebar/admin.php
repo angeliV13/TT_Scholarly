@@ -151,6 +151,11 @@
             </a>
           </li>
           <li>
+            <a class="nav-link collapsed" href="index.php?nav=sch_settings">
+              <i class="ri-settings-line"></i><span>School Settings</span>
+            </a>
+          </li>
+          <li>
             <a class="nav-link collapsed" href="index.php?nav=tts_indicators_ea">
               <i class="ri-settings-line"></i><span>Educ Assistance Indicators</span>
             </a>
@@ -158,6 +163,11 @@
           <li>
             <a class="nav-link collapsed" href="index.php?nav=tts_indicators_sc">
               <i class="ri-settings-line"></i><span>Full Scholar Indicators</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link collapsed" href="index.php?nav=ntf_settings">
+              <i class="ri-settings-line"></i><span>Notification Management</span>
             </a>
           </li>
         </ul>

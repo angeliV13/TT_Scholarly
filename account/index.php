@@ -1,13 +1,13 @@
 <?php
 
 // Getting the Path
+session_start();
+
 include('path_identifier.php');
 include('model/functionModel.php');
 include('global_variables.php');
 
 $title = get_title();
-
-session_start();
 
 if (!isset($_SESSION['id'])) header("Location: login.php");
 

@@ -197,8 +197,10 @@ function getSetAssessmentTable()
     $sql = "SELECT * FROM set_assessment WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ007: " . $conn->error);
 
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows <>  0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             extract($row);
 
             $button =   '<div class="row mx-auto">
@@ -818,4 +820,39 @@ function getIndicatorSCTable($indicatorCategory)
 
     echo json_encode($json_data);  // send data as json format
 
+}
+
+function addNotificationType($data)
+{
+    include ("dbconnection.php");
+
+    $notifFunc = $data['notifFunc'];
+    $notifName = $data['notifName'];
+    $notifIcon = $data['notifIcon'];
+    $filledCheck = $data['filledCheck'];
+    $notifUsers = (is_array($data['notifUsers'])) ? implode(',', $data['notifUsers']) : $data['notifUsers'];
+
+    $sql = "UPDATE system_notification SET used_flag = '1' WHERE id = '$notifFunc'";
+    $query = $conn->query($sql);
+
+    $sql = "INSERT INTO notification_type (notif_function, notif_name, notif_icon, dark_flag, notified_users) VALUES ('$notifFunc', '$notifName', '$notifIcon', '$filledCheck', '$notifUsers')";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function updateNotificationType($data)
+{
+    include ("dbconnection.php");
+
+    $notifName = $data['notifName'];
+    $notifIcon = $data['notifIcon'];
+    $filledCheck = $data['filledCheck'];
+    $notifUsers = (is_array($data['notifUsers'])) ? implode(',', $data['notifUsers']) : $data['notifUsers'];
+    $notifId = $data['notifId'];
+
+    $sql = "UPDATE notification_type SET notif_name = '$notifName', notif_icon = '$notifIcon', dark_flag = '$filledCheck', notified_users = '$notifUsers' WHERE id = '$notifId'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
 }

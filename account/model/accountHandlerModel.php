@@ -102,6 +102,7 @@ function registerAccount($data)
 {
     include("dbconnection.php");
 
+    $randomString = generateRandomString(5);
 
     $emailCheck = [
         'table'     => 'account',
@@ -116,11 +117,8 @@ function registerAccount($data)
         'value'     => $data['username'],
     ];
 
-
     $emailCount = check_exist($emailCheck);
     $userCount = check_exist($userCheck);
-    $randomString = generateRandomString(5);
-
 
     if ($emailCount > 0)
     {
@@ -131,6 +129,17 @@ function registerAccount($data)
         return 'Username Already Exist';
     }
 
+    do {
+        $eacNumber = generateEacNumber();
+        $eacCheck = [
+            'table'     => 'user_info',
+            'column'    => 'eac_number',
+            'value'     => $eacNumber,
+        ];
+
+        $eaCount = check_exist($eacCheck);
+
+    } while ($eaCount > 0);
 
     $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
     $msg .= '<p> Your account has been created. Enter the code below to verify your account. This code will expire in 5 minutes. </p>';
@@ -140,8 +149,10 @@ function registerAccount($data)
 
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
+    $notifiedUsers = get_notif_type(1);
+
     $notifData = [
-        'user_id'       => get_user_id_type(4),
+        'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => 1,
         'notif_body'    => $data['firstName'] . ' ' . $data['lastName'] . ' has registered an account.',
         'notif_link'    => '?nav=Adaccount-management',
@@ -177,8 +188,8 @@ function registerAccount($data)
             $img = $fbImg['path'];
         }
 
-        $sql = "INSERT INTO user_info (account_id, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code, fbName, fbUrl, fbImg)
-        VALUES ('$last_id', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]', '$data[fbName]', '$data[fbUrl]', '$img')";
+        $sql = "INSERT INTO user_info (account_id, eac_number, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code, fbName, fbUrl, fbImg)
+        VALUES ('$last_id', '$eacNumber', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]', '$data[fbName]', '$data[fbUrl]', '$img')";
         $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
         if ($query)
@@ -205,22 +216,6 @@ function registerAccount($data)
         echo 'Error RQ002: ' . mysqli_error($conn);
     }
 }
-
-
-function check_exist($data)
-{
-    include("dbconnection.php");
-
-    $table = $data['table'];
-    $column = $data['column'];
-    $value = $data['value'];
-
-    $sql = "SELECT * FROM " . $table . " WHERE " . $column . " = '" . $value . "'";
-    $query = $conn->query($sql);
-
-    return $query->num_rows;
-}
-
 
 function email_confirmation($data)
 {
