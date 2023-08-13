@@ -56,14 +56,15 @@
                     <h5 class="modal-title">Add School</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <input type="hidden" id="userId" value="<?= $_SESSION['id'] ?>">
                 <div class="modal-body">
                     <div class="row d-flex align-items-center mb-2">
                         <label for="schoolName" class="form-label col-3">School Name</label>
-                        <input type="text" class="form-control col" id="schoolName" aria-describedby="schoolName" name="schoolName">
+                        <input type="text" class="form-control col" id="schoolName" aria-describedby="schoolName" name="School Name">
                     </div>
                     <div class="row d-flex align-items-center mb-2">
                         <label for="schoolAddress" class="form-label col-3">School Address</label>
-                        <textarea class="form-control col" name="schoolAddress" id="schoolAddress" cols="30" rows="5"></textarea>
+                        <textarea class="form-control col" name="School Address" id="schoolAddress" cols="30" rows="5"></textarea>
                     </div>
                     <div class="row d-flex align-items-center mb-2">
                         <label for="schoolType" class="form-label col-3">School Type</label>
@@ -111,38 +112,39 @@
                     <h5 class="modal-title">Update School</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <input type="hidden" id="schoolId">
                 <div class="modal-body">
                     <div class="row d-flex align-items-center mb-2">
                         <label for="schoolName" class="form-label col-3">School Name</label>
-                        <input type="text" class="form-control col" id="schoolName" aria-describedby="schoolName" name="schoolName">
+                        <input type="text" class="form-control col" id="editschoolName" aria-describedby="schoolName" name="School Name">
                     </div>
                     <div class="row d-flex align-items-center mb-2">
                         <label for="schoolAddress" class="form-label col-3">School Address</label>
-                        <textarea class="form-control col" name="schoolAddress" id="schoolAddress" cols="30" rows="5"></textarea>
+                        <textarea class="form-control col" name="School Address" id="editschoolAddress" cols="30" rows="5"></textarea>
                     </div>
                     <div class="row d-flex align-items-center mb-2">
                         <label for="schoolType" class="form-label col-3">School Type</label>
                         <div class="col">
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="0" name="schoolType">
+                                <input class="form-check-input" type="radio" value="0" name="editschoolType">
                                 <label class="mx-2 form-check-label">
                                     College
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="1"  name="schoolType">
+                                <input class="form-check-input" type="radio" value="1"  name="editschoolType">
                                 <label class="mx-2 form-check-label">
                                     Senior High School
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="2" name="schoolType">
+                                <input class="form-check-input" type="radio" value="2" name="editschoolType">
                                 <label class="mx-2 form-check-label">
                                     Junior High School
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="3" name="schoolType">
+                                <input class="form-check-input" type="radio" value="3" name="editschoolType">
                                 <label class="mx-2 form-check-label">
                                     Elementary
                                 </label>
@@ -151,7 +153,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" id="updateSchool">Add School</button>
+                    <button type="button" class="btn btn-warning" id="updateSchool">Update School</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>

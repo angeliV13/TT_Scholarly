@@ -2,7 +2,6 @@
 
 require("../model/basicSetupModel.php");
 
-
 if (isset($_REQUEST['action'])) 
 {
     $action = $_REQUEST['action'];
@@ -235,6 +234,32 @@ if (isset($_REQUEST['action']))
 
             echo updateNotificationType($data);
 
+            break;
+        
+        case 7: // Add School
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'schoolName'    => isset($_POST['schoolName']) ? $_POST['schoolName'] : '',
+                'schoolAddress' => isset($_POST['schoolAddress']) ? $_POST['schoolAddress'] : '',
+                'schoolType'    => isset($_POST['schoolType']) ? $_POST['schoolType'][0][0] : '',
+            ];
+
+            echo addSchool($data);
+
+            break;
+        case 7.1: // Update School
+            $data = [
+                'id'      => isset($_POST['id']) ? $_POST['id'] : '',
+                'name'    => isset($_POST['name']) ? $_POST['name'] : '',
+                'address' => isset($_POST['address']) ? $_POST['address'] : '',
+                'type'    => isset($_POST['type']) ? $_POST['type'][0][0] : '',
+            ];
+
+            echo updateSchool($data);
+
+            break;
+        case 7.2: // Delete School
+            echo deleteSchool(isset($_POST['id']) ? $_POST['id'] : '');
             break;
     }
 }

@@ -71,6 +71,7 @@ let my_handlers = {
   $("#register").on("submit", function(e) {
     e.preventDefault();
 
+    let scholarType = check_error(document.getElementById("scholarType"));
     let firstName = check_error(document.getElementById("inputFirstName"));
     let middleName = $("#inputMiddleName").val();
     let lastName = check_error(document.getElementById("inputLastName"));
@@ -139,6 +140,10 @@ let my_handlers = {
       text: "Facebook Profile Picture"
     });
 
+    let citizenship = check_error(document.getElementById("citizenship"));
+    let years = check_error(document.getElementById("years"));
+    let language = check_error(document.getElementById("language"));
+
     let password = checkFlag !== undefined ? checkFlag : undefined;
     let verifyPassword = checkFlag !== undefined ? checkFlag : undefined;
 
@@ -159,8 +164,9 @@ let my_handlers = {
       returnVal: "text"
     });
 
-    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined) {
+    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
       let formData = new FormData();
+      formData.append("scholarType", scholarType);
       formData.append("firstName", firstName);
       formData.append("middleName", middleName);
       formData.append("lastName", lastName);
@@ -177,6 +183,9 @@ let my_handlers = {
       formData.append("city", city);
       formData.append("barangay", barangay);
       formData.append("zipCode", zipCode);
+      formData.append("citizenship", citizenship);
+      formData.append("years", years);
+      formData.append("language", language);
       formData.append("username", username);
       formData.append("email", email);
       formData.append("password", password);
@@ -192,18 +201,10 @@ let my_handlers = {
         processData: false,
         contentType: false,
         beforeSend: function() {
-          Swal.fire({
-            title: 'Please wait...',
-            html: 'Creating your account',
-            allowOutsideClick: false,
-            imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
-            showConfirmButton: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-          })
+          showBeforeSend("Creating your account");
         },
         success: function(response) {
-          swal.close();
+          hideBeforeSend();
           console.log(response);
           if (response == "Success") {
             Swal.fire({

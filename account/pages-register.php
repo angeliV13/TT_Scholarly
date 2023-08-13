@@ -53,6 +53,19 @@ include('includes/main.php');
 
 
                   <form class="row g-3" novalidate id="register" enctype="multipart/form-data">
+                    <div class="col-md-12 position-relative">
+                      <label for="scholarType" class="form-label">Scholarship Type</label>
+                      <select class="form-select" id="scholarType" name="Scholarship Type">
+                        <option selected disabled value="">Choose...</option>
+                        <?php foreach ($religionArr as $key => $value) : ?>
+                          <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a Scholarship Type.
+                      </div>
+                    </div>
+
                     <div class="col-md-3 position-relative">
                       <label for="inputFirstName" class="form-label">First name</label>
                       <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" name="First Name">
@@ -181,6 +194,35 @@ include('includes/main.php');
                       <input type="text" name="Zip Code" id="zipCode" class="form-control">
                       <div class="invalid-tooltip">
                         Please input your Zip Code.
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 position-relative">
+                      <label for="citizenship" class="form-label">Citizenship</label>
+                      <select class="form-select" id="citizenship" name="Citizenship">
+                        <option selected disabled value="">Choose...</option>
+                        <?php foreach ($citizenshipArr as $key => $value) : ?>
+                          <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                      <div class="invalid-tooltip">
+                        Please select a valid Citizenship.
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 position-relative">
+                      <label for="years" class="form-label">Years of Residency in Sto.Tomas</label>
+                      <input type="number" min="0" name="Years of Residency" id="years" class="form-control">
+                      <div class="invalid-tooltip">
+                        Please input years of residency in Sto.Tomas.
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 position-relative">
+                      <label for="language" class="form-label">Mother Tongue</label>
+                      <input type="text" name="Mother Tongue" id="language" class="form-control">
+                      <div class="invalid-tooltip">
+                        Please input your language.
                       </div>
                     </div>
 

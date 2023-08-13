@@ -241,3 +241,54 @@ function notificationTable()
     echo json_encode($json_data);
 }
 
+function schoolTable()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM school ORDER BY school_type ASC";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $name = "";
+            $id = $row['id'];
+            $schoolName = $row['school_name'];
+            $schoolAddress = $row['school_address'];
+            $addedBy = get_user_info($row['added_by']);
+            $dateAdded = date("F d, Y h:i A", strtotime($row['date_added']));
+            $schoolType = get_school_type($row['school_type']);
+            
+            $name = $addedBy['first_name'] . " " . $addedBy['last_name'];
+
+            $data[] = [
+                static_count(),
+                $schoolName,
+                $schoolAddress,
+                $schoolType,
+                // "<pre>" . print_r($addedBy, true) . "</pre>",
+                $name,
+                $dateAdded,
+                "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . $schoolName . "' data-address='" . $schoolAddress . "' data-type='" . $row['school_type'] . "'>Edit</button>
+                <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . $schoolName . "'>Delete</button>",
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+

@@ -67,7 +67,7 @@ function fileCheck(input, condition){
       text: `File type must be ${condition}!`,
     }).then((result) => {
       if (result.isConfirmed) {
-        input.focus();
+        // input.focus();
         
       }
     });
@@ -86,8 +86,8 @@ function handleMismatchError(input) {
       text: `${inputName1} and ${inputName2} cannot be empty!`,
     }).then((result) => {
       if (result.isConfirmed) {
-        input1.focus();
-        input2.focus();
+        // input1.focus();
+        // input2.focus();
         
       }
     });
@@ -98,8 +98,8 @@ function handleMismatchError(input) {
       text: `${inputName1} and ${inputName2} do not match!`,
     }).then((result) => {
       if (result.isConfirmed) {
-        input1.focus();
-        input2.focus();
+        // input1.focus();
+        // input2.focus();
         
       }
     });
@@ -117,7 +117,7 @@ function handleEmptyError(input) {
     text: `${inputName} cannot be empty!`,
   }).then((result) => {
     if (result.isConfirmed) {
-      input.focus();
+      // input.focus();
     }
   });
 }
@@ -132,7 +132,7 @@ function handleNumberType(input, regex, text, conditionCheck) {
       text: `${inputName} must be a number!`,
     }).then((result) => {
       if (result.isConfirmed) {
-        input.focus();
+        // input.focus();
         
       }
     });
@@ -145,7 +145,7 @@ function handleNumberType(input, regex, text, conditionCheck) {
       text: `${inputName} does not match the required format! Please input a valid ${text}.`,
     }).then((result) => {
       if (result.isConfirmed) {
-        input.focus();
+        // input.focus();
         
       }
     });
@@ -173,7 +173,7 @@ function handleDateType(input, condition, conditionCheck) {
           text: `${inputName} cannot be a future date!`,
         }).then((result) => {
           if (result.isConfirmed) {
-            input.focus();
+            // input.focus();
             
           }
         });
@@ -184,7 +184,7 @@ function handleDateType(input, condition, conditionCheck) {
           text: `You must be at least 14 years old to register!`,
         }).then((result) => {
           if (result.isConfirmed) {
-            input.focus();
+            // input.focus();
             
           }
         });
@@ -207,10 +207,26 @@ function handleDefaultType(input, regex, text) {
       text: `${inputName} does not match the required format! Please input a valid ${text}.`,
     }).then((result) => {
       if (result.isConfirmed) {
-        input.focus();
+        // input.focus();
       }
     });
   } else {
     return input.value;
   }
+}
+
+function showBeforeSend(text) {
+  Swal.fire({
+    title: "Please wait...",
+    html: text,
+    imageUrl: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false,
+  });
+}
+
+function hideBeforeSend() {
+  Swal.close();
 }

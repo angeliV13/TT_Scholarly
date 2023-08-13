@@ -1,5 +1,7 @@
 <?php
 // ---------------------------------------------------
+session_start();
+include("functionModel.php");
 // Connection to Account Handler
 function accountHandlerAccess($access, $id)
 {
@@ -855,4 +857,69 @@ function updateNotificationType($data)
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;
+}
+
+function addSchool($data)
+{
+    include("dbconnection.php");
+
+    $sql = "INSERT INTO school (school_name, school_address, added_by, date_added, school_type) VALUES ('{$data['schoolName']}', '{$data['schoolAddress']}', '{$data['userId']}', NOW(), '{$data['schoolType']}')";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function updateSchool($data)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE school SET school_name = '{$data['name']}', school_address = '{$data['address']}', school_type = '{$data['type']}' WHERE id = '{$data['id']}'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function deleteSchool($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM school WHERE id = '$id'";
+    $query = $conn->query($sql);
+
+    if ($query AND $query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $logs = [
+            'table'     => 'delete_school_log',
+            'userId'    => $_SESSION['id'],
+            'column'    => [
+                'schoolId'          => $id,
+                'school_name'       => $row['school_name'],
+                'school_address'    => $row['school_address'],
+                'added_by'          => $row['added_by'],
+                'date_added'        => $row['date_added'],
+                'school_type'       => $row['school_type']
+            ]
+        ];
+
+        $insertLogs = insert_logs($logs);
+
+        if ($insertLogs)
+        {
+            $sql = "DELETE FROM school WHERE id = '$id'";
+            $query = $conn->query($sql);
+
+            return ($query) ? "success" : $conn->error;
+        }
+        else
+        {
+            return "Error inserting logs. Info: " . $insertLogs;
+        }
+
+    }
+    else
+    {
+        return "School does not exist. Info: " . $conn->error;
+    }
 }

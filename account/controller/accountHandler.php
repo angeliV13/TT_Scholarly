@@ -26,6 +26,7 @@ if (isset($_REQUEST['action']))
     else if ($action == 2) // Register
     {
         $data = [
+            'scholarType'       => isset($_POST['scholarType']) ? $_POST['scholarType'] : '',
             'firstName'         => isset($_POST['firstName']) ? $_POST['firstName'] : '',
             'middleName'        => isset($_POST['middleName']) ? $_POST['middleName'] : '',
             'lastName'          => isset($_POST['lastName']) ? $_POST['lastName'] : '',
@@ -42,6 +43,9 @@ if (isset($_REQUEST['action']))
             'city'              => isset($_POST['city']) ? $_POST['city'] : '',
             'barangay'          => isset($_POST['barangay']) ? $_POST['barangay'] : '',
             'zipCode'           => isset($_POST['zipCode']) ? $_POST['zipCode'] : '',
+            'citizenship'       => isset($_POST['citizenship']) ? $_POST['citizenship'] : 0,
+            'years'             => isset($_POST['years']) ? $_POST['years'] : 0,
+            'language'          => isset($_POST['language']) ? $_POST['language'] : 'NA',
             'username'          => isset($_POST['username']) ? $_POST['username'] : '',
             'email'             => isset($_POST['email']) ? $_POST['email'] : '',
             'password'          => isset($_POST['password']) ? $_POST['password'] : '',
@@ -49,11 +53,6 @@ if (isset($_REQUEST['action']))
             'fbUrl'             => isset($_POST['fbUrl']) ? $_POST['fbUrl'] : '',
             'fbImg'             => isset($_FILES['fbImg']) ? $_FILES['fbImg'] : NULL,
         ];
-
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-
 
         echo registerAccount($data);
     }
@@ -122,6 +121,24 @@ if (isset($_REQUEST['action']))
 
 
         echo update_profile($data);
+    }
+    else if ($action == 11) // Update Contact Information (Benef and Applicant)
+    {
+        $data = [
+            'contactNo'         => isset($_POST['contactNo']) ? $_POST['contactNo'] : '',
+            'email'             => isset($_POST['email']) ? $_POST['email'] : '',
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+        ];
+
+        echo updateContactInfo($data);
+    }
+    else if ($action == 12) // get school address
+    {
+        echo getAccountInfo(isset($_POST['schoolId']) ? $_POST['schoolId'] : '');
+    }
+    else if ($action == 13) // Submit Application
+    {
+        echo submitApplication(isset($_POST['userId']) ? $_POST['userId'] : '');
     }
 }
 

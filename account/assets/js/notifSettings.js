@@ -1,3 +1,51 @@
+$("#notifIcon").on("change", function(){
+    let icon = $(this).val();
+
+    $("#showIcon").html(`<i class="${icon}" style="font-size: 1.5rem"></i>`);
+})
+
+$("#editnotifIcon").on("change", function(){
+    let icon = $(this).val();
+
+    $("#editnotifIcon").html(`<i class="${icon}" style="font-size: 1.5rem"></i>`);
+})
+
+$("input[name='filledCheck']").on("change", function(){
+    if ($(this).is(":checked")) {
+        let icon = $("#notifIcon").val();
+        let newIcon = icon + "-fill";
+
+        $("#showIcon").html(`<i class="${newIcon}" style="font-size: 1.5rem"></i>`);
+    } else {
+        console.log("change2");
+        let icon = $("#notifIcon").val();
+
+        $("#showIcon").html(`<i class="${icon}" style="font-size: 1.5rem"></i>`);
+    }
+})
+
+$("#editnotifIcon").on("change", function(){
+    let icon = $(this).val();
+
+    console.log(icon);
+
+    $("#editshowIcon").html(`<i class="${icon}" style="font-size: 1.5rem"></i>`);
+})
+
+$("input[name='editfilledCheck']").on("change", function(){
+    if ($(this).is(":checked")) {
+        let icon = $("#editnotifIcon").val();
+        let newIcon = icon + "-fill";
+
+        $("#editshowIcon").html(`<i class="${newIcon}" style="font-size: 1.5rem"></i>`);
+    } else {
+        let icon = $("#editnotifIcon").val();
+
+        $("#editshowIcon").html(`<i class="${icon}" style="font-size: 1.5rem"></i>`);
+    }
+})
+    
+
 $("#addNotification").on("click", function(e){
     e.preventDefault();
 
@@ -70,7 +118,7 @@ $(document).on("click", ".editNotif", function(){
     let func = $(this).attr("data-func");
     let users = $(this).attr("data-users");
 
-    console.log(id);
+    // console.log(id);
 
     $("#editnotifName").val(name);
     $("#editnotifFunc").val(func);
@@ -91,6 +139,10 @@ $(document).on("click", ".editNotif", function(){
     if (dark == 1) {
         $("input[name='editfilledCheck']").attr("checked", "checked");
     }
+
+    let showIcon = (dark == 1) ? icon + "-fill" : icon;
+
+    $("#editshowIcon").html(`<i class="${showIcon}" style="font-size: 1.5rem"></i>`);
 })
 
 $("#updateNotif").on("click", function(e){

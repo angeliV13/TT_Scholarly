@@ -60,19 +60,174 @@ function static_count()
     return $count;
 }
 
+function get_scholar_type($type)
+{
+    switch ($type)
+    {
+        case 1:
+            return "College Level";
+        case 2:
+            return "Senior High School Level";
+        case 3:
+            return "Junior High School Level";
+        case 4:
+            return "Elementary Level";
+    }
+}
+
+function get_user_data($id)
+{
+    include("dbconnection.php");
+
+    $user_data = [];
+
+    // Checks if Account Exists
+    $query = "SELECT * FROM account WHERE id = '" . $id . "'";
+    $sql = mysqli_query($conn, $query) or die("Error UD001: " . mysqli_error($conn));
+
+    while ($row = mysqli_fetch_assoc($sql))
+    {
+        extract($row);
+    }  
+    
+    array_push($user_data, $id, $user_name, $email, $account_type, $access_level, $account_status);
+    
+    return $user_data;
+}
+
+function get_user_info($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM user_info WHERE account_id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    $user_info = [];
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $user_info = $row;
+    }
+
+    return $user_info;
+}
+
+function get_user_gen_info($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM gen_info WHERE user_id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    $user_info = [];
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $user_info = $row;
+    }
+
+    return $user_info;
+}
+
+function get_user_education($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM education WHERE user_id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    $education = [];
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $education[] = $row;
+        }
+    }
+
+    $sql = "SELECT * FROM user_awards WHERE school_id IN (SELECT id FROM education WHERE user_id = '" . $id . "')";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            foreach ($education as $key => $value)
+            {
+                if ($value['educ_id'] == $row['school_id'])
+                {
+                    $education[$key]['awards'][] = $row;
+                }
+            }
+        }
+    }
+
+    return $education;
+}
+
+function get_user_family($id)
+{
+    include ("dbconnection.php");
+
+    $sql = "SELECT * FROM user_family WHERE user_id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    $family = [];
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $family[] = $row;
+        }
+    }
+}
+
+function get_school_address($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT school_address FROM school WHERE id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    return ($query AND $query->num_rows > 0) ? $query->fetch_assoc()['school_address'] : "Error: School Address Not Found." . $conn->error;
+}
+
+function get_school_type($type)
+{
+    switch ($type)
+    {
+        case 0:
+            return "College";
+            break;
+        case 1:
+            return "Senior High School";
+            break;
+        case 2:
+            return "Junior High School";
+            break;
+        case 3:
+            return "Elementary";
+            break;
+        case 4:
+            return "Others";
+    }
+}
 
 function get_lastID($data)
 {
     include("dbconnection.php");
 
-
     $sql = "SELECT " . $data['column'] . " FROM " . $data['table'] . " ORDER BY " . $data['column'] . " DESC LIMIT 1";
     $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
 
-
     return ($query->num_rows > 0) ? $query->fetch_assoc()[$data['column']] : 0;
 }
-
 
 function sendEmail($to, $subject, $message, $type = 1) // PHPMAILER FUNCTION
 {
@@ -553,7 +708,7 @@ function get_school()
     {
         while ($row = $query->fetch_assoc())
         {
-            $data[] = $row;
+            $data[$row['id']] = $row;
         }
     }
 
@@ -602,6 +757,54 @@ function check_exist($data)
     $query = $conn->query($sql);
 
     return $query->num_rows;
+}
+
+function insert_logs($data)
+{
+    include("dbconnection.php");
+
+    $table = $data['table'];
+    $id = $data['userId'];
+
+    $sql = "INSERT INTO " . $table . " (";
+
+    foreach ($data['column'] as $key => $column)
+    {
+        $sql .= $key . ", ";
+    }
+
+    $sql .= "deleted_by, date_deleted) VALUES (";
+
+    foreach ($data['column'] as $key => $value)
+    {
+        $sql .= "'" . $value . "', ";
+    }
+
+    $sql .= "'" . $id . "', NOW())";
+
+    $query = $conn->query($sql);
+
+    return ($query) ? true : $conn->error;
+}
+
+function get_table_columns($table)
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SHOW COLUMNS FROM " . $table;
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data[] = $row['Field'];
+        }
+    }
+
+    return $data;
 }
 
 

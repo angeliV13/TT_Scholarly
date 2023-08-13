@@ -1,5 +1,6 @@
 <?php
 
+include("functionModel.php");
 
 function getUserNameFromId($id)
 {
@@ -56,6 +57,19 @@ function userLogin($user_name, $password, $type)
         //     extract($row);
         // }
 
+        $sql = "SELECT scholarType FROM scholarship_application WHERE userId = '" . $id . "'";
+        $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
+
+        $scholarApp = "";
+
+        if ($query->num_rows > 0)
+        {
+            $row = $query->fetch_assoc();
+            extract($row);
+
+            $scholarApp = $scholarType;
+        }
+
 
         session_start();
 
@@ -63,6 +77,7 @@ function userLogin($user_name, $password, $type)
         $_SESSION['id'] = $id;
         $_SESSION['account_type'] = $account_type;
         $_SESSION['name'] = getUserNameFromId($id);
+        $_SESSION['scholarType'] = $scholarApp;
 
 
         return 'Success';
@@ -188,8 +203,8 @@ function registerAccount($data)
             $img = $fbImg['path'];
         }
 
-        $sql = "INSERT INTO user_info (account_id, eac_number, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code, fbName, fbUrl, fbImg)
-        VALUES ('$last_id', '$eacNumber', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]', '$data[fbName]', '$data[fbUrl]', '$img')";
+        $sql = "INSERT INTO user_info (account_id, eac_number, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code, citizenship, years_of_residency, language, fbName, fbUrl, fbImg)
+        VALUES ('$last_id', '$eacNumber', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]', '$data[citizenship]', '$data[years]', '$data[language]', '$data[fbName]', '$data[fbUrl]', '$img')";
         $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
         if ($query)
@@ -199,7 +214,17 @@ function registerAccount($data)
 
             if ($query)
             {
-                echo 'Success';
+                $sql = "INSERT INTO scholarship_application (userId, scholarType, dateApplied, status) VALUES ('$last_id', '$data[scholarType]', NOW(), 0)";
+                $query = mysqli_query($conn, $sql) or die("Error RQ004: " . mysqli_error($conn));
+
+                if ($query)
+                {
+                    echo 'Success';
+                }
+                else
+                {
+                    echo 'Error RQ005: ' . mysqli_error($conn);
+                }
             }
             else
             {
@@ -489,6 +514,139 @@ function update_profile($data)
     $query = $conn->query($sql);
 
     return ($query) ? 'Success' : 'Error EQ002: ' . $conn->error;
+}
+
+function updateContactInfo($data)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE user_info SET contact_number = '" . $data['contactNo'] . "' WHERE account_id = '" . $data['userId'] . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    if ($query)
+    {
+        $sql = "UPDATE account SET email = '" . $data['email'] . "' WHERE id = '" . $data['userId'] . "' LIMIT 1";
+        $query = $conn->query($sql);
+
+        return ($query) ? 'success' : 'Error EQ002: ' . $conn->error;
+    }
+    else
+    {
+        return 'Error EQ002: ' . $conn->error;
+    }
+}
+
+function getAccountInfo($id, $type = 0)
+{
+    switch ($type)
+    {
+        case 0:
+            return get_school_address($id);
+            break;
+
+        case 1:
+            break;
+    }
+}
+
+function check_data($id)
+{
+    include("dbconnection.php");
+
+    $genCol = get_table_columns('gen_info');
+    $userFam = get_table_columns('user_family');
+    $educ = get_table_columns('education');
+
+    $data = [];
+
+    $text = "";
+
+    $sql = "SELECT * FROM gen_info WHERE user_id = '" . $id . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            foreach ($genCol as $key => $value)
+            {
+                if ($row[$value] == NULL)
+                {
+                    $data['General Information'][] = $value;
+                }
+            }
+        }
+    }
+    else
+    {
+        return 'Error EQ002 (General Information): ' . $conn->error;
+    }
+
+    $sql = "SELECT * FROM user_family WHERE user_id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            foreach ($userFam as $key => $value)
+            {
+                if ($row[$value] == NULL)
+                {
+                    $data['Family Background'][] = $value;
+                }
+            }
+        }
+    }
+    else
+    {
+        return 'Error EQ002 (Family Data): ' . $conn->error;
+    }
+
+    $sql = "SELECT * FROM education WHERE user_id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            foreach ($educ as $key => $value)
+            {
+                if ($row[$value] == NULL)
+                {
+                    $data['Educational Background'][] = $value;
+                }
+            }
+        }
+    }
+    else
+    {
+        return 'Error EQ002 (Education Background): ' . $conn->error;
+    }
+
+    if ($data != null)
+    {
+        foreach ($data as $key => $value)
+        {
+            $text .= "<h4>" . $key . "</h4>";
+
+            foreach ($value as $key2 => $value2)
+            {
+                $text .= "<p>" . $value2 . "</p>";
+            }
+        }
+
+        return $text;
+    }
+
+    return "success";
+}
+
+function submitApplication($id)
+{
+    $res = check_data($id);
+
+    if ($res != "success") return $res;
 }
 
 

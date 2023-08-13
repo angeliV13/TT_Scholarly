@@ -18,5 +18,8 @@ switch ($action)
     case 3:
         echo notificationTable();
         break;
+    case 4:
+        echo schoolTable();
+        break;
 }
     
