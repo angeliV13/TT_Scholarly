@@ -70,17 +70,17 @@
                     <h5 class="card-title">Applicants</h5>
                 </div>
                 <div class="table-responsive ">
-                    <table id="college_table_view" class="table table-striped header-fixed" width="250%" cellspacing="100%">
+                    <table id="collegeNewApplicantTable" class="table table-striped header-fixed" width="100%" cellspacing="100%">
                         <thead>
-                            <tr class="text-center">
+                            <tr class="text-center small">
                                 <th>No.</th>
-                                <th>Name(LN, FN, MN)</th>
-                                <th>Educational Level</th>
-                                <th>Course</th>
-                                <th>Year Level</th>
+                                <th>Name (LN, FN)</th>
                                 <th>School</th>
                                 <th>School Type</th>
                                 <th>Scholarship Type</th>
+                                <th>Educational Level</th>
+                                <th>Course</th>
+                                <th>Year Level</th>
                                 <th>Contact No.</th>
                                 <th>Barangay</th>
                                 <th>Action</th>
@@ -89,13 +89,13 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Biscocho, Val Juniel Mendoza</td>
-                                <td>College</td>
-                                <td>1st Year</td>
-                                <td>BS Information Technology</td>
+                                <td>Ka Bogart</td>
                                 <td>Batangas State University JPLPC-Malvar</td>
                                 <td>Public</td>
                                 <td>Educational Assistance</td>
+                                <td>College</td>
+                                <td>BS Information Technology</td>
+                                <td>1st Year</td>
                                 <td>+639280653170</td>
                                 <td>San Bartolome</td>
                                 <td>
@@ -249,7 +249,7 @@
                                                             </div>
                                                             <div class="col-lg-8">
                                                                 <div class="container h-500">
-                                                                    <div class="row d-flex justify-content-center align-items-center h-100">
+                                                                    <div class="row d-flex justify-content-center h-100">
                                                                         <div class="col col-lg-500 col-xl-500">
                                                                             <div class="card">
                                                                                 <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">

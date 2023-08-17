@@ -21,5 +21,8 @@ switch ($action)
     case 4:
         echo schoolTable();
         break;
+    case 5:
+        echo collegeNewApplicantTable();
+        break;
 }
     

@@ -292,3 +292,44 @@ function schoolTable()
     echo json_encode($json_data);
 }
 
+function collegeNewApplicantTable(){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM account WHERE account_type = '3' AND account_status = '1'";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            extract($row);
+            $name = get_user_info($id);
+            
+            $data[] = [
+                static_count(),
+                $name['last_name'] . ', ' . $name['first_name'],
+                1,1,1,1,1,1,1,1,
+                // "<pre>" . print_r($addedBy, true) . "</pre>",
+                
+                "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . 1 . "' data-address='" . 1 . "' data-type='" . 1 . "'>Edit</button>
+                <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . 1 . "'>Delete</button>",
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
