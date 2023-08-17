@@ -13,32 +13,18 @@ if(isset($_REQUEST['action'])){
             }
             break;
         case 2:         // Upload of Assessment Requirements
-            $schoolIdCheck   = $_POST['schoolIdCheck'];
-            $clearanceCheck  = $_POST['clearanceCheck'];
-            $corCheck        = $_POST['corCheck'];
-            $gradeCheck      = $_POST['gradeCheck'];
-            $schoolIdFile    = isset($_FILES['schoolIdFile'])   ? $_FILES['schoolIdFile']   : "";
-            $clearanceFile   = isset($_FILES['clearanceFile'])  ? $_FILES['clearanceFile']  : "";
-            $corFile         = isset($_FILES['corFile'])        ? $_FILES['corFile']        : "";
-            $gradeFile       = isset($_FILES['gradeFile'])      ? $_FILES['gradeFile']      : "";
-            $validSchoolId   = 0;
-            $validClearance  = 0;
-            $validCor        = 0;
-            $validGrade      = 0;
+            // $schoolIdNA      = isset($_POST['schoolIdNA'])      ? $_POST['schoolIdNA']   : "";
+            // $clearanceNA     = isset($_POST['clearanceNA'])     ? $_POST['clearanceNA']  : "";
+            // $corNA           = isset($_POST['corNA'])           ? $_POST['corNA']        : "";
+            // $gradeNA         = isset($_POST['gradeNA'])         ? $_POST['gradeNA']      : "";
+            $schoolIdFile    = isset($_FILES['schoolIdFile'])   ? $_FILES['schoolIdFile']   : $_POST['schoolIdFile'];
+            $clearanceFile   = isset($_FILES['clearanceFile'])  ? $_FILES['clearanceFile']  : $_POST['clearanceFile'];
+            $corFile         = isset($_FILES['corFile'])        ? $_FILES['corFile']        : $_POST['corFile'];
+            $gradeFile       = isset($_FILES['gradeFile'])      ? $_FILES['gradeFile']      : $_POST['gradeFile'];
 
-            //Validation
-            $validSchoolId   = getFileChecks( $schoolIdCheck     , $schoolIdFile );
-            $validClearance  = getFileChecks( $clearanceCheck    , $clearanceFile);
-            $validCor        = getFileChecks( $corCheck          , $corFile      );
-            $validGrade      = getFileChecks( $gradeCheck        , $gradeFile    );    
-
-            if($validSchoolId == 0 || $validClearance == 0 || $validCor == 0 || $validGrade == 0){
-                echo 'VC001: Error in File Validation';
-            }else{
-                $target_dir .= "/assessment/";
-                // print_r(submitAssessment($target_dir, $schoolIdCheck, $clearanceCheck, $corCheck, $gradeCheck, $schoolIdFile, $clearanceFile, $corFile, $gradeFile));
-                echo submitAssessment($target_dir, $schoolIdCheck, $clearanceCheck, $corCheck, $gradeCheck, $schoolIdFile, $clearanceFile, $corFile, $gradeFile);
-            }
+            $target_dir .= "/assessment/";
+            // print_r(submitAssessment($target_dir, $schoolIdCheck, $clearanceCheck, $corCheck, $gradeCheck, $schoolIdFile, $clearanceFile, $corFile, $gradeFile));
+            echo submitAssessment($target_dir, $schoolIdFile, $clearanceFile, $corFile, $gradeFile);
 
             break;
     }

@@ -144,105 +144,80 @@ function getFileData(myFile, inputId) {
 
 //  Saving
 $("#submitAssessment").submit(function (e) {
-  var schoolIdCheck     = $("#btn_na_SchoolId").is(":checked");
-  var clearanceCheck    = $("#btn_na_Clearance").is(":checked");
-  var corCheck          = $("#btn_na_Cor").is(":checked");
-  var gradeCheck        = $("#btn_na_Grade").is(":checked");
-  var schoolIdFile      = document.getElementById("fileUploadSchoolId").files[0];
-  var clearanceFile     = document.getElementById("fileUploadClearance").files[0];
-  var corFile           = document.getElementById("fileUploadCor").files[0];
-  var gradeFile         = document.getElementById("fileUploadGrade").files[0];
-  var validSchoolId     = false;
-  var validClearance    = false;
-  var validCor          = false;
-  var validGrade        = false;
+  e.preventDefault();
 
-  var form_data = new FormData();  
-  form_data.append('action', 2);
-  form_data.append('schoolIdCheck', schoolIdCheck);
-  form_data.append('clearanceCheck', clearanceCheck);
-  form_data.append('corCheck', corCheck);
-  form_data.append('gradeCheck', gradeCheck);                
+  let schoolIdCheck     = ($("#btn_na_SchoolId").is(":checked") == true ? 1 : 0);
+  let clearanceCheck    = ($("#btn_na_Clearance").is(":checked") == true ? 1 : 0);
+  let corCheck          = ($("#btn_na_Cor").is(":checked") == true ? 1 : 0);
+  let gradeCheck        = ($("#btn_na_Grade").is(":checked") == true ? 1 : 0);
+  let schoolIdFile, clearanceFile, corFile, gradeFile;
+ 
+  schoolIdFile          = (schoolIdCheck == 1)   ? '0'  : ((document.getElementById("fileUploadSchoolId")  == null) ? '1' : (((document.getElementById("fileUploadSchoolId"))== undefined)  ? '2' : document.getElementById("fileUploadSchoolId").files[0]));
+  clearanceFile         = (clearanceCheck == 1)  ? '0'  : ((document.getElementById("fileUploadClearance") == null) ? '1' : (((document.getElementById("fileUploadClearance"))== undefined) ? '2' : document.getElementById("fileUploadClearance").files[0]));
+  corFile               = (corCheck == 1)        ? '0'  : ((document.getElementById("fileUploadCor")       == null) ? '1' : (((document.getElementById("fileUploadCor"))== undefined)       ? '2' : document.getElementById("fileUploadCor").files[0]));
+  gradeFile             = (gradeCheck == 1)      ? '0'  : ((document.getElementById("fileUploadGrade")     == null) ? '1' : (((document.getElementById("fileUploadGrade"))== undefined)     ? '2' : document.getElementById("fileUploadGrade").files[0]));
+
+  console.log(schoolIdFile);
+  console.log(clearanceFile);
+
+  let form_data = new FormData(); 
+
+  form_data.append('action', 2);            
   form_data.append('schoolIdFile', schoolIdFile);
   form_data.append('clearanceFile', clearanceFile);
   form_data.append('corFile', corFile);
   form_data.append('gradeFile', gradeFile);
 
-  //Validation
-  validSchoolId = getFileChecks(schoolIdCheck, schoolIdFile);
-  validClearance = getFileChecks(clearanceCheck, clearanceFile);
-  validCor = getFileChecks(corCheck, corFile);
-  validGrade = getFileChecks(gradeCheck, gradeFile);
+  Swal.fire({
+    title: "Submit Assessment?",
+    text: "Are you sure you want to submit your assessment requirements? This cannot be undone",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Submit",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/uploadRequirements.php",
+        processData: false,
+        contentType: false,
+        data: form_data,
 
-  //Check if Requirements are Submitted
-  if (
-    validSchoolId == false ||
-    validClearance == false ||
-    validCor == false ||
-    validGrade == false
-  ) {
-    Swal.fire({
-      title: "Missing Assessment",
-      text: "Assessments documents are missing",
-      icon: "error",
-    });
-  } else {
-    Swal.fire({
-      title: "Submit Assessment?",
-      text: "Are you sure you want to submit your assessment requirements? This cannot be undone",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Submit",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          type: "POST",
-          url: "controller/uploadRequirements.php",
-          processData: false,
-          contentType: false,
-          data: form_data,
-        //   data: {
-        //     action: 1,
-        //     schoolIdCheck   : schoolIdCheck,
-        //     clearanceCheck  : clearanceCheck,
-        //     corCheck        : corCheck,
-        //     gradeCheck      : gradeCheck,
-        //     schoolIdFile    : schoolIdFile,
-        //     clearanceFile   : clearanceFile,
-        //     corFile         : corFile,
-        //     gradeFile       : gradeFile,
-        //   },
-          success: function (data) {
-            if (data == "Insert Success") {
-              Swal.fire({
-                title: "Success!",
-                icon: "success",
-                html: "Upload Success",
-              });
-            } else {
-                console.log(data);
-            //   Swal.fire({
-            //     title: "Error!",
-            //     icon: "error",
-            //     html: data,
-            //   });
-            }
-          },
-        });
-      }
-    });
-  }
+        success: function (data) {
+          if (data == "Success") {
+            let timerInterval;
+
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: "Upload Success",
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              if (result.dismiss) {
+                location.reload();
+              }
+            });
+            
+          } else {
+            console.log(data);
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
 
   return false;
 });
 
-// Checking File
-function getFileChecks(check, file) {
-  if (check == false) {
-    if (file != undefined) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
