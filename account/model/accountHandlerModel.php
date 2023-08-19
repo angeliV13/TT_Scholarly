@@ -513,12 +513,14 @@ function update_profile($data)
     $sql .= " WHERE account_id = '" . $id . "' LIMIT 1";
     $query = $conn->query($sql);
 
-    return ($query) ? 'Success' : 'Error EQ002: ' . $conn->error;
+    return ($query) ? 'Success' : 'Error File Upload: ' . $conn->error;
 }
 
 function updateContactInfo($data)
 {
     include("dbconnection.php");
+
+    $status = update_status(1, $data['userId']); if (!$status) return 'Update Status Error: ' . $status;
 
     $sql = "UPDATE user_info SET contact_number = '" . $data['contactNo'] . "' WHERE account_id = '" . $data['userId'] . "' LIMIT 1";
     $query = $conn->query($sql);
@@ -528,12 +530,28 @@ function updateContactInfo($data)
         $sql = "UPDATE account SET email = '" . $data['email'] . "' WHERE id = '" . $data['userId'] . "' LIMIT 1";
         $query = $conn->query($sql);
 
-        return ($query) ? 'success' : 'Error EQ002: ' . $conn->error;
+        return ($query) ? 'success' : 'Error Account Information: ' . $conn->error;
     }
     else
     {
-        return 'Error EQ002: ' . $conn->error;
+        return 'Error User Information: ' . $conn->error;
     }
+}
+
+function updateGenInfo($data)
+{
+    include("dbconnection.php");
+
+    // $status = update_status(4, $data['userId']); if (!$status) return 'Update Status Error: ' . $status;
+
+    $sql = "UPDATE gen_info SET working_flag = '$data[working_flag]', ofw_flag = '$data[ofw_flag]', other_ofw = '$data[other_ofw]'
+            pwd_flag = '$data[pwd_flag]', other_pwd = '$data[other_pwd]', status_flag = '$data[status_flag]', self_pwd_flag = '$data[self_pwd_flag]'
+            WHERE user_id = '" . $data['userId'] . "' LIMIT 1";
+    
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success' : 'Error General Information: ' . $conn->error;
+
 }
 
 function getAccountInfo($id, $type = 0)
@@ -553,91 +571,97 @@ function check_data($id)
 {
     include("dbconnection.php");
 
-    $genCol = get_table_columns('gen_info');
-    $userFam = get_table_columns('user_family');
-    $educ = get_table_columns('education');
+    // $genCol = get_table_columns('gen_info');
+    // $userFam = get_table_columns('user_family');
+    // $educ = get_table_columns('education');
 
-    $data = [];
+    // $data = [];
 
-    $text = "";
+    // $text = "";
 
-    $sql = "SELECT * FROM gen_info WHERE user_id = '" . $id . "' LIMIT 1";
-    $query = $conn->query($sql);
+    // $sql = "SELECT * FROM gen_info WHERE user_id = '" . $id . "' LIMIT 1";
+    // $query = $conn->query($sql);
 
-    if ($query->num_rows > 0)
-    {
-        while ($row = $query->fetch_assoc())
-        {
-            foreach ($genCol as $key => $value)
-            {
-                if ($row[$value] == NULL)
-                {
-                    $data['General Information'][] = $value;
-                }
-            }
-        }
-    }
-    else
-    {
-        return 'Error EQ002 (General Information): ' . $conn->error;
-    }
+    // if ($query->num_rows > 0)
+    // {
+    //     while ($row = $query->fetch_assoc())
+    //     {
+    //         foreach ($genCol as $key => $value)
+    //         {
+    //             if ($row[$value] == NULL)
+    //             {
+    //                 $data['General Information'][] = $value;
+    //             }
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    //     return 'Error EQ002 (General Information): ' . $conn->error;
+    // }
 
-    $sql = "SELECT * FROM user_family WHERE user_id = '" . $id . "'";
-    $query = $conn->query($sql);
+    // $sql = "SELECT * FROM user_family WHERE user_id = '" . $id . "'";
+    // $query = $conn->query($sql);
 
-    if ($query->num_rows > 0)
-    {
-        while ($row = $query->fetch_assoc())
-        {
-            foreach ($userFam as $key => $value)
-            {
-                if ($row[$value] == NULL)
-                {
-                    $data['Family Background'][] = $value;
-                }
-            }
-        }
-    }
-    else
-    {
-        return 'Error EQ002 (Family Data): ' . $conn->error;
-    }
+    // if ($query->num_rows > 0)
+    // {
+    //     while ($row = $query->fetch_assoc())
+    //     {
+    //         foreach ($userFam as $key => $value)
+    //         {
+    //             if ($row[$value] == NULL)
+    //             {
+    //                 $data['Family Background'][] = $value;
+    //             }
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    //     return 'Error EQ002 (Family Data): ' . $conn->error;
+    // }
 
-    $sql = "SELECT * FROM education WHERE user_id = '" . $id . "'";
-    $query = $conn->query($sql);
+    // $sql = "SELECT * FROM education WHERE user_id = '" . $id . "'";
+    // $query = $conn->query($sql);
 
-    if ($query->num_rows > 0)
-    {
-        while ($row = $query->fetch_assoc())
-        {
-            foreach ($educ as $key => $value)
-            {
-                if ($row[$value] == NULL)
-                {
-                    $data['Educational Background'][] = $value;
-                }
-            }
-        }
-    }
-    else
-    {
-        return 'Error EQ002 (Education Background): ' . $conn->error;
-    }
+    // if ($query->num_rows > 0)
+    // {
+    //     while ($row = $query->fetch_assoc())
+    //     {
+    //         foreach ($educ as $key => $value)
+    //         {
+    //             if ($row[$value] == NULL)
+    //             {
+    //                 $data['Educational Background'][] = $value;
+    //             }
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    //     return 'Error EQ002 (Education Background): ' . $conn->error;
+    // }
 
-    if ($data != null)
-    {
-        foreach ($data as $key => $value)
-        {
-            $text .= "<h4>" . $key . "</h4>";
+    // if ($data != null)
+    // {
+    //     foreach ($data as $key => $value)
+    //     {
+    //         $text .= "<h4>" . $key . "</h4>";
 
-            foreach ($value as $key2 => $value2)
-            {
-                $text .= "<p>" . $value2 . "</p>";
-            }
-        }
+    //         foreach ($value as $key2 => $value2)
+    //         {
+    //             $text .= "<p>" . $value2 . "</p>";
+    //         }
+    //     }
 
-        return $text;
-    }
+    //     return $text;
+    // }
+
+    $stat = check_status($id);
+    $info_flag = $stat['info_flag']; if ($info_flag == 0) return "Please complete your personal information.";
+    $educ_flag = $stat['educ_flag']; if ($educ_flag == 0) return "Please complete your educational background.";
+    $family_flag = $stat['family_flag']; if ($family_flag == 0) return "Please complete your family background.";
+    $add_flag = $stat['add_flag']; if ($add_flag == 0) return "Please complete your other general information.";
 
     return "success";
 }

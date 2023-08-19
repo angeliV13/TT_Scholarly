@@ -1,5 +1,31 @@
 let userId = $("#userId").val();
 let scholarLevel = $("#scholarLevel").val();
+let educBG = $("#educational-background");
+let famBG = $("#family-background");
+let addBG = $("#additional-information");
+
+// if you hover your mouse to educBG tab and it is disabled, show a tooltip saying that the user needs to confirm their personal information first
+$(document).on("mouseenter click", "#educBG", function(){
+    if ($(this).attr("data-status") == "disabled"){
+        $("#educational-background").attr("data-bs-toggle", "tooltip");
+        $("#educational-background").attr("title", "Please confirm your personal information first!");
+    }
+})
+
+$(document).on("mouseenter click", "#famBG", function(){
+    if ($(this).attr("data-status") == "disabled"){
+        $("#family-background").attr("data-bs-toggle", "tooltip");
+        $("#family-background").attr("title", "Please confirm your educational background first!");
+    }
+})
+
+$(document).on("mouseenter click", "#addBG", function(){
+    if ($(this).attr("data-status") == "disabled"){
+        $("#additional-information").attr("data-bs-toggle", "tooltip");
+        $("#additional-information").attr("title", "Please confirm your family background first!");
+    }
+})
+
 
 $("#benefInfo").on("submit", function(e){
     e.preventDefault();
@@ -10,14 +36,14 @@ $("#benefInfo").on("submit", function(e){
         conditionCheck: "contactNumber",
         regex: /^\d{10}$/,
         text: "Contact Number"
-    });
+    }); if (contactNo == undefined) return;
     
     let email = check_error(document.getElementById("email"), options = {
         type: "email",
         verifyFlag: 1,
         regex: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
         text: "Email"
-    });
+    }); if (email == undefined) return;
 
     if (contactNo && email){
         $.ajax({
@@ -57,6 +83,21 @@ $("#benefInfo").on("submit", function(e){
                 }
             }
         })
+    }
+})
+
+$("#graduating_flag").on("change click", function(){
+    let val = $(this).val();
+
+    if (val == 0){
+        $("#honor_flag").prop("disabled", false);
+        $("#graduation_year").prop("disabled", true);
+    } else {
+        $("#graduation_year").prop("disabled", false);
+        $("#honor_flag").prop("disabled", true);
+        $("#honor_type").prop("disabled", true);
+        $("#other_honor").prop("disabled", true);
+        $("#other_honor").val("");
     }
 })
 
@@ -414,6 +455,7 @@ $("#addSibling").on("click", function(){
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
         <td><button class="editSiblingRow btn btn-primary btn-sm">Edit</button><button class="deleteSiblingRow btn btn-danger btn-sm">Delete</button></td>
     </tr>`);
 })
@@ -453,143 +495,435 @@ $("#siblingTable").on("click", ".deleteSiblingRow", function(){
 $("#educationBG").on("submit", function(e){
     e.preventDefault();
 
-    let graduating_flag = check_error(document.getElementById("graduating_flag"));
-    let honor_flag = honor_type = other_honor = "";
+    let graduating_flag = check_error(document.getElementById("graduating_flag")); if (graduating_flag == undefined) return;
+    let graduation_year = honor_flag = honor_type = other_honor = s_year_level = strand = s_schoolAddress = c_year_level = c_major = c_school_address = course = j_school_address = j_year_level = e_grade_level = e_school_address = s_otherSchool = s_otherStrand = j_otherSchool = e_otherSchool = c_otherSchool = c_otherCourse = "";
+    let c_school = courseText = s_school = strandText = j_school = e_school = "";
+
+    let collegeTableBody = $("#collegeTable tbody");
+    let collegeRows = collegeTableBody.children();
+    let college = [];
+
+    let shsTableBody = $("#shsTable tbody");
+    let shsRows = shsTableBody.children();
+    let shs = [];
+
+    let jhsTableBody = $("#jhsTable tbody");
+    let jhsRows = jhsTableBody.children();
+    let jhs = [];
+
+    let elemTableBody = $("#elemTable tbody");
+    let elemRows = elemTableBody.children();
+    let elem = [];
 
     if (graduating_flag == 0){
-        honor_flag = check_error(document.getElementById("honor_flag"));
+        honor_flag = check_error(document.getElementById("honor_flag")); if (honor_flag == undefined) return;
 
         if (honor_flag == 0){
-            honor_type = check_error(document.getElementById("honor_type"));
+            honor_type = check_error(document.getElementById("honor_type")); if (honor_type == undefined) return;
 
             if (honor_type == "3"){
-                other_honor = check_error(document.getElementById("other_honor"));
+                other_honor = check_error(document.getElementById("other_honor")); if (other_honor == undefined) return;
             }
         }
+    } else if (graduating_flag) {
+        graduation_year = check_error(document.getElementById("graduation_year")); if (graduation_year == undefined) return;
     }
 
     if (scholarLevel == 1){
-        // college
-        let c_school = check_error(document.getElementById("c_school"));
-        let c_year_level = check_error(document.getElementById("c_year_level"));
-        let course = check_error(document.getElementById("c_course"));
-        let courseText = check_error(document.getElementById("c_courseText"), options = {returnVal: "text"});
-        let c_major = check_error(document.getElementById("c_major"));
-        let c_school_address = check_error(document.getElementById("c_school_address"));
-        let c_otherSchool = c_otherCourse = "";
+        c_school = check_error(document.getElementById("c_school")); if (c_school == undefined) return;
+        courseText = check_error(document.getElementById("c_courseText"), options = {returnVal: "text"}); if (courseText == undefined) return;
+        c_year_level = check_error(document.getElementById("c_year_level")); if (c_year_level == undefined) return;
+        course = check_error(document.getElementById("c_course")); if (course == undefined) return;
+        c_major = check_error(document.getElementById("c_major")); if (c_major == undefined) return;
+        c_school_address = check_error(document.getElementById("c_school_address")); if (c_school_address == undefined) return;
 
         if (c_school == "Others"){
-            c_otherSchool = check_error(document.getElementById("c_otherSchool"));
+            c_otherSchool = check_error(document.getElementById("c_otherSchool")); if (c_otherSchool == undefined) return;
         }
 
         if (courseText == "Others"){
-            c_otherCourse = check_error(document.getElementById("c_otherCourse"));
+            c_otherCourse = check_error(document.getElementById("c_otherCourse")); if (c_otherCourse == undefined) return;
         }
 
-        let collegeTableBody = $("#collegeTable tbody");
-        let rows = collegeTableBody.children();
-        let college = [];
-
-        for (let i = 0; i < rows.length; i++){
-            let row = rows.eq(i);
-            let collegeObj = {
-                honor: row.children().eq(1).text(),
-                acadYear: row.children().eq(2).text(),
-                sem: row.children().eq(3).text(),
-                yearLevel: row.children().eq(4).text(),
+        if (collegeRows.length > 0){
+            for (let i = 0; i < collegeRows.length; i++){
+                let row = collegeRows.eq(i);
+                let collegeObj = {
+                    honor: row.children().eq(1).text(),
+                    acadYear: row.children().eq(2).text(),
+                    sem: row.children().eq(3).text(),
+                    yearLevel: row.children().eq(4).text(),
+                }
+                college.push(collegeObj);
             }
-            college.push(collegeObj);
+    
+            let collegeCount = 0;
+    
+            for (let i = 0; i < college.length; i++){
+                let obj = college[i];
+                for (let key in obj){
+                    if (obj[key] == ""){
+                        collegeCount++;
+                    }
+                }
+            }
+    
+            if (collegeCount > 0){
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please fill out all fields in the College table."
+                })
+    
+                return;
+            }
         }
     }
 
     if (scholarLevel == 1 || scholarLevel == 2){
         // SHS
-        let s_school = check_error(document.getElementById("s_school"));
-        let s_year_level = check_error(document.getElementById("s_year_level"));
-        let strand = check_error(document.getElementById("s_strand"));
-        let strandText = check_error(document.getElementById("s_strandText"), options = {returnVal: "text"});
-        let s_schoolAddress = check_error(document.getElementById("s_schoolAddress"));
-        let s_otherSchool = s_otherStrand = "";
+        s_school = check_error(document.getElementById("s_school")); if (s_school == undefined) return;
+        strandText = check_error(document.getElementById("s_strandText"), options = {returnVal: "text"}); if (strandText == undefined) return;
+        s_year_level = check_error(document.getElementById("s_year_level")); if (s_year_level == undefined) return;
+        strand = check_error(document.getElementById("s_strand")); if (strand == undefined) return;
+        s_schoolAddress = check_error(document.getElementById("s_schoolAddress")); if (s_schoolAddress == undefined) return;
 
         if (s_school == "Others"){
-            s_otherSchool = check_error(document.getElementById("s_otherSchool"));
+            s_otherSchool = check_error(document.getElementById("s_otherSchool")); if (s_otherSchool == undefined) return;
         }
 
         if (strandText == "Others"){
-            s_otherStrand = check_error(document.getElementById("s_otherStrand"));
+            s_otherStrand = check_error(document.getElementById("s_otherStrand")); if (s_otherStrand == undefined) return;
         }
 
-        let shsTableBody = $("#shsTable tbody");
-        let rows = shsTableBody.children();
-        let shs = [];
-
-        for (let i = 0; i < rows.length; i++){
-            let row = rows.eq(i);
-            let shsObj = {
-                honor: row.children().eq(1).text(),
-                acadYear: row.children().eq(2).text(),
-                sem: row.children().eq(3).text(),
-                yearLevel: row.children().eq(4).text(),
+        if (shsRows.length > 0){
+            for (let i = 0; i < shsRows.length; i++){
+                let row = shsRows.eq(i);
+                let shsObj = {
+                    honor: row.children().eq(1).text(),
+                    acadYear: row.children().eq(2).text(),
+                    sem: row.children().eq(3).text(),
+                    yearLevel: row.children().eq(4).text(),
+                }
+                shs.push(shsObj);
             }
-            shs.push(shsObj);
+    
+            let shsCount = 0;
+    
+            for (let i = 0; i < shs.length; i++){
+                let obj = shs[i];
+                for (let key in obj){
+                    if (obj[key] == ""){
+                        shsCount++;
+                    }
+                }
+            }
+    
+            if (shsCount > 0){
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please fill out all fields in the SHS table."
+                })
+    
+                return;
+            }
         }
     }
 
     if (scholarLevel == 1 || scholarLevel == 2 || scholarLevel == 3){
         // JHS
-        let j_school = check_error(document.getElementById("j_school"));
-        let j_year_level = check_error(document.getElementById("j_year_level"));
-        let j_school_address = check_error(document.getElementById("j_school_address"));
+        j_school = check_error(document.getElementById("j_school")); if (j_school == undefined) return;
+        j_year_level = check_error(document.getElementById("j_year_level")); if (j_year_level == undefined) return;
+        j_school_address = check_error(document.getElementById("j_school_address")); if (j_school_address == undefined) return;
 
         if (j_school == "Others"){
-            j_otherSchool = check_error(document.getElementById("j_otherSchool"));
+            j_otherSchool = check_error(document.getElementById("j_otherSchool")); if (j_otherSchool == undefined) return;
         }
 
-        let jhsTableBody = $("#jhsTable tbody");
-        let rows = jhsTableBody.children();
-        let jhs = [];
-
-        for (let i = 0; i < rows.length; i++){
-            let row = rows.eq(i);
-            let jhsObj = {
-                honor: row.children().eq(1).text(),
-                acadYear: row.children().eq(2).text(),
-                sem: row.children().eq(3).text(),
-                yearLevel: row.children().eq(4).text(),
+        if (jhsRows.length > 0){
+            for (let i = 0; i < jhsRows.length; i++){
+                let row = jhsRows.eq(i);
+                let jhsObj = {
+                    honor: row.children().eq(1).text(),
+                    acadYear: row.children().eq(2).text(),
+                    sem: row.children().eq(3).text(),
+                    yearLevel: row.children().eq(4).text(),
+                }
+                jhs.push(jhsObj);
             }
-            jhs.push(jhsObj);
+    
+            let jhsCount = 0;
+    
+            for (let i = 0; i < jhs.length; i++){
+                let obj = jhs[i];
+                for (let key in obj){
+                    if (obj[key] == ""){
+                        jhsCount++;
+                    }
+                }
+            }
+    
+            if (jhsCount > 0){
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please fill out all fields in the JHS table."
+                })
+    
+                return;
+            }
         }
     }
 
     if (scholarLevel == 1 || scholarLevel == 2 || scholarLevel == 3 || scholarLevel == 4){
         // Elem
-        let e_school = check_error(document.getElementById("e_school"));
-        let e_grade_level = check_error(document.getElementById("e_grade_level"));
-        let e_school_address = check_error(document.getElementById("e_school_address"));
+        e_school = check_error(document.getElementById("e_school")); if (e_school == undefined) return;
+        e_grade_level = check_error(document.getElementById("e_grade_level")); if (e_grade_level == undefined) return;
+        e_school_address = check_error(document.getElementById("e_school_address")); if (e_school_address == undefined) return;
 
         if (e_school == "Others"){
-            e_otherSchool = check_error(document.getElementById("e_otherSchool"));
+            e_otherSchool = check_error(document.getElementById("e_otherSchool")); if (e_otherSchool == undefined) return;
         }
 
-        let elemTableBody = $("#elemTable tbody");
-        let rows = elemTableBody.children();
-        let elem = [];
-
-        for (let i = 0; i < rows.length; i++){
-            let row = rows.eq(i);
-            let elemObj = {
-                honor: row.children().eq(1).text(),
-                acadYear: row.children().eq(2).text(),
-                sem: row.children().eq(3).text(),
-                yearLevel: row.children().eq(4).text(),
+        if (elemRows.length > 0){
+            for (let i = 0; i < elemRows.length; i++){
+                let row = elemRows.eq(i);
+                let elemObj = {
+                    honor: row.children().eq(1).text(),
+                    acadYear: row.children().eq(2).text(),
+                    sem: row.children().eq(3).text(),
+                    yearLevel: row.children().eq(4).text(),
+                }
+                elem.push(elemObj);
             }
-            elem.push(elemObj);
+
+            let elemCount = 0;
+
+            for (let i = 0; i < elem.length; i++){
+                let obj = elem[i];
+                for (let key in obj){
+                    if (obj[key] == ""){
+                        elemCount++;
+                    }
+                }
+            }
+
+            if (elemCount > 0){
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please fill out all fields in the Elem table."
+                })
+
+                return;
+            }
+        }
+    }
+
+    let data = {
+        'college': {
+            'school': c_school,
+            'course': c_course,
+            'year_level': c_year_level,
+            'school_address': c_school_address,
+            'otherSchool': c_otherSchool,
+            'otherCourse': c_otherCourse,
+            'collegeAwards' : college
+        },
+        'shs': {
+            'school': s_school,
+            'strand': s_strand,
+            'year_level': s_year_level,
+            'school_address': s_schoolAddress,
+            'otherSchool': s_otherSchool,
+            'otherStrand': s_otherStrand,
+            'shsAwards': shs
+        },
+        'jhs': {
+            'school': j_school,
+            'year_level': j_year_level,
+            'school_address': j_school_address,
+            'otherSchool': j_otherSchool,
+            'jhsAwards': jhs
+        },
+        'elem': {
+            'school': e_school,
+            'grade_level': e_grade_level,
+            'school_address': e_school_address,
+            'otherSchool': e_otherSchool,
+            'elemAwards': elem
+        },
+        'other_info': {
+            'graduating_flag': graduating_flag,
+            'honor_flag': honor_flag,
+            'honor_type': honor_type,
+            'other_honor': other_honor,
+            'graduation_year': graduation_year,
+        },
+        'action': '14',
+        'userId': userId
+    }
+
+    $.ajax({
+        url: "controller/accountHandler.php",
+        type: "POST",
+        data: data,
+        beforeSend: function(){
+            showBeforeSend("Updating Educational Background...");
+        },
+        success: function(data){
+            hideBeforeSend();
+            if (data == "success"){
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "Educational Background Saved Successfully."
+                }).then((result) => {
+                    if (result.isConfirmed){
+                        location.reload();
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `An error occured while submitting your application. Please try again. Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            }
+        }
+    })
+})
+
+$("#inputGuardian").on("change click", function(){
+    let val = $(this).val();
+
+    if (val == 0){
+        $("#guardianInfo").removeClass("d-none");
+    } else if (val == 1){
+        $("#guardianInfo").addClass("d-none");
+    }
+})
+
+$("#inputSpouse").on("change click", function(){
+    let val = $(this).val();
+
+    if (val == 0){
+        $("#spouseInfo").removeClass("d-none");
+    } else if (val == 1){
+        $("#spouseInfo").addClass("d-none");
+    }
+});
+
+
+$("#familyBG").on("submit", function(e){
+    e.preventDefault();
+
+    let family_flag = check_error(document.getElementById("family_flag")); if (family_flag == undefined) return;
+    let total_num = check_error(document.getElementById("total_num")); if (total_num == undefined) return;
+    let birth_order = check_error(document.getElementById("birth_order")); if (birth_order == undefined) return;
+    let source = check_error(document.getElementById("source")); if (source == undefined) return;
+    let rent_flag = check_error(document.getElementById("rent_flag")); if (rent_flag == undefined) return;
+    let monthly_payment = check_error(document.getElementById("monthly_payment")); if (monthly_payment == undefined) return;
+
+    let siblingTableBody = $("#siblingTable tbody");
+    let siblingRows = siblingTableBody.children();
+    let siblings = [];
+
+    if (siblingRows.length > 0){
+        for (let i = 0; i < siblingRows.length; i++){
+            let row = siblingRows.eq(i);
+            let siblingObj = {
+                name: row.children().eq(1).text(),
+                age: row.children().eq(2).text(),
+                occupation: row.children().eq(3).text(),
+                employer: row.children().eq(4).text(),
+                address: row.children().eq(5).text(),
+            }
+            siblings.push(siblingObj);
+        }
+
+        let siblingCount = 0;
+
+        for (let i = 0; i < siblings.length; i++){
+            let obj = siblings[i];
+            for (let key in obj){
+                if (obj[key] == ""){
+                    siblingCount++;
+                }
+            }
+        }
+
+        if (siblingCount > 0){
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Please fill out all fields in the Sibling table."
+            })
+
+            return;
         }
     }
 })
 
-$("#otherInfo").on("submit", function(e){
 
+$("#otherInfo").on("submit", function(e){
+    e.preventDefault();
+
+    let working_flag = check_error(document.getElementById("working_flag")); if (working_flag == undefined) return;
+    let ofw_flag = check_error(document.getElementById("ofw_flag")); if (ofw_flag == undefined) return;
+    let other_ofw = check_error(document.getElementById("other_ofw")); if (other_ofw == undefined) return;
+    let pwd_flag = check_error(document.getElementById("pwd_flag")); if (pwd_flag == undefined) return;
+    let other_pwd = check_error(document.getElementById("other_pwd")); if (other_pwd == undefined) return;
+    let status_flag = check_error(document.getElementById("status_flag")); if (status_flag == undefined) return;
+    let self_pwd_flag = check_error(document.getElementById("self_pwd_flag")); if (self_pwd_flag == undefined) return;
+
+    $.ajax({
+        url: "controller/accountHandler.php",
+        type: "POST",
+        data: {
+            action: "16",
+            working_flag: working_flag,
+            ofw_flag: ofw_flag,
+            other_ofw: other_ofw,
+            pwd_flag: pwd_flag,
+            other_pwd: other_pwd,
+            status_flag: status_flag,
+            self_pwd_flag: self_pwd_flag,
+            userId: userId
+        },
+        beforeSend: function(){
+            showBeforeSend("Updating Other Information...");
+        },
+        success: function(data){
+            hideBeforeSend();
+            if (data == "success"){
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "Other Information Saved Successfully."
+                }).then((result) => {
+                    if (result.isConfirmed){
+                        location.reload();
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `An error occured while submitting your application. Please try again. Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            }
+        }
+    })
 })
 
 $("#submitApplication").on("click", function(e){
@@ -624,7 +958,7 @@ $("#submitApplication").on("click", function(e){
                             confirmButtonText: "OK"
                         }).then((result) => {
                             if (result.isConfirmed){
-                                window.location.href = "index.php";
+                                location.reload();
                             }
                         })
                     } else {
@@ -632,11 +966,7 @@ $("#submitApplication").on("click", function(e){
                             icon: "error",
                             title: "Oops...",
                             text: `An error occured while submitting your application. Please try again. Error: ${data}`,
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        });
+                        })
                     }
                 }
             })

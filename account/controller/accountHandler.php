@@ -140,6 +140,40 @@ if (isset($_REQUEST['action']))
     {
         echo submitApplication(isset($_POST['userId']) ? $_POST['userId'] : '');
     }
+    else if ($action == 14) // Update Educational Background
+    {
+        $data = [
+            'college'           => isset($_POST['college']) ? $_POST['college'] : [],
+            'shs'               => isset($_POST['shs']) ? $_POST['shs'] : [],
+            'jhs'               => isset($_POST['jhs']) ? $_POST['jhs'] : [],
+            'elem'              => isset($_POST['elem']) ? $_POST['elem'] : [],
+            'other_info'        => isset($_POST['other_info']) ? $_POST['other_info'] : [],
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+        ];
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    }
+    else if ($action == 15) // Update Family Information
+    {
+
+    }
+    else if ($action == 16) // Update General Info
+    {
+        $data = [
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+            'working_flag'      => isset($_POST['working_flag']) ? $_POST['working_flag'] : '',
+            'ofw_flag'          => isset($_POST['ofw_flag']) ? $_POST['ofw_flag'] : '',
+            'other_ofw'         => isset($_POST['other_ofw']) ? $_POST['other_ofw'] : '',
+            'pwd_flag'          => isset($_POST['pwd_flag']) ? $_POST['pwd_flag'] : '',
+            'other_pwd'         => isset($_POST['other_pwd']) ? $_POST['other_pwd'] : '',
+            'status_flag'       => isset($_POST['status_flag']) ? $_POST['status_flag'] : '',
+            'self_pwd_flag'     => isset($_POST['self_pwd_flag']) ? $_POST['self_pwd_flag'] : '',
+        ];
+
+        echo updateGenInfo($data);
+    }
 }
 
 

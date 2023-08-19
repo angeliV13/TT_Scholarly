@@ -29,7 +29,7 @@
                         <div id="acad_table_view" class="table-responsive nav-content ">
 
                             <!-- Table with stripped rows -->
-                            <table id="acadYearTable" class="table datatable table-striped" width="100%">
+                            <table id="acadYearTable" class="table table-bordered table-condensed table-striped datatable" width="100%">
                                 <thead>
                                     <tr class="small">
                                         <th class="text-center">No</th>
@@ -75,7 +75,7 @@
                             </div>
 
                             <!-- Table with stripped rows -->
-                            <table id="setAssessmentTable" class="table table-striped" width="100%" cellspacing="100%">
+                            <table id="setAssessmentTable" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class="small">
                                         <th class="text-center">No</th>
@@ -186,7 +186,7 @@
                             </div>
 
                             <!-- Table with stripped rows -->
-                            <table id="setRenewalTable" class="table table-striped" width="100%" cellspacing="100%">
+                            <table id="setRenewalTable" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class=" small text-center">
                                         <th class="text-center">No</th>
@@ -256,7 +256,7 @@
                             </div>
 
                             <!-- Table with stripped rows -->
-                            <table id="setExamTable" class="table table-striped" width="100%" cellspacing="100%">
+                            <table id="setExamTable" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class=" small text-center">
                                         <th class="text-center">No</th>

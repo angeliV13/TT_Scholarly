@@ -1,6 +1,7 @@
 <?php
 // ---------------------------------------------------
 session_start();
+include("validationModel.php");
 include("functionModel.php");
 // Connection to Account Handler
 function accountHandlerAccess($access, $id)
@@ -782,8 +783,10 @@ function getIndicatorSCTable($indicatorCategory)
     $sql = "SELECT * FROM applicant_indicator WHERE indicator_applicant = 1 AND indicator_category = '{$indicatorCategory}'";
     $query = $conn->query($sql) or die("Error BSQ023: " . $conn->error);
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             extract($row);
             
             if ($indicatorCategory <= 2 || $indicatorCategory == 5) {
@@ -798,7 +801,9 @@ function getIndicatorSCTable($indicatorCategory)
                     $indicatorHigh,
                     $indicatorPoint,
                 ];
-            } else {
+            } 
+            else 
+            {
                 $indicatorExact = '<div id="editIndicator_1_' . $id . '">' . $indicator_exact . '</div><input type="text" class="editIndicatorText d-none form-control" value="' . $indicator_exact . '" id="sc_1_' . $id . '" onfocusout="saveSCIndicator('.$indicatorCategory.',' . $id . ', 1)">';
                 $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="sc_3_' . $id . '" onfocusout="saveSCIndicator('.$indicatorCategory.',' . $id . ', 3)">';
 
@@ -921,5 +926,74 @@ function deleteSchool($id)
     else
     {
         return "School does not exist. Info: " . $conn->error;
+    }
+}
+
+function addWebsiteSocials($data)
+{
+    include("dbconnection.php");
+
+    $exists = check_exist(['table' => 'website_socials', 'column' => 'social_type', 'value' => $data['socType']]);
+
+    $sql = ($exists > 0) ? "UPDATE website_socials SET link = '{$data['socLink']}', added_by = '{$data['userId']}', date_added = NOW() WHERE social_type = '{$data['socType']}'" : "INSERT INTO website_socials (social_type, link, added_by, date_added) VALUES ('{$data['socType']}', '{$data['socLink']}', '{$data['userId']}', NOW())";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function deleteWebsiteSocial($id)
+{
+    include("dbconnection.php");
+
+    $sql = "DELETE FROM website_socials WHERE id = '$id'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function updateWebsiteSocials($data)
+{
+    include("dbconnection.php");
+
+    $exists = check_exist(['table' => 'website_socials', 'column' => 'social_type', 'value' => $data['socType']]);
+
+    $sql = ($exists > 0) ? "UPDATE website_socials SET link = '{$data['socLink']}', added_by = '{$data['userId']}', date_added = NOW() WHERE social_type = '{$data['socType']}'" : "UPDATE website_socials SET link = '{$data['socLink']}', added_by = '{$data['userId']}', date_added = NOW() WHERE id = '{$data['socId']}'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function addWebsiteInfo($data)
+{
+    include("dbconnection.php");
+
+    $email = $data['email'];
+    $address = $data['address'];
+    $telephone = $data['telephone'];
+    $opening = $data['opening'];
+
+    if (empty_validation($email)) return "Email is required.";
+    if (empty_validation($address)) return "Address is required.";
+    if (empty_validation($telephone)) return "Telephone is required.";
+    if (empty_validation($opening)) return "Opening is required.";
+
+    if (!email_validation($email)) return "Invalid email format.";
+
+    $sql = "SELECT * FROM website_info";
+    $query = $conn->query($sql);
+
+    if ($query AND $query->num_rows > 0)
+    {
+        $sql = "UPDATE website_info SET email = '$email', address = '$address', telephone = '$telephone', opening_hours = '$opening'";
+        $query = $conn->query($sql);
+
+        return ($query) ? "success" : $conn->error;
+    }
+    else
+    {
+        $sql = "INSERT INTO website_info (email, address, telephone, opening_hours) VALUES ('$email', '$address', '$telephone', '$opening')";
+        $query = $conn->query($sql);
+
+        return ($query) ? "success" : $conn->error;
     }
 }

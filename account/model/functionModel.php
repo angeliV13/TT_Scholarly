@@ -60,6 +60,84 @@ function static_count()
     return $count;
 }
 
+function get_website_info()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM website_info";
+    $query = $conn->query($sql);
+
+    $website_info = [];
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $website_info = $row;
+    }
+
+    return $website_info;
+}
+
+function get_website_socials()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM website_socials";
+    $query = $conn->query($sql);
+
+    $website_socials = [];
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $socialType = $row['social_type'];
+            $icon = "";
+
+            if ($socialType == "0")
+            {
+                $icon = "bi bi-facebook";
+            }
+            else if ($socialType == "1")
+            {
+                $icon = "bi bi-instagram";
+            }
+            else if ($socialType == "2")
+            {
+                $icon = "bi bi-twitter";
+            }
+            else
+            {
+                $icon = "bi bi-linkedin";
+            }
+
+            $website_socials[] = [
+                'social_type' => $socialType,
+                'icon' => $icon,
+                'link' => $row['link']
+            ];
+        }
+    }
+
+    return $website_socials;
+}
+
+function get_social_type($type)
+{
+    switch ($type)
+    {
+        case 0:
+            return "Facebook";
+        case 1:
+            return "Instagram";
+        case 2:
+            return "Twitter";
+        case 3:
+            return "LinkedIn";
+    }
+}
+
 function get_scholar_type($type)
 {
     switch ($type)
@@ -713,6 +791,53 @@ function get_school()
     }
 
     return $data;
+}
+
+function check_status($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM scholarship_application WHERE userId = " . $id;
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $data = $row;
+    }
+
+    return $data;
+}
+
+function update_status($type, $id)
+{
+    include("dbconnection.php");
+
+    $typeName = "";
+
+    switch ($type)
+    {
+        case 1:
+            $typeName = 'info_flag';
+            break;
+        case 2:
+            $typeName = 'educ_flag';
+            break;
+        case 3:
+            $typeName = 'family_flag';
+            break;
+        case 4:
+            $typeName = 'add_flag';
+            break;
+    }
+
+    $sql = "UPDATE scholarship_application SET " . $typeName . " = 1 WHERE userId = " . $id;
+    $query = $conn->query($sql);
+
+    return ($query) ? true : $conn->error;
 }
 
 function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'queryPath' => '', 'errorValidation' => ['0' => 'Invalid File Type']])

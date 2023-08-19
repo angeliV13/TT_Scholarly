@@ -42,13 +42,13 @@
                     <li class="nav-item flex-fill" role="presentation">
                       <button class="nav-link w-100 active" id="personal-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
                     </li>
-                    <li class="nav-item flex-fill" role="presentation">
+                    <li class="nav-item flex-fill" role="presentation" id="educBG" data-status=<?= ($status['info_flag'] == 0) ? "disabled" : "" ?>>
                       <button class="nav-link  w-100" id="educational-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-educational-background" type="button" role="tab" aria-controls="educational-background" aria-selected="false">Educational Background</button>
                     </li>
-                    <li class="nav-item flex-fill" role="presentation">
+                    <li class="nav-item flex-fill" role="presentation" id="famBG" data-status=<?= ($status['educ_flag'] == 0) ? "" : "" ?>>
                       <button class="nav-link w-100" id="family-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-family-background" type="button" role="tab" aria-controls="family-background" aria-selected="false">Family Background</button>
                     </li>
-                    <li class="nav-item flex-fill" role="presentation">
+                    <li class="nav-item flex-fill" role="presentation" id="addBG" data-status=<?= ($status['family_flag'] == 0) ? "" : "" ?>>
                       <button class="nav-link w-100" id="additional-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-additional-information" type="button" role="tab" aria-controls="additional-information" aria-selected="false">Additional Information</button>
                     </li>
                   </ul>
@@ -244,12 +244,12 @@
                                 <label for="contact_number" class="form-label">Contact Number</label>
                                 <div class="input-group">
                                   <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                  <input form="benefInfo" type="telephone" name="Contact Number" class="form-control" id="contact_number" aria-describedby="inputGroupPrepend2" value="<?php echo substr($user_info['contact_number'], 2) ?>">
+                                  <input form="benefInfo" type="telephone" name="Contact Number" class="form-control" id="contact_number" aria-describedby="inputGroupPrepend2" value="<?php echo substr($user_info['contact_number'], 2) ?>" <?= $finishFlag ? "disabled" : "" ?>>
                                 </div>
                               </div>
                               <div class="col-md-7 position-relative">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input form="benefInfo" type="email" name="Email Address" class="form-control" id="email" aria-describedby="inputEmailAddress" value="<?php echo $user_data[2] ?>">
+                                <input form="benefInfo" type="email" name="Email Address" class="form-control" id="email" aria-describedby="inputEmailAddress" value="<?php echo $user_data[2] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                               </div>
                             </div><!-- End Custom Styled Validation with Tooltips -->
                           </div>
@@ -273,7 +273,7 @@
                               <div class="col-md-6 position-relative">
                                 <label for="graduating_flag" class="form-label">Are you Graduating this Semester/Term?</label>
                                 <?php if ($gen_info != null): ?>
-                                  <select class="form-select" name="Graduating Flag" id="graduating_flag" <?php echo $gen_info['graduating_flag'] != null ? "disabled" : "" ?>>
+                                  <select class="form-select" name="Graduating Flag" id="graduating_flag" <?= $finishFlag ? "disabled" : "" ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['graduating_flag'] == 0 ? "selected" : "" ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['graduating_flag'] == 1 ? "selected" : "" ?>>No</option>
@@ -292,13 +292,13 @@
                               <div class="col-md-6 position-relative">
                                 <label for="honor_flag" class="form-label">Are you Graduating with Honors?</label>
                                 <?php if ($gen_info != null): ?>
-                                  <select class="form-select" name="Honor Flag" id="honor_flag" <?php echo $gen_info['honor_flag'] != null ? "disabled" : "" ?>>
+                                  <select class="form-select" name="Graduating with Honor Flag" id="honor_flag" <?= $finishFlag ? "disabled" : "" ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['honor_flag'] == 0 ? "selected" : "" ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['honor_flag'] == 1 ? "selected" : "" ?>>No</option>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="honor_flag" name="Honor Flag">
+                                  <select class="form-select" id="honor_flag" name="Graduating with Honor Flag" disabled>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
@@ -311,7 +311,7 @@
                               <div class="col-md-4 position-relative">
                                 <label for="honor_type" class="form-label">Specify your Award/Honor</label>
                                 <?php if ($gen_info != null): ?>
-                                <select class="form-select" name="Honor Type" id="honor_type" <?php echo $gen_info['honor_type'] != null ? "disabled" : "" ?>>
+                                <select class="form-select" name="Honor Type" id="honor_type" <?= $finishFlag ? "disabled" : "" ?>>
                                   <option selected disabled value="">Choose...</option>
                                   <option value="0" <?php echo $gen_info['honor_type'] == 0 ? "selected" : "" ?>>With Highest Honors</option>
                                   <option value="1" <?php echo $gen_info['honor_type'] == 1 ? "selected" : "" ?>>With High Honors</option>
@@ -324,7 +324,7 @@
                               </div>
                               <div class="col-md-8 position-relative">
                                 <label for="other_honor" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
-                                <input type="text" class="form-control" id="other_honor" name="Other Honor" aria-describedby="other_honor" value="<?= $gen_info['other_honor'] ?>">
+                                <input type="text" class="form-control" id="other_honor" name="Other Honor" aria-describedby="other_honor" value="<?= $gen_info['other_honor'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                               </div>
                               <?php else: ?>
                                 <select class="form-select" id="honor_type" name="Honor Type" disabled>
@@ -346,7 +346,7 @@
                               <div class="col-md-6 position-relative">
                                 <label for="graduation_year" class="form-label">If not Graduating, what year are you Graduating?</label>
                                 <?php if ($gen_info != null): ?>
-                                  <select class="form-select" name="Year of Graduation" id="graduation_year" <?php echo $gen_info['graduation_year'] != null ? "disabled" : "" ?>>
+                                  <select class="form-select" name="Year of Graduation" id="graduation_year" <?= $finishFlag ? "disabled" : "" ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
                                       <option value="<?php echo $i ?>" <?php echo $gen_info['graduation_year'] == $i ? "selected" : "" ?>><?php echo $i ?></option>
@@ -356,7 +356,7 @@
                                     Please select expected Year of Graduation.
                                   </div>
                                 <?php else: ?>
-                                <select class="form-select" id="graduation_year" name="Year of Graduation">
+                                <select class="form-select" id="graduation_year" name="Year of Graduation" disabled>
                                   <option selected disabled value="">Choose...</option>
                                   <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
                                     <option value="<?php echo $i ?>"><?php echo $i ?></option>
@@ -380,7 +380,7 @@
                                 <!-- COLLEGE -->
                                 <div class="col-md-3 position-relative">
                                   <label for="c_school" class="form-label">Name of School Attended</label>
-                                  <select class="form-select" name="College Attended" id="c_school" <?php echo $education[2] != null ? "disabled" : "" ?>>
+                                  <select class="form-select" name="College Attended" id="c_school" <?= $finishFlag ? "disabled" : "" ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <?php foreach ($school as $key => $col) : ?>
                                       <?php if ($col['school_type'] == 0) : ?>
@@ -395,7 +395,7 @@
                                 </div>
                                 <div class="col-md-7 position-relative">
                                   <label for="c_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
-                                  <input type="text" name="Other College Attended" class="form-control" id="c_otherSchool" aria-describedby="c_otherSchool" disabled>
+                                  <input type="text" name="Other College Attended" class="form-control" id="c_otherSchool" aria-describedby="c_otherSchool" <?= $finishFlag ? "disabled" : "" ?>>
                                 </div>
                                 <div class="col-md-2 position-relative">
                                   <label for="c_year_level" class="form-label">Year Level</label>
@@ -587,6 +587,7 @@
                                         <option value="<?php echo $key ?>"><?php echo $col['school_name'] ?></option>
                                       <?php endif; ?>
                                     <?php endforeach; ?>
+                                    <option value="Others">Others</option>
                                   </select>
                                   <div class="invalid-tooltip">
                                     Please select School.
@@ -663,7 +664,7 @@
                             <!-- Custom Styled Validation with Tooltips -->
                             <div class="row g-4">
                               <!-- COLLEGE -->
-                              <div class="col-md-4 position-relative">
+                              <div class="col-md-3 position-relative">
                                 <label for="e_school" class="form-label">Name of School Attended</label>
                                 <select class="form-select" id="e_school" name="Elementary Name">
                                   <option selected disabled value="">Choose...</option>
@@ -672,14 +673,15 @@
                                       <option value="<?php echo $key ?>"><?php echo $col['school_name'] ?></option>
                                     <?php endif; ?>
                                   <?php endforeach; ?>
+                                  <option value="Others">Others</option>
                                 </select>
                                 <div class="invalid-tooltip">
                                   Please select School.
                                 </div>
                               </div>
-                              <div class="col-md-6 position-relative">
+                              <div class="col-md-7 position-relative">
                                 <label for="e_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
-                                <input type="text" name="Other Elementary Name" class="form-control" id="e_otherSchool" aria-describedby="e_otherSchool">
+                                <input type="text" name="Other Elementary Name" class="form-control" id="e_otherSchool" aria-describedby="e_otherSchool" disabled>
                               </div>
                               <div class="col-md-2 position-relative">
                                 <label for="e_grade_level" class="form-label">Grade Level</label>
@@ -752,13 +754,13 @@
                               <div class="col-md-4 position-relative">
                                 <label for="family_flag" class="form-label">Are you Living with Family?</label>
                                 <?php if ($gen_info != null): ?>
-                                <select class="form-select" id="family_flag" <?php echo $gen_info['family_flag'] != null ? "disabled" : "" ?>>
+                                <select class="form-select" name="Living with Family Flag" id="family_flag" <?= $finishFlag ? "disabled" : "" ?>>
                                   <option selected disabled value="">Choose...</option>
                                   <option value="0" <?php echo $gen_info['family_flag'] == 0 ? "selected" : "" ?>>Yes</option>
                                   <option value="1" <?php echo $gen_info['family_flag'] == 1 ? "selected" : "" ?>>No</option>
                                 </select>
                                 <?php else: ?>
-                                <select class="form-select" id="family_flag">
+                                <select class="form-select" name="Living with Family Flag" id="family_flag">
                                   <option selected disabled value="">Choose...</option>
                                   <option value="0">Yes</option>
                                   <option value="1">No</option>
@@ -768,30 +770,30 @@
                               <div class="col-md-3 position-relative">
                                 <label for="total_num" class="form-label">Total number of Family</label>
                                 <?php if ($gen_info != null): ?>
-                                <input type="number" class="form-control" id="total_num" aria-describedby="total_num" value="<?= $gen_info['total_num'] ?>" readonly>
+                                <input type="number" class="form-control" name="Total Number in the Family" id="total_num" aria-describedby="total_num" value="<?= $gen_info['total_num'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                                 <?php else: ?>
-                                <input type="number" class="form-control" id="total_num" aria-describedby="total_num">
+                                <input type="number" class="form-control" name="Total Number in the Family" id="total_num" aria-describedby="total_num">
                                 <?php endif; ?>
                               </div>
                               <div class="col-md-2 position-relative">
                                 <label for="birth_order" class="form-label">Birth Order</label>
                                 <?php if ($gen_info != null): ?>
-                                <input type="number" class="form-control" id="birth_order" aria-describedby="birth_order" value="<?= $gen_info['birth_order'] ?>" readonly>
+                                <input type="number" class="form-control" id="birth_order" name="Birth Order" aria-describedby="birth_order" value="<?= $gen_info['birth_order'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                                 <?php else: ?>
-                                <input type="number" class="form-control" id="birth_order" aria-describedby="birth_order">
+                                <input type="number" class="form-control" id="birth_order" name="Birth Order" aria-describedby="birth_order">
                                 <?php endif; ?>
                               </div>
                               <div class="col-md-3 position-relative">
                                 <label for="source" class="form-label"> Source of Living?</label>
                                 <?php if ($gen_info != null): ?>
-                                <select class="form-select" id="source" <?php echo $gen_info['source'] != null ? "disabled" : "" ?>>
+                                <select class="form-select" id="source" name="Source of Living" <?= $finishFlag ? "disabled" : "" ?>>
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($incomeArr as $key => $inc) : ?>
                                     <option value="<?php echo $key ?>" <?php echo $gen_info['source'] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
                                   <?php endforeach; ?>
                                 </select>
                                 <?php else: ?>
-                                <select class="form-select" id="source">
+                                <select class="form-select" id="source" name="Source of Living">
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($incomeArr as $key => $inc) : ?>
                                     <option value="<?php echo $key ?>"><?php echo $inc ?></option>
@@ -802,13 +804,13 @@
                               <div class="col-md-5 position-relative">
                                 <label for="rent_flag" class="form-label"> Is your Home Rent or Owned?</label>
                                 <?php if ($gen_info != null): ?>
-                                <select class="form-select" id="rent_flag" <?php echo $gen_info['rent_flag'] != null ? "disabled" : "" ?>>
+                                <select class="form-select" id="rent_flag" name="Rent Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                   <option selected disabled value="">Choose...</option>
                                   <option value="0" <?php echo $gen_info['rent_flag'] == 0 ? "selected" : "" ?>>Owned</option>
                                   <option value="1" <?php echo $gen_info['rent_flag'] == 1 ? "selected" : "" ?>>Rent</option>
                                 </select>
                                 <?php else: ?>
-                                <select class="form-select" id="rent_flag">
+                                <select class="form-select" id="rent_flag" name="Rent Flag">
                                   <option selected disabled value="">Choose...</option>
                                   <option value="0">Owned</option>
                                   <option value="1">Rent</option>
@@ -818,14 +820,14 @@
                               <div class="col-md-7 position-relative">
                                 <label for="monthly_payment" class="form-label"> How much paying monthly (If renting or paying-to-own)</label>
                                 <?php if ($gen_info != null): ?>
-                                <select class="form-select" id="monthly_payment" <?php echo $gen_info['monthly_payment'] != null ? "disabled" : "" ?>>
+                                <select class="form-select" id="monthly_payment" name="Monthly Payment" <?= $finishFlag ? "disabled" : "" ?>>
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($incomeArr as $key => $inc) : ?>
                                     <option value="<?php echo $key ?>" <?php echo $gen_info['monthly_payment'] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
                                   <?php endforeach; ?>
                                 </select>
                                 <?php else: ?>
-                                <select class="form-select" id="monthly_payment">
+                                <select class="form-select" id="monthly_payment" name="Monthly Payment">
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($incomeArr as $key => $inc) : ?>
                                     <option value="<?php echo $key ?>"><?php echo $inc ?></option>
@@ -837,7 +839,7 @@
                               <div class="column">
                                 <div class="py-3">
                                   <div class="add">
-                                    <button class="btn btn-warning" type="button" id="addSibling">Add Siblings</button>
+                                    <button class="btn btn-warning" type="button" id="addSibling" <?= $finishFlag ? "disabled" : "" ?>>Add Siblings</button>
                                   </div>
                                 </div>
                                 <div class="card">
@@ -852,7 +854,8 @@
                                           <tr class="text-center">
                                             <th>No</th>
                                             <th>Name of Sibling (LN/FN/MN)</th>
-                                            <th>Birth Order </th>
+                                            <th>Relationship</th>
+                                            <th>Birth Order</th>
                                             <th>Age</th>
                                             <th>Occupation</th>
                                             <th>Actions</th>
@@ -877,90 +880,93 @@
                             <div class="row g-4">
                               <!-- FULL NAME -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputFirstName" class="form-label">First name</label>
-                                <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                <label for="fatherFN" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="fatherFN" aria-describedby="fatherFN" name="Father's Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputMiddleName" class="form-label">Middle name</label>
-                                <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                <label for="fatherMN" class="form-label">Middle name</label>
+                                <input type="text" class="form-control" id="fatherMN" aria-describedby="fatherMN">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputLastName" class="form-label">Last name</label>
-                                <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                <label for="fatherLN" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="fatherLN" aria-describedby="fatherLN" name="Father's Last Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                <label for="fatherSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                <input type="text" class="form-control" id="fatherSuffix" aria-describedby="fatherSuffix">
                               </div>
                               <!-- END FULL NAME -->
 
                               <!-- BIRTH -->
                               <div class="col-md-4 position-relative">
-                                <label for="inputDate" class="form-label">Birth Date</label>
-                                <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                                <label for="fatherBday" class="form-label">Birth Date</label>
+                                <input type="date" class="form-control" id="fatherBday" aria-describedby="fatherBday" name="Father's Birthdate">
                               </div>
                               <div class="col-md-5  position-relative">
-                                <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                                <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                                <label for="fatherBplace" class="form-label">Place of Birth</label>
+                                <input type="inputBirthPlace" class="form-control" id="fatherBplace" aria-describedby="fatherBplace" name="Father's Birthplace">
                               </div>
                               <!-- END BIRTH -->
 
                               <!-- START AGE -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputAge" class="form-label">Father's Age</label>
-                                <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
+                                <label for="fatherAge" class="form-label">Father's Age</label>
+                                <input type="number" class="form-control" id="fatherAge" aria-describedby="fatherAge" name="Father's Age">
                               </div>
                               <!-- START AGE -->
 
                               <!-- CONTACT INFORMATION -->
                               <div class="col-md-3 position-relative">
-                                <label for="telephone" class="form-label">Contact Number</label>
+                                <label for="fatherContact" class="form-label">Contact Number</label>
                                 <div class="input-group">
                                   <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                  <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                  <input type="tel" class="form-control" id="fatherContact" aria-describedby="inputGroupPrepend2" name="Father's Contact Number">
                                 </div>
                               </div>
                               <!-- END CONTACT INFORMATION -->
 
                               <!-- LIVING OR DECEASED -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                                <select class="form-select" id="inputLivingDeceased" required>
+                                <label for="fatherLivingFlag" class="form-label"> Living or Deceased? </label>
+                                <select class="form-select" id="fatherLivingFlag" name="Father's Living Flag">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option value="0">Yes</option>
+                                  <option value="1">No</option>
                                 </select>
                               </div>
 
                               <!-- FATHER'S OCCUPATION  -->
                               <div class="col-md-6 position-relative">
-                                <label for="inputOccupation" class="form-label"> Occupation</label>
-                                <select class="form-select" id="inputOccupation" required>
+                                <label for="fatherOccupation" class="form-label"> Occupation</label>
+                                <select class="form-select" id="fatherOccupation" name="Father's Occupation">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option>Choose...</option>
+                                </select>
+                              </div>
+                              <div class="col-md-12 position-relative">
+                                <label for="fatherOtherOccupation" class="form-label">If Occupation is not in the list,please specify here</label>
+                                <input type="text" class="form-control" id="fatherOtherOccupation" aria-describedby="fatherOtherOccupation" name="Father's Other Occupation">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="fatherCompany" class="form-label">Company's Name</label>
+                                <input type="text" class="form-control" id="fatherCompany" aria-describedby="fatherCompany" name="Father's Company Name">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="fatherCompanyAddress" class="form-label">Work Address</label>
+                                <textarea class="form-control" name="Father's Work Address" id="fatherCompanyAddress" cols="30" rows="5"></textarea>
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="fatherIncome" class="form-label"> Average Monthly Income</label>
+                                <select class="form-select" id="fatherIncome" name="Father's Monthly Income">
+                                  <option selected disabled value="">Choose...</option>
+                                  <?php foreach ($incomeArr as $key => $inc) : ?>
+                                    <option value="<?php echo $key ?>" <?php echo $gen_info['source'] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
+                                  <?php endforeach; ?>
                                 </select>
                               </div>
                               <div class="col-md-6 position-relative">
-                                <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
-                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyName" class="form-label">Company's Name</label>
-                                <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyAddress" class="form-label">Company's Address</label>
-                                <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                                <select class="form-select" id="inputIncome" required>
-                                  <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
-                                </select>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                                <select class="form-select" id="inputEducationalAttainment" required>
+                                <label for="fatherEducation" class="form-label"> Highest Educational Attainment</label>
+                                <select class="form-select" id="fatherEducation" name="Father's Highest Educational Attainment">
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($educAttainment as $key => $educ) : ?>
                                     <option value="<?php echo $key ?>"><?php echo $educ ?></option>
@@ -978,97 +984,100 @@
                             <div class="row g-4">
                               <!-- FULL NAME -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputFirstName" class="form-label">First name</label>
-                                <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                <label for="motherFN" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="motherFN" aria-describedby="motherFN" name="Mother's First Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputMiddleName" class="form-label">Middle name</label>
-                                <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                <label for="motherMN" class="form-label">Middle name</label>
+                                <input type="text" class="form-control" id="motherMN" aria-describedby="motherMN">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputLastName" class="form-label">Last name</label>
-                                <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                <label for="motherLN" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="motherLN" aria-describedby="motherLN" name="Mother's Last Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                <label for="motherSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                <input type="text" class="form-control" id="motherSuffix" aria-describedby="motherSuffix">
                               </div>
                               <!-- END FULL NAME -->
 
                               <!-- BIRTH -->
                               <div class="col-md-4 position-relative">
-                                <label for="inputDate" class="form-label">Birth Date</label>
-                                <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                                <label for="motherBday" class="form-label">Birth Date</label>
+                                <input type="date" class="form-control" id="motherBday" aria-describedby="motherBday" name="Mother's Birthdate">
                               </div>
                               <div class="col-md-5  position-relative">
-                                <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                                <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                                <label for="motherBplace" class="form-label">Place of Birth</label>
+                                <input type="text" class="form-control" id="motherBplace" aria-describedby="motherBplace" name="Mother's Birthplace">
                               </div>
                               <!-- END BIRTH -->
 
                               <!-- START AGE -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputAge" class="form-label">Mother's Age</label>
-                                <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
+                                <label for="motherAge" class="form-label">Father's Age</label>
+                                <input type="number" class="form-control" id="motherAge" aria-describedby="motherAge" name="Mother's Age">
                               </div>
                               <!-- START AGE -->
 
                               <!-- CONTACT INFORMATION -->
                               <div class="col-md-3 position-relative">
-                                <label for="telephone" class="form-label">Contact Number</label>
+                                <label for="motherContact" class="form-label">Contact Number</label>
                                 <div class="input-group">
                                   <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                  <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                  <input type="tel" class="form-control" id="motherContact" aria-describedby="inputGroupPrepend2" name="Mother's Contact Number">
                                 </div>
                               </div>
                               <!-- END CONTACT INFORMATION -->
 
                               <!-- LIVING OR DECEASED -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                                <select class="form-select" id="inputLivingDeceased" required>
+                                <label for="motherLivingFlag" class="form-label"> Living or Deceased? </label>
+                                <select class="form-select" id="motherLivingFlag" name="Mother's Living Flag">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option value="0">Yes</option>
+                                  <option value="1">No</option>
                                 </select>
                               </div>
 
-                              <!-- MOTHER'S OCCUPATION  -->
+                              <!-- FATHER'S OCCUPATION  -->
                               <div class="col-md-6 position-relative">
-                                <label for="inputOccupation" class="form-label"> Occupation</label>
-                                <select class="form-select" id="inputOccupation" required>
+                                <label for="motherOccupation" class="form-label"> Occupation</label>
+                                <select class="form-select" id="motherOccupation" name="Mother's Occupation">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option>Choose...</option>
+                                </select>
+                              </div>
+                              <div class="col-md-12 position-relative">
+                                <label for="motherOtherOccupation" class="form-label">If Occupation is not in the list,please specify here</label>
+                                <input type="text" class="form-control" id="motherOtherOccupation" aria-describedby="motherOtherOccupation" name="Mother's Other Occupation">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="motherCompany" class="form-label">Company's Name</label>
+                                <input type="text" class="form-control" id="motherCompany" aria-describedby="motherCompany" name="Mother's Company Name">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="motherCompanyAddress" class="form-label">Work Address</label>
+                                <textarea class="form-control" name="Mother's Work Address" id="motherCompanyAddress" cols="30" rows="5"></textarea>
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="motherIncome" class="form-label"> Average Monthly Income</label>
+                                <select class="form-select" id="motherIncome" name="Mother's Monthly Income">
+                                  <option selected disabled value="">Choose...</option>
+                                  <?php foreach ($incomeArr as $key => $inc) : ?>
+                                    <option value="<?php echo $key ?>" <?php echo $gen_info['source'] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
+                                  <?php endforeach; ?>
                                 </select>
                               </div>
                               <div class="col-md-6 position-relative">
-                                <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
-                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyName" class="form-label">Company's Name</label>
-                                <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyAddress" class="form-label">Company's Address</label>
-                                <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                                <select class="form-select" id="inputIncome" required>
-                                  <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
-                                </select>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                                <select class="form-select" id="inputEducationalAttainment" required>
+                                <label for="motherEducation" class="form-label"> Highest Educational Attainment</label>
+                                <select class="form-select" id="motherEducation" name="Mother's Highest Educational Attainment">
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($educAttainment as $key => $educ) : ?>
                                     <option value="<?php echo $key ?>"><?php echo $educ ?></option>
                                   <?php endforeach; ?>
                                 </select>
                               </div>
-                              <!-- END MOTHER'S INFORMATION -->
+                              <!-- END FULL NAME -->
                             </div><!-- End Custom Styled Validation with Tooltips -->
                           </div>
                         </div>
@@ -1077,113 +1086,110 @@
                             <h5 class="card-title">Guardian's Information</h5>
                             <div class="col-md-3 position-relative py-4">
                               <label for="inputGuardian" class="form-label"> Do you have a Guardian? </label>
-                              <select class="form-select" id="inputGuardian" required>
+                              <select class="form-select" id="inputGuardian">
                                 <option selected disabled value="">Choose...</option>
-                                <option>...</option>
+                                <option value="0">Yes</option>
+                                <option value="1">No</option>
                               </select>
                             </div>
                             <!-- Custom Styled Validation with Tooltips -->
-                            <div class="row g-4">
+                            <div class="row g-4 d-none" id="guardianInfo">
                               <!-- FULL NAME -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputFirstName" class="form-label">First name</label>
-                                <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                <label for="guardianFN" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="guardianFN" aria-describedby="guardianFN" name="Guardian's First Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputMiddleName" class="form-label">Middle name</label>
-                                <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                <label for="guardianMN" class="form-label">Middle name</label>
+                                <input type="text" class="form-control" id="guardianMN" aria-describedby="guardianMN">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputLastName" class="form-label">Last name</label>
-                                <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                <label for="guardianLN" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="guardianLN" aria-describedby="guardianLN" name="Guardian's Last Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                <label for="guardianSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                <input type="text" class="form-control" id="guardianSuffix" aria-describedby="guardianSuffix">
                               </div>
                               <!-- END FULL NAME -->
 
                               <!-- BIRTH -->
                               <div class="col-md-4 position-relative">
-                                <label for="inputDate" class="form-label">Birth Date</label>
-                                <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                                <label for="guardianBday" class="form-label">Birth Date</label>
+                                <input type="date" class="form-control" id="guardianBday" aria-describedby="guardianBday" name="Guardian's Birthdate">
                               </div>
                               <div class="col-md-5  position-relative">
-                                <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                                <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                                <label for="guardianBplace" class="form-label">Place of Birth</label>
+                                <input type="text" class="form-control" id="guardianBplace" aria-describedby="guardianBplace" name="Guardian's Birthplace">
                               </div>
                               <!-- END BIRTH -->
 
                               <!-- START AGE -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputAge" class="form-label">Guardian's Age</label>
-                                <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
-                              </div>
-                              <!-- START AGE -->
-
-                              <!-- START AGE -->
-                              <div class="col-md-6 position-relative">
-                                <label for="inputRelationship" class="form-label">Relationship</label>
-                                <input type="Age" class="form-control" id="inputRelationship" aria-describedby="inputRelationship" value="" required>
+                                <label for="guardianAge" class="form-label">Father's Age</label>
+                                <input type="number" class="form-control" id="guardianAge" aria-describedby="guardianAge" name="Guardian's Age">
                               </div>
                               <!-- START AGE -->
 
                               <!-- CONTACT INFORMATION -->
                               <div class="col-md-3 position-relative">
-                                <label for="telephone" class="form-label">Contact Number</label>
+                                <label for="guardianContact" class="form-label">Contact Number</label>
                                 <div class="input-group">
                                   <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                  <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                  <input type="tel" class="form-control" id="guardianContact" aria-describedby="inputGroupPrepend2" name="Guardian's Contact Number">
                                 </div>
                               </div>
                               <!-- END CONTACT INFORMATION -->
 
                               <!-- LIVING OR DECEASED -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                                <select class="form-select" id="inputLivingDeceased" required>
+                                <label for="guardianLivingFlag" class="form-label"> Living or Deceased? </label>
+                                <select class="form-select" id="guardianLivingFlag" name="Guardian's Living Flag">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option value="0">Yes</option>
+                                  <option value="1">No</option>
                                 </select>
                               </div>
 
-                              <!-- GUARDIAN'S INFORMATION  -->
+                              <!-- FATHER'S OCCUPATION  -->
                               <div class="col-md-6 position-relative">
-                                <label for="inputOccupation" class="form-label"> Occupation</label>
-                                <select class="form-select" id="inputOccupation" required>
+                                <label for="guardianOccupation" class="form-label"> Occupation</label>
+                                <select class="form-select" id="guardianOccupation" name="Guardian's Occupation">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option>Choose...</option>
+                                </select>
+                              </div>
+                              <div class="col-md-12 position-relative">
+                                <label for="guardianOtherOccupation" class="form-label">If Occupation is not in the list,please specify here</label>
+                                <input type="text" class="form-control" id="guardianOtherOccupation" aria-describedby="guardianOtherOccupation" name="Guardian's Other Occupation">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="guardianCompany" class="form-label">Company's Name</label>
+                                <input type="text" class="form-control" id="guardianCompany" aria-describedby="guardianCompany" name="Guardian's Company Name">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="guardianCompanyAddress" class="form-label">Work Address</label>
+                                <textarea class="form-control" name="guardian's Work Address" id="GuardianCompanyAddress" cols="30" rows="5"></textarea>
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="guardianIncome" class="form-label"> Average Monthly Income</label>
+                                <select class="form-select" id="guardianIncome" name="Guardian's Monthly Income">
+                                  <option selected disabled value="">Choose...</option>
+                                  <?php foreach ($incomeArr as $key => $inc) : ?>
+                                    <option value="<?php echo $key ?>" <?php echo $gen_info['source'] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
+                                  <?php endforeach; ?>
                                 </select>
                               </div>
                               <div class="col-md-6 position-relative">
-                                <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
-                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyName" class="form-label">Company's Name</label>
-                                <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyAddress" class="form-label">Company's Address</label>
-                                <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                                <select class="form-select" id="inputIncome" required>
-                                  <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
-                                </select>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                                <select class="form-select" id="inputEducationalAttainment" required>
+                                <label for="guardianEducation" class="form-label"> Highest Educational Attainment</label>
+                                <select class="form-select" id="guardianEducation" name="Guardian's Highest Educational Attainment">
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($educAttainment as $key => $educ) : ?>
                                     <option value="<?php echo $key ?>"><?php echo $educ ?></option>
                                   <?php endforeach; ?>
                                 </select>
                               </div>
-                              <!-- END GUARDIAN'S INFORMATION -->
+                              <!-- END FULL NAME -->
                             </div><!-- End Custom Styled Validation with Tooltips -->
                           </div>
                         </div>
@@ -1192,118 +1198,115 @@
                             <h5 class="card-title">Spouse's Information</h5>
                             <div class="col-md-3 position-relative py-4">
                               <label for="inputSpouse" class="form-label"> Do you have a Spouse? </label>
-                              <select class="form-select" id="inputSpouse" required>
+                              <select class="form-select" id="inputSpouse">
                                 <option selected disabled value="">Choose...</option>
-                                <option>...</option>
+                                <option value="0">Yes</option>
+                                <option value="1">No</option>
                               </select>
                             </div>
                             <!-- Custom Styled Validation with Tooltips -->
-                            <div class="row g-4">
+                            <div class="row g-4 d-none" id="spouseInfo">
                               <!-- FULL NAME -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputFirstName" class="form-label">First name</label>
-                                <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                <label for="spouseFN" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="spouseFN" aria-describedby="spouseFN" name="Spouse's First Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputMiddleName" class="form-label">Middle name</label>
-                                <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                <label for="spouseMN" class="form-label">Middle name</label>
+                                <input type="text" class="form-control" id="spouseMN" aria-describedby="spouseMN">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputLastName" class="form-label">Last name</label>
-                                <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                <label for="spouserLN" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="spouserLN" aria-describedby="spouserLN" name="Spouse's Last Name">
                               </div>
                               <div class="col-md-3 position-relative">
-                                <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                <label for="spouseSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                <input type="text" class="form-control" id="spouseSuffix" aria-describedby="spouseSuffix">
                               </div>
                               <!-- END FULL NAME -->
 
                               <!-- BIRTH -->
                               <div class="col-md-4 position-relative">
-                                <label for="inputDate" class="form-label">Birth Date</label>
-                                <input type="date" class="form-control" id="inputDate" aria-describedby="inputDate" value="" required>
+                                <label for="spouseBday" class="form-label">Birth Date</label>
+                                <input type="date" class="form-control" id="spouseBday" aria-describedby="spouseBday" name="Spouse's Birthdate">
                               </div>
                               <div class="col-md-5  position-relative">
-                                <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                                <input type="inputBirthPlace" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="" required>
+                                <label for="spouseBplace" class="form-label">Place of Birth</label>
+                                <input type="text" class="form-control" id="spouseBplace" aria-describedby="spouseBplace" name="Spouse's Birthplace">
                               </div>
                               <!-- END BIRTH -->
 
                               <!-- START AGE -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputAge" class="form-label">Spouse's Age</label>
-                                <input type="Age" class="form-control" id="inputAge" aria-describedby="inputAge" value="" required>
-                              </div>
-                              <!-- START AGE -->
-
-                              <!-- START AGE -->
-                              <div class="col-md-6 position-relative">
-                                <label for="inputRelationship" class="form-label">Relationship</label>
-                                <input type="Age" class="form-control" id="inputRelationship" aria-describedby="inputRelationship" value="" required>
+                                <label for="spouseAge" class="form-label">Father's Age</label>
+                                <input type="number" class="form-control" id="spouseAge" aria-describedby="spouseAge" name="Spouse's Age">
                               </div>
                               <!-- START AGE -->
 
                               <!-- CONTACT INFORMATION -->
                               <div class="col-md-3 position-relative">
-                                <label for="telephone" class="form-label">Contact Number</label>
+                                <label for="spouseContact" class="form-label">Contact Number</label>
                                 <div class="input-group">
                                   <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                  <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                  <input type="tel" class="form-control" id="spouseContact" aria-describedby="inputGroupPrepend2" name="Spouse's Contact Number">
                                 </div>
                               </div>
                               <!-- END CONTACT INFORMATION -->
 
                               <!-- LIVING OR DECEASED -->
                               <div class="col-md-3 position-relative">
-                                <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                                <select class="form-select" id="inputLivingDeceased" required>
+                                <label for="spouseLivingFlag" class="form-label"> Living or Deceased? </label>
+                                <select class="form-select" id="spouseLivingFlag" name="Spouse's Living Flag">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option value="0">Yes</option>
+                                  <option value="1">No</option>
                                 </select>
                               </div>
 
-                              <!-- GUARDIAN'S INFORMATION  -->
+                              <!-- FATHER'S OCCUPATION  -->
                               <div class="col-md-6 position-relative">
-                                <label for="inputOccupation" class="form-label"> Occupation</label>
-                                <select class="form-select" id="inputOccupation" required>
+                                <label for="spouseOccupation" class="form-label"> Occupation</label>
+                                <select class="form-select" id="spouseOccupation" name="Spouse's Occupation">
                                   <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
+                                  <option>Choose...</option>
+                                </select>
+                              </div>
+                              <div class="col-md-12 position-relative">
+                                <label for="spouseOtherOccupation" class="form-label">If Occupation is not in the list,please specify here</label>
+                                <input type="text" class="form-control" id="spouseOtherOccupation" aria-describedby="spouseOtherOccupation" name="Spouse's Other Occupation">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="spouseCompany" class="form-label">Company's Name</label>
+                                <input type="text" class="form-control" id="spouseCompany" aria-describedby="spouseCompany" name="Spouse's Company Name">
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="spouseCompanyAddress" class="form-label">Work Address</label>
+                                <textarea class="form-control" name="spouse's Work Address" id="spouseCompanyAddress" cols="30" rows="5"></textarea>
+                              </div>
+                              <div class="col-md-6 position-relative">
+                                <label for="spouseIncome" class="form-label"> Average Monthly Income</label>
+                                <select class="form-select" id="spouseIncome" name="Spouse's Monthly Income">
+                                  <option selected disabled value="">Choose...</option>
+                                  <?php foreach ($incomeArr as $key => $inc) : ?>
+                                    <option value="<?php echo $key ?>" <?php echo $gen_info['source'] == $key ? "selected" : "" ?>><?php echo $inc ?></option>
+                                  <?php endforeach; ?>
                                 </select>
                               </div>
                               <div class="col-md-6 position-relative">
-                                <label for="inputOthers" class="form-label">If Occupation is not in the list,please specify here</label>
-                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyName" class="form-label">Company's Name</label>
-                                <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputCompanyAddress" class="form-label">Company's Address</label>
-                                <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="" required>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                                <select class="form-select" id="inputIncome" required>
-                                  <option selected disabled value="">Choose...</option>
-                                  <option>...</option>
-                                </select>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                                <select class="form-select" id="inputEducationalAttainment" required>
+                                <label for="spouseEducation" class="form-label"> Highest Educational Attainment</label>
+                                <select class="form-select" id="spouseEducation" name="Spouse's Highest Educational Attainment">
                                   <option selected disabled value="">Choose...</option>
                                   <?php foreach ($educAttainment as $key => $educ) : ?>
                                     <option value="<?php echo $key ?>"><?php echo $educ ?></option>
                                   <?php endforeach; ?>
                                 </select>
                               </div>
-                              <!-- END GUARDIAN'S INFORMATION -->
+                              <!-- END FULL NAME -->
                             </div><!-- End Custom Styled Validation with Tooltips -->
                           </div>
                         </div>
                         <div class="float-end">
-                          <button type="button" class="btn btn-outline-success">Save</button>
+                          <button type="button" class="btn btn-outline-success" id="famBTN">Save</button>
                           <!-- <button type="button" class="btn btn-outline-warning">Edit Profile</button> -->
                         </div>
                       </form>
@@ -1320,13 +1323,13 @@
                               <div class="col-md-4 position-relative">
                                 <label for="working_flag" class="form-label">Are you a Working Student?</label>
                                 <?php if ($gen_info != null): ?>
-                                  <select class="form-select" id="working_flag" <?php echo $gen_info['working_flag'] != null ? 'disabled' : '' ?>>
+                                  <select class="form-select" id="working_flag" name="Working Student Flag" <?php echo $gen_info['working_flag'] != null ? 'disabled' : '' ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['working_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['working_flag'] == 1 ? 'selected' : '' ?>>No</option>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="working_flag">
+                                  <select class="form-select" id="working_flag" name="Working Student Flag">
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
@@ -1337,14 +1340,14 @@
                               <!---OFW PARENTS -->
                               <div class="col-md-8 position-relative">
                                 <label for="ofw_flag" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
-                                <?php if ($gen_info['ofw_flag'] != null): ?>
-                                  <select class="form-select" id="ofw_flag" <?php echo $gen_info['ofw_flag'] != null ? 'disabled' : '' ?>>
+                                <?php if ($gen_info != null): ?>
+                                  <select class="form-select" id="ofw_flag" name="OFW Flag" <?php echo $gen_info['ofw_flag'] != null ? 'disabled' : '' ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['ofw_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['ofw_flag'] == 1 ? 'selected' : '' ?>>No</option>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="ofw_flag">
+                                  <select class="form-select" id="ofw_flag" name="OFW Flag">
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
@@ -1355,14 +1358,14 @@
                               <!--OFW FAMILY MEMBERS -->
                               <div class="col-md-6 position-relative">
                                 <label for="other_ofw" class="form-label">Do you have other Family member/s who are an OFW?</label>
-                                <?php if ($gen_info['other_ofw'] != null): ?>
-                                  <select class="form-select" id="other_ofw" <?php echo $gen_info['other_ofw'] != null ? 'disabled' : '' ?>>
+                                <?php if ($gen_info != null): ?>
+                                  <select class="form-select" id="other_ofw" name="Other OFW Flag" <?php echo $gen_info['other_ofw'] != null ? 'disabled' : '' ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['other_ofw'] == 0 ? 'selected' : '' ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['other_ofw'] == 1 ? 'selected' : '' ?>>No</option>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="other_ofw">
+                                  <select class="form-select" id="other_ofw" name="Other OFW Flag">
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
@@ -1373,14 +1376,14 @@
                               <!---PWD PARENTS -->
                               <div class="col-md-6 position-relative">
                                 <label for="pwd_flag" class="form-label">Do you have a Parent/s who have PWD?</label>
-                                <?php if ($gen_info['pwd_flag'] != null): ?>
-                                  <select class="form-select" id="pwd_flag" <?php echo $gen_info['pwd_flag'] != null ? 'disabled' : '' ?>>
+                                <?php if ($gen_info != null): ?>
+                                  <select class="form-select" id="pwd_flag" name="Parent PWD Flag" <?php echo $gen_info['pwd_flag'] != null ? 'disabled' : '' ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['pwd_flag'] == 1 ? 'selected' : '' ?>>No</option>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="pwd_flag">
+                                  <select class="form-select" id="pwd_flag" name="Parent PWD Flag">
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
@@ -1391,14 +1394,14 @@
                               <!---PWD FAMILY MEMBERS -->
                               <div class="col-md-6 position-relative">
                                 <label for="other_pwd" class="form-label">Do you have other Family member/s who have PWD?</label>
-                                <?php if ($gen_info['other_pwd'] != null): ?>
-                                  <select class="form-select" id="other_pwd" <?php echo $gen_info['other_pwd'] != null ? 'disabled' : '' ?>>
+                                <?php if ($gen_info != null): ?>
+                                  <select class="form-select" id="other_pwd" name="Other Family PWD Flag" <?php echo $gen_info['other_pwd'] != null ? 'disabled' : '' ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['other_pwd'] == 0 ? 'selected' : '' ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['other_pwd'] == 1 ? 'selected' : '' ?>>No</option>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="other_pwd">
+                                  <select class="form-select" id="other_pwd" name="Other Family PWD Flag">
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
@@ -1409,15 +1412,15 @@
                               <!---PARENTS STATUS -->
                               <div class="col-md-6 position-relative">
                                 <label for="status_flag" class="form-label">What is your Parents Status?</label>
-                                <?php if ($gen_info['status_flag'] != null): ?>
-                                  <select class="form-select" id="status_flag" <?php echo $gen_info['status_flag'] != null ? 'disabled' : '' ?>>
+                                <?php if ($gen_info != null): ?>
+                                  <select class="form-select" id="status_flag" name="Parent Status Flag" <?php echo $gen_info['status_flag'] != null ? 'disabled' : '' ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <?php foreach ($civilArr as $key => $value) : ?>
                                       <option value="<?php echo $key ?>" <?php echo $gen_info['status_flag'] == $key ? 'selected' : '' ?>><?php echo $value ?></option>
                                     <?php endforeach; ?>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="status_flag">
+                                  <select class="form-select" id="status_flag" name="Parent Status Flag">
                                     <option selected disabled value="">Choose...</option>
                                     <?php foreach ($civilArr as $key => $value) : ?>
                                       <option value="<?php echo $key ?>"><?php echo $value ?></option>
@@ -1429,14 +1432,14 @@
                               <!---STUDENT PWD -->
                               <div class="col-md-6 position-relative">
                                 <label for="self_pwd_flag" class="form-label">Are you a Student with PWD?</label>
-                                <?php if ($gen_info['self_pwd_flag'] != null): ?>
-                                  <select class="form-select" id="self_pwd_flag" <?php echo $gen_info['self_pwd_flag'] != null ? 'disabled' : '' ?>>
+                                <?php if ($gen_info != null): ?>
+                                  <select class="form-select" id="self_pwd_flag" name="Student PWD Flag" <?php echo $gen_info['self_pwd_flag'] != null ? 'disabled' : '' ?>>
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0" <?php echo $gen_info['self_pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
                                     <option value="1" <?php echo $gen_info['self_pwd_flag'] == 1 ? 'selected' : '' ?>>No</option>
                                   </select>
                                 <?php else: ?>
-                                  <select class="form-select" id="self_pwd_flag">
+                                  <select class="form-select" id="self_pwd_flag" name="Student PWD Flag">
                                     <option selected disabled value="">Choose...</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
@@ -1447,7 +1450,7 @@
                           </div>
                         </div>
                         <div class="float-end">
-                          <button type="submit" class="btn btn-outline-success">Save</button>
+                          <button type="submit" class="btn btn-outline-success" id="otherInfoBTN">Save</button>
                           <!-- <button type="button" class="btn btn-outline-warning">Edit Profile</button> -->
                         </div>
                       </form>

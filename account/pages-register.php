@@ -3,6 +3,7 @@
 
 // Getting the Path
 include('path_identifier.php');
+include('model/functionModel.php');
 include('global_variables.php');
 
 $title = get_title(1);

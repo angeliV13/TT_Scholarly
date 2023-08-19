@@ -162,6 +162,9 @@ function get_path($lv_path, $type = '99')
                         case 'tts_settings':
                                 return 'views/admin/basic_settings.php';
                         
+                        case 'web_settings':
+                                return 'views/admin/web_settings.php';
+                        
                         case 'sch_settings':
                                 return 'views/admin/school_settings.php';
                         

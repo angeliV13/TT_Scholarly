@@ -71,78 +71,78 @@ let my_handlers = {
   $("#register").on("submit", function(e) {
     e.preventDefault();
 
-    let scholarType = check_error(document.getElementById("scholarType"));
-    let firstName = check_error(document.getElementById("inputFirstName"));
+    let scholarType = check_error(document.getElementById("scholarType")); if (scholarType == undefined) return;
+    let firstName = check_error(document.getElementById("inputFirstName")); if (firstName == undefined) return;
     let middleName = $("#inputMiddleName").val();
-    let lastName = check_error(document.getElementById("inputLastName"));
+    let lastName = check_error(document.getElementById("inputLastName")); if (lastName == undefined) return;
     let suffix = $("#inputSuffix").val();
-    let username = check_error(document.getElementById("username"));
+    let username = check_error(document.getElementById("username")); if (username == undefined) return;
 
     let birthDate = check_error(document.getElementById("inputDate"), options = {
       type: "date",
       verifyFlag: 1,
       condition: "today",
       conditionCheck: "birthdate"
-    });
+    }); if (birthDate == undefined) return;
 
-    let birthPlace = check_error(document.getElementById("inputBirthPlace"));
-    let religion = check_error(document.getElementById("inputReligion"));
-    let gender = check_error(document.getElementById("inputGender"));
-    let civilStatus = check_error(document.getElementById("inputCivilStatus"));
+    let birthPlace = check_error(document.getElementById("inputBirthPlace")); if (birthPlace == undefined) return;
+    let religion = check_error(document.getElementById("inputReligion")); if (religion == undefined) return;
+    let gender = check_error(document.getElementById("inputGender")); if (gender == undefined) return;
+    let civilStatus = check_error(document.getElementById("inputCivilStatus")); if (civilStatus == undefined) return;
     let contactNo = check_error(document.getElementById("inputContactNo"), options = {
       type: "number",
       verifyFlag: 1,
       conditionCheck: "contactNumber",
       regex: /^\d{10}$/,
       text: "Contact Number"
-    });
-    let address = check_error(document.getElementById("inputAddress"));
+    }); if (contactNo == undefined) return;
+    let address = check_error(document.getElementById("inputAddress")); if (address == undefined) return;
     let provice = check_error(document.getElementById("province"), options = {
       type: "select",
       returnVal: "text"
-    });
+    }); if (provice == undefined) return;
     let city = check_error(document.getElementById("city"), options = {
       type: "select",
       returnVal: "text"
-    });
+    }); if (city == undefined) return;
     let barangay = check_error(document.getElementById("barangay"), options = {
       type: "select",
       returnVal: "text"
-    });
+    }); if (barangay == undefined) return;
     let email = check_error(document.getElementById("yourEmail"), options = {
       type: "email",
       verifyFlag: 1,
       regex: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
       text: "Email"
-    });
+    }); if (email == undefined) return;
 
-    let zipCode = check_error(document.getElementById("zipCode"));
+    let zipCode = check_error(document.getElementById("zipCode")); if (zipCode == undefined) return;
 
     let arr = [document.getElementById("yourPassword"), document.getElementById("verifyPassword")];
     let checkFlag = check_error(arr, options = {
       type: "input",
       verifyFlag: 1,
-    });
+    }); if (checkFlag == undefined) return;
 
-    let fbName = check_error(document.getElementById("fbName"));
+    let fbName = check_error(document.getElementById("fbName")); if (fbName == undefined) return;
     let facebookProfileURLRegex = /^(https?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
     let fbUrl = check_error(document.getElementById("fbUrl"), options = {
       type: "input",
       verifyFlag: 1,
       regex: facebookProfileURLRegex,
       text: "Facebook Profile URL"
-    });
+    }); if (fbUrl == undefined) return;
 
     let fbImg = check_error(document.getElementById("fbImg"), options = {
       type: "file",
       verifyFlag: 1,
       condition: "jpg,png,jpeg",
       text: "Facebook Profile Picture"
-    });
+    }); if (fbImg == undefined) return;
 
-    let citizenship = check_error(document.getElementById("citizenship"));
-    let years = check_error(document.getElementById("years"));
-    let language = check_error(document.getElementById("language"));
+    let citizenship = check_error(document.getElementById("citizenship")); if (citizenship == undefined) return;
+    let years = check_error(document.getElementById("years")); if (years == undefined) return;
+    let language = check_error(document.getElementById("language")); if (language == undefined) return;
 
     let password = checkFlag !== undefined ? checkFlag : undefined;
     let verifyPassword = checkFlag !== undefined ? checkFlag : undefined;
@@ -162,7 +162,7 @@ let my_handlers = {
     let region = check_error(document.getElementById("region"), options = {
       type: "select",
       returnVal: "text"
-    });
+    }); region == undefined; return;
 
     if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
       let formData = new FormData();
