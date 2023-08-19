@@ -8,7 +8,7 @@ $educAttainment = ['0' => 'Elementary', '1' => 'Junior High School', '2' => 'Sen
 $incomeArr = ['0' => 'Less than 5000', '1' => '5001 - 10999', '2' => '11000 - 20999', '3' => 'Greater than 21000', '4' => 'N/A'];
 $bootstrapIcons = ['Circle' => 'bi bi-check-circle-fill', 'User' => 'bi bi-people', 'Add User' => 'bi bi-person-plus', 'Add' => 'bi bi-plus-circle', 'Delete User' => 'bi bi-person-x', 'Delete' => 'bi bi-trash3', 'Submit 1' => 'bi bi-file-earmark-check', 'Submit 2' => 'bi bi-check-square', 'Archive' => 'bi bi-archive', 'Bar Graph' => 'bi bi-file-bar-graph', 'Card Image' => 'bi bi-card-image'];
 $accountTypeArr = ['0' => 'Super Admin', '1' => 'Admin', '2' => 'Beneficiaries', '3' => 'Applicant'];
-$relationshipArr = [];
+$relationshipArr = ['Brother' => 'Brother', 'Sister' => 'Sister', 'Grandfather' => 'Grandfather', 'Grandmother' => 'Grandmother', 'Uncle' => 'Uncle', 'Aunt' => 'Aunt', 'Cousin' => 'Cousin', 'Others' => 'Others'];
 
 if (isset($_SESSION))
 {
@@ -21,8 +21,3 @@ if (isset($_SESSION))
 
 $website_info = get_website_info();
 $website_socials = get_website_socials();
-
-$college = [];
-$seniorHigh = [];
-$juniorHigh = [];
-$elementary = [];

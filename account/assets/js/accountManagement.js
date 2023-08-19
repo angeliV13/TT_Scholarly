@@ -830,9 +830,19 @@ $("#familyBG").on("submit", function(e){
     let rent_flag = check_error(document.getElementById("rent_flag")); if (rent_flag == undefined) return;
     let monthly_payment = check_error(document.getElementById("monthly_payment")); if (monthly_payment == undefined) return;
 
+    let otherInfoArr = fatherArr = motherArr = guardianArr = spouseArr = siblings = [];
+
+    otherInfoArr.push({
+        'family_flag': family_flag,
+        'total_num': total_num,
+        'birth_order': birth_order,
+        'source': source,
+        'rent_flag': rent_flag,
+        'monthly_payment': monthly_payment,
+    })
+
     let siblingTableBody = $("#siblingTable tbody");
     let siblingRows = siblingTableBody.children();
-    let siblings = [];
 
     if (siblingRows.length > 0){
         for (let i = 0; i < siblingRows.length; i++){
@@ -868,6 +878,240 @@ $("#familyBG").on("submit", function(e){
             return;
         }
     }
+
+    // Father Info
+    let fatherFN = check_error(document.getElementById("fatherFN")); if (fatherFN == undefined) return;
+    let fatherMN = $("#fatherMN").val();
+    let fatherLN = check_error(document.getElementById("fatherLN")); if (fatherLN == undefined) return;
+    let fatherSuffix = $("#fatherSuffix").val();
+    let fatherBday = check_error(document.getElementById("fatherBday"), options = {
+        type: "date",
+        verifyFlag: 1,
+        condition: "today",
+        conditionCheck: "birthdate"
+      }); if (fatherBday == undefined) return;
+    let fatherBplace = check_error(document.getElementById("fatherBplace")); if (fatherBplace == undefined) return;
+    let fatherAge = check_error(document.getElementById("fatherAge")); if (fatherAge == undefined) return;
+    let fatherContact = check_error(document.getElementById("fatherContact"), options = {
+        type: "number",
+        verifyFlag: 1,
+        conditionCheck: "contactNumber",
+        regex: /^\d{10}$/,
+        text: "Contact Number"
+      }); if (fatherContact == undefined) return;
+    let fatherLivingFlag = check_error(document.getElementById("fatherLivingFlag")); if (fatherLivingFlag == undefined) return;
+    let fatherOccupation = check_error(document.getElementById("fatherOccupation")); if (fatherOccupation == undefined) return;
+    let fatherOtherOccupation = check_error(document.getElementById("fatherOtherOccupation")); if (fatherOtherOccupation == undefined) return;
+    let fatherCompany = check_error(document.getElementById("fatherCompany")); if (fatherCompany == undefined) return;
+    let fatherCompanyAddress = check_error(document.getElementById("fatherCompanyAddress")); if (fatherCompanyAddress == undefined) return;
+    let fatherIncome = check_error(document.getElementById("fatherIncome")); if (fatherIncome == undefined) return;
+    let fatherEducation = check_error(document.getElementById("fatherEducation")); if (fatherEducation == undefined) return;
+
+    fatherArr.push({
+        'fatherFN': fatherFN,
+        'fatherMN': fatherMN,
+        'fatherLN': fatherLN,
+        'fatherSuffix': fatherSuffix,
+        'fatherBday': fatherBday,
+        'fatherBplace': fatherBplace,
+        'fatherAge': fatherAge,
+        'fatherContact': fatherContact,
+        'fatherLivingFlag': fatherLivingFlag,
+        'fatherOccupation': fatherOccupation,
+        'fatherOtherOccupation': fatherOtherOccupation,
+        'fatherCompany': fatherCompany,
+        'fatherCompanyAddress': fatherCompanyAddress,
+        'fatherIncome': fatherIncome,
+        'fatherEducation': fatherEducation,
+    });
+
+    // Mother Info
+    let motherFN = check_error(document.getElementById("motherFN")); if (motherFN == undefined) return;
+    let motherMN = $("#motherMN").val();
+    let motherLN = check_error(document.getElementById("motherLN")); if (motherLN == undefined) return;
+    let motherSuffix = $("#motherSuffix").val();
+    let motherBday = check_error(document.getElementById("motherBday"), options = {
+        type: "date",
+        verifyFlag: 1,
+        condition: "today",
+        conditionCheck: "birthdate"
+      }); if (motherBday == undefined) return;
+    let motherBplace = check_error(document.getElementById("motherBplace")); if (motherBplace == undefined) return;
+    let motherAge = check_error(document.getElementById("motherAge")); if (motherAge == undefined) return;
+    let motherContact = check_error(document.getElementById("motherContact"), options = {
+        type: "number",
+        verifyFlag: 1,
+        conditionCheck: "contactNumber",
+        regex: /^\d{10}$/,
+        text: "Contact Number"
+      }); if (motherContact == undefined) return;
+    let motherLivingFlag = check_error(document.getElementById("motherLivingFlag")); if (motherLivingFlag == undefined) return;
+    let motherOccupation = check_error(document.getElementById("motherOccupation")); if (motherOccupation == undefined) return;
+    let motherOtherOccupation = check_error(document.getElementById("motherOtherOccupation")); if (motherOtherOccupation == undefined) return;
+    let motherCompany = check_error(document.getElementById("motherCompany")); if (motherCompany == undefined) return;
+    let motherCompanyAddress = check_error(document.getElementById("motherCompanyAddress")); if (motherCompanyAddress == undefined) return;
+    let motherIncome = check_error(document.getElementById("motherIncome")); if (motherIncome == undefined) return;
+    let motherEducation = check_error(document.getElementById("motherEducation")); if (motherEducation == undefined) return;
+
+    motherArr.push({
+        'motherFN': motherFN,
+        'motherMN': motherMN,
+        'motherLN': motherLN,
+        'motherSuffix': motherSuffix,
+        'motherBday': motherBday,
+        'motherBplace': motherBplace,
+        'motherAge': motherAge,
+        'motherContact': motherContact,
+        'motherLivingFlag': motherLivingFlag,
+        'motherOccupation': motherOccupation,
+        'motherOtherOccupation': motherOtherOccupation,
+        'motherCompany': motherCompany,
+        'motherCompanyAddress': motherCompanyAddress,
+        'motherIncome': motherIncome,
+        'motherEducation': motherEducation,
+    });
+
+    // Guardian Info
+
+    let inputGuardian = $("#inputGuardian").val();
+
+    if (inputGuardian == 0){
+        let guardianRelationship = check_error(document.getElementById("guardianRelationship")); if (guardianRelationship == undefined) return;
+        let guardianFN = check_error(document.getElementById("guardianFN")); if (guardianFN == undefined) return;
+        let guardianMN = $("#guardianMN").val();
+        let guardianLN = check_error(document.getElementById("guardianLN")); if (guardianLN == undefined) return;
+        let guardianSuffix = $("#guardianSuffix").val();
+        let guardianBday = check_error(document.getElementById("guardianBday"), options = {
+            type: "date",
+            verifyFlag: 1,
+            condition: "today",
+            conditionCheck: "birthdate"
+          }); if (guardianBday == undefined) return;
+        let guardianBplace = check_error(document.getElementById("guardianBplace")); if (guardianBplace == undefined) return;
+        let guardianAge = check_error(document.getElementById("guardianAge")); if (guardianAge == undefined) return;
+        let guardianContact = check_error(document.getElementById("guardianContact"), options = {
+            type: "number",
+            verifyFlag: 1,
+            conditionCheck: "contactNumber",
+            regex: /^\d{10}$/,
+            text: "Contact Number"
+          }); if (guardianContact == undefined) return;
+        let guardianLivingFlag = check_error(document.getElementById("guardianLivingFlag")); if (guardianLivingFlag == undefined) return;
+        let guardianOccupation = check_error(document.getElementById("guardianOccupation")); if (guardianOccupation == undefined) return;
+        let guardianOtherOccupation = check_error(document.getElementById("guardianOtherOccupation")); if (guardianOtherOccupation == undefined) return;
+        let guardianCompany = check_error(document.getElementById("guardianCompany")); if (guardianCompany == undefined) return;
+        let guardianCompanyAddress = check_error(document.getElementById("guardianCompanyAddress")); if (guardianCompanyAddress == undefined) return;
+        let guardianIncome = check_error(document.getElementById("guardianIncome")); if (guardianIncome == undefined) return;
+        let guardianEducation = check_error(document.getElementById("guardianEducation")); if (guardianEducation == undefined) return;
+
+        guardianArr.push({
+            guardianRelationship: guardianRelationship,
+            guardianFN: guardianFN,
+            guardianMN: guardianMN,
+            guardianLN: guardianLN,
+            guardianSuffix: guardianSuffix,
+            guardianBday: guardianBday,
+            guardianBplace: guardianBplace,
+            guardianAge: guardianAge,
+            guardianContact: guardianContact,
+            guardianLivingFlag: guardianLivingFlag,
+            guardianOccupation: guardianOccupation,
+            guardianOtherOccupation: guardianOtherOccupation,
+            guardianCompany: guardianCompany,
+            guardianCompanyAddress: guardianCompanyAddress,
+            guardianIncome: guardianIncome,
+            guardianEducation: guardianEducation
+        })
+    }
+
+    let inputSpouse = $("#inputSpouse").val();
+
+    if (inputSpouse == 0){
+        let spouseFN = check_error(document.getElementById("spouseFN")); if (spouseFN == undefined) return;
+        let spouseMN = $("#spouseMN").val();
+        let spouseLN = check_error(document.getElementById("spouseLN")); if (spouseLN == undefined) return;
+        let spouseSuffix = $("#spouseSuffix").val();
+        let spouseBday = check_error(document.getElementById("spouseBday"), options = {
+            type: "date",
+            verifyFlag: 1,
+            condition: "today",
+            conditionCheck: "birthdate"
+          }); if (spouseBday == undefined) return;
+        let spouseBplace = check_error(document.getElementById("spouseBplace")); if (spouseBplace == undefined) return;
+        let spouseAge = check_error(document.getElementById("spouseAge")); if (spouseAge == undefined) return;
+        let spouseContact = check_error(document.getElementById("spouseContact"), options = {
+            type: "number",
+            verifyFlag: 1,
+            conditionCheck: "contactNumber",
+            regex: /^\d{10}$/,
+            text: "Contact Number"
+          }); if (spouseContact == undefined) return;
+        let spouseLivingFlag = check_error(document.getElementById("spouseLivingFlag")); if (spouseLivingFlag == undefined) return;
+        let spouseOccupation = check_error(document.getElementById("spouseOccupation")); if (spouseOccupation == undefined) return;
+        let spouseOtherOccupation = check_error(document.getElementById("spouseOtherOccupation")); if (spouseOtherOccupation == undefined) return;
+        let spouseCompany = check_error(document.getElementById("spouseCompany")); if (spouseCompany == undefined) return;
+        let spouseCompanyAddress = check_error(document.getElementById("spouseCompanyAddress")); if (spouseCompanyAddress == undefined) return;
+        let spouseIncome = check_error(document.getElementById("spouseIncome")); if (spouseIncome == undefined) return;
+        let spouseEducation = check_error(document.getElementById("spouseEducation")); if (spouseEducation == undefined) return;
+
+        spouseArr.push({
+            spouseFN: spouseFN,
+            spouseMN: spouseMN,
+            spouseLN: spouseLN,
+            spouseSuffix: spouseSuffix,
+            spouseBday: spouseBday,
+            spouseBplace: spouseBplace,
+            spouseAge: spouseAge,
+            spouseContact: spouseContact,
+            spouseLivingFlag,
+            spouseOccupation: spouseOccupation,
+            spouseOtherOccupation: spouseOtherOccupation,
+            spouseCompany: spouseCompany,
+            spouseCompanyAddress: spouseCompanyAddress,
+            spouseIncome: spouseIncome,
+            spouseEducation: spouseEducation
+        })
+    }
+
+    $.ajax({
+        url: "controller/accountHandler.php",
+        type: "POST",
+        data: {
+            action: "15",
+            guardianArr: guardianArr,
+            spouseArr: spouseArr,
+            fatherArr: fatherArr,
+            motherArr: motherArr,
+            siblings: siblings,
+        },
+        beforeSend: function(){
+            showBeforeSend("Updating Family Information...");
+        },
+        success: function(data){
+            hideBeforeSend();
+            if (data == "success"){
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "Family Information Saved Successfully."
+                }).then((result) => {
+                    if (result.isConfirmed){
+                        location.reload();
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `An error occured while submitting your application. Please try again. Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            }
+        }
+    })
 })
 
 

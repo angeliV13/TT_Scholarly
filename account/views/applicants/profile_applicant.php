@@ -1014,7 +1014,7 @@
 
                               <!-- START AGE -->
                               <div class="col-md-3 position-relative">
-                                <label for="motherAge" class="form-label">Father's Age</label>
+                                <label for="motherAge" class="form-label">Mother's Age</label>
                                 <input type="number" class="form-control" id="motherAge" aria-describedby="motherAge" name="Mother's Age">
                               </div>
                               <!-- START AGE -->
@@ -1095,6 +1095,15 @@
                             <!-- Custom Styled Validation with Tooltips -->
                             <div class="row g-4 d-none" id="guardianInfo">
                               <!-- FULL NAME -->
+                              <div class="col-md-12 position-relative">
+                                <label for="guardianRelationship" class="form-label"> Relationship</label>
+                                <select class="form-select" id="guardianRelationship" name="Guardian's Relationship">
+                                  <option selected disabled value="">Choose...</option>
+                                  <?php foreach ($relationshipArr as $key => $rel) : ?>
+                                    <option value="<?php echo $key ?>" <?php echo $gen_info == $key ? "selected" : "" ?>><?php echo $rel ?></option>
+                                  <?php endforeach; ?>
+                                </select>
+                              </div>
                               <div class="col-md-3 position-relative">
                                 <label for="guardianFN" class="form-label">First name</label>
                                 <input type="text" class="form-control" id="guardianFN" aria-describedby="guardianFN" name="Guardian's First Name">
@@ -1126,7 +1135,7 @@
 
                               <!-- START AGE -->
                               <div class="col-md-3 position-relative">
-                                <label for="guardianAge" class="form-label">Father's Age</label>
+                                <label for="guardianAge" class="form-label">Guardian's Age</label>
                                 <input type="number" class="form-control" id="guardianAge" aria-describedby="guardianAge" name="Guardian's Age">
                               </div>
                               <!-- START AGE -->
@@ -1238,7 +1247,7 @@
 
                               <!-- START AGE -->
                               <div class="col-md-3 position-relative">
-                                <label for="spouseAge" class="form-label">Father's Age</label>
+                                <label for="spouseAge" class="form-label">Spouse's Age</label>
                                 <input type="number" class="form-control" id="spouseAge" aria-describedby="spouseAge" name="Spouse's Age">
                               </div>
                               <!-- START AGE -->

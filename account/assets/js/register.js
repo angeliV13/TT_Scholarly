@@ -162,7 +162,7 @@ let my_handlers = {
     let region = check_error(document.getElementById("region"), options = {
       type: "select",
       returnVal: "text"
-    }); region == undefined; return;
+    }); if (region == undefined) return;
 
     if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
       let formData = new FormData();
