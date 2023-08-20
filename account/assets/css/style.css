@@ -65,7 +65,7 @@ h6 {
   width: 165px;
   height: 165px;
   box-shadow: 0 0 10px 0 rgba(255, 255, 255, .35);
-  border-radius: 100px;
+  /* border-radius: 100px; */
   z-index: 0;
 }
 .profile-pic .-label {
