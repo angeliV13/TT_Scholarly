@@ -182,6 +182,19 @@ if (isset($_REQUEST['action']))
 
         echo updateAddInfo($data);
     }
+    else if ($action == 17) // Update PFP
+    {
+        $data = [
+            'image'             => isset($_FILES['image']) ? $_FILES['image'] : '',
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+        ];
+
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+
+        echo changePFP($data);
+    }
 }
 
 

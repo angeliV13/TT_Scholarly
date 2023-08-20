@@ -945,4 +945,36 @@ function submitApplication($id)
     return "success";
 }
 
+function changePFP($data)
+{
+    include("dbconnection.php");
+
+    $fbImg = $data['image'];
+    $userId = $data['userId'];
+
+    if ($fbImg != null)
+    {
+        $uploadImg = upload_file($fbImg, 'assets/img/uploads/fbProfile/', '../assets/img/uploads/fbProfile/', $options = [
+            'type' => ['jpg', 'jpeg', 'png'],
+        ]);
+
+        if ($uploadImg == 'Invalid File Type')
+        {
+            return 'Invalid File Type';
+        }
+
+        if ($uploadImg['success'] == false)
+        {
+            return 'Error: ' . $uploadImg['error'];
+        }
+
+        $img = $uploadImg['path'];
+    }
+
+    $sql = "UPDATE user_info SET profile_img = '$img' WHERE account_id = '$userId' LIMIT 1";
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success' : 'Error: ' . $conn->error;
+}
+
 
