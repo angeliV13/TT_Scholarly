@@ -295,7 +295,9 @@ function schoolTable()
 function collegeNewApplicantTable(){
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM account WHERE account_type = '3' AND account_status = '1'";
+    $sql = "SELECT * FROM account acc 
+            JOIN user_info inf ON acc.id = inf.account_id 
+            WHERE acc.account_type = '3' AND acc.account_status = '1'";
     $query = $conn->query($sql);
 
     $data = [];
@@ -307,13 +309,18 @@ function collegeNewApplicantTable(){
         while ($row = $query->fetch_assoc())
         {
             extract($row);
-            $name = get_user_info($id);
             
             $data[] = [
                 static_count(),
-                $name['last_name'] . ', ' . $name['first_name'],
-                1,1,1,1,1,1,1,1,
-                // "<pre>" . print_r($addedBy, true) . "</pre>",
+                $last_name . ', ' . $first_name, //Name
+                1, //School
+                1, //School Type
+                1, //Scholarship Type
+                1, //Educational Level
+                1, //Course
+                1, // Year Level
+                $contact_number, //Contact Number
+                $barangay, //Barangay
                 
                 "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . 1 . "' data-address='" . 1 . "' data-type='" . 1 . "'>Edit</button>
                 <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . 1 . "'>Delete</button>",
