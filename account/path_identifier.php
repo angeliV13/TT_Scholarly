@@ -187,7 +187,6 @@ function get_path($lv_path, $type = '99')
                         case 'dashboard':
                                 return 'views/beneficiaries/profile_bene.php';
 
-
                         case 'assessment-bene':
                                 return 'views/beneficiaries/assessment_bene.php';
 
@@ -217,8 +216,7 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'dashboard_applicant':
-                                return 'views/applicants/profile_applicant.php';
-
+                                return 'views/applicants/profile_bene.php';
 
                         case 'profile_applicant':
                                 return 'views/applicants/profile_applicant.php';
