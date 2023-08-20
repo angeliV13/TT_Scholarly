@@ -1,10 +1,25 @@
 let userId = $("#userId").val();
 let scholarLevel = $("#scholarLevel").val();
-let educBG = $("#educational-background");
-let famBG = $("#family-background");
-let addBG = $("#additional-information");
+let currentActive = $("#currentActive").val();
+let collegeId = $("#collegeId").val();
+let shsId = $("#shsId").val();
+let jhsId = $("#jhsId").val();
+let elemId = $("#elemId").val();
 
-// if you hover your mouse to educBG tab and it is disabled, show a tooltip saying that the user needs to confirm their personal information first
+if (currentActive == "info_flag"){
+    $("#personal-information").addClass("active");
+    $("#bordered-justified-personal-information").addClass("active show");
+} else if (currentActive == "educ_flag"){
+    $("#educational-background").addClass("active");
+    $("#bordered-justified-educational-background").addClass("active show");
+} else if (currentActive == "family_flag"){
+    $("#family-background").addClass("active");
+    $("#bordered-justified-family-background").addClass("active show");
+} else if (currentActive == "add_flag"){
+    $("#additional-information").addClass("active");
+    $("#bordered-justified-additional-information").addClass("active show");
+}
+
 $(document).on("mouseenter click", "#educBG", function(){
     if ($(this).attr("data-status") == "disabled"){
         $("#educational-background").attr("data-bs-toggle", "tooltip");
@@ -26,6 +41,19 @@ $(document).on("mouseenter click", "#addBG", function(){
     }
 })
 
+function calculateAge(val){
+    let today = new Date();
+    let birthDate = new Date(val);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())){
+        age--;
+    }
+
+    return age;
+}
+
 
 $("#benefInfo").on("submit", function(e){
     e.preventDefault();
@@ -45,58 +73,56 @@ $("#benefInfo").on("submit", function(e){
         text: "Email"
     }); if (email == undefined) return;
 
-    if (contactNo && email){
-        $.ajax({
-            url: "controller/accountHandler.php",
-            type: "POST",
-            data: {
-                'action': 11,
-                'contactNo': contactNo,
-                'email': email,
-                'userId': userId
-            },
-            beforeSend: function(){
-                showBeforeSend("Updating Contact Information...");
-            },
-            success: function(data){
-                hideBeforeSend();
-                if (data == "success") {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Success!",
-                        text: `Contact Information Successfully Updated!`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `Something went wrong! Error: ${data}`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                }
+    $.ajax({
+        url: "controller/accountHandler.php",
+        type: "POST",
+        data: {
+            'action': 11,
+            'contactNo': contactNo,
+            'email': email,
+            'userId': userId
+        },
+        beforeSend: function(){
+            showBeforeSend("Updating Contact Information...");
+        },
+        success: function(data){
+            hideBeforeSend();
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Contact Information Successfully Updated!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
             }
-        })
-    }
+        }
+    })
 })
 
 $("#graduating_flag").on("change click", function(){
     let val = $(this).val();
 
     if (val == 0){
-        $("#honor_flag").prop("disabled", false);
-        $("#graduation_year").prop("disabled", true);
+        // $("#honor_flag").prop("disabled", false);
+        // $("#graduation_year").prop("disabled", true);
     } else {
-        $("#graduation_year").prop("disabled", false);
-        $("#honor_flag").prop("disabled", true);
-        $("#honor_type").prop("disabled", true);
-        $("#other_honor").prop("disabled", true);
+        // $("#graduation_year").prop("disabled", false);
+        // $("#honor_flag").prop("disabled", true);
+        // $("#honor_type").prop("disabled", true);
+        // $("#other_honor").prop("disabled", true);
         $("#other_honor").val("");
     }
 })
@@ -105,10 +131,10 @@ $("#honor_flag").on("change click", function(){
     let val = $(this).val();
 
     if (val == 0){
-        $("#honor_type").prop("disabled", false);
+        // $("#honor_type").prop("disabled", false);
     } else {
-        $("#honor_type").prop("disabled", true);
-        $("#other_honor").prop("disabled", true);
+        // $("#honor_type").prop("disabled", true);
+        // $("#other_honor").prop("disabled", true);
         $("#other_honor").val("");
     }
 })
@@ -117,9 +143,9 @@ $("#honor_type").on("change click", function(){
     let val = $(this).val();
 
     if (val == "3"){
-        $("#other_honor").prop("disabled", false);
+        // $("#other_honor").prop("disabled", false);
     } else {
-        $("#other_honor").prop("disabled", true);
+        // $("#other_honor").prop("disabled", true);
         $("#other_honor").val("");
     }
 })
@@ -128,11 +154,11 @@ $("#c_school").on("change click", function(){
     let val = $(this).val();
 
     if (val == "Others"){
-        $("#c_otherSchool").prop("disabled", false);
-        $("#c_school_address").prop("disabled", false);
+        // $("#c_otherSchool").prop("disabled", false);
+        // $("#c_school_address").prop("disabled", false);
         $("#c_school_address").val("");
     } else {
-        $("#c_otherSchool").prop("disabled", true);
+        // $("#c_otherSchool").prop("disabled", true);
         $("#c_otherSchool").val("");
         
         $.ajax({
@@ -145,7 +171,7 @@ $("#c_school").on("change click", function(){
             success: function(data){
                 if (!data.includes("error")){
                     $("#c_school_address").val(data);
-                    $("#c_school_address").prop("disabled", true);
+                    // $("#c_school_address").prop("disabled", true);
                 } else {
                     $("#c_school_address").val("");
                 }
@@ -158,9 +184,9 @@ $("#c_course").on("change click", function(){
     let text = $("#c_course option:selected").text();
 
     if (text == "Others"){
-        $("#c_otherCourse").prop("disabled", false);
+        // $("#c_otherCourse").prop("disabled", false);
     } else {
-        $("#c_otherCourse").prop("disabled", true);
+        // $("#c_otherCourse").prop("disabled", true);
         $("#c_otherCourse").val("");
     }
 })
@@ -169,11 +195,11 @@ $("#s_school").on("change click", function(){
     let val = $(this).val();
 
     if (val == "Others"){
-        $("#s_otherSchool").prop("disabled", false);
-        $("#s_schoolAddress").prop("disabled", false);
+        // $("#s_otherSchool").prop("disabled", false);
+        // $("#s_schoolAddress").prop("disabled", false);
         $("#s_schoolAddress").val("");
     } else {
-        $("#s_otherSchool").prop("disabled", true);
+        // $("#s_otherSchool").prop("disabled", true);
         $("#s_otherSchool").val("");
 
         $.ajax({
@@ -186,7 +212,7 @@ $("#s_school").on("change click", function(){
             success: function(data){
                 if (!data.includes("error")){
                     $("#s_schoolAddress").val(data);
-                    $("#s_schoolAddress").prop("disabled", true);
+                    // $("#s_schoolAddress").prop("disabled", true);
                 } else {
                     $("#s_schoolAddress").val("");
                 }
@@ -199,9 +225,9 @@ $("#s_strand").on("change click", function(){
     let text = $("#s_strand option:selected").text();
 
     if (text == "Others"){
-        $("#s_otherStrand").prop("disabled", false);
+        // $("#s_otherStrand").prop("disabled", false);
     } else {
-        $("#s_otherStrand").prop("disabled", true);
+        // $("#s_otherStrand").prop("disabled", true);
         $("#s_otherStrand").val("");
     }
 })
@@ -210,11 +236,11 @@ $("#j_school").on("change click", function(){
     let val = $(this).val();
 
     if (val == "Others"){
-        $("#j_otherSchool").prop("disabled", false);
-        $("#j_school_address").prop("disabled", false);
+        // $("#j_otherSchool").prop("disabled", false);
+        // $("#j_school_address").prop("disabled", false);
         $("#j_school_address").val("");
     } else {
-        $("#j_otherSchool").prop("disabled", true);
+        // $("#j_otherSchool").prop("disabled", true);
         $("#j_otherSchool").val("");
 
         $.ajax({
@@ -227,7 +253,7 @@ $("#j_school").on("change click", function(){
             success: function(data){
                 if (!data.includes("error")){
                     $("#j_school_address").val(data);
-                    $("#j_school_address").prop("disabled", true);
+                    // $("#j_school_address").prop("disabled", true);
                 } else {
                     $("#j_school_address").val("");
                 }
@@ -240,11 +266,11 @@ $("#e_school").on("change click", function(){
     let val = $(this).val();
 
     if (val == "Others"){
-        $("#e_otherSchool").prop("disabled", false);
-        $("#e_school_address").prop("disabled", false);
+        // $("#e_otherSchool").prop("disabled", false);
+        // $("#e_school_address").prop("disabled", false);
         $("#e_school_address").val("");
     } else {
-        $("#e_otherSchool").prop("disabled", true);
+        // $("#e_otherSchool").prop("disabled", true);
         $("#e_otherSchool").val("");
 
         $.ajax({
@@ -257,7 +283,7 @@ $("#e_school").on("change click", function(){
             success: function(data){
                 if (!data.includes("error")){
                     $("#e_school_address").val(data);
-                    $("#e_school_address").prop("disabled", true);
+                    // $("#e_school_address").prop("disabled", true);
                 } else {
                     $("#e_school_address").val("");
                 }
@@ -271,6 +297,7 @@ $("#addCollegeTable").on("click", function(){
     let autoIncrement = collegeTableBody.children().length + 1;
     let newRow = collegeTableBody.append(`<tr>
         <td>${autoIncrement}</td>
+        <td></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
@@ -281,7 +308,7 @@ $("#addCollegeTable").on("click", function(){
 
 $("#collegeTable").on("keypress", "td", function(e){
     if (e.which == 13){
-        for (let i = 1; i < 5; i++){
+        for (let i = 2; i < 6; i++){
             let row = $(this).parent();
             if (row.children().eq(i).text() == ""){
                 return;
@@ -294,8 +321,8 @@ $("#collegeTable").on("keypress", "td", function(e){
 
 $("#collegeTable").on("click", ".editCollegeRow", function(e){
     e.preventDefault();
-    let row = $(this).parent().parent();
-    for (let i = 1; i < 5; i++){
+    let row = $(this).closest("tr");
+    for (let i = 2; i < 6; i++){
         row.children().eq(i).prop("contenteditable", true);
     }
 })
@@ -316,6 +343,7 @@ $("#addSHSTable").on("click", function(){
     let autoIncrement = shsTableBody.children().length + 1;
     let newRow = shsTableBody.append(`<tr>
         <td>${autoIncrement}</td>
+        <td></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
@@ -326,7 +354,7 @@ $("#addSHSTable").on("click", function(){
 
 $("#shsTable").on("keypress", "td", function(e){
     if (e.which == 13){
-        for (let i = 0; i < 5; i++){
+        for (let i = 2; i < 6; i++){
             let row = $(this).parent();
             if (row.children().eq(i).text() == ""){
                 return;
@@ -339,8 +367,8 @@ $("#shsTable").on("keypress", "td", function(e){
 
 $("#shsTable").on("click", ".editSHSRow", function(e){
     e.preventDefault();
-    let row = $(this).parent().parent();
-    for (let i = 1; i < 5; i++){
+    let row = $(this).closest("tr");
+    for (let i = 2; i < 6; i++){
         row.children().eq(i).prop("contenteditable", true);
     }
 })
@@ -357,10 +385,11 @@ $("#shsTable").on("click", ".deleteSHSRow", function(){
 })
 
 $("#addHSTable").on("click", function(){
-    let jsTableBody = $("#jhsTable tbody");
-    let autoIncrement = jsTableBody.children().length + 1;
-    let newRow = jsTableBody.append(`<tr>
+    let jhsTableBody = $("#jhsTable tbody");
+    let autoIncrement = jhsTableBody.children().length + 1;
+    let newRow = jhsTableBody.append(`<tr>
         <td>${autoIncrement}</td>
+        <td></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
@@ -369,9 +398,9 @@ $("#addHSTable").on("click", function(){
     </tr>`);
 })
 
-$("#jsTable").on("keypress", "td", function(e){
+$("#jhsTable").on("keypress", "td", function(e){
     if (e.which == 13){
-        for (let i = 1; i < 5; i++){
+        for (let i = 2; i < 6; i++){
             let row = $(this).parent();
             if (row.children().eq(i).text() == ""){
                 return;
@@ -382,20 +411,20 @@ $("#jsTable").on("keypress", "td", function(e){
     }
 })
 
-$("#jsTable").on("click", ".editJSRow", function(e){
+$("#jhsTable").on("click", ".editJSRow", function(e){
     e.preventDefault();
-    let row = $(this).parent().parent();
-    for (let i = 1; i < 5; i++){
+    let row = $(this).closest("tr");
+    for (let i = 2; i < 6; i++){
         row.children().eq(i).prop("contenteditable", true);
     }
 })
 
-$("#jsTable").on("click", ".deleteJSRow", function(){
+$("#jhsTable").on("click", ".deleteJSRow", function(){
     let row = $(this).parent().parent();
     row.remove();
 
-    let jsTableBody = $("#jsTable tbody");
-    let rows = jsTableBody.children();
+    let jhsTableBody = $("#jhsTable tbody");
+    let rows = jhsTableBody.children();
     for (let i = 0; i < rows.length; i++){
         rows.eq(i).children().eq(0).text(i + 1);
     }
@@ -406,6 +435,7 @@ $("#addElemTable").on("click", function(){
     let autoIncrement = elemTableBody.children().length + 1;
     let newRow = elemTableBody.append(`<tr>
         <td>${autoIncrement}</td>
+        <td></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
@@ -416,7 +446,7 @@ $("#addElemTable").on("click", function(){
 
 $("#elemTable").on("keypress", "td", function(e){
     if (e.which == 13){
-        for (let i = 1; i < 5; i++){
+        for (let i = 2; i < 6; i++){
             let row = $(this).parent();
             if (row.children().eq(i).text() == ""){
                 return;
@@ -429,8 +459,8 @@ $("#elemTable").on("keypress", "td", function(e){
 
 $("#elemTable").on("click", ".editElemRow", function(e){
     e.preventDefault();
-    let row = $(this).parent().parent();
-    for (let i = 1; i < 5; i++){
+    let row = $(this).closest("tr");
+    for (let i = 2; i < 6; i++){
         row.children().eq(i).prop("contenteditable", true);
     }
 })
@@ -451,6 +481,7 @@ $("#addSibling").on("click", function(){
     let autoIncrement = siblingTableBody.children().length + 1;
     let newRow = siblingTableBody.append(`<tr>
         <td>${autoIncrement}</td>
+        <td></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
@@ -462,7 +493,7 @@ $("#addSibling").on("click", function(){
 
 $("#siblingTable").on("keypress", "td", function(e){
     if (e.which == 13){
-        for (let i = 1; i < 5; i++){
+        for (let i = 2; i < 7; i++){
             let row = $(this).parent();
             if (row.children().eq(i).text() == ""){
                 return;
@@ -475,8 +506,8 @@ $("#siblingTable").on("keypress", "td", function(e){
 
 $("#siblingTable").on("click", ".editSiblingRow", function(e){
     e.preventDefault();
-    let row = $(this).parent().parent();
-    for (let i = 1; i < 5; i++){
+    let row = $(this).closest("tr");
+    for (let i = 2; i < 7; i++){
         row.children().eq(i).prop("contenteditable", true);
     }
 })
@@ -531,28 +562,32 @@ $("#educationBG").on("submit", function(e){
 
     if (scholarLevel == 1){
         c_school = check_error(document.getElementById("c_school")); if (c_school == undefined) return;
-        courseText = check_error(document.getElementById("c_courseText"), options = {returnVal: "text"}); if (courseText == undefined) return;
-        c_year_level = check_error(document.getElementById("c_year_level")); if (c_year_level == undefined) return;
-        course = check_error(document.getElementById("c_course")); if (course == undefined) return;
-        c_major = check_error(document.getElementById("c_major")); if (c_major == undefined) return;
-        c_school_address = check_error(document.getElementById("c_school_address")); if (c_school_address == undefined) return;
 
         if (c_school == "Others"){
             c_otherSchool = check_error(document.getElementById("c_otherSchool")); if (c_otherSchool == undefined) return;
         }
+        
+        c_year_level = check_error(document.getElementById("c_year_level")); if (c_year_level == undefined) return;
+
+        course = check_error(document.getElementById("c_course")); if (course == undefined) return;
+        courseText = check_error(document.getElementById("c_course"), options = {returnVal: "text", type: "select"}); if (courseText == undefined) return;
 
         if (courseText == "Others"){
             c_otherCourse = check_error(document.getElementById("c_otherCourse")); if (c_otherCourse == undefined) return;
         }
+        
+        c_major = check_error(document.getElementById("c_major")); if (c_major == undefined) return;
+        c_school_address = check_error(document.getElementById("c_school_address")); if (c_school_address == undefined) return;
 
         if (collegeRows.length > 0){
             for (let i = 0; i < collegeRows.length; i++){
                 let row = collegeRows.eq(i);
                 let collegeObj = {
-                    honor: row.children().eq(1).text(),
-                    acadYear: row.children().eq(2).text(),
-                    sem: row.children().eq(3).text(),
-                    yearLevel: row.children().eq(4).text(),
+                    awardId: row.children().eq(1).text(),
+                    honor: row.children().eq(2).text(),
+                    acadYear: row.children().eq(3).text(),
+                    sem: row.children().eq(4).text(),
+                    yearLevel: row.children().eq(5).text(),
                 }
                 college.push(collegeObj);
             }
@@ -562,9 +597,8 @@ $("#educationBG").on("submit", function(e){
             for (let i = 0; i < college.length; i++){
                 let obj = college[i];
                 for (let key in obj){
-                    if (obj[key] == ""){
-                        collegeCount++;
-                    }
+                    if (key == "awardId") continue;
+                    if (obj[key] == "") collegeCount++;
                 }
             }
     
@@ -583,27 +617,31 @@ $("#educationBG").on("submit", function(e){
     if (scholarLevel == 1 || scholarLevel == 2){
         // SHS
         s_school = check_error(document.getElementById("s_school")); if (s_school == undefined) return;
-        strandText = check_error(document.getElementById("s_strandText"), options = {returnVal: "text"}); if (strandText == undefined) return;
-        s_year_level = check_error(document.getElementById("s_year_level")); if (s_year_level == undefined) return;
-        strand = check_error(document.getElementById("s_strand")); if (strand == undefined) return;
-        s_schoolAddress = check_error(document.getElementById("s_schoolAddress")); if (s_schoolAddress == undefined) return;
 
         if (s_school == "Others"){
             s_otherSchool = check_error(document.getElementById("s_otherSchool")); if (s_otherSchool == undefined) return;
         }
+        
+        s_year_level = check_error(document.getElementById("s_year_level")); if (s_year_level == undefined) return;
 
+        strand = check_error(document.getElementById("s_strand")); if (strand == undefined) return;
+        strandText = check_error(document.getElementById("s_strand"), options = {returnVal: "text", type: "select"}); if (strandText == undefined) return;
+        
         if (strandText == "Others"){
             s_otherStrand = check_error(document.getElementById("s_otherStrand")); if (s_otherStrand == undefined) return;
         }
+
+        s_schoolAddress = check_error(document.getElementById("s_schoolAddress")); if (s_schoolAddress == undefined) return;
 
         if (shsRows.length > 0){
             for (let i = 0; i < shsRows.length; i++){
                 let row = shsRows.eq(i);
                 let shsObj = {
-                    honor: row.children().eq(1).text(),
-                    acadYear: row.children().eq(2).text(),
-                    sem: row.children().eq(3).text(),
-                    yearLevel: row.children().eq(4).text(),
+                    awardId: row.children().eq(1).text(),
+                    honor: row.children().eq(2).text(),
+                    acadYear: row.children().eq(3).text(),
+                    sem: row.children().eq(4).text(),
+                    yearLevel: row.children().eq(5).text(),
                 }
                 shs.push(shsObj);
             }
@@ -613,9 +651,8 @@ $("#educationBG").on("submit", function(e){
             for (let i = 0; i < shs.length; i++){
                 let obj = shs[i];
                 for (let key in obj){
-                    if (obj[key] == ""){
-                        shsCount++;
-                    }
+                    if (key == "awardId") continue;
+                    if (obj[key] == "") shsCount++;
                 }
             }
     
@@ -634,21 +671,23 @@ $("#educationBG").on("submit", function(e){
     if (scholarLevel == 1 || scholarLevel == 2 || scholarLevel == 3){
         // JHS
         j_school = check_error(document.getElementById("j_school")); if (j_school == undefined) return;
-        j_year_level = check_error(document.getElementById("j_year_level")); if (j_year_level == undefined) return;
-        j_school_address = check_error(document.getElementById("j_school_address")); if (j_school_address == undefined) return;
 
         if (j_school == "Others"){
             j_otherSchool = check_error(document.getElementById("j_otherSchool")); if (j_otherSchool == undefined) return;
         }
 
+        j_year_level = check_error(document.getElementById("j_year_level")); if (j_year_level == undefined) return;
+        j_school_address = check_error(document.getElementById("j_school_address")); if (j_school_address == undefined) return;
+
         if (jhsRows.length > 0){
             for (let i = 0; i < jhsRows.length; i++){
                 let row = jhsRows.eq(i);
                 let jhsObj = {
-                    honor: row.children().eq(1).text(),
-                    acadYear: row.children().eq(2).text(),
-                    sem: row.children().eq(3).text(),
-                    yearLevel: row.children().eq(4).text(),
+                    awardId: row.children().eq(1).text(),
+                    honor: row.children().eq(2).text(),
+                    acadYear: row.children().eq(3).text(),
+                    sem: row.children().eq(4).text(),
+                    yearLevel: row.children().eq(5).text(),
                 }
                 jhs.push(jhsObj);
             }
@@ -658,9 +697,8 @@ $("#educationBG").on("submit", function(e){
             for (let i = 0; i < jhs.length; i++){
                 let obj = jhs[i];
                 for (let key in obj){
-                    if (obj[key] == ""){
-                        jhsCount++;
-                    }
+                    if (key == "awardId") continue;
+                    if (obj[key] == "") jhsCount++;
                 }
             }
     
@@ -679,33 +717,35 @@ $("#educationBG").on("submit", function(e){
     if (scholarLevel == 1 || scholarLevel == 2 || scholarLevel == 3 || scholarLevel == 4){
         // Elem
         e_school = check_error(document.getElementById("e_school")); if (e_school == undefined) return;
-        e_grade_level = check_error(document.getElementById("e_grade_level")); if (e_grade_level == undefined) return;
-        e_school_address = check_error(document.getElementById("e_school_address")); if (e_school_address == undefined) return;
 
         if (e_school == "Others"){
             e_otherSchool = check_error(document.getElementById("e_otherSchool")); if (e_otherSchool == undefined) return;
         }
 
+        e_grade_level = check_error(document.getElementById("e_grade_level")); if (e_grade_level == undefined) return;
+        e_school_address = check_error(document.getElementById("e_school_address")); if (e_school_address == undefined) return;
+
+
         if (elemRows.length > 0){
             for (let i = 0; i < elemRows.length; i++){
                 let row = elemRows.eq(i);
                 let elemObj = {
-                    honor: row.children().eq(1).text(),
-                    acadYear: row.children().eq(2).text(),
-                    sem: row.children().eq(3).text(),
-                    yearLevel: row.children().eq(4).text(),
+                    awardId: row.children().eq(1).text(),
+                    honor: row.children().eq(2).text(),
+                    acadYear: row.children().eq(3).text(),
+                    sem: row.children().eq(4).text(),
+                    yearLevel: row.children().eq(5).text(),
                 }
                 elem.push(elemObj);
             }
 
             let elemCount = 0;
 
-            for (let i = 0; i < elem.length; i++){
+            for (let i = 1; i < elem.length; i++){
                 let obj = elem[i];
                 for (let key in obj){
-                    if (obj[key] == ""){
-                        elemCount++;
-                    }
+                    if (key == "awardId") continue;
+                    if (obj[key] == "") elemCount++;
                 }
             }
 
@@ -723,35 +763,51 @@ $("#educationBG").on("submit", function(e){
 
     let data = {
         'college': {
+            'educ_id': collegeId,
             'school': c_school,
-            'course': c_course,
+            'course': course,
+            'courseText': courseText,
             'year_level': c_year_level,
             'school_address': c_school_address,
             'otherSchool': c_otherSchool,
             'otherCourse': c_otherCourse,
+            'major': c_major,
             'collegeAwards' : college
         },
         'shs': {
+            'educ_id': shsId,
             'school': s_school,
-            'strand': s_strand,
+            'course': strand,
+            'courseText': strandText, // 'strandText' is the 'other' field for 'course
             'year_level': s_year_level,
             'school_address': s_schoolAddress,
             'otherSchool': s_otherSchool,
-            'otherStrand': s_otherStrand,
+            'otherCourse': s_otherStrand,
+            'major': s_otherStrand,
             'shsAwards': shs
         },
         'jhs': {
+            'educ_id': jhsId,
             'school': j_school,
+            'course': '',
+            'courseText': '',
             'year_level': j_year_level,
             'school_address': j_school_address,
             'otherSchool': j_otherSchool,
+            'otherCourse': '',
+            'major': '',
             'jhsAwards': jhs
         },
         'elem': {
+            'educ_id': elemId,
             'school': e_school,
-            'grade_level': e_grade_level,
+            'course': '',
+            'courseText': '',
+            'year_level': e_grade_level,
             'school_address': e_school_address,
             'otherSchool': e_otherSchool,
+            'otherCourse': '',
+            'major': '',
             'elemAwards': elem
         },
         'other_info': {
@@ -764,6 +820,8 @@ $("#educationBG").on("submit", function(e){
         'action': '14',
         'userId': userId
     }
+
+    console.log(data);
 
     $.ajax({
         url: "controller/accountHandler.php",
@@ -789,11 +847,7 @@ $("#educationBG").on("submit", function(e){
                     icon: "error",
                     title: "Oops...",
                     text: `An error occured while submitting your application. Please try again. Error: ${data}`,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                });
+                })
             }
         }
     })
@@ -819,6 +873,29 @@ $("#inputSpouse").on("change click", function(){
     }
 });
 
+$("#fatherBday").on("change click", function(){
+    let val = $(this).val();
+    let age = calculateAge(val);
+    $("#fatherAge").val(age);
+})
+
+$("#motherBday").on("change click", function(){
+    let val = $(this).val();
+    let age = calculateAge(val);
+    $("#motherAge").val(age);
+})
+
+$("#guardianBday").on("change click", function(){
+    let val = $(this).val();
+    let age = calculateAge(val);
+    $("#guardianAge").val(age);
+})
+
+$("#spouseBday").on("change click", function(){
+    let val = $(this).val();
+    let age = calculateAge(val);
+    $("#spouseAge").val(age);
+})
 
 $("#familyBG").on("submit", function(e){
     e.preventDefault();
@@ -830,16 +907,7 @@ $("#familyBG").on("submit", function(e){
     let rent_flag = check_error(document.getElementById("rent_flag")); if (rent_flag == undefined) return;
     let monthly_payment = check_error(document.getElementById("monthly_payment")); if (monthly_payment == undefined) return;
 
-    let otherInfoArr = fatherArr = motherArr = guardianArr = spouseArr = siblings = [];
-
-    otherInfoArr.push({
-        'family_flag': family_flag,
-        'total_num': total_num,
-        'birth_order': birth_order,
-        'source': source,
-        'rent_flag': rent_flag,
-        'monthly_payment': monthly_payment,
-    })
+    let siblings = [];
 
     let siblingTableBody = $("#siblingTable tbody");
     let siblingRows = siblingTableBody.children();
@@ -848,11 +916,13 @@ $("#familyBG").on("submit", function(e){
         for (let i = 0; i < siblingRows.length; i++){
             let row = siblingRows.eq(i);
             let siblingObj = {
-                name: row.children().eq(1).text(),
-                age: row.children().eq(2).text(),
-                occupation: row.children().eq(3).text(),
-                employer: row.children().eq(4).text(),
-                address: row.children().eq(5).text(),
+                id: row.children().eq(1).text(),
+                name: row.children().eq(2).text(),
+                relationship: row.children().eq(3).text(),
+                birthOrder: row.children().eq(4).text(),
+                age: row.children().eq(5).text(),
+                occupation: row.children().eq(6).text(),
+                famType: '3',
             }
             siblings.push(siblingObj);
         }
@@ -862,9 +932,8 @@ $("#familyBG").on("submit", function(e){
         for (let i = 0; i < siblings.length; i++){
             let obj = siblings[i];
             for (let key in obj){
-                if (obj[key] == ""){
-                    siblingCount++;
-                }
+                if (key == "id") continue;
+                if (obj[key] == "") siblingCount++;
             }
         }
 
@@ -901,29 +970,20 @@ $("#familyBG").on("submit", function(e){
       }); if (fatherContact == undefined) return;
     let fatherLivingFlag = check_error(document.getElementById("fatherLivingFlag")); if (fatherLivingFlag == undefined) return;
     let fatherOccupation = check_error(document.getElementById("fatherOccupation")); if (fatherOccupation == undefined) return;
-    let fatherOtherOccupation = check_error(document.getElementById("fatherOtherOccupation")); if (fatherOtherOccupation == undefined) return;
-    let fatherCompany = check_error(document.getElementById("fatherCompany")); if (fatherCompany == undefined) return;
-    let fatherCompanyAddress = check_error(document.getElementById("fatherCompanyAddress")); if (fatherCompanyAddress == undefined) return;
+
+    let fatherOtherOccupation = fatherCompany = fatherCompanyAddress = "";
+
+    if (fatherOccupation == "others"){
+        fatherOtherOccupation = check_error(document.getElementById("fatherOtherOccupation")); if (fatherOtherOccupation == undefined) return;
+    }
+
+    if (fatherOccupation != "unemployed"){
+        fatherCompany = check_error(document.getElementById("fatherCompany")); if (fatherCompany == undefined) return;
+        fatherCompanyAddress = check_error(document.getElementById("fatherCompanyAddress")); if (fatherCompanyAddress == undefined) return;
+    }
+
     let fatherIncome = check_error(document.getElementById("fatherIncome")); if (fatherIncome == undefined) return;
     let fatherEducation = check_error(document.getElementById("fatherEducation")); if (fatherEducation == undefined) return;
-
-    fatherArr.push({
-        'fatherFN': fatherFN,
-        'fatherMN': fatherMN,
-        'fatherLN': fatherLN,
-        'fatherSuffix': fatherSuffix,
-        'fatherBday': fatherBday,
-        'fatherBplace': fatherBplace,
-        'fatherAge': fatherAge,
-        'fatherContact': fatherContact,
-        'fatherLivingFlag': fatherLivingFlag,
-        'fatherOccupation': fatherOccupation,
-        'fatherOtherOccupation': fatherOtherOccupation,
-        'fatherCompany': fatherCompany,
-        'fatherCompanyAddress': fatherCompanyAddress,
-        'fatherIncome': fatherIncome,
-        'fatherEducation': fatherEducation,
-    });
 
     // Mother Info
     let motherFN = check_error(document.getElementById("motherFN")); if (motherFN == undefined) return;
@@ -947,143 +1007,222 @@ $("#familyBG").on("submit", function(e){
       }); if (motherContact == undefined) return;
     let motherLivingFlag = check_error(document.getElementById("motherLivingFlag")); if (motherLivingFlag == undefined) return;
     let motherOccupation = check_error(document.getElementById("motherOccupation")); if (motherOccupation == undefined) return;
-    let motherOtherOccupation = check_error(document.getElementById("motherOtherOccupation")); if (motherOtherOccupation == undefined) return;
-    let motherCompany = check_error(document.getElementById("motherCompany")); if (motherCompany == undefined) return;
-    let motherCompanyAddress = check_error(document.getElementById("motherCompanyAddress")); if (motherCompanyAddress == undefined) return;
+
+    let motherOtherOccupation = motherCompany = motherCompanyAddress = "";
+
+    if (motherOccupation == "others"){
+        motherOtherOccupation = check_error(document.getElementById("motherOtherOccupation")); if (motherOtherOccupation == undefined) return;
+    }
+
+    if (motherOccupation != "unemployed"){
+        motherCompany = check_error(document.getElementById("motherCompany")); if (motherCompany == undefined) return;
+        motherCompanyAddress = check_error(document.getElementById("motherCompanyAddress")); if (motherCompanyAddress == undefined) return;
+    }
+
     let motherIncome = check_error(document.getElementById("motherIncome")); if (motherIncome == undefined) return;
     let motherEducation = check_error(document.getElementById("motherEducation")); if (motherEducation == undefined) return;
 
-    motherArr.push({
-        'motherFN': motherFN,
-        'motherMN': motherMN,
-        'motherLN': motherLN,
-        'motherSuffix': motherSuffix,
-        'motherBday': motherBday,
-        'motherBplace': motherBplace,
-        'motherAge': motherAge,
-        'motherContact': motherContact,
-        'motherLivingFlag': motherLivingFlag,
-        'motherOccupation': motherOccupation,
-        'motherOtherOccupation': motherOtherOccupation,
-        'motherCompany': motherCompany,
-        'motherCompanyAddress': motherCompanyAddress,
-        'motherIncome': motherIncome,
-        'motherEducation': motherEducation,
-    });
-
     // Guardian Info
+    let inputGuardian = check_error(document.getElementById("inputGuardian")); if (inputGuardian == undefined) return;
 
-    let inputGuardian = $("#inputGuardian").val();
+    let guardianType = spouseType = "";
+
+    let guardianRelationship = guardianFN = guardianMN = guardianLN = guardianSuffix = guardianBday = guardianBplace = guardianAge = guardianContact = guardianLivingFlag = guardianOccupation = guardianOtherOccupation = guardianCompany = guardianCompanyAddress = guardianIncome = guardianEducation = "";
 
     if (inputGuardian == 0){
-        let guardianRelationship = check_error(document.getElementById("guardianRelationship")); if (guardianRelationship == undefined) return;
-        let guardianFN = check_error(document.getElementById("guardianFN")); if (guardianFN == undefined) return;
-        let guardianMN = $("#guardianMN").val();
-        let guardianLN = check_error(document.getElementById("guardianLN")); if (guardianLN == undefined) return;
-        let guardianSuffix = $("#guardianSuffix").val();
-        let guardianBday = check_error(document.getElementById("guardianBday"), options = {
+        guardianType = 4;
+        guardianRelationship = check_error(document.getElementById("guardianRelationship")); if (guardianRelationship == undefined) return;
+        guardianFN = check_error(document.getElementById("guardianFN")); if (guardianFN == undefined) return;
+        guardianMN = $("#guardianMN").val();
+        guardianLN = check_error(document.getElementById("guardianLN")); if (guardianLN == undefined) return;
+        guardianSuffix = $("#guardianSuffix").val();
+        guardianBday = check_error(document.getElementById("guardianBday"), options = {
             type: "date",
             verifyFlag: 1,
             condition: "today",
             conditionCheck: "birthdate"
           }); if (guardianBday == undefined) return;
-        let guardianBplace = check_error(document.getElementById("guardianBplace")); if (guardianBplace == undefined) return;
-        let guardianAge = check_error(document.getElementById("guardianAge")); if (guardianAge == undefined) return;
-        let guardianContact = check_error(document.getElementById("guardianContact"), options = {
+        guardianBplace = check_error(document.getElementById("guardianBplace")); if (guardianBplace == undefined) return;
+        guardianAge = check_error(document.getElementById("guardianAge")); if (guardianAge == undefined) return;
+        guardianContact = check_error(document.getElementById("guardianContact"), options = {
             type: "number",
             verifyFlag: 1,
             conditionCheck: "contactNumber",
             regex: /^\d{10}$/,
             text: "Contact Number"
           }); if (guardianContact == undefined) return;
-        let guardianLivingFlag = check_error(document.getElementById("guardianLivingFlag")); if (guardianLivingFlag == undefined) return;
-        let guardianOccupation = check_error(document.getElementById("guardianOccupation")); if (guardianOccupation == undefined) return;
-        let guardianOtherOccupation = check_error(document.getElementById("guardianOtherOccupation")); if (guardianOtherOccupation == undefined) return;
-        let guardianCompany = check_error(document.getElementById("guardianCompany")); if (guardianCompany == undefined) return;
-        let guardianCompanyAddress = check_error(document.getElementById("guardianCompanyAddress")); if (guardianCompanyAddress == undefined) return;
-        let guardianIncome = check_error(document.getElementById("guardianIncome")); if (guardianIncome == undefined) return;
-        let guardianEducation = check_error(document.getElementById("guardianEducation")); if (guardianEducation == undefined) return;
+        guardianLivingFlag = check_error(document.getElementById("guardianLivingFlag")); if (guardianLivingFlag == undefined) return;
+        guardianOccupation = check_error(document.getElementById("guardianOccupation")); if (guardianOccupation == undefined) return;
 
-        guardianArr.push({
-            guardianRelationship: guardianRelationship,
-            guardianFN: guardianFN,
-            guardianMN: guardianMN,
-            guardianLN: guardianLN,
-            guardianSuffix: guardianSuffix,
-            guardianBday: guardianBday,
-            guardianBplace: guardianBplace,
-            guardianAge: guardianAge,
-            guardianContact: guardianContact,
-            guardianLivingFlag: guardianLivingFlag,
-            guardianOccupation: guardianOccupation,
-            guardianOtherOccupation: guardianOtherOccupation,
-            guardianCompany: guardianCompany,
-            guardianCompanyAddress: guardianCompanyAddress,
-            guardianIncome: guardianIncome,
-            guardianEducation: guardianEducation
-        })
+        if (guardianOccupation == "others"){
+            guardianOtherOccupation = check_error(document.getElementById("guardianOtherOccupation")); if (guardianOtherOccupation == undefined) return;
+        }
+
+        if (guardianOccupation != "unemployed"){
+            guardianCompany = check_error(document.getElementById("guardianCompany")); if (guardianCompany == undefined) return;
+            guardianCompanyAddress = check_error(document.getElementById("guardianCompanyAddress")); if (guardianCompanyAddress == undefined) return;
+        }
+
+        guardianIncome = check_error(document.getElementById("guardianIncome")); if (guardianIncome == undefined) return;
+        guardianEducation = check_error(document.getElementById("guardianEducation")); if (guardianEducation == undefined) return;
+
     }
 
-    let inputSpouse = $("#inputSpouse").val();
+    let inputSpouse = check_error(document.getElementById("inputSpouse")); if (inputSpouse == undefined) return;
+
+    let spouseFN = spouseMN = spouseLN = spouseSuffix = spouseBday = spouseBplace = spouseAge = spouseContact = spouseLivingFlag = spouseOccupation = spouseOtherOccupation = spouseCompany = spouseCompanyAddress = spouseIncome = spouseEducation = "";
 
     if (inputSpouse == 0){
-        let spouseFN = check_error(document.getElementById("spouseFN")); if (spouseFN == undefined) return;
-        let spouseMN = $("#spouseMN").val();
-        let spouseLN = check_error(document.getElementById("spouseLN")); if (spouseLN == undefined) return;
-        let spouseSuffix = $("#spouseSuffix").val();
-        let spouseBday = check_error(document.getElementById("spouseBday"), options = {
+        spouseType = 2;
+        spouseFN = check_error(document.getElementById("spouseFN")); if (spouseFN == undefined) return;
+        spouseMN = $("#spouseMN").val();
+        spouseLN = check_error(document.getElementById("spouseLN")); if (spouseLN == undefined) return;
+        spouseSuffix = $("#spouseSuffix").val();
+        spouseBday = check_error(document.getElementById("spouseBday"), options = {
             type: "date",
             verifyFlag: 1,
             condition: "today",
             conditionCheck: "birthdate"
           }); if (spouseBday == undefined) return;
-        let spouseBplace = check_error(document.getElementById("spouseBplace")); if (spouseBplace == undefined) return;
-        let spouseAge = check_error(document.getElementById("spouseAge")); if (spouseAge == undefined) return;
-        let spouseContact = check_error(document.getElementById("spouseContact"), options = {
+        spouseBplace = check_error(document.getElementById("spouseBplace")); if (spouseBplace == undefined) return;
+        spouseAge = check_error(document.getElementById("spouseAge")); if (spouseAge == undefined) return;
+        spouseContact = check_error(document.getElementById("spouseContact"), options = {
             type: "number",
             verifyFlag: 1,
             conditionCheck: "contactNumber",
             regex: /^\d{10}$/,
             text: "Contact Number"
           }); if (spouseContact == undefined) return;
-        let spouseLivingFlag = check_error(document.getElementById("spouseLivingFlag")); if (spouseLivingFlag == undefined) return;
-        let spouseOccupation = check_error(document.getElementById("spouseOccupation")); if (spouseOccupation == undefined) return;
-        let spouseOtherOccupation = check_error(document.getElementById("spouseOtherOccupation")); if (spouseOtherOccupation == undefined) return;
-        let spouseCompany = check_error(document.getElementById("spouseCompany")); if (spouseCompany == undefined) return;
-        let spouseCompanyAddress = check_error(document.getElementById("spouseCompanyAddress")); if (spouseCompanyAddress == undefined) return;
-        let spouseIncome = check_error(document.getElementById("spouseIncome")); if (spouseIncome == undefined) return;
-        let spouseEducation = check_error(document.getElementById("spouseEducation")); if (spouseEducation == undefined) return;
+        spouseLivingFlag = check_error(document.getElementById("spouseLivingFlag")); if (spouseLivingFlag == undefined) return;
+        spouseOccupation = check_error(document.getElementById("spouseOccupation")); if (spouseOccupation == undefined) return;
+
+        if (spouseOccupation == "others"){
+            spouseOtherOccupation = check_error(document.getElementById("spouseOtherOccupation")); if (spouseOtherOccupation == undefined) return;
+        }
+
+        if (spouseOccupation != "unemployed"){
+            spouseCompany = check_error(document.getElementById("spouseCompany")); if (spouseCompany == undefined) return;
+            spouseCompanyAddress = check_error(document.getElementById("spouseCompanyAddress")); if (spouseCompanyAddress == undefined) return;
+        }
+
+        spouseIncome = check_error(document.getElementById("spouseIncome")); if (spouseIncome == undefined) return;
+        spouseEducation = check_error(document.getElementById("spouseEducation")); if (spouseEducation == undefined) return;
 
         spouseArr.push({
-            spouseFN: spouseFN,
-            spouseMN: spouseMN,
-            spouseLN: spouseLN,
-            spouseSuffix: spouseSuffix,
-            spouseBday: spouseBday,
-            spouseBplace: spouseBplace,
-            spouseAge: spouseAge,
-            spouseContact: spouseContact,
-            spouseLivingFlag,
-            spouseOccupation: spouseOccupation,
-            spouseOtherOccupation: spouseOtherOccupation,
-            spouseCompany: spouseCompany,
-            spouseCompanyAddress: spouseCompanyAddress,
-            spouseIncome: spouseIncome,
-            spouseEducation: spouseEducation
+            'famType': '2',
+            'relationship': '',
+            'firstName': spouseFN,
+            'middleName': spouseMN,
+            'lastName': spouseLN,
+            'suffix': spouseSuffix,
+            'birthday': spouseBday,
+            'birthplace': spouseBplace,
+            'age': spouseAge,
+            'contact': spouseContact,
+            'living': spouseLivingFlag,
+            'occupation': spouseOccupation,
+            'otherOccupation': spouseOtherOccupation,
+            'company': spouseCompany,
+            'companyAddress': spouseCompanyAddress,
+            'income': spouseIncome,
+            'education': spouseEducation
         })
+    }
+
+    let data = {
+        'action': 15,
+        'userId': userId,
+        'fatherArr': {
+            'famType': '0',
+            'relationship': '',
+            'firstName': fatherFN,
+            'middleName': fatherMN,
+            'lastName': fatherLN,
+            'suffix': fatherSuffix,
+            'birthday': fatherBday,
+            'birthplace': fatherBplace,
+            'age': fatherAge,
+            'contact': fatherContact,
+            'living': fatherLivingFlag,
+            'occupation': fatherOccupation,
+            'otherOccupation': fatherOtherOccupation,
+            'company': fatherCompany,
+            'companyAddress': fatherCompanyAddress,
+            'income': fatherIncome,
+            'education': fatherEducation,
+        },
+        'motherArr': {
+            'famType': '1',
+            'relationship': '',
+            'firstName': motherFN,
+            'middleName': motherMN,
+            'lastName': motherLN,
+            'suffix': motherSuffix,
+            'birthday': motherBday,
+            'birthplace': motherBplace,
+            'age': motherAge,
+            'contact': motherContact,
+            'living': motherLivingFlag,
+            'occupation': motherOccupation,
+            'otherOccupation': motherOtherOccupation,
+            'company': motherCompany,
+            'companyAddress': motherCompanyAddress,
+            'income': motherIncome,
+            'education': motherEducation,
+        },
+        'spouseArr': {
+            'famType': spouseType,
+            'relationship': '',
+            'firstName': spouseFN,
+            'middleName': spouseMN,
+            'lastName': spouseLN,
+            'suffix': spouseSuffix,
+            'birthday': spouseBday,
+            'birthplace': spouseBplace,
+            'age': spouseAge,
+            'contact': spouseContact,
+            'living': spouseLivingFlag,
+            'occupation': spouseOccupation,
+            'otherOccupation': spouseOtherOccupation,
+            'company': spouseCompany,
+            'companyAddress': spouseCompanyAddress,
+            'income': spouseIncome,
+            'education': spouseEducation
+        },
+        'siblings' : siblings,
+        'guardianArr': {
+            'famType': guardianType,
+            'relationship': guardianRelationship,
+            'firstName': guardianFN,
+            'middleName': guardianMN,
+            'lastName': guardianLN,
+            'suffix': guardianSuffix,
+            'birthday': guardianBday,
+            'birthplace': guardianBplace,
+            'age': guardianAge,
+            'contact': guardianContact,
+            'living': guardianLivingFlag,
+            'occupation': guardianOccupation,
+            'otherOccupation': guardianOtherOccupation,
+            'company': guardianCompany,
+            'companyAddress': guardianCompanyAddress,
+            'income': guardianIncome,
+            'education': guardianEducation
+        },
+        'otherInfoArr': {
+            'family_flag': family_flag,
+            'total_num': total_num,
+            'birth_order': birth_order,
+            'source': source,
+            'rent_flag': rent_flag,
+            'monthly_payment': monthly_payment,
+        }
     }
 
     $.ajax({
         url: "controller/accountHandler.php",
         type: "POST",
-        data: {
-            action: "15",
-            guardianArr: guardianArr,
-            spouseArr: spouseArr,
-            fatherArr: fatherArr,
-            motherArr: motherArr,
-            siblings: siblings,
-        },
+        data: data,
         beforeSend: function(){
             showBeforeSend("Updating Family Information...");
         },
@@ -1149,7 +1288,7 @@ $("#otherInfo").on("submit", function(e){
                 Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "Other Information Saved Successfully."
+                    text: "Other Information Saved Successfully. Please review your application before submitting."
                 }).then((result) => {
                     if (result.isConfirmed){
                         location.reload();
@@ -1160,11 +1299,7 @@ $("#otherInfo").on("submit", function(e){
                     icon: "error",
                     title: "Oops...",
                     text: `An error occured while submitting your application. Please try again. Error: ${data}`,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                });
+                })
             }
         }
     })

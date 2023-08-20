@@ -78,9 +78,9 @@ if (isset($_REQUEST['action']))
     {
         echo delete_account(isset($_POST['email']) ? $_POST['email'] : '');
     }
-    else if ($action == 7) // Forgot Password
+    else if ($action == 7) // Forgot Password and Verify Email
     {
-        echo forgot_password(isset($_POST['email']) ? $_POST['email'] : '');
+        echo forgot_password(isset($_POST['email']) ? $_POST['email'] : '', isset($_POST['type']) ? $_POST['type'] : '');
     }
     else if ($action == 8) // Password Reset
     {
@@ -151,13 +151,21 @@ if (isset($_REQUEST['action']))
             'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
         ];
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
+        echo updateEducationalInfo($data);
     }
     else if ($action == 15) // Update Family Information
     {
+        $data = [
+            'guardianArr'       => isset($_POST['guardianArr']) ? $_POST['guardianArr'] : [],
+            'spouseArr'         => isset($_POST['spouseArr']) ? $_POST['spouseArr'] : [],
+            'fatherArr'         => isset($_POST['fatherArr']) ? $_POST['fatherArr'] : [],
+            'motherArr'         => isset($_POST['motherArr']) ? $_POST['motherArr'] : [],
+            'siblings'          => isset($_POST['siblings']) ? $_POST['siblings'] : [],
+            'otherInfoArr'      => isset($_POST['otherInfoArr']) ? $_POST['otherInfoArr'] : [],
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+        ];
 
+        echo updateFamilyInfo($data);
     }
     else if ($action == 16) // Update General Info
     {
@@ -172,7 +180,7 @@ if (isset($_REQUEST['action']))
             'self_pwd_flag'     => isset($_POST['self_pwd_flag']) ? $_POST['self_pwd_flag'] : '',
         ];
 
-        echo updateGenInfo($data);
+        echo updateAddInfo($data);
     }
 }
 

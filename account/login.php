@@ -66,6 +66,7 @@ include('includes/main.php')
                     <div class="col-12 text-center">
 
                       <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p>
+                      <p class=" small mb-0"> <a href="#" id="verifyAccount">Verify Account</a> </p>
                       <p class=" small mb-0"> <a href="#" id="forgotPass">Forgot Password</a> </p>
                     </div>
                     <!-- <div class="col-12 text-center">

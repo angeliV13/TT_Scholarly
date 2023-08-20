@@ -234,7 +234,7 @@ let my_handlers = {
     }
   })
 
-  function emailConfirmation(email, counter = 0) {
+  function emailConfirmation(email) {
     Swal.fire({
       html: '<p class="text-center">Please enter the code we sent to your email.</p><input type="text" id="code" class="form-control" placeholder="Enter Code" required><div class="invalid-feedback">Please enter the code we sent to your email.</div> <p class="text-center">Didn\'t receive the code? Resend in <b>5:00</b></p>',
       timer: 300000,

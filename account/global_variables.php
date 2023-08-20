@@ -9,6 +9,7 @@ $incomeArr = ['0' => 'Less than 5000', '1' => '5001 - 10999', '2' => '11000 - 20
 $bootstrapIcons = ['Circle' => 'bi bi-check-circle-fill', 'User' => 'bi bi-people', 'Add User' => 'bi bi-person-plus', 'Add' => 'bi bi-plus-circle', 'Delete User' => 'bi bi-person-x', 'Delete' => 'bi bi-trash3', 'Submit 1' => 'bi bi-file-earmark-check', 'Submit 2' => 'bi bi-check-square', 'Archive' => 'bi bi-archive', 'Bar Graph' => 'bi bi-file-bar-graph', 'Card Image' => 'bi bi-card-image'];
 $accountTypeArr = ['0' => 'Super Admin', '1' => 'Admin', '2' => 'Beneficiaries', '3' => 'Applicant'];
 $relationshipArr = ['Brother' => 'Brother', 'Sister' => 'Sister', 'Grandfather' => 'Grandfather', 'Grandmother' => 'Grandmother', 'Uncle' => 'Uncle', 'Aunt' => 'Aunt', 'Cousin' => 'Cousin', 'Others' => 'Others'];
+$occupationArr = ['unemployed' => 'Unemployed', 'employed' => 'Employed', 'self' => 'Self-Employed', 'gov' => 'Government Employee', 'others' => 'Others'];
 
 if (isset($_SESSION))
 {
@@ -16,7 +17,7 @@ if (isset($_SESSION))
     $course = get_education_courses(0);
     $notificationFunc = get_notif_func(1, true, " used_flag = 0");
     $status = check_status($_SESSION['id']);
-    $finishFlag = ($status['status'] > 0) ? true : false;
+    if ($status != null) $finishFlag = ($status['status'] > 0) ? true : false;
 }
 
 $website_info = get_website_info();
