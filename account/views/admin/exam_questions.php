@@ -85,7 +85,7 @@
                         </button>
                     </div>
                     <div id="examination_questions" data-mdb-max-height="460" data-mdb-fixed-header="true">
-                        <table id="examQuestionsTable" class="table table-striped">
+                        <table id="examQuestionsTable" class="table table-bordered table-condensed table-striped">
                             <thead>
                                 <tr class="">
                                     <th>No.</th>

@@ -78,9 +78,9 @@ if (isset($_REQUEST['action']))
     {
         echo delete_account(isset($_POST['email']) ? $_POST['email'] : '');
     }
-    else if ($action == 7) // Forgot Password
+    else if ($action == 7) // Forgot Password and Verify Email
     {
-        echo forgot_password(isset($_POST['email']) ? $_POST['email'] : '');
+        echo forgot_password(isset($_POST['email']) ? $_POST['email'] : '', isset($_POST['type']) ? $_POST['type'] : '');
     }
     else if ($action == 8) // Password Reset
     {
@@ -139,6 +139,61 @@ if (isset($_REQUEST['action']))
     else if ($action == 13) // Submit Application
     {
         echo submitApplication(isset($_POST['userId']) ? $_POST['userId'] : '');
+    }
+    else if ($action == 14) // Update Educational Background
+    {
+        $data = [
+            'college'           => isset($_POST['college']) ? $_POST['college'] : [],
+            'shs'               => isset($_POST['shs']) ? $_POST['shs'] : [],
+            'jhs'               => isset($_POST['jhs']) ? $_POST['jhs'] : [],
+            'elem'              => isset($_POST['elem']) ? $_POST['elem'] : [],
+            'other_info'        => isset($_POST['other_info']) ? $_POST['other_info'] : [],
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+        ];
+
+        echo updateEducationalInfo($data);
+    }
+    else if ($action == 15) // Update Family Information
+    {
+        $data = [
+            'guardianArr'       => isset($_POST['guardianArr']) ? $_POST['guardianArr'] : [],
+            'spouseArr'         => isset($_POST['spouseArr']) ? $_POST['spouseArr'] : [],
+            'fatherArr'         => isset($_POST['fatherArr']) ? $_POST['fatherArr'] : [],
+            'motherArr'         => isset($_POST['motherArr']) ? $_POST['motherArr'] : [],
+            'siblings'          => isset($_POST['siblings']) ? $_POST['siblings'] : [],
+            'otherInfoArr'      => isset($_POST['otherInfoArr']) ? $_POST['otherInfoArr'] : [],
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+        ];
+
+        echo updateFamilyInfo($data);
+    }
+    else if ($action == 16) // Update General Info
+    {
+        $data = [
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+            'working_flag'      => isset($_POST['working_flag']) ? $_POST['working_flag'] : '',
+            'ofw_flag'          => isset($_POST['ofw_flag']) ? $_POST['ofw_flag'] : '',
+            'other_ofw'         => isset($_POST['other_ofw']) ? $_POST['other_ofw'] : '',
+            'pwd_flag'          => isset($_POST['pwd_flag']) ? $_POST['pwd_flag'] : '',
+            'other_pwd'         => isset($_POST['other_pwd']) ? $_POST['other_pwd'] : '',
+            'status_flag'       => isset($_POST['status_flag']) ? $_POST['status_flag'] : '',
+            'self_pwd_flag'     => isset($_POST['self_pwd_flag']) ? $_POST['self_pwd_flag'] : '',
+        ];
+
+        echo updateAddInfo($data);
+    }
+    else if ($action == 17) // Update PFP
+    {
+        $data = [
+            'image'             => isset($_FILES['image']) ? $_FILES['image'] : '',
+            'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
+        ];
+
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+
+        echo changePFP($data);
     }
 }
 

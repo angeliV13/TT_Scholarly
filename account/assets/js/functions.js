@@ -71,6 +71,8 @@ function fileCheck(input, condition){
         
       }
     });
+
+    return;
   }
 }
 
@@ -88,9 +90,10 @@ function handleMismatchError(input) {
       if (result.isConfirmed) {
         // input1.focus();
         // input2.focus();
-        
       }
     });
+    
+    return;
   } else if (input1.value !== input2.value) {
     Swal.fire({
       icon: "error",
@@ -100,9 +103,9 @@ function handleMismatchError(input) {
       if (result.isConfirmed) {
         // input1.focus();
         // input2.focus();
-        
       }
     });
+    return;
   } else {
     return input1.value;
   }
@@ -120,6 +123,8 @@ function handleEmptyError(input) {
       // input.focus();
     }
   });
+
+  return;
 }
 
 function handleNumberType(input, regex, text, conditionCheck) {
@@ -136,6 +141,8 @@ function handleNumberType(input, regex, text, conditionCheck) {
         
       }
     });
+
+    return;
   } else if (regex !== "NA" && !input.value.match(regex)) {
     const inputName = input.name;
 
@@ -149,6 +156,8 @@ function handleNumberType(input, regex, text, conditionCheck) {
         
       }
     });
+
+    return;
   } else {
     if (conditionCheck === "contactNumber") {
       return "63" + input.value;
@@ -177,6 +186,8 @@ function handleDateType(input, condition, conditionCheck) {
             
           }
         });
+
+        return;
       } else if (Math.floor((currentDate - inputDate) / 31557600000) < 14) {
         Swal.fire({
           icon: "error",
@@ -188,6 +199,8 @@ function handleDateType(input, condition, conditionCheck) {
             
           }
         });
+
+        return;
       } else {
         return input.value;
       }
@@ -210,6 +223,8 @@ function handleDefaultType(input, regex, text) {
         // input.focus();
       }
     });
+
+    return;
   } else {
     return input.value;
   }

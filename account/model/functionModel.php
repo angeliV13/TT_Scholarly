@@ -60,6 +60,84 @@ function static_count()
     return $count;
 }
 
+function get_website_info()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM website_info";
+    $query = $conn->query($sql);
+
+    $website_info = [];
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $website_info = $row;
+    }
+
+    return $website_info;
+}
+
+function get_website_socials()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM website_socials";
+    $query = $conn->query($sql);
+
+    $website_socials = [];
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $socialType = $row['social_type'];
+            $icon = "";
+
+            if ($socialType == "0")
+            {
+                $icon = "bi bi-facebook";
+            }
+            else if ($socialType == "1")
+            {
+                $icon = "bi bi-instagram";
+            }
+            else if ($socialType == "2")
+            {
+                $icon = "bi bi-twitter";
+            }
+            else
+            {
+                $icon = "bi bi-linkedin";
+            }
+
+            $website_socials[] = [
+                'social_type' => $socialType,
+                'icon' => $icon,
+                'link' => $row['link']
+            ];
+        }
+    }
+
+    return $website_socials;
+}
+
+function get_social_type($type)
+{
+    switch ($type)
+    {
+        case 0:
+            return "Facebook";
+        case 1:
+            return "Instagram";
+        case 2:
+            return "Twitter";
+        case 3:
+            return "LinkedIn";
+    }
+}
+
 function get_scholar_type($type)
 {
     switch ($type)
@@ -146,24 +224,18 @@ function get_user_education($id)
     {
         while ($row = $query->fetch_assoc())
         {
-            $education[] = $row;
+            $education[$row['educ_id']] = $row;
         }
     }
 
-    $sql = "SELECT * FROM user_awards WHERE school_id IN (SELECT id FROM education WHERE user_id = '" . $id . "')";
+    $sql = "SELECT * FROM user_awards WHERE school_id IN (SELECT educ_id FROM education WHERE user_id = '" . $id . "')";
     $query = $conn->query($sql);
 
     if ($query->num_rows > 0)
     {
         while ($row = $query->fetch_assoc())
         {
-            foreach ($education as $key => $value)
-            {
-                if ($value['educ_id'] == $row['school_id'])
-                {
-                    $education[$key]['awards'][] = $row;
-                }
-            }
+            $education[$row['school_id']]['awards'][] = $row;
         }
     }
 
@@ -183,9 +255,32 @@ function get_user_family($id)
     {
         while ($row = $query->fetch_assoc())
         {
-            $family[] = $row;
+            $famType = $row['fam_type'];
+
+            if ($famType == 0)
+            {
+                $family['father'] = $row;
+            }
+            else if ($famType == 1)
+            {
+                $family['mother'] = $row;
+            }
+            else if ($famType == 2)
+            {
+                $family['spouse'] = $row;
+            }
+            else if ($famType == 3)
+            {
+                $family['siblings'][] = $row;
+            }
+            else
+            {
+                $family['guardian'] = $row;
+            }
         }
     }
+
+    return $family;
 }
 
 function get_school_address($id)
@@ -235,15 +330,11 @@ function sendEmail($to, $subject, $message, $type = 1) // PHPMAILER FUNCTION
     require_once('../../vendor/phpmailer/phpmailer/src/SMTP.php');
     require_once('../../vendor/phpmailer/phpmailer/src/Exception.php');
 
-
     $mail = new PHPMailer\PHPMailer\PHPMailer();
-
 
     // DO NOT USE THE TYPE 0 AS IT WILL NOT WORK
 
-
     $credentials = account_credentials($type);
-
 
     if ($credentials != false)
     {
@@ -255,7 +346,6 @@ function sendEmail($to, $subject, $message, $type = 1) // PHPMAILER FUNCTION
     {
         return "Error: No Credentials Found";
     }
-
 
     $mail->IsSMTP();
     $mail->SMTPDebug = 0;
@@ -272,7 +362,6 @@ function sendEmail($to, $subject, $message, $type = 1) // PHPMAILER FUNCTION
     // $mail->WordWrap   = 80;
     $mail->IsHTML(true);
     $mail->Body = $message;
-
 
     if(!$mail->Send())
     {
@@ -715,6 +804,58 @@ function get_school()
     return $data;
 }
 
+function check_status($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM scholarship_application WHERE userId = " . $id;
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        $data = $row;
+    }
+
+    return $data;
+}
+
+function update_status($type, $id)
+{
+    include("dbconnection.php");
+
+    $typeName = "";
+    $typeUpdate = "";
+
+    switch ($type)
+    {
+        case 1:
+            $typeName = 'info_flag';
+            $typeUpdate = 'educ_flag';
+            break;
+        case 2:
+            $typeName = 'educ_flag';
+            $typeUpdate = 'family_flag';
+            break;
+        case 3:
+            $typeName = 'family_flag';
+            $typeUpdate = 'add_flag';
+            break;
+        case 4:
+            $typeName = 'add_flag';
+            $typeUpdate = 'add_flag';
+            break;
+    }
+
+    $sql = "UPDATE scholarship_application SET " . $typeName . " = 1, current_active = '$typeUpdate' WHERE userId = " . $id;
+    $query = $conn->query($sql);
+
+    return ($query) ? true : $conn->error; $conn->rollback();
+}
+
 function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'queryPath' => '', 'errorValidation' => ['0' => 'Invalid File Type']])
 {
     if ($file != "")
@@ -754,6 +895,27 @@ function check_exist($data)
     $value = $data['value'];
 
     $sql = "SELECT * FROM " . $table . " WHERE " . $column . " = '" . $value . "'";
+    $query = $conn->query($sql);
+
+    return $query->num_rows;
+}
+
+function check_exist_multiple($data)
+{
+    include("dbconnection.php");
+
+    $table = $data['table'];
+    $column = $data['column'];
+
+    $sql = "SELECT * FROM " . $table . " WHERE ";
+
+    foreach ($column as $key => $value)
+    {
+        $sql .= $key . " = '" . $value . "' AND ";
+    }
+
+    $sql = substr($sql, 0, -4);
+
     $query = $conn->query($sql);
 
     return $query->num_rows;
@@ -805,6 +967,23 @@ function get_table_columns($table)
     }
 
     return $data;
+}
+
+function updateApplication($type, $id)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE scholarship_application SET ";
+
+    if ($type == 0) // Finished
+    {
+        $sql .= " dateFinished = NOW(), status = '1' ";
+    }
+
+    $sql .= " WHERE userId = " . $id;
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success' : $conn->error;
 }
 
 

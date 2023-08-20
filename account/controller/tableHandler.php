@@ -24,5 +24,8 @@ switch ($action)
     case 5:
         echo collegeNewApplicantTable();
         break;
+    case 6:
+        echo websiteSocials();
+        break;
 }
     

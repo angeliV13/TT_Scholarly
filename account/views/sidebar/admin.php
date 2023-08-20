@@ -156,6 +156,11 @@
             </a>
           </li>
           <li>
+            <a class="nav-link collapsed" href="index.php?nav=web_settings">
+              <i class="ri-settings-line"></i><span>Website Settings</span>
+            </a>
+          </li>
+          <li>
             <a class="nav-link collapsed" href="index.php?nav=tts_indicators_ea">
               <i class="ri-settings-line"></i><span>Educ Assistance Indicators</span>
             </a>

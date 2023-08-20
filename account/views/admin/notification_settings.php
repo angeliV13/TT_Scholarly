@@ -24,7 +24,7 @@
                             </div>
 
                             <!-- Table with stripped rows -->
-                            <table id="setNotifTable" class="table table-striped" width="100%" cellspacing="100%">
+                            <table id="setNotifTable" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class=" small text-center">
                                         <th class="text-center">No</th>
