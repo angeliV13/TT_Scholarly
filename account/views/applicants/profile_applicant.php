@@ -23,8 +23,6 @@
                   <input id="file" type="file" onchange="loadFile(event)" />
                   <!-- <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" /> -->
                   <img id="output" src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
-                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height:300px">
-                  <img src="<?php echo $user_info['profile_img'] == null ? "assets/img/profile-img.jpg" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                 </div>
                 <!-- <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height:300px">
                   <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
@@ -39,57 +37,15 @@
                     <br><?php echo $user_info['eac_number'] ?></br>
                   </p>
                 </div>
+
                 <input type="hidden" id="userId" value="<?= $_SESSION['id'] ?>">
                 <input type="hidden" id="scholarLevel" value="<?= $_SESSION['scholarType'] ?>">
                 <input type="hidden" id="currentActive" value="<?= $status['current_active'] ?>">
 
               </div>
-              <!-- Bordered Tabs Justified -->
-              <div class="my-2 p-4 text-black" style="background-color: #ffff; height:10px;">
-                <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
-                  <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link w-100 active" id="personal-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
-                  </li>
-                  <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link  w-100" id="educational-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-educational-background" type="button" role="tab" aria-controls="educational-background" aria-selected="false">Educational Background</button>
-                  </li>
-                  <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link w-100" id="family-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-family-background" type="button" role="tab" aria-controls="family-background" aria-selected="false">Family Background</button>
-                  </li>
-                  <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link w-100" id="additional-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-additional-information" type="button" role="tab" aria-controls="additional-information" aria-selected="false">Additional Information</button>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body p-4">
-                <!-- BENEFICIARIES INFORMATION -->
-                <div class="tab-content" id="borderedTabJustifiedContent">
-                  <!-- PERSONAL INFORMATION -->
-                  <div class="tab-pane fade show active" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
-                    <!-- <div class="d-flex justify-content-between align-items-center">
-                      <h5 class="card-title">
-                        Primary
-                        Information
-                      </h5>
-                    </div> -->
-                    <form class="row g-4 pt-3 needs-validation" method="post" id="benefInfo">
-                      <!-- FULL NAME -->
-                      <div class="col-md-3 position-relative">
-                        <label for="inputFirstName" class="form-label">First name</label>
-                        <input type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="<?php echo $user_info['first_name'] ?>" disabled>
-                      </div>
-                      <div class="col-md-3 position-relative">
-                        <label for="inputMiddleName" class="form-label">Middle name</label>
-                        <input type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="<?php echo $user_info['middle_name'] ?>" disabled>
-                      </div>
-                      <div class="col-md-3 position-relative">
-                        <label for="inputLastName" class="form-label">Last name</label>
-                        <input type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="<?php echo $user_info['last_name'] ?>" disabled>
-                      </div>
-                      <div class="col-md-3 position-relative">
-                        <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                        <input type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="<?php echo $user_info['suffix'] ?>" disabled>
-                      </div>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title pt-4 d-flex flex-column align-items-center"> PROFILE</h5>
 
                   <!-- Bordered Tabs Justified -->
                   <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
@@ -308,7 +264,6 @@
                             </div><!-- End Custom Styled Validation with Tooltips -->
                           </div>
                         </div>
-                      </div>
 
                         <div class="float-end">
                           <?php if (!$finishFlag) : ?>
