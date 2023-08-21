@@ -162,6 +162,9 @@ function get_path($lv_path, $type = '99')
                         case 'tts_settings':
                                 return 'views/admin/basic_settings.php';
                         
+                        case 'web_settings':
+                                return 'views/admin/web_settings.php';
+                        
                         case 'sch_settings':
                                 return 'views/admin/school_settings.php';
                         
@@ -186,7 +189,6 @@ function get_path($lv_path, $type = '99')
 
                         case 'dashboard':
                                 return 'views/beneficiaries/profile_bene.php';
-
 
                         case 'assessment-bene':
                                 return 'views/beneficiaries/assessment_bene.php';
@@ -217,16 +219,13 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'dashboard_applicant':
-                                return 'views/applicants/profile_applicant.php';
-
+                                return 'views/applicants/profile_bene.php';
 
                         case 'profile_applicant':
                                 return 'views/applicants/profile_applicant.php';
 
-
-                        case 'app-profile':
-                                return 'views/applicants/profile_bene.php';
-
+                        case 'apply_applicant':
+                                return 'views/applicants/applicant_genReq.php';
 
                         case 'examination':
                                 return 'views/applicants/start_exam.php';

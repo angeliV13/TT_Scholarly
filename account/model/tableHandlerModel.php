@@ -292,10 +292,13 @@ function schoolTable()
     echo json_encode($json_data);
 }
 
-function collegeNewApplicantTable(){
+function collegeNewApplicantTable()
+{
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM account WHERE account_type = '3' AND account_status = '1'";
+    $sql = "SELECT * FROM account acc 
+            JOIN user_info inf ON acc.id = inf.account_id 
+            WHERE acc.account_type = '3' AND acc.account_status = '1'";
     $query = $conn->query($sql);
 
     $data = [];
@@ -307,16 +310,69 @@ function collegeNewApplicantTable(){
         while ($row = $query->fetch_assoc())
         {
             extract($row);
-            $name = get_user_info($id);
             
             $data[] = [
                 static_count(),
-                $name['last_name'] . ', ' . $name['first_name'],
-                1,1,1,1,1,1,1,1,
-                // "<pre>" . print_r($addedBy, true) . "</pre>",
+                $last_name . ', ' . $first_name, //Name
+                1, //School
+                1, //School Type
+                1, //Scholarship Type
+                1, //Educational Level
+                1, //Course
+                1, // Year Level
+                $contact_number, //Contact Number
+                $barangay, //Barangay
                 
                 "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . 1 . "' data-address='" . 1 . "' data-type='" . 1 . "'>Edit</button>
                 <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . 1 . "'>Delete</button>",
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+function websiteSocials()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM website_socials ORDER BY social_type ASC";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $socialName = $name = "";
+            $id = $row['id'];
+            $socialType = $row['social_type'];
+            $link = $row['link'];
+            $addedBy = get_user_info($row['added_by']);
+            $dateAdded = date("F d, Y h:i A", strtotime($row['date_added']));
+            $socialName = get_social_type($socialType);
+            $name = $addedBy['first_name'] . " " . $addedBy['last_name'];
+
+            $data[] = [
+                static_count(),
+                $socialName,
+                $link,
+                $name,
+                $dateAdded,
+                "<button type='button' class='editSocial btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#editSocialModal' data-id='" . $id . "' data-name='" . $socialName . "' data-type='" . $socialType . "' data-link='" . $link . "'>Edit</button>
+                <button type='button' class='deleteSocial btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . $socialName . " Social Link'>Delete</button>",
             ];
 
             $totalData++;

@@ -4,6 +4,7 @@
 session_start();
 
 include('path_identifier.php');
+include('model/validationModel.php');
 include('model/functionModel.php');
 include('global_variables.php');
 

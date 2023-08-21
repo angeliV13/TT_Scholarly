@@ -261,5 +261,42 @@ if (isset($_REQUEST['action']))
         case 7.2: // Delete School
             echo deleteSchool(isset($_POST['id']) ? $_POST['id'] : '');
             break;
+        case 8: // Add Website Socials
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'socType'       => isset($_POST['socType']) ? $_POST['socType'] : '',
+                'socLink'       => isset($_POST['socLink']) ? $_POST['socLink'] : '',
+            ];
+
+            echo addWebsiteSocials($data);
+
+            break;
+        case 8.1: // Delete Website Social
+            echo deleteWebsiteSocial(isset($_POST['id']) ? $_POST['id'] : '');
+            break;
+        case 8.2: // Update Website Social
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'id'            => isset($_POST['id']) ? $_POST['id'] : '',
+                'socType'       => isset($_POST['socType']) ? $_POST['socType'] : '',
+                'socLink'       => isset($_POST['socLink']) ? $_POST['socLink'] : '',
+            ];
+
+            echo updateWebsiteSocials($data);
+
+            break;
+        case 8.3: // Add and Edit Website Information
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'address'       => isset($_POST['address']) ? $_POST['address'] : '',
+                'email'         => isset($_POST['email']) ? $_POST['email'] : '',
+                'telephone'     => isset($_POST['telephone']) ? $_POST['telephone'] : '',
+                'opening'       => isset($_POST['opening']) ? $_POST['opening'] : '',
+            ];
+
+            echo addWebsiteInfo($data);
+
+            break;
+
     }
 }
