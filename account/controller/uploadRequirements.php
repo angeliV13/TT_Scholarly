@@ -10,6 +10,8 @@ if(isset($_REQUEST['action'])){
             $getTable = $_POST['getTable'];
             if($getTable == 1){
                 echo getAssessmentBeneTable();
+            }elseif($getTable == 2){
+                echo getApplicationTable();
             }
             break;
         case 2:         // Upload of Assessment Requirements

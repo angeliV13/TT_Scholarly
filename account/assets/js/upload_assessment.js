@@ -30,6 +30,36 @@ $(document).ready(function () {
       deferRender: false,
       stateSave: false,
   });
+  let applicationTable = $("#applicationTable").DataTable({
+    lengthChange: false,
+    searching: false,
+    ordering: false,
+    serverSide: true,
+    processing: true,
+    ajax: {
+      url: "controller/uploadRequirements.php",
+      type: "POST",
+      data: {
+        action: 1,
+        getTable: 2,
+      },
+      // success: function (row, data, index) {
+      //   console.log(row);
+      //   console.log(data);
+      //   console.log(index);
+      // },
+      error: function (data) {
+        console.log(data);
+      },
+    },
+    createdRow: function (row, data, index) {},
+    columnDefs: [],
+    bInfo: false,
+    paging: false,
+    fixedColumns: false,
+    deferRender: false,
+    stateSave: false,
+});
 });
 
 // School ID

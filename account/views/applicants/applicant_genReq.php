@@ -21,7 +21,7 @@
                     </div>
                     <!-- TABLE AWARDS FOR COLLEGE LEVEL -->
                     <div class="table-responsive">
-                        <table id="collegeAward_table_view" class="table table-striped header-fixed" width="100%" cellspacing="0">
+                        <table id="applicationTable" class="table table-striped header-fixed" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="text-center">
                                     <th class="text-center">No</th>
