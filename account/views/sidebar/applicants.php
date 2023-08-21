@@ -18,7 +18,7 @@
 
       <!--  -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php?nav=profile_applicant">
+        <a class="nav-link collapsed" href="index.php?nav=apply_applicant">
           <i class="bi bi-files"></i>
           <span>General Requirements</span>
         </a>

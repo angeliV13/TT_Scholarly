@@ -224,10 +224,8 @@ function get_path($lv_path, $type = '99')
                         case 'profile_applicant':
                                 return 'views/applicants/profile_applicant.php';
 
-
-                        case 'app-profile':
-                                return 'views/applicants/profile_bene.php';
-
+                        case 'apply_applicant':
+                                return 'views/applicants/applicant_genReq.php';
 
                         case 'examination':
                                 return 'views/applicants/start_exam.php';
