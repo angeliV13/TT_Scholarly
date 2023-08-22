@@ -251,3 +251,116 @@ $("#submitAssessment").submit(function (e) {
   return false;
 });
 
+// Dynamic Button Not Applicable
+function buttonNotApplicable(requirement){
+  if ($("#btn_na_"+requirement).is(":checked")) {
+    $("#divUpload"+requirement).addClass("disabled");
+    $("#fileUpload"+requirement).prop("disabled", true);
+    $("#viewUpload"+requirement).addClass("disabled");
+    $("#textUpload"+requirement).text("");
+  } else {
+    $("#divUpload"+requirement).removeClass("disabled");
+    $("#fileUpload"+requirement).prop("disabled", false);
+    $("#viewUpload"+requirement).removeClass("disabled");
+  }
+}
+
+//  Saving
+$("#submitApplicationFile").submit(function (e) {
+  e.preventDefault();
+
+  let corCheck            = ($("#btn_na_3").is(":checked") == true ? 1 : 0);
+  let gradesCheck         = ($("#btn_na_4").is(":checked") == true ? 1 : 0);
+  let cobCheck            = ($("#btn_na_5").is(":checked") == true ? 1 : 0);
+  let cgmcCheck           = ($("#btn_na_6").is(":checked") == true ? 1 : 0);
+  let idpicCheck          = ($("#btn_na_7").is(":checked") == true ? 1 : 0);
+  let mapCheck            = ($("#btn_na_8").is(":checked") == true ? 1 : 0);
+  let brgyclearanceCheck  = ($("#btn_na_9").is(":checked") == true ? 1 : 0);
+  let parvoteidCheck      = ($("#btn_na_10").is(":checked") == true ? 1 : 0);
+  let appvoteidCheck      = ($("#btn_na_11").is(":checked") == true ? 1 : 0);
+  let itrCheck            = ($("#btn_na_12").is(":checked") == true ? 1 : 0);
+  let indigencyCheck      = ($("#btn_na_13").is(":checked") == true ? 1 : 0);
+ 
+  let corFile             = (corCheck           == 1) ? '0'  : ((document.getElementById("fileUpload3")   == null) ? '1' : (((document.getElementById("fileUpload3"))== undefined)  ? '2' : document.getElementById("fileUpload3").files[0]));
+  let gradesFile          = (gradesCheck        == 1) ? '0'  : ((document.getElementById("fileUpload4")   == null) ? '1' : (((document.getElementById("fileUpload4"))== undefined)  ? '2' : document.getElementById("fileUpload4").files[0]));
+  let cobFile             = (cobCheck           == 1) ? '0'  : ((document.getElementById("fileUpload5")   == null) ? '1' : (((document.getElementById("fileUpload5"))== undefined)  ? '2' : document.getElementById("fileUpload5").files[0]));
+  let cgmcFile            = (cgmcCheck          == 1) ? '0'  : ((document.getElementById("fileUpload6")   == null) ? '1' : (((document.getElementById("fileUpload6"))== undefined)  ? '2' : document.getElementById("fileUpload6").files[0]));
+  let idpicFile           = (idpicCheck         == 1) ? '0'  : ((document.getElementById("fileUpload7")   == null) ? '1' : (((document.getElementById("fileUpload7"))== undefined)  ? '2' : document.getElementById("fileUpload7").files[0]));
+  let mapFile             = (mapCheck           == 1) ? '0'  : ((document.getElementById("fileUpload8")   == null) ? '1' : (((document.getElementById("fileUpload8"))== undefined)  ? '2' : document.getElementById("fileUpload8").files[0]));
+  let brgyclearanceFile   = (brgyclearanceCheck == 1) ? '0'  : ((document.getElementById("fileUpload9")   == null) ? '1' : (((document.getElementById("fileUpload9"))== undefined)  ? '2' : document.getElementById("fileUpload9").files[0]));
+  let parvoteidFile       = (parvoteidCheck     == 1) ? '0'  : ((document.getElementById("fileUpload10")  == null) ? '1' : (((document.getElementById("fileUpload10"))== undefined) ? '2' : document.getElementById("fileUpload10").files[0]));
+  let appvoteidFile       = (appvoteidCheck     == 1) ? '0'  : ((document.getElementById("fileUpload11")  == null) ? '1' : (((document.getElementById("fileUpload11"))== undefined) ? '2' : document.getElementById("fileUpload11").files[0]));
+  let itrFile             = (itrCheck           == 1) ? '0'  : ((document.getElementById("fileUpload12")  == null) ? '1' : (((document.getElementById("fileUpload12"))== undefined) ? '2' : document.getElementById("fileUpload12").files[0]));
+  let indigencyFile       = (indigencyCheck     == 1) ? '0'  : ((document.getElementById("fileUpload13")  == null) ? '1' : (((document.getElementById("fileUpload13"))== undefined) ? '2' : document.getElementById("fileUpload13").files[0]));
+
+  console.log(schoolIdFile);
+  console.log(clearanceFile);
+
+  let form_data = new FormData(); 
+
+  form_data.append('action', 3);            
+  form_data.append('corFile'          , corFile);
+  form_data.append('gradesFile'       , gradesFile);
+  form_data.append('cobFile'          , cobFile);
+  form_data.append('cgmcFile'         , cgmcFile);
+  form_data.append('idpicFile'        , idpicFile);
+  form_data.append('mapFile'          , mapFile);
+  form_data.append('brgyclearanceFile', brgyclearanceFile);
+  form_data.append('parvoteidFile'    , parvoteidFile);
+  form_data.append('appvoteidFile'    , appvoteidFile);
+  form_data.append('itrFile'          , itrFile);
+  form_data.append('indigencyFile'    , indigencyFile);
+
+  Swal.fire({
+    title: "Submit Assessment?",
+    text: "Are you sure you want to submit your application requirements? This cannot be undone",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Submit",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/uploadRequirements.php",
+        processData: false,
+        contentType: false,
+        data: form_data,
+
+        success: function (data) {
+          if (data == "Success") {
+            let timerInterval;
+
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: "Upload Success",
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              if (result.dismiss) {
+                location.reload();
+              }
+            });
+            
+          } else {
+            console.log(data);
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+
+  return false;
+});
+

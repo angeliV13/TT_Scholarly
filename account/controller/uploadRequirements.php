@@ -29,6 +29,25 @@ if(isset($_REQUEST['action'])){
             echo submitAssessment($target_dir, $schoolIdFile, $clearanceFile, $corFile, $gradeFile);
 
             break;
+        case 3:         // Upload of Application Requirements
+            // corFile, gradesFile, cobFile, cgmcFile, idpicFile, mapFile, brgyclearanceFile, parvoteidFile, appvoteidFile, itrFile, indigencyFile);
+
+            $corFile            = isset($_FILES['corFile'])             ? $_FILES['corFile']            : $_POST['corFile'];
+            $gradesFile         = isset($_FILES['gradesFile'])          ? $_FILES['gradesFile']         : $_POST['gradesFile'];
+            $cobFile            = isset($_FILES['cobFile'])             ? $_FILES['cobFile']            : $_POST['cobFile'];
+            $cgmcFile           = isset($_FILES['cgmcFile'])            ? $_FILES['cgmcFile']           : $_POST['cgmcFile'];
+            $idpicFile          = isset($_FILES['idpicFile'])           ? $_FILES['idpicFile']          : $_POST['idpicFile'];
+            $mapFile            = isset($_FILES['mapFile'])             ? $_FILES['mapFile']            : $_POST['mapFile'];
+            $brgyclearanceFile  = isset($_FILES['brgyclearanceFile'])   ? $_FILES['brgyclearanceFile']  : $_POST['brgyclearanceFile'];
+            $parvoteidFile      = isset($_FILES['parvoteidFile'])       ? $_FILES['parvoteidFile']      : $_POST['parvoteidFile'];
+            $appvoteidFile      = isset($_FILES['appvoteidFile'])       ? $_FILES['appvoteidFile']      : $_POST['appvoteidFile'];
+            $itrFile            = isset($_FILES['itrFile'])             ? $_FILES['itrFile']            : $_POST['itrFile'];
+            $indigencyFile      = isset($_FILES['indigencyFile'])       ? $_FILES['indigencyFile']      : $_POST['indigencyFile'];
+
+            $target_dir .= "/application/";
+            echo submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFile, $idpicFile, $mapFile, $brgyclearanceFile, $parvoteidFile, $appvoteidFile, $itrFile, $indigencyFile);
+
+            break;
     }
 }
 

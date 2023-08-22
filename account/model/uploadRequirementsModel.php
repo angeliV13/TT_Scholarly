@@ -325,7 +325,7 @@ function getAssessmentBeneTable()
 
 
 
-function uploadFile($target_dir, $file, $file_name)
+function uploadFile($target_dir, $file, $file_name, $extension_array = array("pdf"))
 {
 
     $errors = "";
@@ -336,8 +336,7 @@ function uploadFile($target_dir, $file, $file_name)
     $tmp = explode('.', $file['name']);
     $file_ext = strtolower(end($tmp));
 
-
-    $extensions = array("pdf");
+    $extensions = $extension_array;
 
     if (in_array($file_ext, $extensions) === false) {
         $errors = "extension not allowed, please choose a pdf file format.";
@@ -370,13 +369,13 @@ function submitAssessment($target_dir, $schoolIdFile, $clearanceFile, $corFile, 
             $value1      = uploadFile($target_dir, $schoolIdFile, $file_name);
 
             if ($value1 == 'Success') {
-                echo updateAssessmentRequirement($ay, $sem, $userid, $file_name, 1, 1);
+                echo updateRequirement($ay, $sem, $userid, $file_name, 1, 1, 'assessment_file');
             } else {
                 return ($value1);
             }
         }
     }else{
-        echo updateAssessmentRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4);
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4, 'assessment_file');
     }
     if ($clearanceFile <> '0' ) {
         if(is_array($clearanceFile)){
@@ -385,13 +384,13 @@ function submitAssessment($target_dir, $schoolIdFile, $clearanceFile, $corFile, 
             $value2      = uploadFile($target_dir, $clearanceFile, $file_name);
 
             if ($value2 == 'Success') {
-                echo updateAssessmentRequirement($ay, $sem, $userid, $file_name, 2, 1);
+                echo updateRequirement($ay, $sem, $userid, $file_name, 2, 1, 'assessment_file');
             } else {
                 return ($value2);
             }
         }
     }else{
-        echo updateAssessmentRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4);
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4, 'assessment_file');
     }
     if ($corFile <> '0') {
         if(is_array($corFile)){
@@ -400,13 +399,13 @@ function submitAssessment($target_dir, $schoolIdFile, $clearanceFile, $corFile, 
             $value3      = uploadFile($target_dir, $corFile, $file_name);
 
             if ($value3 == 'Success') {
-                echo updateAssessmentRequirement($ay, $sem, $userid, $file_name, 3, 1);
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'assessment_file');
             } else {
                 return ($value3);
             }
         }
     }else{
-        echo updateAssessmentRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4);
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4, 'assessment_file');
     }
     if ($gradeFile <> '0') {
         if(is_array($gradeFile)){
@@ -415,24 +414,24 @@ function submitAssessment($target_dir, $schoolIdFile, $clearanceFile, $corFile, 
             $value4      = uploadFile($target_dir, $gradeFile, $file_name);
 
             if ($value4 == 'Success') {
-                echo updateAssessmentRequirement($ay, $sem, $userid, $file_name, 4, 1);
+                echo updateRequirement($ay, $sem, $userid, $file_name, 4, 1, 'assessment_file');
             } else {
                 return ($value4);
             }
         }
     }else{
-        echo updateAssessmentRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4);
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4, 'assessment_file');
     }
     return 'Success';
 }
 
-function updateAssessmentRequirement($ay, $sem, $userid, $file, $requirement, $status)
+function updateRequirement($ay, $sem, $userid, $file, $requirement, $status, $target)
 {
     $date = date("Y-m-d");
 
     include("dbconnection.php");
 
-    $sql = "UPDATE `assessment_file` 
+    $sql = "UPDATE `{$target}` 
                 SET `file`          = '{$file}'     ,
                     `status`        = '{$status}'   ,
                     `upload_date`   = '{$date}'     ,
@@ -474,208 +473,36 @@ function getApplicationTable()
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','8','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','9','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','10','',0, '', '', '', '')";
-        $query = $conn->query($sql) or die("Error URQ002: " . $conn->error);
+        $query = $conn->query($sql) or die("Error URQ006: " . $conn->error);
 
         $sql = "SELECT * FROM applicant_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
-        $query = $conn->query($sql) or die("Error URQ003: " . $conn->error);
+        $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
     }
 
     while ($row = $query->fetch_assoc()) {
         extract($row);
 
-        if ($counter == 1) {
-            if ($status == 0 || $status == 3) {
-                $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
-                                        <!--BUTTON FOR "NOT APPLICABLE"-->
-                                        <input type="checkbox" class="btn-check" id="btn_na_SchoolId" onclick="schoolId()">
-                                        <label class="btn btn-outline-dark" for="btn_na_SchoolId">Not Applicable</label>
-                                        <div class="btn-group" role="group">
-                                        <div id="divUploadSchoolId" class="upload_file file btn btn-primary">Upload
-                                            <input id="fileUploadSchoolId" type="file" name="schoolIdFile" accept="application/pdf" onchange="getFileData(this, \'SchoolId\');" />
-                                        </div>
-                                        <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
-                                        <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-scrollable">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title">School ID</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                                </div>
+        if ($status == 0 || $status == 3) {
+            $button =  getUploadButton($row);
+        }else{
+            $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
+                                    <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
+                                    <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title">School ID</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
+                                            </div>
 
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
-                                    </div>';
-            }else{
-                $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
-                                        <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
-                                        <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-scrollable">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title">School ID</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                                </div>
-
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
-                                    </div>';
-            }
-            $button = $buttonSchoolId;
-
-        } elseif ($counter == 2) {
-            if ($status == 0 || $status == 3) {
-                $buttonClearance =  '<div class="btn-group-vertical d-flex">
-                                    <!--BUTTON FOR "NOT APPLICABLE"-->
-                                    <input type="checkbox" class="btn-check" id="btn_na_Clearance" onclick="schoolClearance()">
-                                    <label class="btn btn-outline-dark" for="btn_na_Clearance">Not Applicable</label>
-                                    <div class="btn-group" role="group">
-                                    <div id="divUploadClearance" class="upload_file file btn btn-primary">Upload
-                                        <input id="fileUploadClearance" type="file" name="clearance" accept="application/pdf" onchange="getFileData(this, \'Clearance\');" />
-                                    </div>
-                                    <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
-                                    <div class="modal fade" id="fileUploadClearanceModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">School Clearance</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <embed id="previewClearance" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                            </div>
                                         </div>
                                         </div>
                                     </div>
-                                    </div>
-                                    <p id="textUploadClearance" class="small mx-auto">' . $file . '</p>
+                                    <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
                                 </div>';
-            }else{
-                $buttonClearance =  '<div class="btn-group-vertical d-flex">
-                                    <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
-                                    <div class="modal fade" id="fileUploadClearanceModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">School Clearance</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <embed id="previewClearance" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <p id="textUploadClearance" class="small mx-auto">' . $file . '</p>
-                                </div>';
-            }
-            $button = $buttonClearance;
-        } elseif ($counter == 3) {
-            if ($status == 0 || $status == 3) {
-                $buttonCor =        '<div class="btn-group-vertical d-flex">
-                                    <!--BUTTON FOR "NOT APPLICABLE"-->
-                                    <input type="checkbox" class="btn-check" id="btn_na_Cor" onclick="cor()">
-                                    <label class="btn btn-outline-dark" for="btn_na_Cor">Not Applicable</label>
-                                    <div class="btn-group" role="group">
-                                    <div id="divUploadCor" class="upload_file file btn btn-primary">Upload
-                                        <input id="fileUploadCor" type="file" name="corFile" accept="application/pdf" onchange="getFileData(this, \'Cor\');" />
-                                    </div>
-                                    <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
-                                    <div class="modal fade" id="viewUploadCorModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">Certificate of Registration</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <embed id="previewCor" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <p id="textUploadCor" class="small mx-auto">' . $file . '</p>
-                                </div>';
-            }else{
-                $buttonCor =        '<div class="btn-group-vertical d-flex">
-                                    <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
-                                    <div class="modal fade" id="viewUploadCorModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">Certificate of Registration</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <embed id="previewCor" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <p id="textUploadCor" class="small mx-auto">' . $file . '</p>
-                                </div>';
-            }
-            
-            $button = $buttonCor;
-        } elseif ($counter == 4) {
-            if ($status == 0 || $status == 3) {
-                $buttonGrade =         '<div class="btn-group-vertical d-flex">
-                                    <!--BUTTON FOR "NOT APPLICABLE"-->
-                                    <input type="checkbox" class="btn-check" id="btn_na_Grade" onclick="grade()">
-                                    <label class="btn btn-outline-dark" for="btn_na_Grade">Not Applicable</label>
-                                    <div class="btn-group" role="group">
-                                    <div id="divUploadGrade" class="upload_file file btn btn-primary">Upload
-                                        <input id="fileUploadGrade" type="file" name="gradeFile" accept="application/pdf" onchange="getFileData(this, \'Grade\');" />
-                                    </div>
-                                    <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
-                                    <div class="modal fade" id="viewUploadGradeModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">Grade</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <embed id="previewGrade" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <p id="textUploadGrade" class="small mx-auto">' . $file . '</p>
-                                </div>';
-            }else{
-                $buttonGrade =         '<div class="btn-group-vertical d-flex">
-                                    <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
-                                    <div class="modal fade" id="viewUploadGradeModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">Grade</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <embed id="previewGrade" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <p id="textUploadGrade" class="small mx-auto">' . $file . '</p>
-                                </div>';
-            }
-            
-            $button = $buttonGrade;
         }
 
         if ($status == 0) {
@@ -709,4 +536,199 @@ function getApplicationTable()
     );
 
     echo json_encode($json_data);  // send data as json format
+}
+
+function getUploadButton($row){
+    extract($row);
+
+    $src = ($file != '')? "uploads/assessment/' . $file . '.pdf" : '';
+
+    $button = '<div class="btn-group-vertical d-flex">
+                    <!--BUTTON FOR "NOT APPLICABLE"-->
+                    <input type="checkbox" class="btn-check" id="btn_na_'. $requirement .'" onclick="buttonNotApplicable('.$requirement.')">
+                    <label class="btn btn-outline-dark" for="btn_na_'. $requirement .'">Not Applicable</label>
+                    <div class="btn-group" role="group">
+                        <div id="divUpload'. $requirement .'" class="upload_file file btn btn-primary">Upload
+                            <input id="fileUpload'. $requirement .'" type="file" name="schoolIdFile" accept="application/pdf" onchange="getFileData(this, \''. $requirement .'\');" />
+                        </div>
+                        <button id="viewUpload'. $requirement .'" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUpload'. $requirement .'Modal"> View File</button>
+                        <div class="modal fade" id="viewUpload'. $requirement .'Modal" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">School ID</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <embed id="preview'. $requirement .'" src="'.$src.'" frameborder="0" width="100%" height="400px">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="textUpload'. $requirement .'" class="small mx-auto">' . $file . '</p>
+                </div>';
+
+    return $button;
+}
+
+function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFile, $idpicFile, $mapFile, $brgyclearanceFile, $parvoteidFile, $appvoteidFile, $itrFile, $indigencyFile)
+{
+    session_start();
+
+    $ay         = getDefaultAcadYearId();
+    $sem        = getDefaultSemesterId();
+    $userid     = $_SESSION['id'];
+    $typeArray  = array("", "schoolid", "clearance", "cor", "grades", "cob", "cgmc", "idpic", "map", "brgyclearance", "parvoteid", "appvoteid", "itr", "indigency");
+
+
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[3];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    if ($gradesFile <> '0') {
+        if(is_array($gradesFile)){
+            $type       = $typeArray[4];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value2     = uploadFile($target_dir, $gradesFile, $file_name);
+
+            if ($value2 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 4, 1, 'applicant_file');
+            } else {
+                return ($value2);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 4, 4, 'applicant_file');
+    }
+    
+    if ($cobFile <> '0') {
+        if(is_array($cobFile)){
+            $type       = $typeArray[5];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value3      = uploadFile($target_dir, $cobFile, $file_name);
+
+            if ($value3 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 5, 1, 'applicant_file');
+            } else {
+                return ($value3);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 5, 4, 'applicant_file');
+    }
+    
+    // ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[3];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[3];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[3];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[3];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[3];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[3];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    
+    return 'Success';
 }
