@@ -146,8 +146,9 @@ function getActionButton($row)
                                                                     <img src="assets/img/profile-img.jpg" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                                                                 </div>
                                                                 <div class="ms-4 adjustable-line-spacing" style="margin-top: 115px;">
-                                                                    <h5 class="fw-bold">JUAN
-                                                                        DELA CRUZ</h5>
+                                                                    <h5 class="fw-bold">
+                                                                        '. $first_name .' '. $middle_name .' '. $last_name .' '. $suffix .'
+                                                                    </h5>
                                                                     <p>Educational
                                                                         Assistance
                                                                         Scholarship -
@@ -213,31 +214,31 @@ function getActionButton($row)
                                                                                         <!-- FULL NAME -->
                                                                                         <div class="col-md-3 position-relative">
                                                                                             <label for="inputFirstName" class="form-label">First name</label>
-                                                                                            <input disabled type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="" required>
+                                                                                            <input disabled type="FirstName" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="'. $first_name .'" required>
                                                                                         </div>
                                                                                         <div class="col-md-3 position-relative">
                                                                                             <label for="inputMiddleName" class="form-label">Middle name</label>
-                                                                                            <input disabled type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="" required>
+                                                                                            <input disabled type="MiddleName" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="'. $middle_name .'" required>
                                                                                         </div>
                                                                                         <div class="col-md-3 position-relative">
                                                                                             <label for="inputLastName" class="form-label">Last name</label>
-                                                                                            <input disabled type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="" required>
+                                                                                            <input disabled type="LastName" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="'. $last_name .'" required>
                                                                                         </div>
                                                                                         <div class="col-md-3 position-relative">
                                                                                             <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                                                                                            <input disabled type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="" required>
+                                                                                            <input disabled type="Suffix" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="'. $suffix .'" required>
                                                                                         </div>
                                                                                         <!-- CONTACT NUMBER AND EMAIL ADDRESS -->
                                                                                         <div class="col-md-5 position-relative">
                                                                                             <label for="telephone" class="form-label">Contact Number</label>
                                                                                             <div class="input-group">
                                                                                                 <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                                                                                <input disabled type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" required>
+                                                                                                <input disabled type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" value="" required>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-md-7 position-relative">
                                                                                             <label for="EmailAddress" class="form-label">Email Address</label>
-                                                                                            <input disabled type="EmailAddress" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="" required>
+                                                                                            <input disabled type="EmailAddress" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="'. $email .'" required>
                                                                                         </div>
                                                                                         <!-- BIRTH -->
                                                                                         <div class="col-md-4 position-relative">
