@@ -488,7 +488,9 @@ function getApplicationTable()
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','7','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','8','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','9','',0, '', '', '', ''),
-                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','10','',0, '', '', '', '')";
+                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','10','',0, '', '', '', ''),
+                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','11','',0, '', '', '', ''),
+                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','12','',0, '', '', '', '')";
         $query = $conn->query($sql) or die("Error URQ006: " . $conn->error);
 
         $sql = "SELECT * FROM applicant_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
@@ -782,23 +784,23 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     }
 
-    $typeCount += 1;
+    // $typeCount += 1;
     
-    if ($indigencyFile <> '0') {
-        if(is_array($indigencyFile)){
-            $type       = $typeArray[$typeCount];
-            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value11    = uploadFile($target_dir, $indigencyFile, $file_name);
+    // if ($indigencyFile <> '0') {
+    //     if(is_array($indigencyFile)){
+    //         $type       = $typeArray[$typeCount];
+    //         $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+    //         $value11    = uploadFile($target_dir, $indigencyFile, $file_name);
 
-            if ($value11 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
-            } else {
-                return ($value11);
-            }
-        }
-    }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
-    }
+    //         if ($value11 == 'Success') {
+    //             echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+    //         } else {
+    //             return ($value11);
+    //         }
+    //     }
+    // }else{
+    //     echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    // }
     
     
     return 'Success';
