@@ -70,7 +70,7 @@
                     <h5 class="card-title">Applicants</h5>
                 </div>
                 <div class="table-responsive ">
-                    <table id="collegeNewApplicantTable_" class="table table-striped header-fixed" width="100%" cellspacing="100%">
+                    <table id="collegeNewApplicantTable" class="table table-striped header-fixed" width="100%" cellspacing="100%">
                         <thead>
                             <tr class="text-center small">
                                 <th>No.</th>

@@ -1,6 +1,7 @@
 <?php
 
 include("functionModel.php");
+include("actionTableHandlerModel.php");
 
 function accountListingTable($acc_type)
 {
@@ -310,6 +311,8 @@ function collegeNewApplicantTable()
         while ($row = $query->fetch_assoc())
         {
             extract($row);
+
+            $button = getActionButton($row);
             
             $data[] = [
                 static_count(),
@@ -322,9 +325,9 @@ function collegeNewApplicantTable()
                 1, // Year Level
                 $contact_number, //Contact Number
                 $barangay, //Barangay
-                
-                "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . 1 . "' data-address='" . 1 . "' data-type='" . 1 . "'>Edit</button>
-                <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . 1 . "'>Delete</button>",
+                $button,
+                // "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . 1 . "' data-address='" . 1 . "' data-type='" . 1 . "'>Edit</button>
+                // <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . 1 . "'>Delete</button>",
             ];
 
             $totalData++;

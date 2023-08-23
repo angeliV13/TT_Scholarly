@@ -38,16 +38,27 @@
     
   // });
 
-  $('input[name="info"]').on('change', function(){
-    let id = $(this).attr('id');
-    if (id == 'infoProfile'){
-      $('#profile').removeClass('d-none');
-      $('#requirements').addClass('d-none');
+  // $('input[name="info"]').on('change', function(){
+  //   let id = $(this).attr('id');
+  //   if (id == 'infoProfile'){
+  //     $('#profile').removeClass('d-none');
+  //     $('#requirements').addClass('d-none');
+  //   }else{
+  //     $('#profile').addClass('d-none');
+  //     $('#requirements').removeClass('d-none');
+  //   }
+
+  //   console.log(id);
+  // });
+
+  function infoRadio(id){
+    let button = $('input[name="info' + id + '"]:checked');
+    
+    if (button.attr('id') == 'infoProfile' + id){
+      $('#profile' + id).removeClass('d-none');
+      $('#requirements' + id).addClass('d-none');
     }else{
-      $('#profile').addClass('d-none');
-      $('#requirements').removeClass('d-none');
+      $('#profile' + id).addClass('d-none');
+      $('#requirements' + id).removeClass('d-none');
     }
-
-    console.log(id);
-
-  });
+  }
