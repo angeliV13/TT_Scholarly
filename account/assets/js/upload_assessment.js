@@ -293,9 +293,6 @@ $("#submitApplicationFile").submit(function (e) {
   let itrFile             = (itrCheck           == 1) ? '0'  : ((document.getElementById("fileUpload12")  == null) ? '1' : (((document.getElementById("fileUpload12"))== undefined) ? '2' : document.getElementById("fileUpload12").files[0]));
   let indigencyFile       = (indigencyCheck     == 1) ? '0'  : ((document.getElementById("fileUpload13")  == null) ? '1' : (((document.getElementById("fileUpload13"))== undefined) ? '2' : document.getElementById("fileUpload13").files[0]));
 
-  console.log(schoolIdFile);
-  console.log(clearanceFile);
-
   let form_data = new FormData(); 
 
   form_data.append('action', 3);            

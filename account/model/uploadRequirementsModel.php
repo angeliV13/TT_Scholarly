@@ -123,6 +123,10 @@ function getAssessmentBeneTable()
                                         </div>
                                         <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
                                     </div>';
+            }elseif ($status == 4 ) {
+                $button =   '<div class="btn-group-vertical d-flex">
+                                <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                            </div>';
             }else{
                 $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
                                         <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
@@ -172,6 +176,10 @@ function getAssessmentBeneTable()
                                     </div>
                                     <p id="textUploadClearance" class="small mx-auto">' . $file . '</p>
                                 </div>';
+            }elseif ($status == 4 ) {
+                $button =   '<div class="btn-group-vertical d-flex">
+                                <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                            </div>';
             }else{
                 $buttonClearance =  '<div class="btn-group-vertical d-flex">
                                     <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
@@ -219,6 +227,10 @@ function getAssessmentBeneTable()
                                     </div>
                                     <p id="textUploadCor" class="small mx-auto">' . $file . '</p>
                                 </div>';
+            }elseif ($status == 4 ) {
+                $button =   '<div class="btn-group-vertical d-flex">
+                                <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                            </div>';
             }else{
                 $buttonCor =        '<div class="btn-group-vertical d-flex">
                                     <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
@@ -267,6 +279,10 @@ function getAssessmentBeneTable()
                                     </div>
                                     <p id="textUploadGrade" class="small mx-auto">' . $file . '</p>
                                 </div>';
+            }elseif ($status == 4 ) {
+                $button =   '<div class="btn-group-vertical d-flex">
+                                <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                            </div>';
             }else{
                 $buttonGrade =         '<div class="btn-group-vertical d-flex">
                                     <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
@@ -484,25 +500,29 @@ function getApplicationTable()
 
         if ($status == 0 || $status == 3) {
             $button =  getUploadButton($row);
+        }elseif ($status == 4 ) {
+            $button =   '<div class="btn-group-vertical d-flex">
+                            <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                        </div>';
         }else{
-            $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
-                                    <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
-                                    <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title">School ID</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                            </div>
-
-                                        </div>
-                                        </div>
+            $button =   '<div class="btn-group-vertical d-flex">
+                            <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
+                            <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title">School ID</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
-                                </div>';
+                                    <div class="modal-body">
+                                        <embed id="previewSchoolId" src="uploads/application/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
+                            <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                        </div>';
         }
 
         if ($status == 0) {
@@ -577,6 +597,7 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
 {
     session_start();
 
+    $typeCount  = 3;
     $ay         = getDefaultAcadYearId();
     $sem        = getDefaultSemesterId();
     $userid     = $_SESSION['id'];
@@ -585,7 +606,7 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
 
     if ($corFile <> '0') {
         if(is_array($corFile)){
-            $type       = $typeArray[3];
+            $type       = $typeArray[$typeCount];
             $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
             $value1      = uploadFile($target_dir, $corFile, $file_name);
 
@@ -598,10 +619,12 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     }
-    
+
+    $typeCount += 1;
+
     if ($gradesFile <> '0') {
         if(is_array($gradesFile)){
-            $type       = $typeArray[4];
+            $type       = $typeArray[$typeCount];
             $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
             $value2     = uploadFile($target_dir, $gradesFile, $file_name);
 
@@ -615,9 +638,11 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 4, 4, 'applicant_file');
     }
     
+    $typeCount += 1;
+
     if ($cobFile <> '0') {
         if(is_array($cobFile)){
-            $type       = $typeArray[5];
+            $type       = $typeArray[$typeCount];
             $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
             $value3      = uploadFile($target_dir, $cobFile, $file_name);
 
@@ -630,99 +655,145 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 5, 4, 'applicant_file');
     }
-    
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if ($corFile <> '0') {
-        if(is_array($corFile)){
-            $type       = $typeArray[3];
+    $typeCount += 1;
+
+    if ($cgmcFile <> '0') {
+        if(is_array($cgmcFile)){
+            $type       = $typeArray[$typeCount];
             $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value1      = uploadFile($target_dir, $corFile, $file_name);
+            $value4      = uploadFile($target_dir, $cgmcFile, $file_name);
 
-            if ($value1 == 'Success') {
+            if ($value4 == 'Success') {
                 echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
             } else {
-                return ($value1);
+                return ($value4);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+
+    $typeCount += 1;
+    
+    if ($idpicFile <> '0') {
+        if(is_array($idpicFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value5      = uploadFile($target_dir, $idpicFile, $file_name);
+
+            if ($value5 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+            } else {
+                return ($value5);
             }
         }
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     }
     
-    if ($corFile <> '0') {
-        if(is_array($corFile)){
-            $type       = $typeArray[3];
-            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value1      = uploadFile($target_dir, $corFile, $file_name);
+    $typeCount += 1;
 
-            if ($value1 == 'Success') {
+    if ($mapFile <> '0') {
+        if(is_array($mapFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value6      = uploadFile($target_dir, $mapFile, $file_name);
+
+            if ($value6 == 'Success') {
                 echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
             } else {
-                return ($value1);
+                return ($value6);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+
+    $typeCount += 1;
+    
+    if ($brgyclearanceFile <> '0') {
+        if(is_array($brgyclearanceFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value7      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value7 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $brgyclearanceFile, 3, 1, 'applicant_file');
+            } else {
+                return ($value7);
             }
         }
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     }
     
-    if ($corFile <> '0') {
-        if(is_array($corFile)){
-            $type       = $typeArray[3];
-            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value1      = uploadFile($target_dir, $corFile, $file_name);
+    $typeCount += 1;
 
-            if ($value1 == 'Success') {
+    if ($parvoteidFile <> '0') {
+        if(is_array($parvoteidFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value8      = uploadFile($target_dir, $parvoteidFile, $file_name);
+
+            if ($value8 == 'Success') {
                 echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
             } else {
-                return ($value1);
+                return ($value8);
             }
         }
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     }
-    
-    if ($corFile <> '0') {
-        if(is_array($corFile)){
-            $type       = $typeArray[3];
-            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value1      = uploadFile($target_dir, $corFile, $file_name);
 
-            if ($value1 == 'Success') {
+    $typeCount += 1;
+    
+    if ($appvoteidFile <> '0') {
+        if(is_array($appvoteidFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value9      = uploadFile($target_dir, $appvoteidFile, $file_name);
+
+            if ($value9 == 'Success') {
                 echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
             } else {
-                return ($value1);
+                return ($value9);
             }
         }
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     }
-    
-    if ($corFile <> '0') {
-        if(is_array($corFile)){
-            $type       = $typeArray[3];
-            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value1      = uploadFile($target_dir, $corFile, $file_name);
 
-            if ($value1 == 'Success') {
+    $typeCount += 1;
+    
+    if ($itrFile <> '0') {
+        if(is_array($itrFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value10    = uploadFile($target_dir, $itrFile, $file_name);
+
+            if ($value10 == 'Success') {
                 echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
             } else {
-                return ($value1);
+                return ($value10);
             }
         }
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     }
-    
-    if ($corFile <> '0') {
-        if(is_array($corFile)){
-            $type       = $typeArray[3];
-            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value1      = uploadFile($target_dir, $corFile, $file_name);
 
-            if ($value1 == 'Success') {
+    $typeCount += 1;
+    
+    if ($indigencyFile <> '0') {
+        if(is_array($indigencyFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value11    = uploadFile($target_dir, $indigencyFile, $file_name);
+
+            if ($value11 == 'Success') {
                 echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
             } else {
-                return ($value1);
+                return ($value11);
             }
         }
     }else{
