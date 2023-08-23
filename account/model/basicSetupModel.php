@@ -457,7 +457,7 @@ function addSetRenewal($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc
 {
     include("dbconnection.php");
 
-    session_start();
+    // session_start();
     $sessionId = $_SESSION['id'];
 
     date_default_timezone_set("Asia/Manila");

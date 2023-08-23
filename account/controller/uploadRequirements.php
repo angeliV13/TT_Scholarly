@@ -13,6 +13,9 @@ if(isset($_REQUEST['action'])){
             }elseif($getTable == 2){
                 echo getApplicationTable();
             }
+            elseif($getTable == 3){
+                echo getRenewalTable();
+            }
             break;
         case 2:         // Upload of Assessment Requirements
             // $schoolIdNA      = isset($_POST['schoolIdNA'])      ? $_POST['schoolIdNA']   : "";
@@ -46,6 +49,15 @@ if(isset($_REQUEST['action'])){
 
             $target_dir .= "/application/";
             echo submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFile, $idpicFile, $mapFile, $brgyclearanceFile, $parvoteidFile, $appvoteidFile, $itrFile, $indigencyFile);
+
+            break;
+        case 4:         // Upload of Renewal Requirements
+            $schoolIdFile    = isset($_FILES['schoolIdFile'])   ? $_FILES['schoolIdFile']   : $_POST['schoolIdFile'];
+            $corFile         = isset($_FILES['corFile'])        ? $_FILES['corFile']        : $_POST['corFile'];
+
+            $target_dir .= "/assessment/";
+            // print_r(submitAssessment($target_dir, $schoolIdCheck, $clearanceCheck, $corCheck, $gradeCheck, $schoolIdFile, $clearanceFile, $corFile, $gradeFile));
+            echo submitRenewal($target_dir, $schoolIdFile, $corFile);
 
             break;
     }

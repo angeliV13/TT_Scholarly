@@ -499,7 +499,7 @@ function getApplicationTable()
         extract($row);
 
         if ($status == 0 || $status == 3) {
-            $button =  getUploadButton($row);
+            $button =  getUploadButton($row, 'application');
         }elseif ($status == 4 ) {
             $button =   '<div class="btn-group-vertical d-flex">
                             <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
@@ -558,10 +558,10 @@ function getApplicationTable()
     echo json_encode($json_data);  // send data as json format
 }
 
-function getUploadButton($row){
+function getUploadButton($row, $category = 'assessment'){
     extract($row);
 
-    $src = ($file != '')? "uploads/assessment/' . $file . '.pdf" : '';
+    $src = ($file != '')? "uploads/". $category ."/" . $file . ".pdf" : '';
 
     $button = '<div class="btn-group-vertical d-flex">
                     <!--BUTTON FOR "NOT APPLICABLE"-->
@@ -798,6 +798,147 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
         }
     }else{
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+    }
+    
+    
+    return 'Success';
+}
+
+function getRenewalTable()
+{
+    session_start();
+    include("dbconnection.php");
+
+    $acadYearId = getDefaultAcadYearId();
+    $semId      = getDefaultSemesterId();
+    $userid     = $_SESSION['id'];
+
+    $reqData    = getRequirementsTable('renewal');
+    $data       = [];
+    $totalData  = 0;
+    $counter    = 1;
+
+    $sql = "SELECT * FROM renewal_file WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}'ORDER BY id ASC";
+    $query = $conn->query($sql) or die("Error URQ008: " . $conn->error);
+
+    // Generate if no Table Entries Found
+    if ($query->num_rows ==  0) {
+        $sql = "INSERT INTO `renewal_file`
+                        (`id`, `account_id`, `ay_id`, `sem_id`, `requirement`, `file`, `status`, `remarks`, `upload_date`, `modified_date`, `checked_date`) 
+                VALUES  ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','1','',0, '', '', '', ''),
+                        ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','3','',0, '', '', '', '')";
+        $query = $conn->query($sql) or die("Error URQ009: " . $conn->error);
+
+        $sql = "SELECT * FROM renewal_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
+        $query = $conn->query($sql) or die("Error URQ010: " . $conn->error);
+    }
+
+    while ($row = $query->fetch_assoc()) {
+        extract($row);
+
+        if ($status == 0 || $status == 3) {
+            $button =  getUploadButton($row, 'renewal');
+        }elseif ($status == 4 ) {
+            $button =   '<div class="btn-group-vertical d-flex">
+                            <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                        </div>';
+        }else{
+            $button =   '<div class="btn-group-vertical d-flex">
+                            <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
+                            <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title">School ID</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <embed id="previewSchoolId" src="uploads/application/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
+                            <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                        </div>';
+        }
+
+        if ($status == 0) {
+            $statusText = 'Not Submitted';
+        } elseif ($status == 1) {
+            $statusText = 'Submitted';
+        } elseif ($status == 2) {
+            $statusText = 'Approved';
+        } elseif ($status == 3) {
+            $statusText = 'Revision';
+        } elseif ($status == 4) {
+            $statusText = 'Not Applicable';
+        }
+
+        $data[] = [
+            $counter,
+            $reqData[$counter - 1][1],
+            $statusText,
+            $remarks,
+            $button,
+        ];
+
+        $counter++;
+    }
+
+    $json_data = array(
+        "draw"            => 1,   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+        "recordsTotal"    => intval($totalData),  // total number of records
+        "recordsFiltered" => intval($totalData), // total number of records after searching, if there is no searching then totalFiltered = totalData
+        "data"            => $data   // total data array
+    );
+
+    echo json_encode($json_data);  // send data as json format
+}
+
+function submitRenewal($target_dir, $schoolIdFile, $corFile)
+{
+    session_start();
+
+    $typeCount  = 1;
+    $ay         = getDefaultAcadYearId();
+    $sem        = getDefaultSemesterId();
+    $userid     = $_SESSION['id'];
+    $typeArray  = array("", "schoolid", "clearance", "cor", "grades", "cob", "cgmc", "idpic", "map", "brgyclearance", "parvoteid", "appvoteid", "itr", "indigency");
+
+
+    if ($schoolIdFile <> '0') {
+        if(is_array($schoolIdFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $schoolIdFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 1, 1, 'renewal_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4, 'renewal_file');
+    }
+
+    $typeCount += 2;
+
+    if ($corFile <> '0') {
+        if(is_array($corFile)){
+            $type       = $typeArray[$typeCount];
+            $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
+            $value1      = uploadFile($target_dir, $corFile, $file_name);
+
+            if ($value1 == 'Success') {
+                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'renewal_file');
+            } else {
+                return ($value1);
+            }
+        }
+    }else{
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'renewal_file');
     }
     
     

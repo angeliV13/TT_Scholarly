@@ -30,6 +30,36 @@ $(document).ready(function () {
       deferRender: false,
       stateSave: false,
   });
+  let renewalBeneTable = $("#renewalBeneTable").DataTable({
+    lengthChange: false,
+    searching: false,
+    ordering: false,
+    serverSide: true,
+    processing: true,
+    ajax: {
+      url: "controller/uploadRequirements.php",
+      type: "POST",
+      data: {
+        action: 1,
+        getTable: 3,
+      },
+      // success: function (row, data, index) {
+      //   console.log(row);
+      //   console.log(data);
+      //   console.log(index);
+      // },
+      error: function (data) {
+        console.log(data);
+      },
+    },
+    createdRow: function (row, data, index) {},
+    columnDefs: [],
+    bInfo: false,
+    paging: false,
+    fixedColumns: false,
+    deferRender: false,
+    stateSave: false,
+  });
   let applicationTable = $("#applicationTable").DataTable({
     lengthChange: false,
     searching: false,
@@ -59,7 +89,7 @@ $(document).ready(function () {
     fixedColumns: false,
     deferRender: false,
     stateSave: false,
-});
+  });
 });
 
 // School ID
@@ -309,8 +339,78 @@ $("#submitApplicationFile").submit(function (e) {
   form_data.append('indigencyFile'    , indigencyFile);
 
   Swal.fire({
-    title: "Submit Assessment?",
+    title: "Submit Application?",
     text: "Are you sure you want to submit your application requirements? This cannot be undone",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Submit",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/uploadRequirements.php",
+        processData: false,
+        contentType: false,
+        data: form_data,
+
+        success: function (data) {
+          if (data == "Success") {
+            let timerInterval;
+
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: "Upload Success",
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              if (result.dismiss) {
+                location.reload();
+              }
+            });
+            
+          } else {
+            console.log(data);
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+
+  return false;
+});
+
+//  Saving
+$("#submitRenewal").submit(function (e) {
+  e.preventDefault();
+
+  let schoolIdCheck       = ($("#btn_na_1").is(":checked") == true ? 1 : 0);
+  let corCheck            = ($("#btn_na_3").is(":checked") == true ? 1 : 0);
+ 
+  let schoolIdFile        = (schoolIdCheck      == 1) ? '0'  : ((document.getElementById("fileUpload1")   == null) ? '1' : (((document.getElementById("fileUpload1"))== undefined)  ? '2' : document.getElementById("fileUpload1").files[0]));
+  let corFile             = (corCheck           == 1) ? '0'  : ((document.getElementById("fileUpload3")   == null) ? '1' : (((document.getElementById("fileUpload3"))== undefined)  ? '2' : document.getElementById("fileUpload3").files[0]));
+
+  let form_data = new FormData(); 
+
+  form_data.append('action', 4);     
+  form_data.append('schoolIdFile'     , schoolIdFile);       
+  form_data.append('corFile'          , corFile);
+  
+
+  Swal.fire({
+    title: "Submit Renewal?",
+    text: "Are you sure you want to submit your renewal requirements? This cannot be undone",
     icon: "question",
     showCancelButton: true,
     confirmButtonText: "Submit",
