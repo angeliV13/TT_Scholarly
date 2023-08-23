@@ -1,7 +1,8 @@
 <?php
 
-function getActionButton($row)
+function getInformationButton($row, $file)
 {
+    include('dbconnection.php');
     extract($row);
 
     $personalInfo = '<!--PERSONAL INFORMATION-->
@@ -1438,7 +1439,7 @@ function getActionButton($row)
 
     
     $profile = '<!--Profile -->
-                <div id="profile' . $id . '" class="row">
+                <div id="profile' . $account_id . '" class="row">
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
@@ -1562,16 +1563,16 @@ function getActionButton($row)
                                         </div>
                                         <div class="my-2 p-4 text-black" style="background-color: #ffff; height:10px;">
                                             <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
-                                                <li class="nav-item flex-fill" role="presentation">
+                                                <li class="nav-item flex-fill text-danger" role="presentation">
                                                     <button class="nav-link w-100 active" id="personal-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
                                                 </li>
-                                                <li class="nav-item flex-fill" role="presentation">
+                                                <li class="nav-item flex-fill text-danger" role="presentation">
                                                     <button class="nav-link w-100" id="educational-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-educational-background" type="button" role="tab" aria-controls="educational-background" aria-selected="false">Educational Background</button>
                                                 </li>
-                                                <li class="nav-item flex-fill" role="presentation">
+                                                <li class="nav-item flex-fill text-danger" role="presentation">
                                                     <button class="nav-link w-100" id="family-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-family-background" type="button" role="tab" aria-controls="family-background" aria-selected="false">Family Background</button>
                                                 </li>
-                                                <li class="nav-item flex-fill" role="presentation">
+                                                <li class="nav-item flex-fill text-danger" role="presentation">
                                                     <button class="nav-link w-100" id="additional-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-additional-information" type="button" role="tab" aria-controls="additional-information" aria-selected="false">Additional Information</button>
                                                 </li>
                                             </ul>
@@ -1660,7 +1661,7 @@ function getActionButton($row)
                 </div>';
 
     $requirements = '<!-- Requirements -->
-                    <div id="requirements' . $id . '" class="row d-none">
+                    <div id="requirements' . $account_id . '" class="row d-none">
                         <div class="col-lg-3">
                             <div class="card">
                                 <div class="card-body">
@@ -1670,17 +1671,16 @@ function getActionButton($row)
                                     <div class="max-width-100">
                                         <!-- Set a max width for the container -->
                                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab'.$id.'" role="tablist" aria-orientation="vertical">
-                                            <button class="nav-link flex-fill" id="v-pills-cor-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-cor" type="button" role="tab" aria-controls="v-pills-cor" aria-selected="true">Certificate of Registration</button>
-                                            <button class="nav-link flex-fill" id="v-pills-cob-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cob" type="button" role="tab" aria-controls="v-pills-cob" aria-selected="true">Certificate of Birth</button>
-                                            <button class="nav-link flex-fill" id="v-pills-cgmc-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cgmc" type="button" role="tab" aria-controls="v-pills-cgmc" aria-selected="false">Certificate of Good Moral Character</button>
-                                            <button class="nav-link flex-fill" id="v-pills-grades-tab" data-bs-toggle="pill" data-bs-target="#v-pills-grades" type="button" role="tab" aria-controls="v-pills-grades" aria-selected="false">Grade Report</button>
-                                            <button class="nav-link flex-fill" id="v-pills-idpic-tab" data-bs-toggle="pill" data-bs-target="#v-pills-idpic" type="button" role="tab" aria-controls="v-pills-idpic" aria-selected="false">ID Photo (2x2 size)</button>
-                                            <button class="nav-link flex-fill" id="v-pills-map-tab" data-bs-toggle="pill" data-bs-target="#v-pills-map" type="button" role="tab" aria-controls="v-pills-map" aria-selected="false">Vicinity Map</button>
-                                            <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance" type="button" role="tab" aria-controls="v-pills-brgyclearance" aria-selected="false">Barangay Clearance</button>
-                                            <button class="nav-link flex-fill" id="v-pills-parvoteid-tab" data-bs-toggle="pill" data-bs-target="#v-pills-parvoteid" type="button" role="tab" aria-controls="v-pills-parvoteid" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
-                                            <button class="nav-link flex-fill" id="v-pills-appvoteid-tab" data-bs-toggle="pill" data-bs-target="#v-pills-appvoteid" type="button" role="tab" aria-controls="v-pills-appvoteid" aria-selected="false">Voter’s Certificate of the Applicant</button>
-                                            <button class="nav-link flex-fill" id="v-pills-itr-tab" data-bs-toggle="pill" data-bs-target="#v-pills-itr" type="button" role="tab" aria-controls="v-pills-itr" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation (Parents)</button>
-                                            <button class="nav-link flex-fill" id="v-pills-indigency-tab" data-bs-toggle="pill" data-bs-target="#v-pills-indigency" type="button" role="tab" aria-controls="v-pills-indigency" aria-selected="false">Certificate of Indigency</button>
+                                            <button class="nav-link active flex-fill" id="v-pills-cor-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-cor'.$id.'" type="button" role="tab" aria-controls="v-pills-cor'.$id.'" aria-selected="true">Certificate of Registration</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cob-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-cob'.$id.'" type="button" role="tab" aria-controls="v-pills-cob'.$id.'" aria-selected="true">Certificate of Birth</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cgmc-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-cgmc'.$id.'" type="button" role="tab" aria-controls="v-pills-cgmc'.$id.'" aria-selected="false">Certificate of Good Moral Character</button>
+                                            <button class="nav-link flex-fill" id="v-pills-grades-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-grades'.$id.'" type="button" role="tab" aria-controls="v-pills-grades'.$id.'" aria-selected="false">Grade Report</button>
+                                            <button class="nav-link flex-fill" id="v-pills-idpic-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-idpic'.$id.'" type="button" role="tab" aria-controls="v-pills-idpic'.$id.'" aria-selected="false">ID Photo (2x2 size)</button>
+                                            <button class="nav-link flex-fill" id="v-pills-map-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-map'.$id.'" type="button" role="tab" aria-controls="v-pills-map'.$id.'" aria-selected="false">Vicinity Map</button>
+                                            <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance'.$id.'" type="button" role="tab" aria-controls="v-pills-brgyclearance'.$id.'" aria-selected="false">Barangay Clearance</button>
+                                            <button class="nav-link flex-fill" id="v-pills-parvoteid-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-parvoteid'.$id.'" type="button" role="tab" aria-controls="v-pills-parvoteid'.$id.'" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
+                                            <button class="nav-link flex-fill" id="v-pills-appvoteid-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-appvoteid'.$id.'" type="button" role="tab" aria-controls="v-pills-appvoteid'.$id.'" aria-selected="false">Voter’s Certificate of the Applicant</button>
+                                            <button class="nav-link flex-fill" id="v-pills-itr-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-itr'.$id.'" type="button" role="tab" aria-controls="v-pills-itr'.$id.'" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation (Parents)</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1692,22 +1692,22 @@ function getActionButton($row)
                                     <div class="card-body">
                                         <div class="tab-content" id="v-pills-tabContent">
                                             <!-- CERT OF REGISTRATION -->
-                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor" role="tabpanel" aria-labelledby="v-pills-cor-tab" style="height: 00%; width: 100%">
+                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor'.$id.'" role="tabpanel" aria-labelledby="v-pills-cor-tab'.$id.'" style="height: 00%; width: 100%">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6 class="card-title">Certificate of Registration</h6>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="corApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="corApproveApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="corRadio'.$id.'" id="corApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="corApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="corReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="corRadio'.$id.'" id="corReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="corReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="corModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="corRadio'.$id.'" id="corModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1715,7 +1715,8 @@ function getActionButton($row)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-
+                                                                <embed id="viewcor'. $account_id .'" frameborder="0" width="100%" height="400px"
+                                                               '. (isset($file[0]['file'])? 'src="uploads/application/'. $file[0]['file']. '.pdf"' : '').'>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1723,22 +1724,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- BIRTH CERT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-cob" role="tabpanel" aria-labelledby="v-pills-cob-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-cob'.$id.'" role="tabpanel" aria-labelledby="v-pills-cob-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">CERTIFICATE OF BIRTH</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cobApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="cobApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="cobRadio'.$id.'" id="cobApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="cobApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cobReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="cobReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="cobRadio'.$id.'" id="cobReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="cobReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cobModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="cobModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="cobRadio'.$id.'" id="cobModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="cobModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1754,22 +1755,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- CERT OF GOOD MORAL -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-cgmc" role="tabpanel" aria-labelledby="v-pills-cgmc-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-cgmc'.$id.'" role="tabpanel" aria-labelledby="v-pills-cgmc-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">CERTIFICATE OF GOOD MORAL CHARACTER</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="goodMoralApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio'.$id.'" id="cgmcApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="cgmcApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="goodMoralReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio'.$id.'" id="cgmcReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="cgmcReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="goodMoralModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio'.$id.'" id="cgmcModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="cgmcModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1785,22 +1786,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- GRADE REPORT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-grades" role="tabpanel" aria-labelledby="v-pills-grades-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-grades'.$id.'" role="tabpanel" aria-labelledby="v-pills-grades-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">GRADE REPORT</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="gradesRadio'.$id.'" id="gradesApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="gradesApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="gradeReportReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="gradesRadio'.$id.'" id="gradesReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="gradesReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="gradeReportModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="gradesRadio'.$id.'" id="gradesModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="gradesModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1816,22 +1817,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- ID PHOTO 2X2 -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-idpic" role="tabpanel" aria-labelledby="v-pills-idpic-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-idpic'.$id.'" role="tabpanel" aria-labelledby="v-pills-idpic-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">ID Photo</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoApproveRadioDefault1">
+                                                            <input class="form-check-input" type="radio" name="idpicRadio'.$id.'" id="idpicApprove'.$id.'">
                                                             <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="gradeReportReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="idpicRadio'.$id.'" id="idpicReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="idpicReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="2x2PhotoModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="idpicRadio'.$id.'" id="idpicModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="idpicModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1847,22 +1848,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- VICINITY MAP -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-map" role="tabpanel" aria-labelledby="v-pills-map-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-map'.$id.'" role="tabpanel" aria-labelledby="v-pills-map-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">VICINITY MAP</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="vicinityMapApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="mapRadio'.$id.'" id="mapApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="mapApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="vicinityMapReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="mapRadio'.$id.'" id="mapReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="mapReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="vicinityMapModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="mapRadio'.$id.'" id="mapModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="mapModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1878,22 +1879,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- BARANGAY CLEARANCE -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-brgyclearance" role="tabpanel" aria-labelledby="v-pills-parvoteid-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-brgyclearance'.$id.'" role="tabpanel" aria-labelledby="v-pills-brgyclearance-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">BARANGAY CLEARANCE</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="bgryClearanceApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio'.$id.'" id="bgryClearanceApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="bgryClearanceApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="bgryClearanceReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio'.$id.'" id="bgryClearanceReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="bgryClearanceReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="bgryClearanceModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio'.$id.'" id="bgryClearanceModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="bgryClearanceModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1909,22 +1910,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- PARENT\'S VOTERS CERT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-parvoteid" role="tabpanel" aria-labelledby="v-pills-parvoteid-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-parvoteid'.$id.'" role="tabpanel" aria-labelledby="v-pills-parvoteid-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">PARENTS VOTER\'S ID / CERTIFICATION</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="parvoteidApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="parvoteidApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio'.$id.'" id="parvoteidApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="parvoteidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="parvoteidReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="parvoteideviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio'.$id.'" id="parvoteidReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="parvoteideview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="parvoteidModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="parvoteidModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio'.$id.'" id="parvoteidModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="parvoteidModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1940,22 +1941,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- APPLICANTS VOTERS CERT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-appvoteid" role="tabpanel" aria-labelledby="v-pills-appvoteid-tab">
+                                            <div class="tab-pane fade pt-3" id="v-pills-appvoteid'.$id.'" role="tabpanel" aria-labelledby="v-pills-appvoteid-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">APPLICANT VOTER\'S ID / CERTIFICATION</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="appvoteidApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="appvoteidApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio'.$id.'" id="appvoteidApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="appvoteidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="appvoteidReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="appvoteidReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio'.$id.'" id="appvoteidReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="appvoteidReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertpaModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="appvoteidModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio'.$id.'" id="votecertpaModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="appvoteidModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1971,22 +1972,22 @@ function getActionButton($row)
                                             </div>
 
                                             <!-- INCOME TAX CERT -->
-                                            <div class="tab-pane fade pt-3  " id="v-pills-itr" role="tabpanel" aria-labelledby="v-pills-itr-tab">
+                                            <div class="tab-pane fade pt-3  " id="v-pills-itr'.$id.'" role="tabpanel" aria-labelledby="v-pills-itr-tab'.$id.'">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">INCOME TAX RETURN OR CERTIFICATE OF <br>EMPLOYMENT AND COMPENSATION</br></h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="itrApproveRadioDefault1">
-                                                            <label class="mx-2 form-check-label" for="itrApproveCheckBox"> Approve </label>
+                                                            <input class="form-check-input" type="radio" name="itrRadio'.$id.'" id="itrApprove'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="itrApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="itrReviewDefault2">
-                                                            <label class="mx-2 form-check-label" for="itrReviewCheckBox"> For Review </label>
+                                                            <input class="form-check-input" type="radio" name="itrRadio'.$id.'" id="itrReview'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="itrReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="itrModiDefault3">
-                                                            <label class="mx-2 form-check-label" for="itrModiCheckBox"> For Modification </label>
+                                                            <input class="form-check-input" type="radio" name="itrRadio'.$id.'" id="itrModify'.$id.'">
+                                                            <label class="mx-2 form-check-label" for="itrModify"> For Modification </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2011,8 +2012,6 @@ function getActionButton($row)
                                                             </div>
                                                             <!-- Quill Editor Full -->
                                                             <div class="quill-editor-full" style="height: 300px">
-                                                                <p>Hello World!</p>
-                                                                <p>This is Quill <strong>full</strong> editor</p>
                                                             </div>
                                                             <!-- End Quill Editor Full -->
                                                             <div class="d-grid gap-2 pt-3 d-flex justify-content-end">
@@ -2032,26 +2031,26 @@ function getActionButton($row)
                     
     $button = '<div class="btn-group-vertical d-flex justify-content-between align-items-center">
                     <!--CHECK PROFILE BUTTON-->
-                    <button id="viewInfo" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal">Check Information</button>
-                    <div class="modal fade" id="viewInfoModal" tabindex="-1">
+                    <button id="viewInfo' . $account_id . '" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '">Check Information</button>
+                    <div class="modal fade" id="viewInfoModal' . $account_id . '" tabindex="-1">
                         <div class="modal-dialog modal-dialog-scrollable modal-fullscreen modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header gap-3">
-                                    <form class="btn-group-toggle" data-toggle="buttons" onchange="infoRadio(' . $id . ')">
-                                        <input type="radio" class="btn-check" name="info' . $id . '" id="infoProfile' . $id . '" value="1" autocomplete="off" checked>
-                                        <label class="btn btn-outline-danger" for="infoProfile' . $id . '">Profile</label>
+                                    <form class="btn-group-toggle" data-toggle="buttons" onchange="infoRadio(' . $account_id . ')">
+                                        <input type="radio" class="btn-check" name="info' . $account_id . '" id="infoProfile' . $account_id . '" value="1" autocomplete="off" checked>
+                                        <label class="btn btn-outline-danger" for="infoProfile' . $account_id . '">Profile</label>
 
-                                        <input type="radio" class="btn-check" name="info' . $id . '" id="infoRequirements' . $id . '" value="2" autocomplete="off">
-                                        <label class="btn btn-outline-danger" for="infoRequirements' . $id . '">Requirements</label>
+                                        <input type="radio" class="btn-check" name="info' . $account_id . '" id="infoRequirements' . $account_id . '" value="2" autocomplete="off">
+                                        <label class="btn btn-outline-danger" for="infoRequirements' . $account_id . '">Requirements</label>
                                     </form>
                                     <div class="d-flex justify-content-center align-items-center gap-3">
                                         <div class="">
-                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $id . '" id="qualiExamRadio' . $id . '">
-                                            <label class="form-check-label" for="qualiExamRadio' . $id . '">For Qualification Exam</label>
+                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $account_id . '" id="qualiExamRadio' . $account_id . '">
+                                            <label class="form-check-label" for="qualiExamRadio' . $account_id . '">For Qualification Exam</label>
                                         </div>
                                         <div class="">
-                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $id . '" id="interviewRadio' . $id . '">
-                                            <label class="form-check-label" for="interviewRadio' . $id . '">For Interview</label>
+                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $account_id . '" id="interviewRadio' . $account_id . '">
+                                            <label class="form-check-label" for="interviewRadio' . $account_id . '">For Interview</label>
                                         </div>
                                     </div>
                                     <div>

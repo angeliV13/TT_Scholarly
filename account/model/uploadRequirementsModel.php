@@ -460,6 +460,20 @@ function updateRequirement($ay, $sem, $userid, $file, $requirement, $status, $ta
     $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
 }
 
+function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ORDER BY id ASC";
+    $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
+
+    if($fetch == 0){
+        return $query;
+    }elseif($fetch == 1){
+        return $query->fetch_all(MYSQLI_ASSOC);
+    }
+    
+}
+
 function getApplicationTable()
 {
     session_start();
@@ -474,11 +488,10 @@ function getApplicationTable()
     $totalData  = 0;
     $counter    = 1;
 
-    $sql = "SELECT * FROM applicant_file WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}'ORDER BY id ASC";
-    $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
+    $entries    = getFileEntries($acadYearId, $semId, $userid, 'applicant_file');
 
     // Generate if no Table Entries Found
-    if ($query->num_rows ==  0) {
+    if ($entries->num_rows ==  0) {
         $sql = "INSERT INTO `applicant_file`
                         (`id`, `account_id`, `ay_id`, `sem_id`, `requirement`, `file`, `status`, `remarks`, `upload_date`, `modified_date`, `checked_date`) 
                 VALUES  ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','3','',0, '', '', '', ''),
@@ -493,11 +506,10 @@ function getApplicationTable()
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','12','',0, '', '', '', '')";
         $query = $conn->query($sql) or die("Error URQ006: " . $conn->error);
 
-        $sql = "SELECT * FROM applicant_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
-        $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
+        $entries    = getFileEntries($acadYearId, $semId, $userid, 'applicant_file');
     }
 
-    while ($row = $query->fetch_assoc()) {
+    while ($row = $entries->fetch_assoc()) {
         extract($row);
 
         if ($status == 0 || $status == 3) {
