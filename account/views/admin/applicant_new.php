@@ -106,7 +106,6 @@
                                             <div class="modal-dialog modal-dialog-scrollable modal-fullscreen modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header gap-3">
-                                                        <!-- <h5 class="modal-title">PROFILE</h5> -->
                                                         <div class="btn-group-toggle" data-toggle="buttons">
                                                             <input type="radio" class="btn-check" name="info" id="infoProfile" value="1" autocomplete="off" checked>
                                                             <label class="btn btn-outline-danger" for="infoProfile">Profile</label>
