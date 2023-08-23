@@ -101,37 +101,37 @@
                                 <td>
                                     <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                                         <!--CHECK PROFILE BUTTON-->
-                                        <button id="viewProfile" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewProfileModal">Check Profile</button>
-                                        <div class="modal fade" id="viewProfileModal" tabindex="-1">
+                                        <button id="viewInfo" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal">Check Information</button>
+                                        <div class="modal fade" id="viewInfoModal" tabindex="-1">
                                             <div class="modal-dialog modal-dialog-scrollable modal-fullscreen modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header gap-3">
                                                         <!-- <h5 class="modal-title">PROFILE</h5> -->
-                                                        <div class="d-flex justify-content-between align-items-center gap-3">
-                                                            <div class="d-flex align-items-start">
-                                                                <div class="btn-group-toggle" data-toggle="buttons">
-                                                                    <input type="radio" class="btn-check" name="semOptions" id="sem1" value="1" autocomplete="off">
-                                                                    <label class="btn btn-outline-danger" for="sem1">1st Semester</label>
+                                                        <div class="btn-group-toggle" data-toggle="buttons">
+                                                            <input type="radio" class="btn-check" name="info" id="infoProfile" value="1" autocomplete="off" checked>
+                                                            <label class="btn btn-outline-danger" for="infoProfile">Profile</label>
 
-                                                                    <input type="radio" class="btn-check" name="semOptions" id="sem2" value="2" autocomplete="off">
-                                                                    <label class="btn btn-outline-danger" for="sem2">2nd Semester</label>
-                                                                </div>
+                                                            <input type="radio" class="btn-check" name="info" id="infoRequirements" value="2" autocomplete="off">
+                                                            <label class="btn btn-outline-danger" for="infoRequirements">Requirements</label>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center align-items-center gap-3">
+                                                            <div class="">
+                                                                <input class="form-check-input me-2" type="radio" name="decisionRadio" id="qualiExamRadio">
+                                                                <label class="form-check-label" for="qualiExamRadio">For Qualification Exam</label>
                                                             </div>
-                                                            <div class="d-flex align-items-end">
-                                                                <input class="form-check-input me-2" type="radio" name="flexRadioDefault" id="forQualiExamDefault1">
-                                                                <label class="form-check-label" for="forQualiExamCheckBox">For Qualification Exam</label>
+                                                            <div class="">
+                                                                <input class="form-check-input me-2" type="radio" name="decisionRadio" id="interviewRadio">
+                                                                <label class="form-check-label" for="interviewRadio">For Interview</label>
                                                             </div>
-                                                            <div class="d-flex align-items-center">
-                                                                <input class="form-check-input me-2" type="radio" name="flexRadioDefault" id="forInterviewDefault2">
-                                                                <label class="form-check-label" for="forInterviewCheckBox">For Interview</label>
-                                                            </div>
+                                                        </div>
+                                                        <div>
                                                             <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <!--SUB POINTS FOR OTHER DETAILS -->
-                                                        <div class="row">
+                                                        <!--Profile -->
+                                                        <div id="profile" class="row">
                                                             <div class="col-lg-4">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -1803,7 +1803,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <!-- Requirements -->
+                                                        <div id="requirements" class="row d-none">
                                                             <div class="col-lg-3">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -2171,397 +2172,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <!-- Action Buttons -->
                                                         <div class="modal-footer  d-grid gap-2 d-flex justify-content-end" style="height: 55px;">
                                                             <button type="button" class="btn btn-warning btn-sm">Submit</button>
                                                             <button type="button" class="btn btn-danger btn-sm">Cancel Submission</button>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--VIEW REQUIREMENTS BUTTON-->
-                                        <button id="viewRequirements" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal">View Requirements</button>
-                                        <div class="modal fade" id="viewRequirementsModal" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title ">APPLICANT'S REQUIREMENTS</h5>
-                                                        <div class="d-grid gap-2 d-flex justify-content-end">
-                                                            <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Vertical Pills Tabs -->
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <div class="d-flex justify-content-between align-items-center">
-                                                                            <h5 class="card-title">GENERAL REQUIREMENTS</h5>
-                                                                        </div>
-                                                                        <div class="max-width-100">
-                                                                            <!-- Set a max width for the container -->
-                                                                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                                                <button class="nav-link active flex-fill" id="v-pills-cor-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cor" type="button" role="tab" aria-controls="v-pills-cor" aria-selected="true">Certificate of Registration</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-birthCert-tab" data-bs-toggle="pill" data-bs-target="#v-pills-birthCert" type="button" role="tab" aria-controls="v-pills-birthCert" aria-selected="true">Certificate of Birth</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-goodmoral-tab" data-bs-toggle="pill" data-bs-target="#v-pills-goodmoral" type="button" role="tab" aria-controls="v-pills-goodmoral" aria-selected="false">Certificate of Good Moral Character</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-gradereport-tab" data-bs-toggle="pill" data-bs-target="#v-pills-gradereport" type="button" role="tab" aria-controls="v-pills-gradereport" aria-selected="false">Grade Report</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-2x2pic-tab" data-bs-toggle="pill" data-bs-target="#v-pills-2x2pic" type="button" role="tab" aria-controls="v-pills-2x2pic" aria-selected="false">ID Photo (2x2 size)</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-vicinitymap-tab" data-bs-toggle="pill" data-bs-target="#v-pills-vicinitymap" type="button" role="tab" aria-controls="v-pills-vicinitymap" aria-selected="false">Vicinity Map</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance" type="button" role="tab" aria-controls="v-pills-brgyclearance" aria-selected="false">Barangay Clearance</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-votecertpar-tab" data-bs-toggle="pill" data-bs-target="#v-pills-votecertpar" type="button" role="tab" aria-controls="v-pills-votecertpar" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-votecertapp-tab" data-bs-toggle="pill" data-bs-target="#v-pills-votecertapp" type="button" role="tab" aria-controls="v-pills-votecertapp" aria-selected="false">Voter’s Certificate of the Applicant</button>
-                                                                                <button class="nav-link flex-fill" id="v-pills-certtax-tab" data-bs-toggle="pill" data-bs-target="#v-pills-certtax" type="button" role="tab" aria-controls="v-pills-certtax" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation (Parents)</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-9">
-                                                                <div class="row d-flex justify-content-center align-items-center h-500" style="width: 100%">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <div class="tab-content" id="v-pills-tabContent">
-                                                                                <!-- CERT OF REGISTRATION -->
-                                                                                <div class="tab-pane fade show active pt-3" id="v-pills-cor" role="tabpanel" aria-labelledby="v-pills-cor-tab" style="height: 00%; width: 100%">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h6 class="card-title">Certificate of Registration</h6>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="corApproveApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="corReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="corModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="corModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- BIRTH CERT -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-birthCert" role="tabpanel" aria-labelledby="v-pills-birthCert-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">CERTIFICATE OF BIRTH</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthCertApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="birthCertApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthCertReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="birthCertReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="birthCertModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="birthCertModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- CERT OF GOOD MORAL -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-goodmoral" role="tabpanel" aria-labelledby="v-pills-goodmoral-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">CERTIFICATE OF GOOD MORAL CHARACTER</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="goodMoralApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="goodMoralReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="goodMoralModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="goodMoralModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- GRADE REPORT -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-gradereport" role="tabpanel" aria-labelledby="v-pills-gradereport-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">GRADE REPORT</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="gradeReportReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="gradeReportModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="gradeReportModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- ID PHOTO 2X2 -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-2x2pic" role="tabpanel" aria-labelledby="v-pills-2x2pic-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">ID Photo</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="gradeReportReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="2x2PhotoModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="2x2PhotoModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- VICINITY MAP -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-vicinitymap" role="tabpanel" aria-labelledby="v-pills-vicinitymap-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">VICINITY MAP</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="vicinityMapApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="vicinityMapReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="vicinityMapModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="vicinityMapModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- BARANGAY CLEARANCE -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-brgyclearance" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">BARANGAY CLEARANCE</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="bgryClearanceApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="bgryClearanceReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bgryClearanceModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="bgryClearanceModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- PARENT'S VOTERS CERT -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-votecertpar" role="tabpanel" aria-labelledby="v-pills-votecertpar-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">PARENTS VOTER'S ID / CERTIFICATION</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertparApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="votecertparApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertparReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="votecertpareviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertparModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="votecertparModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- APPLICANTS VOTERS CERT -->
-                                                                                <div class="tab-pane fade pt-3" id="v-pills-votecertapp" role="tabpanel" aria-labelledby="v-pills-votecertapp-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">APPLICANT VOTER'S ID / CERTIFICATION</h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertappApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="votecertappApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertappReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="votecertappReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="votecertpaModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="votecertappModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <!-- INCOME TAX CERT -->
-                                                                                <div class="tab-pane fade pt-3  " id="v-pills-certtax" role="tabpanel" aria-labelledby="v-pills-certtax-tab">
-                                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                                        <h5 class="card-title">INCOME TAX RETURN OR CERTIFICATE OF <br>EMPLOYMENT AND COMPENSATION</br></h5>
-                                                                                        <div class="d-flex align-items-center d-grid gap-3">
-                                                                                            <label class="form-check-label fw-bold">Remarks:</label>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="certtaxApproveRadioDefault1">
-                                                                                                <label class="mx-2 form-check-label" for="certtaxApproveCheckBox"> Approve </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="certtaxReviewDefault2">
-                                                                                                <label class="mx-2 form-check-label" for="certtaxReviewCheckBox"> For Review </label>
-                                                                                            </div>
-                                                                                            <div class="form-check form-radio">
-                                                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="certtaxModiDefault3">
-                                                                                                <label class="mx-2 form-check-label" for="certtaxModiCheckBox"> For Modification </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="card" style="height:100%">
-                                                                                                <div class="card-body">
-
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <!-- QUILLO DRAGGABLE -->
-                                                                                <div class="col-lg-5">
-                                                                                    <div id="mydiv">
-                                                                                        <div class="card">
-                                                                                            <div class="card-body">
-                                                                                                <div class="d-flex justify-content-between align-items-center">
-                                                                                                    <h5 class="card-title" id="mydivheader">Requirements Remarks</h5>
-                                                                                                    <button type="button" class="btn-close" data-bs-dismiss="mydivheader" aria-label="Close" id="dismissButton"></button>
-                                                                                                </div>
-                                                                                                <!-- Quill Editor Full -->
-                                                                                                <div class="quill-editor-full" style="height: 300px">
-                                                                                                    <p>Hello World!</p>
-                                                                                                    <p>This is Quill <strong>full</strong> editor</p>
-                                                                                                </div>
-                                                                                                <!-- End Quill Editor Full -->
-                                                                                                <div class="d-grid gap-2 pt-3 d-flex justify-content-end">
-                                                                                                    <button type="button" class="btn btn-warning btn-sm">Save Remarks</button>
-                                                                                                    <button type="button" class="btn btn-danger btn-sm">Edit Remarks</button>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- End Vertical Pills Tabs -->
                                                 </div>
                                             </div>
                                         </div>
