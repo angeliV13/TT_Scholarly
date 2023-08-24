@@ -5,6 +5,74 @@ function getInformationButton($row, $file)
     include('dbconnection.php');
     extract($row);
 
+    $personalInfo = getPersonalInfo($row);
+
+    $educationBG = getEducationBG($account_id);
+
+    $familyBG =  getFamilyBG($account_id);
+
+    $additionalBG = getAdditionalBG($row);
+    //
+    $profile = getProfile($row, $personalInfo, $educationBG, $familyBG, $additionalBG);
+    //
+    $requirements = getRequirements($row, $file);
+    // 
+    $button = '<div class="btn-group-vertical d-flex justify-content-between align-items-center">
+                    <!--CHECK PROFILE BUTTON-->
+                    <button id="viewInfo' . $account_id . '" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '">Check Information</button>
+                    <div class="modal fade" id="viewInfoModal' . $account_id . '" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-scrollable modal-fullscreen modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header gap-3">
+                                    <form class="btn-group-toggle" data-toggle="buttons" onchange="infoRadio(' . $account_id . ')">
+                                        <input type="radio" class="btn-check" name="info' . $account_id . '" id="infoProfile' . $account_id . '" value="1" autocomplete="off" checked>
+                                        <label class="btn btn-outline-danger" for="infoProfile' . $account_id . '">Profile</label>
+
+                                        <input type="radio" class="btn-check" name="info' . $account_id . '" id="infoRequirements' . $account_id . '" value="2" autocomplete="off">
+                                        <label class="btn btn-outline-danger" for="infoRequirements' . $account_id . '">Requirements</label>
+                                    </form>
+                                    <div class="d-flex justify-content-center align-items-center gap-3">
+                                        <div class="">
+                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $account_id . '" id="qualiExamRadio' . $account_id . '">
+                                            <label class="form-check-label" for="qualiExamRadio' . $account_id . '">For Qualification Exam</label>
+                                        </div>
+                                        <div class="">
+                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $account_id . '" id="interviewRadio' . $account_id . '">
+                                            <label class="form-check-label" for="interviewRadio' . $account_id . '">For Interview</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                    ' . $profile . '
+
+                                    ' . $requirements . '
+
+                                    <!-- Action Buttons -->
+                                    <div class="modal-footer  d-grid gap-2 d-flex justify-content-end" style="height: 55px;">
+                                        <button type="button" class="btn btn-warning btn-sm">Submit</button>
+                                        <button type="button" class="btn btn-danger btn-sm">Cancel Submission</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- REMOVE BUTTON -->
+                    <button id="removeApplicant" type="button" class="btn btn-danger">Removed Applicant</button>
+                </div>';
+
+    // 
+    return $button;
+}
+
+function getPersonalInfo($row)
+{
+    extract($row);
+
     $personalInfo = '<!--PERSONAL INFORMATION-->
                         <div class="tab-pane fade show active" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
                             <div class="d-flex justify-content-between align-items-center">
@@ -72,22 +140,22 @@ function getInformationButton($row, $file)
                                 </div>
                                 <div class="col-md-2 position-relative">
                                     <label for="inputZipCode" class="form-label">ZIP Code</label>
-                                    <input type="zipCode" class="form-control" id="inputZipCode" aria-describedby="inputZipCode" value="' . $zip_code . '" required>
+                                    <input disabled type="zipCode" class="form-control" id="inputZipCode" aria-describedby="inputZipCode" value="' . $zip_code . '" required>
                                 </div>
                                 <!-- CITIZENSHIP -->
                                 <div class="col-md-3 position-relative">
                                     <label for="inputCitizenship" class="form-label">Citizenship</label>
-                                    <input type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="' . $citizenship . '" required>
+                                    <input disabled type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="' . $citizenship . '" required>
                                 </div>
                                 <!-- RESIDENCY -->
                                 <div class="col-md-4 position-relative">
                                     <label for="inputResidency" class="form-label">Years of Residency in Santo Tomas</label>
-                                    <input type="residency" class="form-control" id="inputResidency" aria-describedby="inputResidency" value="' . $years_of_residency . '" required>
+                                    <input disabled type="residency" class="form-control" id="inputResidency" aria-describedby="inputResidency" value="' . $years_of_residency . '" required>
                                 </div>
                                 <!-- LANGUAGE -->
                                 <div class="col-md-3 position-relative">
                                     <label for="inputMotherTongue" class="form-label">Mother Tongue</label>
-                                    <input type="Language" class="form-control" id="inputMotherTongue" aria-describedby="inputMotherTongue" value="' . $language . '" required>
+                                    <input disabled type="Language" class="form-control" id="inputMotherTongue" aria-describedby="inputMotherTongue" value="' . $language . '" required>
                                 </div>
                                 <!-- START RELIGION -->
                                 <div class="col-md-4 position-relative">
@@ -96,7 +164,7 @@ function getInformationButton($row, $file)
                                 </div>
                                 <!-- SEX -->
 
-                                ------------------------------------------------------------------------------------------------------------------------------------
+                                
                                 <div class="col-md-4 position-relative">
                                     <label for="inputGender" class="form-label">Gender</label>
                                     <select class="form-select" id="inputGender" required>
@@ -131,7 +199,12 @@ function getInformationButton($row, $file)
                             </form>
                         </div>';
 
-    $education_bg = '<!--EDUCATIONAL BACKGROUND-->
+    return $personalInfo;
+}
+
+function getEducationBG($account_id)
+{
+    $educationBG = '<!--EDUCATIONAL BACKGROUND-->
                     <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
                         <!--GENERAL EDUC-->
                         <div class="d-flex justify-content-between align-items-center">
@@ -682,7 +755,12 @@ function getInformationButton($row, $file)
                         </form>
                     </div>';
 
-    $family_bg = '<!--FAMILY BACKGROUND-->
+    return $educationBG;
+}
+
+function getFamilyBG($account_id)
+{
+    $familyBG = '<!--FAMILY BACKGROUND-->
                 <div class="tab-pane fade" id="bordered-justified-family-background" role="tabpanel" aria-labelledby="family-background">
                     <!--FAMILY INFORMATION-->
                     <div class="d-flex justify-content-between align-items-center">
@@ -1367,77 +1445,13 @@ function getInformationButton($row, $file)
                     <!-- End Custom Styled Validation with Tooltips -->
                 </div>';
 
-    $additional_bg = '<!--ADDITIONAL BACKGROUND-->
-                    <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">
-                                Additional
-                                Information
-                            </h5>
-                        </div>
-                        <!-- Custom Styled Validation with Tooltips -->
-                        <form class="row g-4 needs-validation" novalidate>
-                            <!-- WORKING STUDENT -->
-                            <div class="col-md-4 position-relative">
-                                <label for="inputWorkingStudent" class="form-label">Are you a Working Student?</label>
-                                <select class="form-select" id="inputWorkingStudent" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <!---OFW PARENTS -->
-                            <div class="col-md-8 position-relative">
-                                <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
-                                <select class="form-select" id="inputOfwParents" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <!--OFW FAMILY MEMBERS -->
-                            <div class="col-md-6 position-relative">
-                                <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
-                                <select class="form-select" id="inputOfwMembers" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <!---PWD PARENTS -->
-                            <div class="col-md-6 position-relative">
-                                <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
-                                <select class="form-select" id="inputPwdParents" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <!---PWD FAMILY MEMBERS -->
-                            <div class="col-md-6 position-relative">
-                                <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
-                                <select class="form-select" id="inputOfwMembers" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <!---PARENTS STATUS -->
-                            <div class="col-md-6 position-relative">
-                                <label for="inputParentStatus" class="form-label">What is your Parents Status?</label>
-                                <select class="form-select" id="inputParentStatus" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <!---STUDENT PWD -->
-                            <div class="col-md-6 position-relative">
-                                <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
-                                <select class="form-select" id="inputStudentPwd" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </form>
-                        <!-- End Custom Styled Validation with Tooltips -->
-                    </div>';
+    return $familyBG;
+}
 
-    
+function getProfile($row, $personalInfo, $educationBG, $familyBG, $additionalBG)
+{
+    extract($row);
+
     $profile = '<!--Profile -->
                 <div id="profile' . $account_id . '" class="row">
                     <div class="col-lg-4">
@@ -1610,15 +1624,15 @@ function getInformationButton($row, $file)
                                                             
                                                             <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
-                                                            ' . $education_bg . '
+                                                            ' . $educationBG . '
 
                                                             <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
-                                                            ' . $family_bg . '
+                                                            ' . $familyBG . '
 
                                                             <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
-                                                            ' . $additional_bg . '
+                                                            ' . $additionalBG . '
 
                                                             <!-- PAGINATION -->
                                                             <div class="pt-3 d-grid gap-2 d-flex justify-content-end align-items-center" src="pagination.js">
@@ -1660,6 +1674,14 @@ function getInformationButton($row, $file)
                     </div>
                 </div>';
 
+    
+    return $profile;
+}
+
+function getRequirements($row, $file)
+{
+    extract($row);
+
     $requirements = '<!-- Requirements -->
                     <div id="requirements' . $account_id . '" class="row d-none">
                         <div class="col-lg-3">
@@ -1670,17 +1692,17 @@ function getInformationButton($row, $file)
                                     </div>
                                     <div class="max-width-100">
                                         <!-- Set a max width for the container -->
-                                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab'.$id.'" role="tablist" aria-orientation="vertical">
-                                            <button class="nav-link active flex-fill" id="v-pills-cor-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-cor'.$id.'" type="button" role="tab" aria-controls="v-pills-cor'.$id.'" aria-selected="true">Certificate of Registration</button>
-                                            <button class="nav-link flex-fill" id="v-pills-cob-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-cob'.$id.'" type="button" role="tab" aria-controls="v-pills-cob'.$id.'" aria-selected="true">Certificate of Birth</button>
-                                            <button class="nav-link flex-fill" id="v-pills-cgmc-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-cgmc'.$id.'" type="button" role="tab" aria-controls="v-pills-cgmc'.$id.'" aria-selected="false">Certificate of Good Moral Character</button>
-                                            <button class="nav-link flex-fill" id="v-pills-grades-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-grades'.$id.'" type="button" role="tab" aria-controls="v-pills-grades'.$id.'" aria-selected="false">Grade Report</button>
-                                            <button class="nav-link flex-fill" id="v-pills-idpic-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-idpic'.$id.'" type="button" role="tab" aria-controls="v-pills-idpic'.$id.'" aria-selected="false">ID Photo (2x2 size)</button>
-                                            <button class="nav-link flex-fill" id="v-pills-map-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-map'.$id.'" type="button" role="tab" aria-controls="v-pills-map'.$id.'" aria-selected="false">Vicinity Map</button>
-                                            <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance'.$id.'" type="button" role="tab" aria-controls="v-pills-brgyclearance'.$id.'" aria-selected="false">Barangay Clearance</button>
-                                            <button class="nav-link flex-fill" id="v-pills-parvoteid-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-parvoteid'.$id.'" type="button" role="tab" aria-controls="v-pills-parvoteid'.$id.'" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
-                                            <button class="nav-link flex-fill" id="v-pills-appvoteid-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-appvoteid'.$id.'" type="button" role="tab" aria-controls="v-pills-appvoteid'.$id.'" aria-selected="false">Voter’s Certificate of the Applicant</button>
-                                            <button class="nav-link flex-fill" id="v-pills-itr-tab'.$id.'" data-bs-toggle="pill" data-bs-target="#v-pills-itr'.$id.'" type="button" role="tab" aria-controls="v-pills-itr'.$id.'" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation (Parents)</button>
+                                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab' . $id . '" role="tablist" aria-orientation="vertical">
+                                            <button class="nav-link active flex-fill" id="v-pills-cor-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cor' . $id . '" type="button" role="tab" aria-controls="v-pills-cor' . $id . '" aria-selected="true">Certificate of Registration</button>
+                                            <button class="nav-link flex-fill" id="v-pills-grades-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-grades' . $id . '" type="button" role="tab" aria-controls="v-pills-grades' . $id . '" aria-selected="false">Grade Report</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cob-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cob' . $id . '" type="button" role="tab" aria-controls="v-pills-cob' . $id . '" aria-selected="true">Certificate of Birth</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cgmc-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cgmc' . $id . '" type="button" role="tab" aria-controls="v-pills-cgmc' . $id . '" aria-selected="false">Certificate of Good Moral Character</button>
+                                            <button class="nav-link flex-fill" id="v-pills-idpic-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-idpic' . $id . '" type="button" role="tab" aria-controls="v-pills-idpic' . $id . '" aria-selected="false">ID Photo (2x2 size)</button>
+                                            <button class="nav-link flex-fill" id="v-pills-map-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-map' . $id . '" type="button" role="tab" aria-controls="v-pills-map' . $id . '" aria-selected="false">Vicinity Map</button>
+                                            <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance' . $id . '" type="button" role="tab" aria-controls="v-pills-brgyclearance' . $id . '" aria-selected="false">Barangay Clearance</button>
+                                            <button class="nav-link flex-fill" id="v-pills-parvoteid-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-parvoteid' . $id . '" type="button" role="tab" aria-controls="v-pills-parvoteid' . $id . '" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
+                                            <button class="nav-link flex-fill" id="v-pills-appvoteid-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-appvoteid' . $id . '" type="button" role="tab" aria-controls="v-pills-appvoteid' . $id . '" aria-selected="false">Voter’s Certificate of the Applicant</button>
+                                            <button class="nav-link flex-fill" id="v-pills-itr-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-itr' . $id . '" type="button" role="tab" aria-controls="v-pills-itr' . $id . '" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation (Parents)</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1692,21 +1714,21 @@ function getInformationButton($row, $file)
                                     <div class="card-body">
                                         <div class="tab-content" id="v-pills-tabContent">
                                             <!-- CERT OF REGISTRATION -->
-                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor'.$id.'" role="tabpanel" aria-labelledby="v-pills-cor-tab'.$id.'" style="height: 00%; width: 100%">
+                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6 class="card-title">Certificate of Registration</h6>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio'.$id.'" id="corApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="corApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio'.$id.'" id="corReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="corReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio'.$id.'" id="corModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1715,70 +1737,8 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-                                                                <embed id="viewcor'. $account_id .'" frameborder="0" width="100%" height="400px"
-                                                               '. (isset($file[0]['file'])? 'src="uploads/application/'. $file[0]['file']. '.pdf"' : '').'>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- BIRTH CERT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-cob'.$id.'" role="tabpanel" aria-labelledby="v-pills-cob-tab'.$id.'">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <h5 class="card-title">CERTIFICATE OF BIRTH</h5>
-                                                    <div class="d-flex align-items-center d-grid gap-3">
-                                                        <label class="form-check-label fw-bold">Remarks:</label>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cobRadio'.$id.'" id="cobApprove'.$id.'">
-                                                            <label class="mx-2 form-check-label" for="cobApprove"> Approve </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cobRadio'.$id.'" id="cobReview'.$id.'">
-                                                            <label class="mx-2 form-check-label" for="cobReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cobRadio'.$id.'" id="cobModify'.$id.'">
-                                                            <label class="mx-2 form-check-label" for="cobModify"> For Modification </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="card" style="height:100%">
-                                                            <div class="card-body">
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- CERT OF GOOD MORAL -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-cgmc'.$id.'" role="tabpanel" aria-labelledby="v-pills-cgmc-tab'.$id.'">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <h5 class="card-title">CERTIFICATE OF GOOD MORAL CHARACTER</h5>
-                                                    <div class="d-flex align-items-center d-grid gap-3">
-                                                        <label class="form-check-label fw-bold">Remarks:</label>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cgmcRadio'.$id.'" id="cgmcApprove'.$id.'">
-                                                            <label class="mx-2 form-check-label" for="cgmcApprove"> Approve </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cgmcRadio'.$id.'" id="cgmcReview'.$id.'">
-                                                            <label class="mx-2 form-check-label" for="cgmcReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cgmcRadio'.$id.'" id="cgmcModify'.$id.'">
-                                                            <label class="mx-2 form-check-label" for="cgmcModify"> For Modification </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="card" style="height:100%">
-                                                            <div class="card-body">
-
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                               ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1786,21 +1746,21 @@ function getInformationButton($row, $file)
                                             </div>
 
                                             <!-- GRADE REPORT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-grades'.$id.'" role="tabpanel" aria-labelledby="v-pills-grades-tab'.$id.'">
+                                            <div class="tab-pane fade pt-3" id="v-pills-grades' . $id . '" role="tabpanel" aria-labelledby="v-pills-grades-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">GRADE REPORT</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio'.$id.'" id="gradesApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="gradesApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio'.$id.'" id="gradesReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="gradesReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio'.$id.'" id="gradesModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="gradesModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1809,7 +1769,72 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <!-- BIRTH CERT -->
+                                            <div class="tab-pane fade pt-3" id="v-pills-cob' . $id . '" role="tabpanel" aria-labelledby="v-pills-cob-tab' . $id . '">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h5 class="card-title">CERTIFICATE OF BIRTH</h5>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="cobApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="cobReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="cobModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[2]['file']) ? 'src="uploads/application/' . $file[2]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- CERT OF GOOD MORAL -->
+                                            <div class="tab-pane fade pt-3" id="v-pills-cgmc' . $id . '" role="tabpanel" aria-labelledby="v-pills-cgmc-tab' . $id . '">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h5 class="card-title">CERTIFICATE OF GOOD MORAL CHARACTER</h5>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="cgmcApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="cgmcReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="cgmcModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[3]['file']) ? 'src="uploads/application/' . $file[3]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1817,21 +1842,21 @@ function getInformationButton($row, $file)
                                             </div>
 
                                             <!-- ID PHOTO 2X2 -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-idpic'.$id.'" role="tabpanel" aria-labelledby="v-pills-idpic-tab'.$id.'">
+                                            <div class="tab-pane fade pt-3" id="v-pills-idpic' . $id . '" role="tabpanel" aria-labelledby="v-pills-idpic-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">ID Photo</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="idpicRadio'.$id.'" id="idpicApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="idpicRadio'.$id.'" id="idpicReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="idpicReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="idpicRadio'.$id.'" id="idpicModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="idpicModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1840,7 +1865,8 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[4]['file']) ? 'src="uploads/application/' . $file[4]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1848,21 +1874,21 @@ function getInformationButton($row, $file)
                                             </div>
 
                                             <!-- VICINITY MAP -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-map'.$id.'" role="tabpanel" aria-labelledby="v-pills-map-tab'.$id.'">
+                                            <div class="tab-pane fade pt-3" id="v-pills-map' . $id . '" role="tabpanel" aria-labelledby="v-pills-map-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">VICINITY MAP</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="mapRadio'.$id.'" id="mapApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="mapApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="mapRadio'.$id.'" id="mapReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="mapReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="mapRadio'.$id.'" id="mapModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="mapModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1871,7 +1897,8 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[5]['file']) ? 'src="uploads/application/' . $file[5]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1879,21 +1906,21 @@ function getInformationButton($row, $file)
                                             </div>
 
                                             <!-- BARANGAY CLEARANCE -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-brgyclearance'.$id.'" role="tabpanel" aria-labelledby="v-pills-brgyclearance-tab'.$id.'">
+                                            <div class="tab-pane fade pt-3" id="v-pills-brgyclearance' . $id . '" role="tabpanel" aria-labelledby="v-pills-brgyclearance-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">BARANGAY CLEARANCE</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio'.$id.'" id="bgryClearanceApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="bgryClearanceApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio'.$id.'" id="bgryClearanceReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="bgryClearanceReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio'.$id.'" id="bgryClearanceModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="bgryClearanceModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1902,7 +1929,8 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[6]['file']) ? 'src="uploads/application/' . $file[6]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1910,21 +1938,21 @@ function getInformationButton($row, $file)
                                             </div>
 
                                             <!-- PARENT\'S VOTERS CERT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-parvoteid'.$id.'" role="tabpanel" aria-labelledby="v-pills-parvoteid-tab'.$id.'">
+                                            <div class="tab-pane fade pt-3" id="v-pills-parvoteid' . $id . '" role="tabpanel" aria-labelledby="v-pills-parvoteid-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">PARENTS VOTER\'S ID / CERTIFICATION</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="parvoteidRadio'.$id.'" id="parvoteidApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="parvoteidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="parvoteidRadio'.$id.'" id="parvoteidReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="parvoteideview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="parvoteidRadio'.$id.'" id="parvoteidModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="parvoteidModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1933,7 +1961,8 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[7]['file']) ? 'src="uploads/application/' . $file[7]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1941,21 +1970,21 @@ function getInformationButton($row, $file)
                                             </div>
 
                                             <!-- APPLICANTS VOTERS CERT -->
-                                            <div class="tab-pane fade pt-3" id="v-pills-appvoteid'.$id.'" role="tabpanel" aria-labelledby="v-pills-appvoteid-tab'.$id.'">
+                                            <div class="tab-pane fade pt-3" id="v-pills-appvoteid' . $id . '" role="tabpanel" aria-labelledby="v-pills-appvoteid-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">APPLICANT VOTER\'S ID / CERTIFICATION</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="appvoteidRadio'.$id.'" id="appvoteidApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="appvoteidApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="appvoteidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="appvoteidRadio'.$id.'" id="appvoteidReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="appvoteidReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="appvoteidReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="appvoteidRadio'.$id.'" id="votecertpaModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="votecertpaModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="appvoteidModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1964,7 +1993,8 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[8]['file']) ? 'src="uploads/application/' . $file[8]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1972,21 +2002,21 @@ function getInformationButton($row, $file)
                                             </div>
 
                                             <!-- INCOME TAX CERT -->
-                                            <div class="tab-pane fade pt-3  " id="v-pills-itr'.$id.'" role="tabpanel" aria-labelledby="v-pills-itr-tab'.$id.'">
+                                            <div class="tab-pane fade pt-3  " id="v-pills-itr' . $id . '" role="tabpanel" aria-labelledby="v-pills-itr-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h5 class="card-title">INCOME TAX RETURN OR CERTIFICATE OF <br>EMPLOYMENT AND COMPENSATION</br></h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="itrRadio'.$id.'" id="itrApprove'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrApprove' . $id . '">
                                                             <label class="mx-2 form-check-label" for="itrApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="itrRadio'.$id.'" id="itrReview'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrReview' . $id . '">
                                                             <label class="mx-2 form-check-label" for="itrReview"> For Review </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="itrRadio'.$id.'" id="itrModify'.$id.'">
+                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrModify' . $id . '">
                                                             <label class="mx-2 form-check-label" for="itrModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1995,7 +2025,8 @@ function getInformationButton($row, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[9]['file']) ? 'src="uploads/application/' . $file[9]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2028,54 +2059,81 @@ function getInformationButton($row, $file)
                             </div>
                         </div>
                     </div>';
-                    
-    $button = '<div class="btn-group-vertical d-flex justify-content-between align-items-center">
-                    <!--CHECK PROFILE BUTTON-->
-                    <button id="viewInfo' . $account_id . '" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '">Check Information</button>
-                    <div class="modal fade" id="viewInfoModal' . $account_id . '" tabindex="-1">
-                        <div class="modal-dialog modal-dialog-scrollable modal-fullscreen modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header gap-3">
-                                    <form class="btn-group-toggle" data-toggle="buttons" onchange="infoRadio(' . $account_id . ')">
-                                        <input type="radio" class="btn-check" name="info' . $account_id . '" id="infoProfile' . $account_id . '" value="1" autocomplete="off" checked>
-                                        <label class="btn btn-outline-danger" for="infoProfile' . $account_id . '">Profile</label>
 
-                                        <input type="radio" class="btn-check" name="info' . $account_id . '" id="infoRequirements' . $account_id . '" value="2" autocomplete="off">
-                                        <label class="btn btn-outline-danger" for="infoRequirements' . $account_id . '">Requirements</label>
-                                    </form>
-                                    <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <div class="">
-                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $account_id . '" id="qualiExamRadio' . $account_id . '">
-                                            <label class="form-check-label" for="qualiExamRadio' . $account_id . '">For Qualification Exam</label>
-                                        </div>
-                                        <div class="">
-                                            <input class="form-check-input me-2" type="radio" name="decisionRadio' . $account_id . '" id="interviewRadio' . $account_id . '">
-                                            <label class="form-check-label" for="interviewRadio' . $account_id . '">For Interview</label>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                </div>
-                                <div class="modal-body">
-                                    
-                                    '. $profile .'
 
-                                    '. $requirements .'
+    return $requirements;
+}
 
-                                    <!-- Action Buttons -->
-                                    <div class="modal-footer  d-grid gap-2 d-flex justify-content-end" style="height: 55px;">
-                                        <button type="button" class="btn btn-warning btn-sm">Submit</button>
-                                        <button type="button" class="btn btn-danger btn-sm">Cancel Submission</button>
-                                    </div>
-                                </div>
-                            </div>
+function getAdditionalBG($row){
+    $additionalBG = '<!--ADDITIONAL BACKGROUND-->
+                    <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">
+                                Additional
+                                Information
+                            </h5>
                         </div>
-                    </div>
-                    <!-- REMOVE BUTTON -->
-                    <button id="removeApplicant" type="button" class="btn btn-danger">Removed Applicant</button>
-                </div>';
+                        <!-- Custom Styled Validation with Tooltips -->
+                        <form class="row g-4 needs-validation" novalidate>
+                            <!-- WORKING STUDENT -->
+                            <div class="col-md-4 position-relative">
+                                <label for="inputWorkingStudent" class="form-label">Are you a Working Student?</label>
+                                <select class="form-select" id="inputWorkingStudent" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <!---OFW PARENTS -->
+                            <div class="col-md-8 position-relative">
+                                <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
+                                <select class="form-select" id="inputOfwParents" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <!--OFW FAMILY MEMBERS -->
+                            <div class="col-md-6 position-relative">
+                                <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
+                                <select class="form-select" id="inputOfwMembers" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <!---PWD PARENTS -->
+                            <div class="col-md-6 position-relative">
+                                <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
+                                <select class="form-select" id="inputPwdParents" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <!---PWD FAMILY MEMBERS -->
+                            <div class="col-md-6 position-relative">
+                                <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
+                                <select class="form-select" id="inputOfwMembers" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <!---PARENTS STATUS -->
+                            <div class="col-md-6 position-relative">
+                                <label for="inputParentStatus" class="form-label">What is your Parents Status?</label>
+                                <select class="form-select" id="inputParentStatus" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <!---STUDENT PWD -->
+                            <div class="col-md-6 position-relative">
+                                <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
+                                <select class="form-select" id="inputStudentPwd" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </form>
+                        <!-- End Custom Styled Validation with Tooltips -->
+                    </div>';
 
-    return $button;
+    return $additionalBG;
 }
