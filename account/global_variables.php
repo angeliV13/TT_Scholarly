@@ -10,6 +10,10 @@ $bootstrapIcons = ['Circle' => 'bi bi-check-circle-fill', 'User' => 'bi bi-peopl
 $accountTypeArr = ['0' => 'Super Admin', '1' => 'Admin', '2' => 'Beneficiaries', '3' => 'Applicant'];
 $relationshipArr = ['Brother' => 'Brother', 'Sister' => 'Sister', 'Grandfather' => 'Grandfather', 'Grandmother' => 'Grandmother', 'Uncle' => 'Uncle', 'Aunt' => 'Aunt', 'Cousin' => 'Cousin', 'Others' => 'Others'];
 $occupationArr = ['unemployed' => 'Unemployed', 'employed' => 'Employed', 'self' => 'Self-Employed', 'gov' => 'Government Employee', 'others' => 'Others'];
+$schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+$schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
+$scholarTypeArr  = ['1' =>'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
+
 
 if (isset($_SESSION))
 {

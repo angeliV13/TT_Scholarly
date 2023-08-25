@@ -74,7 +74,7 @@ function getPersonalInfo($row)
     extract($row);
 
     $personalInfo = '<!--PERSONAL INFORMATION-->
-                        <div class="tab-pane fade show active" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
+                        <div class="tab-pane fade show active" id="bordered-justified-personal-information' . $account_id . '" role="tabpanel" aria-labelledby="personal-information">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">
                                     Primary
@@ -204,8 +204,12 @@ function getPersonalInfo($row)
 
 function getEducationBG($account_id)
 {
+    $gen_info = get_user_gen_info($account_id);
+    $education = get_user_education($account_id);
+    $family = get_user_family($account_id);
+
     $educationBG = '<!--EDUCATIONAL BACKGROUND-->
-                    <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
+                    <div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">
                         <!--GENERAL EDUC-->
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title">
@@ -219,9 +223,8 @@ function getEducationBG($account_id)
                             <!-- FULL NAME -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputGraduatingSem" class="form-label">Are you Graduating this Semester/Term?</label>
-                                <select class="form-select" id="inputGraduatingSem" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
+                                <select class="form-select" id="inputGraduatingSem" disabled>
+                                    <option selected disabled value="">'. (isset($gen_info['graduating_flag']) ? ($gen_info['graduating_flag'] == 0 ? 'Yes' : 'No') : '') .'</option>
                                 </select>
                                 <div class="invalid-tooltip">
                                     Please
@@ -233,9 +236,8 @@ function getEducationBG($account_id)
                             </div>
                             <div class="col-md-6 position-relative">
                                 <label for="inputGraduatingHonors" class="form-label">Are you Graduating with Honors?</label>
-                                <select class="form-select" id="inputGraduatingHonors" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
+                                <select class="form-select" id="inputGraduatingHonors" disabled>
+                                    <option selected disabled value="">'.(isset($gen_info['honor_flag']) ? ($gen_info['honor_flag'] == 0 ? 'Yes' : 'No' ) : '') .'</option>
                                 </select>
                                 <div class="invalid-tooltip">
                                     Please
@@ -761,7 +763,7 @@ function getEducationBG($account_id)
 function getFamilyBG($account_id)
 {
     $familyBG = '<!--FAMILY BACKGROUND-->
-                <div class="tab-pane fade" id="bordered-justified-family-background" role="tabpanel" aria-labelledby="family-background">
+                <div class="tab-pane fade" id="bordered-justified-family-background' . $account_id . '" role="tabpanel" aria-labelledby="family-background">
                     <!--FAMILY INFORMATION-->
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title">
@@ -1578,16 +1580,16 @@ function getProfile($row, $personalInfo, $educationBG, $familyBG, $additionalBG)
                                         <div class="my-2 p-4 text-black" style="background-color: #ffff; height:10px;">
                                             <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
                                                 <li class="nav-item flex-fill text-danger" role="presentation">
-                                                    <button class="nav-link w-100 active" id="personal-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
+                                                    <button class="nav-link w-100 active" id="personal-information' . $account_id . '" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information' . $account_id . '" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
                                                 </li>
                                                 <li class="nav-item flex-fill text-danger" role="presentation">
-                                                    <button class="nav-link w-100" id="educational-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-educational-background" type="button" role="tab" aria-controls="educational-background" aria-selected="false">Educational Background</button>
+                                                    <button class="nav-link w-100" id="educational-background' . $account_id . '" data-bs-toggle="tab" data-bs-target="#bordered-justified-educational-background' . $account_id . '" type="button" role="tab" aria-controls="educational-background" aria-selected="false">Educational Background</button>
                                                 </li>
                                                 <li class="nav-item flex-fill text-danger" role="presentation">
-                                                    <button class="nav-link w-100" id="family-background" data-bs-toggle="tab" data-bs-target="#bordered-justified-family-background" type="button" role="tab" aria-controls="family-background" aria-selected="false">Family Background</button>
+                                                    <button class="nav-link w-100" id="family-background' . $account_id . '" data-bs-toggle="tab" data-bs-target="#bordered-justified-family-background' . $account_id . '" type="button" role="tab" aria-controls="family-background" aria-selected="false">Family Background</button>
                                                 </li>
                                                 <li class="nav-item flex-fill text-danger" role="presentation">
-                                                    <button class="nav-link w-100" id="additional-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-additional-information" type="button" role="tab" aria-controls="additional-information" aria-selected="false">Additional Information</button>
+                                                    <button class="nav-link w-100" id="additional-information' . $account_id . '" data-bs-toggle="tab" data-bs-target="#bordered-justified-additional-information' . $account_id . '" type="button" role="tab" aria-controls="additional-information" aria-selected="false">Additional Information</button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -2065,8 +2067,10 @@ function getRequirements($row, $file)
 }
 
 function getAdditionalBG($row){
+    extract($row);
+
     $additionalBG = '<!--ADDITIONAL BACKGROUND-->
-                    <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
+                    <div class="tab-pane fade" id="bordered-justified-additional-information' . $account_id . '" role="tabpanel" aria-labelledby="additional-information">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title">
                                 Additional

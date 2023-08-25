@@ -211,11 +211,12 @@ function get_user_gen_info($id)
     return $user_info;
 }
 
-function get_user_education($id)
+function get_user_education($id, $latest = 0)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM education WHERE user_id = '" . $id . "'";
+    $sql   = "SELECT * FROM education WHERE user_id = '" . $id . "'";
+    $sql  .= ($latest != 0) ? "ORDER BY education_level ASC LIMIT 1"  : '';
     $query = $conn->query($sql);
 
     $education = [];
@@ -763,13 +764,18 @@ function get_notif_type($id)
 }
 
 
-function get_education_courses($type)
+function get_education_courses($type = '', $id = 0)
 {
     include("dbconnection.php");
 
     $data = [];
 
-    $sql = "SELECT id, name FROM education_courses WHERE type = " . $type;
+    $sql = "SELECT id, name FROM education_courses WHERE ";
+    if($id == 0){
+        $sql .= "type = '{$type}' ";
+    }else{
+        $sql .= "id = '{$id}' ";
+    }
     $query = $conn->query($sql);
 
 
@@ -798,6 +804,26 @@ function get_school()
         while ($row = $query->fetch_assoc())
         {
             $data[$row['id']] = $row;
+        }
+    }
+
+    return $data;
+}
+
+function get_school_name($id)
+{
+    include ("dbconnection.php");
+
+    $data = '';
+
+    $sql = "SELECT * FROM school WHERE id = '{$id}'";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data = $row;
         }
     }
 
