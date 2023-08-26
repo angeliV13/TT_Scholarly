@@ -63,26 +63,26 @@
     }
   }
 
-  $.ajax({
-    type: "POST",
-    url: "controller/tableHandler.php",
-    data: {
-      action: 5,
-    },
-    success: function (data) {
-      if (data == "Insert Success") {
-        Swal.fire({
-          title: "Success!",
-          icon: "success",
-          html: "Your profile is updated",
-        });
-      } else {
-        console.log(JSON.parse(data));
-        // Swal.fire({
-        //     title: "Error!",
-        //     icon: 'error',
-        //     html: data,
-        //   });
-      }
-    },
-  });
+  // $.ajax({
+  //   type: "POST",
+  //   url: "controller/tableHandler.php",
+  //   data: {
+  //     action: 5,
+  //   },
+  //   success: function (data) {
+  //     if (data == "Insert Success") {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         icon: "success",
+  //         html: "Your profile is updated",
+  //       });
+  //     } else {
+  //       console.log(JSON.parse(data));
+  //       // Swal.fire({
+  //       //     title: "Error!",
+  //       //     icon: 'error',
+  //       //     html: data,
+  //       //   });
+  //     }
+  //   },
+  // });

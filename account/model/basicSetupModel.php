@@ -35,6 +35,22 @@ function getDefaultAcadYearId()
     }
 }
 
+function getDefaultAcadYearColumn($column)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT {$column} FROM acad_year WHERE default_ay = 1";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+            extract($row);
+
+            return ${$column};
+        }
+    }
+}
+
 function getDefaultSemesterId()
 {
     include("dbconnection.php");

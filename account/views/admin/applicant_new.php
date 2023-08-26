@@ -22,36 +22,52 @@
                             </div>
                         </div>
                         <div class="row mb-1 justify-content-between">
-                            <form class="row position-relative">
+                            <form id="filterTable" class="row position-relative">
                                 <!-- Filter options -->
-                                <!-- Scholarship Type --> <label for="inputScholarType" class="col-sm-2 col-form-label">
+                                <!-- Scholarship Type -->
+                                <label for="filterScholarType" class="col-sm-2 col-form-label">
                                     <h6 class="font-bold">Scholarship Type:</h6>
                                 </label>
-                                <div class="col-sm-4" id=""> <select class="form-select" id="inputScholarType">
-                                        <option selected disabled value="">Choose</option>
-                                        <option>Educational Assistance Program</option>
-                                        <option>Full Scholarship Program</option>
-                                    </select> </div> <!-- Education Level --> <label for="inputEducationLevel" class="col-sm-2 col-form-label">
+                                <div class="col-sm-4" id="">
+                                    <select class="form-select" id="filterScholarType">
+                                        <option selected value="">-- </option>
+                                        <option value="1">Educational Assistance Program</option>
+                                        <option value="2">Full Scholarship Program</option>
+                                    </select>
+                                </div> <!-- Education Level -->
+                                <label for="filterEducationLevel" class="col-sm-2 col-form-label">
                                     <h6 class="font-bold">Education Level:</h6>
                                 </label>
-                                <div class="col-sm-4 "> <select class="form-select" id="inputEducationLevel">
-                                        <option selected disabled value="">Choose</option>
-                                        <option>Senior High School</option>
-                                        <option>College - Private</option>
-                                        <option>College - Public</option>
-                                    </select> </div> <label for="inputSchool" class="col-sm-2 col-form-label mt-4">
+                                <div class="col-sm-4 ">
+                                    <select class="form-select" id="filterEducationLevel">
+                                        <option selected value="">-- </option>
+                                        <option value="1">Senior High School</option>
+                                        <option value="1">College - Public</option>
+                                        <option value="1">College - Private</option>
+                                    </select>
+                                </div> <label for="filterSchool" class="col-sm-2 col-form-label mt-4">
                                     <h6 class="font-bold">Name of School</h6>
                                 </label>
-                                <div class="col-sm-4 mt-4"> <select class="form-select" id="inputSchool" onchange="updateYearLevelOptions()">
-                                        <option selected disabled value="">Choose</option>
-                                        <option>BSU</option>
-                                        <option>FAITH</option>
-                                    </select> </div> <!-- Year Level --> <label for="inputYearLevel" class="mt-4 col-sm-2 col-form-label">
+                                <div class="col-sm-4 mt-4">
+                                    <select class="form-select" id="filterSchool">
+                                        <option selected value="">-- </option>
+                                        <option value="1">BSU</option>
+                                        <option value="2">FAITH</option>
+                                    </select>
+                                </div> <!-- Year Level -->
+                                <label for="filterYearLevel" class="mt-4 col-sm-2 col-form-label">
                                     <h6 class="font-bold">Year Level:</h6>
                                 </label>
                                 <div id="yearLevelContainer" class="col-sm-4 mt-4">
-                                    <select class="form-select" id="inputYearLevel">
-                                        <option selected disabled value="">Choose</option>
+                                    <select class="form-select" id="filterYearLevel">
+                                        <option selected value="">-- </option>
+                                        <option value="1">1st Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="4">4th Year</option>
+                                        <option value="5">5th Year</option>
+                                        <option value="11">Grade 11</option>
+                                        <option value="12">Grade 12</option>
                                     </select>
                                 </div>
                                 <div class="d-grid pt-3 gap-2 d-flex justify-content-end">

@@ -203,19 +203,59 @@ $(document).ready(function(){
         },
         "createdRow": function( row, data, index ) {},
         "columnDefs": [{ className: "text-center", "targets": [0] }],
-        language	: {
-                    processing	: "<span class='loader'></span>"
-        },
-        fixedColumns:   {
-                leftColumns: 0
-        },
-        scrollY     	: false,
-        scrollCollapse	: false,
-        scroller    	: {
-            loadingIndicator    : false
-        },
-        stateSave   	: false
+        // language	: {
+        //             processing	: "<span class='loader'></span>"
+        // },
+        // fixedColumns:   {
+        //         leftColumns: 0
+        // },
+        // scrollY     	: false,
+        // scrollCollapse	: false,
+        // scroller    	: {
+        //     loadingIndicator    : false
+        // },
+        // stateSave   	: false
     });
+
+    $("#collegeNewApplicantTable thead th").each( function ( i ) {
+        if ($(this).text() !== '') {
+            var isStatusColumn = (($(this).text() == 'Status') ? true : false);
+            var select = $('<select><option value=""></option></select>')
+                .appendTo( $(this).empty() )
+                .on( 'change', function () {
+                    var val = $(this).val();
+                    
+                    collegeNewApplicantTable.column( i )
+                        .search( val ? '^'+$(this).val()+'$' : val, true, false )
+                        .draw();
+                } );
+             
+            // Get the Status values a specific way since the status is a anchor/image
+            if (isStatusColumn) {
+                var statusItems = [];
+                
+                /* ### IS THERE A BETTER/SIMPLER WAY TO GET A UNIQUE ARRAY OF <TD> data-filter ATTRIBUTES? ### */
+                collegeNewApplicantTable.column( i ).nodes().to$().each( function(d, j){
+                    var thisStatus = $(j).attr("data-filter");
+                    if($.inArray(thisStatus, statusItems) === -1) statusItems.push(thisStatus);
+                } );
+                
+                statusItems.sort();
+                                
+                $.each( statusItems, function(i, item){
+                    select.append( '<option value="'+item+'">'+item+'</option>' );
+                });
+
+            }
+            // All other non-Status columns (like the example)
+            else {
+                collegeNewApplicantTable.column( i ).data().unique().sort().each( function ( d, j ) {  
+                    select.append( '<option value="'+d+'">'+d+'</option>' );
+                } );	
+            }
+            
+        }
+    } );
 
     // Website Socials Table
     let socialTable = $('#setWebsiteSocials').DataTable( {
