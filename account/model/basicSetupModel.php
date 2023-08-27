@@ -46,7 +46,7 @@ function getDefaultAcadYearColumn($column)
         while ($row = $query->fetch_assoc()) {
             extract($row);
 
-            return ${$column};
+            return (${$column});
         }
     }
 }
