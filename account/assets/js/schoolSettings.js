@@ -2,8 +2,8 @@ $("#addSchool").on("click", function(e){
     e.preventDefault();
 
     let userId = $("#userId").val();
-    let schoolName = check_error(document.getElementById("schoolName"));
-    let schoolAddress = check_error(document.getElementById("schoolAddress"));
+    let schoolName = check_error(document.getElementById("schoolName")); if (schoolName == undefined) return;
+    let schoolAddress = check_error(document.getElementById("schoolAddress")); if (schoolAddress == undefined) return;
 
     let schoolType = $("input[name='schoolType']:checked").map(function(){
         return $(this).val();
@@ -19,42 +19,43 @@ $("#addSchool").on("click", function(e){
         return false;
     }
 
-    if (schoolName && schoolAddress) {
-        $.ajax({
-            url: "controller/basicSetup.php",
-            type: "POST",
-            data: {
-                "action"        : 7,
-                "userId"        : userId,
-                "schoolName"    : schoolName,
-                "schoolAddress" : schoolAddress,
-                "schoolType"    : schoolType
-            },
-            success: function(data) {
-                if (data == "success") {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Success!",
-                        text: `School successfully added!`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `Something went wrong! Error: ${data}`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                }
+    let schoolClass = check_error(document.getElementById("schoolClass")); if (schoolClass == undefined) return;
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        type: "POST",
+        data: {
+            "action"        : 7,
+            "userId"        : userId,
+            "schoolName"    : schoolName,
+            "schoolAddress" : schoolAddress,
+            "schoolType"    : schoolType,
+            "schoolClass"   : schoolClass
+        },
+        success: function(data) {
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `School successfully added!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
             }
-        })
-    }
+        }
+    })
 })
 
 $(document).on("click", ".deleteSchool", function(e){
@@ -116,6 +117,7 @@ $(document).on("click", ".editSchool", function(e){
     let name = $(this).attr("data-name");
     let address = $(this).attr("data-address");
     let type = $(this).attr("data-type");
+    let classId = $(this).attr("data-class");
 
     $("#schoolId").val(id);
     $("#editschoolName").val(name);
@@ -126,18 +128,22 @@ $(document).on("click", ".editSchool", function(e){
             $(this).prop("checked", true);
         }
     });
+
+    $("#editschoolClass").val(classId).trigger("change");
 })
 
 $("#updateSchool").on("click", function(e){
     e.preventDefault();
 
     let id = $("#schoolId").val();
-    let name = check_error(document.getElementById("editschoolName"));
-    let address = check_error(document.getElementById("editschoolAddress"));
+    let name = check_error(document.getElementById("editschoolName")); if (name == undefined) return;
+    let address = check_error(document.getElementById("editschoolAddress")); if (address == undefined) return;
 
     let type = $("input[name='editschoolType']:checked").map(function(){
         return $(this).val();
     }).get();
+
+    let schoolClass = check_error(document.getElementById("editschoolClass")); if (schoolClass == undefined) return;
 
     if (type == "") {
         Swal.fire({
@@ -149,44 +155,44 @@ $("#updateSchool").on("click", function(e){
         return false;
     }
 
-    if (name && address) {
-        $.ajax({
-            url: "controller/basicSetup.php",
-            type: "POST",
-            data: {
-                "action"    : 7.1,
-                "id"        : id,
-                "name"      : name,
-                "address"   : address,
-                "type"      : type
-            },
-            beforeSend: function() {
-                showBeforeSend("Updating School...");
-            },
-            success: function(data) {
-                hideBeforeSend();
-                if (data == "success") {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Success!",
-                        text: `School successfully updated!`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `Something went wrong! Error: ${data}`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                }
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        type: "POST",
+        data: {
+            "action"    : 7.1,
+            "id"        : id,
+            "name"      : name,
+            "address"   : address,
+            "type"      : type,
+            "class"     : schoolClass
+        },
+        beforeSend: function() {
+            showBeforeSend("Updating School...");
+        },
+        success: function(data) {
+            hideBeforeSend();
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `School successfully updated!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
             }
-        })
-    }
+        }
+    })
 })

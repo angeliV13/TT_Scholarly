@@ -27,5 +27,8 @@ switch ($action)
     case 6:
         echo websiteSocials();
         break;
+    case 7:
+        echo benefListTable();
+        break;
 }
     

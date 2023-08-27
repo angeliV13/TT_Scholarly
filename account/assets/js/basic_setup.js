@@ -1,3 +1,9 @@
+let applicationId = $("#applicationId").val();
+
+// if (applicationId != ""){
+//   $("#viewInfoModal4").modal("show");
+// }
+
 $(document).ready(function () {
   $.ajax({
     type: "POST",

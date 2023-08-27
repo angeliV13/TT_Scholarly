@@ -9,6 +9,7 @@
         </ol>
     </div>
     <section class="section">
+        <input type="hidden" id="applicationId" value="<?= isset($_GET['applicationId']) ? $_GET['applicationId'] : '' ?>">
         <!-- QUERY OPTION -->
         <div class="column">
             <div class="col-lg-12">

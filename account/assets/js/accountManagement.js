@@ -74,6 +74,14 @@ $(document).on("mouseenter click", "#addBG", function(){
     }
 })
 
+$(document).on("mouseenter click", "#reqLi", function(){
+    if ($(this).attr("data-status") == "disabled"){
+        $("#reqBtn").attr("data-bs-toggle", "tooltip");
+        $("#reqBtn").attr("href", "#");
+        $("#reqBtn").attr("title", "Please confirm your additional information first!");
+    }
+})
+
 function calculateAge(val){
     let today = new Date();
     let birthDate = new Date(val);
@@ -561,7 +569,7 @@ $("#educationBG").on("submit", function(e){
 
     let graduating_flag = check_error(document.getElementById("graduating_flag")); if (graduating_flag == undefined) return;
     let graduation_year = honor_flag = honor_type = other_honor = s_year_level = strand = s_schoolAddress = c_year_level = c_major = c_school_address = course = j_school_address = j_year_level = e_grade_level = e_school_address = s_otherSchool = s_otherStrand = j_otherSchool = e_otherSchool = c_otherSchool = c_otherCourse = "";
-    let c_school = courseText = s_school = strandText = j_school = e_school = "";
+    let c_school = courseText = s_school = strandText = j_school = e_school =  gwa = "";
 
     let collegeTableBody = $("#collegeTable tbody");
     let collegeRows = collegeTableBody.children();
@@ -593,7 +601,9 @@ $("#educationBG").on("submit", function(e){
         graduation_year = check_error(document.getElementById("graduation_year")); if (graduation_year == undefined) return;
     }
 
-    if (scholarLevel == 1){
+    gwa = check_error(document.getElementById("gwa")); if (gwa == undefined) return;
+
+    if (scholarLevel == 1 || scholarLevel == 2){
         c_school = check_error(document.getElementById("c_school")); if (c_school == undefined) return;
 
         if (c_school == "Others"){
@@ -1249,6 +1259,7 @@ $("#familyBG").on("submit", function(e){
             'source': source,
             'rent_flag': rent_flag,
             'monthly_payment': monthly_payment,
+            'gwa': gwa,
         }
     }
 
@@ -1321,10 +1332,10 @@ $("#otherInfo").on("submit", function(e){
                 Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "Other Information Saved Successfully. Please review your application before submitting."
+                    text: "Other Information Saved Successfully. You may now upload your requirements."
                 }).then((result) => {
                     if (result.isConfirmed){
-                        location.reload();
+                        window.location.href = '?nav=apply_applicant';
                     }
                 })
             } else {

@@ -336,7 +336,9 @@
                                 </tbody>
                             </table>
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button id="" type="submit" class="btn btn-primary">Save</button>
+                                <?php if (!$finishFlag): ?>
+                                    <button id="" type="submit" class="btn btn-primary">Save</button>
+                                <?php endif; ?>
                             </div>
                         </form>
                     </div>

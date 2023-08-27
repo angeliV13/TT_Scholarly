@@ -28,10 +28,6 @@ if(isset($_SESSION['id']))
            $examAccess      = examAccess();
         }
     }
-    
 }
-
-date_default_timezone_set("Asia/Manila");
-$dateNow = date('Y-m-d');
 
 ?>

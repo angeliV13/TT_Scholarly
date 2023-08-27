@@ -379,6 +379,14 @@
                               Please select expected Year of Graduation.
                             </div>
                           </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="gwa" class="form-label">Current GWA</label>
+                            <?php if ($gen_info != null) : ?>
+                              <input type="number" name="GWA" id="gwa" class="form-control" min="50" step="any"  value="<?php echo $gen_info['gwa'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                            <?php else : ?>
+                              <input type="number" name="GWA" id="gwa" class="form-control" min="50" step="any">
+                            <?php endif; ?>
+                          </div>
                           <!-- END FULL NAME -->
                           </div><!-- End Custom Styled Validation with Tooltips -->
                         </div>
@@ -618,7 +626,7 @@
                         </div>
                       </div>
                     <?php endif; ?>
-                    <?php if ($_SESSION['scholarType'] <= 2) : ?>
+                    <?php if ($_SESSION['scholarType'] <= 3) : ?>
                       <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">Senior Highschool Level</h5>
@@ -2260,7 +2268,7 @@
                           <!-- WORKING STUDENT -->
                           <div class="col-md-4 position-relative">
                             <label for="working_flag" class="form-label">Are you a Working Student?</label>
-                            <?php if ($gen_info != null) : ?>
+                            <?php if (isset($gen_info['working_flag'])) : ?>
                               <select class="form-select" id="working_flag" name="Working Student Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                 <option selected disabled value="">Choose...</option>
                                 <option value="0" <?php echo $gen_info['working_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
@@ -2278,7 +2286,7 @@
                           <!---OFW PARENTS -->
                           <div class="col-md-8 position-relative">
                             <label for="ofw_flag" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
-                            <?php if ($gen_info != null) : ?>
+                            <?php if (isset($gen_info['ofw_flag'])) : ?>
                               <select class="form-select" id="ofw_flag" name="OFW Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                 <option selected disabled value="">Choose...</option>
                                 <option value="0" <?php echo $gen_info['ofw_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
@@ -2296,7 +2304,7 @@
                           <!--OFW FAMILY MEMBERS -->
                           <div class="col-md-6 position-relative">
                             <label for="other_ofw" class="form-label">Do you have other Family member/s who are an OFW?</label>
-                            <?php if ($gen_info != null) : ?>
+                            <?php if (isset($gen_info['other_ofw'])) : ?>
                               <select class="form-select" id="other_ofw" name="Other OFW Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                 <option selected disabled value="">Choose...</option>
                                 <option value="0" <?php echo $gen_info['other_ofw'] == 0 ? 'selected' : '' ?>>Yes</option>
@@ -2314,7 +2322,7 @@
                           <!---PWD PARENTS -->
                           <div class="col-md-6 position-relative">
                             <label for="pwd_flag" class="form-label">Do you have a Parent/s who have PWD?</label>
-                            <?php if ($gen_info != null) : ?>
+                            <?php if (isset($gen_info['pwd_flag'])) : ?>
                               <select class="form-select" id="pwd_flag" name="Parent PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                 <option selected disabled value="">Choose...</option>
                                 <option value="0" <?php echo $gen_info['pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
@@ -2332,7 +2340,7 @@
                           <!---PWD FAMILY MEMBERS -->
                           <div class="col-md-6 position-relative">
                             <label for="other_pwd" class="form-label">Do you have other Family member/s who have PWD?</label>
-                            <?php if ($gen_info != null) : ?>
+                            <?php if (isset($gen_info['other_pwd'])) : ?>
                               <select class="form-select" id="other_pwd" name="Other Family PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                 <option selected disabled value="">Choose...</option>
                                 <option value="0" <?php echo $gen_info['other_pwd'] == 0 ? 'selected' : '' ?>>Yes</option>
@@ -2350,7 +2358,7 @@
                           <!---PARENTS STATUS -->
                           <div class="col-md-6 position-relative">
                             <label for="status_flag" class="form-label">What is your Parents Status?</label>
-                            <?php if ($gen_info != null) : ?>
+                            <?php if (isset($gen_info['status_flag'])) : ?>
                               <select class="form-select" id="status_flag" name="Parent Status Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                 <option selected disabled value="">Choose...</option>
                                 <?php foreach ($civilArr as $key => $value) : ?>
@@ -2370,7 +2378,7 @@
                           <!---STUDENT PWD -->
                           <div class="col-md-6 position-relative">
                             <label for="self_pwd_flag" class="form-label">Are you a Student with PWD?</label>
-                            <?php if ($gen_info != null) : ?>
+                            <?php if (isset($gen_info['self_pwd_flag'])) : ?>
                               <select class="form-select" id="self_pwd_flag" name="Student PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
                                 <option selected disabled value="">Choose...</option>
                                 <option value="0" <?php echo $gen_info['self_pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
@@ -2399,11 +2407,11 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="float-end">
+              <!-- <div class="float-end">
                 <?php if (!$finishFlag) : ?>
                   <button type="button" class="btn btn-success" id="submitApplication">Submit Application</button>
                 <?php endif; ?>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -460,15 +460,19 @@ function updateRequirement($ay, $sem, $userid, $file, $requirement, $status, $ta
     $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
 }
 
-function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0){
+function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0)
+{
     include("dbconnection.php");
 
     $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ORDER BY id ASC";
     $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
 
-    if($fetch == 0){
+    if($fetch == 0)
+    {
         return $query;
-    }elseif($fetch == 1){
+    }
+    elseif($fetch == 1)
+    {
         return $query->fetch_all(MYSQLI_ASSOC);
     }
     
@@ -813,6 +817,8 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
     // }else{
     //     echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
     // }
+
+    update_status(5, $userid);
     
     
     return 'Success';

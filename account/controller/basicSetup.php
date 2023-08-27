@@ -242,6 +242,7 @@ if (isset($_REQUEST['action']))
                 'schoolName'    => isset($_POST['schoolName']) ? $_POST['schoolName'] : '',
                 'schoolAddress' => isset($_POST['schoolAddress']) ? $_POST['schoolAddress'] : '',
                 'schoolType'    => isset($_POST['schoolType']) ? $_POST['schoolType'][0][0] : '',
+                'schoolClass'   => isset($_POST['schoolClass']) ? $_POST['schoolClass'] : '',
             ];
 
             echo addSchool($data);
@@ -253,6 +254,7 @@ if (isset($_REQUEST['action']))
                 'name'    => isset($_POST['name']) ? $_POST['name'] : '',
                 'address' => isset($_POST['address']) ? $_POST['address'] : '',
                 'type'    => isset($_POST['type']) ? $_POST['type'][0][0] : '',
+                'class'   => isset($_POST['class']) ? $_POST['class'] : '',
             ];
 
             echo updateSchool($data);

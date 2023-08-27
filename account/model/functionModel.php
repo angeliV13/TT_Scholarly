@@ -325,7 +325,7 @@ function get_lastID($data)
     return ($query->num_rows > 0) ? $query->fetch_assoc()[$data['column']] : 0;
 }
 
-function sendEmail($to, $subject, $message, $type = 1) // PHPMAILER FUNCTION
+function sendEmail($to, $subject, $message, $type = 1, $cc = []) // PHPMAILER FUNCTION
 {
     require_once('../../vendor/phpmailer/phpmailer/src/PHPMailer.php');
     require_once('../../vendor/phpmailer/phpmailer/src/SMTP.php');
@@ -359,6 +359,15 @@ function sendEmail($to, $subject, $message, $type = 1) // PHPMAILER FUNCTION
     $mail->Mailer   = "smtp";
     // $mail->SetFrom(" "); // email address
     $mail->AddAddress($to);
+
+    if ($cc != [])
+    {
+        foreach ($cc as $key => $value)
+        {
+            $mail->AddCC($value);
+        }
+    }
+    
     $mail->Subject = $subject;
     // $mail->WordWrap   = 80;
     $mail->IsHTML(true);
@@ -874,6 +883,9 @@ function update_status($type, $id)
             $typeName = 'add_flag';
             $typeUpdate = 'add_flag';
             break;
+        case 5:
+            $typeName = 'req_flag';
+            break;
     }
 
     $sql = "UPDATE scholarship_application SET " . $typeName . " = 1, current_active = '$typeUpdate' WHERE userId = " . $id;
@@ -926,7 +938,7 @@ function check_exist($data)
     return $query->num_rows;
 }
 
-function check_exist_multiple($data)
+function check_exist_multiple($data, $type = 0) // 0 - Num Rows, 1 - Data
 {
     include("dbconnection.php");
 
@@ -944,7 +956,26 @@ function check_exist_multiple($data)
 
     $query = $conn->query($sql);
 
-    return $query->num_rows;
+    if ($type == 0)
+    {
+        return $query->num_rows;
+    }
+    else
+    {
+        $data = [];
+
+        if ($query->num_rows > 0)
+        {
+            while ($row = $query->fetch_assoc())
+            {
+                $data[] = $row;
+            }
+        }
+        else
+        {
+            return $conn->error;
+        }
+    }
 }
 
 function insert_logs($data)

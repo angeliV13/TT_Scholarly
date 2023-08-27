@@ -31,6 +31,7 @@
                                         <th class="text-center">School Name</th>
                                         <th class="text-center">School Address</th>
                                         <th class="text-center">School Type</th>
+                                        <th class="text-center">School Class Type</th>
                                         <th class="text-center">Added By</th>
                                         <th class="text-center">Date Added</th>
                                         <th class="text-center">Actions</th>
@@ -95,6 +96,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="schoolClass" class="form-label col-3">School Class Type</label>
+                        <select name="School Class Type" id="schoolClass" class="form-select col">
+                            <option value="" selected disabled>Choose</option>
+                            <option value="0">Public</option>
+                            <option value="1">Private</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" id="addSchool">Add School</button>
@@ -150,6 +159,14 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="schoolClass" class="form-label col-3">School Class Type</label>
+                        <select name="School Class Type" id="editschoolClass" class="form-select col">
+                            <option value="" selected disabled>Choose</option>
+                            <option value="0">Public</option>
+                            <option value="1">Private</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

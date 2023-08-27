@@ -58,7 +58,7 @@ include('includes/main.php');
                       <label for="scholarType" class="form-label">Scholarship Type</label>
                       <select class="form-select" id="scholarType" name="Scholarship Type">
                         <option selected disabled value="">Choose...</option>
-                        <?php foreach ($religionArr as $key => $value) : ?>
+                        <?php foreach ($scholarTypeArr as $key => $value) : ?>
                           <option value="<?php echo $key ?>"><?php echo $value ?></option>
                         <?php endforeach; ?>
                       </select>

@@ -12,11 +12,56 @@ $relationshipArr = ['Brother' => 'Brother', 'Sister' => 'Sister', 'Grandfather' 
 $occupationArr = ['unemployed' => 'Unemployed', 'employed' => 'Employed', 'self' => 'Self-Employed', 'gov' => 'Government Employee', 'others' => 'Others'];
 $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
 $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
-$scholarTypeArr  = ['1' =>'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
+$scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assistance', '3' => 'SHS Educational Assistance'];
 
 
-if (isset($_SESSION))
+if (isset($_SESSION)) 
 {
+    require("model/get_user_data.php");
+
+    $user_data = get_user_data($_SESSION['id']);
+    $user_info = get_user_info($_SESSION['id']);
+    $accountType = getAccountType($user_data[3], $user_data[4]);
+
+    if (in_array($user_data[3], [2,3]))
+    {
+        $gen_info = get_user_gen_info($_SESSION['id']);
+        $education = get_user_education($_SESSION['id']);
+        $family = get_user_family($_SESSION['id']);
+    }
+
+    $accType = $accountType[0];
+    $accAccess = $accountType[1];
+
+    if($user_data[3] >= 2)
+    { //Checking Account Type if beneficiary or applicant
+        $assessmentAccess   = assessmentAccess();
+        $renewalAccess      = renewalAccess();
+
+        if($user_data[3] == 3)
+        {
+           $examAccess      = examAccess();
+        }
+    }
+
+    $title = get_title();
+    $nav = isset($_GET['nav']) ? get_path($_GET['nav'], $user_data[3]) : get_path('dashboard', $user_data[3]); // 1st check if there is a link, if not, go to dashboard
+    $checkNav = isset($_GET['nav']) ? $_GET['nav'] : '';
+    
+    $sidebar  = get_sidebar($user_data[3], 0);
+
+    $notification = show_notification();
+
+    $notifCount = $notification['count'];
+    $notifBody = $notification['body'];
+
+    $school = get_school();
+
+    if (isset($_GET['notif'])) 
+    {
+        update_notification($_GET['notif'], $_SESSION['id']);
+    }
+
     $strand = get_education_courses(1);
     $course = get_education_courses(0);
     $notificationFunc = get_notif_func(1, true, " used_flag = 0");

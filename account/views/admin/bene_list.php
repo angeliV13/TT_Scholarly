@@ -1,123 +1,115 @@
 <main id="main" class="main">
-  <!-- Start of Page Title -->
-  <div class="pagetitle">
-      <h1>List of Beneficiaries</h1>
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Beneficiaries</li>
-          <li class="breadcrumb-item active">List of Beneficiaries</li>
+    <!-- Start of Page Title -->
+    <div class="pagetitle">
+        <h1>Beneficiaries</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item active">Beneficiaries</li>
+            <li class="breadcrumb-item active">List of Beneficiaries</li>
         </ol>
     </div>
-    <!-- End Page Title -->
-    <!-- End Page Title -->
-    <div class="container py-3">
-      <div class="dropdown">
-        <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Filter button <span class=" "></span></button>
-        <ul class="dropdown-menu">
-          <input class="form-control" id="myInput" type="text" placeholder="Search..">
-          <li><a href="#">HTML</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
-          <li><a href="#">jQuery</a></li>
-          <li><a href="#">Bootstrap</a></li>
-          <li><a href="#">Angular</a></li>
-        </ul>
-      </div>
-    </div>
-  <div class="column">
-    <div class="card">
-        <div class="header-group mb-3">
-          <h5 class="card-header bg-primary" style="color:white">FOR INTERVIEW</h5>
+    <section class="section">
+        <input type="hidden" id="applicationId" value="<?= isset($_GET['applicationId']) ? $_GET['applicationId'] : '' ?>">
+        <!-- QUERY OPTION -->
+        <div class="column">
+            <div class="col-lg-12">
+                <!-- Academic Year -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">List of Beneficiaries</h5>
+                        </div>
+                        <div class="row mb-1 justify-content-between">
+                            <form id="filterTable" class="row position-relative">
+                                <!-- Filter options -->
+                                <!-- Scholarship Type -->
+                                <label for="filterScholarType" class="col-sm-2 col-form-label">
+                                    <h6 class="font-bold">Scholarship Type:</h6>
+                                </label>
+                                <div class="col-sm-4" id="">
+                                    <select class="form-select" id="filterScholarType">
+                                        <option selected value="">-- </option>
+                                        <?php foreach ($scholarTypeArr as $key => $value): ?>
+                                            <option value="<?= $key ?>"><?= $value ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div> <!-- Education Level -->
+                                <label for="filterEducationLevel" class="col-sm-2 col-form-label">
+                                    <h6 class="font-bold">Education Level:</h6>
+                                </label>
+                                <div class="col-sm-4 ">
+                                    <select class="form-select" id="filterEducationLevel">
+                                        <option selected value="">-- </option>
+                                        <?php foreach ($schoolLevelArr as $key => $value): ?>
+                                            <option value="<?= $key ?>"><?= $value ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div> <label for="filterSchool" class="col-sm-2 col-form-label mt-4">
+                                    <h6 class="font-bold">Name of School</h6>
+                                </label>
+                                <div class="col-sm-4 mt-4">
+                                    <select class="form-select" id="filterSchool">
+                                        <option selected value="">-- </option>
+                                        <?php foreach ($school as $key => $value): ?>
+                                            <option value="<?= $key ?>"><?= $value['school_name'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div> <!-- Year Level -->
+                                <label for="filterYearLevel" class="mt-4 col-sm-2 col-form-label">
+                                    <h6 class="font-bold">Year Level:</h6>
+                                </label>
+                                <div id="yearLevelContainer" class="col-sm-4 mt-4">
+                                    <select class="form-select" id="filterYearLevel">
+                                        <option selected value="">-- </option>
+                                        <option value="5">5th Year</option>
+                                        <option value="4">4th Year</option>
+                                        <option value="3">3rd Year</option>
+                                        <option value="2">2nd Year</option>
+                                        <option value="1">1st Year</option>
+                                        <option value="12">Grade 12</option>
+                                        <option value="11">Grade 11</option>
+                                    </select>
+                                </div>
+                                <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
+                                    <button id="setFilter" class="btn btn-sm btn-danger shadow-sm">Set Filter </button>
+                                    <button class="btn btn-sm btn-danger" onclick="window.print()"> <i class="bi bi-printer"></i> Print List </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- TAB FOR COLLEGE LEVEL-->
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Beneficiaries</h5>
+                </div>
+                <div class="table-responsive ">
+                    <table id="listOfBeneficiaries" class="table table-striped header-fixed" width="100%" cellspacing="100%">
+                        <thead>
+                            <tr class="text-center small">
+                                <th>No.</th>
+                                <th>Name (LN, FN)</th>
+                                <th>School</th>
+                                <th>School Type</th>
+                                <th>Scholarship Type</th>
+                                <th>Educational Level</th>
+                                <th>Course</th>
+                                <th>Year Level</th>
+                                <th>Contact No.</th>
+                                <th>Barangay</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <div class= "table-responsive">
-              <!-- Table with stripped rows -->
-              <table class="table datatable table-bordered table-hover"  id="viewAdmin" width="100%" cellspacing="0" >
-                <thead>
-                  <tr class="text-center">
-                    <th>No</th>
-                    <th>Name (LN, FN, MN)</th>
-                    <th>Email Address</th>
-                    <th>School</th>
-                    <th>Year Level</th>
-                    <th>Course/Strand</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                      <td>1</td>
-                      <td>Brandon Jacob</td>
-                      <td>brandon@gmail.com</td>
-                      <td>BSU </td>
-                      <td>1st Year </td>
-                      <td>BSIT </td>
-                      <td>
-                        <div class="btn-group-vertical d-flex" >
-                          <button class="btn btn-primary" data-bs-toggle="modal">Check Profile</button>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Check Requirements</button>
-                          <button class="btn btn-warning" data-bs-toggle="modal">For Interview</button>
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Brandon Jacob</td>
-                      <td>brandon@gmail.com</td>
-                      <td>BSU </td>
-                      <td>1st Year </td>
-                      <td>BSIT </td>
-                      <td>
-                        <div class="btn-group-vertical d-flex">
-                          <button class="btn btn-primary" data-bs-toggle="modal">Check Profile</button>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Check Requirements</button>
-                          <button class="btn btn-warning" data-bs-toggle="modal">For Interview</button>
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Brandon Jacob</td>
-                      <td>brandon@gmail.com</td>
-                      <td>BSU </td>
-                      <td>1st Year </td>
-                      <td>BSIT </td>
-                      <td>
-                        <div class="btn-group-vertical d-flex" >
-                          <button class="btn btn-primary" data-bs-toggle="modal">Check Profile</button>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Check Requirements</button>
-                          <button class="btn btn-warning" data-bs-toggle="modal">For Interview</button>
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Brandon Jacob</td>
-                      <td>brandon@gmail.com</td>
-                      <td>BSU </td>
-                      <td>1st Year </td>
-                      <td>BSIT </td>
-                      <td>
-                        <div class="btn-group-vertical d-flex" >
-                          <button class="btn btn-primary" data-bs-toggle="modal">Check Profile</button>
-                          <button class="btn btn-dark" data-bs-toggle="modal">Check Requirements</button>
-                          <button class="btn btn-warning" data-bs-toggle="modal">For Interview</button>
-                          <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
-                        </div>
-                      </td>
-                    </tr>
-                </tbody>
-              </table>
-          </div>
-        </div>
-    </div>
-  </div>
-
-</main><!-- End #main -->
+    </section>
+</main>
+<!-- DRAGGABLE -->
+<script src="assets/js/mydiv.js"></script>

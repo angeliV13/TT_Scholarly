@@ -884,7 +884,7 @@ function addSchool($data)
 {
     include("dbconnection.php");
 
-    $sql = "INSERT INTO school (school_name, school_address, added_by, date_added, school_type) VALUES ('{$data['schoolName']}', '{$data['schoolAddress']}', '{$data['userId']}', NOW(), '{$data['schoolType']}')";
+    $sql = "INSERT INTO school (school_name, school_address, added_by, date_added, school_type, class_type) VALUES ('{$data['schoolName']}', '{$data['schoolAddress']}', '{$data['userId']}', NOW(), '{$data['schoolType']}', '{$data['schoolClass']}')";
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;
@@ -894,7 +894,7 @@ function updateSchool($data)
 {
     include("dbconnection.php");
 
-    $sql = "UPDATE school SET school_name = '{$data['name']}', school_address = '{$data['address']}', school_type = '{$data['type']}' WHERE id = '{$data['id']}'";
+    $sql = "UPDATE school SET school_name = '{$data['name']}', school_address = '{$data['address']}', school_type = '{$data['type']}', class_type = '{$data['class']}' WHERE id = '{$data['id']}'";
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;

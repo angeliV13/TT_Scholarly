@@ -230,6 +230,7 @@ function schoolTable()
             $addedBy = get_user_info($row['added_by']);
             $dateAdded = date("F d, Y h:i A", strtotime($row['date_added']));
             $schoolType = get_school_type($row['school_type']);
+            $schoolClass = $row['class_type'] == 0 ? "Public" : "Private";
 
             $name = $addedBy['first_name'] . " " . $addedBy['last_name'];
 
@@ -238,10 +239,11 @@ function schoolTable()
                 $schoolName,
                 $schoolAddress,
                 $schoolType,
+                $schoolClass,
                 // "<pre>" . print_r($addedBy, true) . "</pre>",
                 $name,
                 $dateAdded,
-                "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . $schoolName . "' data-address='" . $schoolAddress . "' data-type='" . $row['school_type'] . "'>Edit</button>
+                "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . $schoolName . "' data-address='" . $schoolAddress . "' data-type='" . $row['school_type'] . "' data-class='" . $row['class_type'] . "'>Edit</button>
                 <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . $schoolName . "'>Delete</button>",
             ];
 
@@ -280,8 +282,10 @@ function collegeNewApplicantTable()
 
     $totalData = $totalFiltered = 0;
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             extract($row);
 
             $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
@@ -350,6 +354,67 @@ function websiteSocials()
                 $dateAdded,
                 "<button type='button' class='editSocial btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#editSocialModal' data-id='" . $id . "' data-name='" . $socialName . "' data-type='" . $socialType . "' data-link='" . $link . "'>Edit</button>
                 <button type='button' class='deleteSocial btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . $socialName . " Social Link'>Delete</button>",
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+function benefListTable()
+{
+    include("dbconnection.php");
+
+    $acadYearId = getDefaultAcadYearId();
+    $semId      = getDefaultSemesterId();
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
+    $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
+
+    $sql = "SELECT * FROM account acc 
+            JOIN user_info inf ON acc.id = inf.account_id 
+            WHERE acc.account_type = '3' AND acc.account_status = '1'";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            extract($row);
+
+            $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
+            $education  = get_user_education($account_id, 1);
+            $button     = getInformationButton($row, $entries);
+            $scholarType = check_status($account_id);
+
+            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
+            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
+
+            $data[] = [
+                static_count(),
+                $last_name . ', ' . $first_name, //Name
+                (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name
+                (isset($schoolDetails['class_type']))    ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
+                (isset($scholarType['scholarType'])                 ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
+                (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
+                (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course
+                (isset($education[1]['year_level'])                 ? ($education[1]['year_level']) : ''), // Year Level
+                $contact_number, //Contact Number
+                $barangay, //Barangay
+                $button, // Buttons
             ];
 
             $totalData++;

@@ -1,24 +1,21 @@
 <?php
 
+include("validationModel.php");
 include("functionModel.php");
 
 function getUserNameFromId($id)
 {
     include("dbconnection.php");
 
-
     // Checks if Account Exists
 
-
     $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
-
-
     $query = $conn->query($sql) or die("Error UAQ000: " . $conn->error);
+
     while ($row = $query->fetch_assoc())
     {
         extract($row);
     }
-
 
     return $first_name . ' ' . $last_name;
 }
@@ -28,34 +25,18 @@ function userLogin($user_name, $password, $type)
 {
     include("dbconnection.php");
 
-
     // Checks if Account Exists
-
 
     $sql = ($type <= 1) ? "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= " . $type : "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= " . $type;
 
-
     $query = $conn->query($sql) or die("Error LQ001: " . $conn->error);
-
 
     if($query->num_rows > 0)
     {
         while ($row = $query->fetch_assoc())
         {
             extract($row);
-
-
         }      
-
-
-        // $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
-
-
-        // $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
-        // while ($row = $query->fetch_assoc())
-        // {
-        //     extract($row);
-        // }
 
         $sql = "SELECT scholarType FROM scholarship_application WHERE userId = '" . $id . "'";
         $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
@@ -70,15 +51,12 @@ function userLogin($user_name, $password, $type)
             $scholarApp = $scholarType;
         }
 
-
         session_start();
-
 
         $_SESSION['id'] = $id;
         $_SESSION['account_type'] = $account_type;
         $_SESSION['name'] = getUserNameFromId($id);
         $_SESSION['scholarType'] = $scholarApp;
-
 
         return 'Success';
     }
@@ -93,14 +71,14 @@ function user_sign_out()
 {
     session_start();
 
-
     if (isset($_SESSION['id']))
     {
         $account_type = $_SESSION['account_type'];
         unset($_SESSION['id']);
         unset($_SESSION['account_type']);
         unset($_SESSION['name']);
-        if($account_type>=2){
+        if($account_type>=2)
+        {
             return 'login.php';
         }
         else if($account_type<=1)
@@ -568,16 +546,17 @@ function updateGenInfo($data, $type = 0, $userId = "")
         $honor_flag = ($data['honor_flag'] == '0') ? 0 : 1;
         $honor_type = ($data['honor_type'] == '') ? 4 : $data['honor_type'];
         $other_honor = ($data['other_honor'] == '') ? "" : $data['other_honor'];
+        $gwa = ($data['gwa'] == '') ? '' : $data['gwa'];
 
         if ($exists == 0)
         {
-            $sql = "INSERT INTO gen_info (user_id, graduating_flag, honor_flag, honor_type, other_honor, graduation_year) VALUES
-                ('$userId', '$graduating_flag', '$honor_flag', '$honor_type', '$other_honor', '$graduation_year')";
+            $sql = "INSERT INTO gen_info (user_id, graduating_flag, honor_flag, honor_type, other_honor, graduation_year, gwa) VALUES
+                ('$userId', '$graduating_flag', '$honor_flag', '$honor_type', '$other_honor', '$graduation_year', '$gwa')";
         }
         else
         {
             $sql = "UPDATE gen_info SET graduating_flag = '$graduating_flag', honor_flag = '$honor_flag', honor_type = '$honor_type',
-                other_honor = '$other_honor', graduation_year = '$graduation_year' WHERE user_id = '$userId' LIMIT 1";
+                other_honor = '$other_honor', graduation_year = '$graduation_year', gwa = '$gwa' WHERE user_id = '$userId' LIMIT 1";
         }
     }
     else if ($type == 2) // Family
@@ -803,101 +782,16 @@ function getAccountInfo($id, $type = 0)
     }
 }
 
-function check_data($id)
+function check_application_data($id)
 {
     include("dbconnection.php");
-
-    // $genCol = get_table_columns('gen_info');
-    // $userFam = get_table_columns('user_family');
-    // $educ = get_table_columns('education');
-
-    // $data = [];
-
-    // $text = "";
-
-    // $sql = "SELECT * FROM gen_info WHERE user_id = '" . $id . "' LIMIT 1";
-    // $query = $conn->query($sql);
-
-    // if ($query->num_rows > 0)
-    // {
-    //     while ($row = $query->fetch_assoc())
-    //     {
-    //         foreach ($genCol as $key => $value)
-    //         {
-    //             if ($row[$value] == NULL)
-    //             {
-    //                 $data['General Information'][] = $value;
-    //             }
-    //         }
-    //     }
-    // }
-    // else
-    // {
-    //     return 'Error EQ002 (General Information): ' . $conn->error;
-    // }
-
-    // $sql = "SELECT * FROM user_family WHERE user_id = '" . $id . "'";
-    // $query = $conn->query($sql);
-
-    // if ($query->num_rows > 0)
-    // {
-    //     while ($row = $query->fetch_assoc())
-    //     {
-    //         foreach ($userFam as $key => $value)
-    //         {
-    //             if ($row[$value] == NULL)
-    //             {
-    //                 $data['Family Background'][] = $value;
-    //             }
-    //         }
-    //     }
-    // }
-    // else
-    // {
-    //     return 'Error EQ002 (Family Data): ' . $conn->error;
-    // }
-
-    // $sql = "SELECT * FROM education WHERE user_id = '" . $id . "'";
-    // $query = $conn->query($sql);
-
-    // if ($query->num_rows > 0)
-    // {
-    //     while ($row = $query->fetch_assoc())
-    //     {
-    //         foreach ($educ as $key => $value)
-    //         {
-    //             if ($row[$value] == NULL)
-    //             {
-    //                 $data['Educational Background'][] = $value;
-    //             }
-    //         }
-    //     }
-    // }
-    // else
-    // {
-    //     return 'Error EQ002 (Education Background): ' . $conn->error;
-    // }
-
-    // if ($data != null)
-    // {
-    //     foreach ($data as $key => $value)
-    //     {
-    //         $text .= "<h4>" . $key . "</h4>";
-
-    //         foreach ($value as $key2 => $value2)
-    //         {
-    //             $text .= "<p>" . $value2 . "</p>";
-    //         }
-    //     }
-
-    //     return $text;
-    // }
 
     $stat = check_status($id);
     $info_flag = $stat['info_flag']; if ($info_flag == 0) return "Please complete your personal information.";
     $educ_flag = $stat['educ_flag']; if ($educ_flag == 0) return "Please complete your educational background.";
     $family_flag = $stat['family_flag']; if ($family_flag == 0) return "Please complete your family background.";
     $add_flag = $stat['add_flag']; if ($add_flag == 0) return "Please complete your other general information.";
+    $req_flag = $stat['req_flag']; if ($req_flag == 0) return "Please complete your requirements.";
 
     return "success";
 }
@@ -907,7 +801,7 @@ function submitApplication($id)
 {
     include("dbconnection.php");
 
-    $res = check_data($id); if ($res != "success") return $res;
+    $res = check_application_data($id); if ($res != "success") return $res;
 
     $sql = "SELECT email FROM account WHERE id = '$id' LIMIT 1";
     $query = $conn->query($sql);
@@ -921,13 +815,22 @@ function submitApplication($id)
     $rows = $query->fetch_assoc();
     $name = $rows['name'];
 
+    $adminEmail = [
+        'table' => 'account',
+        'column' => [
+            'account_type' => 1,
+        ]
+    ];
+
+    $adEmail = check_exist_multiple($adminEmail); if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+
     $msg = '<p>Hi '.$name.',<br></p>';
     $msg .= '<p>Your scholarship application has been submitted. You will be notified once your application has been reviewed.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($email, 'Application Submission', $msg, 2); if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+    $sendEmail = sendEmail($email, $name . ' - Scholarship Application Submission', $msg, 2, $adEmail); if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $notifiedUsers = get_notif_type(2);
 
@@ -935,7 +838,7 @@ function submitApplication($id)
         'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => 2,
         'notif_body'    => $name . ' has submitted a scholarship application.',
-        'notif_link'    => '?nav=Adaccount-management',
+        'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
     ];
 
     $notif = insert_notification($notifData); if ($notif !== 'success') return 'Error: ' . $notif;

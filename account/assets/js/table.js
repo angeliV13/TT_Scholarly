@@ -284,4 +284,43 @@ $(document).ready(function(){
         },
         stateSave   	: false
     });
+
+    // Benef List Table
+    let benefListTable = $('#listOfBeneficiaries').DataTable( {
+        "lengthChange"  : false,
+        "paging"        : false,
+        "searching"     : true,
+        "processing"    : true,
+        "ordering"      : false,
+        "serverSide"    : false,
+        "bInfo" 		: false,
+        "ajax":{
+            url     :"controller/tableHandler.php", // json datasource
+            type    : "post",  // method  , by default get
+            data    : {
+                        "action"   	    : 7,
+                    },
+            error: function(data){  // error handling
+                console.log(data);
+                var columnCount = $('#listOfBeneficiaries').DataTable().columns().count();
+                $(".listOfBeneficiaries-error").html("");
+                $("#listOfBeneficiaries").append(`<tbody class="listOfBeneficiaries-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#listOfBeneficiaries_processing").css("display","none"); 
+            }
+        },
+        "createdRow": function( row, data, index ) {},
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language	: {
+                    processing	: "<span class='loader'></span>"
+        },
+        fixedColumns:   {
+                leftColumns: 0
+        },
+        scrollY     	: false,
+        scrollCollapse	: false,
+        scroller    	: {
+            loadingIndicator    : false
+        },
+        stateSave   	: false
+    });
 });

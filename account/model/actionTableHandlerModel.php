@@ -62,7 +62,7 @@ function getInformationButton($row, $file)
                         </div>
                     </div>
                     <!-- REMOVE BUTTON -->
-                    <button id="removeApplicant" type="button" class="btn btn-danger">Removed Applicant</button>
+                    <button id="removeApplicant" type="button" class="btn btn-danger">Remove Applicant</button>
                 </div>';
 
     // 

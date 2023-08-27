@@ -17,12 +17,22 @@
       </li><!-- End Dashboard Nav -->
 
       <!--  -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php?nav=apply_applicant">
+      <li class="nav-item" id="reqLi" data-status = "<?= ($status['add_flag'] == 0) ? "disabled" : "" ?>">
+        <a class="nav-link collapsed" id="reqBtn" href="index.php?nav=apply_applicant">
           <i class="bi bi-files"></i>
           <span>General Requirements</span>
         </a>
       </li><!-- End Dashboard Nav -->
+
+      <!-- Submit Application -->
+      <?php if ($status['req_flag'] == 1 AND !$finishFlag): ?>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" id="submitApplication">
+            <i class="bi bi-file-check"></i>
+            <span>Submit Application</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+      <?php endif; ?>
 
       <?php $scholar_type = 2;
       $scholarType = 1 + $scholar_type; ?>
