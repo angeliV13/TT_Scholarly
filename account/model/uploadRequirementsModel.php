@@ -13,37 +13,37 @@ function getFileChecks($check, $file)
     }
 }
 
-function getDefaultAcadYearId()
-{
-    include("dbconnection.php");
+// function getDefaultAcadYearId()
+// {
+//     include("dbconnection.php");
 
-    $sql = "SELECT * FROM acad_year WHERE default_ay = 1";
-    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+//     $sql = "SELECT * FROM acad_year WHERE default_ay = 1";
+//     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
-            extract($row);
+//     if ($query->num_rows <>  0) {
+//         while ($row = $query->fetch_assoc()) {
+//             extract($row);
 
-            return $id;
-        }
-    }
-}
+//             return $id;
+//         }
+//     }
+// }
 
-function getDefaultSemesterId()
-{
-    include("dbconnection.php");
+// function getDefaultSemesterId()
+// {
+//     include("dbconnection.php");
 
-    $sql = "SELECT * FROM semester WHERE default_sem = 1";
-    $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
+//     $sql = "SELECT * FROM semester WHERE default_sem = 1";
+//     $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
 
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
-            extract($row);
+//     if ($query->num_rows <>  0) {
+//         while ($row = $query->fetch_assoc()) {
+//             extract($row);
 
-            return $id;
-        }
-    }
-}
+//             return $id;
+//         }
+//     }
+// }
 
 function getRequirementsTable($type)
 {
@@ -340,7 +340,6 @@ function getAssessmentBeneTable()
 }
 
 
-
 function uploadFile($target_dir, $file, $file_name, $extension_array = array("pdf"))
 {
 
@@ -460,19 +459,19 @@ function updateRequirement($ay, $sem, $userid, $file, $requirement, $status, $ta
     $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
 }
 
-function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0){
-    include("dbconnection.php");
+// function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0){
+//     include("dbconnection.php");
 
-    $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ORDER BY id ASC";
-    $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
+//     $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ORDER BY id ASC";
+//     $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
 
-    if($fetch == 0){
-        return $query;
-    }elseif($fetch == 1){
-        return $query->fetch_all(MYSQLI_ASSOC);
-    }
+//     if($fetch == 0){
+//         return $query;
+//     }elseif($fetch == 1){
+//         return $query->fetch_all(MYSQLI_ASSOC);
+//     }
     
-}
+// }
 
 function getApplicationTable()
 {

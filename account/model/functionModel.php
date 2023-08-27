@@ -1012,5 +1012,81 @@ function updateApplication($type, $id)
     return ($query) ? 'success' : $conn->error;
 }
 
+function getDefaultAcadYearColumn($column)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT {$column} FROM acad_year WHERE default_ay = 1";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+            extract($row);
+
+            return (${$column});
+        }
+    }
+}
+
+function getDefaultAcadYearId()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM acad_year WHERE default_ay = 1";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+            extract($row);
+
+            return $id;
+        }
+    }
+}
+
+function getDefaultSemesterId()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM semester WHERE default_sem = 1";
+    $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+            extract($row);
+
+            return $id;
+        }
+    }
+}
+
+function getCheckboxValueDB($value)
+{
+    return ($value == 1) ? 'checked' : '';
+}
+
+function getAudience($shs, $colEAPub, $colEAPriv, $colSc)
+{
+    $audience = ($shs          == 1) ? 'Senior High <br>' : '';
+    $audience .= ($colEAPub     == 1) ? 'College EA Public <br>' : '';
+    $audience .= ($colEAPriv    == 1) ? 'College EA Private <br>' : '';
+    $audience .= ($colSc        == 1) ? 'College Scholarship <br>' : '';
+    return $audience;
+}
+
+function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ORDER BY id ASC";
+    $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
+
+    if($fetch == 0){
+        return $query;
+    }elseif($fetch == 1){
+        return $query->fetch_all(MYSQLI_ASSOC);
+    }
+    
+}
+
 
 

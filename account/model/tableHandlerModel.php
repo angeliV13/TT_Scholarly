@@ -2,7 +2,7 @@
 
 include("functionModel.php");
 include("actionTableHandlerModel.php");
-include("uploadRequirementsModel.php");
+// include("uploadRequirementsModel.php");
 include("../global_variables.php");
 
 function accountListingTable($acc_type)
@@ -392,13 +392,13 @@ function graduatesTable()
         while ($row = $query->fetch_assoc()) {
             extract($row);
 
-            $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
-            $education  = get_user_education($account_id, 1);
-            $button     = getInformationButton($row, $entries);
-            $scholarType = check_status($account_id);
+            // $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
+            // $education  = get_user_education($account_id, 1);
+            // $button     = getInformationButton($row, $entries);
+            // $scholarType = check_status($account_id);
 
-            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
-            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
+            // $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
+            // $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
 
             $data[] = [
                 static_count(),
