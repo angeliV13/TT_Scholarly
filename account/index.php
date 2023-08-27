@@ -10,6 +10,27 @@ include('path_identifier.php');
 include('model/validationModel.php');
 include('model/functionModel.php');
 include('global_variables.php');
+include('controller/njs_get_user_data.php');
+
+$title = get_title();
+
+$nav = isset($_GET['nav']) ? get_path($_GET['nav'], $user_data[3]) : get_path('dashboard', $user_data[3]); // 1st check if there is a link, if not, go to dashboard
+$checkNav = isset($_GET['nav']) ? $_GET['nav'] : '';
+    
+$sidebar  = get_sidebar($user_data[3], 0);
+
+$notification = show_notification();
+
+$notifCount = $notification['count'];
+$notifBody = $notification['body'];
+
+$school = get_school();
+
+if (isset($_GET['notif'])) 
+{
+    update_notification($_GET['notif'], $_SESSION['id']);
+}
+
 
 ?>
 

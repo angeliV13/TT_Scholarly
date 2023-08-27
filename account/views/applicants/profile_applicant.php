@@ -295,11 +295,9 @@
                           <?php if ($gen_info != null) : ?>
                             <select class="form-select" name="Honor Type" id="honor_type" <?= $finishFlag ? "disabled" : "" ?>>
                               <option selected disabled value="">Choose...</option>
-                              <option value="0" <?php echo $gen_info['honor_type'] == 0 ? "selected" : "" ?>>With Highest Honors</option>
-                              <option value="1" <?php echo $gen_info['honor_type'] == 1 ? "selected" : "" ?>>With High Honors</option>
-                              <option value="2" <?php echo $gen_info['honor_type'] == 2 ? "selected" : "" ?>>With Honors</option>
-                              <option value="3" <?php echo $gen_info['honor_type'] == 3 ? "selected" : "" ?>>Others</option>
-                              <option value="4" <?php echo $gen_info['honor_type'] == 3 ? "selected" : "" ?>>N/A</option>
+                              <?php foreach ($awardArr AS $key => $awa): ?>
+                                <option value="<?php echo $key ?>" <?php echo $gen_info['honor_type'] == $key ? "selected" : "" ?>><?php echo $awa ?></option>
+                              <?php endforeach; ?>
                             </select>
                             <div class="invalid-tooltip">
                               Please select Awards/Honor.
@@ -312,10 +310,9 @@
                       <?php else : ?>
                         <select class="form-select" id="honor_type" name="Honor Type">
                           <option selected disabled value="">Choose...</option>
-                          <option value="0">With Highest Honors</option>
-                          <option value="1">With High Honors</option>
-                          <option value="2">With Honors</option>
-                          <option value="3">Others</option>
+                          <?php foreach ($awardArr AS $key => $awa): ?>
+                            <option value="<?php echo $key ?>"><?php echo $awa ?></option>
+                          <?php endforeach; ?>
                         </select>
                         <div class="invalid-tooltip">
                           Please select Awards/Honor.

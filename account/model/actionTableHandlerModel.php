@@ -3,6 +3,8 @@
 function getInformationButton($row, $file)
 {
     include('dbconnection.php');
+    include("../global_variables.php");
+
     extract($row);
 
     $personalInfo = getPersonalInfo($row);
@@ -71,6 +73,7 @@ function getInformationButton($row, $file)
 
 function getPersonalInfo($row)
 {
+    include("../global_variables.php");
     extract($row);
 
     $personalInfo = '<!--PERSONAL INFORMATION-->
@@ -105,7 +108,7 @@ function getPersonalInfo($row)
                                     <label for="telephone" class="form-label">Contact Number</label>
                                     <div class="input-group">
                                         <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                        <input disabled type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" value="' . $contact_number . '" required>
+                                        <input disabled type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" value="' . substr($contact_number, 2) . '" required>
                                     </div>
                                 </div>
                                 <div class="col-md-7 position-relative">
@@ -145,7 +148,7 @@ function getPersonalInfo($row)
                                 <!-- CITIZENSHIP -->
                                 <div class="col-md-3 position-relative">
                                     <label for="inputCitizenship" class="form-label">Citizenship</label>
-                                    <input disabled type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="' . $citizenship . '" required>
+                                    <input disabled type="citizenship" class="form-control" id="inputCitizenship" aria-describedby="inputCitizenship" value="' . $citizenshipArr[$citizenship] . '" required>
                                 </div>
                                 <!-- RESIDENCY -->
                                 <div class="col-md-4 position-relative">
@@ -160,41 +163,16 @@ function getPersonalInfo($row)
                                 <!-- START RELIGION -->
                                 <div class="col-md-4 position-relative">
                                     <label for="inputReligion" class="form-label">Religion</label>
-                                    <input disabled type="Religion" class="form-control" id="inputReligion" aria-describedby="inputReligion" value="' . ucfirst($religion) . '" required>
+                                    <input disabled type="Religion" class="form-control" id="inputReligion" aria-describedby="inputReligion" value="' . $religionArr[$religion] . '" required>
                                 </div>
                                 <!-- SEX -->
-
-                                
                                 <div class="col-md-4 position-relative">
-                                    <label for="inputGender" class="form-label">Gender</label>
-                                    <select class="form-select" id="inputGender" required>
-                                        <option selected disabled value="">Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                    <div class="invalid-tooltip">
-                                        Please
-                                        select
-                                        a
-                                        valid
-                                        Gender.
-                                    </div>
+                                    <label for="Gender" class="form-label">Gender</label>
+                                    <input disabled type="text" class="form-control" id="Gender" aria-describedby="Gender" value="' . $genderArr[$religion] . '" required>
                                 </div>
-                                
-                                <!--CIVIL STATUS -->
                                 <div class="col-md-4 position-relative">
-                                    <label for="inputCivilStatus" class="form-label">Civil Status</label>
-                                    <select class="form-select" id="inputCivilStatus" required>
-                                        <option selected disabled value="">Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                    <div class="invalid-tooltip">
-                                        Please
-                                        select
-                                        a
-                                        valid
-                                        Civil
-                                        Status.
-                                    </div>
+                                    <label for="civilStatus" class="form-label">Civil Status</label>
+                                    <input disabled type="text" class="form-control" id="civilStatus" aria-describedby="civilStatus" value="' . $civilArr[$religion] . '" required>
                                 </div>
                             </form>
                         </div>';
@@ -204,6 +182,7 @@ function getPersonalInfo($row)
 
 function getEducationBG($account_id)
 {
+    include("../global_variables.php");
     $gen_info = get_user_gen_info($account_id);
     $education = get_user_education($account_id);
     $family = get_user_family($account_id);
@@ -223,60 +202,23 @@ function getEducationBG($account_id)
                             <!-- FULL NAME -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputGraduatingSem" class="form-label">Are you Graduating this Semester/Term?</label>
-                                <select class="form-select" id="inputGraduatingSem" disabled>
-                                    <option selected disabled value="">'. (isset($gen_info['graduating_flag']) ? ($gen_info['graduating_flag'] == 0 ? 'Yes' : 'No') : '') .'</option>
-                                </select>
-                                <div class="invalid-tooltip">
-                                    Please
-                                    select
-                                    Yes
-                                    or
-                                    No.
-                                </div>
+                                <input type="text" class="form-control" id="inputGraduatingSem" aria-describedby="inputGraduatingSem" value="' . ($gen_info['graduating_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
                             </div>
                             <div class="col-md-6 position-relative">
                                 <label for="inputGraduatingHonors" class="form-label">Are you Graduating with Honors?</label>
-                                <select class="form-select" id="inputGraduatingHonors" disabled>
-                                    <option selected disabled value="">'.(isset($gen_info['honor_flag']) ? ($gen_info['honor_flag'] == 0 ? 'Yes' : 'No' ) : '') .'</option>
-                                </select>
-                                <div class="invalid-tooltip">
-                                    Please
-                                    select
-                                    Yes
-                                    or
-                                    No.
-                                </div>
+                                <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . ($gen_info['honor_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
                             </div>
                             <div class="col-md-4 position-relative">
                                 <label for="inputSpecifyAward" class="form-label">Specify your Award/Honor</label>
-                                <select class="form-select" id="inputSpecifyAward" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                                <div class="invalid-tooltip">
-                                    Please
-                                    select
-                                    Awards/Honor.
-                                </div>
+                                <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . $awardArr[$gen_info['honor_type']]  . '" disabled>
                             </div>
                             <div class="col-md-8 position-relative">
                                 <label for="inputOthers" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
-                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="" required>
+                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="'.$gen_info['other_honor'].'" disabled>
                             </div>
                             <div class="col-md-6 position-relative">
                                 <label for="inputYearGraduation" class="form-label">If not Graduating, what year are you Graduating?</label>
-                                <select class="form-select" id="inputYearGraduation" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
-                                <div class="invalid-tooltip">
-                                    Please
-                                    select
-                                    expected
-                                    Year
-                                    of
-                                    Graduation.
-                                </div>
+                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="'.$gradYear[$gen_info['graduation_year']].'" disabled>
                             </div>
                             <!-- END FULL NAME -->
                         </form>
@@ -1452,110 +1394,125 @@ function getFamilyBG($account_id)
 
 function getProfile($row, $personalInfo, $educationBG, $familyBG, $additionalBG)
 {
+    include("../global_variables.php");
+
     extract($row);
+
+    $gen_info = get_user_gen_info($account_id);
+    $source = $incomeArr[$gen_info['source']];
+    $gwa = $gen_info['gwa'];
+    $self_pwd_flag = ($gen_info['self_pwd_flag'] == 0) ? "checked" : "";
+    $working_flag = ($gen_info['working_flag'] == 0) ? "checked" : "";
 
     $profile = '<!--Profile -->
                 <div id="profile' . $account_id . '" class="row">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="card-title">Profile Checking</h5>
-                                    <div class="d-flex align-items-center">
+                ';
+    if ($account_type == 3) 
+    {
+        $profile .= '<div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">Profile Checking</h5>
+                                <div class="d-flex align-items-center">
+                                </div>
+                            </div>
+                            <!--SUB FORMS-->
+                            <div class="overflow-auto-x" style="height: 100%">
+                                <!-- Multi Columns Form -->
+                                <form class="row g-3 py-2">
+                                    <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
+                                        Applicant\'s other Information
+                                    </h4>
+                                    <hr class="my-3">
+                                    <div class="row mb-4">
+                                        <label for="inputIncome" class="col-sm-3 col-form-label">Income:</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group mb-2">
+                                                <input disabled type="inputIncome" class="form-control" placeholder="Applicant\'s Income" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="'.$source.'" />
+                                                <input disabled type="inputIncomepoints" class="col form-control" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--SUB FORMS-->
-                                <div class="overflow-auto-x" style="height: 100%">
-                                    <!-- Multi Columns Form -->
-                                    <form class="row g-3 py-2">
+                                    <div class="row mb-3">
+                                        <label for="inputGrade" class="col-sm-3 col-form-label">GWA:</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group mb-2">
+                                                <input disabled type="inputGradepoints" class="form-control" placeholder="Applicant\'s General Weightd Average" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="'.$gwa.'"/>
+                                                <input disabled type="inputGradepoints" class="col form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="inputSchooltype" class="col-sm-3 col-form-label">School Type:</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group mb-2">
+                                                <input disabled type="inputSchooltype" class="form-control" placeholder="School Type" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="'.$gwa.'"/>
+                                                <input disabled type="inputSchooltype" class="col form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="inputResidency" class="col-sm-3 col-form-label">Residency:</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group mb-2">
+                                                <input disabled type="inputPointsResidency" class="form-control" placeholder="Applicant\'s Year/s of Residency" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="'.$years_of_residency.'"/>
+                                                <input disabled type="inputPointsResidency" class="col form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
                                         <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
-                                            Applicant\'s other Information
-                                        </h4>
-                                        <hr class="my-3">
-                                        <div class="row mb-4">
-                                            <label for="inputIncome" class="col-sm-3 col-form-label">Income:</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group mb-2">
-                                                    <input disabled type="inputIncome" class="form-control" placeholder="Applicant\'s Income" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" />
-                                                    <input disabled type="inputIncomepoints" class="col form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputGrade" class="col-sm-3 col-form-label">GWA:</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group mb-2">
-                                                    <input disabled type="inputGradepoints" class="form-control" placeholder="Applicant\'s General Weightd Average" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" />
-                                                    <input disabled type="inputGradepoints" class="col form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputSchooltype" class="col-sm-3 col-form-label">School Type:</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group mb-2">
-                                                    <input disabled type="inputSchooltype" class="form-control" placeholder="School Type" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" />
-                                                    <input disabled type="inputSchooltype" class="col form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="inputResidency" class="col-sm-3 col-form-label">Residency:</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group mb-2">
-                                                    <input disabled type="inputPointsResidency" class="form-control" placeholder="Applicant\'s Year/s of Residency" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" />
-                                                    <input disabled type="inputPointsResidency" class="col form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
-                                                Applicant\'s additional
-                                                Information</h4>
-                                        </div>
-                                        <hr class="my-2">
-                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="applicantPwdCheckBox">
-                                            <label class="mx-2 form-check-label" for="applicantPwdCheckBox"> Applicant PWD </label>
-                                        </div>
-                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="selfSupportingCheckBox">
-                                            <label class="mx-2 form-check-label" for="selfSupportingCheckBox"> Self-Supporting </label>
-                                        </div>
-                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="continuingStudentCheckBox">
-                                            <label class="mx-2 form-check-label" for="continuingStudentCheckBox"> Continuing Student </label>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
-                                                Family\'s additional
-                                                Information</h4>
-                                        </div>
-                                        <hr class="my-2">
-                                        <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="parFamPwdCheckBox">
-                                            <label class="mx-2 form-check-label" for="parFamPwdCheckBox"> Parents/Other family members PWD </label>
-                                        </div>
-                                        <div class="d-flex "> <input class="form-check-input" type="checkbox" value="" id="singleParentCheckBox">
-                                            <label class="mx-2 form-check-label" for="singleParentCheckBox"> Single Parent </label>
-                                        </div>
-                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="parentDeceasedCheckBox">
-                                            <label class="mx-2 form-check-label" for="parentDeceasedCheckBox"> Parent Deceased </label>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text ">
-                                                Other Information</h4>
-                                        </div>
-                                        <hr class="my-2">
-                                        <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="jobOrderCheckBox">
-                                            <label class="mx-2 form-check-label" for="jobOrderCheckBox"> City Employee Immediate Family Member <br>(Job Order)</br> </label>
-                                        </div>
-                                        <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="recommendedCheckBox">
-                                            <label class="mx-2 form-check-label" for="recommendedCheckBox"> Informed thru/Recommended by <br> Mayor/Vice Mayor/Councilor </br> </label>
-                                        </div>
-                                    </form>
-                                    <!-- End Multi Columns Form -->
-                                </div>
+                                            Applicant\'s additional
+                                            Information</h4>
+                                    </div>
+                                    <hr class="my-2">
+                                    <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="applicantPwdCheckBox" '.$self_pwd_flag.' disabled>
+                                        <label class="mx-2 form-check-label" for="applicantPwdCheckBox"> Applicant PWD </label>
+                                    </div>
+                                    <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="selfSupportingCheckBox" '.$working_flag.' disabled>
+                                        <label class="mx-2 form-check-label" for="selfSupportingCheckBox"> Self-Supporting </label>
+                                    </div>
+                                    <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="continuingStudentCheckBox">
+                                        <label class="mx-2 form-check-label" for="continuingStudentCheckBox"> Continuing Student </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text">
+                                            Family\'s additional
+                                            Information</h4>
+                                    </div>
+                                    <hr class="my-2">
+                                    <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="parFamPwdCheckBox">
+                                        <label class="mx-2 form-check-label" for="parFamPwdCheckBox"> Parents/Other family members PWD </label>
+                                    </div>
+                                    <div class="d-flex "> <input class="form-check-input" type="checkbox" value="" id="singleParentCheckBox">
+                                        <label class="mx-2 form-check-label" for="singleParentCheckBox"> Single Parent </label>
+                                    </div>
+                                    <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="parentDeceasedCheckBox">
+                                        <label class="mx-2 form-check-label" for="parentDeceasedCheckBox"> Parent Deceased </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4 class="menu-content text-muted mb-0 fs-6 fw-bold text ">
+                                            Other Information</h4>
+                                    </div>
+                                    <hr class="my-2">
+                                    <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="jobOrderCheckBox">
+                                        <label class="mx-2 form-check-label" for="jobOrderCheckBox"> City Employee Immediate Family Member <br>(Job Order)</br> </label>
+                                    </div>
+                                    <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="recommendedCheckBox">
+                                        <label class="mx-2 form-check-label" for="recommendedCheckBox"> Informed thru/Recommended by <br> Mayor/Vice Mayor/Councilor </br> </label>
+                                    </div>
+                                </form>
+                                <!-- End Multi Columns Form -->
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                </div>';
+    }
+
+    $col = ($account_type == 2) ? "12" : "8";
+                
+    $profile .='    <div class="col-lg-'. $col .'">
                         <div class="container h-500">
                             <div class="row d-flex justify-content-center h-100">
                                 <div class="col col-lg-500 col-xl-500">
@@ -2066,8 +2023,20 @@ function getRequirements($row, $file)
     return $requirements;
 }
 
-function getAdditionalBG($row){
+function getAdditionalBG($row)
+{
+    include("../global_variables.php");
+
     extract($row);
+
+    $gen_info = get_user_gen_info($account_id);
+    $working_flag = ($gen_info['working_flag'] == 0 ? 'Yes' : 'No');
+    $ofw_flag = ($gen_info['ofw_flag'] == 0 ? 'Yes' : 'No');
+    $other_ofw = ($gen_info['other_ofw'] == 0 ? 'Yes' : 'No');
+    $pwd_flag = ($gen_info['pwd_flag'] == 0 ? 'Yes' : 'No');
+    $other_pwd = ($gen_info['other_pwd'] == 0 ? 'Yes' : 'No');
+    $status_flag = $gen_info['status_flag'];
+    $self_pwd_flag = ($gen_info['self_pwd_flag'] == 0 ? 'Yes' : 'No');
 
     $additionalBG = '<!--ADDITIONAL BACKGROUND-->
                     <div class="tab-pane fade" id="bordered-justified-additional-information' . $account_id . '" role="tabpanel" aria-labelledby="additional-information">
@@ -2082,58 +2051,37 @@ function getAdditionalBG($row){
                             <!-- WORKING STUDENT -->
                             <div class="col-md-4 position-relative">
                                 <label for="inputWorkingStudent" class="form-label">Are you a Working Student?</label>
-                                <select class="form-select" id="inputWorkingStudent" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputWorkingStudent" value="'.$working_flag.'" disabled>
                             </div>
                             <!---OFW PARENTS -->
                             <div class="col-md-8 position-relative">
                                 <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
-                                <select class="form-select" id="inputOfwParents" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputOfwParents" value="'.$ofw_flag.'" disabled>
                             </div>
                             <!--OFW FAMILY MEMBERS -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
-                                <select class="form-select" id="inputOfwMembers" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputOfwParents" value="'.$other_ofw.'" disabled>
                             </div>
                             <!---PWD PARENTS -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
-                                <select class="form-select" id="inputPwdParents" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputPwdParents" value="'.$pwd_flag.'" disabled>
                             </div>
                             <!---PWD FAMILY MEMBERS -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
-                                <select class="form-select" id="inputOfwMembers" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputPwdParents" value="'.$other_pwd.'" disabled>
                             </div>
                             <!---PARENTS STATUS -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputParentStatus" class="form-label">What is your Parents Status?</label>
-                                <select class="form-select" id="inputParentStatus" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputParentStatus" value="'.$civilArr[$status_flag].'" disabled>
                             </div>
                             <!---STUDENT PWD -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
-                                <select class="form-select" id="inputStudentPwd" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputStudentPwd" value="'.$self_pwd_flag.'" disabled>
                             </div>
                         </form>
                         <!-- End Custom Styled Validation with Tooltips -->
