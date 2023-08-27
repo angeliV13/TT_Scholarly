@@ -246,546 +246,536 @@
                     </form>
                   </div>
 
-                    <!-- EDUCATIONAL BACKGROUND -->
-                    <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
-                      <form method="post" id="educationBG">
-                        <div class="card">
-                          <div class="card-body">
-                            <h5 class="card-title"> General Education Information</h5>
-                            <div class="row g-4">
-                              <!-- FULL NAME -->
-                              <div class="col-md-6 position-relative">
-                                <label for="graduating_flag" class="form-label">Are you Graduating this Semester/Term?</label>
-                                <?php if ($gen_info != null) : ?>
-                                  <select class="form-select" name="Graduating Flag" id="graduating_flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option value="0" <?php echo $gen_info['graduating_flag'] == 0 ? "selected" : "" ?>>Yes</option>
-                                    <option value="1" <?php echo $gen_info['graduating_flag'] == 1 ? "selected" : "" ?>>No</option>
-                                  </select>
-                                <?php else : ?>
-                                  <select class="form-select" id="graduating_flag" name="Graduating Flag">
-                                    <option selected disabled value="">Choose...</option>
-                                    <option value="0">Yes</option>
-                                    <option value="1">No</option>
-                                  </select>
-                                <?php endif; ?>
-                                <div class="invalid-tooltip">
-                                  Please select Yes or No.
-                                </div>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="honor_flag" class="form-label">Are you Graduating with Honors?</label>
-                                <?php if ($gen_info != null) : ?>
-                                  <select class="form-select" name="Graduating with Honor Flag" id="honor_flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option value="0" <?php echo $gen_info['honor_flag'] == 0 ? "selected" : "" ?>>Yes</option>
-                                    <option value="1" <?php echo $gen_info['honor_flag'] == 1 ? "selected" : "" ?>>No</option>
-                                  </select>
-                                <?php else : ?>
-                                  <select class="form-select" id="honor_flag" name="Graduating with Honor Flag">
-                                    <option selected disabled value="">Choose...</option>
-                                    <option value="0">Yes</option>
-                                    <option value="1">No</option>
-                                  </select>
-                                <?php endif; ?>
-                                <div class="invalid-tooltip">
-                                  Please select Yes or No.
-                                </div>
-                              </div>
-                              <div class="col-md-4 position-relative">
-                                <label for="honor_type" class="form-label">Specify your Award/Honor</label>
-                                <?php if ($gen_info != null) : ?>
-                                  <select class="form-select" name="Honor Type" id="honor_type" <?= $finishFlag ? "disabled" : "" ?>>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option value="0" <?php echo $gen_info['honor_type'] == 0 ? "selected" : "" ?>>With Highest Honors</option>
-                                    <option value="1" <?php echo $gen_info['honor_type'] == 1 ? "selected" : "" ?>>With High Honors</option>
-                                    <option value="2" <?php echo $gen_info['honor_type'] == 2 ? "selected" : "" ?>>With Honors</option>
-                                    <option value="3" <?php echo $gen_info['honor_type'] == 3 ? "selected" : "" ?>>Others</option>
-                                    <option value="4" <?php echo $gen_info['honor_type'] == 3 ? "selected" : "" ?>>N/A</option>
-                                  </select>
-                                  <div class="invalid-tooltip">
-                                    Please select Awards/Honor.
-                                  </div>
-                              </div>
-                              <div class="col-md-8 position-relative">
-                                <label for="other_honor" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
-                                <input type="text" class="form-control" id="other_honor" name="Other Honor" aria-describedby="other_honor" value="<?= $gen_info['other_honor'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
-                              </div>
-                            <?php else : ?>
-                              <select class="form-select" id="honor_type" name="Honor Type">
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0">With Highest Honors</option>
-                                <option value="1">With High Honors</option>
-                                <option value="2">With Honors</option>
-                                <option value="3">Others</option>
-                              </select>
-                              <div class="invalid-tooltip">
-                                Please select Awards/Honor.
-                              </div>
-                            </div>
-                            <div class="col-md-8 position-relative">
-                              <label for="other_honor" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
-                              <input type="text" class="form-control" id="other_honor" aria-describedby="other_honor" name="Other Honor">
-                            </div>
-                          <?php endif; ?>
-                          <div class="col-md-6 position-relative">
-                            <label for="graduation_year" class="form-label">If not Graduating, what year are you Graduating?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" name="Year of Graduation" id="graduation_year" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
-                                  <option value="<?php echo $i ?>" <?php echo $gen_info['graduation_year'] == $i ? "selected" : "" ?>><?php echo $i ?></option>
-                                <?php endfor; ?>
-                              </select>
-                              <div class="invalid-tooltip">
-                                Please select expected Year of Graduation.
-                              </div>
-                            <?php else : ?>
-                              <select class="form-select" id="graduation_year" name="Year of Graduation">
-                                <option selected disabled value="">Choose...</option>
-                                <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
-                                  <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                                <?php endfor; ?>
-                              </select>
-                            <?php endif; ?>
-                            <div class="invalid-tooltip">
-                              Please select expected Year of Graduation.
-                            </div>
-                          </div>
-                          <!-- END FULL NAME -->
-                          </div><!-- End Custom Styled Validation with Tooltips -->
-                        </div>
-                    </div>
-                    <input type="hidden" id="collegeId" value="<?= (!isset($education[1]['educ_id'])) ? "" : $education[1]['educ_id'] ?>">
-                    <input type="hidden" id="shsId" value="<?= (!isset($education[2]['educ_id'])) ? "" : $education[2]['educ_id'] ?>">
-                    <input type="hidden" id="jhsId" value="<?= (!isset($education[3]['educ_id'])) ? "" : $education[3]['educ_id'] ?>">
-                    <input type="hidden" id="elemId" value="<?= (!isset($education[4]['educ_id'])) ? "" : $education[4]['educ_id'] ?>">
-                    <?php if ($_SESSION['scholarType'] == 1) : ?>
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">College Level</h5>
-                          <!-- Custom Styled Validation with Tooltips -->
-                          <?php if (isset($education[1])) : ?>
-                            <div class="row g-4">
-                              <!-- COLLEGE -->
-                              <div class="col-md-3 position-relative">
-                                <label for="c_school" class="form-label">Name of School Attended</label>
-                                <select class="form-select" name="College Attended" id="c_school" <?= $finishFlag ? "disabled" : "" ?>>
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($school as $key => $col) : ?>
-                                    <?php if ($col['school_type'] == 0) : ?>
-                                      <option value="<?php echo $key ?>" <?php echo $education[1]['school'] == $key ? "selected" : "" ?>><?php echo $col['school_name'] ?></option>
-                                    <?php endif; ?>
-                                  <?php endforeach; ?>
-                                  <?php if (!is_numeric($education[1]['school'])) : ?>
-                                    <option value="Others" selected>Others</option>
-                                  <?php else : ?>
-                                    <option value="Others">Others</option>
-                                  <?php endif; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select School.
-                                </div>
-                              </div>
-                              <div class="col-md-7 position-relative">
-                                <label for="c_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
-                                <input type="text" name="Other College Attended" class="form-control" id="c_otherSchool" aria-describedby="c_otherSchool" <?= $finishFlag ? "disabled" : "" ?> value="<?= is_numeric($education[1]['school']) ? "" : $education[1]['school'] ?>">
-                              </div>
-                              <div class="col-md-2 position-relative">
-                                <label for="c_year_level" class="form-label">Year Level</label>
-                                <select class="form-select" id="c_year_level" name="College Year Level" <?= $finishFlag ? "disabled" : "" ?>>
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php for ($i = 5; $i >= 1; $i--) : ?>
-                                    <?php if ($i == 1) : ?>
-                                      <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>st Year</option>
-                                    <?php elseif ($i == 2) : ?>
-                                      <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>nd Year</option>
-                                    <?php elseif ($i == 3) : ?>
-                                      <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>rd Year</option>
-                                    <?php else : ?>
-                                      <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>th Year</option>
-                                    <?php endif; ?>
-                                  <?php endfor; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Year Level.
-                                </div>
-                              </div>
-                              <div class="col-md-3 position-relative">
-                                <label for="c_course" class="form-label">Course Taken</label>
-                                <select class="form-select" id="c_course" name="College Course" <?= $finishFlag ? "disabled" : "" ?>>
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($course as $key => $cr) : ?>
-                                    <option value="<?php echo $key ?>" <?php echo $education[1]['course'] == $key ? "selected" : "" ?>><?php echo $cr ?></option>
-                                  <?php endforeach; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Course.
-                                </div>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="c_otherCourse" class="form-label">If not specified in the list, kindly input the Course.</label>
-                                <input type="text" name="Other College Course" class="form-control" id="c_otherCourse" aria-describedby="c_otherCourse" value="<?= is_numeric($education[1]['course']) ? "" : $education[1]['course'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
-                              </div>
-                              <div class="col-md-3 position-relative">
-                                <label for="c_major" class="form-label">Major in</label>
-                                <input type="text" name="College Major" class="form-control" id="c_major" aria-describedby="c_major" value="<?= $education[1]['major'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
-                              </div>
-                              <div class="col-md-12 position-relative">
-                                <label for="c_school_address" class="form-label">School Address</label>
-                                <input type="text" name="College Adddress" class="form-control" id="c_school_address" aria-describedby="c_school_address" value="<?= $education[1]['school_address'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
-                              </div>
-                              <div class="column">
-                                <div class="py-3">
-                                  <div class="add">
-                                    <button class="btn btn-warning" type="button" id="addCollegeTable" <?= $finishFlag ? "disabled" : "" ?>>Add Awards/Honor</button>
-                                  </div>
-                                </div>
-                                <div class="card">
-                                  <div class="header-group mb-3">
-                                    <h5 class="card-header bg-primary" style="color:white">List of Honors/Award Received </h5>
-                                  </div>
-                                  <div class="card-body">
-                                    <div class="table-responsive">
-                                      <!-- Table with stripped rows -->
-                                      <table class="table datatable table-bordered table-hover" id="collegeTable" width="100%" cellspacing="0">
-                                        <thead>
-                                          <tr class="text-center">
-                                            <th>No</th>
-                                            <th>Award ID</th>
-                                            <th>Honor/Award</th>
-                                            <th>Academic Year</th>
-                                            <th>Semester/Quarter</th>
-                                            <th>Year Level</th>
-                                            <th>Actions</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php if (isset($education[1]['awards'])) : ?>
-                                            <?php foreach ($education[1]['awards'] as $key => $award) : ?>
-                                              <tr>
-                                                <td class="text-center"><?php echo $key + 1 ?></td>
-                                                <td class="text-center"><?php echo $award['id'] ?></td>
-                                                <td><?php echo $award['honor'] ?></td>
-                                                <td class="text-center"><?php echo $award['acad_year'] ?></td>
-                                                <td class="text-center"><?php echo $award['sem'] ?></td>
-                                                <td class="text-center"><?php echo $award['year_level'] ?></td>
-                                                <td class="text-center">
-                                                  <?php if ($finishFlag) : ?>
-                                                    <span class="text-danger">You already submitted your application.</span>
-                                                  <?php else : ?>
-                                                    <button class="editCollegeRow btn btn-primary btn-sm">Edit</button><button class="deleteCollegeRow btn btn-danger btn-sm">Delete</button>
-                                                  <?php endif; ?>
-                                                </td>
-                                              </tr>
-                                            <?php endforeach; ?>
-                                          <?php endif; ?>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                  <!-- EDUCATIONAL BACKGROUND -->
+                  <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
+                    <form method="post" id="educationBG">
+                      <h5 class="card-title"> General Education Information</h5>
+                      <div class="row g-4">
+                        <!-- General Education Information -->
+                        <div class="col-md-6 position-relative">
+                          <label for="graduating_flag" class="form-label">Are you Graduating this Semester/Term?</label>
+                          <?php if ($gen_info != null) : ?>
+                            <select class="form-select" name="Graduating Flag" id="graduating_flag" <?= $finishFlag ? "disabled" : "" ?>>
+                              <option selected disabled value="">Choose...</option>
+                              <option value="0" <?php echo $gen_info['graduating_flag'] == 0 ? "selected" : "" ?>>Yes</option>
+                              <option value="1" <?php echo $gen_info['graduating_flag'] == 1 ? "selected" : "" ?>>No</option>
+                            </select>
                           <?php else : ?>
-                            <div class="row g-4">
-                              <!-- COLLEGE -->
-                              <div class="col-md-3 position-relative">
-                                <label for="c_school" class="form-label">Name of School Attended</label>
-                                <select class="form-select" name="College Attended" id="c_school">
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($school as $key => $col) : ?>
-                                    <?php if ($col['school_type'] == 0) : ?>
-                                      <option value="<?php echo $key ?>"><?php echo $col['school_name'] ?></option>
-                                    <?php endif; ?>
-                                  <?php endforeach; ?>
-                                  <option value="Others">Others</option>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select School.
-                                </div>
-                              </div>
-                              <div class="col-md-7 position-relative">
-                                <label for="c_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
-                                <input type="text" name="Other College Attended" class="form-control" id="c_otherSchool" aria-describedby="c_otherSchool">
-                              </div>
-                              <div class="col-md-2 position-relative">
-                                <label for="c_year_level" class="form-label">Year Level</label>
-                                <select class="form-select" id="c_year_level" name="College Year Level">
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php for ($i = 5; $i >= 1; $i--) : ?>
-                                    <?php if ($i == 1) : ?>
-                                      <option value="<?php echo $i ?>"><?php echo $i ?>st Year</option>
-                                    <?php elseif ($i == 2) : ?>
-                                      <option value="<?php echo $i ?>"><?php echo $i ?>nd Year</option>
-                                    <?php elseif ($i == 3) : ?>
-                                      <option value="<?php echo $i ?>"><?php echo $i ?>rd Year</option>
-                                    <?php else : ?>
-                                      <option value="<?php echo $i ?>"><?php echo $i ?>th Year</option>
-                                    <?php endif; ?>
-                                  <?php endfor; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Year Level.
-                                </div>
-                              </div>
-                              <div class="col-md-3 position-relative">
-                                <label for="c_course" class="form-label">Course Taken</label>
-                                <select class="form-select" id="c_course" name="College Course">
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($course as $key => $cr) : ?>
-                                    <option value="<?php echo $key ?>"><?php echo $cr ?></option>
-                                  <?php endforeach; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Course.
-                                </div>
-                              </div>
-                              <div class="col-md-6 position-relative">
-                                <label for="c_otherCourse" class="form-label">If not specified in the list, kindly input the Course.</label>
-                                <input type="text" name="Other College Course" class="form-control" id="c_otherCourse" aria-describedby="c_otherCourse">
-                              </div>
-                              <div class="col-md-3 position-relative">
-                                <label for="c_major" class="form-label">Major in</label>
-                                <input type="text" name="College Major" class="form-control" id="c_major" aria-describedby="c_major">
-                              </div>
-                              <div class="col-md-12 position-relative">
-                                <label for="c_school_address" class="form-label">School Address</label>
-                                <input type="text" name="College Adddress" class="form-control" id="c_school_address" aria-describedby="c_school_address">
-                              </div>
-                              <div class="column">
-                                <div class="py-3">
-                                  <div class="add">
-                                    <button class="btn btn-warning" type="button" id="addCollegeTable">Add Awards/Honor</button>
-                                  </div>
-                                </div>
-                                <div class="card">
-                                  <div class="header-group mb-3">
-                                    <h5 class="card-header bg-primary" style="color:white">List of Honors/Award Received </h5>
-                                  </div>
-                                  <div class="card-body">
-                                    <div class="table-responsive">
-                                      <!-- Table with stripped rows -->
-                                      <table class="table datatable table-bordered table-hover" id="collegeTable" width="100%" cellspacing="0">
-                                        <thead>
-                                          <tr class="text-center">
-                                            <th>No</th>
-                                            <th>Award ID</th>
-                                            <th>Honor/Award</th>
-                                            <th>Academic Year</th>
-                                            <th>Semester/Quarter</th>
-                                            <th>Year Level</th>
-                                            <th>Actions</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            <select class="form-select" id="graduating_flag" name="Graduating Flag">
+                              <option selected disabled value="">Choose...</option>
+                              <option value="0">Yes</option>
+                              <option value="1">No</option>
+                            </select>
                           <?php endif; ?>
+                          <div class="invalid-tooltip">
+                            Please select Yes or No.
+                          </div>
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="honor_flag" class="form-label">Are you Graduating with Honors?</label>
+                          <?php if ($gen_info != null) : ?>
+                            <select class="form-select" name="Graduating with Honor Flag" id="honor_flag" <?= $finishFlag ? "disabled" : "" ?>>
+                              <option selected disabled value="">Choose...</option>
+                              <option value="0" <?php echo $gen_info['honor_flag'] == 0 ? "selected" : "" ?>>Yes</option>
+                              <option value="1" <?php echo $gen_info['honor_flag'] == 1 ? "selected" : "" ?>>No</option>
+                            </select>
+                          <?php else : ?>
+                            <select class="form-select" id="honor_flag" name="Graduating with Honor Flag">
+                              <option selected disabled value="">Choose...</option>
+                              <option value="0">Yes</option>
+                              <option value="1">No</option>
+                            </select>
+                          <?php endif; ?>
+                          <div class="invalid-tooltip">
+                            Please select Yes or No.
+                          </div>
+                        </div>
+                        <div class="col-md-4 position-relative">
+                          <label for="honor_type" class="form-label">Specify your Award/Honor</label>
+                          <?php if ($gen_info != null) : ?>
+                            <select class="form-select" name="Honor Type" id="honor_type" <?= $finishFlag ? "disabled" : "" ?>>
+                              <option selected disabled value="">Choose...</option>
+                              <option value="0" <?php echo $gen_info['honor_type'] == 0 ? "selected" : "" ?>>With Highest Honors</option>
+                              <option value="1" <?php echo $gen_info['honor_type'] == 1 ? "selected" : "" ?>>With High Honors</option>
+                              <option value="2" <?php echo $gen_info['honor_type'] == 2 ? "selected" : "" ?>>With Honors</option>
+                              <option value="3" <?php echo $gen_info['honor_type'] == 3 ? "selected" : "" ?>>Others</option>
+                              <option value="4" <?php echo $gen_info['honor_type'] == 3 ? "selected" : "" ?>>N/A</option>
+                            </select>
+                            <div class="invalid-tooltip">
+                              Please select Awards/Honor.
+                            </div>
+                        </div>
+                        <div class="col-md-8 position-relative">
+                          <label for="other_honor" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
+                          <input type="text" class="form-control" id="other_honor" name="Other Honor" aria-describedby="other_honor" value="<?= $gen_info['other_honor'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                      <?php else : ?>
+                        <select class="form-select" id="honor_type" name="Honor Type">
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0">With Highest Honors</option>
+                          <option value="1">With High Honors</option>
+                          <option value="2">With Honors</option>
+                          <option value="3">Others</option>
+                        </select>
+                        <div class="invalid-tooltip">
+                          Please select Awards/Honor.
                         </div>
                       </div>
+                      <div class="col-md-8 position-relative">
+                        <label for="other_honor" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
+                        <input type="text" class="form-control" id="other_honor" aria-describedby="other_honor" name="Other Honor">
+                      </div>
                     <?php endif; ?>
-                    <?php if ($_SESSION['scholarType'] <= 2) : ?>
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Senior Highschool Level</h5>
-                          <!-- Custom Styled Validation with Tooltips -->
-                          <?php if (isset($education[2])) : ?>
-                            <div class="row g-4">
-                              <!-- COLLEGE -->
-                              <div class="col-md-3 position-relative">
-                                <label for="s_school" class="form-label">Name of School Attended</label>
-                                <select class="form-select" id="s_school" name="Senior High School Name" <?= $finishFlag ? "disabled" : "" ?>>
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($school as $key => $col) : ?>
-                                    <?php if ($col['school_type'] == 1) : ?>
-                                      <option value="<?php echo $key ?>" <?php echo $education[2]['school'] == $key ? "selected" : "" ?>><?php echo $col['school_name'] ?></option>
+                    <div class="col-md-6 position-relative">
+                      <label for="graduation_year" class="form-label">If not Graduating, what year are you Graduating?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" name="Year of Graduation" id="graduation_year" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
+                            <option value="<?php echo $i ?>" <?php echo $gen_info['graduation_year'] == $i ? "selected" : "" ?>><?php echo $i ?></option>
+                          <?php endfor; ?>
+                        </select>
+                        <div class="invalid-tooltip">
+                          Please select expected Year of Graduation.
+                        </div>
+                      <?php else : ?>
+                        <select class="form-select" id="graduation_year" name="Year of Graduation">
+                          <option selected disabled value="">Choose...</option>
+                          <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
+                            <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                          <?php endfor; ?>
+                        </select>
+                      <?php endif; ?>
+                      <div class="invalid-tooltip">
+                        Please select expected Year of Graduation.
+                      </div>
+                    </div>
+                    <div class="col-md-6 position-relative">
+                      <label for="gwa" class="form-label">GWA</label>
+                      <?php if ($gen_info != null) : ?>
+                        <input type="number" name="GWA" id="gwa" min="50" step="any" class="form-control col" value="<?= $gen_info['gwa'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                      <?php else : ?>
+                        <input type="number" name="GWA" id="gwa" min="50" step="any" class="form-control col">
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                  <input type="hidden" id="collegeId" value="<?= (!isset($education[1]['educ_id'])) ? "" : $education[1]['educ_id'] ?>">
+                  <input type="hidden" id="shsId" value="<?= (!isset($education[2]['educ_id'])) ? "" : $education[2]['educ_id'] ?>">
+                  <input type="hidden" id="jhsId" value="<?= (!isset($education[3]['educ_id'])) ? "" : $education[3]['educ_id'] ?>">
+                  <input type="hidden" id="elemId" value="<?= (!isset($education[4]['educ_id'])) ? "" : $education[4]['educ_id'] ?>">
+
+                  <!-- COLLEGE LEVEL -->
+                  <?php if ($_SESSION['scholarType'] == 1) : ?>
+                    <h5 class="card-title mt-3">College Level</h5>
+                    <!-- Custom Styled Validation with Tooltips -->
+                    <?php if (isset($education[1])) : ?>
+                      <div class="row g-4">
+                        <!-- COLLEGE LEVEL-->
+                        <div class="col-md-6 position-relative">
+                          <label for="c_school" class="form-label">Name of School Attended</label>
+                          <select class="form-select" name="College Attended" id="c_school" <?= $finishFlag ? "disabled" : "" ?>>
+                            <option selected disabled value="">Choose...</option>
+                            <?php foreach ($school as $key => $col) : ?>
+                              <?php if ($col['school_type'] == 0) : ?>
+                                <option value="<?php echo $key ?>" <?php echo $education[1]['school'] == $key ? "selected" : "" ?>><?php echo $col['school_name'] ?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                            <?php if (!is_numeric($education[1]['school'])) : ?>
+                              <option value="Others" selected>Others</option>
+                            <?php else : ?>
+                              <option value="Others">Others</option>
+                            <?php endif; ?>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select School.
+                          </div>
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="c_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
+                          <input type="text" name="Other College Attended" class="form-control" id="c_otherSchool" aria-describedby="c_otherSchool" <?= $finishFlag ? "disabled" : "" ?> value="<?= is_numeric($education[1]['school']) ? "" : $education[1]['school'] ?>">
+                        </div>
+                        <div class="col-md-2 position-relative">
+                          <label for="c_year_level" class="form-label">Year Level</label>
+                          <select class="form-select" id="c_year_level" name="College Year Level" <?= $finishFlag ? "disabled" : "" ?>>
+                            <option selected disabled value="">Choose...</option>
+                            <?php for ($i = 5; $i >= 1; $i--) : ?>
+                              <?php if ($i == 1) : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>st Year</option>
+                              <?php elseif ($i == 2) : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>nd Year</option>
+                              <?php elseif ($i == 3) : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>rd Year</option>
+                              <?php else : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[1]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>th Year</option>
+                              <?php endif; ?>
+                            <?php endfor; ?>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select Year Level.
+                          </div>
+                        </div>
+                        <div class="col-md-10 position-relative">
+                          <label for="c_course" class="form-label">Course Taken</label>
+                          <select class="form-select" id="c_course" name="College Course" <?= $finishFlag ? "disabled" : "" ?>>
+                            <option selected disabled value="">Choose...</option>
+                            <?php foreach ($course as $key => $cr) : ?>
+                              <option value="<?php echo $key ?>" <?php echo $education[1]['course'] == $key ? "selected" : "" ?>><?php echo $cr ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select Course.
+                          </div>
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="c_otherCourse" class="form-label">If not specified in the list, kindly input the Course.</label>
+                          <input type="text" name="Other College Course" class="form-control" id="c_otherCourse" aria-describedby="c_otherCourse" value="<?= is_numeric($education[1]['course']) ? "" : $education[1]['course'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="c_major" class="form-label">Major</label>
+                          <input type="text" name="College Major" class="form-control" id="c_major" aria-describedby="c_major" value="<?= $education[1]['major'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                        <div class="col-md-12 position-relative">
+                          <label for="c_school_address" class="form-label">School Address</label>
+                          <input type="text" name="College Adddress" class="form-control" id="c_school_address" aria-describedby="c_school_address" value="<?= $education[1]['school_address'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                        <!-- COLLEGE AWARD TABLE -->
+                        <div class="column">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <h5 class="card-title">List of Awards</h5>
+                                  <button class="btn btn-small btn-warning" type="button" id="addCollegeTable" <?= $finishFlag ? "disabled" : "" ?>>Add Awards/Honor</button>
+                                </div>
+                                <!-- COLLGE AWARD TABLE 1 -->
+                                <table class="table table-striped header-fixed" id="collegeTable" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr class="text-center">
+                                      <th>No</th>
+                                      <th>Award ID</th>
+                                      <th>Honor/Award</th>
+                                      <th>Academic Year</th>
+                                      <th>Semester/Quarter</th>
+                                      <th>Year Level</th>
+                                      <th>Actions</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php if (isset($education[1]['awards'])) : ?>
+                                      <?php foreach ($education[1]['awards'] as $key => $award) : ?>
+                                        <tr>
+                                          <td class="text-center"><?php echo $key + 1 ?></td>
+                                          <td class="text-center"><?php echo $award['id'] ?></td>
+                                          <td><?php echo $award['honor'] ?></td>
+                                          <td class="text-center"><?php echo $award['acad_year'] ?></td>
+                                          <td class="text-center"><?php echo $award['sem'] ?></td>
+                                          <td class="text-center"><?php echo $award['year_level'] ?></td>
+                                          <td class="text-center">
+                                            <?php if ($finishFlag) : ?>
+                                              <span class="text-danger">You already submitted your application.</span>
+                                            <?php else : ?>
+                                              <button class="editCollegeRow btn btn-primary btn-sm">Edit</button><button class="deleteCollegeRow btn btn-danger btn-sm">Delete</button>
+                                            <?php endif; ?>
+                                          </td>
+                                        </tr>
+                                      <?php endforeach; ?>
                                     <?php endif; ?>
-                                  <?php endforeach; ?>
-                                  <?php if (!is_numeric($education[2]['school'])) : ?>
-                                    <option value="Others" selected>Others</option>
-                                  <?php else : ?>
-                                    <option value="Others">Others</option>
-                                  <?php endif; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select School.
-                                </div>
-                              </div>
-                              <div class="col-md-7 position-relative">
-                                <label for="s_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
-                                <input type="Others" name="Other Senior High School Name" class="form-control" id="s_otherSchool" aria-describedby="s_otherSchool" <?= $finishFlag ? "disabled" : "" ?> value="<?= is_numeric($education[2]['school']) ? "" : $education[2]['school'] ?>">
-                              </div>
-                              <div class="col-md-2 position-relative">
-                                <label for="s_year_level" class="form-label">Year Level</label>
-                                <select class="form-select" id="s_year_level" name="SHS Year Level" <?= $finishFlag ? "disabled" : "" ?>>
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php for ($i = 12; $i >= 11; $i--) : ?>
-                                    <option value="<?php echo $i ?>" <?php echo $education[2]['year_level'] == $i ? "selected" : "" ?>>Grade <?php echo $i ?></option>
-                                  <?php endfor; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Year Level.
-                                </div>
-                              </div>
-                              <div class="col-md-3 position-relative">
-                                <label for="s_strand" class="form-label">Strand Taken</label>
-                                <select class="form-select" id="s_strand" name="SHS Strand" <?= $finishFlag ? "disabled" : "" ?>>
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($strand as $key => $str) : ?>
-                                    <option value="<?php echo $key ?>" <?php echo $education[2]['course'] == $key ? "selected" : "" ?>><?php echo $str ?></option>
-                                  <?php endforeach; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Course.
-                                </div>
-                              </div>
-                              <div class="col-md-9 position-relative">
-                                <label for="s_otherStrand" class="form-label">If not specified in the list, kindly input the Strand.</label>
-                                <input type="Others" name="Other SHS Strand" class="form-control" id="s_otherStrand" aria-describedby="s_otherStrand" value="<?= is_numeric($education[2]['course']) ? "" : $education[2]['course'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
-                              </div>
-                              <div class="col-md-12 position-relative">
-                                <label for="s_schoolAddress" class="form-label">School Address</label>
-                                <input type="Others" name="Other SHS Address" class="form-control" id="s_schoolAddress" aria-describedby="s_schoolAddress" value="<?= $education[2]['school_address'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
-                              </div>
-                              <div class="column">
-                                <div class="py-3">
-                                  <div class="add">
-                                    <button class="btn btn-warning" type="button" id="addSHSTable" <?= $finishFlag ? "disabled" : "" ?>>Add Awards/Honor</button>
-                                  </div>
-                                </div>
-                                <div class="card">
-                                  <div class="header-group mb-3">
-                                    <h5 class="card-header bg-primary" style="color:white">List of Honors/Award Received </h5>
-                                  </div>
-                                  <div class="card-body">
-                                    <div class="table-responsive">
-                                      <!-- Table with stripped rows -->
-                                      <table class="table datatable table-bordered table-hover" id="shsTable" width="100%" cellspacing="0">
-                                        <thead>
-                                          <tr class="text-center">
-                                            <th>No</th>
-                                            <th>Award ID</th>
-                                            <th>Honor/Award</th>
-                                            <th>Academic Year</th>
-                                            <th>Semester/Quarter</th>
-                                            <th>Year Level</th>
-                                            <th>Actions</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php if (isset($education[2]['awards'])) : ?>
-                                            <?php foreach ($education[2]['awards'] as $key => $award) : ?>
-                                              <tr>
-                                                <td class="text-center"><?php echo $key + 1 ?></td>
-                                                <td class="text-center"><?php echo $award['id'] ?></td>
-                                                <td><?php echo $award['honor'] ?></td>
-                                                <td class="text-center"><?php echo $award['acad_year'] ?></td>
-                                                <td class="text-center"><?php echo $award['sem'] ?></td>
-                                                <td class="text-center"><?php echo $award['year_level'] ?></td>
-                                                <td class="text-center">
-                                                  <?php if ($finishFlag) : ?>
-                                                    <span class="text-danger">You already submitted your application.</span>
-                                                  <?php else : ?>
-                                                    <button class="editSHSRow btn btn-primary btn-sm">Edit</button><button class="deleteSHSRow btn btn-danger btn-sm">Delete</button>
-                                                  <?php endif; ?>
-                                                </td>
-                                              </tr>
-                                            <?php endforeach; ?>
-                                          <?php endif; ?>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
+                                  </tbody>
+                                </table>
                               </div>
                             </div>
-                          <?php else : ?>
-                            <div class="row g-4">
-                              <!-- COLLEGE -->
-                              <div class="col-md-3 position-relative">
-                                <label for="s_school" class="form-label">Name of School Attended</label>
-                                <select class="form-select" id="s_school" name="Senior High School Name">
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($school as $key => $col) : ?>
-                                    <?php if ($col['school_type'] == 1) : ?>
-                                      <option value="<?php echo $key ?>"><?php echo $col['school_name'] ?></option>
+                          </div>
+                        </div>
+                      </div>
+                    <?php else : ?>
+                      <div class="row g-4">
+                        <!-- COLLEGE -->
+                        <div class="col-md-6 position-relative">
+                          <label for="c_school" class="form-label">Name of School Attended</label>
+                          <select class="form-select" name="College Attended" id="c_school">
+                            <option selected disabled value="">Choose...</option>
+                            <?php foreach ($school as $key => $col) : ?>
+                              <?php if ($col['school_type'] == 0) : ?>
+                                <option value="<?php echo $key ?>"><?php echo $col['school_name'] ?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                            <option value="Others">Others</option>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select School.
+                          </div>
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="c_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
+                          <input type="text" name="Other College Attended" class="form-control" id="c_otherSchool" aria-describedby="c_otherSchool">
+                        </div>
+                        <div class="col-md-2 position-relative">
+                          <label for="c_year_level" class="form-label">Year Level</label>
+                          <select class="form-select" id="c_year_level" name="College Year Level">
+                            <option selected disabled value="">Choose...</option>
+                            <?php for ($i = 5; $i >= 1; $i--) : ?>
+                              <?php if ($i == 1) : ?>
+                                <option value="<?php echo $i ?>"><?php echo $i ?>st Year</option>
+                              <?php elseif ($i == 2) : ?>
+                                <option value="<?php echo $i ?>"><?php echo $i ?>nd Year</option>
+                              <?php elseif ($i == 3) : ?>
+                                <option value="<?php echo $i ?>"><?php echo $i ?>rd Year</option>
+                              <?php else : ?>
+                                <option value="<?php echo $i ?>"><?php echo $i ?>th Year</option>
+                              <?php endif; ?>
+                            <?php endfor; ?>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select Year Level.
+                          </div>
+                        </div>
+                        <div class="col-md-10 position-relative">
+                          <label for="c_course" class="form-label">Course Taken</label>
+                          <select class="form-select" id="c_course" name="College Course">
+                            <option selected disabled value="">Choose...</option>
+                            <?php foreach ($course as $key => $cr) : ?>
+                              <option value="<?php echo $key ?>"><?php echo $cr ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select Course.
+                          </div>
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="c_otherCourse" class="form-label">If not specified in the list, kindly input the Course.</label>
+                          <input type="text" name="Other College Course" class="form-control" id="c_otherCourse" aria-describedby="c_otherCourse">
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="c_major" class="form-label">Major in</label>
+                          <input type="text" name="College Major" class="form-control" id="c_major" aria-describedby="c_major">
+                        </div>
+                        <div class="col-md-12 position-relative">
+                          <label for="c_school_address" class="form-label">School Address</label>
+                          <input type="text" name="College Adddress" class="form-control" id="c_school_address" aria-describedby="c_school_address">
+                        </div>
+                        <!-- COLLEGE AWARD TABLE 2 -->
+                        <div class="column">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <h5 class="card-title">List of Awards</h5>
+                                  <button class="btn btn-small btn-warning" type="button" id="addCollegeTable">Add Awards/Honor</button>
+                                </div>
+                              </div>
+                              <!-- Table with stripped rows -->
+                              <table class="table datatable table-striped header-fixed" id="collegeTable" width="100%" cellspacing="0">
+                                <thead>
+                                  <tr class="text-center">
+                                    <th>No</th>
+                                    <th>Award ID</th>
+                                    <th>Honor/Award</th>
+                                    <th>Academic Year</th>
+                                    <th>Semester/Quarter</th>
+                                    <th>Year Level</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+              </div>
+            <?php endif; ?>
+          <?php endif; ?>
+
+          <!-- SENIOR HIGHSCHOOL -->
+          <?php if ($_SESSION['scholarType'] <= 2) : ?>
+            <h5 class="card-title">Senior Highschool Level</h5>
+            <?php if (isset($education[2])) : ?>
+              <div class="row g-4">
+                <!-- SENIOR HIGHSCHOOL -->
+                <div class="col-md-6 position-relative">
+                  <label for="s_school" class="form-label">Name of School Attended</label>
+                  <select class="form-select" id="s_school" name="Senior High School Name" <?= $finishFlag ? "disabled" : "" ?>>
+                    <option selected disabled value="">Choose...</option>
+                    <?php foreach ($school as $key => $col) : ?>
+                      <?php if ($col['school_type'] == 1) : ?>
+                        <option value="<?php echo $key ?>" <?php echo $education[2]['school'] == $key ? "selected" : "" ?>><?php echo $col['school_name'] ?></option>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                    <?php if (!is_numeric($education[2]['school'])) : ?>
+                      <option value="Others" selected>Others</option>
+                    <?php else : ?>
+                      <option value="Others">Others</option>
+                    <?php endif; ?>
+                  </select>
+                  <div class="invalid-tooltip">
+                    Please select School.
+                  </div>
+                </div>
+                <div class="col-md-6 position-relative">
+                  <label for="s_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
+                  <input type="Others" name="Other Senior High School Name" class="form-control" id="s_otherSchool" aria-describedby="s_otherSchool" <?= $finishFlag ? "disabled" : "" ?> value="<?= is_numeric($education[2]['school']) ? "" : $education[2]['school'] ?>">
+                </div>
+                <div class="col-md-2 position-relative">
+                  <label for="s_year_level" class="form-label">Year Level</label>
+                  <select class="form-select" id="s_year_level" name="SHS Year Level" <?= $finishFlag ? "disabled" : "" ?>>
+                    <option selected disabled value="">Choose...</option>
+                    <?php for ($i = 12; $i >= 11; $i--) : ?>
+                      <option value="<?php echo $i ?>" <?php echo $education[2]['year_level'] == $i ? "selected" : "" ?>>Grade <?php echo $i ?></option>
+                    <?php endfor; ?>
+                  </select>
+                  <div class="invalid-tooltip">
+                    Please select Year Level.
+                  </div>
+                </div>
+                <div class="col-md-3 position-relative">
+                  <label for="s_strand" class="form-label">Strand Taken</label>
+                  <select class="form-select" id="s_strand" name="SHS Strand" <?= $finishFlag ? "disabled" : "" ?>>
+                    <option selected disabled value="">Choose...</option>
+                    <?php foreach ($strand as $key => $str) : ?>
+                      <option value="<?php echo $key ?>" <?php echo $education[2]['course'] == $key ? "selected" : "" ?>><?php echo $str ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                  <div class="invalid-tooltip">
+                    Please select Course.
+                  </div>
+                </div>
+                <div class="col-md-7 position-relative">
+                  <label for="s_otherStrand" class="form-label">If not specified in the list, kindly input the Strand.</label>
+                  <input type="Others" name="Other SHS Strand" class="form-control" id="s_otherStrand" aria-describedby="s_otherStrand" value="<?= is_numeric($education[2]['course']) ? "" : $education[2]['course'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                </div>
+                <div class="col-md-12 position-relative">
+                  <label for="s_schoolAddress" class="form-label">School Address</label>
+                  <input type="Others" name="Other SHS Address" class="form-control" id="s_schoolAddress" aria-describedby="s_schoolAddress" value="<?= $education[2]['school_address'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                </div>
+                <!-- SENIOR HIGHSCHOOL AWARD TABLE -->
+                <div class="column">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <h5 class="card-title">List of Awards</h5>
+                          <button class="btn btn-warning" type="button" id="addSHSTable" <?= $finishFlag ? "disabled" : "" ?>>Add Awards/Honor</button>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable table-striped header-fixed" id="shsTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr class="text-center">
+                              <th>No</th>
+                              <th>Award ID</th>
+                              <th>Honor/Award</th>
+                              <th>Academic Year</th>
+                              <th>Semester/Quarter</th>
+                              <th>Year Level</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php if (isset($education[2]['awards'])) : ?>
+                              <?php foreach ($education[2]['awards'] as $key => $award) : ?>
+                                <tr>
+                                  <td class="text-center"><?php echo $key + 1 ?></td>
+                                  <td class="text-center"><?php echo $award['id'] ?></td>
+                                  <td><?php echo $award['honor'] ?></td>
+                                  <td class="text-center"><?php echo $award['acad_year'] ?></td>
+                                  <td class="text-center"><?php echo $award['sem'] ?></td>
+                                  <td class="text-center"><?php echo $award['year_level'] ?></td>
+                                  <td class="text-center">
+                                    <?php if ($finishFlag) : ?>
+                                      <span class="text-danger">You already submitted your application.</span>
+                                    <?php else : ?>
+                                      <button class="editSHSRow btn btn-primary btn-sm">Edit</button><button class="deleteSHSRow btn btn-danger btn-sm">Delete</button>
                                     <?php endif; ?>
-                                  <?php endforeach; ?>
-                                  <option value="Others">Others</option>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select School.
-                                </div>
-                              </div>
-                              <div class="col-md-7 position-relative">
-                                <label for="s_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
-                                <input type="Others" name="Other Senior High School Name" class="form-control" id="s_otherSchool" aria-describedby="s_otherSchool">
-                              </div>
-                              <div class="col-md-2 position-relative">
-                                <label for="s_year_level" class="form-label">Year Level</label>
-                                <select class="form-select" id="s_year_level" name="SHS Year Level">
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php for ($i = 12; $i >= 11; $i--) : ?>
-                                    <option value="<?php echo $i ?>">Grade <?php echo $i ?></option>
-                                  <?php endfor; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Year Level.
-                                </div>
-                              </div>
-                              <div class="col-md-3 position-relative">
-                                <label for="s_strand" class="form-label">Strand Taken</label>
-                                <select class="form-select" id="s_strand" name="SHS Strand">
-                                  <option selected disabled value="">Choose...</option>
-                                  <?php foreach ($strand as $key => $str) : ?>
-                                    <option value="<?php echo $key ?>"><?php echo $str ?></option>
-                                  <?php endforeach; ?>
-                                </select>
-                                <div class="invalid-tooltip">
-                                  Please select Course.
-                                </div>
-                              </div>
-                              <div class="col-md-9 position-relative">
-                                <label for="s_otherStrand" class="form-label">If not specified in the list, kindly input the Strand.</label>
-                                <input type="Others" name="Other SHS Strand" class="form-control" id="s_otherStrand" aria-describedby="s_otherStrand">
-                              </div>
-                              <div class="col-md-12 position-relative">
-                                <label for="s_schoolAddress" class="form-label">School Address</label>
-                                <input type="Others" name="Other SHS Address" class="form-control" id="s_schoolAddress" aria-describedby="s_schoolAddress">
-                              </div>
-                              <div class="column">
-                                <div class="py-3">
-                                  <div class="add">
-                                    <button class="btn btn-warning" type="button" id="addSHSTable">Add Awards/Honor</button>
-                                  </div>
-                                </div>
-                                <div class="card">
-                                  <div class="header-group mb-3">
-                                    <h5 class="card-header bg-primary" style="color:white">List of Honors/Award Received </h5>
-                                  </div>
-                                  <div class="card-body">
-                                    <div class="table-responsive">
-                                      <!-- Table with stripped rows -->
-                                      <table class="table datatable table-bordered table-hover" id="shsTable" width="100%" cellspacing="0">
-                                        <thead>
-                                          <tr class="text-center">
-                                            <th>No</th>
-                                            <th>Award ID</th>
-                                            <th>Honor/Award</th>
-                                            <th>Academic Year</th>
-                                            <th>Semester/Quarter</th>
-                                            <th>Year Level</th>
-                                            <th>Actions</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
+                                  </td>
+                                </tr>
+                              <?php endforeach; ?>
+                            <?php endif; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php else : ?>
+              <div class="row g-4">
+                <!-- SENIOR HIGHSCHOOL -->
+                <div class="col-md-6 position-relative">
+                  <label for="s_school" class="form-label">Name of School Attended</label>
+                  <select class="form-select" id="s_school" name="Senior High School Name">
+                    <option selected disabled value="">Choose...</option>
+                    <?php foreach ($school as $key => $col) : ?>
+                      <?php if ($col['school_type'] == 1) : ?>
+                        <option value="<?php echo $key ?>"><?php echo $col['school_name'] ?></option>
+                      <?php endif; ?>
+                    <?php endforeach; ?>
+                    <option value="Others">Others</option>
+                  </select>
+                  <div class="invalid-tooltip">
+                    Please select School.
+                  </div>
+                </div>
+                <div class="col-md-6 position-relative">
+                  <label for="s_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
+                  <input type="Others" name="Other Senior High School Name" class="form-control" id="s_otherSchool" aria-describedby="s_otherSchool">
+                </div>
+                <div class="col-md-2 position-relative">
+                  <label for="s_year_level" class="form-label">Year Level</label>
+                  <select class="form-select" id="s_year_level" name="SHS Year Level">
+                    <option selected disabled value="">Choose...</option>
+                    <?php for ($i = 12; $i >= 11; $i--) : ?>
+                      <option value="<?php echo $i ?>">Grade <?php echo $i ?></option>
+                    <?php endfor; ?>
+                  </select>
+                  <div class="invalid-tooltip">
+                    Please select Year Level.
+                  </div>
+                </div>
+                <div class="col-md-3 position-relative">
+                  <label for="s_strand" class="form-label">Strand Taken</label>
+                  <select class="form-select" id="s_strand" name="SHS Strand">
+                    <option selected disabled value="">Choose...</option>
+                    <?php foreach ($strand as $key => $str) : ?>
+                      <option value="<?php echo $key ?>"><?php echo $str ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                  <div class="invalid-tooltip">
+                    Please select Course.
+                  </div>
+                </div>
+                <div class="col-md-7 position-relative">
+                  <label for="s_otherStrand" class="form-label">If not specified in the list, kindly input the Strand.</label>
+                  <input type="Others" name="Other SHS Strand" class="form-control" id="s_otherStrand" aria-describedby="s_otherStrand">
+                </div>
+                <div class="col-md-12 position-relative">
+                  <label for="s_schoolAddress" class="form-label">School Address</label>
+                  <input type="Others" name="Other SHS Address" class="form-control" id="s_schoolAddress" aria-describedby="s_schoolAddress">
+                </div>
+                <!-- SENIOR HIGHSCHOOL -->
+                <div class="column">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <h5 class="card-title">List of Awards</h5>
+                          <button class="btn btn-small btn-warning" type="button" id="addSHSTable">Add Awards/Honor</button>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable table-striped header-fixed" id="shsTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr class="text-center">
+                              <th>No</th>
+                              <th>Award ID</th>
+                              <th>Honor/Award</th>
+                              <th>Academic Year</th>
+                              <th>Semester/Quarter</th>
+                              <th>Year Level</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
 
                           </tbody>
                         </table>
@@ -2194,164 +2184,163 @@
             </form>
           </div>
 
-                <!-- ADDITIONAL INFORMATION -->
-                <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
-                  <form method="post" id="otherInfo">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title"></h5>
-                        <div class="row g-4">
-                          <!-- WORKING STUDENT -->
-                          <div class="col-md-4 position-relative">
-                            <label for="working_flag" class="form-label">Are you a Working Student?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" id="working_flag" name="Working Student Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0" <?php echo $gen_info['working_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
-                                <option value="1" <?php echo $gen_info['working_flag'] == 1 ? 'selected' : '' ?>>No</option>
-                              </select>
-                            <?php else : ?>
-                              <select class="form-select" id="working_flag" name="Working Student Flag">
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0">Yes</option>
-                                <option value="1">No</option>
-                              </select>
-                            <?php endif ?>
-                          </div>
-
-                          <!---OFW PARENTS -->
-                          <div class="col-md-8 position-relative">
-                            <label for="ofw_flag" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" id="ofw_flag" name="OFW Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0" <?php echo $gen_info['ofw_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
-                                <option value="1" <?php echo $gen_info['ofw_flag'] == 1 ? 'selected' : '' ?>>No</option>
-                              </select>
-                            <?php else : ?>
-                              <select class="form-select" id="ofw_flag" name="OFW Flag">
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0">Yes</option>
-                                <option value="1">No</option>
-                              </select>
-                            <?php endif ?>
-                          </div>
-
-                          <!--OFW FAMILY MEMBERS -->
-                          <div class="col-md-6 position-relative">
-                            <label for="other_ofw" class="form-label">Do you have other Family member/s who are an OFW?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" id="other_ofw" name="Other OFW Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0" <?php echo $gen_info['other_ofw'] == 0 ? 'selected' : '' ?>>Yes</option>
-                                <option value="1" <?php echo $gen_info['other_ofw'] == 1 ? 'selected' : '' ?>>No</option>
-                              </select>
-                            <?php else : ?>
-                              <select class="form-select" id="other_ofw" name="Other OFW Flag">
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0">Yes</option>
-                                <option value="1">No</option>
-                              </select>
-                            <?php endif ?>
-                          </div>
-
-                          <!---PWD PARENTS -->
-                          <div class="col-md-6 position-relative">
-                            <label for="pwd_flag" class="form-label">Do you have a Parent/s who have PWD?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" id="pwd_flag" name="Parent PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0" <?php echo $gen_info['pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
-                                <option value="1" <?php echo $gen_info['pwd_flag'] == 1 ? 'selected' : '' ?>>No</option>
-                              </select>
-                            <?php else : ?>
-                              <select class="form-select" id="pwd_flag" name="Parent PWD Flag">
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0">Yes</option>
-                                <option value="1">No</option>
-                              </select>
-                            <?php endif ?>
-                          </div>
-
-                          <!---PWD FAMILY MEMBERS -->
-                          <div class="col-md-6 position-relative">
-                            <label for="other_pwd" class="form-label">Do you have other Family member/s who have PWD?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" id="other_pwd" name="Other Family PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0" <?php echo $gen_info['other_pwd'] == 0 ? 'selected' : '' ?>>Yes</option>
-                                <option value="1" <?php echo $gen_info['other_pwd'] == 1 ? 'selected' : '' ?>>No</option>
-                              </select>
-                            <?php else : ?>
-                              <select class="form-select" id="other_pwd" name="Other Family PWD Flag">
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0">Yes</option>
-                                <option value="1">No</option>
-                              </select>
-                            <?php endif ?>
-                          </div>
-
-                          <!---PARENTS STATUS -->
-                          <div class="col-md-6 position-relative">
-                            <label for="status_flag" class="form-label">What is your Parents Status?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" id="status_flag" name="Parent Status Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <?php foreach ($civilArr as $key => $value) : ?>
-                                  <option value="<?php echo $key ?>" <?php echo $gen_info['status_flag'] == $key ? 'selected' : '' ?>><?php echo $value ?></option>
-                                <?php endforeach; ?>
-                              </select>
-                            <?php else : ?>
-                              <select class="form-select" id="status_flag" name="Parent Status Flag">
-                                <option selected disabled value="">Choose...</option>
-                                <?php foreach ($civilArr as $key => $value) : ?>
-                                  <option value="<?php echo $key ?>"><?php echo $value ?></option>
-                                <?php endforeach; ?>
-                              </select>
-                            <?php endif ?>
-                          </div>
-
-                          <!---STUDENT PWD -->
-                          <div class="col-md-6 position-relative">
-                            <label for="self_pwd_flag" class="form-label">Are you a Student with PWD?</label>
-                            <?php if ($gen_info != null) : ?>
-                              <select class="form-select" id="self_pwd_flag" name="Student PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0" <?php echo $gen_info['self_pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
-                                <option value="1" <?php echo $gen_info['self_pwd_flag'] == 1 ? 'selected' : '' ?>>No</option>
-                              </select>
-                            <?php else : ?>
-                              <select class="form-select" id="self_pwd_flag" name="Student PWD Flag">
-                                <option selected disabled value="">Choose...</option>
-                                <option value="0">Yes</option>
-                                <option value="1">No</option>
-                              </select>
-                            <?php endif ?>
-                          </div>
-                        </div>
-                      </div>
+          <!-- ADDITIONAL INFORMATION -->
+          <div class="tab-pane fade" id="bordered-justified-additional-information" role="tabpanel" aria-labelledby="additional-information">
+            <form method="post" id="otherInfo">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+                  <div class="row g-4">
+                    <!-- WORKING STUDENT -->
+                    <div class="col-md-4 position-relative">
+                      <label for="working_flag" class="form-label">Are you a Working Student?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" id="working_flag" name="Working Student Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0" <?php echo $gen_info['working_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
+                          <option value="1" <?php echo $gen_info['working_flag'] == 1 ? 'selected' : '' ?>>No</option>
+                        </select>
+                      <?php else : ?>
+                        <select class="form-select" id="working_flag" name="Working Student Flag">
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0">Yes</option>
+                          <option value="1">No</option>
+                        </select>
+                      <?php endif ?>
                     </div>
-                    <div class="float-end">
-                      <?php if (!$finishFlag) : ?>
-                        <button type="submit" class="btn btn-outline-success" id="otherInfoBTN">Save</button>
-                      <?php endif; ?>
+
+                    <!---OFW PARENTS -->
+                    <div class="col-md-8 position-relative">
+                      <label for="ofw_flag" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" id="ofw_flag" name="OFW Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0" <?php echo $gen_info['ofw_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
+                          <option value="1" <?php echo $gen_info['ofw_flag'] == 1 ? 'selected' : '' ?>>No</option>
+                        </select>
+                      <?php else : ?>
+                        <select class="form-select" id="ofw_flag" name="OFW Flag">
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0">Yes</option>
+                          <option value="1">No</option>
+                        </select>
+                      <?php endif ?>
                     </div>
-                  </form>
+
+                    <!--OFW FAMILY MEMBERS -->
+                    <div class="col-md-6 position-relative">
+                      <label for="other_ofw" class="form-label">Do you have other Family member/s who are an OFW?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" id="other_ofw" name="Other OFW Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0" <?php echo $gen_info['other_ofw'] == 0 ? 'selected' : '' ?>>Yes</option>
+                          <option value="1" <?php echo $gen_info['other_ofw'] == 1 ? 'selected' : '' ?>>No</option>
+                        </select>
+                      <?php else : ?>
+                        <select class="form-select" id="other_ofw" name="Other OFW Flag">
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0">Yes</option>
+                          <option value="1">No</option>
+                        </select>
+                      <?php endif ?>
+                    </div>
+
+                    <!---PWD PARENTS -->
+                    <div class="col-md-6 position-relative">
+                      <label for="pwd_flag" class="form-label">Do you have a Parent/s who have PWD?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" id="pwd_flag" name="Parent PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0" <?php echo $gen_info['pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
+                          <option value="1" <?php echo $gen_info['pwd_flag'] == 1 ? 'selected' : '' ?>>No</option>
+                        </select>
+                      <?php else : ?>
+                        <select class="form-select" id="pwd_flag" name="Parent PWD Flag">
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0">Yes</option>
+                          <option value="1">No</option>
+                        </select>
+                      <?php endif ?>
+                    </div>
+
+                    <!---PWD FAMILY MEMBERS -->
+                    <div class="col-md-6 position-relative">
+                      <label for="other_pwd" class="form-label">Do you have other Family member/s who have PWD?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" id="other_pwd" name="Other Family PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0" <?php echo $gen_info['other_pwd'] == 0 ? 'selected' : '' ?>>Yes</option>
+                          <option value="1" <?php echo $gen_info['other_pwd'] == 1 ? 'selected' : '' ?>>No</option>
+                        </select>
+                      <?php else : ?>
+                        <select class="form-select" id="other_pwd" name="Other Family PWD Flag">
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0">Yes</option>
+                          <option value="1">No</option>
+                        </select>
+                      <?php endif ?>
+                    </div>
+
+                    <!---PARENTS STATUS -->
+                    <div class="col-md-6 position-relative">
+                      <label for="status_flag" class="form-label">What is your Parents Status?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" id="status_flag" name="Parent Status Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <?php foreach ($civilArr as $key => $value) : ?>
+                            <option value="<?php echo $key ?>" <?php echo $gen_info['status_flag'] == $key ? 'selected' : '' ?>><?php echo $value ?></option>
+                          <?php endforeach; ?>
+                        </select>
+                      <?php else : ?>
+                        <select class="form-select" id="status_flag" name="Parent Status Flag">
+                          <option selected disabled value="">Choose...</option>
+                          <?php foreach ($civilArr as $key => $value) : ?>
+                            <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                          <?php endforeach; ?>
+                        </select>
+                      <?php endif ?>
+                    </div>
+
+                    <!---STUDENT PWD -->
+                    <div class="col-md-6 position-relative">
+                      <label for="self_pwd_flag" class="form-label">Are you a Student with PWD?</label>
+                      <?php if ($gen_info != null) : ?>
+                        <select class="form-select" id="self_pwd_flag" name="Student PWD Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0" <?php echo $gen_info['self_pwd_flag'] == 0 ? 'selected' : '' ?>>Yes</option>
+                          <option value="1" <?php echo $gen_info['self_pwd_flag'] == 1 ? 'selected' : '' ?>>No</option>
+                        </select>
+                      <?php else : ?>
+                        <select class="form-select" id="self_pwd_flag" name="Student PWD Flag">
+                          <option selected disabled value="">Choose...</option>
+                          <option value="0">Yes</option>
+                          <option value="1">No</option>
+                        </select>
+                      <?php endif ?>
+                    </div>
+                  </div>
                 </div>
-                </div>
-                <!-- End Bordered Tabs Justified -->
               </div>
-            </div>
-            <div class="card-body">
               <div class="float-end">
                 <?php if (!$finishFlag) : ?>
-                  <button type="button" class="btn btn-success" id="submitApplication">Submit Application</button>
+                  <button type="submit" class="btn btn-outline-success" id="otherInfoBTN">Save</button>
                 <?php endif; ?>
               </div>
-            </div>
+            </form>
+          </div>
+          </div>
+        </div>
+        <!-- End Bordered Tabs Justified -->
+        <div class="card-body">
+          <div class="float-end">
+            <?php if (!$finishFlag) : ?>
+              <!-- <button type="button" class="btn btn-success" id="submitApplication">Submit Application</button> -->
+            <?php endif; ?>
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
     </div>
   </section>
