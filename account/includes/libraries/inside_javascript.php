@@ -12,7 +12,7 @@ switch($_SESSION['account_type'])
         echo '<script src="assets/js/applicantList.js"></script>';
         echo '<script src="assets/js/updateYearLevelOptions.js"></script>';
         echo '<script src="assets/js/exam_settings.js"></script>';
-        echo '<script src="assets/js/adminTableFilter.js"></script>';
+        echo '<script src="assets/js/dashboard.js"></script>';
         break;
     case 1:     //Admin
         echo '<script src="assets/js/basic_setup.js"></script>';
@@ -22,7 +22,7 @@ switch($_SESSION['account_type'])
         echo '<script src="assets/js/notifSettings.js"></script>';
         echo '<script src="assets/js/schoolSettings.js"></script>';
         echo '<script src="assets/js/websiteManagement.js"></script>';
-        echo '<script src="assets/js/adminTableFilter.js"></script>';
+        echo '<script src="assets/js/dashboard.js"></script>';
         break;
     case 2:     // Beneficiaries
         echo '<script src="assets/js/upload_assessment.js"></script>';

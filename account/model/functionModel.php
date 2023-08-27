@@ -1119,5 +1119,30 @@ function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0){
     
 }
 
+function getAccounts($account_type, $account_status = 1, $count = 0){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM account WHERE account_type = '{$account_type}' AND account_status = '{$account_status}' ORDER BY id ASC";
+    $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
+
+    if($count == 1){
+        return $query->num_rows;
+    }
+}
+
+function getGraduating($graduation_year, $account_type, $count = 0){
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM account acc 
+            JOIN gen_info gen ON acc.id = gen.user_id 
+            WHERE acc.account_type = '{$account_type}' 
+            AND gen.graduation_year < '{$graduation_year}';";
+    $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
+
+    if($count == 1){
+        return $query->num_rows;
+    }
+}
+
 
 
