@@ -90,8 +90,6 @@ function generate_ay()
 {
     include("dbconnection.php");
 
-    session_start();
-
     date_default_timezone_set("Asia/Manila");
 
     $from_ay = date("Y");
@@ -126,6 +124,22 @@ function defaultAY($from_ay)
 
     $sql = "UPDATE acad_year SET default_ay = 1 WHERE from_ay = '" . $from_ay . "'";
     $query = $conn->query($sql) or die("Error BSQ005: " . $conn->error);
+
+    return 'Default Updated Successfully';
+}
+
+function readOnlyAY($from_ay)
+{
+    include("dbconnection.php");
+
+    $acadYearId = getDefaultAcadYearId();
+    $semester   = switchSemester();
+
+    $sql = "UPDATE acad_year SET read_only = 0 WHERE read_only = '1'";
+    $query = $conn->query($sql) or die("Error BSQ004 Read Only: " . $conn->error);
+
+    $sql = "UPDATE acad_year SET read_only = 1 WHERE id = '" . $id . "'";
+    $query = $conn->query($sql) or die("Error BSQ005 Read Only: " . $conn->error);
 
     return 'Default Updated Successfully';
 }
