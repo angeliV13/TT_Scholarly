@@ -7,8 +7,7 @@ $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
 session_start();
 
-switch ($action)
-{
+switch ($action) {
     case 1:
         echo accountListingTable($_SESSION['account_type']);
         break;
@@ -28,7 +27,9 @@ switch ($action)
         echo websiteSocials();
         break;
     case 7:
+        echo graduatesTable();
+        break;
+    case 8:
         echo benefListTable();
         break;
 }
-    

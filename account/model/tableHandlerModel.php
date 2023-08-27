@@ -2,7 +2,7 @@
 
 include("functionModel.php");
 include("actionTableHandlerModel.php");
-include("uploadRequirementsModel.php");
+// include("uploadRequirementsModel.php");
 include("../global_variables.php");
 
 function accountListingTable($acc_type)
@@ -415,6 +415,63 @@ function benefListTable()
                 $contact_number, //Contact Number
                 $barangay, //Barangay
                 $button, // Buttons
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+function graduatesTable()
+{
+    include("dbconnection.php");
+
+    $acadYearId = getDefaultAcadYearId();
+    $semId      = getDefaultSemesterId();
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
+    $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
+
+    $sql = "SELECT * FROM account acc 
+            JOIN user_info inf ON acc.id = inf.account_id 
+            WHERE acc.account_type = '3' AND acc.account_status = '1'";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            extract($row);
+
+            $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
+            $education  = get_user_education($account_id, 1);
+            $button     = getInformationButton($row, $entries);
+            $scholarType = check_status($account_id);
+
+            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
+            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
+
+            $data[] = [
+                static_count(),
+                $last_name . ', ' . $first_name, //Name
+                1,
+                1,
+                1,
+                1,
+                1,
             ];
 
             $totalData++;

@@ -19,7 +19,7 @@
               <div class= "table-responsive">
                   <h5 class="card-title">LIST OF GRADUATES</h5>
                   <!-- Table with stripped rows -->
-                  <table class="table table-striped" width="200%" cellspacing="200%" >
+                  <table id="graduatesTable" class="table table-striped" width="200%" cellspacing="200%" >
                     <thead>
                       <tr>
                         <th>No</th>

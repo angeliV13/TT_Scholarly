@@ -284,6 +284,72 @@ $(document).ready(function(){
         },
         stateSave   	: false
     });
+    
+    // GRADUATES TABLE
+    let graduatesTable = $('#graduatesTable').DataTable( {
+        "lengthChange"  : false,
+        "paging"        : false,
+        "searching"     : true,
+        "processing"    : true,
+        "ordering"      : false,
+        "serverSide"    : false,
+        "bInfo" 		: false,
+        "ajax":{
+            url     :"controller/tableHandler.php", // json datasource
+            type    : "post",  // method  , by default get
+            data    : {
+                        "action"   	    : 7,
+                    },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function(data){  // error handling
+                console.log(data);
+                var columnCount = $('#graduatesTable').DataTable().columns().count();
+                $(".graduatesTable-error").html("");
+                $("#graduatesTable").append(`<tbody class="graduatesTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#graduatesTable_processing").css("display","none"); 
+            }
+        },
+        "createdRow": function( row, data, index ) {},
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language	: {
+                    processing	: "<span class='loader'></span>"
+        },
+        fixedColumns:   {
+                leftColumns: 0
+        },
+        scrollY     	: false,
+        scrollCollapse	: false,
+        scroller    	: {
+            loadingIndicator    : false
+        },
+        stateSave   	: false,
+
+        // "fnInitComplete" : function(oSettings, json) {
+        //     $("#graduatesTable thead th").each( function ( i ) {
+        //         if ($(this).text() !== '') {
+        //             var isStatusColumn = (($(this).text() == 'Status') ? true : false);
+        //             var select = $('<select><option value=""></option></select>')
+        //                 .appendTo( $(this).empty() )
+        //                 .on( 'change', function () {
+        //                     var val = $(this).val();
+                            
+        //                     graduatesTable.column( i )
+        //                         .search( val ? '^'+$(this).val()+'$' : val, true, false )
+        //                         .draw();
+        //                 } );
+                        
+        //                 graduatesTable.column( i ).data().unique().sort().each( function ( d, j ) {  
+        //                 select.append( '<option value="'+d+'">'+d+'</option>' );
+        //             } );	
+                    
+        //         }
+        //     } );
+        // }
+    });
 
     // Benef List Table
     let benefListTable = $('#listOfBeneficiaries').DataTable( {
@@ -298,7 +364,7 @@ $(document).ready(function(){
             url     :"controller/tableHandler.php", // json datasource
             type    : "post",  // method  , by default get
             data    : {
-                        "action"   	    : 7,
+                        "action"   	    : 8,
                     },
             error: function(data){  // error handling
                 console.log(data);

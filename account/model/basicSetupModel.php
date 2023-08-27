@@ -19,67 +19,7 @@ function accountHandlerAccess($access, $id)
 }
 // ---------------------------------------------------
 
-function getDefaultAcadYearId()
-{
-    include("dbconnection.php");
 
-    $sql = "SELECT * FROM acad_year WHERE default_ay = 1";
-    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
-
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
-            extract($row);
-
-            return $id;
-        }
-    }
-}
-
-function getDefaultAcadYearColumn($column)
-{
-    include("dbconnection.php");
-
-    $sql = "SELECT {$column} FROM acad_year WHERE default_ay = 1";
-    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
-
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
-            extract($row);
-
-            return ${$column};
-        }
-    }
-}
-
-function getDefaultSemesterId()
-{
-    include("dbconnection.php");
-
-    $sql = "SELECT * FROM semester WHERE default_sem = 1";
-    $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
-
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
-            extract($row);
-
-            return $id;
-        }
-    }
-}
-
-function getCheckboxValueDB($value)
-{
-    return ($value == 1) ? 'checked' : '';
-}
-
-function getAudience($shs, $colEAPub, $colEAPriv, $colSc)
-{
-    $audience = ($shs          == 1) ? 'Senior High <br>' : '';
-    $audience .= ($colEAPub     == 1) ? 'College EA Public <br>' : '';
-    $audience .= ($colEAPriv    == 1) ? 'College EA Private <br>' : '';
-    $audience .= ($colSc        == 1) ? 'College Scholarship <br>' : '';
-    return $audience;
-}
 // ----------------------------------------------------
 // Change Semester
 function switchSemester($sem = 1)
