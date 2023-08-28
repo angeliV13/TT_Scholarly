@@ -1,6 +1,6 @@
 {
-    "name": "PWA example",
-    "short_name":"PWA example",
+    "name": "Thrive Thomasino Scholarly",
+    "short_name":"TT Scholarly",
     "start_url": "./",
     "scope": "./",
     "background_color": "white",
