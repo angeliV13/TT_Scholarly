@@ -880,4 +880,61 @@ function changePFP($data)
     return ($query) ? 'success' : 'Error: ' . $conn->error;
 }
 
+function set_applicant_status($data)
+{
+    include("dbconnection.php");
+
+    $id = $data['applicantId'];
+    $decision = $data['decision'];
+    $date = $data['date'];
+    $startTime = $data['startTime'];
+    $endTime = $data['endTime'];
+    $decisionText = get_status_text($decision);
+    $msgStatus = get_message_text_status($decision, $date, $startTime, $endTime);
+    $msgText = $msgStatus['text'];
+    $msgType = $msgStatus['notifType'];
+
+    $userInfo = get_user_info($id);
+    $userData = get_user_data($id);
+    $name = $userInfo['first_name'] . ' ' . $userInfo['last_name'];
+    $email = $userData[2];
+
+    $adminEmail = [
+        'table' => 'account',
+        'column' => [
+            'account_type' => 1,
+        ]
+    ];
+
+    $adEmail = check_exist_multiple($adminEmail); if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+
+    $msg = '<p>Hi '.$name.',<br></p>';
+    $msg .= $msgText;
+    $msg .= '<p>Thank you! <br></p>';
+    $msg .= '<p>Best regards,</p>';
+    $msg .= '<p>Youth Development Scholarship</p>';
+
+    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, 2, $adEmail); if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+    $notifiedUsers = get_notif_type(2);
+
+    $notifData = [
+        'user_id'       => $id,
+        'notif_type'    => $msgType,
+        'notif_body'    => $decisionText,
+        'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
+    ];
+
+    $notif = insert_notification($notifData); if ($notif !== 'success') return 'Error: ' . $notif;
+
+    $updateStatus = update_applicant_status($id, $decision); if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
+
+    return 'success';
+}
+
+function deleteUser($id)
+{
+    echo update_account_status($id, 4);
+}
+
 

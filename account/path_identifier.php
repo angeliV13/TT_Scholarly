@@ -116,7 +116,7 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'bene-assessment':
-                                return 'views/admin/bene-assessment.php';
+                                return 'views/admin/bene_assessment.php';
 
 
                         case 'bene-renewal':

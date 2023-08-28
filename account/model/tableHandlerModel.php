@@ -166,8 +166,10 @@ function notificationTable()
 
     $totalData = $totalFiltered = 0;
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $notifiedUsers = "";
             $notifFunc = $row['notif_function'];
             $notifName = $row['notif_name'];
@@ -178,11 +180,15 @@ function notificationTable()
             $button = "<button type='button' class='editNotif btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#editNotifModal' data-id='" . $row['id'] . "' data-name='" . $row['notif_name'] . "' data-icon='" . $row['notif_icon'] . "' data-dark='" . $row['dark_flag'] . "' data-func='" . get_notif_func($row['notif_function']) . " ' data-users='" . $row['notified_users'] . "'>Edit</button>";
 
 
-            if (is_array($notif)) {
-                foreach ($notif as $user) {
+            if (is_array($notif)) 
+            {
+                foreach ($notif as $user) 
+                {
                     $notifiedUsers .= getAccountType($user)[0] . "<br>";
                 }
-            } else {
+            } 
+            else 
+            {
                 $notifiedUsers = getAccountType($notif)[0];
             }
 
@@ -261,21 +267,24 @@ function schoolTable()
     echo json_encode($json_data);
 }
 
-function collegeNewApplicantTable()
+function userTables($stat = "", $acc_status = "", $acc_type = "")
 {
+    // stat = scholarship_application status
+    // acc_status = account account_status
+    // acc_type = account account_type
+
     include("dbconnection.php");
 
-    $acadYearId = getDefaultAcadYearId();
-    $semId      = getDefaultSemesterId();
     $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
-
-
     $sql = "SELECT * FROM account acc 
-            JOIN user_info inf ON acc.id = inf.account_id 
-            WHERE acc.account_type = '3' AND acc.account_status = '1'";
+            JOIN user_info inf ON acc.id = inf.account_id";
+
+    $sql .= ($acc_type == "") ? " WHERE acc.account_type = '3'" : " WHERE acc.account_type = '$acc_type'";
+    $sql .= ($acc_status == "") ? " AND acc.account_status = '1'" : " AND acc.account_status = '$acc_status'";
+
     $query = $conn->query($sql);
 
     $data = [];
@@ -288,10 +297,21 @@ function collegeNewApplicantTable()
         {
             extract($row);
 
-            $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
             $education  = get_user_education($account_id, 1);
-            $button     = getInformationButton($row, $entries);
             $scholarType = check_status($account_id);
+
+            if ($stat != "")
+            {
+                if (!isset($scholarType['status'])) continue;
+                if ($scholarType['status'] != $stat) continue;
+            } 
+
+            $none = ($acc_status == 4) ? "d-none" : "";
+
+            $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
+                            <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                            <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>
+                        </div>';
 
             $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
             $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
@@ -300,7 +320,7 @@ function collegeNewApplicantTable()
                 static_count(),
                 $last_name . ', ' . $first_name, //Name
                 (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name
-                (isset($schoolDetails['school_classification']))    ? $schoolClassArr[$schoolDetails['school_classification']] : '', //School Type
+                (isset($schoolDetails['class_type']))    ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($scholarType['scholarType'])                 ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
                 (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
                 (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course
@@ -335,8 +355,10 @@ function websiteSocials()
 
     $totalData = $totalFiltered = 0;
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $socialName = $name = "";
             $id = $row['id'];
             $socialType = $row['social_type'];
@@ -370,12 +392,10 @@ function websiteSocials()
     echo json_encode($json_data);
 }
 
-function benefListTable()
+function graduatesTable()
 {
     include("dbconnection.php");
 
-    $acadYearId = getDefaultAcadYearId();
-    $semId      = getDefaultSemesterId();
     $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
@@ -395,9 +415,11 @@ function benefListTable()
         {
             extract($row);
 
-            $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
             $education  = get_user_education($account_id, 1);
-            $button     = getInformationButton($row, $entries);
+            $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
+                            <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                            <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Applicant</button>
+                        </div>';
             $scholarType = check_status($account_id);
 
             $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
@@ -406,15 +428,11 @@ function benefListTable()
             $data[] = [
                 static_count(),
                 $last_name . ', ' . $first_name, //Name
-                (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name
-                (isset($schoolDetails['class_type']))    ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
-                (isset($scholarType['scholarType'])                 ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
-                (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
-                (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course
-                (isset($education[1]['year_level'])                 ? ($education[1]['year_level']) : ''), // Year Level
-                $contact_number, //Contact Number
-                $barangay, //Barangay
-                $button, // Buttons
+                1,
+                1,
+                1,
+                1,
+                1,
             ];
 
             $totalData++;
@@ -431,47 +449,23 @@ function benefListTable()
     echo json_encode($json_data);
 }
 
-function graduatesTable()
+function viewNotificationTable()
 {
-    include("dbconnection.php");
-
-    $acadYearId = getDefaultAcadYearId();
-    $semId      = getDefaultSemesterId();
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
-    $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
-    $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
-
-    $sql = "SELECT * FROM account acc 
-            JOIN user_info inf ON acc.id = inf.account_id 
-            WHERE acc.account_type = '3' AND acc.account_status = '1'";
-    $query = $conn->query($sql);
-
-    $data = [];
-
+    $notifications = show_notification(1);
+    
     $totalData = $totalFiltered = 0;
 
-    if ($query->num_rows > 0) 
+    if ($notifications['data'] != null) 
     {
-        while ($row = $query->fetch_assoc()) 
+        foreach ($notifications['data'] as $notif) 
         {
-            extract($row);
-
-            $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
-            $education  = get_user_education($account_id, 1);
-            $button     = getInformationButton($row, $entries);
-            $scholarType = check_status($account_id);
-
-            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
-            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
-
             $data[] = [
                 static_count(),
-                $last_name . ', ' . $first_name, //Name
-                1,
-                1,
-                1,
-                1,
-                1,
+                $notif['notif_name'],
+                htmlspecialchars_decode($notif['notif_body']),
+                date("F d, Y h:i A", strtotime($notif['notif_date'])),
+                ($notif['status'] == 1) ? "Read" : "Unread",
+                "<a href='" . $notif['notif_link'] . "' class='btn btn-sm btn9-primary'>View</a>",
             ];
 
             $totalData++;
@@ -482,7 +476,7 @@ function graduatesTable()
         "draw" => 1,
         "recordsTotal" => intval($totalData),
         "recordsFiltered" => intval($totalFiltered),
-        "data" => $data
+        "data" => $data ?? []
     );
 
     echo json_encode($json_data);

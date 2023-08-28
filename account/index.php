@@ -28,7 +28,7 @@ $school = get_school();
 
 if (isset($_GET['notif'])) 
 {
-    update_notification($_GET['notif'], $_SESSION['id']);
+    echo update_notification($_GET['notif'], $_SESSION['id']);
 }
 
 
@@ -50,6 +50,7 @@ if (isset($_GET['notif']))
 
   <?php include('includes/libraries/javascript.php') ?>
   <?php include('includes/libraries/inside_javascript.php') ?>
+  <?php include('modal.php') ?>
   <script src="assets/js/table.js"></script>
 
   <?php if ($checkNav == "profile-bene" OR in_array($_SESSION['account_type'], ['2', '3'])): ?>

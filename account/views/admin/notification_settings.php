@@ -44,6 +44,34 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">Notifications</h5>
+                            </div>
+
+                            <!-- Table with stripped rows -->
+                            <table id="viewNotifTable" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class=" small text-center">
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Notification Type</th>
+                                        <th class="text-center">Notification Message</th>
+                                        <th class="text-center">Received Date</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small text-center">
+
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

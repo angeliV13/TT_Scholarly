@@ -49,12 +49,13 @@ $("input[name='editfilledCheck']").on("change", function(){
 $("#addNotification").on("click", function(e){
     e.preventDefault();
 
-    let notifFunc = check_error(document.getElementById("notifFunc"));
-    let notifName = check_error(document.getElementById("notifName"));
-    let notifIcon = check_error(document.getElementById("notifIcon"));
+    let notifFunc = check_error(document.getElementById("notifFunc")); if (notifFunc == undefined) return;
+    let notifName = check_error(document.getElementById("notifName")); if (notifName == undefined) return;
+    let notifIcon = check_error(document.getElementById("notifIcon")); if (notifIcon == undefined) return;
     let notifUsers = $("input[name='accTypeCheck[]']:checked").map(function(){
         return $(this).val();
     }).get();
+
     let filledCheck = $("input[name='filledCheck']:checked").val();
 
     if (notifUsers == "") {
@@ -71,43 +72,41 @@ $("#addNotification").on("click", function(e){
         return false;
     }
 
-    if (notifFunc && notifName && notifIcon) {
-        $.ajax({
-            url: "controller/basicSetup.php",
-            type: "POST",
-            data: {
-                "action"        : 6,
-                "notifFunc"     : notifFunc,
-                "notifName"     : notifName,
-                "notifIcon"     : notifIcon,
-                "notifUsers"    : notifUsers,
-                "filledCheck"   : filledCheck
-            },
-            success: function(data) {
-                if (data == "success") {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Success!",
-                        text: `Notification successfully added!`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `Something went wrong! Error: ${data}`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                }
+    $.ajax({
+        url: "controller/basicSetup.php",
+        type: "POST",
+        data: {
+            "action"        : 6,
+            "notifFunc"     : notifFunc,
+            "notifName"     : notifName,
+            "notifIcon"     : notifIcon,
+            "notifUsers"    : notifUsers,
+            "filledCheck"   : filledCheck
+        },
+        success: function(data) {
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Notification successfully added!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 })
 
 $(document).on("click", ".editNotif", function(){
@@ -148,8 +147,8 @@ $(document).on("click", ".editNotif", function(){
 $("#updateNotif").on("click", function(e){
     e.preventDefault();
 
-    let notifName = check_error(document.getElementById("editnotifName"));
-    let notifIcon = check_error(document.getElementById("editnotifIcon"));
+    let notifName = check_error(document.getElementById("editnotifName")); if (notifName == undefined) return;
+    let notifIcon = check_error(document.getElementById("editnotifIcon")); if (notifIcon == undefined) return;
     let notifUsers = $("input[name='editaccTypeCheck[]']:checked").map(function(){
         return $(this).val();
     }).get();
@@ -170,41 +169,39 @@ $("#updateNotif").on("click", function(e){
         return false;
     }
 
-    if (notifName && notifIcon) {
-        $.ajax({
-            url: "controller/basicSetup.php",
-            type: "POST",
-            data: {
-                "action"        : 6.1,
-                "notifName"     : notifName,
-                "notifIcon"     : notifIcon,
-                "notifUsers"    : notifUsers,
-                "filledCheck"   : filledCheck,
-                "notifId"       : notifId
-            },
-            success: function(data) {
-                if (data == "success") {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Success!",
-                        text: `Notification successfully updated!`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `Something went wrong! Error: ${data}`,
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-                }
+    $.ajax({
+        url: "controller/basicSetup.php",
+        type: "POST",
+        data: {
+            "action"        : 6.1,
+            "notifName"     : notifName,
+            "notifIcon"     : notifIcon,
+            "notifUsers"    : notifUsers,
+            "filledCheck"   : filledCheck,
+            "notifId"       : notifId
+        },
+        success: function(data) {
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Notification successfully updated!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 })

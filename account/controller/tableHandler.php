@@ -21,7 +21,7 @@ switch ($action) {
         echo schoolTable();
         break;
     case 5:
-        echo collegeNewApplicantTable();
+        echo userTables(1);
         break;
     case 6:
         echo websiteSocials();
@@ -30,6 +30,30 @@ switch ($action) {
         echo graduatesTable();
         break;
     case 8:
-        echo benefListTable();
+        echo userTables(4, "", 2);
+        break;
+    case 9:
+        echo viewNotificationTable();
+        break;
+    case 10:
+        echo getProfile($_POST['id']);
+        break;
+    case 11:
+        echo userTables(3);
+        break;
+    case 12:
+        echo userTables(2);
+        break;
+    case 13:
+        echo userTables("", 4);
+        break;
+    case 14:
+        echo userTables(2, "", 2);
+        break;
+    case 15:
+        echo userTables(4, 3, 2);
+        break;
+    case 16:
+        echo userTables("", 4, 2);
         break;
 }

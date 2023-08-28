@@ -143,13 +143,13 @@ function get_scholar_type($type)
     switch ($type)
     {
         case 1:
-            return "College Level";
+            return "College Scholarship";
         case 2:
-            return "Senior High School Level";
+            return "College Educational Assistance";
         case 3:
-            return "Junior High School Level";
-        case 4:
-            return "Elementary Level";
+            return "SHS Educational Assistance";
+        default:
+            return "Unknown";
     }
 }
 
@@ -282,6 +282,55 @@ function get_user_family($id)
     }
 
     return $family;
+}
+
+function get_status_text($type)
+{
+    switch ($type)
+    {
+        case 2:
+            return "For Assesment Exam";
+        case 3:
+            return "For Interview";
+        case 4:
+            return "Application Approved";
+        case 5:
+            return "Application Rejected";
+    }
+}
+
+function get_message_text_status($type, $date = "", $startTime = "", $endTime = "")
+{
+    $text = $notifType = "";
+    switch ($type)
+    {
+        case 2:
+            $text .= "<p>Your scholarship application has been reviewed. You are now scheduled for an Assesment Exam</p><br>";
+            $text .= "<p>Here are the details:</p><br>";
+            $text .= "<p>Date: " . $date . "</p>";
+            $text .= "<p>Time: " . $startTime . " - " . $endTime . "</p>";
+            $text .= "<p>Please be on time.</p>";
+            $notifType = 3;
+            break;
+        case 3:
+            $text .= "<p>This is to inform you that you have passed the Assesment Exam. You are now scheduled for an Interview.</p><br>";
+            $text .= "<p>Here are the details:</p><br>";
+            $text .= "<p>Date: " . $date . "</p>";
+            $text .= "<p>Time: " . $startTime . " - " . $endTime . "</p>";
+            $text .= "<p>Please be on time.</p>";
+            $notifType = 4;
+            break;
+        case 4:
+            $text .= "<p>Congratulations! Your scholarship application has been approved.</p><br>";
+            $notifType = 5;
+            break;
+        case 5:
+            $text .= "<p>After careful consideration, we regret to inform you that your scholarship application has been rejected.</p><br>";
+            $notifType = 6;
+            break;
+    }
+
+    return ['text' => $text, 'notifType' => $notifType];
 }
 
 function get_school_address($id)
@@ -446,19 +495,25 @@ function sms_verification($contact, $msg) // function that sends an OTP to the u
 }
 
 
-function show_notification()
+function show_notification($view = 0)
 {
     include("dbconnection.php");
 
 
-    $sql = "SELECT * FROM notification WHERE user_id = " . $_SESSION['id'] . " ORDER BY id DESC";
-    $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
+    $sql = "SELECT * FROM notification WHERE user_id = " . $_SESSION['id'] . " ";
 
+    if ($view == 0)
+    {
+        $sql .= "AND status = 0 ";
+    }
+
+    $sql .= " ORDER BY id DESC";
+
+    $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
 
     $count = ($query->num_rows > 0) ? $query->num_rows : 0;
     $body = "";
     $data = [];    
-
 
     if ($count > 0)
     {
@@ -466,7 +521,6 @@ function show_notification()
         {
             $data[] = $row;
         }
-
 
         $sql = "SELECT id, notif_name, notif_icon FROM notification_type WHERE id IN (";
 
@@ -533,7 +587,7 @@ function show_notification()
     }
 
 
-    return ['count' => $count, 'body' => $body];
+    return ['count' => $count, 'body' => $body, 'data' => $data];
 }
 
 
@@ -780,11 +834,16 @@ function get_education_courses($type = '', $id = 0)
     $data = [];
 
     $sql = "SELECT id, name FROM education_courses WHERE ";
-    if($id == 0){
+
+    if($id == 0)
+    {
         $sql .= "type = '{$type}' ";
-    }else{
+    }
+    else
+    {
         $sql .= "id = '{$id}' ";
     }
+
     $query = $conn->query($sql);
 
 
@@ -889,6 +948,26 @@ function update_status($type, $id)
     }
 
     $sql = "UPDATE scholarship_application SET " . $typeName . " = 1, current_active = '$typeUpdate' WHERE userId = " . $id;
+    $query = $conn->query($sql);
+
+    return ($query) ? true : $conn->error; $conn->rollback();
+}
+
+function update_applicant_status($id, $status)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE scholarship_application SET status = " . $status . " WHERE userId = " . $id;
+    $query = $conn->query($sql);
+
+    return ($query) ? true : $conn->error; $conn->rollback();
+}
+
+function update_account_status($id, $status)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE account SET account_status = " . $status . " WHERE id = " . $id;
     $query = $conn->query($sql);
 
     return ($query) ? true : $conn->error; $conn->rollback();

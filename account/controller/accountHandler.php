@@ -189,11 +189,23 @@ if (isset($_REQUEST['action']))
             'userId'            => isset($_POST['userId']) ? $_POST['userId'] : '',
         ];
 
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-
         echo changePFP($data);
+    }
+    else if ($action == 18) // Update Application
+    {
+        $data = [
+            'decision'          => isset($_POST['decision']) ? $_POST['decision'] : '',
+            'applicantId'       => isset($_POST['applicantId']) ? $_POST['applicantId'] : '',
+            'date'              => isset($_POST['date']) ? $_POST['date'] : '',
+            'startTime'         => isset($_POST['startTime']) ? $_POST['startTime'] : '',
+            'endTime'           => isset($_POST['endTime']) ? $_POST['endTime'] : '',
+        ];
+
+        echo set_applicant_status($data);
+    }
+    else if ($action == 19) // Delete Applicant
+    {
+        echo deleteUser(isset($_POST['id']) ? $_POST['id'] : '');
     }
 }
 

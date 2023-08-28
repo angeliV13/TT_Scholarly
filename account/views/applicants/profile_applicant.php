@@ -362,7 +362,7 @@
                   <input type="hidden" id="elemId" value="<?= (!isset($education[4]['educ_id'])) ? "" : $education[4]['educ_id'] ?>">
 
                   <!-- COLLEGE LEVEL -->
-                  <?php if ($_SESSION['scholarType'] == 1) : ?>
+                  <?php if ($_SESSION['scholarType'] == 1 OR $_SESSION['scholarType'] == 2) : ?>
                     <h5 class="card-title mt-3">College Level</h5>
                     <!-- Custom Styled Validation with Tooltips -->
                     <?php if (isset($education[1])) : ?>
@@ -587,7 +587,7 @@
           <?php endif; ?>
 
           <!-- SENIOR HIGHSCHOOL -->
-          <?php if ($_SESSION['scholarType'] <= 2) : ?>
+          <?php if ($_SESSION['scholarType'] <= 3) : ?>
             <h5 class="card-title">Senior Highschool Level</h5>
             <?php if (isset($education[2])) : ?>
               <div class="row g-4">
@@ -1340,8 +1340,8 @@
                     <label for="fatherLivingFlag" class="form-label"> Living or Deceased? </label>
                     <select class="form-select" id="fatherLivingFlag" name="Father's Living Flag" <?= $finishFlag ? "disabled" : "" ?>>
                       <option selected disabled value="">Choose...</option>
-                      <option value="0" <?= $family['father']['living_flag'] == 0 ? "selected" : "" ?>>Yes</option>
-                      <option value="1" <?= $family['father']['living_flag'] == 1 ? "selected" : "" ?>>No</option>
+                      <option value="0" <?= $family['father']['living_flag'] == 0 ? "selected" : "" ?>>Living</option>
+                      <option value="1" <?= $family['father']['living_flag'] == 1 ? "selected" : "" ?>>Deceased</option>
                     </select>
                   </div>
 
@@ -1441,8 +1441,8 @@
                     <label for="fatherLivingFlag" class="form-label"> Living or Deceased? </label>
                     <select class="form-select" id="fatherLivingFlag" name="Father's Living Flag">
                       <option selected disabled value="">Choose...</option>
-                      <option value="0">Yes</option>
-                      <option value="1">No</option>
+                      <option value="0">Living</option>
+                      <option value="1">Deceased</option>
                     </select>
                   </div>
 
@@ -1550,8 +1550,8 @@
                         <label for="motherLivingFlag" class="form-label"> Living or Deceased? </label>
                         <select class="form-select" id="motherLivingFlag" name="Mother's Living Flag" <?= $finishFlag ? "disabled" : "" ?>>
                           <option selected disabled value="">Choose...</option>
-                          <o value="0" <?= $family['mother']['living_flag'] == 0 ? "selected" : "" ?>>Yes</option>
-                            <o value="1" <?= $family['mother']['living_flag'] == 1 ? "selected" : "" ?>>No</option>
+                          <o value="0" <?= $family['mother']['living_flag'] == 0 ? "selected" : "" ?>>Living</option>
+                            <o value="1" <?= $family['mother']['living_flag'] == 1 ? "selected" : "" ?>>Deceased</option>
                         </select>
                       </div>
 
@@ -1651,8 +1651,8 @@
                         <label for="motherLivingFlag" class="form-label"> Living or Deceased? </label>
                         <select class="form-select" id="motherLivingFlag" name="Mother's Living Flag">
                           <option selected disabled value="">Choose...</option>
-                          <option value="0">Yes</option>
-                          <option value="1">No</option>
+                          <option value="0">Living</option>
+                          <option value="1">Deceased</option>
                         </select>
                       </div>
 
@@ -1897,8 +1897,8 @@
                         <label for="guardianLivingFlag" class="form-label"> Living or Deceased? </label>
                         <select class="form-select" id="guardianLivingFlag" name="Guardian's Living Flag">
                           <option selected disabled value="">Choose...</option>
-                          <option value="0">Yes</option>
-                          <option value="1">No</option>
+                          <option value="0">Living</option>
+                          <option value="1">Deceased</option>
                         </select>
                       </div>
 
@@ -2013,8 +2013,8 @@
                         <label for="spouseLivingFlag" class="form-label"> Living or Deceased? </label>
                         <select class="form-select" id="spouseLivingFlag" name="Spouse's Living Flag" <?= $finishFlag ? "disabled" : "" ?>>
                           <option selected disabled value="">Choose...</option>
-                          <option value="0" <?= $family['spouse']['living_flag'] == 0 ? "selected" : "" ?>>Yes</option>
-                          <option value="1" <?= $family['spouse']['living_flag'] == 1 ? "selected" : "" ?>>No</option>
+                          <option value="0" <?= $family['spouse']['living_flag'] == 0 ? "selected" : "" ?>>Living</option>
+                          <option value="1" <?= $family['spouse']['living_flag'] == 1 ? "selected" : "" ?>>Deceased</option>
                         </select>
                       </div>
 
@@ -2123,8 +2123,8 @@
                         <label for="spouseLivingFlag" class="form-label"> Living or Deceased? </label>
                         <select class="form-select" id="spouseLivingFlag" name="Spouse's Living Flag">
                           <option selected disabled value="">Choose...</option>
-                          <option value="0">Yes</option>
-                          <option value="1">No</option>
+                          <option value="0">Living</option>
+                          <option value="1">Deceased</option>
                         </select>
                       </div>
 
