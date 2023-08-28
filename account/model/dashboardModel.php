@@ -3,12 +3,12 @@
 session_start();
 include("functionModel.php");
 
-function getTotalCounts(){
-
+function getTotalCounts()
+{
     $acadYearId  = getDefaultAcadYearId();
-    $acadYearEnd = getDefaultAcadYearColumn('to_ay'); 
+    $acadYearEnd = getDefaultAcadYearColumn('to_ay');
 
-    $data = [ 
+    $data = [
         getAccounts(2, 1, 1),   // Applicant
         getAccounts(3, 1, 1),    // Beneficiaries
         getGraduating($acadYearEnd, 3, 1) // Graduating
@@ -16,4 +16,13 @@ function getTotalCounts(){
     ];
 
     return json_encode($data);
+}
+
+function getChartTrends()
+{
+    $data = [];
+
+    $acadYearId     = getDefaultAcadYearId();
+    $acadYearInfo   = getAcadYearIdCount($acadYearId, 3);
+
 }

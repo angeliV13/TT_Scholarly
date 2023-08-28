@@ -1158,3 +1158,21 @@ function checkReadOnlyStatus($id = 0)
 
     return $query->num_rows;
 }
+
+function getAcadYearIdCount($id = 0, $limit = 0)
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SELECT * FROM acad_year WHERE id <= '{$id}' ORDER BY id ASC LIMIT '{$limit}'";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+            $data[] = [$row];
+        }
+    }
+
+    return $data;
+}

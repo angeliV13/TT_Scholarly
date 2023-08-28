@@ -1,37 +1,7 @@
 $(document).ready(function ($) {
-  $.ajax({
-    type: "POST",
-    url: "controller/dashboard.php",
-    data: {
-      action: 1,
-    },
-    success: function (data) {
-      if (data != "") {
-        let counts = JSON.parse(data);
-        $("#totalApplicants").text(counts[0]);
-        $("#totalBeneficiaries").text(counts[1]);
-        $("#totalGraduating").text(counts[2]);
-      }
-    },
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  new ApexCharts(document.querySelector("#scholarTrends"), {
-    series: [
-      {
-        name: "College Educ. Assistance",
-        data: [31, 40, 28, 51, 42, 82, 56],
-      },
-      {
-        name: "College Scholars",
-        data: [11, 32, 45, 32, 34, 52, 41],
-      },
-      {
-        name: "SHS Educ. Assistance",
-        data: [15, 11, 32, 18, 9, 24, 11],
-      },
-    ],
+  // Scholar Trend Chart
+  let scholarTrends = new ApexCharts(document.querySelector("#scholarTrends"), {
+    series: [],
     chart: {
       height: 350,
       type: "area",
@@ -60,21 +30,72 @@ document.addEventListener("DOMContentLoaded", () => {
       width: 2,
     },
     xaxis: {
-      type: "datetime",
-      categories: [
-        "2018-09-19T00:00:00.000Z",
-        "2018-09-19T01:30:00.000Z",
-        "2018-09-19T02:30:00.000Z",
-        "2018-09-19T03:30:00.000Z",
-        "2018-09-19T04:30:00.000Z",
-        "2018-09-19T05:30:00.000Z",
-        "2018-09-19T06:30:00.000Z",
-      ],
+
     },
-    tooltip: {
-      x: {
-        format: "dd/MM/yy HH:mm",
-      },
+  });
+
+  scholarTrends.render();
+
+  // Data in Scholar Trend Chart
+  $.ajax({
+    type: "POST",
+    url: "controller/dashboard.php",
+    data: {
+      action: 1,
     },
-  }).render();
+    success: function (data) {
+      if (data != "") {
+        let counts = JSON.parse(data);
+        scholarTrends.updateSeries([
+          {
+            name: "SHS Educ. Assistance",
+            data: [0, 0, 33, 29, 55, 30],
+          },
+          {
+            name: "College Educ. Assistance",
+            data: [40, 40, 28, 51, 42, 56],
+          },
+          {
+            name: "College Scholarship",
+            data: [22, 60, 40, 5, 14, 25],
+          },
+        ]);
+
+        scholarTrends.updateOptions({
+          xaxis: {
+            labels: {
+                show: true,
+                rotate: -45,
+            },
+            type: "category",
+            categories: [
+              "21-22 1st Sem",
+              "21-22 2nd Sem",
+              "22-23 1st Sem",
+              "23-24 2nd Sem",
+              "24-25 1st Sem",
+              "24-25 2nd Sem",
+            ],
+          },
+        });
+      }
+    },
+  });
+
+  // Counts in Accounts
+  $.ajax({
+    type: "POST",
+    url: "controller/dashboard.php",
+    data: {
+      action: 1,
+    },
+    success: function (data) {
+      if (data != "") {
+        let counts = JSON.parse(data);
+        $("#totalApplicants").text(counts[0]);
+        $("#totalBeneficiaries").text(counts[1]);
+        $("#totalGraduating").text(counts[2]);
+      }
+    },
+  });
 });

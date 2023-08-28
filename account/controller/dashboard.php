@@ -11,5 +11,9 @@ if (isset($_REQUEST['action']))
         case 1: // Counts of Dashboard;
             echo getTotalCounts();
             break;
+
+        case 2: // Chart of Scholar Trends;
+            echo getChartTrends();
+            break;
     }
 }

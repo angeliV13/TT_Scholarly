@@ -3,6 +3,7 @@
 session_start();
 include("validationModel.php");
 include("functionModel.php");
+
 // Connection to Account Handler
 function accountHandlerAccess($access, $id)
 {
@@ -125,8 +126,8 @@ function generate_ay()
     $query = $conn->query($sql) or die("Error BSQ002: " . $conn->error);
 
     if ($query->num_rows == 0) {
-        $sql = "INSERT INTO acad_year (`id`, `ay`, `from_ay`, `to_ay`, `modified_by`, `modified_date`) VALUES ('0', '" . $ay . "', '" . $from_ay . "', '" . $to_ay . "', '" . $_SESSION['id'] . "', '" . date('Y-m-d H:i:s') . "')";
-
+        $sql = "INSERT INTO acad_year (`id`, `ay`, `from_ay`, `to_ay`, `modified_by`, `modified_date`) 
+                VALUES ('0', '" . $ay . "', '" . $from_ay . "', '" . $to_ay . "', '" . $_SESSION['id'] . "', '" . date('Y-m-d H:i:s') . "')";
         $query = $conn->query($sql) or die("Error BSQ003: " . $conn->error);
 
         return 'Insert Success';
