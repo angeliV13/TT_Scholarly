@@ -77,6 +77,20 @@ if (isset($_REQUEST['action']))
             }
 
             break;
+        case 1.4:                           //Read Only Academic Year
+            if (isset($_POST['id'])) 
+            {
+                $id     = $_POST['id'];
+                $status = $_POST['status'];
+
+                echo readOnlyAY($id, $status);
+            } 
+            else 
+            {
+                echo 'No AY Exists';
+            }
+
+            break;
 
         case 2.1:                           //Add Assessment Date
             $startDate  = date('Y-m-d', strtotime($_POST['startDate']));

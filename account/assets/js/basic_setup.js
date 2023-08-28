@@ -545,6 +545,49 @@ function defaultAY(id) {
   });
 }
 
+function readOnlyAY(ay, id, status) {
+  let action = (status == 1) ? "Show" : "Unshow";
+  let title = (status == 1) ? "Show AY " + ay + "-" + (ay + 1) + "?" : "Unshow AY " + ay + "-" + (ay + 1) + "?";
+
+  Swal.fire({
+    title: title,
+    text: "Are you sure you want to" + action + " this Academic Year?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: action,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/basicSetup.php",
+        data: {
+          action: 1.4,
+          id: id,
+          status: status,
+        },
+        success: function (data) {
+          console.log(data);
+          if (data == "Success") {
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: 'You can now view AY ' + ay + '-' + (ay + 1) + '!',
+            }).then((result) => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+}
+
 function deleteAY(id) {
   Swal.fire({
     title: "Delete the AY " + id + "-" + (id + 1) + "?",

@@ -45,6 +45,7 @@ function getAcadYearTable()
     $totalData = 0;
     $data = [];
     $counter = 1;
+    $prevId = 0;
 
     $sql = "SELECT * FROM acad_year ORDER BY id DESC LIMIT 5";
     $query = $conn->query($sql) or die("Error BSQ001: " . $conn->error);
@@ -53,14 +54,34 @@ function getAcadYearTable()
         while ($row = $query->fetch_assoc()) {
             extract($row);
 
-            $button =   '<div class="row mx-auto ">
-                            <a href="#" class="col-6 btn btn-warning btn-sm" onclick="defaultAY(' . $from_ay . ')">Make Default</a>
-                            <a href="#" class="col-6 btn btn-danger btn-sm" onclick="deleteAY(' . $from_ay . ')">Delete</a>
-                        </div>';
-            if ($default_ay == 1) {
-                $button = '<div class="align-content-center">
-                                <p class="text-center fst-italic">Default Academic Year</p>
+            if (checkReadOnlyStatus($id) == 1) {
+                $button =   '<div class="row mx-auto ">
+                                <a href="#" class="col-6 btn btn-dark btn-sm" onclick="readOnlyAY(' . $from_ay . ',' . $id . ', 0)">Unshow Records</a>
+                                <a href="#" class="col-6 btn btn-danger btn-sm" onclick="deleteAY(' . $from_ay . ')">Delete</a>
                             </div>';
+            }else{
+                $button = '';
+            }
+
+            // Check if Read Only is Active
+            if (checkReadOnlyStatus() == 0) {
+                // Checks the Buttons if Need to have a make default
+                if ($default_ay == 1) {
+                    $button = '<div class="align-content-center">
+                                    <p class="text-center fst-italic">Default Academic Year</p>
+                                </div>';
+                } elseif ($counter <= 2 && checkBasicSettings('set_assessment', $prevId) == 0 && checkBasicSettings('set_renewal', $prevId) == 0 && checkBasicSettings('set_exam', $prevId) == 0) {
+                    $button =   '<div class="row mx-auto ">
+                                    <a href="#" class="col-6 btn btn-warning btn-sm" onclick="defaultAY(' . $from_ay . ')">Make Default</a>
+                                    <a href="#" class="col-6 btn btn-danger btn-sm" onclick="deleteAY(' . $from_ay . ')">Delete</a>
+                                </div>';
+                } else {
+                    // Default Button
+                    $button =   '<div class="row mx-auto ">
+                                    <a href="#" class="col-6 btn btn-dark btn-sm" onclick="readOnlyAY(' . $from_ay . ', ' . $id . ', 1)">Show Records</a>
+                                    <a href="#" class="col-6 btn btn-danger btn-sm" onclick="deleteAY(' . $from_ay . ')">Delete</a>
+                                </div>';
+                }
             }
 
             $data[] = [
@@ -71,6 +92,8 @@ function getAcadYearTable()
             ];
 
             $counter++;
+
+            $prevId = $id;
         }
     }
 
@@ -128,20 +151,14 @@ function defaultAY($from_ay)
     return 'Default Updated Successfully';
 }
 
-function readOnlyAY($from_ay)
+function readOnlyAY($id, $status)
 {
     include("dbconnection.php");
 
-    $acadYearId = getDefaultAcadYearId();
-    $semester   = switchSemester();
-
-    $sql = "UPDATE acad_year SET read_only = 0 WHERE read_only = '1'";
+    $sql = "UPDATE acad_year SET read_only = '{$status}' WHERE id = '{$id}'";
     $query = $conn->query($sql) or die("Error BSQ004 Read Only: " . $conn->error);
 
-    $sql = "UPDATE acad_year SET read_only = 1 WHERE id = '" . $id . "'";
-    $query = $conn->query($sql) or die("Error BSQ005 Read Only: " . $conn->error);
-
-    return 'Default Updated Successfully';
+    return 'Success';
 }
 
 function deleteAY($from_ay)
@@ -170,10 +187,8 @@ function getSetAssessmentTable()
     $sql = "SELECT * FROM set_assessment WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ007: " . $conn->error);
 
-    if ($query->num_rows <>  0) 
-    {
-        while ($row = $query->fetch_assoc()) 
-        {
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
             extract($row);
 
             $button =   '<div class="row mx-auto">
@@ -663,12 +678,12 @@ function getIndicatorEATable($indicatorCategory)
     if ($query->num_rows > 0) {
         while ($row = $query->fetch_assoc()) {
             extract($row);
-            
+
             if ($indicatorCategory <= 2) {
                 // $indicatorLow   = '<div id="editIndicator_0_' . $id . '" onclick="editEAIndicator(' . $id . ', 0)">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="ea_0_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 0)">';
-                $indicatorLow   = '<div id="editIndicator_0_' . $id . '">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="ea_0_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 0)">';
-                $indicatorHigh  = '<div id="editIndicator_2_' . $id . '">' . $indicator_high . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_high . '" id="ea_2_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 2)">';
-                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="ea_3_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 3)">';
+                $indicatorLow   = '<div id="editIndicator_0_' . $id . '">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="ea_0_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 0)">';
+                $indicatorHigh  = '<div id="editIndicator_2_' . $id . '">' . $indicator_high . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_high . '" id="ea_2_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 2)">';
+                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="ea_3_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 3)">';
 
                 $data[] = [
                     $counter,
@@ -677,8 +692,8 @@ function getIndicatorEATable($indicatorCategory)
                     $indicatorPoint,
                 ];
             } else {
-                $indicatorExact = '<div id="editIndicator_1_' . $id . '">' . $indicator_exact . '</div><input type="text" class="editIndicatorText d-none form-control" value="' . $indicator_exact . '" id="ea_1_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 1)">';
-                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="ea_3_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 3)">';
+                $indicatorExact = '<div id="editIndicator_1_' . $id . '">' . $indicator_exact . '</div><input type="text" class="editIndicatorText d-none form-control" value="' . $indicator_exact . '" id="ea_1_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 1)">';
+                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="ea_3_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 3)">';
 
                 $data[] = [
                     $counter,
@@ -725,8 +740,8 @@ function updateIndicator($id, $type, $value, $category, $applicant = 0)
         $sql = "UPDATE `applicant_indicator` SET `{$columnToChange}`= '{$value}' WHERE id = '{$id}'";
         $query = $conn->query($sql) or die("Error BSQ020: " . $conn->error);
 
-        return (($query) ? 'Success' : "" );
-    }else{
+        return (($query) ? 'Success' : "");
+    } else {
         $sql = "INSERT INTO `applicant_indicator`(`id`, `indicator_applicant`, `indicator_category`, `{$columnToChange}`) 
                     VALUES (0, '{$applicant}', '{$category}', '{$value}')";
         $query = $conn->query($sql) or die("Error BSQ021: " . $conn->error);
@@ -734,7 +749,7 @@ function updateIndicator($id, $type, $value, $category, $applicant = 0)
         $sql = "SELECT LAST_INSERT_ID() AS lastId";
         $query = $conn->query($sql) or die("Error BSQ022: " . $conn->error);
 
-        while ($row = $query -> fetch_assoc()){
+        while ($row = $query->fetch_assoc()) {
             extract($row);
             return $lastId;
         }
@@ -753,17 +768,15 @@ function getIndicatorSCTable($indicatorCategory)
     $sql = "SELECT * FROM applicant_indicator WHERE indicator_applicant = 1 AND indicator_category = '{$indicatorCategory}'";
     $query = $conn->query($sql) or die("Error BSQ023: " . $conn->error);
 
-    if ($query->num_rows > 0) 
-    {
-        while ($row = $query->fetch_assoc()) 
-        {
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_assoc()) {
             extract($row);
-            
+
             if ($indicatorCategory <= 2 || $indicatorCategory == 5) {
                 // $indicatorLow   = '<div id="editIndicator_0_' . $id . '" onclick="editEAIndicator(' . $id . ', 0)">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="ea_0_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 0)">';
-                $indicatorLow   = '<div id="editIndicator_0_' . $id . '">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="sc_0_' . $id . '" onfocusout="saveSCIndicator('.$indicatorCategory.',' . $id . ', 0)">';
-                $indicatorHigh  = '<div id="editIndicator_2_' . $id . '">' . $indicator_high . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_high . '" id="sc_2_' . $id . '" onfocusout="saveSCIndicator('.$indicatorCategory.',' . $id . ', 2)">';
-                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="sc_3_' . $id . '" onfocusout="saveSCIndicator('.$indicatorCategory.',' . $id . ', 3)">';
+                $indicatorLow   = '<div id="editIndicator_0_' . $id . '">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="sc_0_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 0)">';
+                $indicatorHigh  = '<div id="editIndicator_2_' . $id . '">' . $indicator_high . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_high . '" id="sc_2_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 2)">';
+                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="sc_3_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 3)">';
 
                 $data[] = [
                     $counter,
@@ -771,11 +784,9 @@ function getIndicatorSCTable($indicatorCategory)
                     $indicatorHigh,
                     $indicatorPoint,
                 ];
-            } 
-            else 
-            {
-                $indicatorExact = '<div id="editIndicator_1_' . $id . '">' . $indicator_exact . '</div><input type="text" class="editIndicatorText d-none form-control" value="' . $indicator_exact . '" id="sc_1_' . $id . '" onfocusout="saveSCIndicator('.$indicatorCategory.',' . $id . ', 1)">';
-                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="sc_3_' . $id . '" onfocusout="saveSCIndicator('.$indicatorCategory.',' . $id . ', 3)">';
+            } else {
+                $indicatorExact = '<div id="editIndicator_1_' . $id . '">' . $indicator_exact . '</div><input type="text" class="editIndicatorText d-none form-control" value="' . $indicator_exact . '" id="sc_1_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 1)">';
+                $indicatorPoint = '<div id="editIndicator_3_' . $id . '">' . $points . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $points . '" id="sc_3_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 3)">';
 
                 $data[] = [
                     $counter,
@@ -801,7 +812,7 @@ function getIndicatorSCTable($indicatorCategory)
 
 function addNotificationType($data)
 {
-    include ("dbconnection.php");
+    include("dbconnection.php");
 
     $notifFunc = $data['notifFunc'];
     $notifName = $data['notifName'];
@@ -820,7 +831,7 @@ function addNotificationType($data)
 
 function updateNotificationType($data)
 {
-    include ("dbconnection.php");
+    include("dbconnection.php");
 
     $notifName = $data['notifName'];
     $notifIcon = $data['notifIcon'];
@@ -861,8 +872,7 @@ function deleteSchool($id)
     $sql = "SELECT * FROM school WHERE id = '$id'";
     $query = $conn->query($sql);
 
-    if ($query AND $query->num_rows > 0)
-    {
+    if ($query and $query->num_rows > 0) {
         $row = $query->fetch_assoc();
 
         $logs = [
@@ -880,21 +890,15 @@ function deleteSchool($id)
 
         $insertLogs = insert_logs($logs);
 
-        if ($insertLogs)
-        {
+        if ($insertLogs) {
             $sql = "DELETE FROM school WHERE id = '$id'";
             $query = $conn->query($sql);
 
             return ($query) ? "success" : $conn->error;
-        }
-        else
-        {
+        } else {
             return "Error inserting logs. Info: " . $insertLogs;
         }
-
-    }
-    else
-    {
+    } else {
         return "School does not exist. Info: " . $conn->error;
     }
 }
@@ -952,15 +956,12 @@ function addWebsiteInfo($data)
     $sql = "SELECT * FROM website_info";
     $query = $conn->query($sql);
 
-    if ($query AND $query->num_rows > 0)
-    {
+    if ($query and $query->num_rows > 0) {
         $sql = "UPDATE website_info SET email = '$email', address = '$address', telephone = '$telephone', opening_hours = '$opening'";
         $query = $conn->query($sql);
 
         return ($query) ? "success" : $conn->error;
-    }
-    else
-    {
+    } else {
         $sql = "INSERT INTO website_info (email, address, telephone, opening_hours) VALUES ('$email', '$address', '$telephone', '$opening')";
         $query = $conn->query($sql);
 
