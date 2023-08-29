@@ -30,7 +30,7 @@ include('includes/main.php')
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.php" class="logo text-center w-auto">
-                  <img class="mx-auto" src="assets/img/logo.png" alt="">
+                  <img class="mx-auto" src="images/logo512.png" alt="">
                   <span class="d-none d-lg-block py-3">Thrive Thomasino Scholarly</span>
                 </a>
               </div><!-- End Logo -->
@@ -97,6 +97,7 @@ include('includes/main.php')
 
   <!-- Login JS -->
   <script src="assets/js/login.js"></script>
+  <script src="assets/js/forgot.js"></script>
 
 </body>
 

@@ -30,7 +30,7 @@ include('includes/main.php')
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.php" class="logo text-center w-auto">
-                  <img class="mx-auto" src="assets/img/logo.png" alt="">
+                  <img class="mx-auto" src="images/logo512.png" alt="">
                   <span class="d-none d-lg-block py-3">Thrive Thomasino Scholarly</span>
                 </a>
               </div><!-- End Logo -->
@@ -44,12 +44,12 @@ include('includes/main.php')
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form id="login_form_b" method="post" class="row g-3 needs-validation">
+                  <form id="login_form_b" method="post" class="row g-3">
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group ">
-                        <input type="inputUserName" name="username" class="form-control" id="user_name" required>
+                        <input type="inputUserName" name="username" class="form-control" id="user_name">
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
                     </div>

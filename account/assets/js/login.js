@@ -18,7 +18,7 @@ $("#login_form_a").submit(function (event) {
             title: "Error!",
             text: data,
             icon: "error",
-            confirmButtonText: "Noted",
+            confirmButtonText: "Ok",
           });
         }
       },
@@ -34,7 +34,7 @@ $("#login_form_a").submit(function (event) {
 
 $("#login_form_b").submit(function (event) {
   event.preventDefault();
-  if ($("#user_name").val() != "" && $("#password").val() != "") {
+  if ($("#password").val() != "") {
     $.ajax({
       type: "POST",
       url: "controller/accountHandler.php",
@@ -47,12 +47,14 @@ $("#login_form_b").submit(function (event) {
       success: function (data) {
         if (data == "Success") {
           window.location.href = "index.php";
+        } else if(data.substring(0, 1) == 'l'){
+          window.location.href = data;
         } else {
           Swal.fire({
             title: "Error!",
             text: data,
             icon: "error",
-            confirmButtonText: "Noted",
+            confirmButtonText: "Ok",
           });
         }
       },
