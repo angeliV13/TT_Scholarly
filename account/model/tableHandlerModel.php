@@ -52,28 +52,37 @@ function accountListingTable($acc_type)
 
             if ($session_type == 0) {
                 if ($account_type < 2) {
-                    $actions = '<div class="row"> <!--style="height:100px;width:200px" > -->
-                                    <button class="btn-sm btn btn-warning" data-toggle="modal">Edit Credentials</button>
-                                    <button class="btn-sm btn btn-info" data-toggle="modal">Access Options</button>
+                    $actions = '<div class="row d-grid">
+                                    <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit_credential_modal_' . $id . '">Edit Credentials</button>
+                                    <button class="btn-sm btn btn-danger" data-toggle="modal">Delete Account</button>
                                 </div>';
                 }
             } else if ($session_type == 1) {
                 if ($account_type == 0) {
-                    $actions = '<span class="badge bg-secondary">You have no permission to edit this account</span>';
-                } else if ($account_type == 1) {
-                    $actions = '<button class="btn-sm btn btn-warning" data-toggle="modal">Edit Credentials</button>
-                                <button class="btn-sm btn btn-info" data-toggle="modal">Access Options</button>';
+                    $actions = '<div class="row badge bg-secondary">
+                                    <span class="">No Edit Access</span>
+                                </div>';
+                } else if ($account_type == 1 && $access_level == 1) {
+                    $actions = '<div class="d-grid">
+                                    <button class="btn-sm btn btn-secondary" data-toggle="modal">Edit Credentials</button>
+                                    <button class="btn-sm btn btn-danger" data-toggle="modal">Delete Account</button>
+                                </div>';
+                } else {
+                    $actions = '<div class="d-grid">
+                                    <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edit_credential_modal_' . $id . '">Edit Credentials</button>
+                                </div>';
                 }
             }
 
             if ($account_type > 1) {
-                $actions = '<button class="btn-sm btn btn-warning" data-toggle="modal">View Profile</button>
-                                <button class="btn-sm btn btn-info" data-toggle="modal">View Requirements</button>';
-
-                $actions .= '<span class="badge bg-danger w-75 mt-2">For Interview</span>';
+                $actions = '<div class="d-grid">
+                                <button class="btn-sm btn btn-warning" data-toggle="modal">Edit Credentials</button>
+                                <button class="btn-sm btn btn-danger" data-toggle="modal">Delete</button>
+                            </div>';
             }
 
             $nestedData[] = static_count();
+            $nestedData[] = getUserNameFromId($id);
             $nestedData[] = $user_name;
             $nestedData[] = $email;
             $nestedData[] = $type;

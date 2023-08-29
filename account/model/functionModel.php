@@ -138,6 +138,23 @@ function get_scholar_type($type)
     }
 }
 
+function getUserNameFromId($id)
+{
+    include("dbconnection.php");
+
+    // Checks if Account Exists
+
+    $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
+    $query = $conn->query($sql) or die("Error UAQ000: " . $conn->error);
+
+    while ($row = $query->fetch_assoc())
+    {
+        extract($row);
+    }
+
+    return $first_name . ' ' . $last_name;
+}
+
 function get_user_data($id)
 {
     include("dbconnection.php");

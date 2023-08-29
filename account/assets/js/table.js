@@ -27,7 +27,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": "_all" }],
+        "columnDefs": [{ className: "text-center small", "targets": "_all" }],
         language: {
             processing: "<span class='loader'></span>"
         },

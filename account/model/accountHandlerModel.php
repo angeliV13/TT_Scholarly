@@ -3,23 +3,6 @@
 include("validationModel.php");
 include("functionModel.php");
 
-function getUserNameFromId($id)
-{
-    include("dbconnection.php");
-
-    // Checks if Account Exists
-
-    $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
-    $query = $conn->query($sql) or die("Error UAQ000: " . $conn->error);
-
-    while ($row = $query->fetch_assoc())
-    {
-        extract($row);
-    }
-
-    return $first_name . ' ' . $last_name;
-}
-
 
 function userLogin($user_name, $password, $type)
 {
@@ -935,6 +918,62 @@ function set_applicant_status($data)
 function deleteUser($id)
 {
     echo update_account_status($id, 4);
+}
+
+function addAdminAccount($data){
+    include("dbconnection.php");
+
+    $emailCheck = [
+        'table'     => 'account',
+        'column'    => 'email',
+        'value'     => $data['email'],
+    ];
+
+
+    $userCheck = [
+        'table'     => 'account',
+        'column'    => 'user_name',
+        'value'     => $data['username'],
+    ];
+
+    $emailCount = check_exist($emailCheck);
+    $userCount = check_exist($userCheck);
+    $password  = generateRandomString(8);
+
+    if ($emailCount > 0)
+    {
+        return 'Email Already Exist';
+    }
+    else if ($userCount > 0)
+    {
+        return 'Username Already Exist';
+    }
+
+    $sql = "INSERT INTO `account`(`id`, `user_name`, `password`, `email`, `account_type`, `access_level`, `account_status`) 
+            VALUES ('0', '{$data['username']}', '{$password}', '{$data['email']}', '{$data['accountType']}', '{$data['sAdminAccess']}', '{$data['accountStatus']}')";
+    $query = $conn->query($sql);
+
+    $last_id = mysqli_insert_id($conn);
+
+    $sql = "INSERT INTO user_info (account_id, eac_number, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code, citizenship, years_of_residency, language, fbName, fbUrl, fbImage)
+            VALUES ('$last_id', '', '$data[firstName]', '$data[middleName]', '$data[lastName]', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')";
+    $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
+
+    if($query){
+        $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
+        $msg .= '<p> Your account has been created. Please use this password to navigate your account. </p>';
+        $msg .= '<p> <b> Username: ' . $$data['username'] . ' </b> </p>';
+        $msg .= '<p> <b> Password: ' . $password . ' </b> </p>';
+
+        $sendEmail = sendEmail($data['email'], 'Account Created', $msg);
+
+        if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+        return "Insert Success";
+    }
+    
+
+
 }
 
 

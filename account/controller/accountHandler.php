@@ -210,6 +210,21 @@ if (isset($_REQUEST['action']))
     {
         echo deleteUser(isset($_POST['id']) ? $_POST['id'] : '');
     }
+    else if ($action == 20) //Add Account
+    {
+        $data = [
+            'firstName'     => isset($_POST['firstName'])   ? $_POST['firstName'] : '',
+            'middleName'    => isset($_POST['middleName'])  ? $_POST['middleName'] : '',
+            'lastName'      => isset($_POST['lastName'])    ? $_POST['lastName'] : '',
+            'username'      => isset($_POST['username'])    ? $_POST['username'] : '',
+            'email'         => isset($_POST['email'])       ? $_POST['email'] : '',
+            'accountType'   => isset($_POST['accountType']) ? $_POST['accountType'] : '',
+            'sAdminAccess'  => isset($_POST['sAdminAccess'])? $_POST['sAdminAccess'] : '',
+            'accountStatus' => isset($_POST['accountStatus'])? $_POST['accountStatus'] : ''
+        ];
+
+        echo addAdminAccount($data);
+    }
 }
 
 
