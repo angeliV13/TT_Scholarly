@@ -1,5 +1,7 @@
 <?php
 
+include("functionModel.php");
+
 function getFileChecks($check, $file)
 {
     if ($check == false) {
@@ -515,7 +517,7 @@ function getApplicationTable()
             $button =  getUploadButton($row, 'application');
         }elseif ($status == 4 ) {
             $button =   '<div class="btn-group-vertical d-flex">
-                            <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
+                            <p id="textUploadSchoolId'. $requirement .'" class="small mx-auto">' . $file . '</p>
                         </div>';
         }else{
             $button =   '<div class="btn-group-vertical d-flex">
@@ -528,7 +530,7 @@ function getApplicationTable()
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <embed id="previewSchoolId" src="uploads/application/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
+                                        <embed id="previewSchoolId'. $requirement .'" src="uploads/application/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
                                     </div>
 
                                 </div>
@@ -606,7 +608,7 @@ function getUploadButton($row, $category = 'assessment'){
     return $button;
 }
 
-function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFile, $idpicFile, $mapFile, $brgyclearanceFile, $parvoteidFile, $appvoteidFile, $itrFile, $indigencyFile)
+function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFile, $idpicFile, $mapFile, $brgyclearanceFile, $parvoteidFile, $appvoteidFile, $itrFile)
 {
     session_start();
 
@@ -624,13 +626,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value1      = uploadFile($target_dir, $corFile, $file_name);
 
             if ($value1 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value1);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
 
     $typeCount += 1;
@@ -642,13 +644,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value2     = uploadFile($target_dir, $gradesFile, $file_name);
 
             if ($value2 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 4, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value2);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 4, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
     
     $typeCount += 1;
@@ -660,13 +662,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value3      = uploadFile($target_dir, $cobFile, $file_name);
 
             if ($value3 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 5, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value3);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 5, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
 
     $typeCount += 1;
@@ -678,13 +680,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value4      = uploadFile($target_dir, $cgmcFile, $file_name);
 
             if ($value4 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value4);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
 
     $typeCount += 1;
@@ -696,13 +698,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value5      = uploadFile($target_dir, $idpicFile, $file_name);
 
             if ($value5 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value5);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
     
     $typeCount += 1;
@@ -714,13 +716,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value6      = uploadFile($target_dir, $mapFile, $file_name);
 
             if ($value6 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value6);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
 
     $typeCount += 1;
@@ -732,13 +734,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value7      = uploadFile($target_dir, $corFile, $file_name);
 
             if ($value7 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $brgyclearanceFile, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $brgyclearanceFile, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value7);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
     
     $typeCount += 1;
@@ -750,13 +752,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value8      = uploadFile($target_dir, $parvoteidFile, $file_name);
 
             if ($value8 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value8);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
 
     $typeCount += 1;
@@ -768,13 +770,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value9      = uploadFile($target_dir, $appvoteidFile, $file_name);
 
             if ($value9 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value9);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
 
     $typeCount += 1;
@@ -786,13 +788,13 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value10    = uploadFile($target_dir, $itrFile, $file_name);
 
             if ($value10 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $file_name, 3, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value10);
             }
         }
     }else{
-        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 3, 4, 'applicant_file');
+        echo updateRequirement($ay, $sem, $userid, 'Not Applicable', $typeCount, 4, 'applicant_file');
     }
 
     // $typeCount += 1;

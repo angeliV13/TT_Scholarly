@@ -45,10 +45,10 @@ if(isset($_REQUEST['action'])){
             $parvoteidFile      = isset($_FILES['parvoteidFile'])       ? $_FILES['parvoteidFile']      : $_POST['parvoteidFile'];
             $appvoteidFile      = isset($_FILES['appvoteidFile'])       ? $_FILES['appvoteidFile']      : $_POST['appvoteidFile'];
             $itrFile            = isset($_FILES['itrFile'])             ? $_FILES['itrFile']            : $_POST['itrFile'];
-            $indigencyFile      = isset($_FILES['indigencyFile'])       ? $_FILES['indigencyFile']      : $_POST['indigencyFile'];
+            // $indigencyFile      = isset($_FILES['indigencyFile'])       ? $_FILES['indigencyFile']      : $_POST['indigencyFile'];
 
             $target_dir .= "/application/";
-            echo submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFile, $idpicFile, $mapFile, $brgyclearanceFile, $parvoteidFile, $appvoteidFile, $itrFile, $indigencyFile);
+            echo submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFile, $idpicFile, $mapFile, $brgyclearanceFile, $parvoteidFile, $appvoteidFile, $itrFile);
 
             break;
         case 4:         // Upload of Renewal Requirements
