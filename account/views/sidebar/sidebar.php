@@ -133,8 +133,13 @@
                   </a>
                   <ul id="accountManagement-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                       <li>
-                          <a href="index.php?nav=Adaccount-management ">
-                              <i class="bi bi-circle"></i><span>List of Accounts</span>
+                        <?php if ($_SESSION['account_type'] == 0) : ?>
+                          <a href="index.php?nav=manage_account_admin">
+                              <i class="bi bi-circle"></i><span>Admin Accounts</span>
+                          </a>
+                        <?php endif; ?>
+                          <a href="index.php?nav=manage_account_student">
+                              <i class="bi bi-circle"></i><span>Student Accounts</span>
                           </a>
                       </li>
                   </ul>

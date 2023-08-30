@@ -131,7 +131,7 @@ function registerAccount($data)
         'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => 1,
         'notif_body'    => $data['firstName'] . ' ' . $data['lastName'] . ' has registered an account.',
-        'notif_link'    => '?nav=Adaccount-management',
+        'notif_link'    => '?nav=manage_account_student',
     ];
 
     $notif = insert_notification($notifData);
@@ -971,9 +971,6 @@ function addAdminAccount($data){
 
         return "Insert Success";
     }
-    
-
-
 }
 
 

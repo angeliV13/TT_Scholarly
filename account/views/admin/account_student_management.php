@@ -22,7 +22,7 @@
 
 
                             <!-- Table with stripped rows -->
-                            <table class="table table-bordered table-striped table-condensed" id="accountTable" width="200%" cellspacing="200%">
+                            <table class="table table-bordered table-striped table-condensed" id="accountStudentManagementTable" width="200%" cellspacing="200%">
                                 <thead>
                                     <tr>
                                         <th>No</th>

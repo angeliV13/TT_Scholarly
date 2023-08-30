@@ -38,7 +38,7 @@ $("#addAccount").on("submit", function (e){
                 Swal.fire({
                   title: "Success!",
                   icon: "success",
-                  html: "Generated new academic year",
+                  html: "Account Created Successfully",
                 });
               } else {
                 Swal.fire({
