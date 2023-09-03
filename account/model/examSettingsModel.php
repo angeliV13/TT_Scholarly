@@ -49,6 +49,7 @@ function changeExamTotalItems($english, $math, $genInfo, $abstract)
 }
 // ---------------------------------------------------
 
+//Adding Examination Question
 function addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnswer)
 {
 
@@ -62,6 +63,43 @@ function addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnsw
 
     $sql = "INSERT INTO `examination`(`id`, `category`, `question`, `choices`, `answer`) 
                 VALUES (0, '{$category}', '{$examAddQuestion}', '{$examChoices}', '{$examAddAnswer}')";
+
+    $query = $conn->query($sql) or die("Error ESQ005: " . $conn->error);
+
+    return "Success";
+}
+
+//Changing Examination Question
+function editExamItems($id, $category, $examAddQuestion, $examAddChoices, $examAddAnswer)
+{
+
+    include("dbconnection.php");
+    $examChoices = "";
+
+    $examAddChoices = array_filter($examAddChoices);
+    foreach ($examAddChoices as $choices) {
+        $examChoices .= $choices . "<br>";
+    }
+
+    $sql = "UPDATE `examination` 
+            SET `category`  = '{$category}',
+                `question`  = '{$examAddQuestion}',
+                `choices`   = '{$examChoices}',
+                `answer`    = '{$examAddAnswer}'
+            WHERE id = '{$id}'";
+
+    $query = $conn->query($sql) or die("Error ESQ005: " . $conn->error);
+
+    return "Success";
+}
+
+//Deleting Examination Question
+function deleteExamItems($id)
+{
+
+    include("dbconnection.php");
+    
+    $sql = "DELETE FROM `examination` WHERE id = '{$id}'";
 
     $query = $conn->query($sql) or die("Error ESQ005: " . $conn->error);
 

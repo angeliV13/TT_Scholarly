@@ -478,13 +478,79 @@ function examQuestionsTable()
             }
             $count = static_count();
 
+            $button =  '<div class="d-grid">
+                            <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit_question_modal_' . $id . '" onclick="answerSelection(' . $id . ')">Edit Exam</button>
+                            <button class="btn-sm btn btn-danger" onclick="deleteQuestion(' . $id . ')">Delete</button>
+                        </div>
+                        <div class="modal fade" id="edit_question_modal_' . $id . '" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Exam Item</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <div class="col-sm-3">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditEnglish' . $id . '" value="1" '.(($category == 1) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditEnglish' . $id . '">
+                                                        English
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditMath' . $id . '" value="2" '.(($category == 2) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditMath' . $id . '">
+                                                        Mathematics
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditGenInfo' . $id . '" value="3" '.(($category == 3) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditGenInfo' . $id . '">
+                                                        General Information
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditAbstract' . $id . '" value="4" '.(($category == 4) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditAbstract' . $id . '">
+                                                        Abstract Reasoning
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="examEditQuestion' . $id . '" class="form-label col-3">Question</label>
+                                            <textarea class="form-control col" rows="2" id="examEditQuestion' . $id . '" aria-describedby="examEditQuestion" name="examEditQuestion">'. $question .'</textarea>
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="examEditChoices' . $id . '" class="form-label col-3">Choices</label>
+                                            <textarea class="form-control col" rows="3" id="examEditChoices' . $id . '" aria-describedby="examEditChoices" name="examEditChoices" onkeyup="answerSelection('. $id .')">'. str_replace('<br>', '&#10;', $choices) .'</textarea>
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="examEditAnswer' . $id . '" class="form-label col-3">Answer</label>
+                                            <select class="form-select col" id="examEditAnswer' . $id . '" aria-label="Default select example">
+                                            <option value="1">'. $answer .'</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" onclick="editQuestion(' . $id . ')">Edit Question</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+
             $data[] = [
                 $count,
                 $categ,
                 $question,
                 $choices,
                 $answer,
-                "BUTTON",
+                $button,
             ];
 
             $totalData++;
