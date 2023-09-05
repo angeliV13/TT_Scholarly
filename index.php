@@ -91,7 +91,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="index.php" class="logo d-flex align-items-center me-auto me-lg-5">
+      <a href="index.php" class="logo d-flex align-items-center me-auto me-lg-3">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="images/apple-touch-icon.png" href="#hero" alt="">
         <h1>Thrive Thomasino Scholarly<span></span></h1>

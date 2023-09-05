@@ -43,7 +43,7 @@
               </div>
 
               <!-- Bordered Tabs Justified -->
-              <div class="p-4 d-grip text-black" style="background-color: #ffff; height:60px;">
+              <div class="p-4 text-black d-grid gap-3 my-3" style="background-color: #ffff; height:10px;">
                 <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
                   <li class="nav-item flex-sm-fill active" role="presentation">
                     <button class="nav-link w-100 fw-bold" id="personal-information" data-bs-toggle="tab" data-bs-target="#bordered-justified-personal-information" type="button" role="tab" aria-controls="personal-information" aria-selected="true">Personal Information</button>
@@ -59,15 +59,16 @@
                   </li>
                 </ul>
               </div>
+              
+              <div class=" mx-auto p-3">
+                <!-- BENEFICIARIES INFORMATION -->
+                <div class="tab-content mt-2" id="borderedTabJustifiedContent">
 
-              <!-- TAB CONTENT -->
-              <div class="card-body">
-                <div class="tab-content pt-3" id="borderedTabJustifiedContent">
                   <!-- PERSONAL INFORMATION -->
                   <div class="tab-pane fade" id="bordered-justified-personal-information" role="tabpanel" aria-labelledby="personal-information">
                     <form method="post" id="benefInfo">
-                      <h5 class="card-title">Primary Information</h5>
                       <!-- Custom Styled Validation with Tooltips -->
+                      <h5 class="card-title d-flex justify-content-between align-items-center">Primary Information</h5>
                       <div class="row g-4">
                         <!-- FULL NAME -->
                         <div class="col-md-3 position-relative">
@@ -238,7 +239,7 @@
                         </div>
                       </div>
 
-                      <div class="d-grid mt-3 gap-2 d-flex justify-content-end">
+                      <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
                         <?php if (!$finishFlag) : ?>
                           <button type="submit" class="btn btn-outline-success" form="benefInfo">Save Profile</button>
                         <?php endif; ?>
@@ -249,7 +250,7 @@
                   <!-- EDUCATIONAL BACKGROUND -->
                   <div class="tab-pane fade" id="bordered-justified-educational-background" role="tabpanel" aria-labelledby="educational-background">
                     <form method="post" id="educationBG">
-                      <h5 class="card-title"> General Education Information</h5>
+                      <h5 class="card-title d-flex justify-content-between align-items-center">General Education Information</h5>
                       <div class="row g-4">
                         <!-- General Education Information -->
                         <div class="col-md-6 position-relative">
@@ -587,6 +588,7 @@
           <?php endif; ?>
 
           <!-- SENIOR HIGHSCHOOL -->
+          <div class=" mx-auto p-3">
           <?php if ($_SESSION['scholarType'] <= 3) : ?>
             <h5 class="card-title">Senior Highschool Level</h5>
             <?php if (isset($education[2])) : ?>
@@ -783,6 +785,7 @@
               </div>
             <?php endif; ?>
           <?php endif; ?>
+          </div>
 
           <!-- HIGHSCHOOL LEVEL -->
           <?php if ($_SESSION['scholarType'] <= 3) : ?>
@@ -1126,7 +1129,7 @@
                 </div>
               </div>
             <?php endif; ?>
-            <div class="d-grid mt-3 gap-2 d-flex justify-content-end">
+            <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
               <?php if (!$finishFlag) : ?>
                 <button type="submit" class="btn btn-outline-success">Save Profile</button>
               <?php endif; ?>
@@ -1492,7 +1495,7 @@
 
 
               <!-- MOTHER'S INFORMATION -->
-              <h5 class="card-title mt-3">Mother's Information</h5>
+              <h5 class="card-title">Mother's Information</h5>
               <!-- Custom Styled Validation with Tooltips -->
               <?php if ($family != null) : ?>
                 <div class="row g-4">
@@ -1596,7 +1599,6 @@
                   <!-- END FULL NAME -->
                 </div><!-- End Custom Styled Validation with Tooltips -->
               <?php else : ?>
-                <!-- MOTHER'S INFO -->
                 <div class="row g-4">
                   <!-- FULL NAME -->
                   <div class="col-md-3 position-relative">
@@ -1701,9 +1703,9 @@
 
 
               <!-- GUARDIAN'S INFORMATION -->
-              <h5 class="card-title mt-3">Guardian's Information</h5>
+              <h5 class="card-title">Guardian's Information</h5>
               <?php if (isset($family['guardian'])) : ?>
-                <div class="col-md-3 position-relative">
+                <div class="col-md-3 position-relative py-4">
                   <label for="inputGuardian" class="form-label"> Do you have a Guardian? </label>
                   <select class="form-select" id="inputGuardian" <?= $finishFlag ? "disabled" : "" ?>>
                     <option selected disabled value="">Choose...</option>
@@ -1779,7 +1781,7 @@
                     </select>
                   </div>
 
-                  <!-- GUARDIAN'S OCCUPATION  -->
+                  <!-- FATHER'S OCCUPATION  -->
                   <div class="col-md-6 position-relative">
                     <label for="guardianOccupation" class="form-label"> Occupation</label>
                     <select class="form-select" id="guardianOccupation" name="Guardian's Occupation" <?= $finishFlag ? "disabled" : "" ?>>
@@ -1822,7 +1824,7 @@
                   <!-- END FULL NAME -->
                 </div><!-- End Custom Styled Validation with Tooltips -->
               <?php else : ?>
-                <div class="col-md-3 position-relative">
+                <div class="col-md-3 position-relative py-4">
                   <label for="inputGuardian" class="form-label"> Do you have a Guardian? </label>
                   <select class="form-select" id="inputGuardian">
                     <option selected disabled value="">Choose...</option>
@@ -1830,8 +1832,7 @@
                     <option value="1">No</option>
                   </select>
                 </div>
-
-                <!-- GUARDIAN INFO -->
+                <!-- Custom Styled Validation with Tooltips -->
                 <div class="row g-4 d-none" id="guardianInfo">
                   <!-- FULL NAME -->
                   <div class="col-md-12 position-relative">
@@ -1943,10 +1944,11 @@
                 </div><!-- End Custom Styled Validation with Tooltips -->
               <?php endif; ?>
 
+
               <!-- SPOUSE INFORMATION -->
-              <h5 class="card-title mt-3">Spouse's Information</h5>
+              <h5 class="card-title">Spouse's Information</h5>
               <?php if (isset($family['spouse'])) : ?>
-                <div class="col-md-3 position-relative">
+                <div class="col-md-3 position-relative py-4">
                   <label for="inputSpouse" class="form-label"> Do you have a Spouse? </label>
                   <select class="form-select" id="inputSpouse" name="Spouse's Flag" <?= $finishFlag ? "disabled" : "" ?>>
                     <option selected disabled value="">Choose...</option>
@@ -2013,7 +2015,7 @@
                     </select>
                   </div>
 
-                  <!-- SPOUSE'S OCCUPATION  -->
+                  <!-- FATHER'S OCCUPATION  -->
                   <div class="col-md-6 position-relative">
                     <label for="spouseOccupation" class="form-label"> Occupation</label>
                     <select class="form-select" id="spouseOccupation" name="Spouse's Occupation" <?= $finishFlag ? "disabled" : "" ?>>
@@ -2056,7 +2058,7 @@
                   <!-- END FULL NAME -->
                 </div><!-- End Custom Styled Validation with Tooltips -->
               <?php else : ?>
-                <div class="col-md-3 position-relative">
+                <div class="col-md-3 position-relative py-4">
                   <label for="inputSpouse" class="form-label"> Do you have a Spouse? </label>
                   <select class="form-select" id="inputSpouse">
                     <option selected disabled value="">Choose...</option>
@@ -2064,7 +2066,7 @@
                     <option value="1">No</option>
                   </select>
                 </div>
-                <!-- SPOUSE INFO -->
+                <!-- Custom Styled Validation with Tooltips -->
                 <div class="row g-4 d-none" id="spouseInfo">
                   <!-- FULL NAME -->
                   <div class="col-md-3 position-relative">
@@ -2166,8 +2168,7 @@
                   <!-- END FULL NAME -->
                 </div><!-- End Custom Styled Validation with Tooltips -->
               <?php endif; ?>
-
-              <div class="d-grid mt-3 gap-2 d-flex justify-content-end">
+              <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
                 <?php if (!$finishFlag) : ?>
                   <button type="submit" class="btn btn-outline-success" id="famBTN">Save Profile</button>
                 <?php endif; ?>
@@ -2308,7 +2309,7 @@
                   <?php endif ?>
                 </div>
               </div>
-              <div class="d-grid mt-3 d-flex justify-content-end">
+              <div class="d-grid mt-5 gap-2 d-flex justify-content-end">
                 <?php if (!$finishFlag) : ?>
                   <button type="submit" class="btn btn-outline-success" id="otherInfoBTN">Save Profile</button>
                 <?php endif; ?>
