@@ -1,8 +1,6 @@
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
       <ul class="sidebar-nav" id="sidebar-nav">
-
           <?php if ($_SESSION['account_type'] == 0 or $_SESSION['account_type'] == 1) : ?>
               <li class="nav-item">
                   <a class="nav-link" href="index.php?nav=dashboard">
@@ -10,7 +8,6 @@
                       <span>Dashboard</span>
                   </a>
               </li><!-- End Dashboard Nav -->
-
               <!-- Start Applicants Nav -->
               <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#applicants-nav" data-bs-toggle="collapse" href="#">
@@ -190,7 +187,7 @@
               </li>
           <?php elseif ($_SESSION['account_type'] > 2) : ?>
               <li class="nav-item">
-                  <a class="nav-link" href="index.php?nav=appDashboard">
+                  <a class="nav-link" href="index.php?nav=dashboard_applicant">
                       <i class="bi bi-grid"></i>
                       <span>Dashboard</span>
                   </a>

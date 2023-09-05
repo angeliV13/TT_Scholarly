@@ -219,7 +219,7 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'dashboard_applicant':
-                                return 'views/applicants/profile_bene.php';
+                                return 'views/applicants/dashboard_applicant.php';
 
                         case 'profile_applicant':
                                 return 'views/applicants/profile_applicant.php';
