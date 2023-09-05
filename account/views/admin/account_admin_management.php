@@ -4,7 +4,8 @@
         <h1>List of Accounts</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active">List of Accounts</li>
+            <li class="breadcrumb-item active">Account Management</li>
+            <li class="breadcrumb-item active">Student Accounts</li>
         </ol>
     </div>
     <!-- End Page Title -->
@@ -22,7 +23,7 @@
 
 
                             <!-- Table with stripped rows -->
-                            <table class="table table-bordered table-striped table-condensed" id="accountTable" width="200%" cellspacing="200%">
+                            <table class="table table-bordered table-striped table-condensed" id="accountAdminManagementTable" width="200%" cellspacing="200%">
                                 <thead>
                                     <tr>
                                         <th>No</th>

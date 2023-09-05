@@ -5,13 +5,20 @@ include("actionTableHandlerModel.php");
 // include("uploadRequirementsModel.php");
 include("../global_variables.php");
 
-function accountListingTable($acc_type)
+function accountListingTable($acc_id, $acc_type, $view_type = 1) //View Type = 1 is View of Applicants and Beneficiaries
 {
     include("dbconnection.php");
 
     $session_type = $acc_type;
+    $session_id   = $acc_id;
 
-    $sql = "SELECT * FROM account ORDER BY account_type ASC";
+    $sql =  "SELECT * FROM account acc 
+            JOIN user_info user ON acc.id = user.account_id ";
+
+    $sql .= ($view_type == 0) ? " WHERE acc.account_type = 0 OR acc.account_type = 1 " : " WHERE acc.account_type = 2 OR acc.account_type = 3 ";
+    $sql .= "ORDER BY acc.account_type ASC";
+
+    
     $query = $conn->query($sql);
 
     $data = [];
@@ -19,6 +26,8 @@ function accountListingTable($acc_type)
 
     if ($query->num_rows > 0) {
         while ($row = $query->fetch_assoc()) {
+
+            extract($row);
 
             $id = $row['id'];
             $user_name = $row['user_name'];
@@ -53,8 +62,155 @@ function accountListingTable($acc_type)
             if ($session_type == 0) {
                 if ($account_type < 2) {
                     $actions = '<div class="row d-grid">
-                                    <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit_credential_modal_' . $id . '">Edit Credentials</button>
-                                    <button class="btn-sm btn btn-danger" data-toggle="modal">Delete Account</button>
+                                    <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
+                                    <button class="btn-sm btn btn-danger">Delete Account</button>
+                                </div>
+                                <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <form id="editAccount_' . $account_id . '">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit Account</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountName_' . $account_id . '" class="form-label col-4">First Name</label>
+                                                        <input type="text" class="form-control col" id="accountName_' . $account_id . '" aria-describedby="accountName_' . $account_id . '" name="accountName_' . $account_id . '" value="'.getUserNameFromId($account_id).'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountUserName_' . $account_id . '" class="form-label col-4">Username</label>
+                                                        <input type="text" class="form-control col" id="accountUserName_' . $account_id . '" aria-describedby="accountUserName_' . $account_id . '" name="accountUserName_' . $account_id . '" value="'.$user_name.'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountEmail_' . $account_id . '" class="form-label col-4">Email</label>
+                                                        <input type="email" class="form-control col" id="accountEmail_' . $account_id . '" aria-describedby="accountEmail_' . $account_id . '" name="accountEmail_' . $account_id . '"  value="'.$email.'"required>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-3">
+                                                        <label for="accountAccessLevel_' . $account_id . '" class="form-label col-4">Access Level</label>
+                                                        <div class="col">
+                                                            <div class="d-flex"> 
+                                                                <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="0" id="accountSuperAdmin_' . $account_id . '" '. (($account_type == 0) ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountSuperAdmin_' . $account_id . '">
+                                                                    Super Admin
+                                                                </label>
+                                                            </div> 
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="1" id="accountAdmin_' . $account_id . '" '. (($account_type == 1) ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountAdmin_' . $account_id . '">
+                                                                    Admin
+                                                                </label>
+                                                            </div>
+                                                            <div class="d-flex ms-4 mt-1 small">
+                                                                <input class="form-check-input" type="checkbox" value="" id="accountAdminAccess_' . $account_id . '" '. (($access_level == 1) ? 'checked' : '') .'>
+                                                                <label class="mx-2 form-check-label" for="accountAdminAccess_' . $account_id . '">
+                                                                    Super Admin Access
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="editStatus_' . $account_id . '" class="form-label col-4">Account Status</label>
+                                                        <div class="col">
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="1" id="accountActive_' . $account_id . '" '. (($account_status == 'Active') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountActive">
+                                                                    Active
+                                                                </label>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="0" id="accountInactive_' . $account_id . '" '. (($account_status == 'Inactive') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountInactive">
+                                                                    Inactive
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" onclick="updateAccount(' . $account_id . ')" class="btn btn-warning">Edit Account</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>';
+                }
+                if ($account_id == $session_id){
+                    $actions = '<div class="row d-grid">
+                                    <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
+                                </div>
+                                <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <form id="editAccount_' . $account_id . '">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit Account</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountName_' . $account_id . '" class="form-label col-4">First Name</label>
+                                                        <input type="text" class="form-control col" id="accountName_' . $account_id . '" aria-describedby="accountName_' . $account_id . '" name="accountName_' . $account_id . '" value="'.getUserNameFromId($account_id).'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountUserName_' . $account_id . '" class="form-label col-4">Username</label>
+                                                        <input type="text" class="form-control col" id="accountUserName_' . $account_id . '" aria-describedby="accountUserName_' . $account_id . '" name="accountUserName_' . $account_id . '" value="'.$user_name.'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountEmail_' . $account_id . '" class="form-label col-4">Email</label>
+                                                        <input type="email" class="form-control col" id="accountEmail_' . $account_id . '" aria-describedby="accountEmail_' . $account_id . '" name="accountEmail_' . $account_id . '"  value="'.$email.'"required>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-3">
+                                                        <label for="accountAccessLevel_' . $account_id . '" class="form-label col-4">Access Level</label>
+                                                        <div class="col">
+                                                            <div class="d-flex"> 
+                                                                <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="0" id="accountSuperAdmin_' . $account_id . '" '. (($account_type == 0) ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountSuperAdmin_' . $account_id . '">
+                                                                    Super Admin
+                                                                </label>
+                                                            </div> 
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="1" id="accountAdmin_' . $account_id . '" '. (($account_type == 1) ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountAdmin_' . $account_id . '">
+                                                                    Admin
+                                                                </label>
+                                                            </div>
+                                                            <div class="d-flex ms-4 mt-1 small">
+                                                                <input class="form-check-input" type="checkbox" value="" id="accountAdminAccess_' . $account_id . '" '. (($access_level == 1) ? 'checked' : '') .'>
+                                                                <label class="mx-2 form-check-label" for="accountAdminAccess_' . $account_id . '">
+                                                                    Super Admin Access
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="editStatus_' . $account_id . '" class="form-label col-4">Account Status</label>
+                                                        <div class="col">
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="1" id="accountActive_' . $account_id . '" '. (($account_status == 'Active') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountActive">
+                                                                    Active
+                                                                </label>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="0" id="accountInactive_' . $account_id . '" '. (($account_status == 'Inactive') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountInactive">
+                                                                    Inactive
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" onclick="updateAccount(' . $account_id . ')" class="btn btn-warning">Edit Account</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>';
                 }
             } else if ($session_type == 1) {
@@ -64,20 +220,203 @@ function accountListingTable($acc_type)
                                 </div>';
                 } else if ($account_type == 1 && $access_level == 1) {
                     $actions = '<div class="d-grid">
-                                    <button class="btn-sm btn btn-secondary" data-toggle="modal">Edit Credentials</button>
-                                    <button class="btn-sm btn btn-danger" data-toggle="modal">Delete Account</button>
+                                    <button class="btn-sm btn btn-secondary" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
+                                    <button class="btn-sm btn btn-danger">Delete Account</button>
+                                </div>
+                                <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <form id="editAccount_' . $account_id . '">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit Account</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountName_' . $account_id . '" class="form-label col-4">First Name</label>
+                                                        <input type="text" class="form-control col" id="accountName_' . $account_id . '" aria-describedby="accountName_' . $account_id . '" name="accountName_' . $account_id . '" value="'.getUserNameFromId($account_id).'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountUserName_' . $account_id . '" class="form-label col-4">Username</label>
+                                                        <input type="text" class="form-control col" id="accountUserName_' . $account_id . '" aria-describedby="accountUserName_' . $account_id . '" name="accountUserName_' . $account_id . '" value="'.$user_name.'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountEmail_' . $account_id . '" class="form-label col-4">Email</label>
+                                                        <input type="email" class="form-control col" id="accountEmail_' . $account_id . '" aria-describedby="accountEmail_' . $account_id . '" name="accountEmail_' . $account_id . '"  value="'.$email.'"required>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-3">
+                                                        <label for="accountAccessLevel_' . $account_id . '" class="form-label col-4">Access Level</label>
+                                                        <div class="col">
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="1" id="accountAdmin_' . $account_id . '" checked>
+                                                                <label class="mx-2 form-check-label" for="accountAdmin_' . $account_id . '">
+                                                                    Admin
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="editAccount_' . $account_id . '" class="form-label col-4">Account Status</label>
+                                                        <div class="col">
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="1" id="accountActive_' . $account_id . '" '. (($account_status == 'Active') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountActive_' . $account_id . '">
+                                                                    Active
+                                                                </label>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="0" id="accountInactive_' . $account_id . '"'. (($account_status == 'Inactive') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountInactive_' . $account_id . '">
+                                                                    Inactive
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" onclick="updateAccount(' . $account_id . ')" class="btn btn-warning">Edit Account</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>';
                 } else {
                     $actions = '<div class="d-grid">
-                                    <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#edit_credential_modal_' . $id . '">Edit Credentials</button>
+                                    <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
+                                </div>
+                                <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <form id="editAccount_' . $account_id . '">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Edit Account</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountName_' . $account_id . '" class="form-label col-4">First Name</label>
+                                                        <input type="text" class="form-control col" id="accountName_' . $account_id . '" aria-describedby="accountName_' . $account_id . '" name="accountName_' . $account_id . '" value="'.getUserNameFromId($account_id).'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountUserName_' . $account_id . '" class="form-label col-4">Username</label>
+                                                        <input type="text" class="form-control col" id="accountUserName_' . $account_id . '" aria-describedby="accountUserName_' . $account_id . '" name="accountUserName_' . $account_id . '" value="'.$user_name.'" disabled>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="accountEmail_' . $account_id . '" class="form-label col-4">Email</label>
+                                                        <input type="email" class="form-control col" id="accountEmail_' . $account_id . '" aria-describedby="accountEmail_' . $account_id . '" name="accountEmail_' . $account_id . '"  value="'.$email.'"required>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-3">
+                                                        <label for="accountAccessLevel_' . $account_id . '" class="form-label col-4">Access Level</label>
+                                                        <div class="col">
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="1" id="accountAdmin_' . $account_id . '" checked>
+                                                                <label class="mx-2 form-check-label" for="accountAdmin_' . $account_id . '">
+                                                                    Admin
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row d-flex align-items-center mb-2">
+                                                        <label for="editStatus_' . $account_id . '" class="form-label col-4">Account Status</label>
+                                                        <div class="col">
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="1" id="accountActive_' . $account_id . '" '. (($account_status == 'Active') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountActive_' . $account_id . '">
+                                                                    Active
+                                                                </label>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="0" id="accountInactive_' . $account_id . '" '. (($account_status == 'Inactive') ? 'checked' : '' ).'>
+                                                                <label class="mx-2 form-check-label" for="accountInactive_' . $account_id . '">
+                                                                    Inactive
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" onclick="updateAccount(' . $account_id . ')" class="btn btn-warning">Edit Account</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>';
                 }
             }
 
             if ($account_type > 1) {
                 $actions = '<div class="d-grid">
-                                <button class="btn-sm btn btn-warning" data-toggle="modal">Edit Credentials</button>
-                                <button class="btn-sm btn btn-danger" data-toggle="modal">Delete</button>
+                                <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
+                                <button class="btn-sm btn btn-danger">Delete</button>
+                            </div>
+                            <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <form id="editAccount_' . $account_id . '">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Account</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row d-flex align-items-center mb-2">
+                                                    <label for="accountName_' . $account_id . '" class="form-label col-4">First Name</label>
+                                                    <input type="text" class="form-control col" id="accountName_' . $account_id . '" aria-describedby="accountName_' . $account_id . '" name="accountName_' . $account_id . '" value="'.getUserNameFromId($account_id).'" disabled>
+                                                </div>
+                                                <div class="row d-flex align-items-center mb-2">
+                                                    <label for="accountUserName_' . $account_id . '" class="form-label col-4">Username</label>
+                                                    <input type="text" class="form-control col" id="accountUserName_' . $account_id . '" aria-describedby="accountUserName_' . $account_id . '" name="accountUserName_' . $account_id . '" value="'.$user_name.'" disabled>
+                                                </div>
+                                                <div class="row d-flex align-items-center mb-2">
+                                                    <label for="accountEmail_' . $account_id . '" class="form-label col-4">Email</label>
+                                                    <input type="email" class="form-control col" id="accountEmail_' . $account_id . '" aria-describedby="accountEmail_' . $account_id . '" name="accountEmail_' . $account_id . '"  value="'.$email.'"required>
+                                                </div>
+                                                <div class="row d-flex align-items-center mb-3">
+                                                    <label for="accountAccessLevel" class="form-label col-4">Access Level</label>
+                                                    <div class="col">
+                                                        <div class="d-flex">
+                                                            <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="2" id="accountBeneficiary_' . $account_id . '" '. (($account_type == 2) ? 'checked' : '' ).'>
+                                                            <label class="mx-2 form-check-label" for="accountBeneficiary_' . $account_id . '">
+                                                                Beneficiary
+                                                            </label>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <input class="form-check-input" type="radio" name="accountType_' . $account_id . '" value="3" id="accountApplicant_' . $account_id . '" '. (($account_type == 3) ? 'checked' : '' ).'>
+                                                            <label class="mx-2 form-check-label" for="accountApplicant_' . $account_id . '">
+                                                                Applicant
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row d-flex align-items-center mb-2">
+                                                    <label for="editStatus_' . $account_id . '" class="form-label col-4">Account Status</label>
+                                                    <div class="col">
+                                                        <div class="d-flex">
+                                                            <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="1" id="accountActive_' . $account_id . '" '. (($account_status == 'Active') ? 'checked' : '' ).'>
+                                                            <label class="mx-2 form-check-label" for="accountActive_' . $account_id . '">
+                                                                Active
+                                                            </label>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <input class="form-check-input" type="radio" name="accountStatus_' . $account_id . '" value="0" id="accountInactive_' . $account_id . '" '. (($account_status == 'Inactive') ? 'checked' : '' ).'>
+                                                            <label class="mx-2 form-check-label" for="accountInactive_' . $account_id . '">
+                                                                Inactive
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" onclick="updateAccount(' . $account_id . ')" class="btn btn-warning">Edit Account</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>';
             }
 
@@ -139,13 +478,79 @@ function examQuestionsTable()
             }
             $count = static_count();
 
+            $button =  '<div class="d-grid">
+                            <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit_question_modal_' . $id . '" onclick="answerSelection(' . $id . ')">Edit Exam</button>
+                            <button class="btn-sm btn btn-danger" onclick="deleteQuestion(' . $id . ')">Delete</button>
+                        </div>
+                        <div class="modal fade" id="edit_question_modal_' . $id . '" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Exam Item</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <div class="col-sm-3">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditEnglish' . $id . '" value="1" '.(($category == 1) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditEnglish' . $id . '">
+                                                        English
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditMath' . $id . '" value="2" '.(($category == 2) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditMath' . $id . '">
+                                                        Mathematics
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditGenInfo' . $id . '" value="3" '.(($category == 3) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditGenInfo' . $id . '">
+                                                        General Information
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="radioEditCategory' . $id . '" id="radioEditAbstract' . $id . '" value="4" '.(($category == 4) ? 'checked' : '').'>
+                                                    <label class="form-check-label" for="radioEditAbstract' . $id . '">
+                                                        Abstract Reasoning
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="examEditQuestion' . $id . '" class="form-label col-3">Question</label>
+                                            <textarea class="form-control col" rows="2" id="examEditQuestion' . $id . '" aria-describedby="examEditQuestion" name="examEditQuestion">'. $question .'</textarea>
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="examEditChoices' . $id . '" class="form-label col-3">Choices</label>
+                                            <textarea class="form-control col" rows="3" id="examEditChoices' . $id . '" aria-describedby="examEditChoices" name="examEditChoices" onkeyup="answerSelection('. $id .')">'. str_replace('<br>', '&#10;', $choices) .'</textarea>
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="examEditAnswer' . $id . '" class="form-label col-3">Answer</label>
+                                            <select class="form-select col" id="examEditAnswer' . $id . '" aria-label="Default select example">
+                                            <option value="1">'. $answer .'</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" onclick="editQuestion(' . $id . ')">Edit Question</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+
             $data[] = [
                 $count,
                 $categ,
                 $question,
                 $choices,
                 $answer,
-                "BUTTON",
+                $button,
             ];
 
             $totalData++;

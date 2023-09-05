@@ -14,20 +14,17 @@ function userLogin($user_name, $password, $type)
 
     $query = $conn->query($sql) or die("Error LQ001: " . $conn->error);
 
-    if($query->num_rows > 0)
-    {
-        while ($row = $query->fetch_assoc())
-        {
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_assoc()) {
             extract($row);
-        }      
+        }
 
         $sql = "SELECT scholarType FROM scholarship_application WHERE userId = '" . $id . "'";
         $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
 
         $scholarApp = "";
 
-        if ($query->num_rows > 0)
-        {
+        if ($query->num_rows > 0) {
             $row = $query->fetch_assoc();
             extract($row);
 
@@ -42,9 +39,7 @@ function userLogin($user_name, $password, $type)
         $_SESSION['scholarType'] = $scholarApp;
 
         return 'Success';
-    }
-    else
-    {
+    } else {
         return 'Incorrect Username/Password';
     }
 }
@@ -54,18 +49,14 @@ function user_sign_out()
 {
     session_start();
 
-    if (isset($_SESSION['id']))
-    {
+    if (isset($_SESSION['id'])) {
         $account_type = $_SESSION['account_type'];
         unset($_SESSION['id']);
         unset($_SESSION['account_type']);
         unset($_SESSION['name']);
-        if($account_type>=2)
-        {
+        if ($account_type >= 2) {
             return 'login.php';
-        }
-        else if($account_type<=1)
-        {
+        } else if ($account_type <= 1) {
             return 'login_admin.php';
         }
     }
@@ -96,12 +87,9 @@ function registerAccount($data)
     $emailCount = check_exist($emailCheck);
     $userCount = check_exist($userCheck);
 
-    if ($emailCount > 0)
-    {
+    if ($emailCount > 0) {
         return 'Email Already Exist';
-    }
-    else if ($userCount > 0)
-    {
+    } else if ($userCount > 0) {
         return 'Username Already Exist';
     }
 
@@ -114,7 +102,6 @@ function registerAccount($data)
         ];
 
         $eaCount = check_exist($eacCheck);
-
     } while ($eaCount > 0);
 
     $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
@@ -131,33 +118,29 @@ function registerAccount($data)
         'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => 1,
         'notif_body'    => $data['firstName'] . ' ' . $data['lastName'] . ' has registered an account.',
-        'notif_link'    => '?nav=Adaccount-management',
+        'notif_link'    => '?nav=manage_account_student',
     ];
 
     $notif = insert_notification($notifData);
 
     if ($notif !== 'success') return 'Error: ' . $notif;
-   
+
     $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . $data['password'] . "', '" . $data['email'] . "', 3, 0)";
     $query = mysqli_query($conn, $sql) or die("Error RQ001: " . mysqli_error($conn));
 
-    if ($query)
-    {
+    if ($query) {
         $last_id = mysqli_insert_id($conn);
 
-        if ($data['fbImg'] != "")
-        {
+        if ($data['fbImg'] != "") {
             $fbImg = upload_file($data['fbImg'], 'assets/img/uploads/fbProfile/', '../assets/img/uploads/fbProfile/', $options = [
                 'type' => ['jpg', 'jpeg', 'png'],
             ]);
 
-            if ($fbImg == 'Invalid File Type')
-            {
+            if ($fbImg == 'Invalid File Type') {
                 return 'Invalid File Type';
             }
 
-            if ($fbImg['success'] == false)
-            {
+            if ($fbImg['success'] == false) {
                 return 'Error: ' . $fbImg['error'];
             }
 
@@ -168,37 +151,26 @@ function registerAccount($data)
         VALUES ('$last_id', '$eacNumber', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]', '$data[citizenship]', '$data[years]', '$data[language]', '$data[fbName]', '$data[fbUrl]', '$img')";
         $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
-        if ($query)
-        {
+        if ($query) {
             $sql = "INSERT INTO email_token (user_id, email, token, date_generated, type) VALUES ('$last_id', '$data[email]', '" . $randomString . "', NOW(), 0)";
             $query = mysqli_query($conn, $sql) or die("Error RQ003: " . mysqli_error($conn));
 
-            if ($query)
-            {
+            if ($query) {
                 $sql = "INSERT INTO scholarship_application (userId, scholarType, dateApplied, status, current_active) VALUES ('$last_id', '$data[scholarType]', NOW(), 0, 'info_flag')";
                 $query = mysqli_query($conn, $sql) or die("Error RQ004: " . mysqli_error($conn));
 
-                if ($query)
-                {
+                if ($query) {
                     echo 'Success';
-                }
-                else
-                {
+                } else {
                     echo 'Error RQ005: ' . mysqli_error($conn);
                 }
-            }
-            else
-            {
+            } else {
                 echo 'Error RQ004: ' . mysqli_error($conn);
             }
-        }
-        else
-        {
+        } else {
             echo 'Error RQ003: ' . mysqli_error($conn);
         }
-    }
-    else
-    {
+    } else {
         echo 'Error RQ002: ' . mysqli_error($conn);
     }
 }
@@ -210,24 +182,20 @@ function email_confirmation($data)
     $sql = "SELECT id, user_id, date_generated FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' ORDER BY date_generated DESC LIMIT 1";
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0)
-    {
+    if ($query->num_rows > 0) {
         $row = $query->fetch_assoc();
         $id = $row['id'];
         $user_id = $row['user_id'];
         $date_generated = $row['date_generated'];
-       
+
         // add 5 minutes to date_generated
         $date_countdown = date("Y-m-d H:i:s", strtotime('+5 minutes', strtotime($date_generated)));
 
         $timeLeft = getDateTimeDiff($date_generated, $date_countdown, 'seconds');
 
-        if ($timeLeft <= 0)
-        {
+        if ($timeLeft <= 0) {
             return 'Error EQ003: Token Expired';
-        }
-        else
-        {
+        } else {
             $sql = "UPDATE account SET account_status = 1 WHERE id = '" . $user_id . "' AND account_status = 0 LIMIT 1";
             $query = $conn->query($sql);
 
@@ -237,9 +205,7 @@ function email_confirmation($data)
 
             return ($query) ? 'Success' : 'Error EQ002: ' . $conn->error;
         }
-    }
-    else
-    {
+    } else {
         echo 'Invalid Token';
     }
 }
@@ -258,7 +224,7 @@ function resend_email($data)
 
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
-    $sql = "UPDATE email_token SET token = '" . $randomToken . "', date_generated = NOW() WHERE email = '" . $data. "' AND type = 0 ORDER BY date_generated DESC LIMIT 1";
+    $sql = "UPDATE email_token SET token = '" . $randomToken . "', date_generated = NOW() WHERE email = '" . $data . "' AND type = 0 ORDER BY date_generated DESC LIMIT 1";
     $query = $conn->query($sql);
 
     return ($query) ? 'Success' : 'Error EQ001: ' . $conn->error;
@@ -290,7 +256,8 @@ function forgot_password($email, $type)
 {
     include("dbconnection.php");
 
-    if ($type == 0) $exists = check_exist(['table' => 'account', 'column' => 'email', 'value' => $email]); if ($exists == 0) return 'Email does not exist!';
+    if ($type == 0) $exists = check_exist(['table' => 'account', 'column' => 'email', 'value' => $email]);
+    if ($exists == 0) return 'Email does not exist!';
 
     $sql = "SELECT * FROM account WHERE email = '" . $email . "'";
     $sql .= ($type == 0) ? " AND account_status = 0" : '';
@@ -298,8 +265,7 @@ function forgot_password($email, $type)
 
     $text = ($type == 0) ? 'Verification Code' : 'Password Reset Code';
 
-    if ($query->num_rows > 0)
-    {
+    if ($query->num_rows > 0) {
         $row = $query->fetch_assoc();
         $id = $row['id'];
         $user_name = $row['user_name'];
@@ -307,7 +273,7 @@ function forgot_password($email, $type)
         $randomToken = generateRandomString(5);
 
         $msg = '<p> Hello ' . $user_name . ', </p> ';
-        $msg .= '<p> Here is your '. strtolower($text) .'. </p>';
+        $msg .= '<p> Here is your ' . strtolower($text) . '. </p>';
         $msg .= '<p> <b> Code: ' . $randomToken . ' </b> </p>';
 
         $sendEmail = sendEmail($email, $text, $msg);
@@ -318,9 +284,7 @@ function forgot_password($email, $type)
         $query = $conn->query($sql);
 
         return ($query) ? 'Success' : 'Error EQ001: ' . $conn->error;
-    }
-    else
-    {
+    } else {
         echo ($type == 0) ? 'Email Already Verified' : 'Email Not Found';
     }
 }
@@ -333,8 +297,7 @@ function password_reset($data)
     $sql = "SELECT * FROM account WHERE email = '" . $data['email'] . "' LIMIT 1";
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0)
-    {
+    if ($query->num_rows > 0) {
         $row = $query->fetch_assoc();
         $id = $row['id'];
         $user_name = $row['user_name'];
@@ -342,16 +305,14 @@ function password_reset($data)
         $sql = "SELECT * FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' AND type = 1 ORDER BY id DESC LIMIT 1";
         $query = $conn->query($sql);
 
-        if ($query->num_rows > 0)
-        {
+        if ($query->num_rows > 0) {
             $sql = "UPDATE email_token SET date_verified = NOW() WHERE user_id = '" . $id . "' AND token = '" . $data['code'] . "' AND type = 1 LIMIT 1";
             $query = $conn->query($sql);
 
             $sql = "UPDATE account SET password = '" . $data['newPassword'] . "' WHERE id = '" . $id . "' LIMIT 1";
             $query = $conn->query($sql);
 
-            if ($query)
-            {
+            if ($query) {
                 $msg = '<p> Hello ' . $user_name . ', </p> ';
                 $msg .= '<p> Your password has been reset. </p>';
                 $msg .= '<p> If you did not request a password reset, please contact us immediately. </p>';
@@ -362,19 +323,13 @@ function password_reset($data)
 
 
                 echo 'Success';
-            }
-            else
-            {
+            } else {
                 echo 'Error EQ002: ' . $conn->error;
             }
-        }
-        else
-        {
+        } else {
             echo 'Invalid Token';
         }
-    }
-    else
-    {
+    } else {
         echo 'User Not Found';
     }
 }
@@ -389,10 +344,8 @@ function change_password($old, $new)
     $sql = "SELECT id FROM account WHERE id = '" . $_SESSION['id'] . "' AND password = '" . $old . "' LIMIT 1";
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0)
-    {
-        if ($old == $new)
-        {
+    if ($query->num_rows > 0) {
+        if ($old == $new) {
             echo 'New Password must be different from the Old Password';
             return;
         }
@@ -401,9 +354,7 @@ function change_password($old, $new)
         $query = $conn->query($sql);
 
         return ($query) ? 'Success' : 'Error EQ002: ' . $conn->error;
-    }
-    else
-    {
+    } else {
         echo 'Invalid Password';
     }
 }
@@ -426,8 +377,7 @@ function update_profile($data)
             address_line = '" . $data['addressLine'] . "', barangay = '" . $data['barangay'] . "', municipality = '" . $data['municipality'] . "',
             province = '" . $data['province'] . "', zip_code = '" . $data['zipCode'] . "', contact_number = '" . $data['contactNo'] . "'";
 
-    if ($data['file'] != "")
-    {
+    if ($data['file'] != "") {
         // $files = $data['file'];
         // $fileName = $files['name'];
 
@@ -460,13 +410,11 @@ function update_profile($data)
             'type' => ['jpg', 'jpeg', 'png'],
         ]);
 
-        if ($profileImg == 'Invalid File Type')
-        {
+        if ($profileImg == 'Invalid File Type') {
             return 'Invalid File Type';
         }
 
-        if ($profileImg['success'] == false)
-        {
+        if ($profileImg['success'] == false) {
             return 'Error: ' . $profileImg['error'];
         }
 
@@ -485,28 +433,28 @@ function updateContactInfo($data)
 {
     include("dbconnection.php");
 
-    $status = update_status(1, $data['userId']); if (!$status) return 'Update Status Error: ' . $status;
+    $status = update_status(1, $data['userId']);
+    if (!$status) return 'Update Status Error: ' . $status;
 
     $sql = "UPDATE user_info SET contact_number = '" . $data['contactNo'] . "' WHERE account_id = '" . $data['userId'] . "' LIMIT 1";
     $query = $conn->query($sql);
 
-    if ($query)
-    {
+    if ($query) {
         $sql = "UPDATE account SET email = '" . $data['email'] . "' WHERE id = '" . $data['userId'] . "' LIMIT 1";
         $query = $conn->query($sql);
 
         return ($query) ? 'success' : 'Error Account Information: ' . $conn->error;
-    }
-    else
-    {
+    } else {
         return 'Error User Information: ' . $conn->error;
     }
 }
 
 function updateAddInfo($data)
 {
-    $status = update_status(4, $data['userId']); if (!$status) return 'Update Status Error: ' . $status;
-    $genInfo = updateGenInfo($data, 0, $data['userId']); if ($genInfo != 'success') return 'Update General Information Error for Addition Info: ' . $genInfo; 
+    $status = update_status(4, $data['userId']);
+    if (!$status) return 'Update Status Error: ' . $status;
+    $genInfo = updateGenInfo($data, 0, $data['userId']);
+    if ($genInfo != 'success') return 'Update General Information Error for Addition Info: ' . $genInfo;
 
     return 'success';
 }
@@ -520,8 +468,7 @@ function updateGenInfo($data, $type = 0, $userId = "")
         $sql = "UPDATE gen_info SET working_flag = '$data[working_flag]', ofw_flag = '$data[ofw_flag]', other_ofw = '$data[other_ofw]',
             pwd_flag = '$data[pwd_flag]', other_pwd = '$data[other_pwd]', status_flag = '$data[status_flag]', self_pwd_flag = '$data[self_pwd_flag]'
             WHERE user_id = '" . $data['userId'] . "' LIMIT 1";
-    }
-    else if ($type == 1) // Education
+    } else if ($type == 1) // Education
     {
         $exists = check_exist(['table' => 'gen_info', 'column' => 'user_id', 'value' => $userId]);
         $graduating_flag = ($data['graduating_flag'] == '0') ? 0 : 1;
@@ -531,18 +478,14 @@ function updateGenInfo($data, $type = 0, $userId = "")
         $other_honor = ($data['other_honor'] == '') ? "" : $data['other_honor'];
         $gwa = ($data['gwa'] == '') ? '' : $data['gwa'];
 
-        if ($exists == 0)
-        {
+        if ($exists == 0) {
             $sql = "INSERT INTO gen_info (user_id, graduating_flag, honor_flag, honor_type, other_honor, graduation_year, gwa) VALUES
                 ('$userId', '$graduating_flag', '$honor_flag', '$honor_type', '$other_honor', '$graduation_year', '$gwa')";
-        }
-        else
-        {
+        } else {
             $sql = "UPDATE gen_info SET graduating_flag = '$graduating_flag', honor_flag = '$honor_flag', honor_type = '$honor_type',
                 other_honor = '$other_honor', graduation_year = '$graduation_year', gwa = '$gwa' WHERE user_id = '$userId' LIMIT 1";
         }
-    }
-    else if ($type == 2) // Family
+    } else if ($type == 2) // Family
     {
         $family_flag = ($data['family_flag'] == '0') ? 0 : 1;
         $total_num = ($data['total_num'] == '') ? 0 : $data['total_num'];
@@ -557,20 +500,27 @@ function updateGenInfo($data, $type = 0, $userId = "")
 
     $query = $conn->query($sql);
 
-    return ($query) ? 'success' : 'Error General Information: ' . $conn->error; $conn->rollback();
+    return ($query) ? 'success' : 'Error General Information: ' . $conn->error;
+    $conn->rollback();
 }
 
 function updateEducationalInfo($data)
 {
-    $status = update_status(2, $data['userId']); if (!$status) return 'Update Status Error: ' . $status;
-    $genInfo = updateGenInfo($data['other_info'], 1, $data['userId']); if ($genInfo != 'success') return 'Update General Information Error for Education: ' . $genInfo;
+    $status = update_status(2, $data['userId']);
+    if (!$status) return 'Update Status Error: ' . $status;
+    $genInfo = updateGenInfo($data['other_info'], 1, $data['userId']);
+    if ($genInfo != 'success') return 'Update General Information Error for Education: ' . $genInfo;
 
     // $college = $jhs = $shs = $elem = '';
 
-    if ($data['college'] != null) $college = updateSchool($data['college'], $data['userId'], $data['college']['collegeAwards'], 0); if ($college != 'success') return 'Update College Error: ' . $college;
-    if ($data['shs'] != null) $shs = updateSchool($data['shs'], $data['userId'], $data['shs']['shsAwards'], 1); if ($shs != 'success') return 'Update SHS Error: ' . $shs;
-    if ($data['jhs'] != null) $jhs = updateSchool($data['jhs'], $data['userId'], $data['jhs']['jhsAwards'], 2); if ($jhs != 'success') return 'Update JHS Error: ' . $jhs;
-    if ($data['elem'] != null) $elem = updateSchool($data['elem'], $data['userId'], $data['elem']['elemAwards'], 3); if ($elem != 'success') return 'Update Elem Error: ' . $elem;
+    if ($data['college'] != null) $college = updateSchool($data['college'], $data['userId'], $data['college']['collegeAwards'], 0);
+    if ($college != 'success') return 'Update College Error: ' . $college;
+    if ($data['shs'] != null) $shs = updateSchool($data['shs'], $data['userId'], $data['shs']['shsAwards'], 1);
+    if ($shs != 'success') return 'Update SHS Error: ' . $shs;
+    if ($data['jhs'] != null) $jhs = updateSchool($data['jhs'], $data['userId'], $data['jhs']['jhsAwards'], 2);
+    if ($jhs != 'success') return 'Update JHS Error: ' . $jhs;
+    if ($data['elem'] != null) $elem = updateSchool($data['elem'], $data['userId'], $data['elem']['elemAwards'], 3);
+    if ($elem != 'success') return 'Update Elem Error: ' . $elem;
 
     return 'success';
 }
@@ -587,13 +537,10 @@ function updateSchool($data, $userId, $awards = [], $type)
     $year_level = $data['year_level'];
     $educ_id = $data['educ_id'];
 
-    if ($exists == 0)
-    {
+    if ($exists == 0) {
         $sql = "INSERT INTO education (user_id, school, year_level, course, major, school_address, education_level)
         VALUES ('$userId', '$school', '$year_level', '$course', '$major', '$school_address', '$type')";
-    }
-    else
-    {
+    } else {
         $sql = "UPDATE education SET school = '$school', year_level = '$year_level', course = '$course', major = '$major',
             school_address = '$school_address', education_level = '$type' WHERE user_id = '$userId' AND educ_id = '$educ_id' LIMIT 1";
     }
@@ -602,8 +549,8 @@ function updateSchool($data, $userId, $awards = [], $type)
 
     if ($exists == 0) $educ_id = $conn->insert_id;
 
-    return ($query) ? updateAwards($awards, $educ_id) : 'Error Educational Information: ' . $conn->error; $conn->rollback();
-
+    return ($query) ? updateAwards($awards, $educ_id) : 'Error Educational Information: ' . $conn->error;
+    $conn->rollback();
 }
 
 function updateAwards($data, $educId)
@@ -617,35 +564,27 @@ function updateAwards($data, $educId)
 
     $dataArr = $deleteArr = [];
 
-    if ($query->num_rows > 0)
-    {
-        while ($row = $query->fetch_assoc())
-        {
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_assoc()) {
             $dataArr[] = $row['id'];
         }
     }
 
-    if ($data != null)
-    {
-        if ($dataArr != null)
-        {
-            foreach ($dataArr as $awardId)
-            {
-                if (!in_array($awardId, $data['awardId']))
-                {
+    if ($data != null) {
+        if ($dataArr != null) {
+            foreach ($dataArr as $awardId) {
+                if (!in_array($awardId, $data['awardId'])) {
                     $deleteArr[] = $awardId;
                 }
             }
         }
 
-        if ($deleteArr != null)
-        {
+        if ($deleteArr != null) {
             $sql = "DELETE FROM user_awards WHERE id IN (" . implode(',', $deleteArr) . ")";
             $query = $conn->query($sql);
         }
 
-        foreach ($data as $award)
-        {
+        foreach ($data as $award) {
             $awardId = $award['awardId'];
             $honor = $award['honor'];
             $acadYear = $award['acadYear'];
@@ -654,13 +593,10 @@ function updateAwards($data, $educId)
 
             $exists = check_exist(['table' => 'user_awards', 'column' => 'id', 'value' => $awardId]);
 
-            if ($exists == 0)
-            {
+            if ($exists == 0) {
                 $sql = "INSERT INTO user_awards (school_id, acad_year, honor, sem, year_level) VALUES
                     ('$educId', '$acadYear', '$honor', '$sem', '$yearLevel')";
-            }
-            else
-            {
+            } else {
                 $sql = "UPDATE user_awards SET acad_year = '$acadYear', honor = '$honor', sem = '$sem', year_level = '$yearLevel'
                     WHERE id = '$awardId' AND school_id = '$educId' LIMIT 1";
             }
@@ -668,26 +604,32 @@ function updateAwards($data, $educId)
             $query = $conn->query($sql);
         }
 
-        return ($query) ? 'success' : 'Error Awards: ' . $conn->error; $conn->rollback();
-    }
-    else
-    {
+        return ($query) ? 'success' : 'Error Awards: ' . $conn->error;
+        $conn->rollback();
+    } else {
         return 'success';
     }
 }
 
 function updateFamilyInfo($data)
 {
-    $status = update_status(3, $data['userId']); if (!$status) return 'Update Status Error: ' . $status;
-    $genInfo = updateGenInfo($data['otherInfoArr'], 2, $data['userId']); if ($genInfo != 'success') return 'Update General Information Error for Family: ' . $genInfo;
-    
+    $status = update_status(3, $data['userId']);
+    if (!$status) return 'Update Status Error: ' . $status;
+    $genInfo = updateGenInfo($data['otherInfoArr'], 2, $data['userId']);
+    if ($genInfo != 'success') return 'Update General Information Error for Family: ' . $genInfo;
+
     $father = $mother = $spouse = $siblings = $guardian = 'success';
 
-    if ($data['fatherArr'] != null) $father = updateFamily($data['fatherArr'], 0, $data['userId']); if ($father != 'success') return 'Update Family Father Error: ' . $father;
-    if ($data['motherArr'] != null) $mother = updateFamily($data['motherArr'], 1, $data['userId']); if ($mother != 'success') return 'Update Family Mother Error: ' . $mother;
-    if ($data['spouseArr']['firstName'] != '') $spouse = updateFamily($data['spouseArr'], 2, $data['userId']); if ($spouse != 'success') return 'Update Family Spouse Error: ' . $spouse;
-    if ($data['siblings'] != null) $siblings = updateFamily($data['siblings'], 3, $data['userId']); if ($siblings != 'success') return 'Update Family Sibling Error: ' . $siblings;
-    if ($data['guardianArr']['firstName'] != '') $guardian = updateFamily($data['guardianArr'], 4, $data['userId']); if ($guardian != 'success') return 'Update Family Guardian Error: ' . $guardian;
+    if ($data['fatherArr'] != null) $father = updateFamily($data['fatherArr'], 0, $data['userId']);
+    if ($father != 'success') return 'Update Family Father Error: ' . $father;
+    if ($data['motherArr'] != null) $mother = updateFamily($data['motherArr'], 1, $data['userId']);
+    if ($mother != 'success') return 'Update Family Mother Error: ' . $mother;
+    if ($data['spouseArr']['firstName'] != '') $spouse = updateFamily($data['spouseArr'], 2, $data['userId']);
+    if ($spouse != 'success') return 'Update Family Spouse Error: ' . $spouse;
+    if ($data['siblings'] != null) $siblings = updateFamily($data['siblings'], 3, $data['userId']);
+    if ($siblings != 'success') return 'Update Family Sibling Error: ' . $siblings;
+    if ($data['guardianArr']['firstName'] != '') $guardian = updateFamily($data['guardianArr'], 4, $data['userId']);
+    if ($guardian != 'success') return 'Update Family Guardian Error: ' . $guardian;
 
     return 'success';
 }
@@ -698,8 +640,7 @@ function updateFamily($data, $type, $userId)
 
     if ($type == 3) // Sibling
     {
-        foreach ($data AS $fam)
-        {
+        foreach ($data as $fam) {
             $id = $fam['id'];
             $nameArr = explode('/', $fam['name']);
             $relationship = $fam['relationship'];
@@ -712,13 +653,10 @@ function updateFamily($data, $type, $userId)
 
             $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => $userId, 'id' => $id]]);
 
-            if ($exists > 0)
-            {
+            if ($exists > 0) {
                 $sql = "UPDATE user_family SET firstName = '$firstName', middleName = '$middleName', lastName = '$lastName', age = '$age', occupation = '$occupation',
                         relationship = '$relationship', birth_order = '$birth_order' WHERE user_id = '$userId' AND id = '$id' LIMIT 1";
-            }
-            else
-            {
+            } else {
                 $sql = "INSERT INTO user_family (user_id, firstName, middleName, lastName, age, occupation, relationship, fam_type, birth_order)
                         VALUES ('$userId', '$firstName', '$middleName', '$lastName', '$age', '$occupation', '$relationship', '$type', '$birth_order')";
             }
@@ -726,36 +664,32 @@ function updateFamily($data, $type, $userId)
             $query = $conn->query($sql);
         }
 
-        return ($query) ? 'success' : 'Error Sibling Insertion: ' . $conn->error; $conn->rollback();
-    }
-    else
-    {
+        return ($query) ? 'success' : 'Error Sibling Insertion: ' . $conn->error;
+        $conn->rollback();
+    } else {
         $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => $userId, 'fam_type' => $type]]);
         $occupation = ($data['occupation'] == "others") ? $data['otherOccupation'] : $data['occupation'];
 
-        if ($exists > 0)
-        {
+        if ($exists > 0) {
             $sql = "UPDATE user_family SET firstName = '$data[firstName]', middleName = '$data[middleName]', lastName = '$data[lastName]', suffix = '$data[suffix]', age = '$data[age]',
                     birth_date = '$data[birthday]', birth_place = '$data[birthplace]', contact_number = '$data[contact]', living_flag = '$data[living]', occupation = '$occupation',
                     company_name = '$data[company]', company_address = '$data[companyAddress]', income_flag = '$data[income]', attainment_flag = '$data[education]', relationship = '$data[relationship]'
                     WHERE user_id = '$userId' AND fam_type = '$type' LIMIT 1";
-        }
-        else
-        {
+        } else {
             $sql = "INSERT INTO user_family (user_id, fam_type, firstName, middleName, lastName, suffix, age, birth_date, birth_place, contact_number, living_flag, occupation, company_name, company_address, income_flag, attainment_flag, relationship) VALUES
                     ('$userId', '$type', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
         }
 
         $query = $conn->query($sql);
 
-        return ($query) ? 'success' : 'Error Family Insertion: ' . $conn->error; $conn->rollback();
+        return ($query) ? 'success' : 'Error Family Insertion: ' . $conn->error;
+        $conn->rollback();
     }
 }
 
 function getAccountInfo($id, $type = 0)
 {
-    switch ($type)
-    {
+    switch ($type) {
         case 0:
             return get_school_address($id);
             break;
@@ -770,11 +704,16 @@ function check_application_data($id)
     include("dbconnection.php");
 
     $stat = check_status($id);
-    $info_flag = $stat['info_flag']; if ($info_flag == 0) return "Please complete your personal information.";
-    $educ_flag = $stat['educ_flag']; if ($educ_flag == 0) return "Please complete your educational background.";
-    $family_flag = $stat['family_flag']; if ($family_flag == 0) return "Please complete your family background.";
-    $add_flag = $stat['add_flag']; if ($add_flag == 0) return "Please complete your other general information.";
-    $req_flag = $stat['req_flag']; if ($req_flag == 0) return "Please complete your requirements.";
+    $info_flag = $stat['info_flag'];
+    if ($info_flag == 0) return "Please complete your personal information.";
+    $educ_flag = $stat['educ_flag'];
+    if ($educ_flag == 0) return "Please complete your educational background.";
+    $family_flag = $stat['family_flag'];
+    if ($family_flag == 0) return "Please complete your family background.";
+    $add_flag = $stat['add_flag'];
+    if ($add_flag == 0) return "Please complete your other general information.";
+    $req_flag = $stat['req_flag'];
+    if ($req_flag == 0) return "Please complete your requirements.";
 
     return "success";
 }
@@ -784,7 +723,8 @@ function submitApplication($id)
 {
     include("dbconnection.php");
 
-    $res = check_application_data($id); if ($res != "success") return $res;
+    $res = check_application_data($id);
+    if ($res != "success") return $res;
 
     $sql = "SELECT email FROM account WHERE id = '$id' LIMIT 1";
     $query = $conn->query($sql);
@@ -805,15 +745,17 @@ function submitApplication($id)
         ]
     ];
 
-    $adEmail = check_exist_multiple($adminEmail); if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $adEmail = check_exist_multiple($adminEmail);
+    if (!is_array($adEmail)) return 'Error: ' . $adEmail;
 
-    $msg = '<p>Hi '.$name.',<br></p>';
+    $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= '<p>Your scholarship application has been submitted. You will be notified once your application has been reviewed.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($email, $name . ' - Scholarship Application Submission', $msg, 2, $adEmail); if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+    $sendEmail = sendEmail($email, $name . ' - Scholarship Application Submission', $msg, 2, $adEmail);
+    if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $notifiedUsers = get_notif_type(2);
 
@@ -824,9 +766,11 @@ function submitApplication($id)
         'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
     ];
 
-    $notif = insert_notification($notifData); if ($notif !== 'success') return 'Error: ' . $notif;
+    $notif = insert_notification($notifData);
+    if ($notif !== 'success') return 'Error: ' . $notif;
 
-    $app = updateApplication(0, $id); if ($app != "success") return $app;
+    $app = updateApplication(0, $id);
+    if ($app != "success") return $app;
 
     return "success";
 }
@@ -838,19 +782,16 @@ function changePFP($data)
     $fbImg = $data['image'];
     $userId = $data['userId'];
 
-    if ($fbImg != null)
-    {
+    if ($fbImg != null) {
         $uploadImg = upload_file($fbImg, 'assets/img/uploads/fbProfile/', '../assets/img/uploads/fbProfile/', $options = [
             'type' => ['jpg', 'jpeg', 'png'],
         ]);
 
-        if ($uploadImg == 'Invalid File Type')
-        {
+        if ($uploadImg == 'Invalid File Type') {
             return 'Invalid File Type';
         }
 
-        if ($uploadImg['success'] == false)
-        {
+        if ($uploadImg['success'] == false) {
             return 'Error: ' . $uploadImg['error'];
         }
 
@@ -889,15 +830,17 @@ function set_applicant_status($data)
         ]
     ];
 
-    $adEmail = check_exist_multiple($adminEmail); if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $adEmail = check_exist_multiple($adminEmail);
+    if (!is_array($adEmail)) return 'Error: ' . $adEmail;
 
-    $msg = '<p>Hi '.$name.',<br></p>';
+    $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= $msgText;
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, 2, $adEmail); if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, 2, $adEmail);
+    if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $notifiedUsers = get_notif_type(2);
 
@@ -908,9 +851,11 @@ function set_applicant_status($data)
         'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
     ];
 
-    $notif = insert_notification($notifData); if ($notif !== 'success') return 'Error: ' . $notif;
+    $notif = insert_notification($notifData);
+    if ($notif !== 'success') return 'Error: ' . $notif;
 
-    $updateStatus = update_applicant_status($id, $decision); if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
+    $updateStatus = update_applicant_status($id, $decision);
+    if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
 
     return 'success';
 }
@@ -920,7 +865,8 @@ function deleteUser($id)
     echo update_account_status($id, 4);
 }
 
-function addAdminAccount($data){
+function addAdminAccount($data)
+{
     include("dbconnection.php");
 
     $emailCheck = [
@@ -940,12 +886,9 @@ function addAdminAccount($data){
     $userCount = check_exist($userCheck);
     $password  = generateRandomString(8);
 
-    if ($emailCount > 0)
-    {
+    if ($emailCount > 0) {
         return 'Email Already Exist';
-    }
-    else if ($userCount > 0)
-    {
+    } else if ($userCount > 0) {
         return 'Username Already Exist';
     }
 
@@ -959,7 +902,7 @@ function addAdminAccount($data){
             VALUES ('$last_id', '', '$data[firstName]', '$data[middleName]', '$data[lastName]', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')";
     $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
-    if($query){
+    if ($query) {
         $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
         $msg .= '<p> Your account has been created. Please use this password to navigate your account. </p>';
         $msg .= '<p> <b> Username: ' . $$data['username'] . ' </b> </p>';
@@ -971,9 +914,72 @@ function addAdminAccount($data){
 
         return "Insert Success";
     }
-    
-
-
 }
 
+function editAccount($data)
+{
+    session_start();
+    include("dbconnection.php");
 
+    $session_name = $_SESSION['name'];
+
+    $sql = "SELECT * FROM account WHERE id = '{$data['id']}'";
+    $query = $conn->query($sql) or die($conn->error);
+
+    // die(var_dump($query));
+    if ($query->num_rows <> 0) {
+        while ($row = $query->fetch_assoc()) {
+            extract($row);
+
+            $emailCheck = [
+                'table'     => 'account',
+                'column'    => 'email',
+                'value'     => $data['email'],
+            ];
+
+
+            $userCheck = [
+                'table'     => 'account',
+                'column'    => 'user_name',
+                'value'     => $data['username'],
+            ];
+
+            $emailCount = check_exist($emailCheck);
+            $userCount = check_exist($userCheck);
+            $password  = generateRandomString(8);
+
+            if ($email <> $data['email'] && $emailCount > 0) {
+                return 'Email Already Exist';
+            }
+            if ($user_name <> $data['username'] && $userCount > 0) {
+                return 'Username Already Exist';
+            }
+
+            $sql = "UPDATE `account` SET `user_name`     = '{$data['username']}', 
+                                         `email`         = '{$data['email']}',
+                                         `account_type`  = '{$data['accountType']}',
+                                         `access_level`  = '{$data['sAdminAccess']}',
+                                         `account_status`= '{$data['accountStatus']}' 
+                                    WHERE id = {$data['id']}";
+            $query = $conn->query($sql);
+
+            $last_id = mysqli_insert_id($conn);
+
+            $account_type = ($data['accountType'] == 0) ? 'Super Admin' : (($data['accountType'] == 1) ? 'Admin' : (($data['accountType'] == 2) ? 'Beneficiary' : 'Applicant'));
+
+            // if ($query) {
+            //     $msg = '<p> Hello ' . $data['username'] . ', </p> ';
+            //     $msg .= '<p> Your account credentials has been changed by ' . $session_name . '. If you did not request this changes, kindly report to the YDO Office. </p>';
+            //     $msg .= '<p> <b> Username: '        . $data['username'] . ' </b> </p>';
+            //     $msg .= '<p> <b> Email: '           . $data['email'] . ' </b> </p>';
+            //     $msg .= '<p> <b> Account Type: '    . $data['accountType'] . ' </b> </p>';
+
+            //     $sendEmail = sendEmail($data['email'], 'Account Created', $msg);
+
+            //     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+            //     return "Insert Success";
+            // }
+        }
+    }
+}

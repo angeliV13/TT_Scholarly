@@ -164,3 +164,116 @@ $("#addQuestion").on("click", function () {
   }
   
 });
+
+function editQuestion(id)
+{
+  let category = $("input[name='radioAddCategory']:checked").val();
+  let examAddQuestion = $("#examAddQuestion").val();
+  let examAddChoices = $("#examAddChoices").val().split("\n");
+  let examAddAnswer = $("#examAddAnswer").find(":selected").text();
+
+  if(category != undefined && examAddQuestion != "" && examAddChoices != "" && examAddAnswer != "Select Answer"){
+    Swal.fire({
+      title: "Edit Question?",
+      text: "Are you sure you want to edit this question to your list?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Edit",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: "controller/examSettings.php",
+          data: {
+            action          : 7,
+            id              : id,
+            category        : category,
+            examAddQuestion : examAddQuestion,
+            examAddChoices  : examAddChoices,
+            examAddAnswer   : examAddAnswer,
+          },
+          success: function (data) {
+              if (data == "Success") {
+              Swal.fire({
+                title: "Success!",
+                icon: "success",
+                html: "Question chenged successfully",
+              });
+            } else {
+              Swal.fire({
+                title: "Error!",
+                icon: "error",
+                html: data,
+              });
+            }
+          },
+        });
+      }
+    });
+  }else{
+    Swal.fire({
+      title: "Error!",
+      icon: "error",
+      html: "Missing Entries",
+    });
+  }
+}
+
+function deleteQuestion(id){
+  Swal.fire({
+    title: "Delete Question?",
+    text: "Are you sure you want to delete this question to your list?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Delete",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/examSettings.php",
+        data: {
+          action          : 8,
+          id              : id,
+        },
+        success: function (data) {
+            if (data == "Success") {
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: "Question deleted successfully",
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+}
+
+function answerSelection(id){
+  let choices = $("#examEditChoices" + id).val().split("\n");
+
+  $("#examEditAnswer" + id + " option").remove();
+  $("#examEditAnswer" + id).append(
+    $("<option>", {
+      value: 0,
+      text: "Select Answer",
+    })
+  );
+
+  for (let i = 0; i < choices.length; i++) {
+    if (choices[i] != "" && choices[i].replace(/^\s+|\s+$/gm,'') != "") {
+      $("#examEditAnswer" + id).append(
+        $("<option>", {
+          value: i + 1,
+          text: choices[i],
+        })
+      );
+    }
+  }
+}

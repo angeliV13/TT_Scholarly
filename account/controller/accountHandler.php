@@ -225,6 +225,19 @@ if (isset($_REQUEST['action']))
 
         echo addAdminAccount($data);
     }
+    else if ($action == 21) //Edit Account
+    {
+        $data = [
+            'id'            => isset($_POST['id'])          ? $_POST['id'] : '',
+            'username'      => isset($_POST['username'])    ? $_POST['username'] : '',
+            'email'         => isset($_POST['email'])       ? $_POST['email'] : '',
+            'accountType'   => isset($_POST['accountType']) ? $_POST['accountType'] : '',
+            'sAdminAccess'  => isset($_POST['sAdminAccess'])? $_POST['sAdminAccess'] : '',
+            'accountStatus' => isset($_POST['accountStatus'])? $_POST['accountStatus'] : ''
+        ];
+
+        echo editAccount($data);
+    }
 }
 
 

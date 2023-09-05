@@ -39,6 +39,18 @@ if (isset($_REQUEST['action'])) {
         case 6:
             echo submitExam();
             break;
+        case 7:
+            $id              = $_POST['id'];
+            $category        = $_POST['category'];
+            $examAddQuestion = $_POST['examAddQuestion'];
+            $examAddChoices  = $_POST['examAddChoices'];
+            $examAddAnswer   = $_POST['examAddAnswer'];
+            echo editExamItems($id, $category, $examAddQuestion, $examAddChoices, $examAddAnswer);
+            break;
+        case 8:
+            $id              = $_POST['id'];
+            echo deleteExamItems($id);
+            break;
         
     }
 }

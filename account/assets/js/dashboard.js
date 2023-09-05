@@ -41,23 +41,27 @@ $(document).ready(function ($) {
     type: "POST",
     url: "controller/dashboard.php",
     data: {
-      action: 1,
+      action: 2,
     },
     success: function (data) {
+      console.log(data);
       if (data != "") {
-        let counts = JSON.parse(data);
+        let trends = JSON.parse(data);
+        console.log(trends);
+
         scholarTrends.updateSeries([
           {
             name: "SHS Educ. Assistance",
-            data: [0, 0, 33, 29, 55, 30],
+            data: trends.shs,
+            // data: [0, 0, 33, 29, 55, 30],
           },
           {
             name: "College Educ. Assistance",
-            data: [40, 40, 28, 51, 42, 56],
+            data: trends.colEA,
           },
           {
             name: "College Scholarship",
-            data: [22, 60, 40, 5, 14, 25],
+            data: trends.colSc,
           },
         ]);
 
@@ -68,14 +72,15 @@ $(document).ready(function ($) {
                 rotate: -45,
             },
             type: "category",
-            categories: [
-              "21-22 1st Sem",
-              "21-22 2nd Sem",
-              "22-23 1st Sem",
-              "23-24 2nd Sem",
-              "24-25 1st Sem",
-              "24-25 2nd Sem",
-            ],
+            categories: trends.categories
+            // categories: [
+            //   "21-22 1st Sem",
+            //   "21-22 2nd Sem",
+            //   "22-23 1st Sem",
+            //   "23-24 2nd Sem",
+            //   "24-25 1st Sem",
+            //   "24-25 2nd Sem",
+            // ],
           },
         });
       }

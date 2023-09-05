@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let accountManagementTable = $('#accountTable').DataTable({
+    let accountAdminManagementTable = $('#accountAdminManagementTable').DataTable({
         "lengthChange": false,
         "paging": false,
         "searching": false,
@@ -11,7 +11,7 @@ $(document).ready(function () {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
             data: {
-                "action": 1,
+                "action": 1.1,
             },
             // success: function (row, data, index) {
             //   console.log(row);
@@ -20,10 +20,53 @@ $(document).ready(function () {
             // },
             error: function (data) {  // error handling
                 console.log(data);
-                var columnCount = $('#accountTable').DataTable().columns().count();
-                $(".accountTable-error").html("");
-                $("#accountTable").append(`<tbody class="accountTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#accountTable_processing").css("display", "none");
+                var columnCount = $('#accountAdminManagementTable').DataTable().columns().count();
+                $(".accountAdminManagementTable-error").html("");
+                $("#accountAdminManagementTable").append(`<tbody class="accountAdminManagementTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#accountAdminManagementTable_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center small", "targets": "_all" }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false
+    });
+
+    let accountStudentManagementTable = $('#accountStudentManagementTable').DataTable({
+        "lengthChange": false,
+        "paging": false,
+        "searching": false,
+        "processing": true,
+        "ordering": false,
+        "serverSide": false,
+        "bInfo": false,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 1.2,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#accountStudentManagementTable').DataTable().columns().count();
+                $(".accountStudentManagementTable-error").html("");
+                $("#accountStudentManagementTable").append(`<tbody class="accountStudentManagementTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#accountStudentManagementTable_processing").css("display", "none");
             }
         },
         "createdRow": function (row, data, index) { },

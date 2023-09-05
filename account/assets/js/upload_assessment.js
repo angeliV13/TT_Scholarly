@@ -210,15 +210,22 @@ $("#submitAssessment").submit(function (e) {
   let clearanceCheck    = ($("#btn_na_Clearance").is(":checked") == true ? 1 : 0);
   let corCheck          = ($("#btn_na_Cor").is(":checked") == true ? 1 : 0);
   let gradeCheck        = ($("#btn_na_Grade").is(":checked") == true ? 1 : 0);
-  let schoolIdFile, clearanceFile, corFile, gradeFile;
- 
-  schoolIdFile          = (schoolIdCheck == 1)   ? '0'  : ((document.getElementById("fileUploadSchoolId")  == null) ? '1' : (((document.getElementById("fileUploadSchoolId"))== undefined)  ? '2' : document.getElementById("fileUploadSchoolId").files[0]));
-  clearanceFile         = (clearanceCheck == 1)  ? '0'  : ((document.getElementById("fileUploadClearance") == null) ? '1' : (((document.getElementById("fileUploadClearance"))== undefined) ? '2' : document.getElementById("fileUploadClearance").files[0]));
-  corFile               = (corCheck == 1)        ? '0'  : ((document.getElementById("fileUploadCor")       == null) ? '1' : (((document.getElementById("fileUploadCor"))== undefined)       ? '2' : document.getElementById("fileUploadCor").files[0]));
-  gradeFile             = (gradeCheck == 1)      ? '0'  : ((document.getElementById("fileUploadGrade")     == null) ? '1' : (((document.getElementById("fileUploadGrade"))== undefined)     ? '2' : document.getElementById("fileUploadGrade").files[0]));
 
-  console.log(schoolIdFile);
-  console.log(clearanceFile);
+  let schoolIdFile      = (schoolIdCheck == 1)  ? '0'  : ((document.getElementById("fileUploadSchoolId")   == null) ? '1' : ((document.getElementById("fileUploadSchoolId") === undefined) ? '2' : document.getElementById("fileUploadSchoolId").files[0]));
+  let clearanceFile     = (clearanceCheck == 1) ? '0'  : ((document.getElementById("fileUploadClearance")   == null) ? '1' : ((document.getElementById("fileUploadClearance") === undefined) ? '2' : document.getElementById("fileUploadClearance").files[0]));
+  let corFile           = (corCheck == 1)       ? '0'  : ((document.getElementById("fileUploadCor")   == null) ? '1' : ((document.getElementById("fileUploadCor") === undefined) ? '2' : document.getElementById("fileUploadCor").files[0]));
+  let gradeFile         = (gradeCheck == 1)     ? '0'  : ((document.getElementById("fileUploadGrade")   == null) ? '1' : ((document.getElementById("fileUploadGrade") === undefined) ? '2' : document.getElementById("fileUploadGrade").files[0]));
+  
+  //---------------------------------
+  // let schoolIdCheck     = ($("#btn_na_SchoolId").is(":checked") == true ? 1 : 0);
+  // let clearanceCheck    = ($("#btn_na_Clearance").is(":checked") == true ? 1 : 0);
+  // let corCheck          = ($("#btn_na_Cor").is(":checked") == true ? 1 : 0);
+  // let gradeCheck        = ($("#btn_na_Grade").is(":checked") == true ? 1 : 0);
+ 
+  // schoolIdFile          = (schoolIdCheck == 1)   ? '0'  : ((document.getElementById("fileUploadSchoolId")  == null) ? '1' : (((document.getElementById("fileUploadSchoolId"))== undefined)  ? '2' : document.getElementById("fileUploadSchoolId").files[0]));
+  // clearanceFile         = (clearanceCheck == 1)  ? '0'  : ((document.getElementById("fileUploadClearance") == null) ? '1' : (((document.getElementById("fileUploadClearance"))== undefined) ? '2' : document.getElementById("fileUploadClearance").files[0]));
+  // corFile               = (corCheck == 1)        ? '0'  : ((document.getElementById("fileUploadCor")       == null) ? '1' : (((document.getElementById("fileUploadCor"))== undefined)       ? '2' : document.getElementById("fileUploadCor").files[0]));
+  // gradeFile             = (gradeCheck == 1)      ? '0'  : ((document.getElementById("fileUploadGrade")     == null) ? '1' : (((document.getElementById("fileUploadGrade"))== undefined)     ? '2' : document.getElementById("fileUploadGrade").files[0]));
 
   let form_data = new FormData(); 
 
@@ -228,55 +235,63 @@ $("#submitAssessment").submit(function (e) {
   form_data.append('corFile', corFile);
   form_data.append('gradeFile', gradeFile);
 
-  Swal.fire({
-    title: "Submit Assessment?",
-    text: "Are you sure you want to submit your assessment requirements? This cannot be undone",
-    icon: "question",
-    showCancelButton: true,
-    confirmButtonText: "Submit",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      $.ajax({
-        type: "POST",
-        url: "controller/uploadRequirements.php",
-        processData: false,
-        contentType: false,
-        data: form_data,
+  if(schoolIdFile === undefined || clearanceFile === undefined || corFile === undefined || gradesFile === undefined) {
+    Swal.fire({
+      title: "Error!",
+      icon: "error",
+      html: "One or more file/s is/are not submitted",
+    });
+  } else {
+    Swal.fire({
+      title: "Submit Assessment?",
+      text: "Are you sure you want to submit your assessment requirements? This cannot be undone",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Submit",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: "controller/uploadRequirements.php",
+          processData: false,
+          contentType: false,
+          data: form_data,
 
-        success: function (data) {
-          if (data == "Success") {
-            let timerInterval;
+          success: function (data) {
+            if (data == "Success") {
+              let timerInterval;
 
-            Swal.fire({
-              title: "Success!",
-              icon: "success",
-              html: "Upload Success",
-              timer: 2000,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading()
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              if (result.dismiss) {
-                location.reload();
-              }
-            });
-            
-          } else {
-            console.log(data);
-            Swal.fire({
-              title: "Error!",
-              icon: "error",
-              html: data,
-            });
-          }
-        },
-      });
-    }
-  });
+              Swal.fire({
+                title: "Success!",
+                icon: "success",
+                html: "Upload Success",
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading()
+                },
+                willClose: () => {
+                  clearInterval(timerInterval)
+                }
+              }).then((result) => {
+                if (result.dismiss) {
+                  location.reload();
+                }
+              });
+              
+            } else {
+              console.log(data);
+              Swal.fire({
+                title: "Error!",
+                icon: "error",
+                html: data,
+              });
+            }
+          },
+        });
+      }
+    });
+  }
 
   return false;
 });
@@ -404,11 +419,11 @@ $("#submitApplicationFile").submit(function (e) {
 $("#submitRenewal").submit(function (e) {
   e.preventDefault();
 
-  let schoolIdCheck       = ($("#btn_na_1").is(":checked") == true ? 1 : 0);
-  let corCheck            = ($("#btn_na_3").is(":checked") == true ? 1 : 0);
+  // let schoolIdCheck       = ($("#btn_na_1").is(":checked") == true ? 1 : 0);
+  // let corCheck            = ($("#btn_na_3").is(":checked") == true ? 1 : 0);
  
-  let schoolIdFile        = (schoolIdCheck      == 1) ? '0'  : ((document.getElementById("fileUpload1")   == null) ? '1' : (((document.getElementById("fileUpload1"))== undefined)  ? '2' : document.getElementById("fileUpload1").files[0]));
-  let corFile             = (corCheck           == 1) ? '0'  : ((document.getElementById("fileUpload3")   == null) ? '1' : (((document.getElementById("fileUpload3"))== undefined)  ? '2' : document.getElementById("fileUpload3").files[0]));
+  let schoolIdFile        = (schoolIdCheck      == 1) ? '0'  : ((document.getElementById("fileUpload1")   == null) ? '1' : (((document.getElementById("fileUpload1"))=== undefined)  ? '2' : document.getElementById("fileUpload1").files[0]));
+  let corFile             = (corCheck           == 1) ? '0'  : ((document.getElementById("fileUpload3")   == null) ? '1' : (((document.getElementById("fileUpload3"))=== undefined)  ? '2' : document.getElementById("fileUpload3").files[0]));
 
   let form_data = new FormData(); 
 
@@ -416,56 +431,63 @@ $("#submitRenewal").submit(function (e) {
   form_data.append('schoolIdFile'     , schoolIdFile);       
   form_data.append('corFile'          , corFile);
   
+  if(schoolIdFile === undefined || corFile === undefined) {
+    Swal.fire({
+      title: "Error!",
+      icon: "error",
+      html: "One or more file/s is/are not submitted",
+    });
+  } else {
+    Swal.fire({
+      title: "Submit Renewal?",
+      text: "Are you sure you want to submit your renewal requirements? This cannot be undone",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Submit",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "POST",
+          url: "controller/uploadRequirements.php",
+          processData: false,
+          contentType: false,
+          data: form_data,
 
-  Swal.fire({
-    title: "Submit Renewal?",
-    text: "Are you sure you want to submit your renewal requirements? This cannot be undone",
-    icon: "question",
-    showCancelButton: true,
-    confirmButtonText: "Submit",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      $.ajax({
-        type: "POST",
-        url: "controller/uploadRequirements.php",
-        processData: false,
-        contentType: false,
-        data: form_data,
+          success: function (data) {
+            if (data == "Success") {
+              let timerInterval;
 
-        success: function (data) {
-          if (data == "Success") {
-            let timerInterval;
-
-            Swal.fire({
-              title: "Success!",
-              icon: "success",
-              html: "Upload Success",
-              timer: 2000,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading()
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              if (result.dismiss) {
-                location.reload();
-              }
-            });
-            
-          } else {
-            console.log(data);
-            Swal.fire({
-              title: "Error!",
-              icon: "error",
-              html: data,
-            });
-          }
-        },
-      });
-    }
-  });
+              Swal.fire({
+                title: "Success!",
+                icon: "success",
+                html: "Upload Success",
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading()
+                },
+                willClose: () => {
+                  clearInterval(timerInterval)
+                }
+              }).then((result) => {
+                if (result.dismiss) {
+                  location.reload();
+                }
+              });
+              
+            } else {
+              console.log(data);
+              Swal.fire({
+                title: "Error!",
+                icon: "error",
+                html: data,
+              });
+            }
+          },
+        });
+      }
+    });
+  }
 
   return false;
 });

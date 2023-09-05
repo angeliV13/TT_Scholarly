@@ -9,84 +9,7 @@ function get_path($lv_path, $type = '99')
                 switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
-                        case 'pages-contact':
-                                return 'maintenance.php';
-                        case 'new-applicants':
-                                return 'views/admin/new-applicants.php';
-                        case 'interview':
-                                return 'views/admin/interview.php';
-
-
-                        case 'assessment':
-                                return 'views/admin/assessment.php';
-
-
-                        case 'examination':
-                                return 'views/admin/examination.php';
-
-
-                        case 'removed-applicants':
-                                return 'views/admin/removed-applicants.php';
-
-
-                        case 'beneficiaries':
-                                return 'views/admin/beneficiaries.php';
-
-
-                        case 'bene-assessment':
-                                return 'views/admin/bene-assessment.php';
-
-
-                        case 'bene-renewal':
-                                return 'views/admin/bene-renewal.php';
-
-
-                        case 'removed-bene':
-                                return 'views/admin/removed-bene.php';
-
-
-                        case 'graduates':
-                                return 'views/admin/graduates.php';
-
-
-                        case 'graduating':
-                                return 'views/admin/graduating.php';
-
-
-                        case 'Adaccount-management':
-                                return 'views/admin/Adaccount-management.php';
-
-
-                        case 'admin-profile':
-                                return 'views/admin/admin-profile.php';
-
-
-                        case 'applicants':
-                                return 'maintenance.php';
-
-
-                        case 'exam_settings':
-                                return 'views/admin/exam_settings.php';
-
-
-                        case 'exam_questions':
-                                return 'views/admin/exam_questions.php';
-
-
-                        case 'tts_settings':
-                                return 'maintenance.php';
-
-                        default:
-                                return 'error.php';
-                }
-        }
-
-
-        if ($type == 1)         //Admin
-        {
-                switch ($lv_path) {
-                        case 'dashboard':
-                                return 'views/admin/dashboard.php';
+                                
                         case 'pages-contact':
                                 return 'pages-contact.php';
 
@@ -135,8 +58,11 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/graduating_list.php';
 
 
-                        case 'Adaccount-management':
-                                return 'views/admin/account_management.php';
+                        case 'manage_account_admin':
+                                return 'views/admin/account_admin_management.php';
+                
+                        case 'manage_account_student':
+                                return 'views/admin/account_student_management.php';
 
 
                         case 'admin-profile':
@@ -175,8 +101,114 @@ function get_path($lv_path, $type = '99')
                         case 'tts_indicators_ea':
                                 return 'views/admin/basic_indicators_ea.php';
 
-                                case 'tts_indicators_sc':
-                                        return 'views/admin/basic_indicators_sc.php';
+                        case 'tts_indicators_sc':
+                                return 'views/admin/basic_indicators_sc.php';
+
+                        default:
+                                return 'error.php';
+                }
+        }
+
+
+        if ($type == 1)         //Admin
+        {
+                switch ($lv_path) {
+                        case 'dashboard':
+                                return 'views/admin/dashboard.php';
+
+                        case 'pages-contact':
+                                return 'pages-contact.php';
+
+                                //      Applicants Section
+                        case 'new-applicants':
+                                return 'views/admin/applicant_new.php';
+
+
+                        case 'interview':
+                                return 'views/admin/applicant_interview.php';
+
+
+                        case 'assessment':
+                                return 'views/admin/applicant_assessment.php';
+
+
+                        case 'examination':
+                                return 'views/admin/applicant_examination.php';
+
+
+                        case 'removed-applicants':
+                                return 'views/admin/applicant_removed.php';
+
+
+                        case 'beneficiaries':
+                                return 'views/admin/bene_list.php';
+
+
+                        case 'bene-assessment':
+                                return 'views/admin/bene_assessment.php';
+
+
+                        case 'bene-renewal':
+                                return 'views/admin/bene-renewal.php';
+
+
+                        case 'removed-bene':
+                                return 'views/admin/bene_removed.php';
+
+
+                        case 'graduates':
+                                return 'views/admin/graduates_list.php';
+
+
+                        case 'graduating':
+                                return 'views/admin/graduating_list.php';
+
+
+                        case 'manage_account_admin':
+                                return 'views/admin/account_admin_management.php';
+                
+                        case 'manage_account_student':
+                                return 'views/admin/account_student_management.php';
+
+
+                        case 'admin-profile':
+                                return 'views/admin/profile_admin.php';
+
+
+                        case 'app-profile':
+                                return 'maintenance.php';
+
+
+                        case 'applicants':
+                                return 'maintenance.php';
+
+
+                        case 'exam_settings':
+                                return 'views/admin/exam_settings.php';
+
+
+                        case 'exam_questions':
+                                return 'views/admin/exam_questions.php';
+
+
+                        case 'tts_settings':
+                                return 'views/admin/basic_settings.php';
+                        
+                        case 'web_settings':
+                                return 'views/admin/web_settings.php';
+                        
+                        case 'sch_settings':
+                                return 'views/admin/school_settings.php';
+                        
+                        case 'ntf_settings':
+                                return 'views/admin/notification_settings.php';
+
+
+                        case 'tts_indicators_ea':
+                                return 'views/admin/basic_indicators_ea.php';
+
+                        case 'tts_indicators_sc':
+                                return 'views/admin/basic_indicators_sc.php';
 
 
                         default:

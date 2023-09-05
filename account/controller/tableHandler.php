@@ -8,8 +8,11 @@ $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 session_start();
 
 switch ($action) {
-    case 1:
-        echo accountListingTable($_SESSION['account_type']);
+    case 1.1:
+        echo accountListingTable($_SESSION['id'], $_SESSION['account_type'], 0); // View for Admin Accounts
+        break;
+    case 1.2:
+        echo accountListingTable($_SESSION['id'], $_SESSION['account_type'], 1); // View for Student Accounts
         break;
     case 2:
         echo examQuestionsTable();
