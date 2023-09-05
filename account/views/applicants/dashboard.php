@@ -72,7 +72,7 @@
                               <div class="card-body">
                                   <h5 class="card-title">General Requirements<span> | Progress</span></h5>
 
-                                  <table class="table table-borderless datatable">
+                                  <table id="applicationFileTable" class="table table-borderless datatable">
                                       <thead>
                                           <tr>
                                               <th scope="col">No.</th>

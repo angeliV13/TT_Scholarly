@@ -220,7 +220,7 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'dashboard':
-                                return 'views/beneficiaries/profile_bene.php';
+                                return 'views/beneficiaries/dashboard.php';
 
                         case 'assessment-bene':
                                 return 'views/beneficiaries/assessment_bene.php';
@@ -250,8 +250,8 @@ function get_path($lv_path, $type = '99')
                 switch ($lv_path) {
 
 
-                        case 'dashboard_applicant':
-                                return 'views/applicants/dashboard_applicant.php';
+                        case 'dashboard':
+                                return 'views/applicants/dashboard.php';
 
                         case 'profile_applicant':
                                 return 'views/applicants/profile_applicant.php';

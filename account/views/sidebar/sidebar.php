@@ -192,7 +192,7 @@
               </li>
           <?php elseif ($_SESSION['account_type'] > 2) : ?>
               <li class="nav-item">
-                  <a class="nav-link" href="index.php?nav=dashboard_applicant">
+                  <a class="nav-link" href="index.php?nav=dashboard">
                       <i class="bi bi-grid"></i>
                       <span>Dashboard</span>
                   </a>
