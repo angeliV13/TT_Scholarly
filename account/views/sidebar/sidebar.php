@@ -130,11 +130,11 @@
                   </a>
                   <ul id="accountManagement-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                       <li>
-                        <?php if ($_SESSION['account_type'] == 0) : ?>
-                          <a href="index.php?nav=manage_account_admin">
-                              <i class="bi bi-circle"></i><span>Admin Accounts</span>
-                          </a>
-                        <?php endif; ?>
+                          <?php if ($_SESSION['account_type'] == 0) : ?>
+                              <a href="index.php?nav=manage_account_admin">
+                                  <i class="bi bi-circle"></i><span>Admin Accounts</span>
+                              </a>
+                          <?php endif; ?>
                           <a href="index.php?nav=manage_account_student">
                               <i class="bi bi-circle"></i><span>Student Accounts</span>
                           </a>
@@ -190,7 +190,7 @@
                       <span>Profile</span>
                   </a>
               </li>
-          <?php elseif ($_SESSION['account_type'] > 2) : ?>
+          <?php elseif ($_SESSION['account_type'] >= 2) : ?>
               <li class="nav-item">
                   <a class="nav-link" href="index.php?nav=dashboard">
                       <i class="bi bi-grid"></i>
@@ -199,42 +199,79 @@
               </li><!-- End Dashboard Nav -->
 
               <li class="nav-item">
-                  <a class="nav-link " href="index.php?nav=profile_applicant">
+                  <a class="nav-link " href="index.php?<?php echo ($_SESSION['account_type'] == 2) ? 'nav=profile-bene' : 'nav=profile-applicant'; ?>">
                       <i class="bi bi-person"></i>
                       <span>Profile</span>
                   </a>
               </li><!-- End Dashboard Nav -->
 
-              <!--  -->
-              <li class="nav-item" id="reqLi" data-status="<?= ($status['add_flag'] == 0) ? "disabled" : "" ?>">
-                  <a class="nav-link collapsed" id="reqBtn" href="index.php?nav=apply_applicant">
-                      <i class="bi bi-files"></i>
-                      <span>General Requirements</span>
-                  </a>
-              </li><!-- End Dashboard Nav -->
+              <?php if ($_SESSION['account_type'] == 2) : ?>
 
-              <!-- Submit Application -->
-              <?php if ($status['req_flag'] == 1 and !$finishFlag) : ?>
-                  <li class="nav-item">
-                      <a class="nav-link collapsed" href="#" id="submitApplication">
-                          <i class="bi bi-file-check"></i>
-                          <span>Submit Application</span>
-                      </a>
-                  </li><!-- End Dashboard Nav -->
+                  <?php $scholar_type = 2;
+                    $scholarType = 1 + $scholar_type; ?>
+
+                  <?php if ($assessmentAccess != null) : ?>
+
+                      <?php if ($assessmentAccess[$scholarType] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow) : ?>
+                          <!-- Start Assessment Requirements Nav -->
+                          <li class="nav-item">
+                              <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
+                                  <i class="bi bi-person"></i>
+                                  <span>Assessment</span>
+                              </a>
+                          </li><!-- Applicants Nav -->
+                      <?php endif; ?>
+
+                  <?php endif; ?>
+
+                  <?php if ($renewalAccess != null) : ?>
+
+                      <?php if ($renewalAccess[$scholarType] == 1 && $renewalAccess[0] <= $dateNow && $renewalAccess[1] >= $dateNow) : ?>
+
+                          <li class="nav-item">
+                              <a class="nav-link collapsed" href="index.php?nav=renewal-bene">
+                                  <i class="bi bi-person"></i>
+                                  <span>Renewal</span>
+                              </a>
+                          </li><!-- Applicants Nav -->
+                      <?php endif; ?>
+
+                  <?php endif; ?>
               <?php endif; ?>
 
-              <?php $scholar_type = 2;
-                $scholarType = 1 + $scholar_type; ?>
+              <?php if ($_SESSION['account_type'] == 3) : ?>
 
-              <?php if ($examAccess != null) : ?>
-                  <?php if ($examAccess[$scholarType] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow) : ?>
-                      <!-- Start Exam Nav -->
+                  <!--  -->
+                  <li class="nav-item" id="reqLi" data-status="<?= ($status['add_flag'] == 0) ? "disabled" : "" ?>">
+                      <a class="nav-link collapsed" id="reqBtn" href="index.php?nav=apply-applicant">
+                          <i class="bi bi-files"></i>
+                          <span>General Requirements</span>
+                      </a>
+                  </li><!-- End Dashboard Nav -->
+
+                  <!-- Submit Application -->
+                  <?php if ($status['req_flag'] == 1 and !$finishFlag) : ?>
                       <li class="nav-item">
-                          <a class="nav-link collapsed" href="index.php?nav=examination">
-                              <i class="bi bi-person"></i>
-                              <span>Examination</span>
+                          <a class="nav-link collapsed" href="#" id="submitApplication">
+                              <i class="bi bi-file-check"></i>
+                              <span>Submit Application</span>
                           </a>
-                      </li><!-- Applicants Nav -->
+                      </li><!-- End Dashboard Nav -->
+                  <?php endif; ?>
+
+                  <?php $scholar_type = 2;
+                    $scholarType = 1 + $scholar_type; ?>
+
+                  <?php if ($examAccess != null) : ?>
+                      <?php if ($examAccess[$scholarType] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow) : ?>
+                          <!-- Start Exam Nav -->
+                          <li class="nav-item">
+                              <a class="nav-link collapsed" href="index.php?nav=examination">
+                                  <i class="bi bi-person"></i>
+                                  <span>Examination</span>
+                              </a>
+                          </li><!-- Applicants Nav -->
+                      <?php endif; ?>
                   <?php endif; ?>
               <?php endif; ?>
           <?php endif; ?>
