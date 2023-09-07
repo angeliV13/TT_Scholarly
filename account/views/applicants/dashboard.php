@@ -163,7 +163,7 @@
 
               <!-- Right side columns -->
               <!-- <div class="col-lg-4"> -->
-                  <!-- <div class="card">
+              <!-- <div class="card">
                       <div class="filter">
                           <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -235,8 +235,8 @@
                       </div>
                   </div> -->
 
-                  <!-- News & Updates Traffic -->
-                  <!-- <div class="card">
+              <!-- News & Updates Traffic -->
+              <!-- <div class="card">
                       <div class="filter">
                           <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -286,11 +286,11 @@
                           </div>
                       </div>
                   </div> -->
-                  <!-- End News & Updates -->
+              <!-- End News & Updates -->
 
               <!-- </div> -->
               <!-- End Right side columns -->
-              
+
               <!-- THOMASINO  -->
               <!-- <div class="row">
                   <div class="col-lg-12">
