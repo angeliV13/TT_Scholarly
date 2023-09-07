@@ -78,6 +78,7 @@ $(document).ready(function ($) {
     deferRender: false,
     stateSave: false,
   });
+
   let applicationFileTable = $("#applicationFileTable").DataTable({
     lengthChange: false,
     searching: false,
@@ -90,6 +91,7 @@ $(document).ready(function ($) {
       data: {
         action: 1,
         getTable: 2,
+        dashboard: 1,
       },
       // success: function (row, data, index) {
       //   console.log(row);

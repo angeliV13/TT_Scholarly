@@ -72,14 +72,14 @@
                               <div class="card-body">
                                   <h5 class="card-title">General Requirements<span> | Progress</span></h5>
 
-                                  <table id="applicationFileTable" class="table table-borderless datatable">
+                                  <table id="applicationFileTable" class="table table-borderless text-center">
                                       <thead>
                                           <tr>
-                                              <th scope="col">No.</th>
-                                              <th scope="col">Requirements</th>
-                                              <th scope="col">Date Submitted</th>
-                                              <th scope="col">Remarks</th>
-                                              <th scope="col">Status</th>
+                                              <th class="text-center">No.</th>
+                                              <th class="text-center">Requirements</th>
+                                              <th class="text-center">Date Submitted</th>
+                                              <th class="text-center">Remarks</th>
+                                              <th class="text-center">Status</th>
                                           </tr>
                                       </thead>
                                       <tbody>

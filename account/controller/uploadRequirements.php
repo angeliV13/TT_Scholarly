@@ -11,7 +11,8 @@ if(isset($_REQUEST['action'])){
             if($getTable == 1){
                 echo getAssessmentBeneTable();
             }elseif($getTable == 2){
-                echo getApplicationTable();
+                $dashboard = (isset($_POST['dashboard']) ? 1 : 0);
+                echo getApplicationTable($dashboard);
             }
             elseif($getTable == 3){
                 echo getRenewalTable();
