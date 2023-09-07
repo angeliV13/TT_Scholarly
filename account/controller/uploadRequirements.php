@@ -5,17 +5,18 @@ $target_dir = "../uploads";
 
 if(isset($_REQUEST['action'])){
     $action = $_REQUEST['action'];
+    $dashboard = (isset($_POST['dashboard']) ? 1 : 0);
+
     switch($action){
         case 1:
             $getTable = $_POST['getTable'];
             if($getTable == 1){
-                echo getAssessmentBeneTable();
+                echo getAssessmentBeneTable($dashboard);
             }elseif($getTable == 2){
-                $dashboard = (isset($_POST['dashboard']) ? 1 : 0);
                 echo getApplicationTable($dashboard);
             }
             elseif($getTable == 3){
-                echo getRenewalTable();
+                echo getRenewalTable($dashboard);
             }
             break;
         case 2:         // Upload of Assessment Requirements

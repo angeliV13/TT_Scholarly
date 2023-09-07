@@ -1,169 +1,260 @@
 <main id="main" class="main">
-      <!-- Start of Page Title -->
-      <div class="pagetitle d-none">
-          <h1>Dashboard</h1>
-          <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
-          </ol>
-      </div>
-      <!-- End Page Title -->
-      <section class="section dashboard">
-          <!-- DASHBOARD PROFILE -->
-          <div class="col-lg-12">
-              <div class="container h-100">
-                  <div class="row  h-100">
-                      <div class="col col-md-9 col-lg-12 col-xl-12">
-                          <div class="card">
-                              <div class="card-body mt-3">
-                                  <div class="d-flex text-black">
-                                      <div class="profile-pic d-flex flex-column" style="width: 160px; height:180px;  border-radius: 10px;">
-                                          <label class="-label" for="file">
-                                              <span class="glyphicon glyphicon-camera"></span>
-                                              <span>Change Image</span>
-                                          </label>
-                                          <input id="file" type="file" onchange="loadFile(event)" />
-                                          <!-- <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" /> -->
-                                          <img id="output" src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
-                                      </div>
-                                      <div class="flex-grow-1 ms-4 mt-3">
-                                          <h5 class="mb-1 fw-bold">JUAN DELA CRUZ</h5>
-                                          <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;">BS Information Technology - FOURTH YEAR</p>
-                                          <p class="mb-2 pb-1" style="color: #2b2a2a;">Batangas State University JPLPC- Malvar</p>
+  <!-- Start of Page Title -->
+  <div class="pagetitle d-none">
+    <h1>Dashboard</h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+      <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+  </div>
+  <!-- End Page Title -->
+  <section class="section dashboard">
+    <!-- DASHBOARD PROFILE -->
+    <div class="col-lg-12">
+      <div class="container h-100">
+        <div class="row  h-100">
+          <div class="col col-md-9 col-lg-12 col-xl-12">
+            <div class="card">
+              <div class="card-body mt-3">
+                <div class="d-flex text-black">
+                  <div class="profile-pic d-flex flex-column" style="width: 160px; height:180px;  border-radius: 10px;">
+                    <label class="-label" for="file">
+                      <span class="glyphicon glyphicon-camera"></span>
+                      <span>Change Image</span>
+                    </label>
+                    <input id="file" type="file" onchange="loadFile(event)" />
+                    <!-- <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" /> -->
+                    <img id="output" src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                  </div>
+                  <div class="flex-grow-1 ms-4 mt-3">
+                    <h5 class="mb-1 fw-bold">JUAN DELA CRUZ</h5>
+                    <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;">BS Information Technology - FOURTH YEAR</p>
+                    <p class="mb-2 pb-1" style="color: #2b2a2a;">Batangas State University JPLPC- Malvar</p>
 
-                                          <div class="d-flex justify-content-between align-items-center rounded-3 gap-2 p-2 mb-2" style="background-color: #efefef;">
-                                              <div>
-                                                  <p class="small text-muted mb-1">Status:</p>
-                                                  <p class="mb-0 fw-bold">Applicant</p>
-                                              </div>
-                                              <div class="px-3">
-                                                  <p class="small text-muted mb-1">Scholarship Type:</p>
-                                                  <p class="mb-0 fw-bold">Education Scholarship Assistance</p>
-                                              </div>
-                                              <div class="px-3">
-                                                  <p class="small text-muted mb-1">Education Level:</p>
-                                                  <p class="mb-0 fw-bold">Senior Highschool</p>
-                                              </div>
-                                              <div>
-                                                  <p class="small text-muted mb-1">Semester:</p>
-                                                  <p class="mb-0 fw-bold">FIRST SEMESTER AY 2023-2024</p>
-                                              </div>
-                                          </div>
-                                          <!-- <div class="d-flex pt-1">
+                    <div class="d-flex justify-content-between align-items-center rounded-3 gap-2 p-2 mb-2" style="background-color: #efefef;">
+                      <div>
+                        <p class="small text-muted mb-1">Status:</p>
+                        <p class="mb-0 fw-bold">Applicant</p>
+                      </div>
+                      <div class="px-3">
+                        <p class="small text-muted mb-1">Scholarship Type:</p>
+                        <p class="mb-0 fw-bold">Education Scholarship Assistance</p>
+                      </div>
+                      <div class="px-3">
+                        <p class="small text-muted mb-1">Education Level:</p>
+                        <p class="mb-0 fw-bold">Senior Highschool</p>
+                      </div>
+                      <div>
+                        <p class="small text-muted mb-1">Semester:</p>
+                        <p class="mb-0 fw-bold">FIRST SEMESTER AY 2023-2024</p>
+                      </div>
+                    </div>
+                    <!-- <div class="d-flex pt-1">
                                           <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
                                           <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
                                       </div> -->
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
                   </div>
+                </div>
               </div>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="row">
-              <!-- Left side columns -->
-              <div class="col-lg-12">
-                  <div class="row">
-                      <!-- GENERAL REQUIREMENTS DASHBOARD -->
-                      <div class="col-12">
-                          <div class="card recent-sales overflow-auto">
-                              <div class="card-body">
-                                  <h5 class="card-title">General Requirements<span> | Progress</span></h5>
+    <div class="row">
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+          <!-- GENERAL REQUIREMENTS DASHBOARD -->
+          <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+              <div class="card-body">
+                <h5 class="card-title">General Requirements<span> | Progress</span></h5>
 
-                                  <table id="applicationFileTable" class="table table-borderless text-center">
-                                      <thead>
-                                          <tr>
-                                              <th class="text-center">No.</th>
-                                              <th class="text-center">Requirements</th>
-                                              <th class="text-center">Date Submitted</th>
-                                              <th class="text-center">Remarks</th>
-                                              <th class="text-center">Status</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                          <tr>
-                                              <th scope="row"><a href="#">1</a></th>
-                                              <td>Certificate of Birth</td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">2</a></th>
-                                              <td>Certificate of Good Moral Character</td>
-                                              <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-warning">Pending</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">3</a></th>
-                                              <td>Report of Grades</td>
-                                              <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">4</a></th>
-                                              <td>ID Photo (2X2 size)</td>
-                                              <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-danger">Rejected</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">5</a></th>
-                                              <td>Vicinity Map</td>
-                                              <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">6</a></th>
-                                              <td>Barangay Clearance</td>
-                                              <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">7</a></th>
-                                              <td>Parents Voter's ID/Voter's Certification</td>
-                                              <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">8</a></th>
-                                              <td>Voter's Certificate of the Applicant</td>
-                                              <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">9</a></th>
-                                              <td>Income Tax Return or Certificate of Employment and Compensation (Parents)</td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"><a href="#">10</a></th>
-                                              <td>Certificate of Indigency or Certificate of Unemployment for the Parents or other Household who are not employed.</td>
-                                              <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                              <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                              <td><span class="badge bg-success">Approved</span></td>
-                                          </tr>
-                                      </tbody>
-                                  </table>
-                              </div>
-                          </div>
-                      </div><!-- End GENERAL REQUIREMENTS DASHBOARD -->
-                  </div>
-              </div><!-- End Left side columns -->
+                <?php if ($assessmentAccess != null && ($assessmentAccess[$scholarType] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)) : ?>
+                  <!-- Assessment Table -->
+                  <table id="assessmentFileTable" class="table table-borderless text-center">
+                    <thead>
+                      <tr>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Requirements</th>
+                        <th class="text-center">Date Submitted</th>
+                        <th class="text-center">Remarks</th>
+                        <th class="text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><a href="#">1</a></th>
+                        <td>Certificate of Birth</td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">2</a></th>
+                        <td>Certificate of Good Moral Character</td>
+                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-warning">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">3</a></th>
+                        <td>Report of Grades</td>
+                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">4</a></th>
+                        <td>ID Photo (2X2 size)</td>
+                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-danger">Rejected</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">5</a></th>
+                        <td>Vicinity Map</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">6</a></th>
+                        <td>Barangay Clearance</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">7</a></th>
+                        <td>Parents Voter's ID/Voter's Certification</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">8</a></th>
+                        <td>Voter's Certificate of the Applicant</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">9</a></th>
+                        <td>Income Tax Return or Certificate of Employment and Compensation (Parents)</td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">10</a></th>
+                        <td>Certificate of Indigency or Certificate of Unemployment for the Parents or other Household who are not employed.</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                <?php endif; ?>
 
-              <!-- Right side columns -->
-              <!-- <div class="col-lg-4"> -->
-              <!-- <div class="card">
+
+                <?php if ($renewalAccess != null && ($renewalAccess[$scholarType] == 1 && $renewalAccess[0] <= $dateNow && $renewalAccess[1] >= $dateNow)) : ?>
+                  <!-- Renewal Table -->
+                  <table id="renewalFileTable" class="table table-borderless text-center">
+                    <thead>
+                      <tr>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Requirements</th>
+                        <th class="text-center">Date Submitted</th>
+                        <th class="text-center">Remarks</th>
+                        <th class="text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><a href="#">1</a></th>
+                        <td>Certificate of Birth</td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">2</a></th>
+                        <td>Certificate of Good Moral Character</td>
+                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-warning">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">3</a></th>
+                        <td>Report of Grades</td>
+                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">4</a></th>
+                        <td>ID Photo (2X2 size)</td>
+                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-danger">Rejected</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">5</a></th>
+                        <td>Vicinity Map</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">6</a></th>
+                        <td>Barangay Clearance</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">7</a></th>
+                        <td>Parents Voter's ID/Voter's Certification</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">8</a></th>
+                        <td>Voter's Certificate of the Applicant</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">9</a></th>
+                        <td>Income Tax Return or Certificate of Employment and Compensation (Parents)</td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">10</a></th>
+                        <td>Certificate of Indigency or Certificate of Unemployment for the Parents or other Household who are not employed.</td>
+                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                        <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                <?php endif; ?>
+              </div>
+            </div>
+          </div><!-- End GENERAL REQUIREMENTS DASHBOARD -->
+        </div>
+      </div><!-- End Left side columns -->
+
+      <!-- Right side columns -->
+      <!-- <div class="col-lg-4"> -->
+      <!-- <div class="card">
                       <div class="filter">
                           <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -235,8 +326,8 @@
                       </div>
                   </div> -->
 
-              <!-- News & Updates Traffic -->
-              <!-- <div class="card">
+      <!-- News & Updates Traffic -->
+      <!-- <div class="card">
                       <div class="filter">
                           <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -286,13 +377,13 @@
                           </div>
                       </div>
                   </div> -->
-              <!-- End News & Updates -->
+      <!-- End News & Updates -->
 
-              <!-- </div> -->
-              <!-- End Right side columns -->
+      <!-- </div> -->
+      <!-- End Right side columns -->
 
-              <!-- THOMASINO  -->
-              <!-- <div class="row">
+      <!-- THOMASINO  -->
+      <!-- <div class="row">
                   <div class="col-lg-12">
                       <div class="card">
                           <div class="card-body">
@@ -338,7 +429,7 @@
                       </div>
                   </div>
               </div> -->
-          </div>
-      </section>
+    </div>
+  </section>
 
-  </main><!-- End #main -->
+</main><!-- End #main -->

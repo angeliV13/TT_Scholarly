@@ -63,7 +63,7 @@ function getRequirementsTable($type)
     return $requirementData;
 }
 
-function getAssessmentBeneTable()
+function getAssessmentBeneTable($dashboard = 0)
 {
     session_start();
     include("dbconnection.php");
@@ -82,16 +82,28 @@ function getAssessmentBeneTable()
 
     // Generate if no Table Entries Found
     if ($query->num_rows ==  0) {
-        $sql = "INSERT INTO `assessment_file`
+        if ($dashboard == 0) {
+
+            $sql = "INSERT INTO `assessment_file`
                         (`id`, `account_id`, `ay_id`, `sem_id`, `requirement`, `file`, `status`, `remarks`, `upload_date`, `modified_date`, `checked_date`) 
                 VALUES  ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','1','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','2','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','3','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','4','',0, '', '', '', '')";
-        $query = $conn->query($sql) or die("Error URQ002: " . $conn->error);
+            $query = $conn->query($sql) or die("Error URQ002: " . $conn->error);
 
-        $sql = "SELECT * FROM assessment_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
-        $query = $conn->query($sql) or die("Error URQ003: " . $conn->error);
+            $sql = "SELECT * FROM assessment_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
+            $query = $conn->query($sql) or die("Error URQ003: " . $conn->error);
+        } else {
+            $json_data = array(
+                "draw"            => 1,   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+                "recordsTotal"    => intval($totalData),  // total number of records
+                "recordsFiltered" => intval($totalData), // total number of records after searching, if there is no searching then totalFiltered = totalData
+                "data"            => $data   // total data array
+            );
+
+            return json_encode($json_data);
+        }
     }
 
     while ($row = $query->fetch_assoc()) {
@@ -307,25 +319,52 @@ function getAssessmentBeneTable()
             $button = $buttonGrade;
         }
 
-        if ($status == 0) {
-            $statusText = 'Not Submitted';
-        } elseif ($status == 1) {
-            $statusText = 'Submitted';
-        } elseif ($status == 2) {
-            $statusText = 'Approved';
-        } elseif ($status == 3) {
-            $statusText = 'Revision';
-        } elseif ($status == 4) {
-            $statusText = 'Not Applicable';
-        }
+        // STATUS PLACE
 
-        $data[] = [
-            $counter,
-            $reqData[$counter - 1][1],
-            $statusText,
-            $remarks,
-            $button,
-        ];
+        if ($dashboard == 0) {
+
+            if ($status == 0) {
+                $statusText = 'Not Submitted';
+            } elseif ($status == 1) {
+                $statusText = 'Submitted';
+            } elseif ($status == 2) {
+                $statusText = 'Approved';
+            } elseif ($status == 3) {
+                $statusText = 'Revision';
+            } elseif ($status == 4) {
+                $statusText = 'Not Applicable';
+            }
+
+            $data[] = [
+                $counter,
+                $reqData[$counter - 1][1],
+                $statusText,
+                $remarks,
+                $button,
+            ];
+        } else {
+
+            if ($status == 0) {
+                $statusText = '<span class="badge bg-warning">Not Submitted</span>';
+            } elseif ($status == 1) {
+                $statusText = '<span class="badge bg-primary">Submitted</span>';
+            } elseif ($status == 2) {
+                $statusText = '<span class="badge bg-success">Approved</span>';
+            } elseif ($status == 3) {
+                $statusText = '<span class="badge bg-danger">Revision</span>';
+            } elseif ($status == 4) {
+                $statusText = '<span class="badge bg-dark">Not Applicable</span>';
+            }
+
+            $data[] = [
+                $counter,
+                $reqData[$counter - 1][1],
+                (($modified_date <> '0000-00-00') ? date("F d, Y", strtotime($modified_date)) : ''),
+                // $modified_date,
+                $remarks,
+                $statusText,
+            ];
+        }
 
         $counter++;
     }
@@ -574,7 +613,7 @@ function getApplicationTable($dashboard = 0)
                 $remarks,
                 $button,
             ];
-        }else{
+        } else {
 
             if ($status == 0) {
                 $statusText = '<span class="badge bg-warning">Not Submitted</span>';
@@ -591,7 +630,8 @@ function getApplicationTable($dashboard = 0)
             $data[] = [
                 $counter,
                 $reqData[$counter - 1][1],
-                $modified_date,
+                (($modified_date <> '0000-00-00') ? date("F d, Y", strtotime($modified_date)) : ''),
+                // $modified_date,
                 $remarks,
                 $statusText,
             ];
@@ -860,7 +900,7 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
     return 'Success';
 }
 
-function getRenewalTable()
+function getRenewalTable($dashboard = 0)
 {
     session_start();
     include("dbconnection.php");
@@ -879,14 +919,25 @@ function getRenewalTable()
 
     // Generate if no Table Entries Found
     if ($query->num_rows ==  0) {
-        $sql = "INSERT INTO `renewal_file`
+        if ($dashboard == 0) {
+            $sql = "INSERT INTO `renewal_file`
                         (`id`, `account_id`, `ay_id`, `sem_id`, `requirement`, `file`, `status`, `remarks`, `upload_date`, `modified_date`, `checked_date`) 
                 VALUES  ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','1','',0, '', '', '', ''),
                         ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','3','',0, '', '', '', '')";
-        $query = $conn->query($sql) or die("Error URQ009: " . $conn->error);
+            $query = $conn->query($sql) or die("Error URQ009: " . $conn->error);
 
-        $sql = "SELECT * FROM renewal_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
-        $query = $conn->query($sql) or die("Error URQ010: " . $conn->error);
+            $sql = "SELECT * FROM renewal_file WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' AND account_id = '" . $userid . "'ORDER BY id DESC";
+            $query = $conn->query($sql) or die("Error URQ010: " . $conn->error);
+        } else {
+            $json_data = array(
+                "draw"            => 1,   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+                "recordsTotal"    => intval($totalData),  // total number of records
+                "recordsFiltered" => intval($totalData), // total number of records after searching, if there is no searching then totalFiltered = totalData
+                "data"            => $data   // total data array
+            );
+
+            return json_encode($json_data);
+        }
     }
 
     while ($row = $query->fetch_assoc()) {
@@ -919,25 +970,52 @@ function getRenewalTable()
                         </div>';
         }
 
-        if ($status == 0) {
-            $statusText = 'Not Submitted';
-        } elseif ($status == 1) {
-            $statusText = 'Submitted';
-        } elseif ($status == 2) {
-            $statusText = 'Approved';
-        } elseif ($status == 3) {
-            $statusText = 'Revision';
-        } elseif ($status == 4) {
-            $statusText = 'Not Applicable';
-        }
+        // STATUS PLACE
 
-        $data[] = [
-            $counter,
-            $reqData[$counter - 1][1],
-            $statusText,
-            $remarks,
-            $button,
-        ];
+        if ($dashboard == 0) {
+
+            if ($status == 0) {
+                $statusText = 'Not Submitted';
+            } elseif ($status == 1) {
+                $statusText = 'Submitted';
+            } elseif ($status == 2) {
+                $statusText = 'Approved';
+            } elseif ($status == 3) {
+                $statusText = 'Revision';
+            } elseif ($status == 4) {
+                $statusText = 'Not Applicable';
+            }
+
+            $data[] = [
+                $counter,
+                $reqData[$counter - 1][1],
+                $statusText,
+                $remarks,
+                $button,
+            ];
+        } else {
+
+            if ($status == 0) {
+                $statusText = '<span class="badge bg-warning">Not Submitted</span>';
+            } elseif ($status == 1) {
+                $statusText = '<span class="badge bg-primary">Submitted</span>';
+            } elseif ($status == 2) {
+                $statusText = '<span class="badge bg-success">Approved</span>';
+            } elseif ($status == 3) {
+                $statusText = '<span class="badge bg-danger">Revision</span>';
+            } elseif ($status == 4) {
+                $statusText = '<span class="badge bg-dark">Not Applicable</span>';
+            }
+
+            $data[] = [
+                $counter,
+                $reqData[$counter - 1][1],
+                (($modified_date <> '0000-00-00') ? date("F d, Y", strtotime($modified_date)) : ''),
+                // $modified_date,
+                $remarks,
+                $statusText,
+            ];
+        }
 
         $counter++;
     }

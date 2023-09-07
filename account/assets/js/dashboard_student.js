@@ -17,7 +17,7 @@ $(document).ready(function ($) {
   // });
 
   // Scholar File Status
-  let assessmentBeneTable = $("#assessmentBeneTable").DataTable({
+  let assessmentFileTable = $("#assessmentFileTable").DataTable({
     lengthChange: false,
     searching: false,
     ordering: false,
@@ -29,6 +29,7 @@ $(document).ready(function ($) {
       data: {
         action: 1,
         getTable: 1,
+        dashboard: 1,
       },
       // success: function (row, data, index) {
       //   console.log(row);
@@ -48,7 +49,7 @@ $(document).ready(function ($) {
     stateSave: false,
   });
 
-  let renewalBeneTable = $("#renewalBeneTable").DataTable({
+  let renewalFileTable = $("#renewalFileTable").DataTable({
     lengthChange: false,
     searching: false,
     ordering: false,
@@ -60,6 +61,7 @@ $(document).ready(function ($) {
       data: {
         action: 1,
         getTable: 3,
+        dashboard: 1,
       },
       // success: function (row, data, index) {
       //   console.log(row);
