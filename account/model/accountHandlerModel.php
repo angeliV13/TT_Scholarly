@@ -292,7 +292,7 @@ function forgot_password($email, $type)
 {
     include("dbconnection.php");
 
-    if ($type == 1) $exists = check_exist(['table' => 'account', 'column' => 'email', 'value' => $email]);
+    $exists = check_exist(['table' => 'account', 'column' => 'email', 'value' => $email]);
     if ($exists == 0) return 'Email does not exist!';
 
     $sql = "SELECT * FROM account WHERE email = '" . $email . "'";
