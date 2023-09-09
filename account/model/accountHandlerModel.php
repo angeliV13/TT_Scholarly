@@ -127,6 +127,10 @@ function registerAccount($data)
     $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
     $msg .= '<p> Your account has been created. Enter the code below to verify your account. This code will expire in 5 minutes. </p>';
     $msg .= '<p> <b> Code: ' . $randomString . ' </b> </p>';
+    $msg .= '<p>This is a system generated email. Please do not reply.</p>';
+    $msg .= '<p>Thank you! <br></p>';
+    $msg .= '<p>Best regards,</p>';
+    $msg .= '<p>Youth Development Scholarship</p>';
 
     $sendEmail = sendEmail($data['email'], 'Account Verification', $msg);
 
@@ -257,6 +261,10 @@ function resend_email($data)
 
     $msg = '<p> Here is your new code. This code will expire in 5 minutes. </p>';
     $msg .= '<p> <b> Code: ' . $randomToken . ' </b> </p>';
+    $msg .= '<p>This is a system generated email. Please do not reply.</p>';
+    $msg .= '<p>Thank you! <br></p>';
+    $msg .= '<p>Best regards,</p>';
+    $msg .= '<p>Youth Development Scholarship</p>';
 
     $sendEmail = sendEmail($data, 'Resend Verification Code', $msg);
 
@@ -314,6 +322,10 @@ function forgot_password($email, $type)
         $msg = '<p> Hello ' . $user_name . ', </p> ';
         $msg .= '<p> Here is your ' . strtolower($text) . '. </p>';
         $msg .= '<p> <b> Code: ' . $randomToken . ' </b> </p>';
+        $msg .= '<p>This is a system generated email. Please do not reply.</p>';
+        $msg .= '<p>Thank you! <br></p>';
+        $msg .= '<p>Best regards,</p>';
+        $msg .= '<p>Youth Development Scholarship</p>';
 
         $sendEmail = sendEmail($email, $text, $msg, $emailType);
 
@@ -360,6 +372,10 @@ function password_reset($data)
                 $msg = '<p> Hello ' . $user_name . ', </p> ';
                 $msg .= '<p> Your password has been reset. </p>';
                 $msg .= '<p> If you did not request a password reset, please contact us immediately. </p>';
+                $msg .= '<p>This is a system generated email. Please do not reply.</p>';
+                $msg .= '<p>Thank you! <br></p>';
+                $msg .= '<p>Best regards,</p>';
+                $msg .= '<p>Youth Development Scholarship</p>';
 
                 $sendEmail = sendEmail($data['email'], 'Password Reset Notification', $msg);
 
@@ -810,6 +826,7 @@ function submitApplication($id)
 
     $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= '<p>Your scholarship application has been submitted. You will be notified once your application has been reviewed.</p>';
+    $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
@@ -896,6 +913,7 @@ function set_applicant_status($data)
 
     $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= $msgText;
+    $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
@@ -982,6 +1000,7 @@ function deleteUserRequest($data)
     $msg = '<p>Hi approvers,<br></p>';
     $msg .= '<p>Below is the information for account deletion. Please review before proceeding with the action.</p><br>';
     $msg .= $table;
+    $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
@@ -1051,6 +1070,10 @@ function addAdminAccount($data)
         $msg .= '<p> Your account has been created. Please use this password to navigate your account. </p>';
         $msg .= '<p> <b> Username: ' . $$data['username'] . ' </b> </p>';
         $msg .= '<p> <b> Password: ' . $password . ' </b> </p>';
+        $msg .= '<p>This is a system generated email. Please do not reply.</p>';
+        $msg .= '<p>Thank you! <br></p>';
+        $msg .= '<p>Best regards,</p>';
+        $msg .= '<p>Youth Development Scholarship</p>';
 
         $sendEmail = sendEmail($data['email'], 'Account Created', $msg);
 
