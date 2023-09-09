@@ -174,9 +174,12 @@ function registerAccount($data)
     $emailCount = check_exist($emailCheck);
     $userCount = check_exist($userCheck);
 
-    if ($emailCount > 0) {
+    if ($emailCount > 0) 
+    {
         return 'Email Already Exist';
-    } else if ($userCount > 0) {
+    } 
+    else if ($userCount > 0) 
+    {
         return 'Username Already Exist';
     }
 
@@ -199,7 +202,9 @@ function registerAccount($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($data['email'], 'Account Verification', $msg);
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+
+    $sendEmail = sendEmail($data['email'], 'Account Verification', $msg, $emailType);
 
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
@@ -333,7 +338,9 @@ function resend_email($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($data, 'Resend Verification Code', $msg);
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+
+    $sendEmail = sendEmail($data, 'Resend Verification Code', $msg, $emailType);
 
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
@@ -444,7 +451,9 @@ function password_reset($data)
                 $msg .= '<p>Best regards,</p>';
                 $msg .= '<p>Youth Development Scholarship</p>';
 
-                $sendEmail = sendEmail($data['email'], 'Password Reset Notification', $msg);
+                $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+
+                $sendEmail = sendEmail($data['email'], 'Password Reset Notification', $msg, $emailType);
 
                 if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
@@ -902,7 +911,9 @@ function submitApplication($id)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($email, $name . ' - Scholarship Application Submission', $msg, 2, $adEmail);
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '4';
+
+    $sendEmail = sendEmail($email, $name . ' - Scholarship Application Submission', $msg, $emailType, $adEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $notifiedUsers = get_notif_type(2);
@@ -989,7 +1000,9 @@ function set_applicant_status($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, 2, $adEmail);
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '4';
+
+    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, $emailType, $adEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $notifiedUsers = get_notif_type(2);
@@ -1076,7 +1089,9 @@ function deleteUserRequest($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $sendEmail = sendEmail($adEmail, $applicantName . ' - Account Deletion', $msg, 2, $requesterEmail);
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '5';
+
+    $sendEmail = sendEmail($adEmail, $applicantName . ' - Account Deletion', $msg, $emailType, $requesterEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $sql = "INSERT INTO delete_account_form (userId, requestedBy, reason, date_inserted) VALUES ('$id', '$userId', '$reason', NOW())";
@@ -1141,7 +1156,7 @@ function addAdminAccount($data)
 
     if ($query) 
     {
-        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '5';
         $name = $data['firstName'] . ' ' . $data['lastName'];
 
         $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';

@@ -1147,7 +1147,9 @@ function updateRequest($data)
         $msg .= '<p>Best regards,</p>';
         $msg .= '<p>Youth Development Scholarship</p>';
 
-        $sendEmail = sendEmail($userEmail, $applicantName . ' - Account Deletion Approval', $msg, 2, $requesterEmail, $adEmail);
+        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '5';
+
+        $sendEmail = sendEmail($userEmail, $applicantName . ' - Account Deletion Approval', $msg, $emailType, $requesterEmail, $adEmail);
         if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
         echo update_account_status($userId, 4);
@@ -1184,7 +1186,9 @@ function updateRequest($data)
         $msg .= '<p>Best regards,</p>';
         $msg .= '<p>Youth Development Scholarship</p>';
 
-        $sendEmail = sendEmail($requesterEmail, $applicantName . ' - Account Deletion Rejection', $msg, 2, $adEmail);
+        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '5';
+
+        $sendEmail = sendEmail($requesterEmail, $applicantName . ' - Account Deletion Rejection', $msg, $emailType, $adEmail);
         if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
         return 'success';
