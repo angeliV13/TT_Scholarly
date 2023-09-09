@@ -1210,17 +1210,22 @@ function fetchEvents($date = "", $type = 0)
         {
             extract($row);
 
+            $color = ($active == 1) ? '#28a745' : '#dc3545';
+            $border = ($active == 1) ? '#28a745' : '#dc3545';
+
             if ($type == 0)
             {
                 $data[] = [
-                    'id'        => $id,
-                    'title'     => $title,
-                    'start'     => $date_start,
-                    'end'       => $date_end,
-                    'allDay'    => true,
-                    'desc'      => $description,
-                    'image'     => $image,
-                    'active'    => $active,
+                    'id'                  => $id,
+                    'title'               => $title,
+                    'start'               => $date_start,
+                    'end'                 => $date_end,
+                    'allDay'              => true,
+                    'desc'                => $description,
+                    'image'               => $image,
+                    'backgroundColor'     => $color,
+                    'borderColor'         => $border,
+                    'active'              => $active,
                 ];
             }
             else
@@ -1229,14 +1234,16 @@ function fetchEvents($date = "", $type = 0)
                 if ($date >= $date_start and $date <= $date_end)
                 {
                     $return[] = [
-                        'id'        => $id,
-                        'title'     => $title,
-                        'start'     => $date_start,
-                        'end'       => $date_end,
-                        'allDay'    => true,
-                        'desc'      => $description,
-                        'image'     => $image,
-                        'active'    => $active,
+                        'id'                  => $id,
+                        'title'               => $title,
+                        'start'               => $date_start,
+                        'end'                 => $date_end,
+                        'allDay'              => true,
+                        'desc'                => $description,
+                        'image'               => $image,
+                        'backgroundColor'     => $color,
+                        'borderColor'         => $border,
+                        'active'              => $active,
                     ];
                 }
             }
@@ -1289,17 +1296,24 @@ function updateEvents($data)
     $exists = check_exist_multiple(['table' => 'website_coa', 'column' => ['id' => ['=', $data['eventId']]]], 1);
     $oldImg = $exists[0]['image'];
 
-    if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+    if ($eventImg != "")
+    {
+        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
 
-    $eImg = upload_file($eventImg, 'assets/img/uploads/events/', '../assets/img/uploads/events/', $options = [
-        'type' => ['jpg', 'jpeg', 'png'],
-    ]);
-
-    if ($eImg == 'Invalid File Type') return 'Invalid File Type';
-
-    if ($eImg['success'] == false) return 'Error: ' . $fbImg['error'];
-
-    $img = $eImg['path'];
+        $eImg = upload_file($eventImg, 'assets/img/uploads/events/', '../assets/img/uploads/events/', $options = [
+            'type' => ['jpg', 'jpeg', 'png'],
+        ]);
+    
+        if ($eImg == 'Invalid File Type') return 'Invalid File Type';
+    
+        if ($eImg['success'] == false) return 'Error: ' . $fbImg['error'];
+    
+        $img = $eImg['path'];
+    }
+    else
+    {
+        $img = $oldImg;
+    }
 
     $sql = "UPDATE website_coa SET title = '$eventName', description = '$eventDesc', image = '$img', date_start = '$dateStart', date_end = '$dateEnd', added_by = '$userId', active = $active WHERE id = '{$data['eventId']}'";
     $query = $conn->query($sql);

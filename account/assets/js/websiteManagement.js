@@ -364,17 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 return false;
                             }
                 
-                            if (eventImg == ""){
-                                Swal.showValidationMessage(
-                                    `Please select an event image!`
-                                )
-                
-                                resolve();
-
-                                return false;
-                            }
-                
-                            let img = $("#eventImg")[0].files[0];
+                            let img = ($("#eventImg")[0].files[0] == undefined) ? "" : $("#eventImg")[0].files[0];
                 
                             let formData = new FormData();
                             formData.append("action", 13);
