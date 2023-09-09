@@ -243,9 +243,14 @@ if (isset($_REQUEST['action']))
 
         echo editAccount($data);
     }
-    else if ($action == 22) // Delete Success
+    else if ($action == 22) // Change Password for Newly Created Admin Accounts
     {
-        
+        $data = [
+            'user_name'     => isset($_POST['user_name'])   ? $_POST['user_name'] : '',
+            'password'      => isset($_POST['password'])    ? $_POST['password'] : '',
+        ];
+
+        echo changeAdminPassword($data);
     }
 }
 

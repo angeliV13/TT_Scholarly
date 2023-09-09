@@ -8,27 +8,44 @@ function userLogin($user_name, $password, $type)
     include("dbconnection.php");
 
     // Checks if Account Exists
-
-    $sql = ($type <= 1) ? "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type <= " . $type : "SELECT * FROM account WHERE user_name = '" . $user_name . "' AND password = '" . $password . "' AND account_type >= " . $type;
-
+    $sql = "SELECT * FROM account WHERE user_name = '" . $user_name . "' LIMIT 1";
     $query = $conn->query($sql) or die("Error LQ001: " . $conn->error);
 
     if ($query->num_rows > 0) 
     {
-        while ($row = $query->fetch_assoc()) 
-        {
-            extract($row);
-        }
+        $row = $query->fetch_assoc();
+        $id = $row['id'];
+        $email = $row['email'];
+        $access_level = $row['access_level'];
+        $account_status = $row['account_status'];
+        $account_type = $row['account_type'];
+        $oldPw = $row['password'];
 
-        $accStatus = $account_status;
-
-        if ($accStatus == 0)
+        if ($account_status == 0)
         {
             return 'Account not yet verified or already deactivated.';
         }
-        else if ($accStatus == 4)
+        else if ($account_status == 4)
         {
             return 'Your account has been deleted. Please contact the administrator for more information.';
+        }
+        else if ($account_status == 5)
+        {
+            return '5';
+        }
+
+        if ($account_type == 0)
+        {
+            if ($password != $oldPw)
+            {
+                return 'Incorrect Password!';
+            }
+        }
+        else
+        {
+            $checkPw = verifyHashPW($password, $oldPw);
+
+            if (!$checkPw) return 'Incorrect Password!';
         }
 
         $sql = "SELECT scholarType FROM scholarship_application WHERE userId = '" . $id . "'";
@@ -47,28 +64,32 @@ function userLogin($user_name, $password, $type)
         session_start();
 
         $_SESSION['id'] = $id;
+        $_SESSION['email'] = $email;
+        $_SESSION['access_level'] = $access_level;
         $_SESSION['account_type'] = $account_type;
         $_SESSION['name'] = getUserNameFromId($id);
         $_SESSION['scholarType'] = $scholarApp;
 
         return 'Success';
+        
     } 
     else 
     {
-        return 'Incorrect Username/Password';
+        return 'Account does not exist';
     }
 }
-
 
 function user_sign_out()
 {
     session_start();
 
-    if (isset($_SESSION['id'])) {
+    if (isset($_SESSION['id'])) 
+    {
         $account_type = $_SESSION['account_type'];
-        unset($_SESSION['id']);
-        unset($_SESSION['account_type']);
-        unset($_SESSION['name']);
+        // unset($_SESSION['id']);
+        // unset($_SESSION['account_type']);
+        // unset($_SESSION['name']);
+        session_destroy();
         if ($account_type >= 2) 
         {
             return 'login.php';
@@ -82,6 +103,48 @@ function user_sign_out()
     return 'No Session Found';
 }
 
+function changeAdminPassword($data)
+{
+    include("dbconnection.php");
+
+    $userName = $data['user_name'];
+    $password = $data['password'];
+
+    $sql = "SELECT password, account_type FROM account WHERE user_name LIKE '" . $userName . "' AND account_status = 5 LIMIT 1";
+    $query = $conn->query($sql) or die("Error LQ001: " . $conn->error);
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+        $oldPw = $row['password'];
+        $account_type = $row['account_type'];
+
+        if ($oldPw == $password)
+        {
+            return 'New password must be different from the old password.';
+        }
+        else
+        {
+            $hashedPassword = ($account_type == 0) ? $password : hashPassword($password);
+            $sql = "UPDATE account SET password = '" . $hashedPassword . "', account_status = '1' WHERE user_name = '" . $userName . "' AND account_status = 5 LIMIT 1";
+            $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
+
+            if ($query)
+            {
+                return 'Success';
+            }
+            else
+            {
+                return 'Error LQ003: ' . $conn->error;
+            }
+        }
+    }
+    else
+    {
+        return 'Invalid Username';
+    }
+
+}
 
 function registerAccount($data)
 {
@@ -149,7 +212,7 @@ function registerAccount($data)
 
     if ($notif !== 'success') return 'Error: ' . $notif;
 
-    $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . $data['password'] . "', '" . $data['email'] . "', 3, 0)";
+    $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . hashPassword($data['password']) . "', '" . $data['email'] . "', 3, 0)";
     $query = mysqli_query($conn, $sql) or die("Error RQ001: " . mysqli_error($conn));
 
     if ($query) 
@@ -410,8 +473,10 @@ function change_password($old, $new)
     $sql = "SELECT id FROM account WHERE id = '" . $_SESSION['id'] . "' AND password = '" . $old . "' LIMIT 1";
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        if ($old == $new) {
+    if ($query->num_rows > 0) 
+    {
+        if ($old == $new) 
+        {
             echo 'New Password must be different from the Old Password';
             return;
         }
@@ -420,7 +485,9 @@ function change_password($old, $new)
         $query = $conn->query($sql);
 
         return ($query) ? 'Success' : 'Error EQ002: ' . $conn->error;
-    } else {
+    } 
+    else 
+    {
         echo 'Invalid Password';
     }
 }
@@ -1038,7 +1105,6 @@ function addAdminAccount($data)
         'value'     => $data['email'],
     ];
 
-
     $userCheck = [
         'table'     => 'account',
         'column'    => 'user_name',
@@ -1049,14 +1115,18 @@ function addAdminAccount($data)
     $userCount = check_exist($userCheck);
     $password  = generateRandomString(8);
 
-    if ($emailCount > 0) {
+    if ($emailCount > 0) 
+    {
         return 'Email Already Exist';
-    } else if ($userCount > 0) {
+    } 
+    else if ($userCount > 0) 
+    {
         return 'Username Already Exist';
     }
 
     $sql = "INSERT INTO `account`(`id`, `user_name`, `password`, `email`, `account_type`, `access_level`, `account_status`) 
-            VALUES ('0', '{$data['username']}', '{$password}', '{$data['email']}', '{$data['accountType']}', '{$data['sAdminAccess']}', '{$data['accountStatus']}')";
+            VALUES ('0', '{$data['username']}', '{$password}', '{$data['email']}', '{$data['accountType']}', '{$data['sAdminAccess']}', '5')";
+            // -- VALUES ('0', '{$data['username']}', '{$password}', '{$data['email']}', '{$data['accountType']}', '{$data['sAdminAccess']}', '{$data['accountStatus']}')";
     $query = $conn->query($sql);
 
     $last_id = mysqli_insert_id($conn);
@@ -1065,17 +1135,22 @@ function addAdminAccount($data)
             VALUES ('$last_id', '', '$data[firstName]', '$data[middleName]', '$data[lastName]', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')";
     $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
-    if ($query) {
+    if ($query) 
+    {
+        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+        $name = $data['firstName'] . ' ' . $data['lastName'];
+
         $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
         $msg .= '<p> Your account has been created. Please use this password to navigate your account. </p>';
-        $msg .= '<p> <b> Username: ' . $$data['username'] . ' </b> </p>';
+        $msg .= '<p> <b> Username: ' . $data['username'] . ' </b> </p>';
         $msg .= '<p> <b> Password: ' . $password . ' </b> </p>';
+        $msg .= '<p> You are required to change your password upon login. </p>';
         $msg .= '<p>This is a system generated email. Please do not reply.</p>';
         $msg .= '<p>Thank you! <br></p>';
         $msg .= '<p>Best regards,</p>';
         $msg .= '<p>Youth Development Scholarship</p>';
 
-        $sendEmail = sendEmail($data['email'], 'Account Created', $msg);
+        $sendEmail = sendEmail($data['email'], $name . ' - Account Created Successfully', $msg, $emailType);
 
         if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 

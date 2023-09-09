@@ -57,6 +57,16 @@ function static_count()
     return $count;
 }
 
+function hashPassword($pass)
+{
+    return password_hash($pass, PASSWORD_DEFAULT);
+}
+
+function verifyHashPW($pass, $hash)
+{
+    return password_verify($pass, $hash);
+}
+
 function get_website_info()
 {
     include("dbconnection.php");
