@@ -309,11 +309,13 @@ function forgot_password($email, $type)
 
         $randomToken = generateRandomString(5);
 
+        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+
         $msg = '<p> Hello ' . $user_name . ', </p> ';
         $msg .= '<p> Here is your ' . strtolower($text) . '. </p>';
         $msg .= '<p> <b> Code: ' . $randomToken . ' </b> </p>';
 
-        $sendEmail = sendEmail($email, $text, $msg);
+        $sendEmail = sendEmail($email, $text, $msg, $emailType);
 
         if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 

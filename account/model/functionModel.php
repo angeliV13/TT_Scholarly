@@ -426,7 +426,7 @@ function sendEmail($to, $subject, $message, $type = 1, $cc = [], $bcc = []) // P
     $mail->Port     = 465;
     // $mail->Username = ""; // email address
     // $mail->Password = ""; // password
-    $mail->Host     = "smtp.gmail.com";
+    $mail->Host     = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "smtp.gmail.com" : 'smtp.hostinger.com';
     $mail->Mailer   = "smtp";
     // $mail->SetFrom(" "); // email address
     
