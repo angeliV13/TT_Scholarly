@@ -210,7 +210,7 @@ $("#updateSoc").on("click", function(e){
     }
 })
 
-$("#setWebsiteInfo").on("keypress", "td", function(e){
+$("#setWebsiteInfo").on("keydown", "td", function(e){
     if (e.which == 13){
         e.preventDefault();
         var tdDataArr = [];
