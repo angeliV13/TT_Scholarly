@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let eventId = events[0]["id"];
                 let eventName = events[0]["title"];
                 let eventDesc = events[0]["desc"];
-                let eventImg = events[0]["img"];
+                let eventImg = events[0]["image"];
                 let eventStart = events[0]["start"];
                 let eventEnd = events[0]["end"];
                 let active = events[0]["active"];
