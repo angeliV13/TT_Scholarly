@@ -77,6 +77,19 @@
 
     </section>
 
+    <!-- View Notif Modal -->
+    <div class="modal fade" id="view_notif" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="showModal"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Add Notif Modal -->
     <div class="modal fade" id="add_notif" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable">

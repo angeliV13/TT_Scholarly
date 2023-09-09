@@ -3,7 +3,6 @@
 include("validationModel.php");
 include("functionModel.php");
 
-
 function userLogin($user_name, $password, $type)
 {
     include("dbconnection.php");
@@ -14,9 +13,22 @@ function userLogin($user_name, $password, $type)
 
     $query = $conn->query($sql) or die("Error LQ001: " . $conn->error);
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             extract($row);
+        }
+
+        $accStatus = $account_status;
+
+        if ($accStatus == 0)
+        {
+            return 'Account not yet verified or already deactivated.';
+        }
+        else if ($accStatus == 4)
+        {
+            return 'Your account has been deleted. Please contact the administrator for more information.';
         }
 
         $sql = "SELECT scholarType FROM scholarship_application WHERE userId = '" . $id . "'";
@@ -24,7 +36,8 @@ function userLogin($user_name, $password, $type)
 
         $scholarApp = "";
 
-        if ($query->num_rows > 0) {
+        if ($query->num_rows > 0) 
+        {
             $row = $query->fetch_assoc();
             extract($row);
 
@@ -39,7 +52,9 @@ function userLogin($user_name, $password, $type)
         $_SESSION['scholarType'] = $scholarApp;
 
         return 'Success';
-    } else {
+    } 
+    else 
+    {
         return 'Incorrect Username/Password';
     }
 }
@@ -54,9 +69,12 @@ function user_sign_out()
         unset($_SESSION['id']);
         unset($_SESSION['account_type']);
         unset($_SESSION['name']);
-        if ($account_type >= 2) {
+        if ($account_type >= 2) 
+        {
             return 'login.php';
-        } else if ($account_type <= 1) {
+        } 
+        else if ($account_type <= 1) 
+        {
             return 'login_admin.php';
         }
     }
@@ -70,6 +88,8 @@ function registerAccount($data)
     include("dbconnection.php");
 
     $randomString = generateRandomString(5);
+    $acadYear = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
 
     $emailCheck = [
         'table'     => 'account',
@@ -128,10 +148,12 @@ function registerAccount($data)
     $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . $data['password'] . "', '" . $data['email'] . "', 3, 0)";
     $query = mysqli_query($conn, $sql) or die("Error RQ001: " . mysqli_error($conn));
 
-    if ($query) {
+    if ($query) 
+    {
         $last_id = mysqli_insert_id($conn);
 
-        if ($data['fbImg'] != "") {
+        if ($data['fbImg'] != "") 
+        {
             $fbImg = upload_file($data['fbImg'], 'assets/img/uploads/fbProfile/', '../assets/img/uploads/fbProfile/', $options = [
                 'type' => ['jpg', 'jpeg', 'png'],
             ]);
@@ -151,26 +173,37 @@ function registerAccount($data)
         VALUES ('$last_id', '$eacNumber', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]', '$data[citizenship]', '$data[years]', '$data[language]', '$data[fbName]', '$data[fbUrl]', '$img')";
         $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
-        if ($query) {
+        if ($query) 
+        {
             $sql = "INSERT INTO email_token (user_id, email, token, date_generated, type) VALUES ('$last_id', '$data[email]', '" . $randomString . "', NOW(), 0)";
             $query = mysqli_query($conn, $sql) or die("Error RQ003: " . mysqli_error($conn));
 
-            if ($query) {
-                $sql = "INSERT INTO scholarship_application (userId, scholarType, dateApplied, status, current_active) VALUES ('$last_id', '$data[scholarType]', NOW(), 0, 'info_flag')";
+            if ($query) 
+            {
+                $sql = "INSERT INTO scholarship_application (ay_id, sem_id, userId, scholarType, dateApplied, status, current_active) VALUES ('$acadYear', '$semId', '$last_id', '$data[scholarType]', NOW(), 0, 'info_flag')";
                 $query = mysqli_query($conn, $sql) or die("Error RQ004: " . mysqli_error($conn));
 
-                if ($query) {
+                if ($query) 
+                {
                     echo 'Success';
-                } else {
+                } 
+                else 
+                {
                     echo 'Error RQ005: ' . mysqli_error($conn);
                 }
-            } else {
+            } 
+            else 
+            {
                 echo 'Error RQ004: ' . mysqli_error($conn);
             }
-        } else {
+        } 
+        else 
+        {
             echo 'Error RQ003: ' . mysqli_error($conn);
         }
-    } else {
+    } 
+    else 
+    {
         echo 'Error RQ002: ' . mysqli_error($conn);
     }
 }
@@ -193,9 +226,12 @@ function email_confirmation($data)
 
         $timeLeft = getDateTimeDiff($date_generated, $date_countdown, 'seconds');
 
-        if ($timeLeft <= 0) {
+        if ($timeLeft <= 0) 
+        {
             return 'Error EQ003: Token Expired';
-        } else {
+        } 
+        else 
+        {
             $sql = "UPDATE account SET account_status = 1 WHERE id = '" . $user_id . "' AND account_status = 0 LIMIT 1";
             $query = $conn->query($sql);
 
@@ -205,7 +241,9 @@ function email_confirmation($data)
 
             return ($query) ? 'Success' : 'Error EQ002: ' . $conn->error;
         }
-    } else {
+    } 
+    else 
+    {
         echo 'Invalid Token';
     }
 }
@@ -230,7 +268,6 @@ function resend_email($data)
     return ($query) ? 'Success' : 'Error EQ001: ' . $conn->error;
 }
 
-
 function delete_account($email)
 {
     include("dbconnection.php");
@@ -251,7 +288,6 @@ function delete_account($email)
     $query = $conn->query($sql);
 }
 
-
 function forgot_password($email, $type)
 {
     include("dbconnection.php");
@@ -265,7 +301,8 @@ function forgot_password($email, $type)
 
     $text = ($type == 0) ? 'Verification Code' : 'Password Reset Code';
 
-    if ($query->num_rows > 0) {
+    if ($query->num_rows > 0) 
+    {
         $row = $query->fetch_assoc();
         $id = $row['id'];
         $user_name = $row['user_name'];
@@ -284,7 +321,9 @@ function forgot_password($email, $type)
         $query = $conn->query($sql);
 
         return ($query) ? 'Success' : 'Error EQ001: ' . $conn->error;
-    } else {
+    } 
+    else 
+    {
         echo ($type == 0) ? 'Email Already Verified' : 'Email Not Found';
     }
 }
@@ -297,7 +336,8 @@ function password_reset($data)
     $sql = "SELECT * FROM account WHERE email = '" . $data['email'] . "' LIMIT 1";
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
+    if ($query->num_rows > 0) 
+    {
         $row = $query->fetch_assoc();
         $id = $row['id'];
         $user_name = $row['user_name'];
@@ -305,14 +345,16 @@ function password_reset($data)
         $sql = "SELECT * FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' AND type = 1 ORDER BY id DESC LIMIT 1";
         $query = $conn->query($sql);
 
-        if ($query->num_rows > 0) {
+        if ($query->num_rows > 0) 
+        {
             $sql = "UPDATE email_token SET date_verified = NOW() WHERE user_id = '" . $id . "' AND token = '" . $data['code'] . "' AND type = 1 LIMIT 1";
             $query = $conn->query($sql);
 
             $sql = "UPDATE account SET password = '" . $data['newPassword'] . "' WHERE id = '" . $id . "' LIMIT 1";
             $query = $conn->query($sql);
 
-            if ($query) {
+            if ($query) 
+            {
                 $msg = '<p> Hello ' . $user_name . ', </p> ';
                 $msg .= '<p> Your password has been reset. </p>';
                 $msg .= '<p> If you did not request a password reset, please contact us immediately. </p>';
@@ -323,13 +365,19 @@ function password_reset($data)
 
 
                 echo 'Success';
-            } else {
+            } 
+            else 
+            {
                 echo 'Error EQ002: ' . $conn->error;
             }
-        } else {
+        } 
+        else 
+        {
             echo 'Invalid Token';
         }
-    } else {
+    } 
+    else 
+    {
         echo 'User Not Found';
     }
 }
@@ -640,7 +688,8 @@ function updateFamily($data, $type, $userId)
 
     if ($type == 3) // Sibling
     {
-        foreach ($data as $fam) {
+        foreach ($data as $fam) 
+        {
             $id = $fam['id'];
             $nameArr = explode('/', $fam['name']);
             $relationship = $fam['relationship'];
@@ -651,12 +700,15 @@ function updateFamily($data, $type, $userId)
             $middleName = $nameArr[2];
             $lastName = $nameArr[0];
 
-            $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => $userId, 'id' => $id]]);
+            $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id]]]);
 
-            if ($exists > 0) {
+            if ($exists > 0) 
+            {
                 $sql = "UPDATE user_family SET firstName = '$firstName', middleName = '$middleName', lastName = '$lastName', age = '$age', occupation = '$occupation',
                         relationship = '$relationship', birth_order = '$birth_order' WHERE user_id = '$userId' AND id = '$id' LIMIT 1";
-            } else {
+            } 
+            else 
+            {
                 $sql = "INSERT INTO user_family (user_id, firstName, middleName, lastName, age, occupation, relationship, fam_type, birth_order)
                         VALUES ('$userId', '$firstName', '$middleName', '$lastName', '$age', '$occupation', '$relationship', '$type', '$birth_order')";
             }
@@ -666,16 +718,21 @@ function updateFamily($data, $type, $userId)
 
         return ($query) ? 'success' : 'Error Sibling Insertion: ' . $conn->error;
         $conn->rollback();
-    } else {
-        $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => $userId, 'fam_type' => $type]]);
+    } 
+    else 
+    {
+        $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'fam_type' => ['=', $type]]]);
         $occupation = ($data['occupation'] == "others") ? $data['otherOccupation'] : $data['occupation'];
 
-        if ($exists > 0) {
+        if ($exists > 0) 
+        {
             $sql = "UPDATE user_family SET firstName = '$data[firstName]', middleName = '$data[middleName]', lastName = '$data[lastName]', suffix = '$data[suffix]', age = '$data[age]',
                     birth_date = '$data[birthday]', birth_place = '$data[birthplace]', contact_number = '$data[contact]', living_flag = '$data[living]', occupation = '$occupation',
                     company_name = '$data[company]', company_address = '$data[companyAddress]', income_flag = '$data[income]', attainment_flag = '$data[education]', relationship = '$data[relationship]'
                     WHERE user_id = '$userId' AND fam_type = '$type' LIMIT 1";
-        } else {
+        } 
+        else 
+        {
             $sql = "INSERT INTO user_family (user_id, fam_type, firstName, middleName, lastName, suffix, age, birth_date, birth_place, contact_number, living_flag, occupation, company_name, company_address, income_flag, attainment_flag, relationship) VALUES
                     ('$userId', '$type', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
         }
@@ -740,12 +797,13 @@ function submitApplication($id)
 
     $adminEmail = [
         'table' => 'account',
+        'return' => 'email',
         'column' => [
-            'account_type' => 1,
+            'account_type' => ['=', 1],
         ]
     ];
 
-    $adEmail = check_exist_multiple($adminEmail);
+    $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
 
     $msg = '<p>Hi ' . $name . ',<br></p>';
@@ -825,12 +883,13 @@ function set_applicant_status($data)
 
     $adminEmail = [
         'table' => 'account',
+        'return' => 'email',
         'column' => [
-            'account_type' => 1,
+            'account_type' => ['=', 1],
         ]
     ];
 
-    $adEmail = check_exist_multiple($adminEmail);
+    $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
 
     $msg = '<p>Hi ' . $name . ',<br></p>';
@@ -860,9 +919,92 @@ function set_applicant_status($data)
     return 'success';
 }
 
-function deleteUser($id)
+function deleteUserRequest($data)
 {
-    echo update_account_status($id, 4);
+    session_start();
+    include("dbconnection.php");
+
+    $id = $data['id'];
+    $reason = $data['reason'];
+    $userId = $_SESSION['id'];
+    $account_type = $_SESSION['account_type'];
+    $name = $_SESSION['name'];
+
+    $except = $col = [];
+
+    if ($account_type == 0)
+    {
+        $except = [$userId];
+        $col = ['account_type' => ['=', 0], 'id' => ['!=', $userId]];
+    }
+    else
+    {
+        $col = ['account_type' => ['=', 0]];
+    }
+
+    $applicantName = getUserNameFromId($id);
+    $requesterName = getUserNameFromId($userId);
+    $requesterEmail = (array)get_user_data($userId)[2];
+
+    $adminEmail = [
+        'table' => 'account',
+        'return' => 'email',
+        'column' => $col
+    ];
+
+    $adEmail = check_exist_multiple($adminEmail, 1);
+    if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+
+    $table = '<table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #dddddd; text-align: center; padding: 8px;" colspan=2>Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Requester Name</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $requesterName . '</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Applicant Name</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $applicantName . '</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Reason</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $reason . '</td>
+                    </tr>
+                </tbody>
+            </table>';
+
+    $msg = '<p>Hi approvers,<br></p>';
+    $msg .= '<p>Below is the information for account deletion. Please review before proceeding with the action.</p><br>';
+    $msg .= $table;
+    $msg .= '<p>Thank you! <br></p>';
+    $msg .= '<p>Best regards,</p>';
+    $msg .= '<p>Youth Development Scholarship</p>';
+
+    $sendEmail = sendEmail($adEmail, $applicantName . ' - Account Deletion', $msg, 2, $requesterEmail);
+    if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+    $sql = "INSERT INTO delete_account_form (userId, requestedBy, reason, date_inserted) VALUES ('$id', '$userId', '$reason', NOW())";
+    $query = $conn->query($sql);
+
+    $lastId = $conn->insert_id;
+
+    if (!$query) return 'Error: ' . $conn->error;
+
+    $notifData = [
+        'user_id'       => get_user_id_notification([0], $except),
+        'notif_type'    => 11,
+        'notif_body'    => $requesterName . ' has submitted a deletion request.',
+        'notif_link'    => '?nav=ntf_settings&id=' . $id . '&deleteFormId=' . $lastId,
+    ];
+
+    $notif = insert_notification($notifData);
+    if ($notif !== 'success') return 'Error: ' . $notif;
+
+    return 'success';
 }
 
 function addAdminAccount($data)

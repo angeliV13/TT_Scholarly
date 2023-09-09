@@ -911,22 +911,49 @@ $(document).on("click", ".deleteApplicant", function(){
         cancelButtonText: "No",
     }).then((result) => {
         if (result.isConfirmed) {
+            swalReasonDeletion(id, status);
+        }
+    })
+})
+
+function swalReasonDeletion(id, status) {
+    Swal.fire({
+        title: "Reason for Deleting " + status,
+        input: 'textarea',
+        inputLabel: 'Reason',
+        inputPlaceholder: 'Type your reason here...',
+        inputAttributes: {
+            'aria-label': 'Type your reason here'
+        },
+        showCancelButton: true,
+        confirmButtonText: "Submit",
+        cancelButtonText: "Cancel",
+        preConfirm: (reason) => {
+            if (reason == '') {
+                Swal.showValidationMessage(
+                    `Please fill up the reason field.`
+                )
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
             $.ajax({
                 url: "controller/accountHandler.php",
                 type: "POST",
                 data: {
                     action: 19,
-                    id: id
+                    id: id,
+                    reason: $('#swal2-input').val(),
                 },
                 beforeSend: function () {
-                    showBeforeSend("Deleting " + status + "...");
+                    showBeforeSend("Submitting Deletion Request...");
                 },
                 success: function (data) {
                     hideBeforeSend();
                     if (data == "success") {
                         Swal.fire({
-                            title: status + " Deleted",
-                            text: "The " + status + " has been deleted",
+                            title: status + " Deletion Request",
+                            text: "Deletion request for " + status + " has been submitted. Please wait for the admin's approval.",
                             icon: "success",
                             confirmButtonText: "OK"
                         }).then((result) => {
@@ -938,11 +965,11 @@ $(document).on("click", ".deleteApplicant", function(){
                         Swal.fire({
                             icon: "error",
                             title: "Oops...",
-                            text: `An error occured while deleting the ${status}. Please try again. Error: ${data}`,
+                            text: `An error occured while requesting for deletion. Please try again. Error: ${data}`,
                         })
                     }
                 }
             })
         }
     })
-})
+}

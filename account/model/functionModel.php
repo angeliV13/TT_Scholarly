@@ -84,18 +84,27 @@ function get_website_socials()
 
     $website_socials = [];
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $socialType = $row['social_type'];
             $icon = "";
 
-            if ($socialType == "0") {
+            if ($socialType == "0") 
+            {
                 $icon = "bi bi-facebook";
-            } else if ($socialType == "1") {
+            } 
+            else if ($socialType == "1") 
+            {
                 $icon = "bi bi-instagram";
-            } else if ($socialType == "2") {
+            } 
+            else if ($socialType == "2") 
+            {
                 $icon = "bi bi-twitter";
-            } else {
+            } 
+            else 
+            {
                 $icon = "bi bi-linkedin";
             }
 
@@ -268,6 +277,38 @@ function get_user_family($id)
     return $family;
 }
 
+function get_delete_request($id)
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM delete_account_form WHERE id = '" . $id . "'";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        $row = $query->fetch_assoc();
+
+        return $row;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function get_delete_request_text($type)
+{
+    switch ($type)
+    {
+        case 0:
+            return "Pending";
+        case 1:
+            return "Approved";
+        case 2:
+            return "Rejected";
+    }
+}
+
 function get_status_text($type)
 {
     switch ($type) {
@@ -355,7 +396,7 @@ function get_lastID($data)
     return ($query->num_rows > 0) ? $query->fetch_assoc()[$data['column']] : 0;
 }
 
-function sendEmail($to, $subject, $message, $type = 1, $cc = []) // PHPMAILER FUNCTION
+function sendEmail($to, $subject, $message, $type = 1, $cc = [], $bcc = []) // PHPMAILER FUNCTION
 {
     require_once('../../vendor/phpmailer/phpmailer/src/PHPMailer.php');
     require_once('../../vendor/phpmailer/phpmailer/src/SMTP.php');
@@ -367,11 +408,14 @@ function sendEmail($to, $subject, $message, $type = 1, $cc = []) // PHPMAILER FU
 
     $credentials = account_credentials($type);
 
-    if ($credentials != false) {
+    if ($credentials != false) 
+    {
         $mail->Username = $credentials['email'];
         $mail->Password = $credentials['password'];
         $mail->SetFrom($credentials['email'], $credentials['name']);
-    } else {
+    } 
+    else 
+    {
         return "Error: No Credentials Found";
     }
 
@@ -385,11 +429,32 @@ function sendEmail($to, $subject, $message, $type = 1, $cc = []) // PHPMAILER FU
     $mail->Host     = "smtp.gmail.com";
     $mail->Mailer   = "smtp";
     // $mail->SetFrom(" "); // email address
-    $mail->AddAddress($to);
+    
+    if (is_array($to))
+    {
+        foreach ($to as $key => $value) 
+        {
+            $mail->AddAddress($value);
+        }
+    }
+    else
+    {
+        $mail->AddAddress($to);
+    }
 
-    if ($cc != []) {
-        foreach ($cc as $key => $value) {
+    if (count($cc) > 0) 
+    {
+        foreach ($cc as $key => $value) 
+        {
             $mail->AddCC($value);
+        }
+    }
+
+    if (count($bcc) > 0) 
+    {
+        foreach ($bcc as $key => $value) 
+        {
+            $mail->AddBCC($value);
         }
     }
 
@@ -398,16 +463,16 @@ function sendEmail($to, $subject, $message, $type = 1, $cc = []) // PHPMAILER FU
     $mail->IsHTML(true);
     $mail->Body = $message;
 
-    if (!$mail->Send()) {
+    if (!$mail->Send()) 
+    {
         return "Error: " . $mail->ErrorInfo;
-    } else {
+    } 
+    else 
+    {
         return "Success";
     }
 
-
     $mail->smtpClose();
-
-
     unset($mail);
 }
 
@@ -475,7 +540,8 @@ function show_notification($view = 0)
 
     $sql = "SELECT * FROM notification WHERE user_id = " . $_SESSION['id'] . " ";
 
-    if ($view == 0) {
+    if ($view == 0) 
+    {
         $sql .= "AND status = 0 ";
     }
 
@@ -487,8 +553,10 @@ function show_notification($view = 0)
     $body = "";
     $data = [];
 
-    if ($count > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($count > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $data[] = $row;
         }
 
@@ -506,10 +574,14 @@ function show_notification($view = 0)
         $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
 
 
-        if ($query->num_rows > 0) {
-            while ($row = $query->fetch_assoc()) {
-                foreach ($data as $key => $value) {
-                    if ($value['notif_type'] == $row['id']) {
+        if ($query->num_rows > 0) 
+        {
+            while ($row = $query->fetch_assoc()) 
+            {
+                foreach ($data as $key => $value) 
+                {
+                    if ($value['notif_type'] == $row['id']) 
+                    {
                         $data[$key]['notif_name'] = $row['notif_name'];
                         $data[$key]['notif_icon'] = $row['notif_icon'];
                     }
@@ -524,8 +596,8 @@ function show_notification($view = 0)
         $body .= '</li>';
         $body .= '<li><hr class="dropdown-divider"></li>';
 
-
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $value) 
+        {
             $body .= '<a href="' . $value['notif_link'] . '">';
             $body .= '<li class="notification-item">';
             $body .= '<i class="' . $value['notif_icon'] . '"></i>';
@@ -543,7 +615,9 @@ function show_notification($view = 0)
         $body .= '<li class="dropdown-footer">';
         $body .= '<a href="#">Show all notifications</a>';
         $body .= '</li>';
-    } else {
+    } 
+    else 
+    {
         $body .= '<li class="dropdown-header">';
         $body .= 'You have no new notifications';
         $body .= '</li>';
@@ -553,11 +627,9 @@ function show_notification($view = 0)
     return ['count' => $count, 'body' => $body, 'data' => $data];
 }
 
-
 function insert_notification($data)
 {
     include("dbconnection.php");
-
 
     $user_id = $data['user_id'];
     $notif_type = $data['notif_type'];
@@ -568,16 +640,20 @@ function insert_notification($data)
 
     $new_link = (strpos($notif_link, '?') !== false) ? $notif_link . '&notif=' . $lastId : $notif_link . '?notif=' . $lastId;
 
-    if (is_array($user_id)) {
+    if (is_array($user_id)) 
+    {
         $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link, notif_date) VALUES ";
 
-        foreach ($user_id as $key => $id) {
+        foreach ($user_id as $key => $id) 
+        {
             $notif_text = "Hi " . $id . ", <br>" . $notif_body;
             $sql .= "('$key', '$notif_type', '$lastId', '$notif_text', '$new_link', NOW()),";
         }
 
         $sql = rtrim($sql, ",");
-    } else {
+    } 
+    else 
+    {
         $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link) VALUES ($notif_type', '$lastId', '$notif_body', '$notif_link')";
     }
 
@@ -591,17 +667,14 @@ function update_notification($notificationId, $id = 'NA')
 {
     include("dbconnection.php");
 
-
     $sql = "UPDATE notification SET status = 1 WHERE notificationId = " . $notificationId;
 
-
-    if ($id != 'NA') {
+    if ($id != 'NA') 
+    {
         $sql .= " AND user_id = " . $id;
     }
 
-
     $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
-
 
     return ($query) ? 'success' : $conn->error;
 }
@@ -618,20 +691,39 @@ function get_notif_func($id = 0, $all = false, $queries = "")
 
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        if ($all) {
+    if ($query->num_rows > 0) 
+    {
+        if ($all) 
+        {
             $data = [];
 
-            while ($row = $query->fetch_assoc()) {
+            while ($row = $query->fetch_assoc()) 
+            {
                 $data[$row['id']] = $row['notif_func'];
             }
 
             return $data;
-        } else {
+        } 
+        else 
+        {
             $row = $query->fetch_assoc();
 
             return $row['notif_func'];
         }
+    }
+}
+
+function notif_view_type($link)
+{
+    // 0 - Modal
+    // 1 - Page
+
+    switch ($link)
+    {
+        case (strpos($link, 'deleteFormId') !== false):
+            return 0;
+        case (strpos($link, 'applicationId') !== false):
+            return 1;
     }
 }
 
@@ -728,23 +820,25 @@ function get_user_id_type($type)
     return $data;
 }
 
-function get_user_id_notification($type = [])
+function get_user_id_notification($type = [], $except = [])
 {
     include("dbconnection.php");
 
     $data = [];
 
     $getType = "";
+    $getException = "";
 
-    if (count($type) > 0) {
-        $getType = "AND account_type IN (" . implode(",", $type) . ")";
-    }
+    $getType = (count($type) > 0) ? "AND account_type IN (" . implode(",", $type) . ")" : "";
+    $getException = (count($except) > 0) ? "AND id NOT IN (" . implode(",", $except) . ")" : "";
 
-    $sql = "SELECT id, user_name FROM account WHERE account_status = 1 " . $getType;
+    $sql = "SELECT id, user_name FROM account WHERE account_status = 1 " . $getType . " " . $getException;
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $data[$row['id']] = $row['user_name'];
         }
     }
@@ -842,7 +936,8 @@ function check_status($id)
 
     $data = [];
 
-    if ($query->num_rows > 0) {
+    if ($query->num_rows > 0) 
+    {
         $row = $query->fetch_assoc();
 
         $data = $row;
@@ -887,6 +982,25 @@ function update_status($type, $id)
     $conn->rollback();
 }
 
+function updateDeleteRequest($data)
+{
+    include("dbconnection.php");
+
+    $formId = $data['id'];
+    $notifId = $data['notifId'];
+    $modifiedBy = $data['modifiedBy'];
+    $reason = $data['reason'];
+    $status = $data['status'];
+
+    $notif = update_notification($notifId);
+    if ($notif !== 'success') return 'Error: ' . $notif;
+
+    $sql = "UPDATE delete_account_form SET modifiedBy = " . $modifiedBy . ", modifierReason = '" . $reason . "', status = " . $status . ", date_updated = NOW() WHERE id = " . $formId;
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
 function update_applicant_status($id, $status)
 {
     include("dbconnection.php");
@@ -905,7 +1019,7 @@ function update_account_status($id, $status)
     $sql = "UPDATE account SET account_status = " . $status . " WHERE id = " . $id;
     $query = $conn->query($sql);
 
-    return ($query) ? true : $conn->error;
+    return ($query) ? "success" : $conn->error;
     $conn->rollback();
 }
 
@@ -951,28 +1065,48 @@ function check_exist_multiple($data, $type = 0) // 0 - Num Rows, 1 - Data
     include("dbconnection.php");
 
     $table = $data['table'];
+    $return = (!isset($data['return'])) ? "*" : $data['return'];
     $column = $data['column'];
 
-    $sql = "SELECT * FROM " . $table . " WHERE ";
+    $sql = "SELECT " . $return . " FROM " . $table . " WHERE ";
 
-    foreach ($column as $key => $value) {
-        $sql .= $key . " = '" . $value . "' AND ";
+    foreach ($column as $key => $value) 
+    {
+        $sql .= $key ;
+
+        foreach ($value as $key2 => $value2) 
+        {
+            $sql .= " " . $value2;
+        }
+
+        $sql .= " AND ";
+
+        // $sql .= $key . " = '" . $value . "' AND ";
     }
 
     $sql = substr($sql, 0, -4);
 
     $query = $conn->query($sql);
 
-    if ($type == 0) {
+    if ($type == 0) 
+    {
         return $query->num_rows;
-    } else {
-        $data = [];
+    } 
+    else 
+    {
+        $values = [];
 
-        if ($query->num_rows > 0) {
-            while ($row = $query->fetch_assoc()) {
-                $data[] = $row;
+        if ($query->num_rows > 0) 
+        {
+            while ($row = $query->fetch_assoc()) 
+            {
+                $values[] = (!isset($data['return'])) ? $row : $row[$data['return']];
             }
-        } else {
+
+            return $values;
+        } 
+        else 
+        {
             return $conn->error;
         }
     }
@@ -1065,17 +1199,23 @@ function getDefaultAcadYearId()
         $sql = "SELECT * FROM acad_year WHERE read_only = 1";
         $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
-        if ($query->num_rows <>  0) {
-            while ($row = $query->fetch_assoc()) {
+        if ($query->num_rows <>  0) 
+        {
+            while ($row = $query->fetch_assoc()) 
+            {
                 extract($row);
             }
         }
-    } else {
+    } 
+    else 
+    {
         $sql = "SELECT * FROM acad_year WHERE default_ay = 1";
         $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
-        if ($query->num_rows <>  0) {
-            while ($row = $query->fetch_assoc()) {
+        if ($query->num_rows <>  0) 
+        {
+            while ($row = $query->fetch_assoc()) 
+            {
                 extract($row);
             }
         }
@@ -1092,7 +1232,8 @@ function getDefaultSemesterId()
     $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
 
     if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
+        while ($row = $query->fetch_assoc()) 
+        {
             extract($row);
 
             return $id;

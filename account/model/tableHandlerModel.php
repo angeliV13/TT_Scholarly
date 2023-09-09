@@ -873,13 +873,17 @@ function viewNotificationTable()
     {
         foreach ($notifications['data'] as $notif) 
         {
+            $buttonClass = notif_view_type($notif['notif_link']);
+
+            $button = ($buttonClass == 0) ? '<button type="button" class="viewNotifData btn btn-primary" data-bs-toggle="modal" data-bs-target="#view_notif" data-link="' . $notif['notif_link'] . '">View</button>' : "<a href='" . $notif['notif_link'] . "' class='btn btn-primary'>View</a>";
+
             $data[] = [
                 static_count(),
                 $notif['notif_name'],
                 htmlspecialchars_decode($notif['notif_body']),
                 date("F d, Y h:i A", strtotime($notif['notif_date'])),
                 ($notif['status'] == 1) ? "Read" : "Unread",
-                "<a href='" . $notif['notif_link'] . "' class='btn btn-sm btn9-primary'>View</a>",
+                $button,
             ];
 
             $totalData++;

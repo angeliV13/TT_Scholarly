@@ -117,8 +117,6 @@ $(document).on("click", ".editNotif", function(){
     let func = $(this).attr("data-func");
     let users = $(this).attr("data-users");
 
-    // console.log(id);
-
     $("#editnotifName").val(name);
     $("#editnotifFunc").val(func);
     $("#notifId").val(id);
@@ -205,3 +203,99 @@ $("#updateNotif").on("click", function(e){
         }
     });
 })
+
+$(document).on("click", ".viewNotifData", function(){
+    let link = $(this).attr("data-link");
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        type: "POST",
+        data: {
+            "action"    : 9,
+            "link"      : link
+        },
+        success: function(data) {
+            if (data.includes("Error:")) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: data,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                $("#showModal").html(data);
+            }
+        }
+    });
+})
+
+function updateDeleteRequest(formId, userId, status){
+    let deleteRequestStatus = $("#deleteRequestStatus").val();
+    let notifId = $("#notifId").val();
+    let requestedBy = $("#requestedBy").val();
+    let text = (deleteRequestStatus == 1) ? "Approve" : "Reject";
+    
+    if (status == deleteRequestStatus){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `Please select a different status!`,
+        })
+        
+        return false;
+    }
+
+    let deleteRequestReason = check_error(document.getElementById("deleteRequestReason")); if (deleteRequestReason == undefined) return;
+    
+    Swal.fire({
+        icon: "warning",
+        title: "Are you sure?",
+        text: `You are about to ${text} this request!`,
+        showCancelButton: true,
+        confirmButtonText: `Yes, ${text} it!`,
+        cancelButtonText: "No, cancel it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/basicSetup.php",
+                type: "POST",
+                data: {
+                    "action"              : 10,
+                    "formId"              : formId,
+                    "userId"              : userId,
+                    "notifId"             : notifId,
+                    "requestedBy"         : requestedBy,
+                    "deleteRequestReason" : deleteRequestReason,
+                    "deleteRequestStatus" : deleteRequestStatus
+                },
+                beforeSend: function() {
+                    showBeforeSend("Changing status...");
+                },
+
+                success: function(data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: `Request successfully ${text.toLowerCase()}ed!`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `Something went wrong! Error: ${data}`,
+                        })
+                    }
+                }
+            });
+        }
+    })
+}

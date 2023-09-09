@@ -313,6 +313,22 @@ if (isset($_REQUEST['action']))
             echo addWebsiteInfo($data);
 
             break;
+        
+        case 9: // Notification Modal
+            echo notificationModal(isset($_POST['link']) ? $_POST['link'] : '');
+            break;
 
+        case 10: // Delete Request
+            $data = [
+                'formId'              => isset($_POST['formId']) ? $_POST['formId'] : '',
+                'userId'              => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'notifId'             => isset($_POST['notifId']) ? $_POST['notifId'] : '',
+                'requestedBy'         => isset($_POST['requestedBy']) ? $_POST['requestedBy'] : '',
+                'deleteRequestReason' => isset($_POST['deleteRequestReason']) ? $_POST['deleteRequestReason'] : '',
+                'deleteRequestStatus' => isset($_POST['deleteRequestStatus']) ? $_POST['deleteRequestStatus'] : '',
+            ];
+
+            echo updateRequest($data);
+            break;
     }
 }

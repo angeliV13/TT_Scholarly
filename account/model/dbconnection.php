@@ -1,9 +1,9 @@
 <?php
 
     $dbhost = 'localhost';
-    $dbuser = 'root';
-    $dbpassword = '';
-    $dbdatabase = 'db_scholarsystem';
+    $dbuser = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? 'root' : 'u497506402_admin';
+    $dbpassword = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? '' : 'Santotomas.0907';
+    $dbdatabase = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? 'db_scholarsystem' : 'u497506402_scholarsystem';
     $dbport = 3306;
 
     $conn = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbdatabase, $dbport);

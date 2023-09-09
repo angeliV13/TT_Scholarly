@@ -206,9 +206,14 @@ if (isset($_REQUEST['action']))
 
         echo set_applicant_status($data);
     }
-    else if ($action == 19) // Delete Applicant
+    else if ($action == 19) // Delete Request Applicant
     {
-        echo deleteUser(isset($_POST['id']) ? $_POST['id'] : '');
+        $data = [
+            'id'            => isset($_POST['id'])          ? $_POST['id'] : '',
+            'reason'        => isset($_POST['reason'])      ? $_POST['reason'] : '',
+        ];
+
+        echo deleteUserRequest($data);
     }
     else if ($action == 20) //Add Account
     {
@@ -237,6 +242,10 @@ if (isset($_REQUEST['action']))
         ];
 
         echo editAccount($data);
+    }
+    else if ($action == 22) // Delete Success
+    {
+        
     }
 }
 

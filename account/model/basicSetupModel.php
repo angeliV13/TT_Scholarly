@@ -957,15 +957,236 @@ function addWebsiteInfo($data)
     $sql = "SELECT * FROM website_info";
     $query = $conn->query($sql);
 
-    if ($query and $query->num_rows > 0) {
+    if ($query and $query->num_rows > 0) 
+    {
         $sql = "UPDATE website_info SET email = '$email', address = '$address', telephone = '$telephone', opening_hours = '$opening'";
         $query = $conn->query($sql);
 
         return ($query) ? "success" : $conn->error;
-    } else {
+    } 
+    else 
+    {
         $sql = "INSERT INTO website_info (email, address, telephone, opening_hours) VALUES ('$email', '$address', '$telephone', '$opening')";
         $query = $conn->query($sql);
 
         return ($query) ? "success" : $conn->error;
+    }
+}
+
+function notificationModal($link)
+{
+    include("dbconnection.php");
+
+    $modalBody = "";
+    $modalBody .= '<div class="modal-body">';
+
+    if (strpos($link, 'deleteFormId') !== false) // Deletion Request
+    {
+        $data = explode('&', $link);
+        $id = explode('=', $data[1])[1];
+        $deleteFormId = explode('=', $data[2])[1];
+        $notif = explode('=', $data[3])[1];
+
+        $exist = check_exist_multiple(['table' => 'delete_account_form', 'column' => ['id' => ['=', $deleteFormId], 'userId' => ['=', $id]]], 1);
+
+        if (is_array($exist))
+        {
+            $userId = $exist[0]['userId'];
+            $requestedBy = $exist[0]['requestedBy'];
+            $modifiedBy = $exist[0]['modifiedBy'];
+            $modifierReason = $exist[0]['modifierReason'];
+            $applicantName = getUserNameFromId($userId);
+            $requestedByName = getUserNameFromId($requestedBy);
+            $modifiedName = ($modifiedBy == 0) ? 'N/A' : getUserNameFromId($modifiedBy);
+            $reason = $exist[0]['reason'];
+            $dateInserted = date('F d, Y h:i A', strtotime($exist[0]['date_inserted']));
+            $dateUpdated = ($exist[0]['date_updated'] == '0000-00-00 00:00:00') ? '' : date('F d, Y h:i A', strtotime($exist[0]['date_updated']));
+            $status = get_delete_request_text($exist[0]['status']);
+
+            $modalBody .= '<input type="hidden" id="notifId" value="' . $notif . '">';
+            $modalBody .= '<input type="hidden" id="requestedBy" value="' . $requestedBy . '">';
+
+            $modalBody .= '<div class="row mb-2">
+                                <div class="col-4">Applicant Name</div>
+                                <div class="col-8">' . $applicantName . '</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">Requested By</div>
+                                <div class="col-8">' . $requestedByName . '</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">Reason</div>
+                                <div class="col-8">' . $reason . '</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">Date Requested</div>
+                                <div class="col-8">' . $dateInserted . '</div>
+                            </div>';
+
+                            if ($modifiedBy <> 0)
+                            {
+                                $modalBody .= '<div class="row mb-2">
+                                                    <div class="col-4">Modified By</div>
+                                                    <div class="col-8">' . $modifiedName . '</div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-4">Reason for ' . (($exist[0]['status'] == 1) ? 'Approval' : 'Rejection') . '</div>
+                                                    <div class="col-8">' . $modifierReason . '</div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-4">Date Reviewed</div>
+                                                    <div class="col-8">' . $dateUpdated . '</div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-4">Status</div>
+                                                    <div class="col-8">' . $status . '</div>
+                                                </div>
+                                            </div>';
+                            }
+                            else
+                            {
+                                $modalBody .= '<div class="row mb-2">
+                                                    <div class="col-4">Status</div>
+                                                    <div class="col-8">
+                                                        <select class="form-select" id="deleteRequestStatus">
+                                                            <option value="0" ' . (($exist[0]['status'] == 0) ? 'selected' : '') . '>Pending</option>
+                                                            <option value="1" ' . (($exist[0]['status'] == 1) ? 'selected' : '') . '>Approve</option>
+                                                            <option value="2" ' . (($exist[0]['status'] == 2) ? 'selected' : '') . '>Reject</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-4">Reason</div>
+                                                    <div class="col-8">
+                                                        <textarea class="form-control" id="deleteRequestReason" rows="3" name="Reason"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>';
+
+                                $modalBody .= '<div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" onclick="updateDeleteRequest(' . $deleteFormId . ', ' . $id . ', ' . $exist[0]['status'] . ')">Update</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                </div>';
+                            }
+        }
+        else
+        {
+            return "Error: " . $exist;
+        }
+    }
+
+    return $modalBody;
+}
+
+function updateRequest($data)
+{
+    include("dbconnection.php");
+
+    $id = $_SESSION['id'];
+    $formId = $data['formId'];
+    $userId = $data['userId'];
+    $requestedBy = $data['requestedBy'];
+    $notifId = $data['notifId'];
+    $deleteRequestReason = $data['deleteRequestReason'];
+    $deleteRequestStatus = $data['deleteRequestStatus'];
+
+    $value = [
+        'id'            => $formId,
+        'notifId'       => $notifId,
+        'modifiedBy'    => $id,
+        'reason'        => $deleteRequestReason,
+        'status'        => $deleteRequestStatus
+    ];
+
+    $requestData = get_delete_request($formId); if ($requestData == false) return 'Error: No request found.';
+    $reason = $requestData['reason'];
+
+    $request = updateDeleteRequest($value); if ($request != 'success') return $request;
+
+    $applicantName = getUserNameFromId($userId);
+    $requesterName = getUserNameFromId($requestedBy);
+    $requesterEmail = (array)get_user_data($requestedBy)[2];
+    $userEmail = (array)get_user_data($userId)[2];
+
+    $col = ['account_type' => ['=', 0], 'id' => ['!=', $requestedBy]];
+
+    $adminEmail = [
+        'table' => 'account',
+        'return' => 'email',
+        'column' => $col
+    ];
+
+    $adEmail = check_exist_multiple($adminEmail, 1);
+    if (!is_array($adEmail)) return 'Error: ' . $adEmail;        
+
+    if ($deleteRequestStatus == 1)
+    {
+        $table = '<table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #dddddd; text-align: center; padding: 8px;" colspan=2>Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Applicant Name</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $applicantName . '</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Reason for Deletion</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $reason . '</td>
+                    </tr>
+                </tbody>
+            </table>';
+
+        $msg = '<p>Hi ' . $applicantName . ',</p>';
+        $msg .= '<p>We regret to inform you that your account has been deleted. Please see below for the details.</p><br>';
+        $msg .= $table;
+        $msg .= '<br><p>If you think this is a mistake, please contact us immediately.</p><br>';
+        $msg .= '<p>Thank you! <br></p>';
+        $msg .= '<p>Best regards,</p>';
+        $msg .= '<p>Youth Development Scholarship</p>';
+
+        $sendEmail = sendEmail($userEmail, $applicantName . ' - Account Deletion Approval', $msg, 2, $requesterEmail, $adEmail);
+        if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+        echo update_account_status($userId, 4);
+    }
+    else
+    {
+        $table = '<table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #dddddd; text-align: center; padding: 8px;" colspan=3>Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Applicant Name</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $applicantName . '</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Reason for Deletion</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $reason . '</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px; font-weight: bold;">Reason for Rejection</td>
+                        <td style="border: 1px solid #dddddd; text-align: center; padding: 8px;">' . $deleteRequestReason . '</td>
+                    </tr>
+                </tbody>
+            </table>';
+
+        $msg = '<p>Hi ' . $requesterName . ',</p>';
+        $msg .= '<p>We would like to inform you that your request for deletion of account has been rejected. Please see below for the details.</p><br>';
+        $msg .= $table;
+        $msg .= '<br><p>If you think this is a mistake, please contact us immediately.</p><br>';
+        $msg .= '<p>Thank you! <br></p>';
+        $msg .= '<p>Best regards,</p>';
+        $msg .= '<p>Youth Development Scholarship</p>';
+
+        $sendEmail = sendEmail($requesterEmail, $applicantName . ' - Account Deletion Rejection', $msg, 2, $adEmail);
+        if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+        return 'success';
     }
 }
