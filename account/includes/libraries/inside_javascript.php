@@ -13,14 +13,16 @@ switch($_SESSION['account_type'])
         echo '<script src="assets/js/notifSettings.js"></script>';
         echo '<script src="assets/js/updateYearLevelOptions.js"></script>';
         echo '<script src="assets/js/exam_settings.js"></script>';
+        echo '<script src="assets/js/schoolSettings.js"></script>';
+        echo '<script src="assets/js/websiteManagement.js"></script>';
         echo '<script src="assets/js/accountList.js"></script>';
         break;
     case 1:     //Admin
         echo '<script src="assets/js/basic_setup.js"></script>';
         echo '<script src="assets/js/applicantList.js"></script>';
+        echo '<script src="assets/js/notifSettings.js"></script>';
         echo '<script src="assets/js/updateYearLevelOptions.js"></script>';
         echo '<script src="assets/js/exam_settings.js"></script>';
-        echo '<script src="assets/js/notifSettings.js"></script>';
         echo '<script src="assets/js/schoolSettings.js"></script>';
         echo '<script src="assets/js/websiteManagement.js"></script>';
         echo '<script src="assets/js/accountList.js"></script>';
