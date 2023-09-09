@@ -46,6 +46,18 @@
                     </div>
                 </div>
 
+                <!-- Calendar of Activities -->
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">Calendar of Activities</h5>
+                            </div>
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Website Socials -->
                 <div class="card">
                     <div class="card-body ">

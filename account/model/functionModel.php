@@ -1035,22 +1035,29 @@ function update_account_status($id, $status)
 
 function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'queryPath' => '', 'errorValidation' => ['0' => 'Invalid File Type']])
 {
-    if ($file != "") {
+    if ($file != "") 
+    {
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt));
 
-        if (in_array($fileActualExt, $options['type'])) {
+        if (in_array($fileActualExt, $options['type'])) 
+        {
             $fileNewName = uniqid('', true) . "." . $fileActualExt;
             $fileDestination = $mainPath . $fileNewName;
             $fileDestinationQuery = $viewPath . $fileNewName;
-            if (move_uploaded_file($fileTmpName, $fileDestinationQuery)) {
+            if (move_uploaded_file($fileTmpName, $fileDestinationQuery)) 
+            {
                 return ['success' => true, 'path' => $fileDestination];
-            } else {
+            } 
+            else 
+            {
                 return ['success' => false, 'error' => 'Error LC001: File Upload Failed'];
             }
-        } else {
+        } 
+        else 
+        {
             return $options['errorValidation'][0];
         }
     }

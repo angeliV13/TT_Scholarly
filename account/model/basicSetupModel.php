@@ -1194,3 +1194,130 @@ function updateRequest($data)
         return 'success';
     }
 }
+
+function fetchEvents($date = "", $type = 0)
+{
+    include("dbconnection.php");
+
+    $data = $return = [];
+
+    $sql = "SELECT * FROM website_coa";
+    $query = $conn->query($sql);
+
+    if ($query and $query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            extract($row);
+
+            if ($type == 0)
+            {
+                $data[] = [
+                    'id'        => $id,
+                    'title'     => $title,
+                    'start'     => $date_start,
+                    'end'       => $date_end,
+                    'allDay'    => true,
+                    'desc'      => $description,
+                    'image'     => $image,
+                    'active'    => $active,
+                ];
+            }
+            else
+            {
+
+                if ($date >= $date_start and $date <= $date_end)
+                {
+                    $return[] = [
+                        'id'        => $id,
+                        'title'     => $title,
+                        'start'     => $date_start,
+                        'end'       => $date_end,
+                        'allDay'    => true,
+                        'desc'      => $description,
+                        'image'     => $image,
+                        'active'    => $active,
+                    ];
+                }
+            }
+        }
+    }
+
+    return ($type == 0) ? json_encode($data) : json_encode($return);
+}
+
+function addEvents($data)
+{
+    include("dbconnection.php");
+
+    $userId = $data['userId'];
+    $eventName = $data['eventName'];
+    $eventDesc = $data['eventDesc'];
+    $eventImg = $data['eventImg'];
+    $dateStart = $data['dateStart'];
+    $dateEnd = $data['dateEnd'];
+    $active = $data['active'];
+
+    $eImg = upload_file($eventImg, 'assets/img/uploads/events/', '../assets/img/uploads/events/', $options = [
+        'type' => ['jpg', 'jpeg', 'png'],
+    ]);
+
+    if ($eImg == 'Invalid File Type') return 'Invalid File Type';
+
+    if ($eImg['success'] == false) return 'Error: ' . $fbImg['error'];
+
+    $img = $eImg['path'];
+
+    $sql = "INSERT INTO website_coa (title, description, image, date_start, date_end, date_added, added_by, active) VALUES ('$eventName', '$eventDesc', '$img', '$dateStart', '$dateEnd', NOW(), '$userId', $active)";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function updateEvents($data)
+{
+    include("dbconnection.php");
+    
+    $userId = $data['userId'];
+    $eventName = $data['eventName'];
+    $eventDesc = $data['eventDesc'];
+    $eventImg = $data['eventImg'];
+    $dateStart = $data['dateStart'];
+    $dateEnd = $data['dateEnd'];
+    $active = $data['active'];
+
+    $exists = check_exist_multiple(['table' => 'website_coa', 'column' => ['id' => ['=', $data['eventId']]]], 1);
+    $oldImg = $exists[0]['image'];
+
+    if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+
+    $eImg = upload_file($eventImg, 'assets/img/uploads/events/', '../assets/img/uploads/events/', $options = [
+        'type' => ['jpg', 'jpeg', 'png'],
+    ]);
+
+    if ($eImg == 'Invalid File Type') return 'Invalid File Type';
+
+    if ($eImg['success'] == false) return 'Error: ' . $fbImg['error'];
+
+    $img = $eImg['path'];
+
+    $sql = "UPDATE website_coa SET title = '$eventName', description = '$eventDesc', image = '$img', date_start = '$dateStart', date_end = '$dateEnd', added_by = '$userId', active = $active WHERE id = '{$data['eventId']}'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function deleteEvents($id)
+{
+    include("dbconnection.php");
+
+    $exists = check_exist_multiple(['table' => 'website_coa', 'column' => ['id' => ['=', $id]]], 1);
+    $oldImg = $exists[0]['image'];
+
+    if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+
+    $sql = "DELETE FROM website_coa WHERE id = '$id'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}

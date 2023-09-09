@@ -269,3 +269,366 @@ $("#setWebsiteInfo").on("keydown", "td", function(e){
     }
 })
 
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        selectable: true,
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: {
+            url: 'controller/basicSetup.php',
+            method: 'POST',
+            extraParams: {
+                action: 11,
+            },
+            failure: function() {
+                console.log('there was an error while fetching events!');
+            }
+        },
+        dateClick: function(info) {
+            // console.log(info);
+
+            getEventDetails(info.dateStr).then(function(data) {
+                let events = JSON.parse(data);
+
+                let eventId = events[0]["id"];
+                let eventName = events[0]["title"];
+                let eventDesc = events[0]["desc"];
+                let eventImg = events[0]["img"];
+                let eventStart = events[0]["start"];
+                let eventEnd = events[0]["end"];
+                let active = events[0]["active"];
+
+                Swal.fire({
+                    title: 'Edit Event',
+                    html: `<input type="text" id="eventName" class="form-control mb-2" placeholder="Event Name" value="${eventName}">
+                        <input type="text" id="eventDesc" class="form-control mb-2" placeholder="Event Description" value="${eventDesc}">
+                        <select class="form-select mb-2" id="active">
+                            <option value="1" ${(active == 1) ? "selected" : ""}>Active</option>
+                            <option value="0" ${(active == 0) ? "selected" : ""}>Inactive</option>
+                        </select>
+                        <input type="file" id="eventImg" class="form-control" accept="image/*">
+                        <div class="text-center mt-2">
+                            <img src="${eventImg}" id="eventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
+                        </div>
+                        <input type="hidden" id="eventId" class="form-control" value="${eventId}">
+                        <input type="hidden" id="dateStart" class="form-control" value="${eventStart}">
+                        <input type="hidden" id="dateEnd" class="form-control" value="${eventEnd}">`,
+                    confirmButtonText: 'Update',
+                    showCancelButton: true,
+                    cancelButtonText: 'Delete',
+                    focusConfirm: false,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    didOpen: function(){
+                        $("#eventImg").on("change", function(){
+                            let reader = new FileReader();
+                            reader.onload = function(e){
+                                $("#eventImgPreview").attr("src", e.target.result);
+                            }
+                
+                            reader.readAsDataURL(this.files[0]);
+                        })
+                    },
+                    preConfirm: function() {
+                        return new Promise(function(resolve, reject) {
+                            let eventId = $("#eventId").val();
+                            let dateStart = $("#dateStart").val();
+                            let dateEnd = $("#dateEnd").val();
+                            let eventName = $("#eventName").val();
+                            let eventDesc = $("#eventDesc").val();
+                            let eventImg = $("#eventImg").val();
+                            let active = $("#active").val();
+                
+                            if (eventName == ""){
+                                Swal.showValidationMessage(
+                                    `Please enter the event name!`
+                                )
+
+                                resolve();
+                
+                                return false;
+                            }
+                
+                            if (eventDesc == ""){
+                                Swal.showValidationMessage(
+                                    `Please enter the event description!`
+                                )
+                
+                                resolve();
+
+                                return false;
+                            }
+                
+                            if (eventImg == ""){
+                                Swal.showValidationMessage(
+                                    `Please select an event image!`
+                                )
+                
+                                resolve();
+
+                                return false;
+                            }
+                
+                            let img = $("#eventImg")[0].files[0];
+                
+                            let formData = new FormData();
+                            formData.append("action", 13);
+                            formData.append("userId", userId);
+                            formData.append("eventId", eventId);
+                            formData.append("eventName", eventName);
+                            formData.append("eventDesc", eventDesc);
+                            formData.append("eventImg", img);
+                            formData.append("dateStart", dateStart);
+                            formData.append("dateEnd", dateEnd);
+                            formData.append("active", active);
+                                
+                            $.ajax({
+                                url: "controller/basicSetup.php",
+                                type: "POST",
+                                processData: false,
+                                contentType: false,
+                                type: "POST",
+                                data: formData,
+                                success: function(data) {
+                                    if (data == "success") {
+                                        resolve();
+                                    } else {
+                                        Swal.showValidationMessage(
+                                            `Something went wrong! Error: ${data}`
+                                        )
+
+                                        resolve();
+
+                                        return false;
+                                    }
+                                }
+                            })
+                        });
+                    }
+                }).then(function(result){
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: `Event successfully updated!`,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        let eventId = $("#eventId").val();
+                                
+                        $.ajax({
+                            url: "controller/basicSetup.php",
+                            type: "POST",
+                            data: {
+                                "action"    : 14,
+                                "eventId"   : eventId
+                            },
+                            beforeSend: function(){
+                                showBeforeSend("Deleting Event...");
+                            },
+                            success: function(data) {
+                                hideBeforeSend();
+                                if (data == "success") {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Success!",
+                                        text: `Event successfully deleted!`,
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: `Something went wrong! Error: ${data}`,
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                    })
+                                }
+                            }
+                        })
+                    }
+                })
+            }).catch(function(error) {
+                console.error(error);
+            });
+        }
+    });
+
+    function getEventDetails(date) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: "controller/basicSetup.php",
+                type: "POST",
+                data: {
+                    "action": 11,
+                    "date": date,
+                    "type": 1
+                },
+                success: function(data) {
+                    resolve(data);
+                },
+                error: function(xhr, status, error) {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    function IsDateHasEvent(calendar, date) {
+        let desc = "";
+        let eventStart = eventEnd = eventStartToDate = eventEndToDate = "";
+        let events = calendar.getEvents();
+
+        // console.log(events);
+        
+        for (let i = 0; i < events.length; i++) {
+            eventStart = events[i]._instance.range.start;
+            eventEnd = events[i]._instance.range.end;
+
+            eventStartToDate = new Date(eventStart);
+            eventEndToDate = new Date(eventEnd);
+
+            if (date >= eventStartToDate.toISOString().slice(0, 10) && date <= eventEndToDate.toISOString().slice(0, 10)){
+                desc = events[i]._def.extendedProps.desc;
+                break;
+            }   
+        }
+
+        return (desc == "") ? false : true;
+    }
+
+    calendar.render();
+
+    calendar.on('select', function(info) {
+
+        let checkEvent = IsDateHasEvent(calendar, info.startStr);
+
+        // console.log(checkEvent);
+
+        if (checkEvent){
+            return false;
+        }
+
+        let dateStart = info.startStr;
+        let dateEnd = (info.endStr == null) ? info.startStr : info.endStr;
+
+        Swal.fire({
+            title: 'Add Event',
+            html: `<input type="text" id="eventName" class="form-control mb-2" placeholder="Event Name">
+                <input type="text" id="eventDesc" class="form-control mb-2" placeholder="Event Description">
+                <select class="form-select mb-2" id="active">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <input type="file" id="eventImg" class="form-control" accept="image/*">
+                <div class="text-center mt-2">
+                    <img src="" id="eventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
+                </div>
+                <input type="hidden" id="dateStart" class="form-control" value="${dateStart}">
+                <input type="hidden" id="dateEnd" class="form-control" value="${dateEnd}">`,
+            confirmButtonText: 'Add',
+            focusConfirm: false,
+            didOpen: function(){
+                $("#eventImg").on("change", function(){
+                    let reader = new FileReader();
+                    reader.onload = function(e){
+                        $("#eventImgPreview").attr("src", e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                })
+            },
+            preConfirm: () => {
+                let eventName = $("#eventName").val();
+                let eventDesc = $("#eventDesc").val();
+                let eventImg = $("#eventImg").val();
+                let active = $("#active").val();
+
+                if (eventName == ""){
+                    Swal.showValidationMessage(
+                        `Please enter the event name!`
+                    )
+
+                    return false;
+                }
+
+                if (eventDesc == ""){
+                    Swal.showValidationMessage(
+                        `Please enter the event description!`
+                    )
+
+                    return false;
+                }
+
+                if (eventImg == ""){
+                    Swal.showValidationMessage(
+                        `Please select an event image!`
+                    )
+
+                    return false;
+                }
+
+                let img = $("#eventImg")[0].files[0];
+
+                let formData = new FormData();
+                formData.append("action", 12);
+                formData.append("userId", userId);
+                formData.append("eventName", eventName);
+                formData.append("eventDesc", eventDesc);
+                formData.append("eventImg", img);
+                formData.append("dateStart", dateStart);
+                formData.append("dateEnd", dateEnd);
+                formData.append("active", active);
+
+                $.ajax({
+                    url: "controller/basicSetup.php",
+                    processData: false,
+                    contentType: false,
+                    type: "POST",
+                    data: formData,
+                    beforeSend: function(){
+                        showBeforeSend("Adding Event...");
+                    },
+                    success: function(data) {
+                        hideBeforeSend();
+                        if (data == "success") {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success!",
+                                text: `Event successfully added!`,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: `Something went wrong! Error: ${data}`,
+                            })
+                        }
+                    }
+                })
+            },
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+        })
+    });
+  });
+

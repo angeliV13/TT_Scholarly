@@ -330,5 +330,41 @@ if (isset($_REQUEST['action']))
 
             echo updateRequest($data);
             break;
+        case 11: // Fetch Events
+            $date = isset($_POST['date']) ? $_POST['date'] : '';
+            $type = isset($_POST['type']) ? $_POST['type'] : 0;
+
+            echo fetchEvents($date, $type);
+            break;
+        case 12: // Add Events
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'eventName'     => isset($_POST['eventName']) ? $_POST['eventName'] : '',
+                'eventDesc'     => isset($_POST['eventDesc']) ? $_POST['eventDesc'] : '',
+                'eventImg'      => isset($_FILES['eventImg']) ? $_FILES['eventImg'] : '',
+                'dateStart'     => isset($_POST['dateStart']) ? $_POST['dateStart'] : '',
+                'dateEnd'       => isset($_POST['dateEnd']) ? $_POST['dateEnd'] : '',
+                'active'        => isset($_POST['active']) ? $_POST['active'] : '',
+            ];
+
+            echo addEvents($data);
+            break;
+        case 13: // Update Events
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'eventId'       => isset($_POST['eventId']) ? $_POST['eventId'] : '',
+                'eventName'     => isset($_POST['eventName']) ? $_POST['eventName'] : '',
+                'eventDesc'     => isset($_POST['eventDesc']) ? $_POST['eventDesc'] : '',
+                'eventImg'      => isset($_FILES['eventImg']) ? $_FILES['eventImg'] : '',
+                'dateStart'     => isset($_POST['dateStart']) ? $_POST['dateStart'] : '',
+                'dateEnd'       => isset($_POST['dateEnd']) ? $_POST['dateEnd'] : '',
+                'active'        => isset($_POST['active']) ? $_POST['active'] : '',
+            ];
+
+            echo updateEvents($data);
+            break;
+        case 14: // Delete Events
+            echo deleteEvents(isset($_POST['eventId']) ? $_POST['eventId'] : '');
+            break;
     }
 }
