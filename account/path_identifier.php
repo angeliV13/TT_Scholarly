@@ -217,8 +217,6 @@ function get_path($lv_path, $type = '99')
         } elseif ($type == 2)     //Beneficiaries        
         {
                 switch ($lv_path) {
-
-
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
 
@@ -232,7 +230,6 @@ function get_path($lv_path, $type = '99')
 
                         case 'renewal-bene':
                                 return 'views/beneficiaries/renewal_bene.php';
-
 
                         case 'app-profile':
                                 return 'views/applicants/profile_bene.php';
@@ -248,7 +245,6 @@ function get_path($lv_path, $type = '99')
         } elseif ($type == 3)     //Applicant
         {
                 switch ($lv_path) {
-
 
                         case 'dashboard':
                                 return 'views/applicants/dashboard.php';
