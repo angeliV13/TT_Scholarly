@@ -48,19 +48,6 @@ function userLogin($user_name, $password, $type)
             if (!$checkPw) return 'Incorrect Password!';
         }
 
-        $sql = "SELECT scholarType FROM scholarship_application WHERE userId = '" . $id . "'";
-        $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
-
-        $scholarApp = "";
-
-        if ($query->num_rows > 0) 
-        {
-            $row = $query->fetch_assoc();
-            extract($row);
-
-            $scholarApp = $scholarType;
-        }
-
         session_start();
 
         $_SESSION['id'] = $id;
@@ -68,7 +55,24 @@ function userLogin($user_name, $password, $type)
         $_SESSION['access_level'] = $access_level;
         $_SESSION['account_type'] = $account_type;
         $_SESSION['name'] = getUserNameFromId($id);
-        $_SESSION['scholarType'] = $scholarApp;
+
+        if ($account_type > 1)
+        {
+            $sql = "SELECT scholarType FROM scholarship_application WHERE userId = '" . $id . "'";
+            $query = $conn->query($sql) or die("Error LQ002: " . $conn->error);
+
+            $scholarApp = "";
+
+            if ($query->num_rows > 0) 
+            {
+                $row = $query->fetch_assoc();
+                extract($row);
+
+                $scholarApp = $scholarType;
+
+                $_SESSION['scholarType'] = $scholarApp;
+            }
+        }
 
         return 'Success';
         

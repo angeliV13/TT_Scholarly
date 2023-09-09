@@ -63,7 +63,7 @@
                             </div>
                             <div class="row d-flex align-items-center mb-2">
                                 <label for="accountMiddleName" class="form-label col-4">Middle Name</label>
-                                <input type="text" class="form-control col" id="accountMiddleName" aria-describedby="accountMiddleName" name="accountMiddleName" required>
+                                <input type="text" class="form-control col" id="accountMiddleName" aria-describedby="accountMiddleName" name="accountMiddleName">
                             </div>
                             <div class="row d-flex align-items-center mb-2">
                                 <label for="accountLastName" class="form-label col-4">Last Name</label>
