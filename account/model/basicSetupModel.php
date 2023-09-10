@@ -1335,7 +1335,10 @@ function deleteEvents($id)
     $exists = check_exist_multiple(['table' => 'website_coa', 'column' => ['id' => ['=', $id]]], 1);
     $oldImg = $exists[0]['image'];
 
-    if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+    if ($oldImg != "")
+    {
+        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+    }
 
     $sql = "DELETE FROM website_coa WHERE id = '$id'";
     $query = $conn->query($sql);

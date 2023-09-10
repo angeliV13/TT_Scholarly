@@ -892,14 +892,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: 'Edit Event',
                     html: `<input type="text" id="eeventName" class="form-control mb-2" placeholder="Event Name" value="${eventName}">
                         <input type="text" id="eeventDesc" class="form-control mb-2" placeholder="Event Description" value="${eventDesc}">
-                        <select class="form-select mb-2" id="eactive">
-                            <option value="1" ${(active == 1) ? "selected" : ""}>Active</option>
-                            <option value="0" ${(active == 0) ? "selected" : ""}>Inactive</option>
-                        </select>
                         <input type="file" id="eeventImg" class="form-control" accept="image/*">
                         <div class="text-center mt-2">
                             <img src="${eventImg}" id="eeventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
                         </div>
+                        <input type="checkbox" id="eactive" class="form-check-input" ${(active == 1) ? "checked" : ""}>
+                        <label for="eactive" class="form-check-label">Event Active?</label>
                         <input type="hidden" id="eeventId" class="form-control" value="${eventId}">
                         <input type="hidden" id="edateStart" class="form-control" value="${eventStart}">
                         <input type="hidden" id="edateEnd" class="form-control" value="${eventEnd}">`,
@@ -918,15 +916,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         })
                     },
                     preConfirm: function() {
+                        let eventId = $("#eeventId").val();
+                        let dateStart = $("#edateStart").val();
+                        let dateEnd = $("#edateEnd").val();
+                        let eventName = $("#eeventName").val();
+                        let eventDesc = $("#eeventDesc").val();
+                        let eventImg = $("#eeventImg").val();
+                        let active = ($("input#eactive").is(":checked")) ? 1 : 0;
+
                         return new Promise(function(resolve, reject) {
-                            let eventId = $("#eeventId").val();
-                            let dateStart = $("#edateStart").val();
-                            let dateEnd = $("#edateEnd").val();
-                            let eventName = $("#eeventName").val();
-                            let eventDesc = $("#eeventDesc").val();
-                            let eventImg = $("#eeventImg").val();
-                            let active = $("#eactive").val();
-                
                             if (eventName == ""){
                                 Swal.showValidationMessage(
                                     `Please enter the event name!`
@@ -997,7 +995,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         });
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        let eventId = $("#eventId").val();
+                        let eventId = $("#eeventId").val();
                                 
                         $.ajax({
                             url: "controller/basicSetup.php",
@@ -1104,14 +1102,12 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Add Event',
             html: `<input type="text" id="eventName" class="form-control mb-2" placeholder="Event Name">
                 <input type="text" id="eventDesc" class="form-control mb-2" placeholder="Event Description">
-                <select class="form-select mb-2" id="active">
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-                <input type="file" id="eventImg" class="form-control" accept="image/*">
+                <input type="checkbox" id="active" class="form-check-input mb-2" checked>
                 <div class="text-center mt-2">
                     <img src="" id="eventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
                 </div>
+                <label for="active" class="form-check-label mb-2">Event Active?</label>
+                <input type="file" id="eventImg" class="form-control" accept="image/*">
                 <input type="hidden" id="dateStart" class="form-control" value="${dateStart}">
                 <input type="hidden" id="dateEnd" class="form-control" value="${dateEnd}">`,
             confirmButtonText: 'Add',
@@ -1130,7 +1126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let eventName = $("#eventName").val();
                 let eventDesc = $("#eventDesc").val();
                 let eventImg = $("#eventImg").val();
-                let active = $("#active").val();
+                let active = $("input[type='checkbox']").is(":checked") ? 1 : 0;
 
                 if (eventName == ""){
                     Swal.showValidationMessage(
