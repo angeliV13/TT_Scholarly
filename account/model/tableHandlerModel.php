@@ -899,3 +899,67 @@ function viewNotificationTable()
 
     echo json_encode($json_data);
 }
+
+function viewOfficials()
+{
+    $officials = website_officials(1);
+
+    $totalData = $totalFiltered = 0;
+
+    $link = $button = "";
+
+    if ($officials != null)
+    {
+        foreach ($officials AS $key => $ofc)
+        {
+            $socMedias = $activeText = "";
+            $id = $ofc['id'];
+            $name = $ofc['name'];
+            $img = $ofc['image'];
+            $jobTitle = $ofc['job_title'];
+            $desc = $ofc['description'];
+            $dateAdded = date("F d, Y h:i A", strtotime($ofc['date_added']));
+            $addedBy = ($ofc['added_by'] != 0) ? getUserNameFromId($ofc['added_by']) : "N/A";
+            $active = $ofc['active'];
+            $activeText = ($active == 1) ? "Active" : "Inactive";
+            $socials = get_official_socials($id);
+            $jsonSocials = json_encode($socials);
+
+            if ($socials != null)
+            {
+                $socMedias .= "<div class='d-flex justify-content-center'>";
+
+                foreach ($socials AS $soc)
+                {
+                    $socMedias .= '<a href="' . $soc['link'] . '" target="_blank" class="btn btn-sm btn-primary" style="margin-right: 5px;"><i class="' . $soc['socType'] . '"></i></a>';
+                }
+
+                $socMedias .= "</div>";
+            }
+
+            $button = '<button type="button" class="viewOfficial btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editOfficial" data-id="' . $id . '" data-name="' . $name . '" data-job="' . $jobTitle . '" data-desc="' . $desc . '" data-img="' . $img . '" data-active="' . $active . '" data-soc=\'' . json_encode($socials) . '\'>Edit</button>
+                        <button type="button" class="deleteOfficial btn btn-sm btn-danger" data-id="' . $id . '" data-name="' . $name . '">Delete</button>';
+
+            $data[] = [
+                static_count(),
+                $name,
+                $jobTitle,
+                $desc,
+                $socMedias,
+                $dateAdded,
+                $addedBy,
+                $activeText,
+                $button,
+            ];
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data ?? []
+    );
+
+    echo json_encode($json_data);
+}

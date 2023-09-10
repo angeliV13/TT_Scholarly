@@ -12,7 +12,7 @@ include('model/functionModel.php');
 include('global_variables.php');
 include('controller/njs_get_user_data.php');
 
-$title = get_title();
+$title = $website_info['header'];
 
 $nav = isset($_GET['nav']) ? get_path($_GET['nav'], $user_data[3]) : get_path('dashboard', $user_data[3]); // 1st check if there is a link, if not, go to dashboard
 $checkNav = isset($_GET['nav']) ? $_GET['nav'] : (in_array($_SESSION['account_type'], ['0', '1', '2', '3']) ? 'dashboard' : '');
@@ -30,7 +30,6 @@ if (isset($_GET['notif']))
 {
     echo update_notification($_GET['notif'], $_SESSION['id']);
 }
-
 
 ?>
 

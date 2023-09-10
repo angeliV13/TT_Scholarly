@@ -942,11 +942,15 @@ function addWebsiteInfo($data)
 {
     include("dbconnection.php");
 
+    $header = $data['header'];
+    $descr = $data['descr'];
     $email = $data['email'];
     $address = $data['address'];
     $telephone = $data['telephone'];
     $opening = $data['opening'];
 
+    if (empty_validation($header)) return "Website Header Title is required.";
+    if (empty_validation($descr)) return "Description is required.";
     if (empty_validation($email)) return "Email is required.";
     if (empty_validation($address)) return "Address is required.";
     if (empty_validation($telephone)) return "Telephone is required.";
@@ -959,14 +963,14 @@ function addWebsiteInfo($data)
 
     if ($query and $query->num_rows > 0) 
     {
-        $sql = "UPDATE website_info SET email = '$email', address = '$address', telephone = '$telephone', opening_hours = '$opening'";
+        $sql = "UPDATE website_info SET email = '$email', address = '$address', telephone = '$telephone', opening_hours = '$opening', header = '$header', descr = '$descr'";
         $query = $conn->query($sql);
 
         return ($query) ? "success" : $conn->error;
     } 
     else 
     {
-        $sql = "INSERT INTO website_info (email, address, telephone, opening_hours) VALUES ('$email', '$address', '$telephone', '$opening')";
+        $sql = "INSERT INTO website_info (header, descr, email, address, telephone, opening_hours) VALUES ('$header', '$descr', '$email', '$address', '$telephone', '$opening')";
         $query = $conn->query($sql);
 
         return ($query) ? "success" : $conn->error;
@@ -1271,7 +1275,7 @@ function addEvents($data)
 
     if ($eImg == 'Invalid File Type') return 'Invalid File Type';
 
-    if ($eImg['success'] == false) return 'Error: ' . $fbImg['error'];
+    if ($eImg['success'] == false) return 'Error: ' . $eImg['error'];
 
     $img = $eImg['path'];
 
@@ -1306,7 +1310,7 @@ function updateEvents($data)
     
         if ($eImg == 'Invalid File Type') return 'Invalid File Type';
     
-        if ($eImg['success'] == false) return 'Error: ' . $fbImg['error'];
+        if ($eImg['success'] == false) return 'Error: ' . $eImg['error'];
     
         $img = $eImg['path'];
     }
@@ -1331,6 +1335,219 @@ function deleteEvents($id)
     if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
 
     $sql = "DELETE FROM website_coa WHERE id = '$id'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function addOfficials($data)
+{
+    include("dbconnection.php");
+
+    $userId = $data['userId'];
+    $officialName = $data['officialName'];
+    $jobTitle = $data['jobTitle'];
+    $officialImg = $data['officialImg'];
+    $descr = $data['descr'];
+    $active = $data['active'];
+    $socialArr = $data['socialArr'];
+
+    $img = "";
+
+    $oImg = upload_file($officialImg, 'assets/img/uploads/officialImg/', '../assets/img/uploads/officialImg/', $options = [
+        'type' => ['jpg', 'jpeg', 'png'],
+    ]);
+
+    if ($oImg == 'Invalid File Type') return 'Invalid File Type';
+
+    if ($oImg['success'] == false) return 'Error: ' . $oImg['error'];
+
+    $img = $oImg['path'];
+
+    $sql = "INSERT INTO website_officials SET name = '$officialName', job_title = '$jobTitle', img = '$img', description = '$descr', added_by = '$userId', date_added = NOW(), active = '$active'";
+    $query = $conn->query($sql);
+
+    if ($query)
+    {
+        $lastId = $conn->insert_id;
+
+        if ($socialArr != null)
+        {
+            $sql = "INSERT INTO official_socials (official_id, socialType, url) VALUES ";
+
+            foreach ($socialArr as $key => $value)
+            {
+                $socialType = 0;
+                if (strpos($value, 'facebook') !== false) $socialType = 0;
+                if (strpos($value, 'twitter') !== false) $socialType = 1;
+                if (strpos($value, 'instagram') !== false) $socialType = 2;
+                if (strpos($value, 'linkedin') !== false) $socialType = 3;
+
+                $sql .= "('$lastId', '$socialType', '$value'),";
+            }
+
+            $sql = rtrim($sql, ',');
+
+            $query = $conn->query($sql);
+
+            return ($query) ? "success" : 'Official Socials Error: ' . $conn->error;
+        }
+    }
+    else
+    {
+        return 'Official Info Error: ' . $conn->error;
+    }
+}
+
+function updateOfficial($data)
+{
+    include("dbconnection.php");
+
+    $userId = $data['userId'];
+    $id = $data['id'];
+    $officialName = $data['officialName'];
+    $jobTitle = $data['jobTitle'];
+    $descr = $data['descr'];
+    $active = $data['active'];
+    $officialImg = $data['officialImg'];
+    $socialArr = $data['socialArr'];
+
+    $exists = check_exist_multiple(['table' => 'website_officials', 'column' => ['id' => ['=', $id]]], 1);
+    $oldImg = $exists[0]['img'];
+
+    if ($officialImg != "")
+    {
+        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+
+        $oImg = upload_file($officialImg, 'assets/img/uploads/officialImg/', '../assets/img/uploads/officialImg/', $options = [
+            'type' => ['jpg', 'jpeg', 'png'],
+        ]);
+    
+        if ($oImg == 'Invalid File Type') return 'Invalid File Type';
+    
+        if ($oImg['success'] == false) return 'Error: ' . $oImg['error'];
+    
+        $img = $oImg['path'];
+    }
+    else
+    {
+        $img = $oldImg;
+    }
+
+    $sql = "UPDATE website_officials SET name = '$officialName', job_title = '$jobTitle', img = '$img', description = '$descr', added_by = '$userId', active = '$active' WHERE id = '$id'";
+    $query = $conn->query($sql);
+
+    if ($query)
+    {
+        $sql = "DELETE FROM official_socials WHERE official_id = '$id'";
+        $query = $conn->query($sql);
+
+        if ($socialArr != null)
+        {
+            $sql = "INSERT INTO official_socials (official_id, socialType, url) VALUES ";
+
+            foreach ($socialArr as $key => $value)
+            {
+                $socialType = 0;
+                if (strpos($value, 'facebook') !== false) $socialType = 0;
+                if (strpos($value, 'twitter') !== false) $socialType = 1;
+                if (strpos($value, 'instagram') !== false) $socialType = 2;
+                if (strpos($value, 'linkedin') !== false) $socialType = 3;
+
+                $sql .= "('$id', '$socialType', '$value'),";
+            }
+
+            $sql = rtrim($sql, ',');
+
+            $query = $conn->query($sql);
+
+            return ($query) ? "success" : 'Official Socials Error: ' . $conn->error;
+        }
+    }
+    else
+    {
+        return 'Official Info Error: ' . $conn->error;
+    }
+}
+
+function deleteOfficial($id)
+{
+    include("dbconnection.php");
+
+    $exists = check_exist_multiple(['table' => 'website_officials', 'column' => ['id' => ['=', $id]]], 1);
+    $oldImg = $exists[0]['img'];
+
+    if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+
+    $sql = "DELETE FROM website_officials WHERE id = '$id'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function updateOtherInfo($data)
+{
+    include("dbconnection.php");
+
+    $type = $data['type'];
+    $welcome = $data['welcome'];
+    $url = $data['url'];
+    $aboutUrl = $data['aboutUrl'];
+    $image = $data['image'];
+    $imgType = $data['imgType'];
+
+    if ($type == 1)
+    {
+        $sql = "UPDATE website_other_info SET welcome_text = '$welcome', url = '$url', about_url = '$aboutUrl'";
+    }
+    else
+    {
+        
+        if ($imgType == 1)
+        {
+            $updateText = "icon";
+            $mainPath = "assets/img/uploads/website_image/icon/";
+            $viewPath = "../assets/img/uploads/website_image/icon/";
+        }
+        else if ($imgType == 2)
+        {
+            $updateText = "cover";
+            $mainPath = "assets/img/uploads/website_image/cover/";
+            $viewPath = "../assets/img/uploads/website_image/cover/";
+        }
+        else
+        {
+            $updateText = "hero";
+            $mainPath = "assets/img/uploads/website_image/hero/";
+            $viewPath = "../assets/img/uploads/website_image/hero/";
+        }
+        
+        $exists = check_exist_multiple(['table' => 'website_other_info'], 1);
+        $oldImg = $exists[0][$updateText];
+        $sql = "UPDATE website_other_info SET ";
+
+        if ($image != "")
+        {
+            if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+
+            $oImg = upload_file($image, $mainPath, $viewPath, $options = [
+                'type' => ['jpg', 'jpeg', 'png'],
+            ]);
+        
+            if ($oImg == 'Invalid File Type') return 'Invalid File Type';
+        
+            if ($oImg['success'] == false) return 'Error: ' . $oImg['error'];
+        
+            $img = $oImg['path'];
+        }
+        else
+        {
+            $img = $oldImg;
+        }
+
+        $sql .= "$updateText = '$img'";
+    }
+
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;

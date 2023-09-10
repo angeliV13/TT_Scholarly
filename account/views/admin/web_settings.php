@@ -20,12 +20,16 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Website Information</h5>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#preview" class="btn btn-sm btn-danger shadow-sm" id="previewModal">
+                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Preview Website</button>
                             </div>
 
                             <!-- Table with stripped rows -->
                             <table id="setWebsiteInfo" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class="small text-center">
+                                        <th class="text-center">Website Header Title</th>
+                                        <th class="text-center">Website Short Description</th>
                                         <th class="text-center">Address</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Telephone</th>
@@ -34,11 +38,130 @@
                                 </thead>
                                 <tbody class="small text-center">
                                     <tr>
+                                        <td contenteditable="true"><?= $website_info['header'] ?></td>
+                                        <td contenteditable="true"><?= $website_info['descr'] ?></td>
                                         <td contenteditable="true"><?= $website_info['address'] ?></td>
                                         <td contenteditable="true"><?= $website_info['email'] ?></td>
                                         <td contenteditable="true"><?= $website_info['telephone'] ?></td>
                                         <td contenteditable="true"><?= $website_info['opening_hours'] ?></td>
                                     </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
+                            <!-- Table with stripped rows -->
+                            <table id="setOtherInfo" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class="small text-center">
+                                        <th class="text-center">Website Welcome Text</th>
+                                        <th class="text-center">Website Header URL</th>
+                                        <th class="text-center">Website About Us</th>
+                                        <th class="text-center">Website Icon</th>
+                                        <th class="text-center">Website Header Cover Photo</th>
+                                        <th class="text-center">Website Hero Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small text-center">
+                                    <tr>
+                                        <td contenteditable="true"><?= $website_other['welcome_text'] ?></td>
+                                        <td contenteditable="true"><?= $website_other['url'] ?></td>
+                                        <td contenteditable="true"><?= $website_other['about_url'] ?></td>
+                                        <td>
+                                            <div class="profile-pic" style="width: auto;">
+                                                <label class="-label" for="icon">
+                                                    <span class="glyphicon glyphicon-camera"></span>
+                                                    <span>Change Image</span>
+                                                </label>
+                                                <input id="icon" type="file" onchange="loadFile(event, 1, 'ioutput')" />
+                                                <img id="ioutput" src="<?= $website_other['icon'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $website_other['icon'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="profile-pic" style="width: auto;">
+                                                <label class="-label" for="cover">
+                                                    <span class="glyphicon glyphicon-camera"></span>
+                                                    <span>Change Image</span>
+                                                </label>
+                                                <input id="cover" type="file" onchange="loadFile(event, 2, 'foutput')" />
+                                                <img id="foutput" src="<?= $website_other['cover'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $website_other['cover'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="profile-pic" style="width: auto;">
+                                                <label class="-label" for="hero">
+                                                    <span class="glyphicon glyphicon-camera"></span>
+                                                    <span>Change Image</span>
+                                                </label>
+                                                <input id="hero" type="file" onchange="loadFile(event, 3, 'houtput')" />
+                                                <img id="houtput" src="<?= $website_other['hero'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $website_other['hero'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Socials -->
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">Website Social Information</h5>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#add_socials" class=" btn btn-sm btn-danger shadow-sm">
+                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Social Information</a>
+                            </div>
+
+                            <!-- Table with stripped rows -->
+                            <table id="setWebsiteSocials" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class="small text-center">
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Social Type</th>
+                                        <th class="text-center">Link</th>
+                                        <th class="text-center">Added By</th>
+                                        <th class="text-center">Date Added</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small text-center">
+
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Administrators -->
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">YDO Officials</h5>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#add_officials" class=" btn btn-sm btn-danger shadow-sm">
+                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Officials</a>
+                            </div>
+
+                            <!-- Table with stripped rows -->
+                            <table id="setWebsiteOfficials" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class=" small text-center">
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Job Title</th>
+                                        <th class="text-center">Description</th>
+                                        <th class="text-center">Official Socials</th>
+                                        <th class="text-center">Date Added</th>
+                                        <th class="text-center">Added By</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small text-center">
+
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
@@ -58,40 +181,28 @@
                     </div>
                 </div>
 
-                <!-- Website Socials -->
-                <div class="card">
-                    <div class="card-body ">
-                        <div class="table-responsive">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Website Social Information</h5>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#add_socials" class=" btn btn-sm btn-danger shadow-sm">
-                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Social Information</a>
-                            </div>
-
-                            <!-- Table with stripped rows -->
-                            <table id="setWebsiteSocials" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
-                                <thead>
-                                    <tr class=" small text-center">
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">Social Type</th>
-                                        <th class="text-center">Link</th>
-                                        <th class="text-center">Added By</th>
-                                        <th class="text-center">Date Added</th>
-                                        <th class="text-center">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="small text-center">
-
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
     </section>
+
+    <!-- Preview -->
+    <div class="modal modal-xl fade" id="preview" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Website</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Notif Modal -->
     <div class="modal fade" id="add_socials" tabindex="-1">
@@ -150,5 +261,153 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Add Official Modal -->
+    <div class="modal modal-lg fade" id="add_officials" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Officials</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="officialName" class="form-label col-6">Name of Official</label>
+                            <input type="text" class="form-control col" id="officialName" aria-describedby="officialName" name="Official Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="jobTitle" class="form-label col-6">Job Title</label>
+                            <input type="text" class="form-control col" id="jobTitle" aria-describedby="jobTitle" name="Official Job Title">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="descr" class="form-label col-6">Description/Quote</label>
+                            <textarea name="Official Description" class="form-control" id="descr" cols="10" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="officialImg" class="form-label col-6">Profile Image</label>
+                            <input type="file" class="form-control col" id="officialImg" accept="image/*" name="Official Profile Image">
+                        </div>
+                        <div class="form-group col-md-12 my-3">
+                            <img src="" id="officialImgShow" class="img-fluid w-50" alt="Official Image">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="fbLink" class="form-label col-6">Facebook URL</label>
+                            <input type="text" class="form-control col" id="fbLink" aria-describedby="fbLink" name="Facebook URL">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="igLink" class="form-label col-6">Instagram URL</label>
+                            <input type="text" class="form-control col" id="igLink" aria-describedby="igLink" name="Instragram URL">
+                        </div>
+                        
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="twtLink" class="form-label col-6">Twitter URL</label>
+                            <input type="text" class="form-control col" id="twtLink" aria-describedby="twtLink" name="Twitter URL">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="linkUrl" class="form-label col-6">Linkedin URL</label>
+                            <input type="text" class="form-control col" id="linkUrl" aria-describedby="linkUrl" name="Linkedin URL">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="active" class="form-label col-6">Active Status</label>
+                            <select name="Active" id="active" class="form-select">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="addOfficials">Add Official</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Official Modal -->
+    <div class="modal modal-lg fade" id="editOfficial" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Official</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="officialId">
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="eofficialName" class="form-label col-6">Name of Official</label>
+                            <input type="text" class="form-control col" id="eofficialName" aria-describedby="officialName" name="Official Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ejobTitle" class="form-label col-6">Job Title</label>
+                            <input type="text" class="form-control col" id="ejobTitle" aria-describedby="jobTitle" name="Official Job Title">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="edescr" class="form-label col-6">Description/Quote</label>
+                            <textarea name="Official Description" class="form-control" id="edescr" cols="10" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="eofficialImg" class="form-label col-6">Profile Image</label>
+                            <input type="file" class="form-control col" id="eofficialImg" accept="image/*" name="Official Profile Image">
+                        </div>
+                        <div class="form-group col-md-12 my-4">
+                            <img src="" id="eofficialImgShow" class="img-fluid w-50" alt="Official Image">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="efbLink" class="form-label col-6">Facebook URL</label>
+                            <input type="text" class="form-control col" id="efbLink" aria-describedby="fbLink" name="Facebook URL">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="eigLink" class="form-label col-6">Instagram URL</label>
+                            <input type="text" class="form-control col" id="eigLink" aria-describedby="igLink" name="Instragram URL">
+                        </div>
+                        
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="etwtLink" class="form-label col-6">Twitter URL</label>
+                            <input type="text" class="form-control col" id="etwtLink" aria-describedby="twtLink" name="Twitter URL">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="elinkUrl" class="form-label col-6">Linkedin URL</label>
+                            <input type="text" class="form-control col" id="elinkUrl" aria-describedby="linkUrl" name="Linkedin URL">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="eactive" class="form-label col-6">Active Status</label>
+                            <select name="Active" id="eactive" class="form-select">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="updateOfficial" class="btn btn-warning">Update Official</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main><!-- End #main -->

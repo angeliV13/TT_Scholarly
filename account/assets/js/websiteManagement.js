@@ -213,9 +213,12 @@ $("#updateSoc").on("click", function(e){
 $("#setWebsiteInfo").on("keydown", "td", function(e){
     if (e.which == 13){
         e.preventDefault();
-        var tdDataArr = [];
+        let tdDataArr = [];
+
+        let id = $(this).closest("table").attr("id"); 
 
         for (instance of document.querySelectorAll("[contenteditable=true]")){
+            if (instance.closest("table").id != id) continue;
             instance.setAttribute("data-text", instance.innerText);
 
             if (instance.innerText != ""){
@@ -223,17 +226,19 @@ $("#setWebsiteInfo").on("keydown", "td", function(e){
             }
         }
 
-        if (tdDataArr.length == 4){
+        if (tdDataArr.length == 6){
             $.ajax({
                 url: "controller/basicSetup.php",
                 type: "POST",
                 data: {
                     "action"        : 8.3,
                     "userId"        : userId,
-                    "address"       : tdDataArr[0],
-                    "email"         : tdDataArr[1],
-                    "telephone"     : tdDataArr[2],
-                    "opening"       : tdDataArr[3]
+                    "header"        : tdDataArr[0],
+                    "descr"         : tdDataArr[1],
+                    "address"       : tdDataArr[2],
+                    "email"         : tdDataArr[3],
+                    "telephone"     : tdDataArr[4],
+                    "opening"       : tdDataArr[5]
                 },
                 beforeSend: function(){
                     showBeforeSend("Updating Website Info...");
@@ -267,6 +272,390 @@ $("#setWebsiteInfo").on("keydown", "td", function(e){
             })
         }
     }
+})
+
+$("#setOtherInfo").on("keydown", "td", function(e){
+    if (e.which == 13){
+        e.preventDefault();
+        let tdDataArr = [];
+
+        let id = $(this).closest("table").attr("id"); 
+        
+        for (instance of document.querySelectorAll("[contenteditable=true]")){
+            if (instance.closest("table").id != id) continue;
+            instance.setAttribute("data-text", instance.innerText);
+
+            if (instance.innerText != ""){
+                tdDataArr.push(instance.innerText);
+            }
+        }
+
+        console.log(tdDataArr);
+
+        if (tdDataArr.length == 3){
+            $.ajax({
+                url: "controller/basicSetup.php",
+                type: "POST",
+                data: {
+                    "action"        : 18,
+                    "welcome"       : tdDataArr[0],
+                    "url"           : tdDataArr[1],
+                    "aboutUrl"      : tdDataArr[2]
+                },
+                beforeSend: function(){
+                    showBeforeSend("Updating Website Info...");
+                },
+                success: function(data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: `Website Info successfully updated!`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `Something went wrong! Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Please fill all the fields!`,
+            })
+        }
+    }
+})
+
+let loadFile = function (event, type, id) {
+    let image = document.getElementById(id);
+    image.src = URL.createObjectURL(event.target.files[0]);
+
+    let formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    formData.append("userId", userId);
+    formData.append("type", type);
+    formData.append("action", 19);
+
+    let text = (type == 1) ? "Logo" : "Cover";
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `${text} Successfully Updated!`,
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                })
+            }
+        },
+    });
+};
+
+$("#previewModal").on("click", function(){
+    if ($("#preview .modal-body iframe").length > 0) $("#preview .modal-body iframe").remove();
+    $("#preview .modal-body").append(`<iframe src="http://127.0.0.1/TT_Scholarly/" class="w-100" style="height: 80vh;"></iframe>`);
+})
+
+$("#officialImg").on("change", function(){
+    let reader = new FileReader();
+    reader.onload = function(e){
+        $("#officialImgShow").attr("src", e.target.result);
+    }
+
+    reader.readAsDataURL(this.files[0]);
+
+})
+
+$("#addOfficials").on("click", function(e){
+    let officialName = check_error(document.getElementById("officialName")); if (officialName == undefined) return false;
+    let jobTitle = check_error(document.getElementById("jobTitle")); if (jobTitle == undefined) return false;
+    let descr = $("#descr").val();
+    let active = $("#active").val();
+
+    let officialImg = check_error(document.getElementById("officialImg"), options = {
+        type: "file",
+        verifyFlag: 1,
+        condition: "jpg,png,jpeg",
+        text: "Official Profile Picture"
+    }); if (officialImg == undefined) return;
+
+    let fbLink = ($("#fbLink").val() == "") ? "" : check_error(document.getElementById("fbLink"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i,
+        text: "Facebook Profile URL"
+    }); if (fbLink == undefined) return;
+
+    let igLink = ($("#igLink").val() == "") ? "" : check_error(document.getElementById("igLink"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)instagram.com\/.*/i,
+        text: "Instagram Profile URL"
+    }); if (igLink == undefined) return;
+
+    let twtLink = ($("#twtLink").val() == "") ? "" : check_error(document.getElementById("twtLink"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)twitter.com\/.*/i,
+        text: "Twitter Profile URL"
+    }); if (twtLink == undefined) return;
+
+    let linkUrl = ($("#linkUrl").val() == "") ? "" : check_error(document.getElementById("linkUrl"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)linkedin.com\/.*/i,
+        text: "LinkedIn Profile URL"
+    }); if (linkUrl == undefined) return;
+
+    let socialArr = [];
+
+    if (fbLink != "") socialArr.push(fbLink);
+    if (igLink != "") socialArr.push(igLink);
+    if (twtLink != "") socialArr.push(twtLink);
+    if (linkUrl != "") socialArr.push(linkUrl);
+
+    let formData = new FormData();
+
+    let img = $("#officialImg")[0].files[0];
+
+    formData.append("action", 15);
+    formData.append("userId", userId);
+    formData.append("officialName", officialName);
+    formData.append("jobTitle", jobTitle);
+    formData.append("descr", descr);
+    formData.append("active", active);
+    formData.append("officialImg", img);
+    formData.append("socialArr", JSON.stringify(socialArr));
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        processData: false,
+        contentType: false,
+        type: "POST",
+        data: formData,
+        beforeSend: function(){
+            showBeforeSend("Adding Official...");
+        },
+        success: function(data) {
+            hideBeforeSend();
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Official successfully added!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                })
+            }
+        }
+    })
+})
+
+$(document).on("click", ".viewOfficial", function(e){
+    let id = $(this).attr("data-id");
+    let name = $(this).attr("data-name");
+    let job = $(this).attr("data-job");
+    let desc = $(this).attr("data-desc");
+    let img = $(this).attr("data-img");
+    let active = $(this).attr("data-active");
+    let soc = $(this).attr("data-soc");
+
+    $("#officialId").val(id);
+    $("#eofficialName").val(name);
+    $("#ejobTitle").val(job);
+    $("#edescr").val(desc);
+    $("#eactive").val(active);
+    $("#eofficialImgShow").attr("src", img);
+
+    try {
+        soc = JSON.parse(soc);
+        console.log(soc);
+
+        for (let i = 0; i < soc.length; i++){
+            if (soc[i]['socType'].includes("facebook")){
+                $("#efbLink").val(soc[i]['link']);
+            } else if (soc[i]['socType'].includes("instagram")){
+                $("#eigLink").val(soc[i]['link']);
+            } else if (soc[i]['socType'].includes("twitter")){
+                $("#etwtLink").val(soc[i]['link']);
+            } else if (soc[i]['socType'].includes("linkedin")){
+                $("#elinkUrl").val(soc[i]['link']);
+            }
+        }
+    } catch (error) {
+        console.error(error);
+    }
+})
+
+$(document).on("click", ".deleteOfficial", function(e){
+    let id = $(this).attr("data-id");
+    let name = $(this).attr("data-name");
+
+    Swal.fire({
+        icon: "warning",
+        title: "Are you sure?",
+        text: `You are about to delete ${name}!`,
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/basicSetup.php",
+                type: "POST",
+                data: {
+                    "action"    : 17,
+                    "id"        : id
+                },
+                beforeSend: function() {
+                    showBeforeSend("Deleting Official...");
+                },
+                success: function(data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: `Official successfully deleted!`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `Something went wrong! Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+})
+
+$("#updateOfficial").on("click", function(e){
+    let id = $("#officialId").val();
+    let officialName = check_error(document.getElementById("eofficialName")); if (officialName == undefined) return false;
+    let jobTitle = check_error(document.getElementById("ejobTitle")); if (jobTitle == undefined) return false;
+    let descr = $("#edescr").val();
+    let active = $("#eactive").val();
+
+    let officialImg = ($("#eofficialImg")[0].files[0] == undefined) ? "" : check_error(document.getElementById("eofficialImg"), options = {
+        type: "file",
+        verifyFlag: 1,
+        condition: "jpg,png,jpeg",
+        text: "Official Profile Picture"
+    }); if (officialImg == undefined) return;
+
+    let fbLink = ($("#efbLink").val() == "") ? "" : check_error(document.getElementById("efbLink"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i,
+        text: "Facebook Profile URL"
+    }); if (fbLink == undefined) return;
+
+    let igLink = ($("#eigLink").val() == "") ? "" : check_error(document.getElementById("eigLink"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)instagram.com\/.*/i,
+        text: "Instagram Profile URL"
+    }); if (igLink == undefined) return;
+
+    let twtLink = ($("#etwtLink").val() == "") ? "" : check_error(document.getElementById("etwtLink"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)twitter.com\/.*/i,
+        text: "Twitter Profile URL"
+    }); if (twtLink == undefined) return;
+
+    let linkUrl = ($("#elinkUrl").val() == "") ? "" : check_error(document.getElementById("elinkUrl"), options = {
+        type: "input",
+        verifyFlag: 1,
+        regex: /^(https?:\/\/)?((w{3}\.)?)linkedin.com\/.*/i,
+        text: "LinkedIn Profile URL"
+    }); if (linkUrl == undefined) return;
+
+    let socialArr = [];
+
+    if (fbLink != "") socialArr.push(fbLink);
+    if (igLink != "") socialArr.push(igLink);
+    if (twtLink != "") socialArr.push(twtLink);
+    if (linkUrl != "") socialArr.push(linkUrl);
+
+    let formData = new FormData();
+    let img = ($("#eofficialImg")[0].files[0] == undefined) ? "" : $("#eofficialImg")[0].files[0];
+
+    formData.append("action", 16);
+    formData.append("userId", userId);
+    formData.append("id", id);
+    formData.append("officialName", officialName);
+    formData.append("jobTitle", jobTitle);
+    formData.append("descr", descr);
+    formData.append("active", active);
+    formData.append("officialImg", img);
+    formData.append("socialArr", JSON.stringify(socialArr));
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        processData: false,
+        contentType: false,
+        type: "POST",
+        data: formData,
+        beforeSend: function(){
+            showBeforeSend("Updating Official...");
+        },
+        success: function(data) {
+            hideBeforeSend();
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Official successfully updated!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                })
+            }
+        }
+    })
 })
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -305,30 +694,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 Swal.fire({
                     title: 'Edit Event',
-                    html: `<input type="text" id="eventName" class="form-control mb-2" placeholder="Event Name" value="${eventName}">
-                        <input type="text" id="eventDesc" class="form-control mb-2" placeholder="Event Description" value="${eventDesc}">
-                        <select class="form-select mb-2" id="active">
+                    html: `<input type="text" id="eeventName" class="form-control mb-2" placeholder="Event Name" value="${eventName}">
+                        <input type="text" id="eeventDesc" class="form-control mb-2" placeholder="Event Description" value="${eventDesc}">
+                        <select class="form-select mb-2" id="eactive">
                             <option value="1" ${(active == 1) ? "selected" : ""}>Active</option>
                             <option value="0" ${(active == 0) ? "selected" : ""}>Inactive</option>
                         </select>
-                        <input type="file" id="eventImg" class="form-control" accept="image/*">
+                        <input type="file" id="eeventImg" class="form-control" accept="image/*">
                         <div class="text-center mt-2">
-                            <img src="${eventImg}" id="eventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
+                            <img src="${eventImg}" id="eeventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
                         </div>
-                        <input type="hidden" id="eventId" class="form-control" value="${eventId}">
-                        <input type="hidden" id="dateStart" class="form-control" value="${eventStart}">
-                        <input type="hidden" id="dateEnd" class="form-control" value="${eventEnd}">`,
+                        <input type="hidden" id="eeventId" class="form-control" value="${eventId}">
+                        <input type="hidden" id="edateStart" class="form-control" value="${eventStart}">
+                        <input type="hidden" id="edateEnd" class="form-control" value="${eventEnd}">`,
                     confirmButtonText: 'Update',
                     showCancelButton: true,
                     cancelButtonText: 'Delete',
                     focusConfirm: false,
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
                     didOpen: function(){
-                        $("#eventImg").on("change", function(){
+                        $("#eeventImg").on("change", function(){
                             let reader = new FileReader();
                             reader.onload = function(e){
-                                $("#eventImgPreview").attr("src", e.target.result);
+                                $("#eeventImgPreview").attr("src", e.target.result);
                             }
                 
                             reader.readAsDataURL(this.files[0]);
@@ -336,13 +723,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     preConfirm: function() {
                         return new Promise(function(resolve, reject) {
-                            let eventId = $("#eventId").val();
-                            let dateStart = $("#dateStart").val();
-                            let dateEnd = $("#dateEnd").val();
-                            let eventName = $("#eventName").val();
-                            let eventDesc = $("#eventDesc").val();
-                            let eventImg = $("#eventImg").val();
-                            let active = $("#active").val();
+                            let eventId = $("#eeventId").val();
+                            let dateStart = $("#edateStart").val();
+                            let dateEnd = $("#edateEnd").val();
+                            let eventName = $("#eeventName").val();
+                            let eventDesc = $("#eeventDesc").val();
+                            let eventImg = $("#eeventImg").val();
+                            let active = $("#eactive").val();
                 
                             if (eventName == ""){
                                 Swal.showValidationMessage(
@@ -364,7 +751,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 return false;
                             }
                 
-                            let img = ($("#eventImg")[0].files[0] == undefined) ? "" : $("#eventImg")[0].files[0];
+                            let img = ($("#eeventImg")[0].files[0] == undefined) ? "" : $("#eeventImg")[0].files[0];
                 
                             let formData = new FormData();
                             formData.append("action", 13);
@@ -620,5 +1007,5 @@ document.addEventListener('DOMContentLoaded', function() {
             cancelButtonText: 'Cancel',
         })
     });
-  });
+});
 

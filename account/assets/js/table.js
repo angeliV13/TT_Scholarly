@@ -734,6 +734,49 @@ $(document).ready(function () {
         },
         stateSave: false,
     });
+
+    let officialTable = $('#setWebsiteOfficials').DataTable({
+        "lengthChange": false,
+        "paging": false,
+        "searching": true,
+        "processing": true,
+        "ordering": false,
+        "serverSide": false,
+        "bInfo": false,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 17,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#setWebsiteOfficials').DataTable().columns().count();
+                $(".setWebsiteOfficials-error").html("");
+                $("#setWebsiteOfficials").append(`<tbody class="setWebsiteOfficials-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#setWebsiteOfficials_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: false,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
 });
 
 $(document).on("click", ".viewInfoClass", function () {

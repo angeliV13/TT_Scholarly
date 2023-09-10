@@ -9,10 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- add icon link -->
-<link rel = "icon" href = "images/logo192.png"  type = "image/x-icon">
+<link rel = "icon" href = "account/<?= $website_other['icon'] ?>"  type = "image/x-icon">
 
 
-<title>Thrive Thomasino Scholarly</title>
+<title><?= $website_info['header'] ?></title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 <!-- PWA -->
@@ -94,7 +94,7 @@
       <a href="index.php" class="logo d-flex align-items-center me-auto me-lg-3">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="images/apple-touch-icon.png" href="#hero" alt="">
-        <h1>Thrive Thomasino Scholarly<span></span></h1>
+        <h1><?= $website_info['header'] ?><span></span></h1>
       </a>
 
       <nav id="navbar" class="navbar">
@@ -118,15 +118,17 @@
     <div class="container">
       <div class="row justify-content-between gy-5 ">
         <div class="col-lg-4 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <h2 data-aos="fade-up">Welcome Thomasino!</h2>
+          <h2 data-aos="fade-up"><?= $website_other['welcome_text'] ?></h2>
           <!-- <p data-aos="fade-up" data-aos-delay="100">Thrive Thomasino Scholarly .</p> -->
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
             <a href="#book-a-table" class="btn-book-a-table">Apply Scholarship</a>
-            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <?php if ($website_other['url'] != null): ?>
+              <a href="<?= $website_other['url'] ?>" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <?php endif; ?>
           </div>
         </div>
         <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-          <img src="assets/img/white.jpg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+          <img src="account/<?= $website_other['hero'] ?>" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
         </div>
       </div>
     </div>
@@ -145,14 +147,15 @@
 
 
         <div class="row gy-4">
-          <div class="col-lg-7 position-relative about-img" style="background-image: url(assets/img/white.jpg) ;" data-aos="fade-up" data-aos-delay="150">
-          </div>
+          <!-- <div class="col-lg-7 position-relative about-img" style="background-image: url(account/<?= $website_other['cover'] ?>) ;" data-aos="fade-up" data-aos-delay="150"> -->
+          <img src="account/<?= $website_other['cover'] ?>" class="col-lg-7 position-relative about-img" data-aos="fade-up" data-aos-delay="150">
+          </img>
           <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
             <div class="content ps-0 ps-lg-5">
               <p class="fst-italic">
-                The City of Sto. Tomas Scholarship is a competitive scholarship program that provides funding for qualified students in the city of Sto. Tomas, province of Batangas.
+              <?= $website_info['descr'] ?>
               </p>
-              <ul>
+              <!-- <ul>
                 <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
                 <li><i class="bi bi-check2-all"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
                 <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
@@ -160,12 +163,14 @@
               <p>
                 Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
                 velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-              </p>
+              </p> -->
 
-              <div class="position-relative mt-4">
-                <img src="assets/img/white.jpg" class="img-fluid" alt="">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
-              </div>
+              <?php if ($website_other['about_url'] != ''): ?>
+                <div class="position-relative mt-4">
+                  <img src="assets/img/white.jpg" class="img-fluid" alt="">
+                  <a href="<?= $website_other['about_url'] ?>" class="glightbox play-btn"></a>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -431,36 +436,35 @@
           <h3><span>CALENDAR OF ACTIVITIES</span></h3>
         </div>
 
-        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+        <?php if ($coa != null) : ?>
+
+        <div class="slides swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-1.jpg)">
-              <h3>Custom Parties</h3>
-              <div class="price align-self-start">$99</div>
+            <?php foreach ($coa AS $key => $ev): ?>
+
+            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(account/<?= $ev['image'] ?>)"> 
+              <h3><?= $ev['title'] ?></h3>
+              <div class="price align-self-start"><?= $ev['date_start'] ?> to <?= $ev['date_end'] ?></div>
               <p class="description">
-                Quo corporis voluptas ea ad. Consectetur inventore sapiente ipsum voluptas eos omnis facere. Enim facilis veritatis id est rem repudiandae nulla expedita quas.
+                <?= $ev['description'] ?>
               </p>
             </div><!-- End Event item -->
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-2.jpg)">
-              <h3>Private Parties</h3>
-              <div class="price align-self-start">$289</div>
-              <p class="description">
-                In delectus sint qui et enim. Et ab repudiandae inventore quaerat doloribus. Facere nemo vero est ut dolores ea assumenda et. Delectus saepe accusamus aspernatur.
-              </p>
-            </div><!-- End Event item -->
-
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-3.jpg)">
-              <h3>Birthday Parties</h3>
-              <div class="price align-self-start">$499</div>
-              <p class="description">
-                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-              </p>
-            </div><!-- End Event item -->
+            <?php endforeach; ?>
 
           </div>
           <div class="swiper-pagination"></div>
         </div>
+
+        <?php else: ?>
+
+          <div class="text-center mt-5">
+            <h3>No Active Events for Now</h3>
+            <p>Check back later for updates!</p>
+        </div>
+
+        <?php endif; ?>
 
       </div>
     </section><!-- End CALENDAR ACTIVITIES Section -->
@@ -474,67 +478,46 @@
           <h3><span>HEAD AND ADMINISTRATORS</span></h3>
         </div>
 
+        <?php if ($ofc != null): ?>
+
         <div class="row gy-4">
+
+          <?php foreach ($ofc AS $key => $of) : ?>
+
+            <?php if ($of['active'] == 0) continue; ?>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="chef-member">
               <div class="member-img">
-                <img src="assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <img src="account/<?= $of['image'] ?>" class="img-fluid" alt="">
+                <?php if ($of['socials'] != null): ?>
+                  <div class="social">
+                    <?php foreach ($of['socials'] AS $key => $soc): ?>
+                      <a href="<?= $soc['link'] ?>"><i class="<?= $soc['socType'] ?>"></i></a>
+                    <?php endforeach; ?>
+                  </div>
+                <?php endif; ?>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Master Chef</span>
-                <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
+                <h4><?= $of['name'] ?></h4>
+                <span><?= $of['job_title'] ?></span>
+                <p><?= $of['description'] ?></p>
               </div>
             </div>
           </div><!-- End Chefs Member -->
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="chef-member">
-              <div class="member-img">
-                <img src="assets/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Patissier</span>
-                <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
-              </div>
-            </div>
-          </div><!-- End HEAD AND ADMINISTRATORS Member -->
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="chef-member">
-              <div class="member-img">
-                <img src="assets/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Cook</span>
-                <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
-              </div>
-            </div>
-          </div><!-- End Chefs Member -->
+          <?php endforeach; ?>
 
         </div>
 
+        <?php else: ?>
+
+          <div class="text-center mt-5">
+            <h3>No Active Officials for Now</h3>
+            <p>Check back later for updates!</p>
+          </div>
+
+        <?php endif; ?>
       </div>
     </section><!-- End Chefs Section -->
 
@@ -622,7 +605,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Thrive Thomasino Scholarly</span></strong>. <br> All Rights Reserved
+        &copy; Copyright <strong><span><?= $website_info['header'] ?></span></strong>. <br> All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
