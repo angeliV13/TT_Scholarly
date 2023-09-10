@@ -359,12 +359,16 @@ function getUserNameFromId($id)
     $sql = "SELECT first_name, last_name FROM user_info WHERE id = '" . $id . "'";
     $query = $conn->query($sql) or die("Error UAQ000: " . $conn->error);
 
-    while ($row = $query->fetch_assoc())
+    if ($query->num_rows > 0)
     {
-        extract($row);
-    }
+        $row = $query->fetch_assoc();
 
-    return $first_name . ' ' . $last_name;
+        return $row['first_name'] . " " . $row['last_name'];
+    }
+    else
+    {
+        return "Unknown";
+    }
 }
 
 function get_user_data($id)
