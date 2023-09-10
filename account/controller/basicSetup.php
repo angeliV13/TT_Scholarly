@@ -422,5 +422,34 @@ if (isset($_REQUEST['action']))
 
             echo updateOtherInfo($data);
             break;
+        case 20: // Add Alumni
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'alumniName'    => isset($_POST['alumniName']) ? $_POST['alumniName'] : '',
+                'alumniTitle'   => isset($_POST['alumniTitle']) ? $_POST['alumniTitle'] : '',
+                'alumniDesc'    => isset($_POST['alumniDesc']) ? $_POST['alumniDesc'] : '',
+                'alumniImage'   => isset($_FILES['alumniImage']) ? $_FILES['alumniImage'] : '',
+                'alumniActive'  => isset($_POST['alumniActive']) ? $_POST['alumniActive'] : 0,
+            ];
+            
+            echo addAlumni($data);
+            break;
+        case 21: // Update Alumni
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'id'            => isset($_POST['id']) ? $_POST['id'] : '',
+                'alumniName'    => isset($_POST['alumniName']) ? $_POST['alumniName'] : '',
+                'alumniTitle'   => isset($_POST['alumniTitle']) ? $_POST['alumniTitle'] : '',
+                'alumniDesc'    => isset($_POST['alumniDesc']) ? $_POST['alumniDesc'] : '',
+                'alumniImage'   => isset($_FILES['alumniImage']) ? $_FILES['alumniImage'] : '',
+                'alumniActive'  => isset($_POST['alumniActive']) ? $_POST['alumniActive'] : 0,
+            ];
+            
+            echo updateAlumni($data);
+            break;
+        case 22: // Delete Alumni
+            
+            echo deleteAlumni(isset($_POST['id']) ? $_POST['id'] : '');
+            break;
     }
 }

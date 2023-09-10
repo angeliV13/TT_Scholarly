@@ -658,6 +658,202 @@ $("#updateOfficial").on("click", function(e){
     })
 })
 
+$("#alumniImage").on("change", function(){
+    let reader = new FileReader();
+    reader.onload = function(e){
+        $("#alumniImgShow").attr("src", e.target.result);
+    }
+
+    reader.readAsDataURL(this.files[0]);
+
+})
+
+$("#ealumniImage").on("change", function(){
+    let reader = new FileReader();
+    reader.onload = function(e){
+        $("#ealumniImgShow").attr("src", e.target.result);
+    }
+
+    reader.readAsDataURL(this.files[0]);
+
+})
+
+$("#addAlumni").on("click", function(e){
+    e.preventDefault();
+
+    let alumniName = check_error(document.getElementById("alumniName")); if (alumniName == undefined) return false;
+    let alumniTitle = check_error(document.getElementById("alumniTitle")); if (alumniTitle == undefined) return false;
+    let alumniDesc = check_error(document.getElementById("alumniDesc")); if (alumniDesc == undefined) return false;
+    let alumniImage = ($("#alumniImage")[0].files[0] == undefined) ? "" : check_error(document.getElementById("alumniImage"), options = {
+        type: "file",
+        verifyFlag: 1,
+        condition: "jpg,png,jpeg",
+        text: "Alumni Profile Picture"
+    }); if (alumniImage == undefined) return;
+    let alumniActive = $("#alumniActive").val();
+
+    let formData = new FormData();
+    formData.append("action", 20);
+    formData.append("userId", userId);
+    formData.append("alumniName", alumniName);
+    formData.append("alumniTitle", alumniTitle);
+    formData.append("alumniDesc", alumniDesc);
+    formData.append("alumniImage", alumniImage);
+    formData.append("alumniActive", alumniActive);
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        processData: false,
+        contentType: false,
+        type: "POST",
+        data: formData,
+        beforeSend: function(){
+            showBeforeSend("Adding Alumni...");
+        },
+        success: function(data) {
+            hideBeforeSend();
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Alumni successfully added!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                })
+            }
+        }
+    })
+})
+
+$(document).on("click", ".viewTestimony", function(e){
+    let id = $(this).attr("data-id");
+    let name = $(this).attr("data-name");
+    let title = $(this).attr("data-job");
+    let desc = $(this).attr("data-desc");
+    let img = $(this).attr("data-img");
+    let active = $(this).attr("data-active");
+
+    $("#alumniId").val(id);
+    $("#ealumniName").val(name);
+    $("#ealumniTitle").val(title);
+    $("#ealumniDesc").val(desc);
+    $("#ealumniActive").val(active);
+    $("#ealumniImgShow").attr("src", img);
+})
+
+$("#updateAlumni").on("click", function(e){
+    e.preventDefault();
+
+    let id = $("#alumniId").val();
+    let alumniName = check_error(document.getElementById("ealumniName")); if (alumniName == undefined) return false;
+    let alumniTitle = check_error(document.getElementById("ealumniTitle")); if (alumniTitle == undefined) return false;
+    let alumniDesc = check_error(document.getElementById("ealumniDesc")); if (alumniDesc == undefined) return false;
+    let alumniImage = ($("#ealumniImage")[0].files[0] == undefined) ? "" : check_error(document.getElementById("ealumniImage"), options = {
+        type: "file",
+        verifyFlag: 1,
+        condition: "jpg,png,jpeg",
+        text: "Alumni Profile Picture"
+    }); if (alumniImage == undefined) return;
+    let alumniActive = $("#ealumniActive").val();
+
+    let formData = new FormData();
+    formData.append("action", 21);
+    formData.append("userId", userId);
+    formData.append("id", id);
+    formData.append("alumniName", alumniName);
+    formData.append("alumniTitle", alumniTitle);
+    formData.append("alumniDesc", alumniDesc);
+    formData.append("alumniImage", alumniImage);
+    formData.append("alumniActive", alumniActive);
+
+    $.ajax({
+        url: "controller/basicSetup.php",
+        processData: false,
+        contentType: false,
+        type: "POST",
+        data: formData,
+        beforeSend: function(){
+            showBeforeSend("Updating Alumni...");
+        },
+        success: function(data) {
+            hideBeforeSend();
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Alumni successfully updated!`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                })
+            }
+        }
+    })
+})
+
+$(document).on("click", ".deleteTestimony", function(e){
+    let id = $(this).attr("data-id");
+    let name = $(this).attr("data-name");
+
+    Swal.fire({
+        icon: "warning",
+        title: "Are you sure?",
+        text: `You are about to delete ${name}!`,
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/basicSetup.php",
+                type: "POST",
+                data: {
+                    "action"    : 22,
+                    "id"        : id
+                },
+                beforeSend: function() {
+                    showBeforeSend("Deleting Alumni...");
+                },
+                success: function(data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: `Alumni successfully deleted!`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `Something went wrong! Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+})
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {

@@ -1302,7 +1302,10 @@ function updateEvents($data)
 
     if ($eventImg != "")
     {
-        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+        if ($oldImg != "")
+        {
+            if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+        }
 
         $eImg = upload_file($eventImg, 'assets/img/uploads/events/', '../assets/img/uploads/events/', $options = [
             'type' => ['jpg', 'jpeg', 'png'],
@@ -1417,7 +1420,10 @@ function updateOfficial($data)
 
     if ($officialImg != "")
     {
-        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+        if ($oldImg != "")
+        {
+            if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+        }
 
         $oImg = upload_file($officialImg, 'assets/img/uploads/officialImg/', '../assets/img/uploads/officialImg/', $options = [
             'type' => ['jpg', 'jpeg', 'png'],
@@ -1477,7 +1483,10 @@ function deleteOfficial($id)
     $exists = check_exist_multiple(['table' => 'website_officials', 'column' => ['id' => ['=', $id]]], 1);
     $oldImg = $exists[0]['img'];
 
-    if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+    if ($oldImg != "")
+    {
+        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+    }
 
     $sql = "DELETE FROM website_officials WHERE id = '$id'";
     $query = $conn->query($sql);
@@ -1528,7 +1537,10 @@ function updateOtherInfo($data)
 
         if ($image != "")
         {
-            if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+            if ($oldImg != "")
+            {
+                if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+            }
 
             $oImg = upload_file($image, $mainPath, $viewPath, $options = [
                 'type' => ['jpg', 'jpeg', 'png'],
@@ -1548,6 +1560,96 @@ function updateOtherInfo($data)
         $sql .= "$updateText = '$img'";
     }
 
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function addAlumni($data)
+{
+    include("dbconnection.php");
+
+    $userId = $data['userId'];
+    $alumniName = $data['alumniName'];
+    $alumniTitle = $data['alumniTitle'];
+    $alumniDesc = $data['alumniDesc'];
+    $alumniImage = $data['alumniImage'];
+    $alumniActive = $data['alumniActive'];
+
+    $img = "";
+
+    $aImg = upload_file($alumniImage, 'assets/img/uploads/website_image/testimonials/', '../assets/img/uploads/website_image/testimonials/', $options = [
+        'type' => ['jpg', 'jpeg', 'png'],
+    ]);
+
+    if ($aImg == 'Invalid File Type') return 'Invalid File Type';
+
+    if ($aImg['success'] == false) return 'Error: ' . $aImg['error'];
+
+    $img = $aImg['path'];
+
+    $sql = "INSERT INTO website_testimonials (alumni_name, image, job_title, testimony, date_added, added_by, active) VALUES ('$alumniName', '$img', '$alumniTitle', '$alumniDesc', NOW(), '$userId', '$alumniActive')";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function updateAlumni($data)
+{
+    include("dbconnection.php");
+
+    $userId = $data['userId'];
+    $id = $data['id'];
+    $alumniName = $data['alumniName'];
+    $alumniTitle = $data['alumniTitle'];
+    $alumniDesc = $data['alumniDesc'];
+    $alumniImage = $data['alumniImage'];
+    $alumniActive = $data['alumniActive'];
+
+    $exists = check_exist_multiple(['table' => 'website_testimonials', 'column' => ['id' => ['=', $id]]], 1);
+    $oldImg = $exists[0]['image'];
+
+    if ($alumniImage != "")
+    {
+        if ($oldImg != "")
+        {
+            if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+        }
+
+        $aImg = upload_file($alumniImage, 'assets/img/uploads/website_image/testimonials/', '../assets/img/uploads/website_image/testimonials/', $options = [
+            'type' => ['jpg', 'jpeg', 'png'],
+        ]);
+    
+        if ($aImg == 'Invalid File Type') return 'Invalid File Type';
+    
+        if ($aImg['success'] == false) return 'Error: ' . $aImg['error'];
+    
+        $img = $aImg['path'];
+    }
+    else
+    {
+        $img = $oldImg;
+    }
+
+    $sql = "UPDATE website_testimonials SET alumni_name = '$alumniName', image = '$img', job_title = '$alumniTitle', testimony = '$alumniDesc', added_by = '$userId', active = '$alumniActive' WHERE id = '$id'";
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+}
+
+function deleteAlumni($id)
+{
+    include("dbconnection.php");
+
+    $exists = check_exist_multiple(['table' => 'website_testimonials', 'column' => ['id' => ['=', $id]]], 1);
+    $oldImg = $exists[0]['image'];
+
+    if ($oldImg != "")
+    {
+        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+    }
+
+    $sql = "DELETE FROM website_testimonials WHERE id = '$id'";
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;

@@ -923,7 +923,6 @@ function viewOfficials()
             $active = $ofc['active'];
             $activeText = ($active == 1) ? "Active" : "Inactive";
             $socials = get_official_socials($id);
-            $jsonSocials = json_encode($socials);
 
             if ($socials != null)
             {
@@ -946,6 +945,52 @@ function viewOfficials()
                 $jobTitle,
                 $desc,
                 $socMedias,
+                $dateAdded,
+                $addedBy,
+                $activeText,
+                $button,
+            ];
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data ?? []
+    );
+
+    echo json_encode($json_data);
+}
+
+function viewTestimony()
+{
+    $testimony = get_website_testimonials();
+
+    $totalData = $totalFiltered = 0;
+
+    if ($testimony != null)
+    {
+        foreach ($testimony AS $key => $test)
+        {
+            $id = $test['id'];
+            $name = $test['name'];
+            $img = $test['image'];
+            $desc = $test['description'];
+            $jobTitle = $test['job_title'];
+            $dateAdded = date("F d, Y h:i A", strtotime($test['date_added']));
+            $addedBy = ($test['added_by'] != 0) ? getUserNameFromId($test['added_by']) : "N/A";
+            $active = $test['active'];
+            $activeText = ($active == 1) ? "Active" : "Inactive";
+
+            $button = '<button type="button" class="viewTestimony btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editTestimony" data-id="' . $id . '" data-name="' . $name . '" data-desc="' . $desc . '" data-img="' . $img . '" data-active="' . $active . '" data-job="' . $jobTitle . '">Edit</button>
+                        <button type="button" class="deleteTestimony btn btn-sm btn-danger" data-id="' . $id . '" data-name="' . $name . '">Delete</button>';
+
+            $data[] = [
+                static_count(),
+                $name,
+                $jobTitle,
+                $desc,
                 $dateAdded,
                 $addedBy,
                 $activeText,

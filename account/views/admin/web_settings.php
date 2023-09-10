@@ -169,6 +169,39 @@
                     </div>
                 </div>
 
+                <!-- Website Alumni -->
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">YDO Alumni</h5>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#add_alumni" class=" btn btn-sm btn-danger shadow-sm">
+                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Alumni</a>
+                            </div>
+
+                            <!-- Table with stripped rows -->
+                            <table id="setWebsiteAlumni" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class=" small text-center">
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Alumni Name</th>
+                                        <th class="text-center">Job Title</th>
+                                        <th class="text-center">Testimony Message</th>
+                                        <th class="text-center">Date Added</th>
+                                        <th class="text-center">Added By</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small text-center">
+
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Calendar of Activities -->
                 <div class="card">
                     <div class="card-body ">
@@ -404,6 +437,111 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="updateOfficial" class="btn btn-warning">Update Official</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Alumni Modal -->
+    <div class="modal modal-lg fade" id="add_alumni" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Alumni</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="alumniName" class="form-label col-6">Name of Alumni</label>
+                            <input type="text" class="form-control col" id="alumniName" aria-describedby="alumniName" name="Alumni Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="alumniTitle" class="form-label col-6">Job Title</label>
+                            <input type="text" class="form-control col" id="alumniTitle" aria-describedby="alumniTitle" name="Alumni Job Title">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="alumniDesc" class="form-label col-6">Testimony Message</label>
+                            <textarea name="Testimony Message" class="form-control" id="alumniDesc" cols="10" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="alumniImage" class="form-label col-6">Profile Image</label>
+                            <input type="file" class="form-control col" id="alumniImage" accept="image/*" name="Alumni Profile Image">
+                        </div>
+                        <div class="form-group col-md-12 my-3">
+                            <img src="" id="alumniImgShow" class="img-fluid w-50" alt="Alumni Image">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="alumniActive" class="form-label col-6">Active Status</label>
+                            <select name="Active" id="alumniActive" class="form-select">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="addAlumni">Add Alumni</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Official Modal -->
+    <div class="modal modal-lg fade" id="editTestimony" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Alumni</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="alumniId">
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="ealumniName" class="form-label col-6">Name of Alumni</label>
+                            <input type="text" class="form-control col" id="ealumniName" aria-describedby="ealumniName" name="Alumni Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ealumniTitle" class="form-label col-6">Job Title</label>
+                            <input type="text" class="form-control col" id="ealumniTitle" aria-describedby="ealumniTitle" name="Alumni Job Title">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="ealumniDesc" class="form-label col-6">Testimony Message</label>
+                            <textarea name="Testimony Message" class="form-control" id="ealumniDesc" cols="10" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="ealumniImage" class="form-label col-6">Profile Image</label>
+                            <input type="file" class="form-control col" id="ealumniImage" accept="image/*" name="Alumni Profile Image">
+                        </div>
+                        <div class="form-group col-md-12 my-3">
+                            <img src="" id="ealumniImgShow" class="img-fluid w-50" alt="Alumni Image">
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <div class="form-group col-md-12">
+                            <label for="ealumniActive" class="form-label col-6">Active Status</label>
+                            <select name="Active" id="ealumniActive" class="form-select">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="updateAlumni" class="btn btn-warning">Update Alumni</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>

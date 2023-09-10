@@ -253,6 +253,89 @@ function get_official_socials($id)
     return $data;
 }
 
+function get_website_testimonials($showAll = 1)
+{
+    include("dbconnection.php");
+
+    $data = [];
+    $sql = "SELECT * FROM website_testimonials";
+
+    if ($showAll == 0) 
+    {
+        $sql .= " WHERE active = 1";
+    }
+
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            $data[] = [
+                'id' => $row['id'],
+                'name' => $row['alumni_name'],
+                'job_title' => $row['job_title'],
+                'description' => $row['testimony'],
+                'image' => $row['image'],
+                'date_added' => $row['date_added'],
+                'added_by' => $row['added_by'],
+                'active' => $row['active'], // 0 = inactive, 1 = active
+                'sql' => $sql
+            ];
+        }
+    }
+
+    return $data;
+}
+
+function get_scholarship_requirements($type = "NA")
+{
+    // 0 - Renewal
+    // 1 - Assessment
+    // 2 - Application
+    include("dbconnection.php");
+
+    $data = [];
+    $sql = "SELECT * FROM requirements";
+
+    if ($type != "NA") 
+    {
+        $sql .= " WHERE ";
+
+        if ($type == 0)
+        {
+            $sql .= " renewal = 1";
+        }
+        else if ($type == 1)
+        {
+            $sql .= " assessment = 1";
+        }
+        else
+        {
+            $sql .= " application = 1";
+        }
+    }
+
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data[] = [
+                'id' => $row['id'],
+                'req' => $row['requirement_name'],
+                'code' => $row['requirement_code'],
+                'renewal' => $row['renewal'],
+                'assessment' => $row['assessment'],
+                'application' => $row['application'],
+            ];
+        }
+    }
+
+    return $data;
+}
+
 function get_scholar_type($type)
 {
     switch ($type) {

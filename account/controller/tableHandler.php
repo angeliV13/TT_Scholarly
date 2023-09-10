@@ -62,4 +62,7 @@ switch ($action) {
     case 17:
         echo viewOfficials();
         break;
+    case 18:
+        echo viewTestimony();
+        break;
 }
