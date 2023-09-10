@@ -2,8 +2,10 @@
 
 // Getting the Path
 include('path_identifier.php');
+include('model/functionModel.php');
+include('global_variables.php');
 
-$title = get_title(0);
+$title = $website_info['header'];
 
 
 if (isset($_SESSION['id'])) header("Location: index.php");
@@ -30,8 +32,8 @@ include('includes/main.php')
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.php" class="logo text-center w-auto">
-                  <img class="mx-auto" src="images/logo512.png" alt="">
-                  <span class="d-none d-lg-block py-3">Thrive Thomasino Scholarly</span>
+                  <img class="mx-auto" src="<?= $website_other['icon'] ?>" alt="">
+                  <span class="d-none d-lg-block py-3"><?= $website_info['header'] ?></span>
                 </a>
               </div><!-- End Logo -->
 

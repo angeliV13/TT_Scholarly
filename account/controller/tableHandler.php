@@ -59,4 +59,10 @@ switch ($action) {
     case 16:
         echo userTables("", 4, 2);
         break;
+    case 17:
+        echo viewOfficials();
+        break;
+    case 18:
+        echo viewTestimony();
+        break;
 }

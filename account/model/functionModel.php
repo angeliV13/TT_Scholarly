@@ -67,16 +67,19 @@ function verifyHashPW($pass, $hash)
     return password_verify($pass, $hash);
 }
 
-function get_website_info()
+function get_website_info($type = 0)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM website_info";
+    $table = ($type == 0) ? "website_info" : "website_other_info";
+
+    $sql = "SELECT * FROM $table";
     $query = $conn->query($sql);
 
     $website_info = [];
 
-    if ($query->num_rows > 0) {
+    if ($query->num_rows > 0) 
+    {
         $row = $query->fetch_assoc();
 
         $website_info = $row;
@@ -141,6 +144,196 @@ function get_social_type($type)
         case 3:
             return "LinkedIn";
     }
+}
+
+function get_calendar_of_activites()
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SELECT * FROM website_coa WHERE active = 1";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            $data[] = $row;
+        }
+    }
+
+    return $data;
+}
+
+function website_officials($showAll = 0, $id = "")
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SELECT * FROM website_officials";
+
+    if ($id != "") 
+    {
+        $sql .= " WHERE id = " . $id;
+    }
+
+    if ($showAll == 0) 
+    {
+        $sql .= " WHERE active = 1";
+    }
+
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            $socials = get_official_socials($row['id']);
+
+            $data[] = [
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'job_title' => $row['job_title'],
+                'description' => $row['description'],
+                'image' => $row['img'],
+                'date_added' => $row['date_added'],
+                'added_by' => $row['added_by'],
+                'active' => $row['active'], // 0 = inactive, 1 = active
+                'socials' => $socials
+            ];
+        }
+    }
+
+    return $data;
+}
+
+function get_official_socials($id)
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    $socType = 0;
+
+    $sql = "SELECT * FROM official_socials WHERE official_id = " . $id;
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            $socialType = $row['socialType'];
+
+            if ($socialType == "0") 
+            {
+                $socType = "bi bi-facebook";
+            } 
+            else if ($socialType == "1") 
+            {
+                $socType = "bi bi-twitter";
+            } 
+            else if ($socialType == "2") 
+            {
+                $socType = "bi bi-instagram";
+            } 
+            else 
+            {
+                $socType = "bi bi-linkedin";
+            }
+
+            $data[] = [
+                'socType' => $socType,
+                'link' => $row['url']
+            ];
+        }
+    }
+
+    return $data;
+}
+
+function get_website_testimonials($showAll = 1)
+{
+    include("dbconnection.php");
+
+    $data = [];
+    $sql = "SELECT * FROM website_testimonials";
+
+    if ($showAll == 0) 
+    {
+        $sql .= " WHERE active = 1";
+    }
+
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            $data[] = [
+                'id' => $row['id'],
+                'name' => $row['alumni_name'],
+                'job_title' => $row['job_title'],
+                'description' => $row['testimony'],
+                'image' => $row['image'],
+                'date_added' => $row['date_added'],
+                'added_by' => $row['added_by'],
+                'active' => $row['active'], // 0 = inactive, 1 = active
+                'sql' => $sql
+            ];
+        }
+    }
+
+    return $data;
+}
+
+function get_scholarship_requirements($type = "NA")
+{
+    // 0 - Renewal
+    // 1 - Assessment
+    // 2 - Application
+    include("dbconnection.php");
+
+    $data = [];
+    $sql = "SELECT * FROM requirements";
+
+    if ($type != "NA") 
+    {
+        $sql .= " WHERE ";
+
+        if ($type == 0)
+        {
+            $sql .= " renewal = 1";
+        }
+        else if ($type == 1)
+        {
+            $sql .= " assessment = 1";
+        }
+        else
+        {
+            $sql .= " application = 1";
+        }
+    }
+
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        while ($row = $query->fetch_assoc())
+        {
+            $data[] = [
+                'id' => $row['id'],
+                'req' => $row['requirement_name'],
+                'code' => $row['requirement_code'],
+                'renewal' => $row['renewal'],
+                'assessment' => $row['assessment'],
+                'application' => $row['application'],
+            ];
+        }
+    }
+
+    return $data;
 }
 
 function get_scholar_type($type)
@@ -1035,22 +1228,29 @@ function update_account_status($id, $status)
 
 function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'queryPath' => '', 'errorValidation' => ['0' => 'Invalid File Type']])
 {
-    if ($file != "") {
+    if ($file != "") 
+    {
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt));
 
-        if (in_array($fileActualExt, $options['type'])) {
+        if (in_array($fileActualExt, $options['type'])) 
+        {
             $fileNewName = uniqid('', true) . "." . $fileActualExt;
             $fileDestination = $mainPath . $fileNewName;
             $fileDestinationQuery = $viewPath . $fileNewName;
-            if (move_uploaded_file($fileTmpName, $fileDestinationQuery)) {
+            if (move_uploaded_file($fileTmpName, $fileDestinationQuery)) 
+            {
                 return ['success' => true, 'path' => $fileDestination];
-            } else {
+            } 
+            else 
+            {
                 return ['success' => false, 'error' => 'Error LC001: File Upload Failed'];
             }
-        } else {
+        } 
+        else 
+        {
             return $options['errorValidation'][0];
         }
     }
@@ -1076,25 +1276,30 @@ function check_exist_multiple($data, $type = 0) // 0 - Num Rows, 1 - Data
 
     $table = $data['table'];
     $return = (!isset($data['return'])) ? "*" : $data['return'];
-    $column = $data['column'];
+    $column = isset($data['column']) ? $data['column'] : null;
 
-    $sql = "SELECT " . $return . " FROM " . $table . " WHERE ";
+    $sql = "SELECT " . $return . " FROM " . $table . "  ";
 
-    foreach ($column as $key => $value) 
+    if ($column != null)
     {
-        $sql .= $key ;
+        $sql .= "WHERE ";
 
-        foreach ($value as $key2 => $value2) 
+        foreach ($column as $key => $value) 
         {
-            $sql .= " " . $value2;
+            $sql .= $key ;
+
+            foreach ($value as $key2 => $value2) 
+            {
+                $sql .= " " . $value2;
+            }
+
+            $sql .= " AND ";
+
+            // $sql .= $key . " = '" . $value . "' AND ";
         }
 
-        $sql .= " AND ";
-
-        // $sql .= $key . " = '" . $value . "' AND ";
+        $sql = substr($sql, 0, -4);
     }
-
-    $sql = substr($sql, 0, -4);
 
     $query = $conn->query($sql);
 

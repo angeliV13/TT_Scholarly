@@ -5,16 +5,16 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title><?php echo $title == "" ? "Thrive Thomasino Scholarly" : $title ?></title>
+    <title><?= $website_info['header'] ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
     <!-- <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+    <link href="assets/img/apple-touch-icon.png" rel"apple-touch-icon"> -->
 
     <!-- add icon link -->
-    <link rel = "icon" href ="images/logo192.png" type = "image/x-icon">
+    <link rel = "icon" href ="<?= $website_other['icon'] ?>" type = "image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">

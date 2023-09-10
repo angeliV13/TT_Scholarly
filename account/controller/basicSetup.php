@@ -304,6 +304,8 @@ if (isset($_REQUEST['action']))
         case 8.3: // Add and Edit Website Information
             $data = [
                 'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'header'        => isset($_POST['header']) ? $_POST['header'] : '',
+                'descr'         => isset($_POST['descr']) ? $_POST['descr'] : '',
                 'address'       => isset($_POST['address']) ? $_POST['address'] : '',
                 'email'         => isset($_POST['email']) ? $_POST['email'] : '',
                 'telephone'     => isset($_POST['telephone']) ? $_POST['telephone'] : '',
@@ -329,6 +331,125 @@ if (isset($_REQUEST['action']))
             ];
 
             echo updateRequest($data);
+            break;
+        case 11: // Fetch Events
+            $date = isset($_POST['date']) ? $_POST['date'] : '';
+            $type = isset($_POST['type']) ? $_POST['type'] : 0;
+
+            echo fetchEvents($date, $type);
+            break;
+        case 12: // Add Events
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'eventName'     => isset($_POST['eventName']) ? $_POST['eventName'] : '',
+                'eventDesc'     => isset($_POST['eventDesc']) ? $_POST['eventDesc'] : '',
+                'eventImg'      => isset($_FILES['eventImg']) ? $_FILES['eventImg'] : '',
+                'dateStart'     => isset($_POST['dateStart']) ? $_POST['dateStart'] : '',
+                'dateEnd'       => isset($_POST['dateEnd']) ? $_POST['dateEnd'] : '',
+                'active'        => isset($_POST['active']) ? $_POST['active'] : '',
+            ];
+
+            echo addEvents($data);
+            break;
+        case 13: // Update Events
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'eventId'       => isset($_POST['eventId']) ? $_POST['eventId'] : '',
+                'eventName'     => isset($_POST['eventName']) ? $_POST['eventName'] : '',
+                'eventDesc'     => isset($_POST['eventDesc']) ? $_POST['eventDesc'] : '',
+                'eventImg'      => isset($_FILES['eventImg']) ? $_FILES['eventImg'] : '',
+                'dateStart'     => isset($_POST['dateStart']) ? $_POST['dateStart'] : '',
+                'dateEnd'       => isset($_POST['dateEnd']) ? $_POST['dateEnd'] : '',
+                'active'        => isset($_POST['active']) ? $_POST['active'] : '',
+            ];
+
+            echo updateEvents($data);
+            break;
+        case 14: // Delete Events
+            echo deleteEvents(isset($_POST['eventId']) ? $_POST['eventId'] : '');
+            break;
+        case 15: // Add Officials
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'officialName'  => isset($_POST['officialName']) ? $_POST['officialName'] : '',
+                'jobTitle'      => isset($_POST['jobTitle']) ? $_POST['jobTitle'] : '',
+                'officialImg'   => isset($_FILES['officialImg']) ? $_FILES['officialImg'] : '',
+                'descr'         => isset($_POST['descr']) ? $_POST['descr'] : '',
+                'active'        => isset($_POST['active']) ? $_POST['active'] : 0,
+                'socialArr'     => isset($_POST['socialArr']) ? json_decode($_POST['socialArr'], true) : [],
+            ];
+
+            echo addOfficials($data);
+            break;
+        case 16: // Update Officials
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'id'            => isset($_POST['id']) ? $_POST['id'] : '',
+                'officialName'  => isset($_POST['officialName']) ? $_POST['officialName'] : '',
+                'jobTitle'      => isset($_POST['jobTitle']) ? $_POST['jobTitle'] : '',
+                'descr'         => isset($_POST['descr']) ? $_POST['descr'] : '',
+                'active'        => isset($_POST['active']) ? $_POST['active'] : 0,
+                'officialImg'   => isset($_FILES['officialImg']) ? $_FILES['officialImg'] : '',
+                'socialArr'     => isset($_POST['socialArr']) ? json_decode($_POST['socialArr'], true) : [],
+            ];
+
+            echo updateOfficial($data);
+            break;
+        case 17: // Delete Officials
+            echo deleteOfficial(isset($_POST['id']) ? $_POST['id'] : '');
+            break;
+        case 18: // Update Other Info Text
+            $data = [
+                'welcome'       => isset($_POST['welcome']) ? $_POST['welcome'] : '',
+                'url'           => isset($_POST['url']) ? $_POST['url'] : '',
+                'aboutUrl'      => isset($_POST['aboutUrl']) ? $_POST['aboutUrl'] : '',
+                'image'         => isset($_FILES['image']) ? $_FILES['image'] : '',
+                'type'          => 1,
+                'imgType'       => ''
+            ];
+
+            echo updateOtherInfo($data);
+            break;
+        case 19: // Update Icons
+            $data = [
+                'welcome'       => isset($_POST['welcome']) ? $_POST['welcome'] : '',
+                'url'           => isset($_POST['url']) ? $_POST['url'] : '',
+                'aboutUrl'      => isset($_POST['aboutUrl']) ? $_POST['aboutUrl'] : '',
+                'image'         => isset($_FILES['image']) ? $_FILES['image'] : '',
+                'type'          => 2,
+                'imgType'       => isset($_POST['type']) ? $_POST['type'] : '',
+            ];
+
+            echo updateOtherInfo($data);
+            break;
+        case 20: // Add Alumni
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'alumniName'    => isset($_POST['alumniName']) ? $_POST['alumniName'] : '',
+                'alumniTitle'   => isset($_POST['alumniTitle']) ? $_POST['alumniTitle'] : '',
+                'alumniDesc'    => isset($_POST['alumniDesc']) ? $_POST['alumniDesc'] : '',
+                'alumniImage'   => isset($_FILES['alumniImage']) ? $_FILES['alumniImage'] : '',
+                'alumniActive'  => isset($_POST['alumniActive']) ? $_POST['alumniActive'] : 0,
+            ];
+            
+            echo addAlumni($data);
+            break;
+        case 21: // Update Alumni
+            $data = [
+                'userId'        => isset($_POST['userId']) ? $_POST['userId'] : '',
+                'id'            => isset($_POST['id']) ? $_POST['id'] : '',
+                'alumniName'    => isset($_POST['alumniName']) ? $_POST['alumniName'] : '',
+                'alumniTitle'   => isset($_POST['alumniTitle']) ? $_POST['alumniTitle'] : '',
+                'alumniDesc'    => isset($_POST['alumniDesc']) ? $_POST['alumniDesc'] : '',
+                'alumniImage'   => isset($_FILES['alumniImage']) ? $_FILES['alumniImage'] : '',
+                'alumniActive'  => isset($_POST['alumniActive']) ? $_POST['alumniActive'] : 0,
+            ];
+            
+            echo updateAlumni($data);
+            break;
+        case 22: // Delete Alumni
+            
+            echo deleteAlumni(isset($_POST['id']) ? $_POST['id'] : '');
             break;
     }
 }

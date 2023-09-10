@@ -39,4 +39,9 @@ if (isset($_SESSION))
 }
 
 $website_info = get_website_info();
+$website_other = get_website_info(1);
 $website_socials = get_website_socials();
+$website_testimony = get_website_testimonials(0);
+$gen_req = get_scholarship_requirements(2);
+$coa = get_calendar_of_activites();
+$ofc = website_officials();

@@ -6,17 +6,13 @@ include('path_identifier.php');
 include('model/functionModel.php');
 include('global_variables.php');
 
-$title = get_title(1);
-
+$title = $website_info['header'];
 
 include('includes/main.php');
 
-
 ?>
 
-
 <body>
-
 
   <main>
     <!-- Start of Page Title -->
@@ -25,7 +21,6 @@ include('includes/main.php');
     </div>
     <!-- End Page Title -->
     <div class="container">
-
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
@@ -36,7 +31,7 @@ include('includes/main.php');
               <div class="d-flex justify-content-center py-4">
                 <a href="index.php" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">Thrive Thomasino Scholarly</span>
+                  <span class="d-none d-lg-block"><?= $website_info['header'] ?></span>
                 </a>
               </div><!-- End Logo -->
 

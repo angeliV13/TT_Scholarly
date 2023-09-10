@@ -21,6 +21,16 @@ function userLogin($user_name, $password, $type)
         $account_type = $row['account_type'];
         $oldPw = $row['password'];
 
+        // if an admin tries to login in login.php, an error will show because admins can only login at login_admin.php
+        if ($type == 1 && $account_type > 1)
+        {
+            return 'Access Denied!';
+        }
+        else if ($type == 2 && $account_type <= 1)
+        {
+            return 'Access Denied!';
+        }
+
         if ($account_status == 0)
         {
             return 'Account not yet verified or already deactivated.';
@@ -941,16 +951,24 @@ function changePFP($data)
     $fbImg = $data['image'];
     $userId = $data['userId'];
 
-    if ($fbImg != null) {
+    $exists = check_exist_multiple(['table' => 'user_info', 'column' => ['account_id' => ['=', $data['userId']]]], 1);
+    $oldImg = $exists[0]['profile_img'];
+
+    if ($fbImg != null) 
+    {
+        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+
         $uploadImg = upload_file($fbImg, 'assets/img/uploads/fbProfile/', '../assets/img/uploads/fbProfile/', $options = [
             'type' => ['jpg', 'jpeg', 'png'],
         ]);
 
-        if ($uploadImg == 'Invalid File Type') {
+        if ($uploadImg == 'Invalid File Type') 
+        {
             return 'Invalid File Type';
         }
 
-        if ($uploadImg['success'] == false) {
+        if ($uploadImg['success'] == false) 
+        {
             return 'Error: ' . $uploadImg['error'];
         }
 
