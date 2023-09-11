@@ -65,4 +65,7 @@ switch ($action) {
     case 18:
         echo viewTestimony();
         break;
+    case 19:
+        echo graduatingTable();
+        break;
 }

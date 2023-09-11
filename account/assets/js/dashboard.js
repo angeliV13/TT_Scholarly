@@ -103,4 +103,18 @@ $(document).ready(function ($) {
       }
     },
   });
+
+  // Activities
+  $.ajax({
+    type: "POST",
+    url: "controller/dashboard.php",
+    data: {
+      action: 3,
+    },
+    success: function (data) {
+      if (data != "") {
+        $("#activity").append(data);
+      }
+    },
+  });
 });

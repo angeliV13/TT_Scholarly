@@ -394,6 +394,72 @@ $(document).ready(function () {
         // }
     });
 
+    // GRADUATES TABLE
+    let graduatingTable = $('#graduatingTable').DataTable({
+        "lengthChange": false,
+        "paging": false,
+        "searching": true,
+        "processing": true,
+        "ordering": false,
+        "serverSide": false,
+        "bInfo": false,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 19,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#graduatingTable').DataTable().columns().count();
+                $(".graduatingTable-error").html("");
+                $("#graduatingTable").append(`<tbody class="graduatingTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#graduatingTable_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: false,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+
+        // "fnInitComplete" : function(oSettings, json) {
+        //     $("#graduatingTable thead th").each( function ( i ) {
+        //         if ($(this).text() !== '') {
+        //             var isStatusColumn = (($(this).text() == 'Status') ? true : false);
+        //             var select = $('<select><option value=""></option></select>')
+        //                 .appendTo( $(this).empty() )
+        //                 .on( 'change', function () {
+        //                     var val = $(this).val();
+
+        //                     graduatingTable.column( i )
+        //                         .search( val ? '^'+$(this).val()+'$' : val, true, false )
+        //                         .draw();
+        //                 } );
+
+        //                 graduatingTable.column( i ).data().unique().sort().each( function ( d, j ) {  
+        //                 select.append( '<option value="'+d+'">'+d+'</option>' );
+        //             } );	
+
+        //         }
+        //     } );
+        // }
+    });
+
     // Benef List Table
     let benefListTable = $('#listOfBeneficiaries').DataTable({
         "lengthChange": false,

@@ -15,5 +15,9 @@ if (isset($_REQUEST['action']))
         case 2: // Chart of Scholar Trends;
             echo getChartTrends();
             break;
+
+        case 3: // Chart of Scholar Trends;
+            echo getRecentActivity();
+            break;
     }
 }

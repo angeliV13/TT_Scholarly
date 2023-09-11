@@ -43,15 +43,15 @@ function getChartTrends()
 
     if ($query->num_rows <>  0) {
         while ($row = $query->fetch_assoc()) {
-            
+
             extract($row);
             // Category
-            $categ[] = [ $ay . ' '. $short_name ];
+            $categ[] = [$ay . ' ' . $short_name];
 
             // Data
-            $shsArray[]     =   $shs ;
+            $shsArray[]     =   $shs;
             $colEAArray[]   =   $colEAPub + $colEAPriv;
-            $colScArray[]   =   $colSc ;
+            $colScArray[]   =   $colSc;
         }
         $data = [
             'categories' => $categ,
@@ -59,9 +59,67 @@ function getChartTrends()
             'colEA'      => $colEAArray,
             'colSc'      => $colScArray
         ];
-
     }
 
     return json_encode($data);
+}
 
+function getRecentActivity()
+{
+    include("dbconnection.php");
+    $user = $_SESSION['id'];
+
+    $data = "";
+    $count = 1;
+
+    $sql = "SELECT * FROM notification WHERE user_id = '{$user}' ORDER BY notif_date DESC LIMIT 6";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            extract($row);
+            $body = explode('<br>', $notif_body)[1];
+            $date = $notif_date;
+            $data .= activityButton($count, $body, $notif_link, $notif_date);
+
+            $count++;
+        }
+    }
+    return $data;
+}
+
+function activityButton($count = 0, $notif_body="", $notif_link = "", $notif_date)
+{
+    $buttonArray = ['', 'success', 'danger', 'primary', 'info', 'warning', 'muted',];
+    $start_date = new DateTime($notif_date);
+    $diff_date = $start_date->diff(new DateTime(date("Y-m-d H:i:s")));
+    $date = "";
+
+    if($diff_date->m <> 0){
+        $date = $diff_date->m . ' month/s';
+    }
+    elseif($diff_date->d <> 0){
+        $date = $diff_date->d . ' day/s';
+    }
+    elseif($diff_date->h <> 0){
+        $date = $diff_date->h . ' hour/s';
+    }
+    elseif($diff_date->i <> 0){
+        $date = $diff_date->i . ' min/s';
+    }
+    else{
+        $date = $diff_date->s . ' sec/s';
+    }
+
+    $data = '   <div class="activity-item d-flex">
+                    <div class="activite-label">'. $date .'</div>
+                    <i class="bi bi-circle-fill activity-badge text-'. $buttonArray[$count] .' align-self-start"></i>
+                    <div class="activity-content">
+                    <a href="index.php'.$notif_link.'" class="text-dark">'. $notif_body .'</a>
+                    </div>
+                </div><!-- End activity item-->';
+
+    return $data;
 }

@@ -816,7 +816,7 @@ function graduatesTable()
 
     $sql = "SELECT * FROM account acc 
             JOIN user_info inf ON acc.id = inf.account_id 
-            WHERE acc.account_type = '3' AND acc.account_status = '1'";
+            WHERE acc.account_type = '3' AND acc.account_status = '2'";
     $query = $conn->query($sql);
 
     $data = [];
@@ -842,11 +842,71 @@ function graduatesTable()
             $data[] = [
                 static_count(),
                 $last_name . ', ' . $first_name, //Name
-                1,
-                1,
-                1,
-                1,
-                1,
+                $email,                         //Email
+                (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
+                (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course,
+                'ACTIONS NOT SPECIFIED YET',
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+function graduatingTable()
+{
+    include("dbconnection.php");
+
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
+    $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
+
+    $sql = "SELECT * FROM account acc 
+            JOIN user_info inf ON acc.id = inf.account_id 
+            JOIN gen_info gen ON acc.id = user_id
+            WHERE acc.account_type = '3' 
+            AND acc.account_status = '1'
+            AND gen.graduating_flag = '1'";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            extract($row);
+
+            $education  = get_user_education($account_id, 1);
+            $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
+                            <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                            <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Applicant</button>
+                        </div>';
+            $scholarType = check_status($account_id);
+
+            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
+            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
+
+            $data[] = [
+                static_count(),
+                $last_name . ', ' . $first_name, //Name
+                $email,                         //Email
+                (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
+                (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course,
+                'ACTIONS NOT SPECIFIED YET',
             ];
 
             $totalData++;

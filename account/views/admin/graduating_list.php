@@ -1,11 +1,11 @@
 <main id="main" class="main">
   <!-- Start of Page Title -->
   <div class="pagetitle">
-    <h1>Graduated List</h1>
+    <h1>Graduating List</h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.php">Home</a></li>
       <li class="breadcrumb-item">Graduates</li>
-      <li class="breadcrumb-item active">Graduated List</li>
+      <li class="breadcrumb-item active">Graduating List</li>
     </ol>
   </div>
   <!-- End Page Title -->
@@ -15,9 +15,9 @@
         <div class="card">
           <div class="card-body ">
             <div class="table-responsive">
-              <h5 class="card-title">LIST OF GRADUATES</h5>
+              <h5 class="card-title">LIST OF GRADUATING</h5>
               <!-- Table with stripped rows -->
-              <table id="graduatesTable" class="table table-striped" width="200%" cellspacing="200%">
+              <table id="graduatingTable" class="table table-striped" width="200%" cellspacing="200%">
                 <thead>
                   <tr>
                     <th>No</th>
