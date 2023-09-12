@@ -103,6 +103,14 @@
                             <option value="0">Public</option>
                             <option value="1">Private</option>
                         </select>
+                        <div class="col">
+                            <div class="d-flex">
+                                <input class="form-check-input" type="checkbox" value="1" id="partner" name="partner">
+                                <label class="mx-2 form-check-label">
+                                    Partner School
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -167,6 +175,14 @@
                             <option value="0">Public</option>
                             <option value="1">Private</option>
                         </select>
+                        <div class="col">
+                            <div class="d-flex">
+                                <input class="form-check-input" type="checkbox" value="1" id="editpartner" name="editpartner">
+                                <label class="mx-2 form-check-label">
+                                    Partner School
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

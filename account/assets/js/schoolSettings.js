@@ -1,3 +1,12 @@
+$("#schoolClass").on("change", function(){
+    ($(this).val() == 1) ? $("#partner").attr("disabled", false) : ( $("#partner").attr("disabled", true) , $("#partner").prop("checked", false) );
+});
+
+$("#editschoolClass").on("change", function(){
+    ($(this).val() == 1) ? $("#editpartner").attr("disabled", false) : ( $("#editpartner").attr("disabled", true) , $("#editpartner").prop("checked", false) );
+});
+
+
 $("#addSchool").on("click", function(e){
     e.preventDefault();
 
@@ -21,6 +30,8 @@ $("#addSchool").on("click", function(e){
 
     let schoolClass = check_error(document.getElementById("schoolClass")); if (schoolClass == undefined) return;
 
+    let partner     = (($("#partner").is(":checked") == true) ? "1" : "0" );
+
     $.ajax({
         url: "controller/basicSetup.php",
         type: "POST",
@@ -30,7 +41,8 @@ $("#addSchool").on("click", function(e){
             "schoolName"    : schoolName,
             "schoolAddress" : schoolAddress,
             "schoolType"    : schoolType,
-            "schoolClass"   : schoolClass
+            "schoolClass"   : schoolClass,
+            "partner"       : partner,
         },
         success: function(data) {
             if (data == "success") {
@@ -118,6 +130,8 @@ $(document).on("click", ".editSchool", function(e){
     let address = $(this).attr("data-address");
     let type = $(this).attr("data-type");
     let classId = $(this).attr("data-class");
+    let partner = $(this).attr("data-partner");
+
 
     $("#schoolId").val(id);
     $("#editschoolName").val(name);
@@ -130,6 +144,7 @@ $(document).on("click", ".editSchool", function(e){
     });
 
     $("#editschoolClass").val(classId).trigger("change");
+    $("#editpartner").prop("checked", (partner == 1) ? true : false);
 })
 
 $("#updateSchool").on("click", function(e){
@@ -144,6 +159,8 @@ $("#updateSchool").on("click", function(e){
     }).get();
 
     let schoolClass = check_error(document.getElementById("editschoolClass")); if (schoolClass == undefined) return;
+
+    let partner     = (($("#editpartner").is(":checked") == true) ? "1" : "0" );
 
     if (type == "") {
         Swal.fire({
@@ -165,7 +182,8 @@ $("#updateSchool").on("click", function(e){
             "name"      : name,
             "address"   : address,
             "type"      : type,
-            "class"     : schoolClass
+            "class"     : schoolClass,
+            "partner"   : partner,
         },
         beforeSend: function() {
             showBeforeSend("Updating School...");
