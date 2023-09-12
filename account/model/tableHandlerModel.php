@@ -816,7 +816,10 @@ function graduatesTable()
 
     $sql = "SELECT * FROM account acc 
             JOIN user_info inf ON acc.id = inf.account_id 
-            WHERE acc.account_type = '3' AND acc.account_status = '2'";
+            JOIN gen_info gen ON acc.id = user_id
+            WHERE acc.account_type = '3' 
+            AND acc.account_status = '2'
+            AND gen.graduating_flag = '0'";
     $query = $conn->query($sql);
 
     $data = [];
@@ -876,7 +879,7 @@ function graduatingTable()
             JOIN gen_info gen ON acc.id = user_id
             WHERE acc.account_type = '3' 
             AND acc.account_status = '1'
-            AND gen.graduating_flag = '1'";
+            AND gen.graduating_flag = '0'";
     $query = $conn->query($sql);
 
     $data = [];

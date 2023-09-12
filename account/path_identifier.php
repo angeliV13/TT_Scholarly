@@ -9,7 +9,7 @@ function get_path($lv_path, $type = '99')
                 switch ($lv_path) {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
-                                
+
                         case 'pages-contact':
                                 return 'pages-contact.php';
 
@@ -60,7 +60,7 @@ function get_path($lv_path, $type = '99')
 
                         case 'manage_account_admin':
                                 return 'views/admin/account_admin_management.php';
-                
+
                         case 'manage_account_student':
                                 return 'views/admin/account_student_management.php';
 
@@ -84,16 +84,19 @@ function get_path($lv_path, $type = '99')
                         case 'exam_questions':
                                 return 'views/admin/exam_questions.php';
 
+                        case 'generate_report':
+                                return 'views/admin/generate_report.php';
+
 
                         case 'tts_settings':
                                 return 'views/admin/basic_settings.php';
-                        
+
                         case 'web_settings':
                                 return 'views/admin/web_settings.php';
-                        
+
                         case 'sch_settings':
                                 return 'views/admin/school_settings.php';
-                        
+
                         case 'ntf_settings':
                                 return 'views/admin/notification_settings.php';
 
@@ -166,7 +169,7 @@ function get_path($lv_path, $type = '99')
 
                         case 'manage_account_admin':
                                 return 'views/admin/account_admin_management.php';
-                
+
                         case 'manage_account_student':
                                 return 'views/admin/account_student_management.php';
 
@@ -190,16 +193,20 @@ function get_path($lv_path, $type = '99')
                         case 'exam_questions':
                                 return 'views/admin/exam_questions.php';
 
+                        case 'generate_report':
+                                return 'views/admin/generate_report.php';
+
+
 
                         case 'tts_settings':
                                 return 'views/admin/basic_settings.php';
-                        
+
                         case 'web_settings':
                                 return 'views/admin/web_settings.php';
-                        
+
                         case 'sch_settings':
                                 return 'views/admin/school_settings.php';
-                        
+
                         case 'ntf_settings':
                                 return 'views/admin/notification_settings.php';
 
