@@ -24,7 +24,7 @@
                         </div>
                         <!-- Filter options -->
                         <div class="row mb-1 justify-content-between">
-                            <form id="filterScholarType" class="column position-relative">
+                            <form id="filterScholar" class="column position-relative">
 
                                 <!-- Scholarship Type -->
                                 <div class="row mb-3">
