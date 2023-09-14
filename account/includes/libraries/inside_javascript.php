@@ -16,6 +16,7 @@ switch($_SESSION['account_type'])
         echo '<script src="assets/js/schoolSettings.js"></script>';
         echo '<script src="assets/js/websiteManagement.js"></script>';
         echo '<script src="assets/js/accountList.js"></script>';
+        echo '<script src="assets/js/filter.js"></script>';
         break;
     case 1:     //Admin
         echo '<script src="assets/js/basic_setup.js"></script>';
