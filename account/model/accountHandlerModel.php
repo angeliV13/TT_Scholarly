@@ -1203,11 +1203,11 @@ function editAccount($data)
     $session_name = $_SESSION['name'];
 
     $sql = "SELECT * FROM account WHERE id = '{$data['id']}'";
-    $query = $conn->query($sql) or die($conn->error);
+    $query_1 = $conn->query($sql) or die($conn->error);
 
     // die(var_dump($query));
-    if ($query->num_rows <> 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query_1->num_rows <> 0) {
+        while ($row = $query_1->fetch_assoc()) {
             extract($row);
 
             $emailCheck = [
@@ -1259,6 +1259,23 @@ function editAccount($data)
 
             //     return "Insert Success";
             // }
+            return "Update Success";
         }
+    }
+}
+
+function deleteAccount($data){
+
+    include("dbconnection.php");
+
+    $sql = "SELECT * FROM account WHERE id = '{$data['id']}'";
+
+    // SQL SHOULD BE CHANGED
+    // $sql = "UPDATE `account_status`= '{$data['accountStatus']}' 
+    //         WHERE id = {$data['id']}";
+    $query = $conn->query($sql) or die($conn->error);
+
+    if($query){
+        return "Delete Success";
     }
 }

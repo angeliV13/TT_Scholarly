@@ -90,8 +90,47 @@ function updateAccount(id) {
             Swal.fire({
               title: "Success!",
               icon: "success",
-              html: "Account Created Successfully",
+              html: "Account Updated Successfully",
             });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+}
+
+function deleteAccount(id, name) {
+  Swal.fire({
+    title: "Delete Account?",
+    text: "Are you sure you want to delete account for " + name + "? This cannot be undone.",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Add",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/accountHandler.php",
+        data: {
+          action: 23,
+          id: id,
+        },
+        success: function (data) {
+          if (data == "Delete Success") {
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: "Account Deleted Successfully",
+            });
+
+            location.reload();
+            
           } else {
             Swal.fire({
               title: "Error!",

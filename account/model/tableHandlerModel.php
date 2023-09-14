@@ -63,7 +63,7 @@ function accountListingTable($acc_id, $acc_type, $view_type = 1) //View Type = 1
                 if ($account_type < 2) {
                     $actions = '<div class="row d-grid">
                                     <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
-                                    <button class="btn-sm btn btn-danger">Delete Account</button>
+                                    <button class="btn-sm btn btn-danger" onclick=" deleteAccount(' . $account_id . ', \'' . getUserNameFromId($id) . '\');">Delete Account</button>
                                 </div>
                                 <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -221,7 +221,7 @@ function accountListingTable($acc_id, $acc_type, $view_type = 1) //View Type = 1
                 } else if ($account_type == 1 && $access_level == 1) {
                     $actions = '<div class="d-grid">
                                     <button class="btn-sm btn btn-secondary" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
-                                    <button class="btn-sm btn btn-danger">Delete Account</button>
+                                    <button class="btn-sm btn btn-danger" onclick=" deleteAccount(' . $account_id . ', \'' . getUserNameFromId($id) . '\');">Delete Account</button>
                                 </div>
                                 <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -351,7 +351,7 @@ function accountListingTable($acc_id, $acc_type, $view_type = 1) //View Type = 1
             if ($account_type > 1) {
                 $actions = '<div class="d-grid">
                                 <button class="btn-sm btn btn-warning" data-bs-toggle="modal" data-bs-target="#account_edit_modal_' . $account_id . '">Edit Credentials</button>
-                                <button class="btn-sm btn btn-danger">Delete</button>
+                                <button class="btn-sm btn btn-danger" onclick=" deleteAccount(' . $account_id . ', \'' . getUserNameFromId($id) . '\');">Delete Account</button>
                             </div>
                             <div class="modal fade" id="account_edit_modal_' . $account_id . '" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-scrollable">

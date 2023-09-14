@@ -252,6 +252,14 @@ if (isset($_REQUEST['action']))
 
         echo changeAdminPassword($data);
     }
+    else if ($action == 23) // Delete Account 
+    {
+        $data = [
+            'id'            => isset($_POST['id'])          ? $_POST['id'] : '',
+        ];
+
+        echo deleteAccount($data);
+    }
 }
 
 
