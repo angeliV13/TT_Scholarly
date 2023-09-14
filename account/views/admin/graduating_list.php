@@ -21,7 +21,9 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Name (LN, FN, MN)</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
                     <th>Email Address</th>
                     <th>School</th>
                     <th>Year Level</th>
@@ -32,7 +34,9 @@
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
+                    <td>Dela Cruz</td>
+                    <td>Juan</td>
+                    <td>Sanchez</td>
                     <td>brandon@gmail.com</td>
                     <td>BSU </td>
                     <td>1st Year </td>
