@@ -2,70 +2,8 @@
     <input type="hidden" id="applicationId" value="<?= isset($_GET['applicationId']) ? $_GET['applicationId'] : '' ?>">
     <section class="section">
         <div class="column">
-            <div class="col-lg-30">
-                <!-- Academic Year -->
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">List of Applicants for Assessment</h5>
-                            <div class="d-flex align-items-center">
-                                <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm">
-                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Set Filter
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row mb-4 py-2 justify-content-between">
-                            <form class="row position-relative">
-                                <!-- Filter options -->
-                                <!-- Scholarship Type -->
-                                <label for="inputScholarType" class="col-sm-2 col-form-label">
-                                    <h6 class="font-bold">Scholarship Type:</h6>
-                                </label>
-                                <div class="col-sm-4" id="">
-                                    <select class="form-select" id="inputScholarType">
-                                        <option selected disabled value="">Choose</option>
-                                        <option>Educational Assistance Program</option>
-                                        <option>Full Scholarship Program</option>
-                                    </select>
-                                </div>
-
-                                <!-- Education Level -->
-                                <label for="inputEducationLevel" class="col-sm-2 col-form-label">
-                                    <h6 class="font-bold">Education Level:</h6>
-                                </label>
-                                <div class="col-sm-4 ">
-                                    <select class="form-select" id="inputEducationLevel">
-                                        <option selected disabled value="">Choose</option>
-                                        <option>Senior High School</option>
-                                        <option>College - Private</option>
-                                        <option>College - Public</option>
-                                    </select>
-                                </div>
-
-                                <label for="inputSchool" class="col-sm-2 col-form-label mt-4">
-                                    <h6 class="font-bold">Name of School</h6>
-                                </label>
-                                <div class="col-sm-4 mt-4">
-                                    <select class="form-select" id="inputSchool" onchange="updateYearLevelOptions()">
-                                        <option selected disabled value="">Choose</option>
-                                        <option>BSU</option>
-                                        <option>FAITH</option>
-                                    </select>
-                                </div>
-
-                                <!-- Year Level -->
-                                <label for="inputYearLevel" class="mt-4 col-sm-2 col-form-label">
-                                    <h6 class="font-bold">Year Level:</h6>
-                                </label>
-                                <div  id="yearLevelContainer" class="col-sm-4 mt-4" >
-                                    <select class="form-select" id="inputYearLevel" >
-                                        <option selected disabled value="">Choose</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-12">
+                <?php include("views/admin/filter.php"); ?>
             </div>
         </div>
 
