@@ -19,7 +19,7 @@ $checkNav = isset($_GET['nav']) ? $_GET['nav'] : (in_array($_SESSION['account_ty
     
 $sidebar  = get_sidebar($user_data[3], 0);
 
-$notification = show_notification(0, 5);
+$notification = show_notification(0, 15);
 
 $notifCount = $notification['count'];
 $notifBody = $notification['body'];
