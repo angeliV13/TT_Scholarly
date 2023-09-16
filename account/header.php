@@ -25,7 +25,7 @@
         <?php echo ($notifCount > 0 AND $notifCount != null) ? '<span class="badge bg-primary badge-number">' . $notifCount . '</span>' : ''; ?> 
       </a><!-- End Notification Icon -->
 
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="max-height: 30rem; overflow-y: auto; scrollbar-width: thin;">
         <?php echo $notifBody; ?>
       </ul><!-- End Notification Dropdown Items -->
 

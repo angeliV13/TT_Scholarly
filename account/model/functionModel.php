@@ -835,7 +835,7 @@ function sms_verification($contact, $msg) // function that sends an OTP to the u
 }
 
 
-function show_notification($view = 0)
+function show_notification($view = 0, $limit = 0)
 {
     include("dbconnection.php");
 
@@ -848,6 +848,8 @@ function show_notification($view = 0)
     }
 
     $sql .= " ORDER BY id DESC";
+
+    $sql .= ($limit != 0) ? " LIMIT " . $limit : "";
 
     $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
 
