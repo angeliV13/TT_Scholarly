@@ -260,6 +260,20 @@ if (isset($_REQUEST['action']))
 
         echo deleteAccount($data);
     }
+    else if ($action == 24) // Update Admin Profile
+    {
+        $data = [
+            'userId'        => isset($_POST['userId'])      ? $_POST['userId'] : '',
+            'userName'      => isset($_POST['userName'])    ? $_POST['userName'] : '',
+            'firstName'     => isset($_POST['firstName'])   ? $_POST['firstName'] : '',
+            'middleName'    => isset($_POST['middleName'])  ? $_POST['middleName'] : '',
+            'lastName'      => isset($_POST['lastName'])    ? $_POST['lastName'] : '',
+            'telephone'     => isset($_POST['telephone'])   ? $_POST['telephone'] : '',
+            'emailAddress'  => isset($_POST['emailAddress'])? $_POST['emailAddress'] : '',
+        ];
+
+        echo updateAdminAccount($data);
+    }
 }
 
 

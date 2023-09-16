@@ -1,3 +1,5 @@
+let accId = $("#userId").val();
+
 $("#addAccount").on("submit", function (e) {
   e.preventDefault();
 
@@ -38,6 +40,8 @@ $("#addAccount").on("submit", function (e) {
               title: "Success!",
               icon: "success",
               html: "Account Created Successfully",
+            }).then((result) => {
+              location.reload();
             });
           } else {
             Swal.fire({
@@ -91,7 +95,9 @@ function updateAccount(id) {
               title: "Success!",
               icon: "success",
               html: "Account Updated Successfully",
-            });
+            }).then((result) => {
+              location.reload();
+            })
           } else {
             Swal.fire({
               title: "Error!",
@@ -127,10 +133,9 @@ function deleteAccount(id, name) {
               title: "Success!",
               icon: "success",
               html: "Account Deleted Successfully",
+            }).then((result) => {
+              location.reload();
             });
-
-            location.reload();
-            
           } else {
             Swal.fire({
               title: "Error!",
@@ -143,3 +148,63 @@ function deleteAccount(id, name) {
     }
   });
 }
+
+$("#saveAdminProfile").on("click", function(e){
+  e.preventDefault();
+  
+  let userName = check_error(document.getElementById("userName")); if (userName == undefined) return;
+  let firstName = check_error(document.getElementById("firstName")); if (firstName == undefined) return;
+  let middleName = $("#middleName").val();
+  let lastName = check_error(document.getElementById("lastName")); if (lastName == undefined) return;
+  let telephone = check_error(document.getElementById("telephone"), options = {
+      type: "number",
+      verifyFlag: 1,
+      conditionCheck: "contactNumber",
+      regex: /^\d{10}$/,
+      text: "Contact Number"
+  }); if (telephone == undefined) return;
+  let emailAddress = check_error(document.getElementById("emailAddress"), options = {
+  type: "email",
+  verifyFlag: 1,
+  regex: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+  text: "Email"
+  }); if (emailAddress == undefined) return;
+
+  $.ajax({
+      url: "controller/accountHandler.php",
+      type: "POST",
+      data: {
+          action: "24",
+          userId: accId,
+          userName: userName,
+          firstName: firstName,
+          middleName: middleName,
+          lastName: lastName,
+          telephone: telephone,
+          emailAddress: emailAddress
+      },
+      beforeSend: function(){
+          showBeforeSend("Updating Profile...");
+      },
+      success: function(data){
+          hideBeforeSend();
+          if (data == "success"){
+              Swal.fire({
+                  icon: "success",
+                  title: "Success",
+                  text: "Profile Updated Successfully."
+              }).then((result) => {
+                  if (result.isConfirmed){
+                      location.reload();
+                  }
+              })
+          } else {
+              Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: `An error occured while updating your profile. Please try again. Error: ${data}`,
+              })
+          }
+      }
+  })
+})

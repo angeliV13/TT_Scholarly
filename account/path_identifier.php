@@ -1,12 +1,12 @@
 <?php
 
-
 //Link Checker and Registration
 function get_path($lv_path, $type = '99')
 {
         if ($type == 0)         //Super Admin
         {                       //NOT FINAL
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
 
@@ -115,7 +115,8 @@ function get_path($lv_path, $type = '99')
 
         if ($type == 1)         //Admin
         {
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
                         case 'dashboard':
                                 return 'views/admin/dashboard.php';
 
@@ -221,9 +222,11 @@ function get_path($lv_path, $type = '99')
                         default:
                                 return 'error.php';
                 }
-        } elseif ($type == 2)     //Beneficiaries        
+        } 
+        elseif ($type == 2)     //Beneficiaries        
         {
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
                         case 'dashboard':
                                 return 'views/beneficiaries/dashboard.php';
 
@@ -232,7 +235,7 @@ function get_path($lv_path, $type = '99')
 
 
                         case 'profile-bene':
-                                return 'views/beneficiaries/profile_bene.php';
+                                return 'views/applicants/profile_applicant.php';
 
 
                         case 'renewal-bene':
@@ -249,17 +252,19 @@ function get_path($lv_path, $type = '99')
                         default:
                                 return 'error.php';
                 }
-        } elseif ($type == 3)     //Applicant
+        } 
+        elseif ($type == 3)     //Applicant
         {
-                switch ($lv_path) {
+                switch ($lv_path) 
+                {
 
-                        case 'dashboard':
+                        case 'dashboard_applicant':
                                 return 'views/applicants/dashboard.php';
 
-                        case 'profile-applicant':
+                        case 'profile_applicant':
                                 return 'views/applicants/profile_applicant.php';
 
-                        case 'apply-applicant':
+                        case 'apply_applicant':
                                 return 'views/applicants/applicant_genReq.php';
 
                         case 'examination':
@@ -278,15 +283,19 @@ function get_path($lv_path, $type = '99')
 
 function get_sidebar($type, $access_level = 0)
 {
-        switch ($type) {
+        switch ($type) 
+        {
                 case 0:
                         return 'views/sidebar/super_admin.php';
 
 
                 case 1:
-                        if ($access_level == 1) {
+                        if ($access_level == 1) 
+                        {
                                 return 'views/sidebar/semi_super_admin.php';
-                        } else {
+                        } 
+                        else 
+                        {
                                 return 'views/sidebar/admin.php';
                         }
                 case 2:

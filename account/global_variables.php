@@ -35,6 +35,8 @@ if (isset($_SESSION))
     $course = get_education_courses(0);
     $notificationFunc = get_notif_func(1, true, " used_flag = 0");
     $status = check_status($_SESSION['id']);
+    $defaultSem = getDefaultSemesterId();
+    $defaultAy = getDefaultAcadYearId();
     if ($status != null) $finishFlag = ($status['status'] > 0) ? true : false;
 }
 

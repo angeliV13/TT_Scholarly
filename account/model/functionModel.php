@@ -381,7 +381,8 @@ function get_user_data($id)
     $query = "SELECT * FROM account WHERE id = '" . $id . "'";
     $sql = mysqli_query($conn, $query) or die("Error UD001: " . mysqli_error($conn));
 
-    while ($row = mysqli_fetch_assoc($sql)) {
+    while ($row = mysqli_fetch_assoc($sql)) 
+    {
         extract($row);
     }
 
@@ -399,7 +400,8 @@ function get_user_info($id)
 
     $user_info = [];
 
-    if ($query->num_rows > 0) {
+    if ($query->num_rows > 0) 
+    {
         $row = $query->fetch_assoc();
 
         $user_info = $row;
@@ -412,12 +414,16 @@ function get_user_gen_info($id)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM gen_info WHERE user_id = '" . $id . "'";
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $sql = "SELECT * FROM gen_info WHERE user_id = '" . $id . "' AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "' LIMIT 1";
     $query = $conn->query($sql);
 
     $user_info = [];
 
-    if ($query->num_rows > 0) {
+    if ($query->num_rows > 0) 
+    {
         $row = $query->fetch_assoc();
 
         $user_info = $row;
@@ -430,24 +436,31 @@ function get_user_education($id, $latest = 0)
 {
     include("dbconnection.php");
 
-    $sql   = "SELECT * FROM education WHERE user_id = '" . $id . "'";
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $sql   = "SELECT * FROM education WHERE user_id = '" . $id . "' AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
     $sql  .= ($latest != 0) ? "ORDER BY education_level ASC LIMIT 1"  : '';
     $query = $conn->query($sql);
 
     $education = [];
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
-            $education[$row['educ_id']] = $row;
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            $education[$row['education_level']] = $row;
         }
-    }
 
-    $sql = "SELECT * FROM user_awards WHERE school_id IN (SELECT educ_id FROM education WHERE user_id = '" . $id . "')";
-    $query = $conn->query($sql);
+        $sql = "SELECT * FROM user_awards WHERE school_id IN (" . implode(",", array_keys($education)) . ")";
+        $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
-            $education[$row['school_id']]['awards'][] = $row;
+        if ($query->num_rows > 0) 
+        {
+            while ($row = $query->fetch_assoc()) 
+            {
+                $education[$row['school_id']]['awards'][] = $row;
+            }
         }
     }
 
@@ -458,24 +471,38 @@ function get_user_family($id)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM user_family WHERE user_id = '" . $id . "'";
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $sql = "SELECT * FROM user_family WHERE user_id = '" . $id . "' AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
     $query = $conn->query($sql);
 
     $family = [];
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $famType = $row['fam_type'];
 
-            if ($famType == 0) {
+            if ($famType == 0) 
+            {
                 $family['father'] = $row;
-            } else if ($famType == 1) {
+            } 
+            else if ($famType == 1) 
+            {
                 $family['mother'] = $row;
-            } else if ($famType == 2) {
+            } 
+            else if ($famType == 2) 
+            {
                 $family['spouse'] = $row;
-            } else if ($famType == 3) {
+            } 
+            else if ($famType == 3) 
+            {
                 $family['siblings'][] = $row;
-            } else {
+            } 
+            else 
+            {
                 $family['guardian'] = $row;
             }
         }
@@ -533,7 +560,8 @@ function get_status_text($type)
 function get_message_text_status($type, $date = "", $startTime = "", $endTime = "")
 {
     $text = $notifType = "";
-    switch ($type) {
+    switch ($type) 
+    {
         case 2:
             $text .= "<p>Your scholarship application has been reviewed. You are now scheduled for an Assesment Exam</p><br>";
             $text .= "<p>Here are the details:</p><br>";
@@ -832,6 +860,19 @@ function show_notification($view = 0)
 
 
     return ['count' => $count, 'body' => $body, 'data' => $data];
+}
+
+function insert_acad_year_data($id)
+{
+    include("dbconnection.php");
+
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $sql = "INSERT INTO acad_year_data (ay_id, sem_id, user_id) VALUES ('$acadYear', '$defaultYear', '$id')";
+    $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
+
+    return ($query) ? 'success' : $conn->error;
 }
 
 function insert_notification($data)
@@ -1138,17 +1179,32 @@ function check_status($id)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM scholarship_application WHERE userId = " . $id;
-    $query = $conn->query($sql);
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
 
     $data = [];
 
-    if ($query->num_rows > 0) 
+    do
     {
-        $row = $query->fetch_assoc();
+        $count = 0;
+        $sql = "SELECT * FROM scholarship_application WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
+        $query = $conn->query($sql);
+        
+        if ($query->num_rows > 0) 
+        {
+            $row = $query->fetch_assoc();
+    
+            $data = $row;
 
-        $data = $row;
-    }
+            $count++;
+        }
+        else
+        {
+            $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', NOW())";
+            $query = $conn->query($sql);
+        }
+
+    } while ($count == 0);
 
     return $data;
 }
@@ -1156,6 +1212,9 @@ function check_status($id)
 function update_status($type, $id)
 {
     include("dbconnection.php");
+
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
 
     $typeName = "";
     $typeUpdate = "";
@@ -1181,12 +1240,12 @@ function update_status($type, $id)
             $typeName = 'req_flag';
             break;
     }
-
-    $sql = "UPDATE scholarship_application SET " . $typeName . " = 1, current_active = '$typeUpdate' WHERE userId = " . $id;
+    
+    $sql = "UPDATE scholarship_application SET " . $typeName . " = 1, current_active = '$typeUpdate' WHERE userId = " . $id . " 
+            AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
     $query = $conn->query($sql);
 
-    return ($query) ? true : $conn->error;
-    $conn->rollback();
+    return ($query) ? true : $conn->error; $conn->rollback();
 }
 
 function updateDeleteRequest($data)
@@ -1202,7 +1261,8 @@ function updateDeleteRequest($data)
     $notif = update_notification($notifId);
     if ($notif !== 'success') return 'Error: ' . $notif;
 
-    $sql = "UPDATE delete_account_form SET modifiedBy = " . $modifiedBy . ", modifierReason = '" . $reason . "', status = " . $status . ", date_updated = NOW() WHERE id = " . $formId;
+    $sql = "UPDATE delete_account_form SET modifiedBy = " . $modifiedBy . ", modifierReason = '" . $reason . "', status = " . $status . ", date_updated = NOW() 
+            WHERE id = " . $formId;
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;
@@ -1212,7 +1272,10 @@ function update_applicant_status($id, $status)
 {
     include("dbconnection.php");
 
-    $sql = "UPDATE scholarship_application SET status = " . $status . " WHERE userId = " . $id;
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $sql = "UPDATE scholarship_application SET status = " . $status . " WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
     $query = $conn->query($sql);
 
     return ($query) ? true : $conn->error;
@@ -1366,8 +1429,10 @@ function get_table_columns($table)
     $sql = "SHOW COLUMNS FROM " . $table;
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $data[] = $row['Field'];
         }
     }
@@ -1379,6 +1444,9 @@ function updateApplication($type, $id)
 {
     include("dbconnection.php");
 
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
     $sql = "UPDATE scholarship_application SET ";
 
     if ($type == 0) // Finished
@@ -1386,7 +1454,7 @@ function updateApplication($type, $id)
         $sql .= " dateFinished = NOW(), status = '1' ";
     }
 
-    $sql .= " WHERE userId = " . $id;
+    $sql .= " WHERE userId = " . $id . " AND ay_id = " . $acadYear . " AND sem_id = " . $defaultYear;
     $query = $conn->query($sql);
 
     return ($query) ? 'success' : $conn->error;
@@ -1399,8 +1467,10 @@ function getDefaultAcadYearColumn($column)
     $sql = "SELECT {$column} FROM acad_year WHERE default_ay = 1";
     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows <>  0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             extract($row);
 
             return (${$column});
@@ -1413,7 +1483,8 @@ function getDefaultAcadYearId()
     include("dbconnection.php");
 
     $readOnly = checkReadOnlyStatus();
-    if ($readOnly <> 0) {
+    if ($readOnly <> 0) 
+    {
 
         $sql = "SELECT * FROM acad_year WHERE read_only = 1";
         $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
@@ -1450,7 +1521,8 @@ function getDefaultSemesterId()
     $sql = "SELECT * FROM semester WHERE default_sem = 1";
     $query = $conn->query($sql) or die("Error BSQ0015: " . $conn->error);
 
-    if ($query->num_rows <>  0) {
+    if ($query->num_rows <>  0) 
+    {
         while ($row = $query->fetch_assoc()) 
         {
             extract($row);
@@ -1481,9 +1553,12 @@ function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0)
     $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ORDER BY id ASC";
     $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
 
-    if ($fetch == 0) {
+    if ($fetch == 0) 
+    {
         return $query;
-    } elseif ($fetch == 1) {
+    } 
+    elseif ($fetch == 1) 
+    {
         return $query->fetch_all(MYSQLI_ASSOC);
     }
 }
@@ -1495,7 +1570,8 @@ function getAccounts($account_type, $account_status = 1, $count = 0)
     $sql = "SELECT * FROM account WHERE account_type = '{$account_type}' AND account_status = '{$account_status}' ORDER BY id ASC";
     $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
 
-    if ($count == 1) {
+    if ($count == 1) 
+    {
         return $query->num_rows;
     }
 }
@@ -1510,7 +1586,8 @@ function getGraduating($graduation_year, $account_type, $count = 0)
             AND gen.graduation_year < '{$graduation_year}';";
     $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
 
-    if ($count == 1) {
+    if ($count == 1) 
+    {
         return $query->num_rows;
     }
 }

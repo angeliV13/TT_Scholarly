@@ -168,6 +168,7 @@ function registerAccount($data)
     $acadYear = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
 
+
     $emailCheck = [
         'table'     => 'account',
         'column'    => 'email',
@@ -254,6 +255,8 @@ function registerAccount($data)
 
             $img = $fbImg['path'];
         }
+
+        $yearData = insert_acad_year_data($last_id); if ($yearData != 'success') return 'Registrants Acad Year Error : ' . $yearData;
 
         $sql = "INSERT INTO user_info (account_id, eac_number, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code, citizenship, years_of_residency, language, fbName, fbUrl, fbImage)
         VALUES ('$last_id', '$eacNumber', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[birthdate]', '$data[birthPlace]', '$data[address]', '$data[barangay]', '$data[city]', '$data[province]', '$data[region]', '$data[religion]', '$data[gender]', '$data[civilStatus]', '$data[contactNo]', '$data[zipCode]', '$data[citizenship]', '$data[years]', '$data[language]', '$data[fbName]', '$data[fbUrl]', '$img')";
@@ -533,7 +536,8 @@ function update_profile($data)
             address_line = '" . $data['addressLine'] . "', barangay = '" . $data['barangay'] . "', municipality = '" . $data['municipality'] . "',
             province = '" . $data['province'] . "', zip_code = '" . $data['zipCode'] . "', contact_number = '" . $data['contactNo'] . "'";
 
-    if ($data['file'] != "") {
+    if ($data['file'] != "") 
+    {
         // $files = $data['file'];
         // $fileName = $files['name'];
 
@@ -566,13 +570,9 @@ function update_profile($data)
             'type' => ['jpg', 'jpeg', 'png'],
         ]);
 
-        if ($profileImg == 'Invalid File Type') {
-            return 'Invalid File Type';
-        }
+        if ($profileImg == 'Invalid File Type') return 'Invalid File Type';
 
-        if ($profileImg['success'] == false) {
-            return 'Error: ' . $profileImg['error'];
-        }
+        if ($profileImg['success'] == false) return 'Error: ' . $profileImg['error'];
 
         $img = $profileImg['path'];
 
@@ -595,12 +595,15 @@ function updateContactInfo($data)
     $sql = "UPDATE user_info SET contact_number = '" . $data['contactNo'] . "' WHERE account_id = '" . $data['userId'] . "' LIMIT 1";
     $query = $conn->query($sql);
 
-    if ($query) {
+    if ($query) 
+    {
         $sql = "UPDATE account SET email = '" . $data['email'] . "' WHERE id = '" . $data['userId'] . "' LIMIT 1";
         $query = $conn->query($sql);
 
         return ($query) ? 'success' : 'Error Account Information: ' . $conn->error;
-    } else {
+    } 
+    else 
+    {
         return 'Error User Information: ' . $conn->error;
     }
 }
@@ -609,6 +612,7 @@ function updateAddInfo($data)
 {
     $status = update_status(4, $data['userId']);
     if (!$status) return 'Update Status Error: ' . $status;
+
     $genInfo = updateGenInfo($data, 0, $data['userId']);
     if ($genInfo != 'success') return 'Update General Information Error for Addition Info: ' . $genInfo;
 
@@ -619,14 +623,18 @@ function updateGenInfo($data, $type = 0, $userId = "")
 {
     include("dbconnection.php");
 
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
     if ($type == 0) // Additional Information
     {
         $sql = "UPDATE gen_info SET working_flag = '$data[working_flag]', ofw_flag = '$data[ofw_flag]', other_ofw = '$data[other_ofw]',
             pwd_flag = '$data[pwd_flag]', other_pwd = '$data[other_pwd]', status_flag = '$data[status_flag]', self_pwd_flag = '$data[self_pwd_flag]'
-            WHERE user_id = '" . $data['userId'] . "' LIMIT 1";
-    } else if ($type == 1) // Education
+            WHERE user_id = '" . $data['userId'] . "' AND ay_id = '$defaultYear' AND sem_id = '$acadYear' LIMIT 1";
+    } 
+    else if ($type == 1) // Education
     {
-        $exists = check_exist(['table' => 'gen_info', 'column' => 'user_id', 'value' => $userId]);
+        $exists = check_exist_multiple(['table' => 'gen_info', 'column' => ['user_id' => ['=', $userId], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
         $graduating_flag = ($data['graduating_flag'] == '0') ? 0 : 1;
         $graduation_year = ($data['graduating_flag'] == '1') ? "" : $data['graduation_year'];
         $honor_flag = ($data['honor_flag'] == '0') ? 0 : 1;
@@ -634,14 +642,19 @@ function updateGenInfo($data, $type = 0, $userId = "")
         $other_honor = ($data['other_honor'] == '') ? "" : $data['other_honor'];
         $gwa = ($data['gwa'] == '') ? '' : $data['gwa'];
 
-        if ($exists == 0) {
-            $sql = "INSERT INTO gen_info (user_id, graduating_flag, honor_flag, honor_type, other_honor, graduation_year, gwa) VALUES
-                ('$userId', '$graduating_flag', '$honor_flag', '$honor_type', '$other_honor', '$graduation_year', '$gwa')";
-        } else {
+        if ($exists == 0) 
+        {
+            $sql = "INSERT INTO gen_info (user_id, ay_id, sem_id, graduating_flag, honor_flag, honor_type, other_honor, graduation_year, gwa) VALUES
+                ('$userId', '$acadYear', '$defaultYear', '$graduating_flag', '$honor_flag', '$honor_type', '$other_honor', '$graduation_year', '$gwa')";
+        } 
+        else 
+        {
             $sql = "UPDATE gen_info SET graduating_flag = '$graduating_flag', honor_flag = '$honor_flag', honor_type = '$honor_type',
-                other_honor = '$other_honor', graduation_year = '$graduation_year', gwa = '$gwa' WHERE user_id = '$userId' LIMIT 1";
+                other_honor = '$other_honor', graduation_year = '$graduation_year', gwa = '$gwa' WHERE user_id = '$userId' AND ay_id = '$acadYear'
+                AND sem_id = '$defaultYear' LIMIT 1";
         }
-    } else if ($type == 2) // Family
+    } 
+    else if ($type == 2) // Family
     {
         $family_flag = ($data['family_flag'] == '0') ? 0 : 1;
         $total_num = ($data['total_num'] == '') ? 0 : $data['total_num'];
@@ -651,13 +664,12 @@ function updateGenInfo($data, $type = 0, $userId = "")
         $monthly_payment = ($data['monthly_payment'] == '') ? 0 : $data['monthly_payment'];
 
         $sql = "UPDATE gen_info SET family_flag = '$family_flag', total_num = '$total_num', birth_order = '$birth_order', source = '$source',
-            rent_flag = '$rent_flag', monthly_payment = '$monthly_payment' WHERE user_id = '$userId' LIMIT 1";
+            rent_flag = '$rent_flag', monthly_payment = '$monthly_payment' WHERE user_id = '$userId' AND ay_id = '$acadYear' AND sem_id = '$defaultYear' LIMIT 1";
     }
 
     $query = $conn->query($sql);
 
-    return ($query) ? 'success' : 'Error General Information: ' . $conn->error;
-    $conn->rollback();
+    return ($query) ? 'success' : 'Error General Information: ' . $conn->error; $conn->rollback();
 }
 
 function updateEducationalInfo($data)
@@ -685,7 +697,11 @@ function updateSchool($data, $userId, $awards = [], $type)
 {
     include("dbconnection.php");
 
-    $exists = check_exist(['table' => 'education', 'column' => 'educ_id', 'value' => $data['educ_id']]);
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $exists = check_exist_multiple(['table' => 'education', 'column' => ['educ_id' => ['=', $data['educ_id']], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
+    // $exists = check_exist(['table' => 'education', 'column' => 'educ_id', 'value' => $data['educ_id']]);
     $course = ($data['courseText'] == "Others") ? $data['otherCourse'] : $data['course'];
     $major = $data['major'];
     $school = ($data['school'] == "Others") ? $data['otherSchool'] : $data['school'];
@@ -693,12 +709,16 @@ function updateSchool($data, $userId, $awards = [], $type)
     $year_level = $data['year_level'];
     $educ_id = $data['educ_id'];
 
-    if ($exists == 0) {
-        $sql = "INSERT INTO education (user_id, school, year_level, course, major, school_address, education_level)
-        VALUES ('$userId', '$school', '$year_level', '$course', '$major', '$school_address', '$type')";
-    } else {
+    if ($exists == 0) 
+    {
+        $sql = "INSERT INTO education (user_id, ay_id, sem_id, school, year_level, course, major, school_address, education_level)
+        VALUES ('$userId', '$acadYear', '$defaultYear', '$school', '$year_level', '$course', '$major', '$school_address', '$type')";
+    } 
+    else 
+    {
         $sql = "UPDATE education SET school = '$school', year_level = '$year_level', course = '$course', major = '$major',
-            school_address = '$school_address', education_level = '$type' WHERE user_id = '$userId' AND educ_id = '$educ_id' LIMIT 1";
+            school_address = '$school_address', education_level = '$type' WHERE user_id = '$userId' AND educ_id = '$educ_id'
+            AND ay_id = '$acadYear' AND sem_id = '$defaultYear' LIMIT 1";
     }
 
     $query = $conn->query($sql);
@@ -720,27 +740,35 @@ function updateAwards($data, $educId)
 
     $dataArr = $deleteArr = [];
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $dataArr[] = $row['id'];
         }
     }
 
-    if ($data != null) {
-        if ($dataArr != null) {
-            foreach ($dataArr as $awardId) {
-                if (!in_array($awardId, $data['awardId'])) {
+    if ($data != null) 
+    {
+        if ($dataArr != null) 
+        {
+            foreach ($dataArr as $awardId) 
+            {
+                if (!in_array($awardId, $data['awardId'])) 
+                {
                     $deleteArr[] = $awardId;
                 }
             }
         }
 
-        if ($deleteArr != null) {
+        if ($deleteArr != null) 
+        {
             $sql = "DELETE FROM user_awards WHERE id IN (" . implode(',', $deleteArr) . ")";
             $query = $conn->query($sql);
         }
 
-        foreach ($data as $award) {
+        foreach ($data as $award) 
+        {
             $awardId = $award['awardId'];
             $honor = $award['honor'];
             $acadYear = $award['acadYear'];
@@ -749,10 +777,13 @@ function updateAwards($data, $educId)
 
             $exists = check_exist(['table' => 'user_awards', 'column' => 'id', 'value' => $awardId]);
 
-            if ($exists == 0) {
+            if ($exists == 0) 
+            {
                 $sql = "INSERT INTO user_awards (school_id, acad_year, honor, sem, year_level) VALUES
                     ('$educId', '$acadYear', '$honor', '$sem', '$yearLevel')";
-            } else {
+            } 
+            else 
+            {
                 $sql = "UPDATE user_awards SET acad_year = '$acadYear', honor = '$honor', sem = '$sem', year_level = '$yearLevel'
                     WHERE id = '$awardId' AND school_id = '$educId' LIMIT 1";
             }
@@ -762,7 +793,9 @@ function updateAwards($data, $educId)
 
         return ($query) ? 'success' : 'Error Awards: ' . $conn->error;
         $conn->rollback();
-    } else {
+    } 
+    else 
+    {
         return 'success';
     }
 }
@@ -794,6 +827,9 @@ function updateFamily($data, $type, $userId)
 {
     include("dbconnection.php");
 
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
     if ($type == 3) // Sibling
     {
         foreach ($data as $fam) 
@@ -808,17 +844,18 @@ function updateFamily($data, $type, $userId)
             $middleName = $nameArr[2];
             $lastName = $nameArr[0];
 
-            $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id]]]);
+            $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
+            // $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id]]]);
 
             if ($exists > 0) 
             {
                 $sql = "UPDATE user_family SET firstName = '$firstName', middleName = '$middleName', lastName = '$lastName', age = '$age', occupation = '$occupation',
-                        relationship = '$relationship', birth_order = '$birth_order' WHERE user_id = '$userId' AND id = '$id' LIMIT 1";
+                        relationship = '$relationship', birth_order = '$birth_order' WHERE user_id = '$userId' AND id = '$id' AND ay_id = '$acadYear' AND sem_id = '$defaultYear' LIMIT 1";
             } 
             else 
             {
-                $sql = "INSERT INTO user_family (user_id, firstName, middleName, lastName, age, occupation, relationship, fam_type, birth_order)
-                        VALUES ('$userId', '$firstName', '$middleName', '$lastName', '$age', '$occupation', '$relationship', '$type', '$birth_order')";
+                $sql = "INSERT INTO user_family (user_id, ay_id, sem_id, firstName, middleName, lastName, age, occupation, relationship, fam_type, birth_order)
+                        VALUES ('$userId', '$acadYear', '$defaultYear', '$firstName', '$middleName', '$lastName', '$age', '$occupation', '$relationship', '$type', '$birth_order')";
             }
 
             $query = $conn->query($sql);
@@ -829,7 +866,8 @@ function updateFamily($data, $type, $userId)
     } 
     else 
     {
-        $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'fam_type' => ['=', $type]]]);
+        $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'fam_type' => ['=', $type], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
+        // $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'fam_type' => ['=', $type]]]);
         $occupation = ($data['occupation'] == "others") ? $data['otherOccupation'] : $data['occupation'];
 
         if ($exists > 0) 
@@ -837,12 +875,12 @@ function updateFamily($data, $type, $userId)
             $sql = "UPDATE user_family SET firstName = '$data[firstName]', middleName = '$data[middleName]', lastName = '$data[lastName]', suffix = '$data[suffix]', age = '$data[age]',
                     birth_date = '$data[birthday]', birth_place = '$data[birthplace]', contact_number = '$data[contact]', living_flag = '$data[living]', occupation = '$occupation',
                     company_name = '$data[company]', company_address = '$data[companyAddress]', income_flag = '$data[income]', attainment_flag = '$data[education]', relationship = '$data[relationship]'
-                    WHERE user_id = '$userId' AND fam_type = '$type' LIMIT 1";
+                    WHERE user_id = '$userId' AND fam_type = '$type' AND ay_id = '$acadYear' AND sem_id = '$defaultYear' LIMIT 1";
         } 
         else 
         {
-            $sql = "INSERT INTO user_family (user_id, fam_type, firstName, middleName, lastName, suffix, age, birth_date, birth_place, contact_number, living_flag, occupation, company_name, company_address, income_flag, attainment_flag, relationship) VALUES
-                    ('$userId', '$type', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
+            $sql = "INSERT INTO user_family (user_id, ay_id, sem_id fam_type, firstName, middleName, lastName, suffix, age, birth_date, birth_place, contact_number, living_flag, occupation, company_name, company_address, income_flag, attainment_flag, relationship) VALUES
+                    ('$userId', '$userId', '$acadYear', '$defaultYear', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
         }
 
         $query = $conn->query($sql);
@@ -854,7 +892,8 @@ function updateFamily($data, $type, $userId)
 
 function getAccountInfo($id, $type = 0)
 {
-    switch ($type) {
+    switch ($type) 
+    {
         case 0:
             return get_school_address($id);
             break;
@@ -1206,8 +1245,10 @@ function editAccount($data)
     $query_1 = $conn->query($sql) or die($conn->error);
 
     // die(var_dump($query));
-    if ($query_1->num_rows <> 0) {
-        while ($row = $query_1->fetch_assoc()) {
+    if ($query_1->num_rows <> 0) 
+    {
+        while ($row = $query_1->fetch_assoc()) 
+        {
             extract($row);
 
             $emailCheck = [
@@ -1227,10 +1268,12 @@ function editAccount($data)
             $userCount = check_exist($userCheck);
             $password  = generateRandomString(8);
 
-            if ($email <> $data['email'] && $emailCount > 0) {
+            if ($email <> $data['email'] && $emailCount > 0) 
+            {
                 return 'Email Already Exist';
             }
-            if ($user_name <> $data['username'] && $userCount > 0) {
+            if ($user_name <> $data['username'] && $userCount > 0) 
+            {
                 return 'Username Already Exist';
             }
 
@@ -1264,8 +1307,8 @@ function editAccount($data)
     }
 }
 
-function deleteAccount($data){
-
+function deleteAccount($data)
+{
     include("dbconnection.php");
 
     $sql = "SELECT * FROM account WHERE id = '{$data['id']}'";
@@ -1275,7 +1318,63 @@ function deleteAccount($data){
     //         WHERE id = {$data['id']}";
     $query = $conn->query($sql) or die($conn->error);
 
-    if($query){
+    if($query)
+    {
         return "Delete Success";
     }
+}
+
+function updateAdminAccount($data)
+{
+    include("dbconnection.php");
+
+    $userId = $data['userId'];
+    $userName = $data['userName'];
+    $firstName = $data['firstName'];
+    $middleName = $data['middleName'];
+    $lastName = $data['lastName'];
+    $telephone = $data['telephone'];
+    $emailAddress = $data['emailAddress'];
+
+    $emailCheck = [
+        'table'     => 'account',
+        'column'    => 'email',
+        'value'     => $emailAddress,
+    ];
+
+
+    $userCheck = [
+        'table'     => 'account',
+        'column'    => 'user_name',
+        'value'     => $userName,
+    ];
+
+    $sql = "SELECT user_name, email FROM account WHERE id = '$userId' LIMIT 1";
+    $query = $conn->query($sql);
+
+    $row = $query->fetch_assoc();
+    $oldEmail = $row['email'];
+    $oldUsername = $row['user_name'];
+
+    if ($emailAddress != $oldEmail) 
+    {
+        $emailCount = check_exist($emailCheck);
+        if ($emailCount > 0) return 'Email Already Exist';
+    }
+
+    if ($userName != $oldUsername) 
+    {
+        $userCount = check_exist($userCheck);
+        if ($userCount > 0) return 'Username Already Exist';
+    }
+
+    $sql = "UPDATE account SET user_name = '$userName', email = '$emailAddress' WHERE id = '$userId' LIMIT 1";
+    $query = $conn->query($sql);
+
+    if (!$query) return 'Error: ' . $conn->error;
+
+    $sql = "UPDATE user_info SET first_name = '$firstName', middle_name = '$middleName', last_name = '$lastName', contact_number = '$telephone' WHERE account_id = '$userId' LIMIT 1";
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success' : 'Error: ' . $conn->error;
 }
