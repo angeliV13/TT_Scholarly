@@ -508,14 +508,23 @@ function get_user_education($id, $latest = 0)
                 $education[$row['education_level']] = $row;
             }
 
-            $sql = "SELECT * FROM user_awards WHERE school_id IN (" . implode(",", array_keys($education)) . ")";
+            $sql = "SELECT * FROM user_awards WHERE school_id IN (" . implode(",", array_map(function ($el) {
+                return $el['educ_id'];
+            }, $education)) . ")";
+
             $query = $conn->query($sql);
 
             if ($query->num_rows > 0) 
             {
                 while ($row = $query->fetch_assoc()) 
                 {
-                    $education[$row['school_id']]['awards'][] = $row;
+                    foreach ($education as $key => $value) 
+                    {
+                        if ($value['educ_id'] == $row['school_id']) 
+                        {
+                            $education[$key]['awards'][] = $row;
+                        }
+                    }
                 }
             }
         }
