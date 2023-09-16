@@ -917,7 +917,7 @@ function show_notification($view = 0, $limit = 0)
 
 
         $body .= '<li class="dropdown-footer">';
-        $body .= '<a href="#">Show all notifications</a>';
+        $body .= '<a href="?nav=ntf_settings">Show all notifications</a>';
         $body .= '</li>';
     } 
     else 
