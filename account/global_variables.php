@@ -48,11 +48,15 @@ if (isset($_SESSION))
 
         $latestEd = $latestCourseName . " " . $major . " - " . strtoupper($yearLevel);
     }
-
-    $status = check_status($_SESSION['id']);
+    
     $defaultSem = getDefaultSemesterId();
     $defaultAy = getDefaultAcadYearId();
-    if ($status != null) $finishFlag = ($status['status'] > 0) ? true : false;
+
+    if ($_SESSION['account_type'] > 2)
+    {
+        $status = check_status($_SESSION['id']);
+        if ($status != null) $finishFlag = ($status['status'] > 0) ? true : false;
+    }
 }
 
 $website_info = get_website_info();
