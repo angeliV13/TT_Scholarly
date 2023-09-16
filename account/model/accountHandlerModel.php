@@ -735,7 +735,10 @@ function updateAwards($data, $educId)
 
     // select all awards
 
-    $sql = "SELECT id FROM user_awards WHERE school_id = '$educId'";
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $sql = "SELECT id FROM user_awards WHERE school_id = '$educId' AND acad_year = '$acadYear' AND sem = '$defaultYear'";
     $query = $conn->query($sql);
 
     $dataArr = $deleteArr = [];
@@ -775,17 +778,18 @@ function updateAwards($data, $educId)
             $sem = $award['sem'];
             $yearLevel = $award['yearLevel'];
 
-            $exists = check_exist(['table' => 'user_awards', 'column' => 'id', 'value' => $awardId]);
+            $exists = check_exist_multiple(['table' => 'user_awards', 'column' => ['id' => ['=', $awardId], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
+            // $exists = check_exist(['table' => 'user_awards', 'column' => 'id', 'value' => $awardId]);
 
             if ($exists == 0) 
             {
-                $sql = "INSERT INTO user_awards (school_id, acad_year, honor, sem, year_level) VALUES
-                    ('$educId', '$acadYear', '$honor', '$sem', '$yearLevel')";
+                $sql = "INSERT INTO user_awards (school_id, ay_id, sem_id acad_year, honor, sem, year_level) VALUES
+                    ('$educId', '$acadYear', '$defaultYear', '$acadYear', '$honor', '$sem', '$yearLevel')";
             } 
             else 
             {
                 $sql = "UPDATE user_awards SET acad_year = '$acadYear', honor = '$honor', sem = '$sem', year_level = '$yearLevel'
-                    WHERE id = '$awardId' AND school_id = '$educId' LIMIT 1";
+                    WHERE id = '$awardId' AND school_id = '$educId' AND ay_id = '$acadYear' AND sem_id = '$defaultYear'";
             }
 
             $query = $conn->query($sql);
