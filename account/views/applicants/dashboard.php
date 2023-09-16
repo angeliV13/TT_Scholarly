@@ -31,13 +31,13 @@
                                         </div>
                                       <div class="flex-grow-1 ms-4 mt-3">
                                           <h5 class="mb-1 fw-bold"><?= $user_info['first_name'] . " " . $user_info['middle_name'] . " " . $user_info['last_name']  ?></h5>
-                                          <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;">BS Information Technology - FOURTH YEAR</p>
-                                          <p class="mb-2 pb-1" style="color: #2b2a2a;">Batangas State University JPLPC- Malvar</p>
+                                          <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;"><?= $latestEd ?></p>
+                                          <p class="mb-2 pb-1" style="color: #2b2a2a;"><?= $latestSchoolName ?></p>
 
                                           <div class="d-flex justify-content-between align-items-center rounded-3 gap-2 p-2 mb-2" style="background-color: #efefef;">
                                               <div>
                                                   <p class="small text-muted mb-1">Status:</p>
-                                                  <p class="mb-0 fw-bold">Applicant</p>
+                                                  <p class="mb-0 fw-bold"><?= getAccountType($_SESSION['account_type'])[0] ?></p>
                                               </div>
                                               <div class="px-3">
                                                   <p class="small text-muted mb-1">Scholarship Type:</p>
@@ -45,7 +45,7 @@
                                               </div>
                                               <div class="px-3">
                                                   <p class="small text-muted mb-1">Education Level:</p>
-                                                  <p class="mb-0 fw-bold">Senior Highschool</p>
+                                                  <p class="mb-0 fw-bold"><?= $latestSchoolType ?></p>
                                               </div>
                                               <div>
                                                   <p class="small text-muted mb-1">Semester:</p>

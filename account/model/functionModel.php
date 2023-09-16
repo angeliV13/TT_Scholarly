@@ -47,6 +47,54 @@ function getDateTimeDiff($date1, $date2, $type = "minutes") // function that ret
     }
 }
 
+function convertNumToText($num)
+{
+    $ones = array(
+        0 => "",
+        1 => "First",
+        2 => "Second",
+        3 => "Third",
+        4 => "Fourth",
+        5 => "Fifth",
+        6 => "Sixth",
+        7 => "Seventh",
+        8 => "Eighth",
+        9 => "Ninth"
+    );
+
+    $tens = array(
+        0 => "",
+        1 => "Tenth",
+        2 => "Twentieth",
+        3 => "Thirtieth",
+        4 => "Fortieth",
+        5 => "Fiftieth",
+        6 => "Sixtieth",
+        7 => "Seventieth",
+        8 => "Eightieth",
+        9 => "Ninetieth"
+    );
+
+    if ($num < 10) 
+    {
+        return $ones[$num];
+    } 
+    else if ($num < 20) 
+    {
+        return "Eleventh";
+    } 
+    else if ($num < 100) 
+    {
+        $tensDigit = floor($num / 10);
+        $onesDigit = $num % 10;
+        return $tens[$tensDigit] . " " . $ones[$onesDigit];
+    } 
+    else 
+    {
+        return "Number is out of range";
+    }
+}
+
 
 function static_count()
 {
@@ -447,19 +495,28 @@ function get_user_education($id, $latest = 0)
 
     if ($query->num_rows > 0) 
     {
-        while ($row = $query->fetch_assoc()) 
+        if ($latest == 1)
         {
-            $education[$row['education_level']] = $row;
+            $row = $query->fetch_assoc();
+
+            $education = $row;
         }
-
-        $sql = "SELECT * FROM user_awards WHERE school_id IN (" . implode(",", array_keys($education)) . ")";
-        $query = $conn->query($sql);
-
-        if ($query->num_rows > 0) 
+        else
         {
             while ($row = $query->fetch_assoc()) 
             {
-                $education[$row['school_id']]['awards'][] = $row;
+                $education[$row['education_level']] = $row;
+            }
+
+            $sql = "SELECT * FROM user_awards WHERE school_id IN (" . implode(",", array_keys($education)) . ")";
+            $query = $conn->query($sql);
+
+            if ($query->num_rows > 0) 
+            {
+                while ($row = $query->fetch_assoc()) 
+                {
+                    $education[$row['school_id']]['awards'][] = $row;
+                }
             }
         }
     }
@@ -603,7 +660,8 @@ function get_school_address($id)
 
 function get_school_type($type)
 {
-    switch ($type) {
+    switch ($type) 
+    {
         case 0:
             return "College";
             break;
@@ -979,7 +1037,8 @@ function getAccountType($type, $level = 0)
 {
     $data = [];
 
-    switch ($type) {
+    switch ($type) 
+    {
         case 0:
             $typeName = "Super Admin";
             break;
@@ -987,16 +1046,17 @@ function getAccountType($type, $level = 0)
             $typeName = "Admin";
             break;
         case 2:
-            $typeName = "Beneficiaries";
+            $typeName = "Beneficiary";
             break;
         case 3:
-            $typeName = "Applicants";
+            $typeName = "Applicant";
             break;
         default:
             $typeName = "Unknown";
     }
 
-    switch ($level) {
+    switch ($level) 
+    {
         case 0:
             $levelName = "No Super Admin Access";
             break;
@@ -1058,8 +1118,10 @@ function get_user_id_type($type)
     $query = $conn->query($sql);
 
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $data[$row['id']] = $row['user_name'];
         }
     }
@@ -1121,22 +1183,48 @@ function get_education_courses($type = '', $id = 0)
 
     $sql = "SELECT id, name FROM education_courses WHERE ";
 
-    if ($id == 0) {
+    if ($id == 0) 
+    {
         $sql .= "type = '{$type}' ";
-    } else {
+    } 
+    else 
+    {
         $sql .= "id = '{$id}' ";
     }
 
     $query = $conn->query($sql);
 
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $data[$row['id']] = $row['name'];
         }
     }
 
     return $data;
+}
+
+function get_course_name($id)
+{
+    include("dbconnection.php");
+
+    $data = '';
+
+    $sql = "SELECT name FROM education_courses WHERE id = " . $id;
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) 
+    {
+        $row = $query->fetch_assoc();
+
+        $data = $row['name'];
+    }
+
+    return $data;
+
+    // echo $sql;
 }
 
 function get_school()
@@ -1148,8 +1236,10 @@ function get_school()
     $sql = "SELECT * FROM school";
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
             $data[$row['id']] = $row;
         }
     }
@@ -1161,15 +1251,16 @@ function get_school_name($id)
 {
     include("dbconnection.php");
 
-    $data = '';
+    $data = [];
 
-    $sql = "SELECT * FROM school WHERE id = '{$id}'";
+    $sql = "SELECT * FROM school WHERE id = " . $id;
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        while ($row = $query->fetch_assoc()) {
-            $data = $row;
-        }
+    if ($query->num_rows > 0) 
+    {
+        $row = $query->fetch_assoc();
+
+        $data = $row;
     }
 
     return $data;

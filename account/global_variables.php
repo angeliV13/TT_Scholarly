@@ -34,6 +34,21 @@ if (isset($_SESSION))
     $strand = get_education_courses(1);
     $course = get_education_courses(0);
     $notificationFunc = get_notif_func(1, true, " used_flag = 0");
+    $latestEducation = get_user_education($_SESSION['id'], 1);
+
+    $latestSchoolName = $latestSchoolType = $latestCourseName = $major = $latestYearLevel = $latestEd = "NA";
+
+    if ($latestEducation != null)
+    {
+        $latestSchoolName = (get_school_name($latestEducation['school']) == null) ? $latestEducation['school'] : get_school_name($latestEducation['school'])['school_name'];
+        $latestSchoolType = get_school_type($latestEducation['education_level']);
+        $latestCourseName = get_course_name($latestEducation['course']) == '' ? $latestEducation['course'] : get_course_name($latestEducation['course']);
+        $major = $latestEducation['major'] == '' ? '' : "Major in " . $latestEducation['major'];
+        $yearLevel = convertNumToText($latestEducation['year_level']) . " Level";
+
+        $latestEd = $latestCourseName . " " . $major . " - " . strtoupper($yearLevel);
+    }
+
     $status = check_status($_SESSION['id']);
     $defaultSem = getDefaultSemesterId();
     $defaultAy = getDefaultAcadYearId();
