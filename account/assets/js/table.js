@@ -121,7 +121,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -165,7 +165,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -209,7 +209,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -252,7 +252,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -320,7 +320,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -364,7 +364,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -430,7 +430,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -491,7 +491,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -535,7 +535,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -578,7 +578,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -621,7 +621,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -664,7 +664,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -707,7 +707,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -750,7 +750,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -793,7 +793,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -836,7 +836,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -879,7 +879,7 @@ $(document).ready(function () {
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: false,
+        scrollY: 505,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
