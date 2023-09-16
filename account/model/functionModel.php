@@ -1041,6 +1041,8 @@ function notif_view_type($link)
             return 0;
         case (strpos($link, 'applicationId') !== false):
             return 1;
+        default:
+            return 1;
     }
 }
 
