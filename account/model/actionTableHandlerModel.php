@@ -448,14 +448,14 @@ function getProfile($account_id)
                     </div>';
     }
 
-    if (isset($education[0]))
+    if (isset($education[1]))
     {
         // SHS
         $shsTable = "";
 
-        if (isset($education[0]['awards']))
+        if (isset($education[1]['awards']))
         {
-            foreach ($education[0]['awards'] as $key => $award)
+            foreach ($education[1]['awards'] as $key => $award)
             {
                 $shsTable .= '<tr>
                                     <td class="text-center">' . ($key + 1) . '</td>
@@ -480,27 +480,27 @@ function getProfile($account_id)
                         <!-- COLLEGE -->
                         <div class="col-md-4 position-relative">
                             <label for="inputSeniorSchoolName" class="form-label">Name of School Attended</label>
-                            <input type="text" class="form-control" id="inputSeniorSchoolName" aria-describedby="inputSeniorSchoolName" value="' . (is_numeric($education[0]['school']) ? $school[$education[0]['school']]['school_name'] : "Others") . '" disabled>
+                            <input type="text" class="form-control" id="inputSeniorSchoolName" aria-describedby="inputSeniorSchoolName" value="' . (is_numeric($education[1]['school']) ? $school[$education[1]['school']]['school_name'] : "Others") . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputSeniorOtherSchool" class="form-label">If others, other school name.</label>
-                            <input type="text" class="form-control" id="inputSeniorOtherSchool" aria-describedby="inputSeniorOtherSchool" value="'.(is_numeric($education[0]['school']) ? "" : $education[0]['school']).'" disabled>
+                            <input type="text" class="form-control" id="inputSeniorOtherSchool" aria-describedby="inputSeniorOtherSchool" value="'.(is_numeric($education[1]['school']) ? "" : $education[1]['school']).'" disabled>
                         </div>
                         <div class="col-md-2 position-relative">
                             <label for="inputSeniorYearLevel" class="form-label">Year Level</label>
-                            <input type="text" class="form-control" id="inputSeniorYearLevel" aria-describedby="inputSeniorYearLevel" value="' . $education[0]['year_level'] . '" disabled>
+                            <input type="text" class="form-control" id="inputSeniorYearLevel" aria-describedby="inputSeniorYearLevel" value="' . $education[1]['year_level'] . '" disabled>
                         </div>
                         <div class="col-md-3 position-relative">
                             <label for="inputTrack" class="form-label">Strand Taken</label>
-                            <input type="text" class="form-control" id="inputTrack" aria-describedby="inputTrack" value="' . $strand[$education[0]['course']] . '" disabled>
+                            <input type="text" class="form-control" id="inputTrack" aria-describedby="inputTrack" value="' . $strand[$education[1]['course']] . '" disabled>
                         </div>
                         <div class="col-md-9 position-relative">
                             <label for="inputOtherTrack" class="form-label">If others, other strand name.</label>
-                            <input type="text" class="form-control" id="inputOtherTrack" aria-describedby="inputOtherTrack" value="'.(is_numeric($education[0]['course']) ? "" : $education[0]['course']).'" disabled>
+                            <input type="text" class="form-control" id="inputOtherTrack" aria-describedby="inputOtherTrack" value="'.(is_numeric($education[1]['course']) ? "" : $education[1]['course']).'" disabled>
                         </div>
                         <div class="col-md-12 position-relative">
                             <label for="inputSeniorSchoolAddress" class="form-label">School Address</label>
-                            <input type="text" class="form-control" id="inputSeniorSchoolAddress" aria-describedby="inputSeniorSchoolAddress" value="' . $education[0]['school_address'] . '" disabled>
+                            <input type="text" class="form-control" id="inputSeniorSchoolAddress" aria-describedby="inputSeniorSchoolAddress" value="' . $education[1]['school_address'] . '" disabled>
                         </div>
                         <div class="column">
                             <div class="d-flex justify-content-between align-items-center">
@@ -530,15 +530,15 @@ function getProfile($account_id)
                     </div>';
     }
 
-    if (isset($education[0]))
+    if (isset($education[2]))
     {
         // HS
 
         $hsTable = "";
 
-        if (isset($education[0]['awards']))
+        if (isset($education[2]['awards']))
         {
-            foreach ($education[0]['awards'] as $key => $award)
+            foreach ($education[2]['awards'] as $key => $award)
             {
                 $hsTable .= '<tr>
                                     <td class="text-center">' . ($key + 1) . '</td>
@@ -564,19 +564,19 @@ function getProfile($account_id)
                         <!-- COLLEGE -->
                         <div class="col-md-4 position-relative">
                             <label for="inputHighSchoolName" class="form-label">Name of School Attended</label>
-                            <input type="text" class="form-control" id="inputHighSchoolName" aria-describedby="inputHighSchoolName" value="' . (is_numeric($education[0]['school']) ? $school[$education[0]['school']]['school_name'] : "Others") . '" disabled>
+                            <input type="text" class="form-control" id="inputHighSchoolName" aria-describedby="inputHighSchoolName" value="' . (is_numeric($education[2]['school']) ? $school[$education[2]['school']]['school_name'] : "Others") . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputHighOtherSchool" class="form-label">If others, other school name.</label>
-                            <input type="text" class="form-control" id="inputHighOtherSchool" aria-describedby="inputHighOtherSchool" value="'.(is_numeric($education[0]['school']) ? "" : $education[0]['school']).'" disabled>
+                            <input type="text" class="form-control" id="inputHighOtherSchool" aria-describedby="inputHighOtherSchool" value="'.(is_numeric($education[2]['school']) ? "" : $education[2]['school']).'" disabled>
                         </div>
                         <div class="col-md-2 position-relative">
                             <label for="inputHighYearLevel" class="form-label">Year Level</label>
-                            <input type="text" class="form-control" id="inputHighYearLevel" aria-describedby="inputHighYearLevel" value="' . $education[0]['year_level'] . '" disabled>
+                            <input type="text" class="form-control" id="inputHighYearLevel" aria-describedby="inputHighYearLevel" value="' . $education[2]['year_level'] . '" disabled>
                         </div>
                         <div class="col-md-12 position-relative">
                             <label for="inputHighSchoolAddress" class="form-label">School Address</label>
-                            <input type="text" class="form-control" id="inputHighSchoolAddress" aria-describedby="inputHighSchoolAddress" value="' . $education[0]['school_address'] . '" disabled>
+                            <input type="text" class="form-control" id="inputHighSchoolAddress" aria-describedby="inputHighSchoolAddress" value="' . $education[2]['school_address'] . '" disabled>
                         </div>
                         <div class="column">
                             <div class="d-flex justify-content-between align-items-center">
@@ -606,13 +606,13 @@ function getProfile($account_id)
                     </div>';
     }
 
-    if (isset($education[0]))
+    if (isset($education[3]))
     {
         $elemTable = "";
 
-        if (isset($education[0]['awards']))
+        if (isset($education[3]['awards']))
         {
-            foreach ($education[0]['awards'] as $key => $award)
+            foreach ($education[3]['awards'] as $key => $award)
             {
                 $elemTable .= '<tr>
                                     <td class="text-center">' . ($key + 1) . '</td>
@@ -636,19 +636,19 @@ function getProfile($account_id)
                         <!-- COLLEGE -->
                         <div class="col-md-4 position-relative">
                             <label for="inputElementarySchoolName" class="form-label">Name of School Attended</label>
-                            <input type="text" class="form-control" id="inputElementarySchoolName" aria-describedby="inputElementarySchoolName" value="' . (is_numeric($education[0]['school']) ? $school[$education[0]['school']]['school_name'] : "Others") . '" disabled>
+                            <input type="text" class="form-control" id="inputElementarySchoolName" aria-describedby="inputElementarySchoolName" value="' . (is_numeric($education[3]['school']) ? $school[$education[3]['school']]['school_name'] : "Others") . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputElementaryOtherSchool" class="form-label">If others, other school name.</label>
-                            <input type="text" class="form-control" id="inputElementaryOtherSchool" aria-describedby="inputElementaryOtherSchool" value="'.(is_numeric($education[0]['school']) ? "" : $education[0]['school']).'" disabled>
+                            <input type="text" class="form-control" id="inputElementaryOtherSchool" aria-describedby="inputElementaryOtherSchool" value="'.(is_numeric($education[3]['school']) ? "" : $education[3]['school']).'" disabled>
                         </div>
                         <div class="col-md-2 position-relative">
                             <label for="inputHighYearLevel" class="form-label">Year Level</label>
-                            <input type="text" class="form-control" id="inputHighYearLevel" aria-describedby="inputHighYearLevel" value="' . $education[0]['year_level'] . '" disabled>
+                            <input type="text" class="form-control" id="inputHighYearLevel" aria-describedby="inputHighYearLevel" value="' . $education[3]['year_level'] . '" disabled>
                         </div>
                         <div class="col-md-12 position-relative">
                             <label for="inputElementarySchoolAddress" class="form-label">School Address</label>
-                            <input type="text" class="form-control" id="inputElementarySchoolAddress" aria-describedby="inputElementarySchoolAddress" value="' . $education[0]['school_address'] . '" disabled>
+                            <input type="text" class="form-control" id="inputElementarySchoolAddress" aria-describedby="inputElementarySchoolAddress" value="' . $education[3]['school_address'] . '" disabled>
                         </div>
                         <div class="column">
                             <div class="d-flex justify-content-between align-items-center">
