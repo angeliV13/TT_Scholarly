@@ -55,6 +55,39 @@ $(document).ready(function () {
     deferRender: false,
     stateSave: false,
   });
+
+  // Set Assessment Table
+  let setApplicationTable = $("#setApplicationTable").DataTable({
+    lengthChange: false,
+    searching: false,
+    ordering: false,
+    serverSide: true,
+    processing: true,
+    ajax: {
+      url: "controller/basicSetup.php",
+      type: "POST",
+      data: {
+        action: 1,
+        getTable: 7,
+      },
+      // success: function (row, data, index) {
+      //   console.log(row);
+      //   console.log(data);
+      //   console.log(index);
+      // },
+      error: function (data) {
+        console.log(data);
+      },
+    },
+    createdRow: function (row, data, index) {},
+    columnDefs: [],
+    bInfo: false,
+    paging: false,
+    fixedColumns: false,
+    deferRender: false,
+    stateSave: false,
+  });
+
   // Set Assessment Table
   let setAssessmentTable = $("#setAssessmentTable").DataTable({
     lengthChange: false,
@@ -672,6 +705,148 @@ $("input[name=semOptions]").on("change", function (e) {
 
   return false;
 });
+
+// -----------------------------------------------------------------
+// Set Application
+function addSetApplication() {
+  let startDate = $("#applicationStartDate").val();
+  let endDate = $("#applicationEndDate").val();
+  let shs = $("#applicationShsCheckBox").prop("checked");
+  let colEAPub = $("#applicationColEAPubCheckBox").prop("checked");
+  let colEAPriv = $("#applicationColEAPrivCheckBox").prop("checked");
+  let colSc = $("#applicationColScCheckBox").prop("checked");
+
+  Swal.fire({
+    title: "Add this application?",
+    text: "Are you sure you want to add this application date?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Add",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/basicSetup.php",
+        data: {
+          action: 23.1,
+          startDate: startDate,
+          endDate: endDate,
+          shs: shs,
+          colEAPub: colEAPub,
+          colEAPriv: colEAPriv,
+          colSc: colSc,
+        },
+        success: function (data) {
+          if (data == "Application Date Added") {
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: data,
+            }).then((result) => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+}
+
+function updateSetApplication(id) {
+  let startDate = $("#applicationStartDate_" + id).val();
+  let endDate = $("#applicationEndDate_" + id).val();
+  let shs = $("#applicationShsCheckBox_" + id).prop("checked");
+  let colEAPub = $("#applicationColEAPubCheckBox_" + id).prop("checked");
+  let colEAPriv = $("#applicationColEAPrivCheckBox_" + id).prop("checked");
+  let colSc = $("#applicationColScCheckBox_" + id).prop("checked");
+
+  Swal.fire({
+    title: "Update this record?",
+    text: "Are you sure you want to update this application date?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Generate",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/basicSetup.php",
+        data: {
+          action: 23.2,
+          id: id,
+          startDate: startDate,
+          endDate: endDate,
+          shs: shs,
+          colEAPub: colEAPub,
+          colEAPriv: colEAPriv,
+          colSc: colSc,
+        },
+        success: function (data) {
+          if (data == "Application Date Updated") {
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: data,
+            }).then((result) => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+}
+
+function deleteSetApplication(id) {
+  Swal.fire({
+    title: "Delete the application?",
+    text: "Are you sure you want to delete this application? This cannot be undone",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Delete",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/basicSetup.php",
+        data: {
+          action: 23.3,
+          id: id,
+        },
+        success: function (data) {
+          if (data == "Deleted Successfully") {
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: data,
+            }).then((result) => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
+}
+
 
 // -----------------------------------------------------------------
 // Set Assessment

@@ -47,6 +47,10 @@ if (isset($_REQUEST['action']))
                 {
                     echo getIndicatorSCTable($_POST['tableCategory']);
                 }
+                elseif ($getTable == 7)                  //Generate Application Table
+                {
+                    echo getSetApplicationTable();
+                }
             }
             break;
         case 1.1:                           //Generate Academic Year
@@ -452,6 +456,45 @@ if (isset($_REQUEST['action']))
         case 22: // Delete Alumni
             
             echo deleteAlumni(isset($_POST['id']) ? $_POST['id'] : '');
+            break;
+        case 23.1:                           //Add Application Date
+            $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
+            $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
+            $shs        = $_POST['shs'];
+            $colEAPub   = $_POST['colEAPub'];
+            $colEAPriv  = $_POST['colEAPriv'];
+            $colSc      = $_POST['colSc'];
+
+            echo addSetApplication($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
+
+            break;
+        case 23.2:                           //Update Application Date
+            if (isset($_POST['id'])) 
+            {
+                $id         = $_POST['id'];
+                $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
+                $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
+                $shs        = $_POST['shs'];
+                $colEAPub   = $_POST['colEAPub'];
+                $colEAPriv  = $_POST['colEAPriv'];
+                $colSc      = $_POST['colSc'];
+
+                echo editSetApplication($id, $startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
+            }
+
+            break;
+        case 23.3:                           //Delete Application Date
+            if (isset($_POST['id'])) 
+            {
+                $id = $_POST['id'];
+
+                echo deleteSetApplication($id);
+            } 
+            else 
+            {
+                echo 'No Application Exists';
+            }
+
             break;
     }
 }

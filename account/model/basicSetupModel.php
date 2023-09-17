@@ -172,6 +172,170 @@ function deleteAY($from_ay)
     return 'Deleted Successfully';
 }
 
+// Application
+
+function getSetApplicationTable()
+{
+    include("dbconnection.php");
+
+    $totalData = 0;
+    $data = [];
+    $counter = 1;
+
+    $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
+
+    $sql = "SELECT * FROM set_application WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' ORDER BY id DESC";
+    $query = $conn->query($sql) or die("Error BSQ007: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+            extract($row);
+
+            $button =   '<div class="row mx-auto">
+                            <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="#application_edit_modal_' . $id . '">Edit</button>
+                            <button class="col-6 btn btn-danger" onclick="deleteSetApplication(' . $id . ')">Delete</button>
+                        </div>
+                        <!-- Acad Year Make Default Modal -->
+                        <div class="modal fade" id="application_edit_modal_' . $id . '" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Application Date</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="applicationStartDate_' . $id . '" class="form-label col-3">Start Date</label>
+                                            <input type="date" class="form-control col" id="applicationStartDate_' . $id . '" aria-describedby="applicationStartDate" name="applicationStartDate" value="' . $start_date . '">
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="applicationEndDate_' . $id . '" class="form-label col-3">End Date</label>
+                                            <input type="date" class="form-control col" id="applicationEndDate_' . $id . '" aria-describedby="applicationEndDate" name="applicationEndDate" value="' . $end_date . '">
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="applicationStartDate" class="form-label col-3">Audience</label>
+                                            <div class="col">
+                                                <div class="d-flex">
+                                                    <input class="form-check-input" type="checkbox" value="" id="applicationShsCheckBox_' . $id . '" ' . getCheckboxValueDB($shs) . '>
+                                                    <label class="mx-2 form-check-label" for="applicationShsCheckBox_' . $id . '">
+                                                        Senior High School
+                                                    </label>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <input class="form-check-input" type="checkbox" value="" id="applicationColEAPubCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPub) . '>
+                                                    <label class="mx-2 form-check-label" for="applicationColEACheckBox_' . $id . '">
+                                                        College Educational Assistance - Public
+                                                    </label>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <input class="form-check-input" type="checkbox" value="" id="applicationColEAPrivCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPriv) . '>
+                                                    <label class="mx-2 form-check-label" for="applicationColEACheckBox_' . $id . '">
+                                                        College Educational Assistance - Private
+                                                    </label>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <input class="form-check-input" type="checkbox" value="" id="applicationColScCheckBox_' . $id . '" ' . getCheckboxValueDB($colSc) . '>
+                                                    <label class="mx-2 form-check-label" for="applicationColScCheckBox_' . $id . '">
+                                                        College Scholars
+                                                    </label>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" onclick="updateSetApplication(' . $id . ')">Update</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+
+            $data[] = [
+                $counter,
+                $start_date,
+                $end_date,
+                getAudience($shs, $colEAPub, $colEAPriv, $colSc),
+                accountHandlerAccess(1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
+                accountHandlerAccess(1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
+                $button,
+            ];
+
+            $counter++;
+        }
+    }
+
+    $json_data = array(
+        "draw"            => 1,   // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+        "recordsTotal"    => intval($totalData),  // total number of records
+        "recordsFiltered" => intval($totalData), // total number of records after searching, if there is no searching then totalFiltered = totalData
+        "data"            => $data   // total data array
+    );
+
+    echo json_encode($json_data);  // send data as json format
+}
+
+function addSetApplication($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc)
+{
+    include("dbconnection.php");
+
+    // session_start();
+    $sessionId = $_SESSION['id'];
+
+    date_default_timezone_set("Asia/Manila");
+    $date = date("Y-m-d");
+
+    $acadYearId = getDefaultAcadYearId();
+    $semId = getDefaultSemesterId();
+
+    $audience  = ($shs      == true) ? '1' : '';
+    $audience .= ($colEAPub == true) ? '2' : '';
+    $audience .= ($colEAPriv == true) ? '3' : '';
+    $audience .= ($colSc    == true) ? '4' : '';
+
+    $sql = "INSERT INTO set_application (`id`, `ay_id`, `sem_id`, `start_date`, `end_date`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '" . $acadYearId . "', '" . $semId . "',  '" . $startDate . "', '" . $endDate . "', " . $shs . "," . $colEAPub . "," . $colEAPriv . "," . $colSc . ", '" . $sessionId . "', '" . $date . "', '" . $sessionId . "', '" . $date . "')";
+    $query = $conn->query($sql) or die("Error BSQ008: " . $conn->error);
+
+    return 'Application Date Added';
+}
+
+function editSetApplication($id, $startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc)
+{
+    include("dbconnection.php");
+
+    // session_start();
+    $sessionId = $_SESSION['id'];
+
+    date_default_timezone_set("Asia/Manila");
+    $date = date("Y-m-d");
+
+    $sql = "UPDATE set_application SET   `start_date`= '" . $startDate . "',
+                                        `end_date`= '" . $endDate . "' ,
+                                        `shs`= " . $shs . " ,
+                                        `colEAPub`= " . $colEAPub . " ,
+                                        `colEAPriv`= " . $colEAPriv . " ,
+                                        `colSc`= " . $colSc . " ,
+                                        `modified_by`='" . $sessionId . "' ,
+                                        `modified_date`='" . $date . "' 
+                                WHERE   id = '" . $id . "'";
+
+    $query = $conn->query($sql) or die("Error BSQ009: " . $conn->error);
+
+    return 'Application Date Updated';
+}
+
+function deleteSetApplication($id)
+{
+    include("dbconnection.php");
+
+    $sql = "DELETE FROM set_application WHERE id = '" . $id . "'";
+    $query = $conn->query($sql) or die("Error BSQ010: " . $conn->error);
+
+    return 'Deleted Successfully';
+}
+
+
 // Assessments
 
 function getSetAssessmentTable()
@@ -279,7 +443,7 @@ function addSetAssessment($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $co
 {
     include("dbconnection.php");
 
-    session_start();
+    // session_start();
     $sessionId = $_SESSION['id'];
 
     date_default_timezone_set("Asia/Manila");
@@ -304,7 +468,7 @@ function editSetAssessment($id, $startDate, $endDate, $shs, $colEAPub, $colEAPri
 {
     include("dbconnection.php");
 
-    session_start();
+    // session_start();
     $sessionId = $_SESSION['id'];
 
     date_default_timezone_set("Asia/Manila");
@@ -468,7 +632,7 @@ function editSetRenewal($id, $startDate, $endDate, $shs, $colEAPub, $colEAPriv, 
 {
     include("dbconnection.php");
 
-    session_start();
+    // session_start();
     $sessionId = $_SESSION['id'];
 
     date_default_timezone_set("Asia/Manila");
@@ -612,7 +776,7 @@ function addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $c
 {
     include("dbconnection.php");
 
-    session_start();
+    // session_start();
     $sessionId = $_SESSION['id'];
 
     date_default_timezone_set("Asia/Manila");
@@ -632,7 +796,7 @@ function editSetExam($id, $startDate, $time, $endDate, $shs, $colEAPub, $colEAPr
 {
     include("dbconnection.php");
 
-    session_start();
+    // session_start();
     $sessionId = $_SESSION['id'];
 
     date_default_timezone_set("Asia/Manila");

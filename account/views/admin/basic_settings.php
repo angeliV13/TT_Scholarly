@@ -64,6 +64,117 @@
                         </div>
                     </div>
                 </div>
+                <!-- Application -->
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">Set Application</h5>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#application_add_modal" class=" btn btn-sm btn-danger shadow-sm">
+                                    <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Application Date</a>
+                            </div>
+
+                            <!-- Table with stripped rows -->
+                            <table id="setApplicationTable" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class="small">
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Application Start Date</th>
+                                        <th class="text-center">Application End Date</th>
+                                        <th class="text-center">Target Audience</th>
+                                        <th class="text-center">Created by</th>
+                                        <th class="text-center">Modified by</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class=" small text-center">
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>June 30, 2023</td>
+                                        <td>July 31, 2023</td>
+                                        <td>College EA - Private</td>
+                                        <td>Super Admin 1
+                                            <br>
+                                            <span class="small">May 6, 2023</span>
+                                        </td>
+                                        <td>Admin
+                                            <br>
+                                            <span class="small">May 7, 2023</span>
+                                        </td>
+                                        <td>
+                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
+                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="#application_edit_modal">Edit</button>
+                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="#application_delete_modal">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>June 30, 2023</td>
+                                        <td>July 31, 2023</td>
+                                        <td>College SC - Private</td>
+                                        <td>Super Admin 1
+                                            <br>
+                                            <span class="small">May 6, 2023</span>
+                                        </td>
+                                        <td>Admin
+                                            <br>
+                                            <span class="small">May 7, 2023</span>
+                                        </td>
+                                        <td>
+                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
+                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
+                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="">Delete</button>
+                                            </div>
+                                            <!-- Assessement Edit Modal -->
+                                            <div class="modal fade" id="application_edit_modal" tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Edit Application</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>
+                                                                Are you sure you want to make this academic year as default?
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-warning">Make it default</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Application Delete Modal -->
+                                            <div class="modal fade" id="application_delete_modal" tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Delete Application?</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>
+                                                                Are you sure you want to delete this academic year?
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
                 <!-- Assessment -->
                 <div class="card">
                     <div class="card-body ">
@@ -321,6 +432,61 @@
             </div>
         </div>
     </section>
+
+    <!-- Add Application Modal -->
+    <div class="modal fade" id="application_add_modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Application Date</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="applicationStartDate" class="form-label col-3">Start Date</label>
+                        <input type="date" class="form-control col" id="applicationStartDate" aria-describedby="applicationStartDate" name="applicationStartDate">
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="applicationEndDate" class="form-label col-3">End Date</label>
+                        <input type="date" class="form-control col" id="applicationEndDate" aria-describedby="applicationEndDate" name="applicationEndDate">
+                    </div>
+                    <div class="row d-flex align-items-center mb-2">
+                        <label for="applicationStartDate" class="form-label col-3">Audience</label>
+                        <div class="col">
+                            <div class="d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="applicationShsCheckBox">
+                                <label class="mx-2 form-check-label" for="applicationShsCheckBox">
+                                    Senior High School
+                                </label>
+                            </div>
+                            <div class="d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="applicationColEAPubCheckBox">
+                                <label class="mx-2 form-check-label" for="applicationColEACheckBox">
+                                    College Educational Assistance - Public
+                                </label>
+                            </div>
+                            <div class="d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="applicationColEAPrivCheckBox">
+                                <label class="mx-2 form-check-label" for="applicationColEACheckBox">
+                                    College Educational Assistance - Private
+                                </label>
+                            </div>
+                            <div class="d-flex">
+                                <input class="form-check-input" type="checkbox" value="" id="applicationColScCheckBox">
+                                <label class="mx-2 form-check-label" for="applicationColScCheckBox">
+                                    College Scholars
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" onclick="addSetApplication()">Add Application</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Assessment Modal -->
     <div class="modal fade" id="assessment_add_modal" tabindex="-1">
