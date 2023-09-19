@@ -116,7 +116,7 @@
                   </a>
                   <ul id="reports-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                       <li>
-                          <a href=" ">
+                          <a href="index.php?nav=generate_report">
                               <i class="bi bi-circle"></i><span>Generate Reports</span>
                           </a>
                       </li>
@@ -199,7 +199,7 @@
               </li><!-- End Dashboard Nav -->
 
               <li class="nav-item">
-                  <a class="nav-link " href="index.php?<?php echo ($_SESSION['account_type'] == 2) ? 'nav=profile-bene' : 'nav=profile-applicant'; ?>">
+                  <a class="nav-link" href="index.php?<?php echo ($_SESSION['account_type'] == 2) ? 'nav=profile_bene' : 'nav=profile_applicant'; ?>">
                       <i class="bi bi-person"></i>
                       <span>Profile</span>
                   </a>
@@ -240,14 +240,15 @@
               <?php endif; ?>
 
               <?php if ($_SESSION['account_type'] == 3) : ?>
-
+                  <?php if ($status['add_flag'] <> 0) : ?>
                   <!--  -->
-                  <li class="nav-item" id="reqLi" data-status="<?= ($status['add_flag'] == 0) ? "disabled" : "" ?>">
-                      <a class="nav-link collapsed" id="reqBtn" href="index.php?nav=apply-applicant">
+                  <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "")?>">
+                      <a class="nav-link collapsed" id="reqBtn" href="<?= (($status['add_flag'] == 0) ? "index.phps" : "index.php?nav=apply-applicant")?>">
                           <i class="bi bi-files"></i>
                           <span>General Requirements</span>
                       </a>
                   </li><!-- End Dashboard Nav -->
+                  <?php endif; ?>
 
                   <!-- Submit Application -->
                   <?php if ($status['req_flag'] == 1 and !$finishFlag) : ?>
