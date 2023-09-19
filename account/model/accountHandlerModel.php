@@ -1395,7 +1395,7 @@ function cancelSubmitApplication($id)
                                                 `family_flag`='0',
                                                 `add_flag`='0',
                                                 `req_flag`='0',
-                                                `current_active` = 'info_flag'
+                                                `current_active` = 'info_flag',
                                                 `status`='0'
                                             WHERE userId = " . $id . " 
             AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
