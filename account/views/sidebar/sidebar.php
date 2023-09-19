@@ -240,6 +240,7 @@
               <?php endif; ?>
 
               <?php if ($_SESSION['account_type'] == 3) : ?>
+                <?php $scholar_type = 2; $scholarType = 1 + $scholar_type; ?>
                   <?php if ($status['add_flag'] <> 0) : ?>
                   <!--  -->
                   <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "")?>">
@@ -259,9 +260,6 @@
                           </a>
                       </li><!-- End Dashboard Nav -->
                   <?php endif; ?>
-
-                  <?php $scholar_type = 2;
-                    $scholarType = 1 + $scholar_type; ?>
 
                   <?php if ($examAccess != null) : ?>
                       <?php if ($examAccess[$scholarType] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow) : ?>
