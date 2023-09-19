@@ -1382,3 +1382,24 @@ function updateAdminAccount($data)
 
     return ($query) ? 'success' : 'Error: ' . $conn->error;
 }
+
+function cancelSubmitApplication($id)
+{
+    include("dbconnection.php");
+
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+    
+    $sql = "UPDATE scholarship_application SET  `info_flag`='0',
+                                                `educ_flag`='0',
+                                                `family_flag`='0',
+                                                `add_flag`='0',
+                                                `req_flag`='0',
+                                                `current_active` = 'info_flag'
+                                                `status`='0'
+                                            WHERE userId = " . $id . " 
+            AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success': $conn->error; $conn->rollback();
+}

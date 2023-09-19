@@ -1396,3 +1396,40 @@ $("#submitApplication").on("click", function(e){
         }
     })
 })
+
+$("#editInfoProfile").on("click", function(){
+    Swal.fire({
+        title: "Edit Profile?",
+        text: "Are you sure you want to edit your profile? Your submission will reset.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Edit Information",
+        cancelButtonText: "No,"
+    }).then((result) => {
+        if (result.isConfirmed){
+            $.ajax({
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                    action: "25",
+                    userId : userId
+                },
+                beforeSend: function(){
+                    showBeforeSend("Submitting Application...");
+                },
+                success: function(data){
+                    hideBeforeSend();
+                    if (data == "success"){
+                        location.href("index.php?nav=profile_applicant");
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `An error occured while submitting your application. Please try again. Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+})
