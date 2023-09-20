@@ -31,6 +31,11 @@ $("#genrep_applicant_btn").on("click", function (e) {
 });
 
 function reportTable(data){
+
+    if ( $.fn.DataTable.isDataTable('#dynamic_table') ) {
+        $('#dynamic_table').DataTable().destroy();
+    }
+    
     let dynamic_table = $('#dynamic_table').DataTable({
         "lengthChange": false,
         "paging": false,
