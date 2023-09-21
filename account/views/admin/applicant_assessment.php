@@ -25,11 +25,13 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                <table id="applicantExamineeTable" class="table table-striped header-fixed" width="100%" cellspacing="100%">
+                    <table id="applicantExamineeTable" class="table table-striped header-fixed" width="100%" cellspacing="100%">
                         <thead>
                             <tr class="text-center small">
                                 <th>No.</th>
-                                <th>Name (LN, FN)</th>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
                                 <th>School</th>
                                 <th>School Type</th>
                                 <th>Scholarship Type</th>
@@ -46,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>

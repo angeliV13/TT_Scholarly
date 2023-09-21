@@ -213,7 +213,7 @@ function registerAccount($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
     $sendEmail = sendEmail($data['email'], 'Account Verification', $msg, $emailType);
 
@@ -351,7 +351,7 @@ function resend_email($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
     $sendEmail = sendEmail($data, 'Resend Verification Code', $msg, $emailType);
 
@@ -404,7 +404,7 @@ function forgot_password($email, $type)
 
         $randomToken = generateRandomString(5);
 
-        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
         $msg = '<p> Hello ' . $user_name . ', </p> ';
         $msg .= '<p> Here is your ' . strtolower($text) . '. </p>';
@@ -464,7 +464,7 @@ function password_reset($data)
                 $msg .= '<p>Best regards,</p>';
                 $msg .= '<p>Youth Development Scholarship</p>';
 
-                $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '3';
+                $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
                 $sendEmail = sendEmail($data['email'], 'Password Reset Notification', $msg, $emailType);
 
@@ -964,7 +964,7 @@ function submitApplication($id)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '4';
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
     $sendEmail = sendEmail($email, $name . ' - Scholarship Application Submission', $msg, $emailType, $adEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
@@ -1063,7 +1063,7 @@ function set_applicant_status($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '4';
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
     $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, $emailType, $adEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
@@ -1152,7 +1152,7 @@ function deleteUserRequest($data)
     $msg .= '<p>Best regards,</p>';
     $msg .= '<p>Youth Development Scholarship</p>';
 
-    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "2" : '5';
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '5';
 
     $sendEmail = sendEmail($adEmail, $applicantName . ' - Account Deletion', $msg, $emailType, $requesterEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
@@ -1219,7 +1219,7 @@ function addAdminAccount($data)
 
     if ($query) 
     {
-        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1') ? "1" : '5';
+        $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '5';
         $name = $data['firstName'] . ' ' . $data['lastName'];
 
         $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
@@ -1383,4 +1383,25 @@ function updateAdminAccount($data)
     $query = $conn->query($sql);
 
     return ($query) ? 'success' : 'Error: ' . $conn->error;
+}
+
+function cancelSubmitApplication($id)
+{
+    include("dbconnection.php");
+
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+    
+    $sql = "UPDATE scholarship_application SET  `info_flag`='0',
+                                                `educ_flag`='0',
+                                                `family_flag`='0',
+                                                `add_flag`='0',
+                                                `req_flag`='0',
+                                                `current_active` = 'info_flag',
+                                                `status`='0'
+                                            WHERE userId = " . $id . " 
+            AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success': $conn->error; $conn->rollback();
 }

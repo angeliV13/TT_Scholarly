@@ -14,6 +14,14 @@
   <!-- DataTables -->
   <script src="assets/vendor/datatables/js/dataTables.jquery.min.js"></script>
 
+  <!-- PRINTING FROM DATA TABLES -->
+  <script src="assets/vendor/datatables/js/dataTables.buttons.min.js"></script>
+  <script src="assets/vendor/jquery/jszip.min.js"></script>
+  <script src="assets/vendor/jquery/pdfmake.min.js"></script>
+  <script src="assets/vendor/jquery/vfs_fonts.min.js"></script>
+  <script src="assets/vendor/datatables/js/buttons.html5.min.js"></script>
+  <script src="assets/vendor/datatables/js/dataTables.buttons.print.min.js"></script>
+
 
   <!-- Vendor JS Files 2 -->
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>

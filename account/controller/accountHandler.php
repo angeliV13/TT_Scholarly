@@ -274,6 +274,10 @@ if (isset($_REQUEST['action']))
 
         echo updateAdminAccount($data);
     }
+    else if ($action == 25) // Cancel Submission
+    {
+        echo cancelSubmitApplication(isset($_POST['userId']) ? $_POST['userId'] : '');
+    }
 }
 
 
