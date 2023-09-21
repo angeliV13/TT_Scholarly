@@ -19,24 +19,68 @@ $("#genrep_applicant_btn").on("click", function (e) {
             $('#dynamic_table thead tr').empty();
             $('#dynamic_table tbody tr').empty();
 
-
             theadtr.forEach(headtr => {
                 $('#dynamic_table thead tr').append(
                     '<th scope="col">' + headtr + '</th>'
                 );
             });
-            reportTable(tbodytr);
+            reportTable(tbodytr, 'Applicants Information');
         },
     });
 });
 
-function reportTable(data){
+function reportTable(data, title){
 
     if ( $.fn.DataTable.isDataTable('#dynamic_table') ) {
         $('#dynamic_table').DataTable().destroy();
     }
     
     let dynamic_table = $('#dynamic_table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copy',
+                className: 'btn btn-primary btn-small',
+                title: '',
+            },
+            {
+                extend      : 'csv'  ,
+                className  : 'btn btn-primary btn-small',
+                title      : ''
+            },
+            {
+                extend      : 'excel', 
+                className   : 'btn btn-primary btn-small',
+                title       : title,
+            },
+            // {
+            //     extend      : 'pdf' ,
+            //     className   : 'btn btn-primary btn-small',
+            //     title       : title,
+            //     orientation : 'portrait',
+            //     text        : 'Portrait PDF',
+            // },
+            // {
+            //     extend      : 'pdf' ,
+            //     className   : 'btn btn-primary btn-small',
+            //     title       : title,
+            //     orientation : 'landscape',
+            //     text        : 'Landscape PDF',
+            // },
+            {
+                extend      : 'print', 
+                className   : 'btn btn-primary btn-small',
+                title       : '',
+                //For repeating heading.
+                repeatingHead: {
+                    logo: 'images/tts-chrome-192x192.png',
+                    logoPosition: 'center',
+                    logoStyle: 'height: 96px; width: 96px;',
+                    title: '<h2 class="text-center">'+ title +'</h2>'
+                },
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": false,
         "paging": false,
         "searching": true,
@@ -53,11 +97,12 @@ function reportTable(data){
         fixedColumns: {
             leftColumns: 0
         },
-        scrollY: 505,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
+        // scrollX: false,
+        // scrollY: 505,
+        // scrollCollapse: false,
+        // scroller: {
+        //     loadingIndicator: false
+        // },
         stateSave: false,
     });
 }
