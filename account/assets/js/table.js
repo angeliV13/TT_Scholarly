@@ -245,7 +245,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [10, 11, 12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -418,7 +418,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [10, 11, 12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -505,7 +505,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [10, 11] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -548,7 +548,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -591,7 +591,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [10, 11, 12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -634,7 +634,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -677,7 +677,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [10, 11, 12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -720,7 +720,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [10, 11, 12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
