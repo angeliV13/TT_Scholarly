@@ -421,7 +421,10 @@ function accountListingTable($acc_id, $acc_type, $view_type = 1) //View Type = 1
             }
 
             $nestedData[] = static_count();
-            $nestedData[] = getUserNameFromId($id);
+            // $nestedData[] = getUserNameFromId($id);
+            $nestedData[] = $last_name;
+            $nestedData[] = $first_name;
+            $nestedData[] = $middle_name;
             $nestedData[] = $user_name;
             $nestedData[] = $email;
             $nestedData[] = $type;
@@ -732,7 +735,9 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
 
             $data[] = [
                 static_count(),
-                $last_name . ', ' . $first_name, //Name
+                $last_name,
+                $first_name,
+                $middle_name,
                 (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name
                 (isset($schoolDetails['class_type']))    ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($scholarType['scholarType'])                 ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
@@ -844,7 +849,9 @@ function graduatesTable()
 
             $data[] = [
                 static_count(),
-                $last_name . ', ' . $first_name, //Name
+                $last_name,
+                $first_name,
+                $middle_name,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
                 (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
@@ -904,7 +911,9 @@ function graduatingTable()
 
             $data[] = [
                 static_count(),
-                $last_name . ', ' . $first_name, //Name
+                $last_name,
+                $first_name,
+                $middle_name,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
                 (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,

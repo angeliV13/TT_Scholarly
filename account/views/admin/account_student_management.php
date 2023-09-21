@@ -25,7 +25,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
+                                        <th>Last Name</th>
+                                        <th>First Name</th>
+                                        <th>Middle Name</th>
                                         <th>Username</th>
                                         <th>Email Address</th>
                                         <th>Account Type</th>
