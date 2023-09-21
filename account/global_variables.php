@@ -11,7 +11,8 @@ $bootstrapIcons = ['Circle' => 'bi bi-check-circle-fill', 'User' => 'bi bi-peopl
 'Submit 2' => 'bi bi-check-square', 'Archive' => 'bi bi-archive', 'Bar Graph' => 'bi bi-file-bar-graph', 'Card Image' => 'bi bi-card-image', 
 'File Check' => 'bi bi-file-check', 'File Earmark Check' => 'bi bi-file-earmark-check', 'File Earmark X' => 'bi bi-file-earmark-x', 
 'File Earmark Excel' => 'bi bi-file-earmark-excel', 'File Earmark Text' => 'bi bi-file-earmark-text', 'Person Check' => 'bi bi-person-check',
-'Person Dash' => 'bi bi-person-dash', 'Person Plus' => 'bi bi-person-plus', 'Person X' => 'bi bi-person-x', 'Person' => 'bi bi-person'];
+'Person Dash' => 'bi bi-person-dash', 'Person Plus' => 'bi bi-person-plus', 'Person X' => 'bi bi-person-x', 'Person' => 'bi bi-person',
+'Info Cirle' => 'bi bi-info-circle', 'Question Circle' => 'bi bi-question-circle', 'X Circle' => 'bi bi-x-circle', 'X' => 'bi bi-x'];
 
 $accountTypeArr = ['0' => 'Super Admin', '1' => 'Admin', '2' => 'Beneficiaries', '3' => 'Applicant'];
 $relationshipArr = ['Brother' => 'Brother', 'Sister' => 'Sister', 'Grandfather' => 'Grandfather', 'Grandmother' => 'Grandmother', 'Uncle' => 'Uncle', 'Aunt' => 'Aunt', 

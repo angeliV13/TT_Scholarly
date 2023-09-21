@@ -1031,12 +1031,14 @@ function set_applicant_status($data)
     $id = $data['applicantId'];
     $decision = $data['decision'];
     $date = $data['date'];
-    $startTime = $data['startTime'];
-    $endTime = $data['endTime'];
+    $endDate = $data['dateEnd'];
+    $reason = $data['reason'];
     $decisionText = get_status_text($decision);
-    $msgStatus = get_message_text_status($decision, $date, $startTime, $endTime);
+    $msgStatus = get_message_text_status($decision, $date, $endDate, $reason);
     $msgText = $msgStatus['text'];
     $msgType = $msgStatus['notifType'];
+
+    $decision = ($decision == 6) ? 0 : $decision;
 
     $userInfo = get_user_info($id);
     $userData = get_user_data($id);
@@ -1078,7 +1080,7 @@ function set_applicant_status($data)
     $notif = insert_notification($notifData);
     if ($notif !== 'success') return 'Error: ' . $notif;
 
-    $updateStatus = update_applicant_status($id, $decision);
+    $updateStatus = update_applicant_status($id, $decision, $date, $endDate, $reason);
     if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
 
     return 'success';

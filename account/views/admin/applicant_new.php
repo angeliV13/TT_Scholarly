@@ -36,6 +36,10 @@
                                 <th>Year Level</th>
                                 <th>Contact No.</th>
                                 <th>Barangay</th>
+                                <th>Examination Start Date</th>
+                                <th>Examination Start Date</th>
+                                <th>Interview Start Date</th>
+                                <th>Interview End Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

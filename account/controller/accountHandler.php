@@ -200,8 +200,8 @@ if (isset($_REQUEST['action']))
             'decision'          => isset($_POST['decision']) ? $_POST['decision'] : '',
             'applicantId'       => isset($_POST['applicantId']) ? $_POST['applicantId'] : '',
             'date'              => isset($_POST['date']) ? $_POST['date'] : '',
-            'startTime'         => isset($_POST['startTime']) ? $_POST['startTime'] : '',
-            'endTime'           => isset($_POST['endTime']) ? $_POST['endTime'] : '',
+            'dateEnd'           => isset($_POST['dateEnd']) ? $_POST['dateEnd'] : '',
+            'reason'            => isset($_POST['reason']) ? $_POST['reason'] : '',
         ];
 
         echo set_applicant_status($data);

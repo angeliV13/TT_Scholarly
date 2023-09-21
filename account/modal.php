@@ -27,6 +27,10 @@
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="5">
                         <label class="form-check-label" for="interviewRadio">Reject Application</label>
                     </div>
+                    <div class="">
+                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="6">
+                        <label class="form-check-label" for="interviewRadio">Send Email Notification</label>
+                    </div>
                 </div>
                 <div>
                     <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button>

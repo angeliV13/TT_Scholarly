@@ -620,10 +620,12 @@ function get_status_text($type)
             return "Application Approved";
         case 5:
             return "Application Rejected";
+        case 6:
+            return "Follow Up Action Needed";
     }
 }
 
-function get_message_text_status($type, $date = "", $startTime = "", $endTime = "")
+function get_message_text_status($type, $date = "", $endDate = "", $reason = "")
 {
     $text = $notifType = "";
     switch ($type) 
@@ -631,17 +633,17 @@ function get_message_text_status($type, $date = "", $startTime = "", $endTime = 
         case 2:
             $text .= "<p>Your scholarship application has been reviewed. You are now scheduled for an Assesment Exam</p><br>";
             $text .= "<p>Here are the details:</p><br>";
-            $text .= "<p>Date: " . $date . "</p>";
-            $text .= "<p>Time: " . $startTime . " - " . $endTime . "</p>";
-            $text .= "<p>Please be on time.</p>";
+            $text .= "<p>Start Date: <b>" . $date . "</b></p>";
+            $text .= "<p>End Date: <b>" . $endDate . "</b></p>";
+            $text .= "<p>Please be on time.</p><br>";
             $notifType = 3;
             break;
         case 3:
             $text .= "<p>This is to inform you that you have passed the Assesment Exam. You are now scheduled for an Interview.</p><br>";
             $text .= "<p>Here are the details:</p><br>";
-            $text .= "<p>Date: " . $date . "</p>";
-            $text .= "<p>Time: " . $startTime . " - " . $endTime . "</p>";
-            $text .= "<p>Please be on time.</p>";
+            $text .= "<p>Start Date: <b>" . $date . "</b></p>";
+            $text .= "<p>End Date: <b>" . $endDate . "</b></p>";
+            $text .= "<p>Please be on time.</p><br>";
             $notifType = 4;
             break;
         case 4:
@@ -649,8 +651,16 @@ function get_message_text_status($type, $date = "", $startTime = "", $endTime = 
             $notifType = 5;
             break;
         case 5:
-            $text .= "<p>After careful consideration, we regret to inform you that your scholarship application has been rejected.</p><br>";
+            $text .= "<p>After careful consideration, we regret to inform you that your scholarship application has been rejected.</p>";
+            $text .= "<p>With a reason of: <b>" . $reason . "</b></p>";
+            $text .= "<p>Please contact the Scholarship Office for more information.</p><br>";
             $notifType = 6;
+            break;
+        case 6:
+            $text .= "<p>Please be informed that your scholarship application cannot continue due to the following reason(s):</p><br>";
+            $text .= "<p><b>" . $reason . "<b></p>";
+            $text .= "<p>Please contact the Scholarship Office for more information.</p><br>";
+            $notifType = 12;
             break;
     }
 
@@ -1372,14 +1382,27 @@ function updateDeleteRequest($data)
     return ($query) ? "success" : $conn->error;
 }
 
-function update_applicant_status($id, $status)
+function update_applicant_status($id, $status, $date = "", $end = "", $reason = "")
 {
     include("dbconnection.php");
 
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
-    $sql = "UPDATE scholarship_application SET status = " . $status . " WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
+    $sql = "UPDATE scholarship_application SET status = " . $status . "";
+
+    if ($date != "")
+    {
+        $sql .= ($status == 2) ? ", exam_start_date = '" . $date . "', exam_end_date = '" . $end . "'" : ", interview_start_date = '" . $date . "', interview_end_date = '" . $end . "'";
+    }
+
+    if ($reason != "")
+    {
+        $sql .= ", reason_of_admin = '" . $reason . "'";
+    }
+
+    $sql .= " WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
+
     $query = $conn->query($sql);
 
     return ($query) ? true : $conn->error;
