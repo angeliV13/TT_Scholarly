@@ -926,7 +926,6 @@ function check_application_data($id)
     return "success";
 }
 
-
 function submitApplication($id)
 {
     include("dbconnection.php");
@@ -979,7 +978,17 @@ function submitApplication($id)
     ];
 
     $notif = insert_notification($notifData);
-    if ($notif !== 'success') return 'Error: ' . $notif;
+    if ($notif !== 'success') return 'Error Admin Notification: ' . $notif;
+
+    $notifData = [
+        'user_id'       => $id,
+        'notif_type'    => 12,
+        'notif_body'    => 'You have successfully submitted your scholarship application. You will be notified once your application has been reviewed.',
+        'notif_link'    => '?nav=dashboard',
+    ];
+
+    $notif = insert_notification($notifData);
+    if ($notif !== 'success') return 'Error User Notification: ' . $notif;
 
     $app = updateApplication(0, $id);
     if ($app != "success") return $app;
@@ -1071,14 +1080,26 @@ function set_applicant_status($data)
     $notifiedUsers = get_notif_type(2);
 
     $notifData = [
-        'user_id'       => $id,
+        // 'user_id'       => $id,
+        'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => $msgType,
         'notif_body'    => $decisionText,
         'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
     ];
 
     $notif = insert_notification($notifData);
-    if ($notif !== 'success') return 'Error: ' . $notif;
+    if ($notif !== 'success') return 'Error Admin Notification: ' . $notif;
+
+    $notifData = [
+        'user_id'       => $id,
+        // 'user_id'       => get_user_id_notification($notifiedUsers),
+        'notif_type'    => $msgType,
+        'notif_body'    => $decisionText,
+        'notif_link'    => '?nav=dashboard',
+    ];
+
+    $notif = insert_notification($notifData);
+    if ($notif !== 'success') return 'Error User Notification: ' . $notif;
 
     $updateStatus = update_applicant_status($id, $decision, $date, $endDate, $reason);
     if ($updateStatus != 'success') return 'Error: ' . $updateStatus;

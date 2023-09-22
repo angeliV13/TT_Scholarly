@@ -833,9 +833,11 @@ $(document).on("click", ".viewInfoClass", function () {
             "id": id
         },
         success: function (data) {
+            // console.log(data);
             $("#accountViewId").val(id);
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
+            $("#currentStatus").html($("#scholarStatus").val());
         }
     })
 })
@@ -1062,7 +1064,7 @@ function reasonForRejection(val, accountViewId) {
 
 function sendEmailNotification(val, accountViewId) {
     Swal.fire({
-        title: "Reason for Rejection",
+        title: "Send Notification to Applicant",
         html: `<div class="form-group mb-3">
                     <label for="reason">Reason</label>
                     <select class="form-control" id="reason">

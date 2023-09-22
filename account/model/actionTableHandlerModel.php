@@ -49,10 +49,12 @@ function getProfile($account_id)
     $working_flag = ($gen_info['working_flag'] == 0) ? "checked" : "";
     $other_pwd_flag = ($gen_info['other_pwd'] == 0) ? "checked" : "";
     
-    $scholarType = check_status($account_id)['scholarType'];
-    $scholarTypeName = get_scholar_type($scholarType);
+    $scholarType = check_status($account_id);
+    $scholarTypeName = get_scholar_type($scholarType['scholarType']);
+    $scholarStatus = get_scholar_status($scholarType['status']);
 
     $profile = '<div class="row" id="profile">';
+    $profile .= '<input type="hidden" id="scholarStatus" value="' . $scholarStatus . '">';
 
     if ($accountType == 3)
     {
@@ -324,8 +326,9 @@ function getProfile($account_id)
                                                                     <input disabled type="text" class="form-control" id="civilStatus" aria-describedby="civilStatus" value="' . $civilArr[$civil_status] . '">
                                                                 </div>
                                                             </form>
-                                                        </div>';
-
+                                                        </div>
+    <div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">';
+    // DO NOT COMMENT THE ABOVE LINE
     // Educational Background 
     $profile .= '<div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">
                     <div class="d-flex justify-content-between align-items-center">

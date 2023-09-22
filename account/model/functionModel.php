@@ -386,7 +386,8 @@ function get_scholarship_requirements($type = "NA")
 
 function get_scholar_type($type)
 {
-    switch ($type) {
+    switch ($type) 
+    {
         case 1:
             return "College Scholarship";
         case 2:
@@ -395,6 +396,25 @@ function get_scholar_type($type)
             return "SHS Educational Assistance";
         default:
             return "Unknown";
+    }
+}
+
+function get_scholar_status($type)
+{
+    switch ($type)
+    {
+        case 0:
+            return "Pending";
+        case 1:
+            return "Application Submitted";
+        case 2:
+            return "For Assesment Exam";
+        case 3:
+            return "For Interview";
+        case 4:
+            return "Application Approved";
+        case 5:
+            return "Application Rejected";
     }
 }
 
@@ -925,10 +945,12 @@ function show_notification($view = 0, $limit = 0)
             $body .= '</a>';
         }
 
-
-        $body .= '<li class="dropdown-footer">';
-        $body .= '<a href="?nav=ntf_settings">Show all notifications</a>';
-        $body .= '</li>';
+        if ($_SESSION['account_type'] <= 1)
+        {
+            $body .= '<li class="dropdown-footer">';
+            $body .= '<a href="?nav=ntf_settings">Show all notifications</a>';
+            $body .= '</li>';
+        }
     } 
     else 
     {
