@@ -240,17 +240,19 @@
               <?php endif; ?>
 
               <?php if ($_SESSION['account_type'] == 3) : ?>
-                <?php $scholar_type = 2; $scholarType = 1 + $scholar_type; ?>
-                  <?php if ($status['add_flag'] <> 0) : ?>
-                  <!--  -->
-                  <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "")?>">
-                      <a class="nav-link collapsed" id="reqBtn" href="<?= (($status['add_flag'] == 0) ? "index.phps" : "index.php?nav=apply-applicant")?>">
-                          <i class="bi bi-files"></i>
-                          <span>General Requirements</span>
-                      </a>
-                  </li><!-- End Dashboard Nav -->
+                  <?php $scholar_type = 2;
+                    $scholarType = 1 + $scholar_type; ?>
+                  <?php if ($applicationAccess != null) : ?>
+                      <?php if ($applicationAccess[$scholarType] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) : ?>
+                          <!--  -->
+                          <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "") ?>">
+                              <a class="nav-link collapsed" id="reqBtn" href="<?= (($status['add_flag'] == 0) ? "index.phps" : "index.php?nav=apply-applicant") ?>">
+                                  <i class="bi bi-files"></i>
+                                  <span>General Requirements</span>
+                              </a>
+                          </li><!-- End Dashboard Nav -->
+                      <?php endif; ?>
                   <?php endif; ?>
-
                   <!-- Submit Application -->
                   <?php if ($status['req_flag'] == 1 and !$finishFlag) : ?>
                       <li class="nav-item">

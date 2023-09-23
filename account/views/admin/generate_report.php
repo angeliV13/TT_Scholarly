@@ -40,9 +40,9 @@
                                         <div class="column position-relative">
                                             <!-- Academic Year -->
                                             <div class="row mb-3">
-                                                <label for="ScholarType" class="col-sm-12 col-form-label">Academic Year:</label>
-                                                <div class="col-sm-12" id="">
-                                                    <select class="form-select" id="ScholarType">
+                                                <label for="applicantAy" class="col-sm-12 col-form-label">Academic Year:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="applicantAy">
                                                         <option selected value="">-- </option>
                                                         <option value="1">2020-2021</option>
                                                         <option value="2">2021-2022</option>
@@ -54,9 +54,9 @@
 
                                             <!-- Scholarship Type -->
                                             <div class="row mb-3">
-                                                <label for="ScholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
-                                                <div class="col-sm-12" id="">
-                                                    <select class="form-select" id="ScholarType">
+                                                <label for="app_sholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="app_sholartype">
                                                         <option selected value="">-- </option>
                                                         <option value="1">Educational Assistance Program</option>
                                                         <option value="2">Full Scholarship Program</option>
@@ -66,9 +66,9 @@
 
                                             <!-- Education Level -->
                                             <div class="row mb-3">
-                                                <label for="educationLevel" class="col-sm-12 col-form-label font-bold">Educational Level:</label>
+                                                <label for="app_educLevel" class="col-sm-12 col-form-label font-bold">Educational Level:</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" id="educationLevel">
+                                                    <select class="form-select" id="app_educLevel">
                                                         <option selected value="">-- </option>
                                                         <option value="1">College - Private</option>
                                                         <option value="2">College - Public</option>
@@ -79,9 +79,9 @@
 
                                             <!-- School Name -->
                                             <div class="row mb-3">
-                                                <label for="schoolName" class="col-sm-12 col-form-label font-bold">School Name:</label>
+                                                <label for="app_schoolName" class="col-sm-12 col-form-label font-bold">School Name:</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" id="SchoolName">
+                                                    <select class="form-select" id="app_SchoolName">
                                                         <option selected value="">-- </option>
                                                         <option value="1">BSU</option>
                                                         <option value="2">FAITH</option>
@@ -92,9 +92,9 @@
 
                                             <!-- Year Level -->
                                             <div class="row mb-3">
-                                                <label for="yearLevel" class="col-sm-12 col-form-label font-bold">Year Level :</label>
+                                                <label for="app_yearLevel" class="col-sm-12 col-form-label font-bold">Year Level :</label>
                                                 <div id="yearLevelContainer" class="col-sm-12">
-                                                    <select class="form-select" id="yearLevel">
+                                                    <select class="form-select" id="app_yearLevel">
                                                         <option selected value="">-- </option>
                                                         <option value="1">1st Year</option>
                                                         <option value="2">2nd Year</option>
@@ -109,9 +109,9 @@
 
                                             <!-- COURSE/STRAND -->
                                             <div class="row mb-3">
-                                                <label for="courseStrand" class="col-sm-12 col-form-label font-bold">Course/ Strand:</label>
-                                                <div id="courseStrandContainer" class="col-sm-12">
-                                                    <select class="form-select" id="courseStrand">
+                                                <label for="app_courseStrand" class="col-sm-12 col-form-label font-bold">Course/ Strand:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="app_courseStrand">
                                                         <option selected value="">-- </option>
                                                         <option value="1">BS Information Technology</option>
                                                         <option value="2">Computer Science</option>
@@ -152,7 +152,6 @@
                         </div>
                     </div>
                 </div><!-- End Reports -->
-
             </div>
 
             <!-- Beneficiaries -->
@@ -171,7 +170,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <!-- Applicants Report Content -->
+                            <!-- Beneficiaries Report Content -->
                             <div id="genrep_beneficiaries" class="card-body collapse">
                                 <div class="col-lg-12">
                                     <!-- Academic Year -->
@@ -184,9 +183,9 @@
                                         <div id="genrep_beneficiaries" class="column position-relative">
                                             <!-- Academic Year -->
                                             <div class="row mb-3">
-                                                <label for="ScholarType" class="col-sm-12 col-form-label">Academic Year:</label>
-                                                <div class="col-sm-12" id="">
-                                                    <select class="form-select" id="ScholarType">
+                                                <label for="beneficiariesAy" class="col-sm-12 col-form-label">Academic Year:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="beneficiariesAy">
                                                         <option selected value="">-- </option>
                                                         <option value="1">2020-2021</option>
                                                         <option value="2">2021-2022</option>
@@ -198,9 +197,9 @@
 
                                             <!-- Scholarship Type -->
                                             <div class="row mb-3">
-                                                <label for="ScholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
-                                                <div class="col-sm-12" id="">
-                                                    <select class="form-select" id="ScholarType">
+                                                <label for="bene_ScholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="bene_ScholarType">
                                                         <option selected value="">-- </option>
                                                         <option value="1">Educational Assistance Program</option>
                                                         <option value="2">Full Scholarship Program</option>
@@ -210,9 +209,9 @@
 
                                             <!-- Education Level -->
                                             <div class="row mb-3">
-                                                <label for="educationLevel" class="col-sm-12 col-form-label font-bold">Educational Level:</label>
+                                                <label for="bene_educationLevel" class="col-sm-12 col-form-label font-bold">Educational Level:</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" id="educationLevel">
+                                                    <select class="form-select" id="bene_educationLevel">
                                                         <option selected value="">-- </option>
                                                         <option value="1">College - Private</option>
                                                         <option value="2">College - Public</option>
@@ -223,9 +222,9 @@
 
                                             <!-- School Name -->
                                             <div class="row mb-3">
-                                                <label for="schoolName" class="col-sm-12 col-form-label font-bold">School Name:</label>
+                                                <label for="bene_schoolName" class="col-sm-12 col-form-label font-bold">School Name:</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" id="SchoolName">
+                                                    <select class="form-select" id="bene_schoolName">
                                                         <option selected value="">-- </option>
                                                         <option value="1">BSU</option>
                                                         <option value="2">FAITH</option>
@@ -236,9 +235,9 @@
 
                                             <!-- Year Level -->
                                             <div class="row mb-3">
-                                                <label for="yearLevel" class="col-sm-12 col-form-label font-bold">Year Level :</label>
-                                                <div id="yearLevelContainer" class="col-sm-12">
-                                                    <select class="form-select" id="yearLevel">
+                                                <label for="bene_yearLevel" class="col-sm-12 col-form-label font-bold">Year Level :</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="bene_yearLevel">
                                                         <option selected value="">-- </option>
                                                         <option value="1">1st Year</option>
                                                         <option value="2">2nd Year</option>
@@ -253,9 +252,9 @@
 
                                             <!-- COURSE/STRAND -->
                                             <div class="row mb-3">
-                                                <label for="courseStrand" class="col-sm-12 col-form-label font-bold">Course/ Strand:</label>
-                                                <div id="courseStrandContainer" class="col-sm-12">
-                                                    <select class="form-select" id="courseStrand">
+                                                <label for="bene_courseStrand" class="col-sm-12 col-form-label font-bold">Course/ Strand:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="bene_courseStrand">
                                                         <option selected value="">-- </option>
                                                         <option value="1">BS Information Technology</option>
                                                         <option value="2">Computer Science</option>
@@ -275,7 +274,7 @@
                                             <!-- Beneficiaries Status -->
                                             <div class="row mb-3">
                                                 <label for="bene_status" class="col-sm-12 col-form-label">Status:</label>
-                                                <div class="col-sm-12" id="">
+                                                <div class="col-sm-12">
                                                     <select class="form-select" id="bene_status">
                                                         <option selected value="">-- </option>
                                                         <option value="1">Not Yet Assessed</option>
@@ -331,9 +330,9 @@
                                         <div id="genrep_graduating" class="column position-relative">
                                             <!-- Academic Year -->
                                             <div class="row mb-3">
-                                                <label for="ScholarType" class="col-sm-12 col-form-label">Academic Year:</label>
-                                                <div class="col-sm-12" id="">
-                                                    <select class="form-select" id="ScholarType">
+                                                <label for="graduatingAy" class="col-sm-12 col-form-label">Academic Year:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="graduatingAy">
                                                         <option selected value="">-- </option>
                                                         <option value="1">2020-2021</option>
                                                         <option value="2">2021-2022</option>
@@ -345,9 +344,9 @@
 
                                             <!-- Scholarship Type -->
                                             <div class="row mb-3">
-                                                <label for="ScholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
+                                                <label for="graudating_scholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
                                                 <div class="col-sm-12" id="">
-                                                    <select class="form-select" id="ScholarType">
+                                                    <select class="form-select" id="graudating_scholarType">
                                                         <option selected value="">-- </option>
                                                         <option value="1">Educational Assistance Program</option>
                                                         <option value="2">Full Scholarship Program</option>
@@ -358,9 +357,9 @@
 
                                             <!-- Education Level -->
                                             <div class="row mb-3">
-                                                <label for="educationLevel" class="col-sm-12 col-form-label font-bold">Educational Level:</label>
+                                                <label for="graduating_educationLevel" class="col-sm-12 col-form-label font-bold">Educational Level:</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" id="educationLevel">
+                                                    <select class="form-select" id="graduating_educationLevel">
                                                         <option selected value="">-- </option>
                                                         <option value="1">College - Private</option>
                                                         <option value="2">College - Public</option>
@@ -371,9 +370,9 @@
 
                                             <!-- School Name -->
                                             <div class="row mb-3">
-                                                <label for="schoolName" class="col-sm-12 col-form-label font-bold">School Name:</label>
+                                                <label for="graduating_schoolName" class="col-sm-12 col-form-label font-bold">School Name:</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" id="SchoolName">
+                                                    <select class="form-select" id="graduating_schoolName">
                                                         <option selected value="">-- </option>
                                                         <option value="1">BSU</option>
                                                         <option value="2">FAITH</option>
@@ -384,9 +383,9 @@
 
                                             <!-- Year Level -->
                                             <div class="row mb-3">
-                                                <label for="yearLevel" class="col-sm-12 col-form-label font-bold">Year Level :</label>
-                                                <div id="yearLevelContainer" class="col-sm-12">
-                                                    <select class="form-select" id="yearLevel">
+                                                <label for="graduating_yearLevel" class="col-sm-12 col-form-label font-bold">Year Level :</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="graduating_yearLevel">
                                                         <option selected value="">-- </option>
                                                         <option value="1">1st Year</option>
                                                         <option value="2">2nd Year</option>
@@ -401,9 +400,9 @@
 
                                             <!-- COURSE/STRAND -->
                                             <div class="row mb-3">
-                                                <label for="courseStrand" class="col-sm-12 col-form-label font-bold">Course/ Strand:</label>
-                                                <div id="courseStrandContainer" class="col-sm-12">
-                                                    <select class="form-select" id="courseStrand">
+                                                <label for="graduating_courseStrand" class="col-sm-12 col-form-label font-bold">Course/ Strand:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-select" id="graduating_courseStrand">
                                                         <option selected value="">-- </option>
                                                         <option value="1">BS Information Technology</option>
                                                         <option value="2">Computer Science</option>
@@ -421,9 +420,9 @@
 
                                             <!-- Beneficiaries Status -->
                                             <div class="row mb-3">
-                                                <label for="bene_status" class="col-sm-12 col-form-label">Status:</label>
+                                                <label for="graduating_status" class="col-sm-12 col-form-label">Status:</label>
                                                 <div class="col-sm-12" id="">
-                                                    <select class="form-select" id="bene_status">
+                                                    <select class="form-select" id="graduating_status">
                                                         <option selected value="">-- </option>
                                                         <option value="1">Graduated</option>
                                                         <option value="3">Did not Graduate</option>
@@ -502,8 +501,6 @@
                 </div>
             </div>
             <!-- End Recent Sales -->
-
-
         </div>
         </section?>
 </main><!-- End #main -->

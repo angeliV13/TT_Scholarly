@@ -25,7 +25,8 @@ if(isset($_SESSION['id']))
 
         if($user_data[3] == 3)
         {
-           $examAccess      = examAccess();
+           $examAccess          = examAccess();
+           $applicationAccess   = applicationAccess();
         }
     }
 }

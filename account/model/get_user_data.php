@@ -42,6 +42,32 @@ function assessmentAccess()
 
 }
 
+function applicationAccess()
+{
+    include("dbconnection.php");
+
+    $ay = getCurrentAY();
+
+    $application_data = [];
+
+    // Checks if Account Exists
+    $query = "SELECT * FROM set_application WHERE ay_id = '" . $ay . "' ORDER BY id DESC LIMIT 1";
+    $sql = mysqli_query($conn, $query) or die("Error AQ001: " . mysqli_error($conn));
+
+    if ($sql->num_rows > 0)
+    {
+        while ($row = mysqli_fetch_assoc($sql))
+        {
+            extract($row);
+        }  
+
+        array_push($application_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+    }
+
+    return $application_data;
+
+}
+
 function renewalAccess()
 {
     include("dbconnection.php");
