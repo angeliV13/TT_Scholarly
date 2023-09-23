@@ -652,17 +652,17 @@ function get_message_text_status($type, $date = "", $endDate = "", $reason = "")
     {
         case 2:
             $text .= "<p>Your scholarship application has been reviewed. You are now scheduled for an Assesment Exam</p><br>";
-            $text .= "<p>Here are the details:</p><br>";
-            $text .= "<p>Start Date: <b>" . $date . "</b></p>";
-            $text .= "<p>End Date: <b>" . $endDate . "</b></p>";
+            $text .= "<p>Here are the details:</p>";
+            $text .= "<p>Start Date: <b>" . date('F j,Y H:i:s', strtotime($date)) . "</b></p>";
+            $text .= "<p>End Date: <b>" . date('F j,Y H:i:s', strtotime($endDate)) . "</b></p>";
             $text .= "<p>Please be on time.</p><br>";
             $notifType = 3;
             break;
         case 3:
             $text .= "<p>This is to inform you that you have passed the Assesment Exam. You are now scheduled for an Interview.</p><br>";
-            $text .= "<p>Here are the details:</p><br>";
-            $text .= "<p>Start Date: <b>" . $date . "</b></p>";
-            $text .= "<p>End Date: <b>" . $endDate . "</b></p>";
+            $text .= "<p>Here are the details:</p>";
+            $text .= "<p>Start Date: <b>" . date('F j,Y H:i:s', strtotime($date)) . "</b></p>";
+            $text .= "<p>End Date: <b>" . date('F j,Y H:i:s', strtotime($endDate)) . "</b></p>";
             $text .= "<p>Please be on time.</p><br>";
             $notifType = 4;
             break;
