@@ -245,7 +245,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -258,28 +258,6 @@ $(document).ready(function () {
             loadingIndicator: false
         },
         stateSave: false,
-
-        // "fnInitComplete" : function(oSettings, json) {
-        //     $("#collegeNewApplicantTable thead th").each( function ( i ) {
-        //         if ($(this).text() !== '') {
-        //             var isStatusColumn = (($(this).text() == 'Status') ? true : false);
-        //             var select = $('<select><option value=""></option></select>')
-        //                 .appendTo( $(this).empty() )
-        //                 .on( 'change', function () {
-        //                     var val = $(this).val();
-
-        //                     collegeNewApplicantTable.column( i )
-        //                         .search( val ? '^'+$(this).val()+'$' : val, true, false )
-        //                         .draw();
-        //                 } );
-
-        //             collegeNewApplicantTable.column( i ).data().unique().sort().each( function ( d, j ) {  
-        //                 select.append( '<option value="'+d+'">'+d+'</option>' );
-        //             } );	
-
-        //         }
-        //     } );
-        // }
     });
 
 
@@ -370,28 +348,6 @@ $(document).ready(function () {
             loadingIndicator: false
         },
         stateSave: false,
-
-        // "fnInitComplete" : function(oSettings, json) {
-        //     $("#graduatesTable thead th").each( function ( i ) {
-        //         if ($(this).text() !== '') {
-        //             var isStatusColumn = (($(this).text() == 'Status') ? true : false);
-        //             var select = $('<select><option value=""></option></select>')
-        //                 .appendTo( $(this).empty() )
-        //                 .on( 'change', function () {
-        //                     var val = $(this).val();
-
-        //                     graduatesTable.column( i )
-        //                         .search( val ? '^'+$(this).val()+'$' : val, true, false )
-        //                         .draw();
-        //                 } );
-
-        //                 graduatesTable.column( i ).data().unique().sort().each( function ( d, j ) {  
-        //                 select.append( '<option value="'+d+'">'+d+'</option>' );
-        //             } );	
-
-        //         }
-        //     } );
-        // }
     });
 
     // GRADUATES TABLE
@@ -436,28 +392,6 @@ $(document).ready(function () {
             loadingIndicator: false
         },
         stateSave: false,
-
-        // "fnInitComplete" : function(oSettings, json) {
-        //     $("#graduatingTable thead th").each( function ( i ) {
-        //         if ($(this).text() !== '') {
-        //             var isStatusColumn = (($(this).text() == 'Status') ? true : false);
-        //             var select = $('<select><option value=""></option></select>')
-        //                 .appendTo( $(this).empty() )
-        //                 .on( 'change', function () {
-        //                     var val = $(this).val();
-
-        //                     graduatingTable.column( i )
-        //                         .search( val ? '^'+$(this).val()+'$' : val, true, false )
-        //                         .draw();
-        //                 } );
-
-        //                 graduatingTable.column( i ).data().unique().sort().each( function ( d, j ) {  
-        //                 select.append( '<option value="'+d+'">'+d+'</option>' );
-        //             } );	
-
-        //         }
-        //     } );
-        // }
     });
 
     // Benef List Table
@@ -484,7 +418,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -571,7 +505,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -614,7 +548,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -657,7 +591,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -700,7 +634,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -743,7 +677,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -786,7 +720,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -899,18 +833,18 @@ $(document).on("click", ".viewInfoClass", function () {
             "id": id
         },
         success: function (data) {
+            // console.log(data);
             $("#accountViewId").val(id);
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
+            $("#currentStatus").html($("#scholarStatus").val());
         }
     })
 })
 
-let accountViewId = $('#accountViewId').val();
-
 $("input[name='decisionRadio']").on('change', function () {
     let val = $("input[name='decisionRadio']:checked").val();
-    console.log(val);
+    let accountViewId = $('#accountViewId').val();
     let text = icon = '';
 
     if (val == 2) {
@@ -922,9 +856,12 @@ $("input[name='decisionRadio']").on('change', function () {
     } else if (val == 4) {
         text = "Approve Applicant? You cannot undo this action.";
         icon = "info";
-    } else {
+    } else if (val == 5) {
         text = "Reject Applicant? You cannot undo this action.";
         icon = "warning";
+    } else {
+        text = "Send Notification to Applicant?";
+        icon = "question";
     }
 
     Swal.fire({
@@ -937,74 +874,39 @@ $("input[name='decisionRadio']").on('change', function () {
     }).then((result) => {
         if (result.isConfirmed) {
             if (val == 2 || val == 3) {
-                appointment(val);
+                appointment(val, accountViewId);
+            } else if (val == 4) {
+                approveApplicant(val, accountViewId);
+            } else if (val == 5) {
+                reasonForRejection(val, accountViewId);
             } else {
-                $.ajax({
-                    url: "controller/accountHandler.php",
-                    type: "POST",
-                    data: {
-                        action: 18,
-                        decision: val,
-                        applicantId: accountViewId
-                    },
-                    beforeSend: function () {
-                        showBeforeSend("Updating Applicant Status...");
-                    },
-                    success: function (data) {
-                        hideBeforeSend();
-                        if (data == "success") {
-                            Swal.fire({
-                                title: "Applicant Status Updated",
-                                text: "The applicant's status has been updated",
-                                icon: "success",
-                                confirmButtonText: "OK"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: `An error occured while updating the applicant's status. Please try again. Error: ${data}`,
-                            })
-                        }
-                    }
-                })
+                sendEmailNotification(val, accountViewId);
             }
         }
     })
 });
 
-function appointment(val) {
+function appointment(val, accountViewId) {
     // if val is 2 and 3, create two inputs for date and time
     Swal.fire({
         title: "Set Appointment for" + (val == 2 ? " Assessment" : " Interview"),
-        html: '<div class="form-group"><label for="date">Date</label><input type="date" class="form-control" id="date"></div><div class="form-group"><label for="startTime">Start Time</label><input type="time" class="form-control" id="startTime"></div><div class="form-group"><label for="endTime">End Time</label><input type="time" class="form-control" id="endTime"></div>',
+        html: '<div class="form-group"><label for="date">Start Date and Time</label><input type="datetime-local" class="form-control" id="date"></div><div class="form-group"><label for="dateEnd">End Date and Time</label><input type="datetime-local" class="form-control" id="dateEnd"></div>',
         showCancelButton: true,
         confirmButtonText: "Set",
         cancelButtonText: "Cancel",
         preConfirm: () => {
             let date = $('#date').val();
-            let startTime = $('#startTime').val();
-            let endTime = $('#endTime').val();
+            let dateEnd = $('#dateEnd').val();
 
-            if (date == '' || startTime == '' || endTime == '') {
+            if (date == '' || dateEnd == '' ) {
                 Swal.showValidationMessage(
                     `Please fill up all fields.`
                 )
             }
 
-            if (new Date(date + ' ' + time) < new Date()) {
+            if (dateEnd < date) {
                 Swal.showValidationMessage(
-                    `The date and time you set is invalid.`
-                )
-            }
-
-            if (startTime >= endTime) {
-                Swal.showValidationMessage(
-                    `The start time should be earlier than the end time.`
+                    `End date and time cannot be earlier than the start date and time.`
                 )
             }
         }
@@ -1016,8 +918,7 @@ function appointment(val) {
                 data: {
                     action: 18,
                     date: $('#date').val(),
-                    startTime: $('#startTime').val(),
-                    endTime: $('#endTime').val(),
+                    dateEnd: $('#dateEnd').val(),
                     decision: val,
                     applicantId: accountViewId
                 },
@@ -1042,6 +943,191 @@ function appointment(val) {
                             icon: "error",
                             title: "Oops...",
                             text: `An error occured while setting an appointment. Please try again. Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+}
+
+function approveApplicant(val, accountViewId) {
+    $.ajax({
+        url: "controller/accountHandler.php",
+        type: "POST",
+        data: {
+            action: 18,
+            decision: val,
+            applicantId: accountViewId
+        },
+        beforeSend: function () {
+            showBeforeSend("Updating Applicant Status...");
+        },
+        success: function (data) {
+            hideBeforeSend();
+            if (data == "success") {
+                Swal.fire({
+                    title: "Applicant Status Updated",
+                    text: "The applicant's status has been updated",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `An error occured while updating the applicant's status. Please try again. Error: ${data}`,
+                })
+            }
+        }
+    })
+}
+
+function reasonForRejection(val, accountViewId) {
+    Swal.fire({
+        title: "Reason for Rejection",
+        html: `<div class="form-group mb-3">
+                    <label for="reason">Reason</label>
+                    <select class="form-control" id="reason">
+                        <option value="1">With Failed Grades</option>
+                        <option value="2">Did Not Meet Maintaining GWA 2.50</option>
+                        <option value="3">Did Not Meet Deadline</option>
+                        <option value="4">With Dropped Subject</option>
+                        <option value="5">Did Not Submit Requirements</option>
+                        <option value="6">Others</option>
+                    </select>
+                </div>
+                <div class="form-group" id="otherReason">
+                    <label for="otherReason">Other Reason</label>
+                    <input type="text" class="form-control" id="otherReason">
+                </div>`,
+        showCancelButton: true,
+        confirmButtonText: "Submit",
+        cancelButtonText: "Cancel",
+        preConfirm: () => {
+            let reason = $('#reason').val();
+            let otherReason = $('#otherReason').val();
+
+            if (reason == 6 && otherReason == '') {
+                Swal.showValidationMessage(
+                    `Please fill up the reason field.`
+                )
+            }
+
+            let fullReason = (reason == 6 ? otherReason : $('#reason option:selected').text());
+
+            return fullReason;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                    action: 18,
+                    decision: val,
+                    applicantId: accountViewId,
+                    reason: result.value
+                },
+                beforeSend: function () {
+                    showBeforeSend("Rejecting Applicant...");
+                },
+                success: function (data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            title: "Applicant Rejected",
+                            text: "The applicant has been rejected",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `An error occured while rejecting the applicant. Please try again. Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+}
+
+function sendEmailNotification(val, accountViewId) {
+    Swal.fire({
+        title: "Send Notification to Applicant",
+        html: `<div class="form-group mb-3">
+                    <label for="reason">Reason</label>
+                    <select class="form-control" id="reason">
+                        <option value="1">Need to Resubmit Grades</option>
+                        <option value="2">Waiting for Grades</option>
+                        <option value="3">Must Submit COR and ID</option>
+                        <option value="4">Did Not Submit Requirements Graduate</option>
+                        <option value="5">Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="otherReason">Other Reason</label>
+                    <textarea class="form-control" id="otherReason"></textarea>
+                </div>`,
+        showCancelButton: true,
+        confirmButtonText: "Submit",
+        cancelButtonText: "Cancel",
+        preConfirm: () => {
+            let reason = $('#reason').val();
+            let otherReason = $('#otherReason').val();
+
+            if (reason == 5 && otherReason == '') {
+                Swal.showValidationMessage(
+                    `Please fill up the reason field.`
+                )
+            }
+
+            let fullReason = (reason == 6 ? otherReason : $('#reason option:selected').text());
+
+            return fullReason;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                    action: 18,
+                    decision: val,
+                    applicantId: accountViewId,
+                    reason: result.value
+                },
+                beforeSend: function () {
+                    showBeforeSend("Sending Notification...");
+                },
+                success: function (data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            title: "Applicant Notified",
+                            text: "The applicant has been notified",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `An error occured while notifying the applicant. Please try again. Error: ${data}`,
                         })
                     }
                 }

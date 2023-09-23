@@ -24,7 +24,7 @@ switch ($action) {
         echo schoolTable();
         break;
     case 5:
-        echo userTables(1);
+        echo userTables();
         break;
     case 6:
         echo websiteSocials();

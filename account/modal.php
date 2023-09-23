@@ -10,6 +10,13 @@
                     <input type="radio" class="btn-check" name="info" id="infoRequirements" value="2" autocomplete="off">
                     <label class="btn btn-outline-danger" for="infoRequirements">Requirements</label>
                 </form>
+                <!-- CURRENT STATUS LABEL TEXT -->
+                <div class="d-flex justify-content-center align-items-center gap-3">
+                    <div class="text-center">
+                        <h5 class="text-center">Current Status:</h5>
+                        <h6 class="text-center" id="currentStatus">Pending</h6>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-center align-items-center gap-3">
                     <div class="">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="2">
@@ -27,9 +34,13 @@
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="5">
                         <label class="form-check-label" for="interviewRadio">Reject Application</label>
                     </div>
+                    <div class="">
+                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="6">
+                        <label class="form-check-label" for="interviewRadio">Send Email Notification</label>
+                    </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button>
+                    <!-- <button type="button" class="btn btn-sm btn-primary" id="openButton">Add Comment</button> -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>

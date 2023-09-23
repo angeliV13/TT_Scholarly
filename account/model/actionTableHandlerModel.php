@@ -49,10 +49,12 @@ function getProfile($account_id)
     $working_flag = ($gen_info['working_flag'] == 0) ? "checked" : "";
     $other_pwd_flag = ($gen_info['other_pwd'] == 0) ? "checked" : "";
     
-    $scholarType = check_status($account_id)['scholarType'];
-    $scholarTypeName = get_scholar_type($scholarType);
+    $scholarType = check_status($account_id);
+    $scholarTypeName = get_scholar_type($scholarType['scholarType']);
+    $scholarStatus = get_scholar_status($scholarType['status']);
 
     $profile = '<div class="row" id="profile">';
+    $profile .= '<input type="hidden" id="scholarStatus" value="' . $scholarStatus . '">';
 
     if ($accountType == 3)
     {
@@ -324,8 +326,9 @@ function getProfile($account_id)
                                                                     <input disabled type="text" class="form-control" id="civilStatus" aria-describedby="civilStatus" value="' . $civilArr[$civil_status] . '">
                                                                 </div>
                                                             </form>
-                                                        </div>';
-
+                                                        </div>
+    <div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">';
+    // DO NOT COMMENT THE ABOVE LINE
     // Educational Background 
     $profile .= '<div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">
                     <div class="d-flex justify-content-between align-items-center">
@@ -769,183 +772,189 @@ function getProfile($account_id)
 
     // Father's Information
 
-    if (strpos(strtolower($family['father']['firstName']), 'na') === false)
+    if (isset($family['father']))
     {
-        $profile .= '<div class="d-flex justify-content-between align-items-center py-3">
-                        <h5 class="card-title">
-                            Father\'s
-                            Information
-                        </h5>
-                    </div>
-                    <!-- Custom Styled Validation with Tooltips -->
-                    <div class="row g-4 " >
-                        <!-- FULL NAME -->
-                        <div class="col-md-3 position-relative">
-                            <label for="inputFirstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="'.$family['father']['firstName'].'" disabled>
+        if (strpos(strtolower($family['father']['firstName']), 'na') === false)
+        {
+            $profile .= '<div class="d-flex justify-content-between align-items-center py-3">
+                            <h5 class="card-title">
+                                Father\'s
+                                Information
+                            </h5>
                         </div>
-                        <div class="col-md-3 position-relative">
-                            <label for="inputMiddleName" class="form-label">Middle name</label>
-                            <input type="text" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="'.$family['father']['middleName'].'" disabled>
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <label for="inputLastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="'.$family['father']['lastName'].'" disabled>
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                            <input type="text" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="'.$family['father']['suffix'].'" disabled>
-                        </div>
-                        <!-- END FULL NAME -->
-                        <!-- BIRTH -->
-                        <div class="col-md-4 position-relative">
-                            <label for="inputDate" class="form-label">Birth Date</label>
-                            <input type="text" class="form-control" id="inputDate" aria-describedby="inputDate" value="'.date("F j, Y", strtotime($family['father']['birth_date'])).'" disabled>
-                        </div>
-                        <div class="col-md-5  position-relative">
-                            <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                            <input type="text" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="'.$family['father']['birth_place'].'" disabled>
-                        </div>
-                        <!-- END BIRTH -->
-                        <!-- START AGE -->
-                        <div class="col-md-3 position-relative">
-                            <label for="inputAge" class="form-label">Father\'s Age</label>
-                            <input type="text" class="form-control" id="inputAge" aria-describedby="inputAge" value="'.$family['father']['age'].'" disabled>
-                        </div>
-                        <!-- START AGE -->
-                        <!-- CONTACT INFORMATION -->
-                        <div class="col-md-3 position-relative">
-                            <label for="telephone" class="form-label">Contact Number</label>
-                            <div class="input-group">
-                                <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                <input type="text" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" disabled value="'.substr($family['father']['contact_number'], 2).'">
+                        <!-- Custom Styled Validation with Tooltips -->
+                        <div class="row g-4 " >
+                            <!-- FULL NAME -->
+                            <div class="col-md-3 position-relative">
+                                <label for="inputFirstName" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="'.$family['father']['firstName'].'" disabled>
                             </div>
-                        </div>
-                        <!-- END CONTACT INFORMATION -->
-                        <!-- LIVING OR DECEASED -->
-                        <div class="col-md-3 position-relative">
-                            <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                            <input type="text" class="form-control" id="inputLivingDeceased" aria-describedby="inputLivingDeceased" value="'.($family['father']['living_flag'] == 0 ? 'Living' : 'Deceased').'" disabled>
-                        </div>
-                        <!-- FATHER\'S OCCUPATION  -->
-                        <div class="col-md-6 position-relative">
-                            <label for="inputOccupation" class="form-label"> Occupation</label>
-                            <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['father']['occupation']].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputOthers" class="form-label">If others, input occupation name</label>
-                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="'.($family['father']['occupation'] != "others" ? "" : $family['father']['occupation']).'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputCompanyName" class="form-label">Company\'s Name</label>
-                            <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="'.$family['father']['company_name'].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputCompanyAddress" class="form-label">Company\'s Address</label>
-                            <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="'.$family['father']['company_address'].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                            <input type="text" class="form-control" id="inputIncome" aria-describedby="inputIncome" value="'.$incomeArr[$family['father']['income_flag']].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                            <input type="text" class="form-control" id="inputEducationalAttainment" aria-describedby="inputEducationalAttainment" value="'.$educAttainment[$family['father']['attainment_flag']].'" disabled>
-                        </div>
-                        <!-- END FULL NAME -->
-                    </div>';
+                            <div class="col-md-3 position-relative">
+                                <label for="inputMiddleName" class="form-label">Middle name</label>
+                                <input type="text" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="'.$family['father']['middleName'].'" disabled>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="inputLastName" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="'.$family['father']['lastName'].'" disabled>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                <input type="text" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="'.$family['father']['suffix'].'" disabled>
+                            </div>
+                            <!-- END FULL NAME -->
+                            <!-- BIRTH -->
+                            <div class="col-md-4 position-relative">
+                                <label for="inputDate" class="form-label">Birth Date</label>
+                                <input type="text" class="form-control" id="inputDate" aria-describedby="inputDate" value="'.date("F j, Y", strtotime($family['father']['birth_date'])).'" disabled>
+                            </div>
+                            <div class="col-md-5  position-relative">
+                                <label for="inputBirthPlace" class="form-label">Place of Birth</label>
+                                <input type="text" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="'.$family['father']['birth_place'].'" disabled>
+                            </div>
+                            <!-- END BIRTH -->
+                            <!-- START AGE -->
+                            <div class="col-md-3 position-relative">
+                                <label for="inputAge" class="form-label">Father\'s Age</label>
+                                <input type="text" class="form-control" id="inputAge" aria-describedby="inputAge" value="'.$family['father']['age'].'" disabled>
+                            </div>
+                            <!-- START AGE -->
+                            <!-- CONTACT INFORMATION -->
+                            <div class="col-md-3 position-relative">
+                                <label for="telephone" class="form-label">Contact Number</label>
+                                <div class="input-group">
+                                    <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
+                                    <input type="text" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" disabled value="'.substr($family['father']['contact_number'], 2).'">
+                                </div>
+                            </div>
+                            <!-- END CONTACT INFORMATION -->
+                            <!-- LIVING OR DECEASED -->
+                            <div class="col-md-3 position-relative">
+                                <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
+                                <input type="text" class="form-control" id="inputLivingDeceased" aria-describedby="inputLivingDeceased" value="'.($family['father']['living_flag'] == 0 ? 'Living' : 'Deceased').'" disabled>
+                            </div>
+                            <!-- FATHER\'S OCCUPATION  -->
+                            <div class="col-md-6 position-relative">
+                                <label for="inputOccupation" class="form-label"> Occupation</label>
+                                <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['father']['occupation']].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputOthers" class="form-label">If others, input occupation name</label>
+                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="'.($family['father']['occupation'] != "others" ? "" : $family['father']['occupation']).'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputCompanyName" class="form-label">Company\'s Name</label>
+                                <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="'.$family['father']['company_name'].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputCompanyAddress" class="form-label">Company\'s Address</label>
+                                <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="'.$family['father']['company_address'].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputIncome" class="form-label"> Average Monthly Income</label>
+                                <input type="text" class="form-control" id="inputIncome" aria-describedby="inputIncome" value="'.$incomeArr[$family['father']['income_flag']].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
+                                <input type="text" class="form-control" id="inputEducationalAttainment" aria-describedby="inputEducationalAttainment" value="'.$educAttainment[$family['father']['attainment_flag']].'" disabled>
+                            </div>
+                            <!-- END FULL NAME -->
+                        </div>';
+        }
     }
 
+
     // Mother's Information
-    if (strpos(strtolower($family['mother']['firstName']), 'na') === false)
+    if (isset($family['mother']))
     {
-        $profile .= '<div class="d-flex justify-content-between align-items-center pt-3">
-                        <h5 class="card-title">
-                            Mother\'s
-                            Information
-                        </h5>
-                    </div>
-                    <!-- Custom Styled Validation with Tooltips -->
-                    <div class="row g-4 " >
-                        <!-- FULL NAME -->
-                        <div class="col-md-3 position-relative">
-                            <label for="inputFirstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="'.$family['mother']['firstName'].'" disabled>
+        if (strpos(strtolower($family['mother']['firstName']), 'na') === false)
+        {
+            $profile .= '<div class="d-flex justify-content-between align-items-center pt-3">
+                            <h5 class="card-title">
+                                Mother\'s
+                                Information
+                            </h5>
                         </div>
-                        <div class="col-md-3 position-relative">
-                            <label for="inputMiddleName" class="form-label">Middle name</label>
-                            <input type="text" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="'.$family['mother']['middleName'].'" disabled>
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <label for="inputLastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="'.$family['mother']['lastName'].'" disabled>
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
-                            <input type="text" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="'.$family['mother']['suffix'].'" disabled>
-                        </div>
-                        <!-- END FULL NAME -->
-                        <!-- BIRTH -->
-                        <div class="col-md-4 position-relative">
-                            <label for="inputDate" class="form-label">Birth Date</label>
-                            <input type="text" class="form-control" id="inputDate" aria-describedby="inputDate" value="'.date("F j, Y", strtotime($family['mother']['birth_date'])).'" disabled>
-                        </div>
-                        <div class="col-md-5  position-relative">
-                            <label for="inputBirthPlace" class="form-label">Place of Birth</label>
-                            <input type="text" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="'.$family['mother']['birth_place'].'" disabled>
-                        </div>
-                        <!-- END BIRTH -->
-                        <!-- START AGE -->
-                        <div class="col-md-3 position-relative">
-                            <label for="inputAge" class="form-label">Mother\'s Age</label>
-                            <input type="text" class="form-control" id="inputAge" aria-describedby="inputAge" value="'.$family['mother']['age'].'" disabled>
-                        </div>
-                        <!-- START AGE -->
-                        <!-- CONTACT INFORMATION -->
-                        <div class="col-md-3 position-relative">
-                            <label for="telephone" class="form-label">Contact Number</label>
-                            <div class="input-group">
-                                <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
-                                <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" disabled value="'.substr($family['mother']['contact_number'], 2).'">
+                        <!-- Custom Styled Validation with Tooltips -->
+                        <div class="row g-4 " >
+                            <!-- FULL NAME -->
+                            <div class="col-md-3 position-relative">
+                                <label for="inputFirstName" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="inputFirstName" aria-describedby="inputFirstName" value="'.$family['mother']['firstName'].'" disabled>
                             </div>
-                        </div>
-                        <!-- END CONTACT INFORMATION -->
-                        <!-- LIVING OR DECEASED -->
-                        <div class="col-md-3 position-relative">
-                            <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
-                            <input type="text" class="form-control" id="inputLivingDeceased" aria-describedby="inputLivingDeceased" value="'.($family['mother']['living_flag'] == 0 ? 'Living' : 'Deceased').'" disabled>
-                        </div>
-                        <!-- MOTHER\'S OCCUPATION  -->
-                        <div class="col-md-6 position-relative">
-                            <label for="inputOccupation" class="form-label"> Occupation</label>
-                            <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['mother']['occupation']].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputOthers" class="form-label">If others, input occupation name</label>
-                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="'.($family['mother']['occupation'] != "others" ? "" : $family['mother']['occupation']).'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputCompanyName" class="form-label">Company\'s Name</label>
-                            <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="'.$family['mother']['company_name'].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputCompanyAddress" class="form-label">Company\'s Address</label>
-                            <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="'.$family['mother']['company_address'].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputIncome" class="form-label"> Average Monthly Income</label>
-                            <input type="text" class="form-control" id="inputIncome" aria-describedby="inputIncome" value="'.$incomeArr[$family['mother']['income_flag']].'" disabled>
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
-                            <input type="text" class="form-control" id="inputEducationalAttainment" aria-describedby="inputEducationalAttainment" value="'.$educAttainment[$family['mother']['attainment_flag']].'" disabled>
-                        </div>
-                        <!-- END MOTHER\'S INFORMATION -->
-                    </div>';
+                            <div class="col-md-3 position-relative">
+                                <label for="inputMiddleName" class="form-label">Middle name</label>
+                                <input type="text" class="form-control" id="inputMiddleName" aria-describedby="inputMiddleName" value="'.$family['mother']['middleName'].'" disabled>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="inputLastName" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="inputLastName" aria-describedby="inputLastName" value="'.$family['mother']['lastName'].'" disabled>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="inputSuffix" class="form-label">Name Suffix (Ex. Sr, Jr, III)</label>
+                                <input type="text" class="form-control" id="inputSuffix" aria-describedby="inputSuffix" value="'.$family['mother']['suffix'].'" disabled>
+                            </div>
+                            <!-- END FULL NAME -->
+                            <!-- BIRTH -->
+                            <div class="col-md-4 position-relative">
+                                <label for="inputDate" class="form-label">Birth Date</label>
+                                <input type="text" class="form-control" id="inputDate" aria-describedby="inputDate" value="'.date("F j, Y", strtotime($family['mother']['birth_date'])).'" disabled>
+                            </div>
+                            <div class="col-md-5  position-relative">
+                                <label for="inputBirthPlace" class="form-label">Place of Birth</label>
+                                <input type="text" class="form-control" id="inputBirthPlace" aria-describedby="inputBirthPlace" value="'.$family['mother']['birth_place'].'" disabled>
+                            </div>
+                            <!-- END BIRTH -->
+                            <!-- START AGE -->
+                            <div class="col-md-3 position-relative">
+                                <label for="inputAge" class="form-label">Mother\'s Age</label>
+                                <input type="text" class="form-control" id="inputAge" aria-describedby="inputAge" value="'.$family['mother']['age'].'" disabled>
+                            </div>
+                            <!-- START AGE -->
+                            <!-- CONTACT INFORMATION -->
+                            <div class="col-md-3 position-relative">
+                                <label for="telephone" class="form-label">Contact Number</label>
+                                <div class="input-group">
+                                    <span span class="input-group-text" id="inputGroupPrepend2">+63</span>
+                                    <input type="telephone" class="form-control" id="validationDefaultContactNo." aria-describedby="inputGroupPrepend2" disabled value="'.substr($family['mother']['contact_number'], 2).'">
+                                </div>
+                            </div>
+                            <!-- END CONTACT INFORMATION -->
+                            <!-- LIVING OR DECEASED -->
+                            <div class="col-md-3 position-relative">
+                                <label for="inputLivingDeceased" class="form-label"> Living or Deceased? </label>
+                                <input type="text" class="form-control" id="inputLivingDeceased" aria-describedby="inputLivingDeceased" value="'.($family['mother']['living_flag'] == 0 ? 'Living' : 'Deceased').'" disabled>
+                            </div>
+                            <!-- MOTHER\'S OCCUPATION  -->
+                            <div class="col-md-6 position-relative">
+                                <label for="inputOccupation" class="form-label"> Occupation</label>
+                                <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['mother']['occupation']].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputOthers" class="form-label">If others, input occupation name</label>
+                                <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="'.($family['mother']['occupation'] != "others" ? "" : $family['mother']['occupation']).'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputCompanyName" class="form-label">Company\'s Name</label>
+                                <input type="inputCompanyName" class="form-control" id="inputCompanyName" aria-describedby="inputCompanyName" value="'.$family['mother']['company_name'].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputCompanyAddress" class="form-label">Company\'s Address</label>
+                                <input type="Others" class="form-control" id="inputCompanyAddress" aria-describedby="inputCompanyAddress" value="'.$family['mother']['company_address'].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputIncome" class="form-label"> Average Monthly Income</label>
+                                <input type="text" class="form-control" id="inputIncome" aria-describedby="inputIncome" value="'.$incomeArr[$family['mother']['income_flag']].'" disabled>
+                            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="inputEducationalAttainment" class="form-label"> Highest Educational Attainment</label>
+                                <input type="text" class="form-control" id="inputEducationalAttainment" aria-describedby="inputEducationalAttainment" value="'.$educAttainment[$family['mother']['attainment_flag']].'" disabled>
+                            </div>
+                            <!-- END MOTHER\'S INFORMATION -->
+                        </div>';
+        }
     }
 
     // Guardian
-
     if (isset($family['guardian']))
     {
         $profile .= '<div class="d-flex justify-content-between align-items- py-3">

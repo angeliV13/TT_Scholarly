@@ -120,7 +120,7 @@
           <!-- <h2 data-aos="fade-up"><?= $website_other['welcome_text'] ?></h2> -->
           <!-- <p data-aos="fade-up" data-aos-delay="100">Thrive Thomasino Scholarly .</p> -->
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <!-- <a href="#book-a-table" class="btn-book-a-table">Apply Scholarship</a> -->
+            <a href="account/pages-register.php" class="btn-book-a-table">Apply Scholarship</a>
             <?php if ($website_other['url'] != null): ?>
               <!-- <a href="<?= $website_other['url'] ?>" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
             <?php endif; ?>
@@ -269,7 +269,7 @@
               <div class="col-lg-12">
                 <div class="card d-flex justify-content-center">
                   <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
+                    <h5 class="card-title">Senior High School</h5>
                     <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
                   </div>
                 </div>
@@ -283,7 +283,7 @@
               <div class="col-lg-12">
                 <div class="card d-flex justify-content-center">
                   <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
+                    <h5 class="card-title">College Educational Assistance</h5>
                     <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                   </div>
@@ -298,7 +298,7 @@
               <div class="col-lg-12">
                 <div class="card d-flex justify-content-center">
                   <div class="card-body">
-                    <h5 class="card-title">Example Card</h5>
+                    <h5 class="card-title">College Full Scholarship</h5>
                     <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
                   </div>
                 </div>

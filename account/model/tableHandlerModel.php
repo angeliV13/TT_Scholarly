@@ -692,14 +692,19 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
 
     include("dbconnection.php");
 
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
     $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
     $sql = "SELECT * FROM account acc 
-            JOIN user_info inf ON acc.id = inf.account_id";
+            JOIN user_info inf ON acc.id = inf.account_id
+            JOIN scholarship_application sa ON acc.id = sa.userId
+            WHERE sa.ay_id = '$acadYear' AND sa.sem_id = '$defaultYear'";
 
-    $sql .= ($acc_type == "") ? " WHERE acc.account_type = '3'" : " WHERE acc.account_type = '$acc_type'";
+    $sql .= ($acc_type == "") ? " AND acc.account_type = '3'" : " AND acc.account_type = '$acc_type'";
     $sql .= ($acc_status == "") ? " AND acc.account_status = '1'" : " AND acc.account_status = '$acc_status'";
 
     $query = $conn->query($sql);
@@ -725,13 +730,11 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
 
             $none = ($acc_status == 4) ? "d-none" : "";
 
-            $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
-                            <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                            <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>
-                        </div>';
+            $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                        <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
 
-            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
-            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
+            $course     = (isset($education['course']) ? get_education_courses('', $education['course']) : '');
+            $schoolDetails = (isset($education['school']) ? get_school_name($education['school']) :  '');
 
             $data[] = [
                 static_count(),
@@ -742,10 +745,14 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
                 (isset($schoolDetails['class_type']))    ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($scholarType['scholarType'])                 ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
                 (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
-                (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course
-                (isset($education[1]['year_level'])                 ? ($education[1]['year_level']) : ''), // Year Level
+                (isset($education['course']))                       ? $course[$education['course']] : '', //Course
+                (isset($education['year_level'])                    ? ($education['year_level']) : ''), // Year Level
                 $contact_number, //Contact Number
                 $barangay, //Barangay
+                $exam_start_date,
+                $exam_end_date,
+                $interview_start_date,
+                $interview_end_date,
                 $button, // Buttons
             ];
 
@@ -761,6 +768,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
     );
 
     echo json_encode($json_data);
+    // echo $sql;
 }
 
 function websiteSocials()
