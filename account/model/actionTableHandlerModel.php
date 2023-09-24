@@ -358,7 +358,7 @@ function getProfile($account_id)
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputYearGraduation" class="form-label">If not Graduating, what year are you Graduating?</label>
-                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="' . (isset($gen_info['graduation_year']) AND $gen_info['graduation_year'] == "") ? $gradYear[$gen_info['graduation_year']] : ""  . '" disabled>
+                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="' . (isset($gen_info['graduation_year']) AND $gen_info['graduation_year'] != "") ? $gradYear[$gen_info['graduation_year']] : ""  . '" disabled>
                         </div>
                         <!-- END FULL NAME -->
                     </div>';
