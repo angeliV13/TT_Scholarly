@@ -350,15 +350,15 @@ function getProfile($account_id)
                         </div>
                         <div class="col-md-4 position-relative">
                             <label for="inputSpecifyAward" class="form-label">Specify your Award/Honor</label>
-                            <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . $awardArr[$gen_info['honor_type']]  . '" disabled>
+                            <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . (isset($gen_info['honor_type']) ? $awardArr[$gen_info['honor_type']] : '')   . '" disabled>
                         </div>
                         <div class="col-md-8 position-relative">
                             <label for="inputOthers" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
-                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="' . $gen_info['other_honor'] . '" disabled>
+                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="' . (isset($gen_info['other_honor']) ? $gen_info['other_honor'] : '')  . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputYearGraduation" class="form-label">If not Graduating, what year are you Graduating?</label>
-                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="' . ($gen_info['graduation_year'] == "") ? "" : $gradYear[$gen_info['graduation_year']] . '" disabled>
+                            <input type="Others" class="form-control" id="inputOthers" aria-describedby="inputOthers" value="' . (isset($gen_info['graduation_year']) AND $gen_info['graduation_year'] == "") ? $gradYear[$gen_info['graduation_year']] : ""  . '" disabled>
                         </div>
                         <!-- END FULL NAME -->
                     </div>';
@@ -720,27 +720,27 @@ function getProfile($account_id)
                         <!-- GENERAL FAMILY INFORMATION -->
                         <div class="col-md-4 position-relative">
                             <label for="inputLivingFamily" class="form-label">Are you Living with Family?</label>
-                            <input type="text" class="form-control" id="inputLivingFamily" aria-describedby="inputLivingFamily" value="' . ($gen_info['family_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
+                            <input type="text" class="form-control" id="inputLivingFamily" aria-describedby="inputLivingFamily" value="' . (isset($gen_info['family_flag']) AND $gen_info['family_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
                         </div>
                         <div class="col-md-3 position-relative">
                             <label for="inputFamilyTotal" class="form-label">Total number of Family</label>
-                            <input type="text" class="form-control" id="inputFamilyTotal" aria-describedby="inputFamilyTotal" value="' . $gen_info['total_num'] . '" disabled>
+                            <input type="text" class="form-control" id="inputFamilyTotal" aria-describedby="inputFamilyTotal" value="' . (isset($gen_info['total_num']) ? $gen_info['total_num'] : '' ). '" disabled>
                         </div>
                         <div class="col-md-2 position-relative">
                             <label for="inputBirthOrder" class="form-label">Birth Order</label>
-                            <input type="text" class="form-control" id="inputBirthOrder" aria-describedby="inputBirthOrder" value="' . $gen_info['birth_order'] . '" disabled>
+                            <input type="text" class="form-control" id="inputBirthOrder" aria-describedby="inputBirthOrder" value="' . (isset($gen_info['birth_order']) ? $gen_info['birth_order'] : '' ) . '" disabled>
                         </div>
                         <div class="col-md-3 position-relative">
                             <label for="inputSourceLiving" class="form-label"> Source ofLiving?</label>
-                            <input type="text" class="form-control" id="inputSourceLiving" aria-describedby="inputSourceLiving" value="' . $incomeArr[$gen_info['source']] . '" disabled>
+                            <input type="text" class="form-control" id="inputSourceLiving" aria-describedby="inputSourceLiving" value="' . (isset($gen_info['source']) ? $incomeArr[$gen_info['source']] : '' ) . '" disabled>
                         </div>
                         <div class="col-md-5 position-relative">
                             <label for="inputHomeType" class="form-label"> Is your Home Rent or Owned?</label>
-                            <input type="text" class="form-control" id="inputHomeType" aria-describedby="inputHomeType" value="' . ($gen_info['rent_flag'] == 0 ? 'Owned' : 'Rent') . '" disabled>
+                            <input type="text" class="form-control" id="inputHomeType" aria-describedby="inputHomeType" value="' . (isset($gen_info['rent_flag']) AND $gen_info['rent_flag'] == 0 ? 'Owned' : 'Rent') . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputRenting" class="form-label"> How much are you paying monthly?</label>
-                            <input type="text" class="form-control" id="inputRenting" aria-describedby="inputRenting" value="' . $incomeArr[$gen_info['monthly_payment']] . '" disabled>
+                            <input type="text" class="form-control" id="inputRenting" aria-describedby="inputRenting" value="' . (isset($gen_info['monthly_payment']) ? $incomeArr[$gen_info['monthly_payment']] : '' ) . '" disabled>
                         </div>
                         <!-- TABLE OF SIBLINGS -->
                         <div class="column">
@@ -1153,37 +1153,37 @@ function getProfile($account_id)
                         <!-- WORKING STUDENT -->
                         <div class="col-md-4 position-relative">
                             <label for="inputWorkingStudent" class="form-label">Are you a Working Student?</label>
-                            <input type="text" class="form-control" id="inputWorkingStudent" value="'.($gen_info['working_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputWorkingStudent" value="'.(isset($gen_info['working_flag']) AND $gen_info['working_flag'] == 0 ? "Yes" : "No").'" disabled>
                         </div>
                         <!---OFW PARENTS -->
                         <div class="col-md-8 position-relative">
                             <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
-                            <input type="text" class="form-control" id="inputOfwParents" value="'.($gen_info['ofw_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputOfwParents" value="'.(isset($gen_info['ofw_flag']) AND $gen_info['ofw_flag'] == 0 ? "Yes" : "No").'" disabled>
                         </div>
                         <!--OFW FAMILY MEMBERS -->
                         <div class="col-md-6 position-relative">
                             <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
-                            <input type="text" class="form-control" id="inputOfwParents" value="'.($gen_info['other_ofw'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputOfwParents" value="'.(isset($gen_info['other_ofw']) AND $gen_info['other_ofw'] == 0 ? "Yes" : "No").'" disabled>
                         </div>
                         <!---PWD PARENTS -->
                         <div class="col-md-6 position-relative">
                             <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
-                            <input type="text" class="form-control" id="inputPwdParents" value="'.($gen_info['pwd_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputPwdParents" value="'.(isset($gen_info['pwd_flag']) AND $gen_info['pwd_flag'] == 0 ? "Yes" : "No").'" disabled>
                         </div>
                         <!---PWD FAMILY MEMBERS -->
                         <div class="col-md-6 position-relative">
                             <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
-                            <input type="text" class="form-control" id="inputPwdParents" value="'.($gen_info['other_pwd'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputPwdParents" value="'.(isset($gen_info['other_pwd']) AND $gen_info['other_pwd'] == 0 ? "Yes" : "No").'" disabled>
                         </div>
                         <!---PARENTS STATUS -->
                         <div class="col-md-6 position-relative">
                             <label for="inputParentStatus" class="form-label">What is your Parents Status?</label>
-                            <input type="text" class="form-control" id="inputParentStatus" value="'.$civilArr[$gen_info['status_flag']].'" disabled>
+                            <input type="text" class="form-control" id="inputParentStatus" value="'.(isset($gen_info['status_flag']) ? $civilArr[$gen_info['status_flag']] : "") .'" disabled>
                         </div>
                         <!---STUDENT PWD -->
                         <div class="col-md-6 position-relative">
                             <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
-                            <input type="text" class="form-control" id="inputStudentPwd" value="'.($gen_info['self_pwd_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputStudentPwd" value="'.(isset($gen_info['self_pwd_flag']) AND $gen_info['self_pwd_flag'] == 0 ? "Yes" : "No").'" disabled>
                         </div>
                     </div>
                 </div>';
