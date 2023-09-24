@@ -43,11 +43,11 @@ function getProfile($account_id)
     $family = get_user_family($account_id);
     
     $gen_info = get_user_gen_info($account_id);
-    $source = $incomeArr[$gen_info['source']];
-    $gwa = $gen_info['gwa'];
-    $self_pwd_flag = ($gen_info['self_pwd_flag'] == 0) ? "checked" : "";
-    $working_flag = ($gen_info['working_flag'] == 0) ? "checked" : "";
-    $other_pwd_flag = ($gen_info['other_pwd'] == 0) ? "checked" : "";
+    $source = isset($gen_info['source']) ? $incomeArr[$gen_info['source']] : "";
+    $gwa = isset($gen_info['gwa']) ? $gen_info['gwa'] : "";
+    $self_pwd_flag = (isset($gen_info['self_pwd_flag']) AND $gen_info['self_pwd_flag'] == 0) ? "checked" : "";
+    $working_flag = (isset($gen_info['working_flag']) AND $gen_info['working_flag'] == 0) ? "checked" : "";
+    $other_pwd_flag = (isset($gen_info['other_pwd']) AND $gen_info['other_pwd'] == 0) ? "checked" : "";
     
     $scholarType = check_status($account_id);
     $scholarTypeName = get_scholar_type($scholarType['scholarType']);
@@ -342,11 +342,11 @@ function getProfile($account_id)
                         <!-- FULL NAME -->
                         <div class="col-md-6 position-relative">
                             <label for="inputGraduatingSem" class="form-label">Are you Graduating this Semester/Term?</label>
-                            <input type="text" class="form-control" id="inputGraduatingSem" aria-describedby="inputGraduatingSem" value="' . ($gen_info['graduating_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
+                            <input type="text" class="form-control" id="inputGraduatingSem" aria-describedby="inputGraduatingSem" value="' . (isset($gen_info['graduating_flag']) AND $gen_info['graduating_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputGraduatingHonors" class="form-label">Are you Graduating with Honors?</label>
-                            <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . ($gen_info['honor_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
+                            <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . (isset($gen_info['honor_flag']) AND $gen_info['honor_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
                         </div>
                         <div class="col-md-4 position-relative">
                             <label for="inputSpecifyAward" class="form-label">Specify your Award/Honor</label>
