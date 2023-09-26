@@ -5,7 +5,8 @@ include("validationModel.php");
 include("functionModel.php");
 
 
-function getTableHeader(){
+function getTableHeader()
+{
     include('dbconnection.php');
 
     $data = [];
@@ -13,36 +14,40 @@ function getTableHeader(){
     $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '{$dbdatabase}' AND TABLE_NAME = 'account'";
     $query = $conn->query($sql) or die("Error ESQ000: " . $conn->error);
 
-    while($row = $query->fetch_assoc()){
+    while ($row = $query->fetch_assoc()) {
         $data[] .= $row['COLUMN_NAME'];
     }
 
-    return($data);
+    return ($data);
 }
 
-function getTableBody(){
+function getTableBody()
+{
     include('dbconnection.php');
+    if($ay_id == '')  : getDefaultAcadYearId(); endif;
+    if($sem_id == '') : getDefaultSemesterId(); endif;
 
     $data = [];
 
     $sql = "SELECT * FROM account";
     $query = $conn->query($sql) or die("Error ESQ000: " . $conn->error);
 
-    while($row = $query->fetch_row()){
+    while ($row = $query->fetch_row()) {
         $data[] = $row;
     }
 
-    return($data);
+    return ($data);
 }
 
-function createTable(){
-    $data = [];
+function createTable()
+{
+    $array =  ['applicant'];
+    $returnData = [];
 
     $tableHeader = getTableHeader();
     $tableBody   = getTableBody();
 
-    $data = [ $tableHeader, $tableBody ];
+    $returnData = [$tableHeader, $tableBody];
 
-    return (json_encode($data));
-
+    return (json_encode($returnData));
 }

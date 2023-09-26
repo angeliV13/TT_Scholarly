@@ -40,7 +40,7 @@
                                         <div class="column position-relative">
                                             <!-- Academic Year -->
                                             <div class="row mb-3">
-                                                <label for="applicantAy" class="col-sm-12 col-form-label">Academic Year:</label>
+                                                <label for="app_ay" class="col-sm-12 col-form-label">Academic Year:</label>
                                                 <div class="col-sm-12">
                                                     <select class="form-select" id="applicantAy">
                                                         <option selected value="">-- </option>
@@ -183,7 +183,7 @@
                                         <div id="genrep_beneficiaries" class="column position-relative">
                                             <!-- Academic Year -->
                                             <div class="row mb-3">
-                                                <label for="beneficiariesAy" class="col-sm-12 col-form-label">Academic Year:</label>
+                                                <label for="bene_ay" class="col-sm-12 col-form-label">Academic Year:</label>
                                                 <div class="col-sm-12">
                                                     <select class="form-select" id="beneficiariesAy">
                                                         <option selected value="">-- </option>
@@ -330,7 +330,7 @@
                                         <div id="genrep_graduating" class="column position-relative">
                                             <!-- Academic Year -->
                                             <div class="row mb-3">
-                                                <label for="graduatingAy" class="col-sm-12 col-form-label">Academic Year:</label>
+                                                <label for="graduating_ay" class="col-sm-12 col-form-label">Academic Year:</label>
                                                 <div class="col-sm-12">
                                                     <select class="form-select" id="graduatingAy">
                                                         <option selected value="">-- </option>
