@@ -19,7 +19,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Applicants</h5>
+                    <h5 class="card-title">List of New Applicants</h5>
                     <button class="btn btn-sm btn-danger" onclick="window.print()"> <i class="bi bi-printer"></i> Print List </button>
                 </div>
                 <div class="table-responsive ">
@@ -27,9 +27,14 @@
                         <thead>
                             <tr class="text-center small">
                                 <th>No.</th>
+                                <th>Applicantion Number<th>
                                 <th>Last Name</th>
                                 <th>First Name</th>
                                 <th>Middle Name</th>
+                                <th>Middle Initial</th>
+                                <th>Extension Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
                                 <th>School</th>
                                 <th>School Type</th>
                                 <th>Scholarship Type</th>
@@ -46,6 +51,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
                             <td>1</td>
                             <td>1</td>
                             <td>1</td>
