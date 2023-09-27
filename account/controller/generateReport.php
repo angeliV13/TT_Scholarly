@@ -9,10 +9,7 @@ if (isset($_REQUEST['action']))
     switch ($action) 
     {
         case 1: 
-            $data = [
-                "applicant" => "account"
-            ];
-            echo createTable();
+            echo createTable(1);
             break;
     }
 }

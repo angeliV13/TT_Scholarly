@@ -11,7 +11,7 @@ function getTableHeader()
 
     $data = [];
 
-    $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '{$dbdatabase}' AND TABLE_NAME = 'account'";
+    $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '{$dbdatabase}' AND TABLE_NAME = '{$report}'";
     $query = $conn->query($sql) or die("Error ESQ000: " . $conn->error);
 
     while ($row = $query->fetch_assoc()) {
@@ -29,7 +29,7 @@ function getTableBody()
 
     $data = [];
 
-    $sql = "SELECT * FROM account";
+    $sql = "SELECT * FROM {$report}";
     $query = $conn->query($sql) or die("Error ESQ000: " . $conn->error);
 
     while ($row = $query->fetch_row()) {
@@ -39,13 +39,13 @@ function getTableBody()
     return ($data);
 }
 
-function createTable()
+function createTable($report)
 {
-    $array =  ['applicant'];
+    $array =  [0, 'applicant_report'];
     $returnData = [];
 
-    $tableHeader = getTableHeader();
-    $tableBody   = getTableBody();
+    $tableHeader = getTableHeader($array[$report]);
+    $tableBody   = getTableBody($array[$report]);
 
     $returnData = [$tableHeader, $tableBody];
 
