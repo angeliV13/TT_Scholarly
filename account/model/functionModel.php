@@ -718,6 +718,25 @@ function get_school_type($type)
     }
 }
 
+function get_school_class($type)
+{
+    switch ($type)
+    {
+        case 0:
+            return "Public (Within Sto.Tomas, Batangas)";
+            break;
+        case 1:
+            return "Private (Within Sto.Tomas, Batangas)";
+            break;
+        case 2:
+            return "Public (Outside Sto.Tomas, Batangas)";
+            break;
+        case 3:
+            return "Private (Outside Sto.Tomas, Batangas)";
+            break;
+    }
+}
+
 function get_lastID($data)
 {
     include("dbconnection.php");

@@ -84,15 +84,6 @@ function getProfile($account_id)
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputGrade" class="col-sm-3 col-form-label">GWA:</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group mb-2">
-                                                    <input disabled type="inputGradepoints" class="form-control" placeholder="Applicant\'s General Weightd Average" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $gwa . '"/>
-                                                    <input disabled type="inputGradepoints" class="col form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
                                             <label for="inputSchooltype" class="col-sm-3 col-form-label">School Type:</label>
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-2">
@@ -423,6 +414,10 @@ function getProfile($account_id)
                             <label for="inputCollegeSchoolAddress" class="form-label">School Address</label>
                             <input type="Others" class="form-control" id="inputCollegeSchoolAddress" aria-describedby="inputCollegeSchoolAddress" value="'.$education[0]['school_address'].'" disabled>
                         </div>
+                        <div class="col-md-12 position-relative">
+                            <label for="gwa" class="form-label">GWA</label>
+                            <input type="number" step="any" class="form-control" id="gwa" placeholder="Applicant\'s General Weighted Average" aria-describedby="gwa" value="'.$education[0]['gwa'].'" disabled>
+                        </div>
                         <div class="column">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">
@@ -505,6 +500,10 @@ function getProfile($account_id)
                             <label for="inputSeniorSchoolAddress" class="form-label">School Address</label>
                             <input type="text" class="form-control" id="inputSeniorSchoolAddress" aria-describedby="inputSeniorSchoolAddress" value="' . $education[1]['school_address'] . '" disabled>
                         </div>
+                        <div class="col-md-12 position-relative">
+                            <label for="gwa" class="form-label">GWA</label>
+                            <input type="number" step="any" class="form-control" id="gwa" placeholder="Applicant\'s General Weighted Average" aria-describedby="gwa" value="'.$education[1]['gwa'].'" disabled>
+                        </div>
                         <div class="column">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">
@@ -581,6 +580,10 @@ function getProfile($account_id)
                             <label for="inputHighSchoolAddress" class="form-label">School Address</label>
                             <input type="text" class="form-control" id="inputHighSchoolAddress" aria-describedby="inputHighSchoolAddress" value="' . $education[2]['school_address'] . '" disabled>
                         </div>
+                        <div class="col-md-12 position-relative">
+                            <label for="gwa" class="form-label">GWA</label>
+                            <input type="number" step="any" class="form-control" id="gwa" placeholder="Applicant\'s General Weighted Average" aria-describedby="gwa" value="'.$education[2]['gwa'].'" disabled>
+                        </div>
                         <div class="column">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">
@@ -652,6 +655,10 @@ function getProfile($account_id)
                         <div class="col-md-12 position-relative">
                             <label for="inputElementarySchoolAddress" class="form-label">School Address</label>
                             <input type="text" class="form-control" id="inputElementarySchoolAddress" aria-describedby="inputElementarySchoolAddress" value="' . $education[3]['school_address'] . '" disabled>
+                        </div>
+                        <div class="col-md-12 position-relative">
+                            <label for="gwa" class="form-label">GWA</label>
+                            <input type="number" step="any" class="form-control" id="gwa" placeholder="Applicant\'s General Weighted Average" aria-describedby="gwa" value="'.$education[3]['gwa'].'" disabled>
                         </div>
                         <div class="column">
                             <div class="d-flex justify-content-between align-items-center">

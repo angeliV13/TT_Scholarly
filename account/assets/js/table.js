@@ -1016,6 +1016,8 @@ function reasonForRejection(val, accountViewId) {
                 Swal.showValidationMessage(
                     `Please fill up the reason field.`
                 )
+
+                return;
             }
 
             let fullReason = (reason == 6 ? otherReason : $('#reason option:selected').text());
@@ -1065,36 +1067,25 @@ function reasonForRejection(val, accountViewId) {
 function sendEmailNotification(val, accountViewId) {
     Swal.fire({
         title: "Send Notification to Applicant",
-        html: `<div class="form-group mb-3">
-                    <label for="reason">Reason</label>
-                    <select class="form-control" id="reason">
-                        <option value="1">Need to Resubmit Grades</option>
-                        <option value="2">Waiting for Grades</option>
-                        <option value="3">Must Submit COR and ID</option>
-                        <option value="4">Did Not Submit Requirements Graduate</option>
-                        <option value="5">Others</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="otherReason">Other Reason</label>
+        html: `<div class="form-group">
+                    <label for="otherReason">Reason</label>
                     <textarea class="form-control" id="otherReason"></textarea>
                 </div>`,
         showCancelButton: true,
         confirmButtonText: "Submit",
         cancelButtonText: "Cancel",
         preConfirm: () => {
-            let reason = $('#reason').val();
             let otherReason = $('#otherReason').val();
 
-            if (reason == 5 && otherReason == '') {
+            if (otherReason == '') {
                 Swal.showValidationMessage(
                     `Please fill up the reason field.`
                 )
+
+                return;
             }
 
-            let fullReason = (reason == 6 ? otherReason : $('#reason option:selected').text());
-
-            return fullReason;
+            return otherReason;
         }
     }).then((result) => {
         if (result.isConfirmed) {

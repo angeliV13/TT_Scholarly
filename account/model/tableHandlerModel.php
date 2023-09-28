@@ -653,7 +653,7 @@ function schoolTable()
             $addedBy = get_user_info($row['added_by']);
             $dateAdded = date("F d, Y h:i A", strtotime($row['date_added']));
             $schoolType = get_school_type($row['school_type']);
-            $schoolClass = $row['class_type'] == 0 ? "Public" : "Private";
+            $schoolClass = get_school_class($row['class_type']);
 
             $name = $addedBy['first_name'] . " " . $addedBy['last_name'];
 

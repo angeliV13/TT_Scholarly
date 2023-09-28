@@ -570,6 +570,7 @@ $("#educationBG").on("submit", function(e){
     let graduating_flag = check_error(document.getElementById("graduating_flag")); if (graduating_flag == undefined) return;
     let graduation_year = honor_flag = honor_type = other_honor = s_year_level = strand = s_schoolAddress = c_year_level = c_major = c_school_address = course = j_school_address = j_year_level = e_grade_level = e_school_address = s_otherSchool = s_otherStrand = j_otherSchool = e_otherSchool = c_otherSchool = c_otherCourse = "";
     let c_school = courseText = s_school = strandText = j_school = e_school =  gwa = "";
+    let cgwa = sgwa = hgwa = egwa = "";
 
     let collegeTableBody = $("#collegeTable tbody");
     let collegeRows = collegeTableBody.children();
@@ -601,8 +602,6 @@ $("#educationBG").on("submit", function(e){
         graduation_year = check_error(document.getElementById("graduation_year")); if (graduation_year == undefined) return;
     }
 
-    gwa = check_error(document.getElementById("gwa")); if (gwa == undefined) return;
-
     if (scholarLevel == 1 || scholarLevel == 2){
         c_school = check_error(document.getElementById("c_school")); if (c_school == undefined) return;
 
@@ -621,6 +620,7 @@ $("#educationBG").on("submit", function(e){
         
         c_major = check_error(document.getElementById("c_major")); if (c_major == undefined) return;
         c_school_address = check_error(document.getElementById("c_school_address")); if (c_school_address == undefined) return;
+        cgwa = check_error(document.getElementById("cgwa")); if (gwa == undefined) return;
 
         if (collegeRows.length > 0){
             for (let i = 0; i < collegeRows.length; i++){
@@ -657,7 +657,7 @@ $("#educationBG").on("submit", function(e){
         }
     }
 
-    if (scholarLevel == 1 || scholarLevel == 2){
+    if (scholarLevel == 1 || scholarLevel == 2 || scholarLevel == 3){
         // SHS
         s_school = check_error(document.getElementById("s_school")); if (s_school == undefined) return;
 
@@ -675,6 +675,7 @@ $("#educationBG").on("submit", function(e){
         }
 
         s_schoolAddress = check_error(document.getElementById("s_schoolAddress")); if (s_schoolAddress == undefined) return;
+        sgwa = check_error(document.getElementById("sgwa")); if (sgwa == undefined) return;
 
         if (shsRows.length > 0){
             for (let i = 0; i < shsRows.length; i++){
@@ -721,6 +722,7 @@ $("#educationBG").on("submit", function(e){
 
         j_year_level = check_error(document.getElementById("j_year_level")); if (j_year_level == undefined) return;
         j_school_address = check_error(document.getElementById("j_school_address")); if (j_school_address == undefined) return;
+        hgwa = check_error(document.getElementById("hgwa")); if (hgwa == undefined) return;
 
         if (jhsRows.length > 0){
             for (let i = 0; i < jhsRows.length; i++){
@@ -767,7 +769,7 @@ $("#educationBG").on("submit", function(e){
 
         e_grade_level = check_error(document.getElementById("e_grade_level")); if (e_grade_level == undefined) return;
         e_school_address = check_error(document.getElementById("e_school_address")); if (e_school_address == undefined) return;
-
+        egwa = check_error(document.getElementById("egwa")); if (egwa == undefined) return;
 
         if (elemRows.length > 0){
             for (let i = 0; i < elemRows.length; i++){
@@ -815,6 +817,7 @@ $("#educationBG").on("submit", function(e){
             'otherSchool': c_otherSchool,
             'otherCourse': c_otherCourse,
             'major': c_major,
+            'gwa': cgwa,
             'collegeAwards' : college
         },
         'shs': {
@@ -827,6 +830,7 @@ $("#educationBG").on("submit", function(e){
             'otherSchool': s_otherSchool,
             'otherCourse': s_otherStrand,
             'major': s_otherStrand,
+            'gwa': sgwa,
             'shsAwards': shs
         },
         'jhs': {
@@ -839,6 +843,7 @@ $("#educationBG").on("submit", function(e){
             'otherSchool': j_otherSchool,
             'otherCourse': '',
             'major': '',
+            'gwa': hgwa,
             'jhsAwards': jhs
         },
         'elem': {
@@ -851,6 +856,7 @@ $("#educationBG").on("submit", function(e){
             'otherSchool': e_otherSchool,
             'otherCourse': '',
             'major': '',
+            'gwa': egwa,
             'elemAwards': elem
         },
         'other_info': {
@@ -864,7 +870,7 @@ $("#educationBG").on("submit", function(e){
         'userId': userId
     }
 
-    console.log(data);
+    // console.log(data);
 
     $.ajax({
         url: "controller/accountHandler.php",
@@ -1259,7 +1265,6 @@ $("#familyBG").on("submit", function(e){
             'source': source,
             'rent_flag': rent_flag,
             'monthly_payment': monthly_payment,
-            'gwa': gwa,
         }
     }
 
