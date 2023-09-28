@@ -708,16 +708,17 @@ function updateSchool($data, $userId, $awards = [], $type)
     $school_address = $data['school_address'];
     $year_level = $data['year_level'];
     $educ_id = $data['educ_id'];
+    $gwa = $data['gwa'];
 
     if ($exists == 0) 
     {
-        $sql = "INSERT INTO education (user_id, ay_id, sem_id, school, year_level, course, major, school_address, education_level)
-        VALUES ('$userId', '$acadYear', '$defaultYear', '$school', '$year_level', '$course', '$major', '$school_address', '$type')";
+        $sql = "INSERT INTO education (user_id, ay_id, sem_id, school, year_level, course, major, school_address, education_level, gwa)
+        VALUES ('$userId', '$acadYear', '$defaultYear', '$school', '$year_level', '$course', '$major', '$school_address', '$type', '$gwa')";
     } 
     else 
     {
         $sql = "UPDATE education SET school = '$school', year_level = '$year_level', course = '$course', major = '$major',
-            school_address = '$school_address', education_level = '$type' WHERE user_id = '$userId' AND educ_id = '$educ_id'
+            school_address = '$school_address', education_level = '$type', gwa = '$gwa' WHERE user_id = '$userId' AND educ_id = '$educ_id'
             AND ay_id = '$acadYear' AND sem_id = '$defaultYear' LIMIT 1";
     }
 

@@ -100,8 +100,10 @@
                         <label for="schoolClass" class="form-label col-3">School Class Type</label>
                         <select name="School Class Type" id="schoolClass" class="form-select col">
                             <option value="" selected disabled>Choose</option>
-                            <option value="0">Public</option>
-                            <option value="1">Private</option>
+                            <option value="0">Public (Within Sto. Tomas, Batangas)</option>
+                            <option value="1">Private (Within Sto. Tomas, Batangas)</option>
+                            <option value="2">Public (Outside Sto. Tomas, Batangas)</option>
+                            <option value="3">Private (Outside Sto. Tomas, Batangas)</option>
                         </select>
                         <div class="col">
                             <div class="d-flex">
@@ -172,8 +174,10 @@
                         <label for="schoolClass" class="form-label col-3">School Class Type</label>
                         <select name="School Class Type" id="editschoolClass" class="form-select col">
                             <option value="" selected disabled>Choose</option>
-                            <option value="0">Public</option>
-                            <option value="1">Private</option>
+                            <option value="0">Public (Within Sto. Tomas, Batangas)</option>
+                            <option value="1">Private (Within Sto. Tomas, Batangas)</option>
+                            <option value="2">Public (Outside Sto. Tomas, Batangas)</option>
+                            <option value="3">Private (Outside Sto. Tomas, Batangas)</option>
                         </select>
                         <div class="col">
                             <div class="d-flex">

@@ -355,14 +355,14 @@
                         Please select expected Year of Graduation.
                       </div>
                     </div>
-                    <div class="col-md-6 position-relative">
+                    <!-- <div class="col-md-6 position-relative">
                       <label for="gwa" class="form-label">GWA</label>
                       <?php if ($gen_info != null) : ?>
                         <input type="number" name="GWA" id="gwa" min="50" step="any" class="form-control col" value="<?= $gen_info['gwa'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                       <?php else : ?>
                         <input type="number" name="GWA" id="gwa" min="50" step="any" class="form-control col">
                       <?php endif; ?>
-                    </div>
+                    </div> -->
                     <input type="hidden" id="collegeId" value="<?= (!isset($education[0]['educ_id'])) ? "" : $education[0]['educ_id'] ?>">
                     <input type="hidden" id="shsId" value="<?= (!isset($education[1]['educ_id'])) ? "" : $education[1]['educ_id'] ?>">
                     <input type="hidden" id="jhsId" value="<?= (!isset($education[2]['educ_id'])) ? "" : $education[2]['educ_id'] ?>">
@@ -438,9 +438,13 @@
                             <label for="c_major" class="form-label">Major</label>
                             <input type="text" name="College Major" class="form-control" id="c_major" aria-describedby="c_major" value="<?= $education[0]['major'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                           </div>
-                          <div class="col-md-12 position-relative">
+                          <div class="col-md-6 position-relative">
                             <label for="c_school_address" class="form-label">School Address</label>
                             <input type="text" name="College Adddress" class="form-control" id="c_school_address" aria-describedby="c_school_address" value="<?= $education[0]['school_address'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                          </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="cgwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="cgwa" min="50" step="any" class="form-control col" value="<?= $education[0]['gwa'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                           </div>
                           <!-- COLLEGE AWARD TABLE -->
                           <div class="column">
@@ -553,9 +557,13 @@
                             <label for="c_major" class="form-label">Major in</label>
                             <input type="text" name="College Major" class="form-control" id="c_major" aria-describedby="c_major">
                           </div>
-                          <div class="col-md-12 position-relative">
+                          <div class="col-md-6 position-relative">
                             <label for="c_school_address" class="form-label">School Address</label>
                             <input type="text" name="College Adddress" class="form-control" id="c_school_address" aria-describedby="c_school_address">
+                          </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="cgwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="cgwa" min="50" step="any" class="form-control col">
                           </div>
                           <!-- COLLEGE AWARD TABLE 2 -->
                           <div class="column">
@@ -650,6 +658,10 @@
                           <div class="col-md-12 position-relative">
                             <label for="s_schoolAddress" class="form-label">School Address</label>
                             <input type="Others" name="Other SHS Address" class="form-control" id="s_schoolAddress" aria-describedby="s_schoolAddress" value="<?= $education[1]['school_address'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
+                          </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="sgwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="sgwa" min="50" step="any" class="form-control col" value="<?= $education[1]['gwa'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                           </div>
                           <!-- SENIOR HIGHSCHOOL AWARD TABLE -->
                           <div class="column">
@@ -754,6 +766,10 @@
                             <label for="s_schoolAddress" class="form-label">School Address</label>
                             <input type="Others" name="Other SHS Address" class="form-control" id="s_schoolAddress" aria-describedby="s_schoolAddress">
                           </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="sgwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="sgwa" min="50" step="any" class="form-control col">
+                          </div>
                           <!-- SENIOR HIGHSCHOOL -->
                           <div class="column">
                             <div class="card">
@@ -840,6 +856,10 @@
                           <div class="col-md-9 position-relative">
                             <label for="j_school_address" class="form-label">School Address</label>
                             <input type="text" name="Other JHS Name" class="form-control" id="j_school_address" aria-describedby="j_school_address" <?= $finishFlag ? "disabled" : "" ?> value="<?= $education[2]['school_address'] ?>">
+                          </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="hgwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="hgwa" min="50" step="any" class="form-control col" value="<?= $education[2]['gwa'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                           </div>
                           <div class="column">
                             <div class="card">
@@ -935,6 +955,10 @@
                             <label for="j_school_address" class="form-label">School Address</label>
                             <input type="text" name="Other JHS Name" class="form-control" id="j_school_address" aria-describedby="j_school_address">
                           </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="hgwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="hgwa" min="50" step="any" class="form-control col">
+                          </div>
                           <div class="column">
                             <div class="card">
                               <div class="card-body">
@@ -1011,6 +1035,10 @@
                           <div class="col-md-12 position-relative">
                             <label for="e_school_address" class="form-label">School Address</label>
                             <input type="text" name="Elementary School Address" class="form-control" id="e_school_address" aria-describedby="e_school_address" <?= $finishFlag ? "disabled" : "" ?> value="<?= $education[3]['school_address'] ?>">
+                          </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="egwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="egwa" min="50" step="any" class="form-control col" value="<?= $education[3]['gwa'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                           </div>
                           <div class="column">
                             <div class="card">
@@ -1097,6 +1125,10 @@
                           <div class="col-md-12 position-relative">
                             <label for="e_school_address" class="form-label">School Address</label>
                             <input type="text" name="Elementary School Address" class="form-control" id="e_school_address" aria-describedby="e_school_address">
+                          </div>
+                          <div class="col-md-6 position-relative">
+                            <label for="egwa" class="form-label">GWA</label>
+                            <input type="number" name="GWA" id="egwa" min="50" step="any" class="form-control col">
                           </div>
                           <div class="column">
                             <div class="card">
