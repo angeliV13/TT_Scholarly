@@ -1779,3 +1779,22 @@ function checkReadOnlyStatus($id = 0)
 
 //     return $data;
 // }
+
+function getAcadYearOptions(){
+    include("dbconnection.php");
+    $data = [];
+
+    $sql = "SELECT id, ay FROM acad_year ORDER BY id DESC";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+            $data[] = [
+                $row['id'],
+                $row['ay'],
+            ];
+        }
+    }
+
+    return json_encode($data);
+}

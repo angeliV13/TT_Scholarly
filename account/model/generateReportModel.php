@@ -5,7 +5,7 @@ include("validationModel.php");
 include("functionModel.php");
 
 
-function getTableHeader()
+function getTableHeader($report)
 {
     include('dbconnection.php');
 
@@ -21,31 +21,48 @@ function getTableHeader()
     return ($data);
 }
 
-function getTableBody()
+function getTableBody($report, $data)
 {
     include('dbconnection.php');
-    if($ay_id == '')  : getDefaultAcadYearId(); endif;
-    if($sem_id == '') : getDefaultSemesterId(); endif;
+    if ($data['Academic Year'] == '') : getDefaultAcadYearId();
+    endif;
+    // if ($data['Semester'] == '') : getDefaultSemesterId();
+    // endif;
 
-    $data = [];
+    $body = [];
+    $where = false;
 
     $sql = "SELECT * FROM {$report}";
+    // Looping if Data for Filter Found
+    foreach ($data as $key => $value) {
+        if ($value <> '--' && $value <> '') {
+            if ($where == false) {
+                $sql .= " WHERE ";
+                $where = true;
+            }else{
+                $sql .= " AND ";
+            }
+            $sql .= "`{$key}` LIKE '{$value}'";
+        }
+    }
+
+    // return $sql;
     $query = $conn->query($sql) or die("Error ESQ000: " . $conn->error);
 
     while ($row = $query->fetch_row()) {
-        $data[] = $row;
+        $body[] = $row;
     }
 
-    return ($data);
+    return ($body);
 }
 
-function createTable($report)
+function createTable($report, $data)
 {
     $array =  [0, 'applicant_report'];
     $returnData = [];
 
     $tableHeader = getTableHeader($array[$report]);
-    $tableBody   = getTableBody($array[$report]);
+    $tableBody   = getTableBody($array[$report], $data);
 
     $returnData = [$tableHeader, $tableBody];
 
