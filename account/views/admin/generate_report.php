@@ -50,9 +50,9 @@
 
                                             <!-- Scholarship Type -->
                                             <div class="row mb-3">
-                                                <label for="app_sholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
+                                                <label for="app_scholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" id="app_sholartype">
+                                                    <select class="form-select" id="app_scholarType">
                                                         <option selected value="">--</option>
                                                         <option value="1">Educational Assistance Program</option>
                                                         <option value="2">Full Scholarship Program</option>

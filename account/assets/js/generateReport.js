@@ -26,11 +26,11 @@ $(document).ready(function () {
 
   $("#genrep_applicant_btn").on("click", function (e) {
     let ay = $("#app_ay option:selected").text();
-    let scholarType = $("#app_scholarType option:selected").val();
-    let educLevel = $("#app_educLevel option:selected").val();
-    let schoolName = $("#app_schoolName option:selected").val();
-    let yearLevel = $("#app_yearLevel option:selected").val();
-    let courseStrand = $("#app_courseStrand option:selected").val();
+    let scholarType = $("#app_scholarType option:selected").text();
+    let educLevel = $("#app_educLevel option:selected").text();
+    let schoolName = $("#app_schoolName option:selected").val(); // ?
+    let yearLevel = $("#app_yearLevel option:selected").text();
+    let courseStrand = $("#app_courseStrand option:selected").val(); // ?
     let status = $("#app_status option:selected").val();
 
     $.ajax({

@@ -24,10 +24,8 @@ function getTableHeader($report)
 function getTableBody($report, $data)
 {
     include('dbconnection.php');
-    if ($data['Academic Year'] == '') : getDefaultAcadYearId();
-    endif;
-    // if ($data['Semester'] == '') : getDefaultSemesterId();
-    // endif;
+    if ($data['Academic Year'] == '') getDefaultAcadYearId();
+    // if ($data['Semester'] == '') getDefaultSemesterId();
 
     $body = [];
     $where = false;
@@ -58,7 +56,7 @@ function getTableBody($report, $data)
 
 function createTable($report, $data)
 {
-    $array =  [0, 'applicant_report'];
+    $array =  [0, 'applicant_report', 'beneficiary_report'];
     $returnData = [];
 
     $tableHeader = getTableHeader($array[$report]);
