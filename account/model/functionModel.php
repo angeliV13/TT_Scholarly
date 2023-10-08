@@ -1355,7 +1355,7 @@ function check_status($id)
         }
         else
         {
-            $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', NOW())";
+            $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, account_type, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', NOW())";
             $query = $conn->query($sql);
         }
 
