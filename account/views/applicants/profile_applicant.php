@@ -17,14 +17,14 @@
               <div class="rounded-top text-white d-flex flex-row mb-3" style="background-color: #000; height:200px;">
                 <div class="profile-pic ms-4 mt-5 d-flex flex-column" style="width: 150px; height:170px">
                   <?php if ($finishFlag) : ?>
-                    <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" id="output" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
+                    <img src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" id="output" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
                   <?php else : ?>
                     <label class="-label" for="file">
                       <span class="glyphicon glyphicon-camera"></span>
                       <span>Change Image</span>
                     </label>
                     <input id="file" type="file" onchange="loadFile(event)" />
-                    <img id="output" src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                    <img id="output" src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                   <?php endif; ?>
                 </div>
                 <div class="ms-4 adjustable-line-spacing" style="margin-top: 115px;">

@@ -16,7 +16,7 @@
                         <div class="card">
                             <div class="rounded-top text-white d-flex flex-row mb-3" style="background-color: #000; height:200px;">
                                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height:300px">
-                                    <img id="profileImage" src="<?php echo $user_info['profile_img'] == null ? "assets/img/profile-img.jpg" : $user_info['profile_img'] ?>" alt="Profile" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                    <img id="profileImage" src="<?php echo $user_info['fbImage'] == null ? "assets/img/profile-img.jpg" : $user_info['fbImage'] ?>" alt="Profile" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                                     <input type="file" id="imageInput" style="display: none;">
                                     <button onclick="document.getElementById('imageInput').click()">Change Profile Image</button>
                                 </div>

@@ -525,8 +525,8 @@ function update_profile($data)
     session_start();
 
     $id = $_SESSION['id'];
-    $fileLocation = "assets/img/uploads/profileImg/";
-    $fileLocationQuery = "../assets/img/uploads/profileImg/";
+    $fileLocation = "assets/img/uploads/fbProfile/";
+    $fileLocationQuery = "../assets/img/uploads/fbProfile/";
 
     $sql = "UPDATE account SET email = '" . $data['email'] . "' WHERE id = '" . $id . "' LIMIT 1";
     $query = $conn->query($sql);
@@ -562,7 +562,7 @@ function update_profile($data)
         //         move_uploaded_file($fileTmpName, $fileDestinationQuery);
 
 
-        //         $sql .= ", profile_img = '" . $fileDestination . "'";
+        //         $sql .= ", fbImage = '" . $fileDestination . "'";
         //     }
         // }
 
@@ -576,7 +576,7 @@ function update_profile($data)
 
         $img = $profileImg['path'];
 
-        $sql .= ", profile_img = '" . $img . "'";
+        $sql .= ", fbImage = '" . $img . "'";
     }
 
     $sql .= " WHERE account_id = '" . $id . "' LIMIT 1";
@@ -1005,7 +1005,7 @@ function changePFP($data)
     $userId = $data['userId'];
 
     $exists = check_exist_multiple(['table' => 'user_info', 'column' => ['account_id' => ['=', $data['userId']]]], 1);
-    $oldImg = $exists[0]['profile_img'];
+    $oldImg = $exists[0]['fbImage'];
 
     if ($fbImg != null) 
     {
@@ -1028,7 +1028,7 @@ function changePFP($data)
         $img = $uploadImg['path'];
     }
 
-    $sql = "UPDATE user_info SET profile_img = '$img' WHERE account_id = '$userId' LIMIT 1";
+    $sql = "UPDATE user_info SET fbImage = '$img' WHERE account_id = '$userId' LIMIT 1";
     $query = $conn->query($sql);
 
     return ($query) ? 'success' : 'Error: ' . $conn->error;
