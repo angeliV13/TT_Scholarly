@@ -54,8 +54,8 @@
                                 <thead>
                                     <tr class="small text-center">
                                         <th class="text-center">Website Welcome Text</th>
-                                        <th class="text-center">Website Header URL</th>
-                                        <th class="text-center">Website About Us</th>
+                                        <!-- <th class="text-center">Website Header URL</th>
+                                        <th class="text-center">Website About Us</th> -->
                                         <th class="text-center">Website Icon</th>
                                         <th class="text-center">Website Header Cover Photo</th>
                                         <th class="text-center">Website Hero Image</th>
@@ -64,8 +64,8 @@
                                 <tbody class="small text-center">
                                     <tr>
                                         <td contenteditable="true"><?= $website_other['welcome_text'] ?></td>
-                                        <td contenteditable="true"><?= $website_other['url'] ?></td>
-                                        <td contenteditable="true"><?= $website_other['about_url'] ?></td>
+                                        <!-- <td contenteditable="true"><?= $website_other['url'] ?></td>
+                                        <td contenteditable="true"><?= $website_other['about_url'] ?></td> -->
                                         <td>
                                             <div class="profile-pic" style="width: auto;">
                                                 <label class="-label" for="icon">
@@ -96,6 +96,41 @@
                                                 <img id="houtput" src="<?= $website_other['hero'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $website_other['hero'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                                             </div>
                                         </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table id="setScholarText" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class="small text-center">
+                                        <th class="text-center">Senior High School Scholarship Text</th>
+                                        <th class="text-center">College Educational Assistance Text</th>
+                                        <th class="text-center">College Full Scholarship Text</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small text-center">
+                                    <tr>
+                                        <td contenteditable="true"><?= $website_scholar_text[0]['scholarText'] ?></td>
+                                        <td contenteditable="true"><?= $website_scholar_text[1]['scholarText'] ?></td>
+                                        <td contenteditable="true"><?= $website_scholar_text[2]['scholarText'] ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table id="setSlider" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                                <thead>
+                                    <tr class="small text-center">
+                                        <th class="text-center">Slider Image</th>
+                                        <th class="text-center">Slider Text</th>
+                                        <th class="text-center">Slider SubText</th>
+                                        <th class="text-center">Active Flag</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small text-center">
+                                    <tr>
+                                        <td contenteditable="true"><?= $website_scholar_text[0]['scholarText'] ?></td>
+                                        <td contenteditable="true"><?= $website_scholar_text[1]['scholarText'] ?></td>
+                                        <td contenteditable="true"><?= $website_scholar_text[2]['scholarText'] ?></td>
                                     </tr>
                                 </tbody>
                             </table>

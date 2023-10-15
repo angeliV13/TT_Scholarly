@@ -990,18 +990,7 @@ function approveApplicant(val, accountViewId) {
 function reasonForRejection(val, accountViewId) {
     Swal.fire({
         title: "Reason for Rejection",
-        html: `<div class="form-group mb-3">
-                    <label for="reason">Reason</label>
-                    <select class="form-control" id="reason">
-                        <option value="1">With Failed Grades</option>
-                        <option value="2">Did Not Meet Maintaining GWA 2.50</option>
-                        <option value="3">Did Not Meet Deadline</option>
-                        <option value="4">With Dropped Subject</option>
-                        <option value="5">Did Not Submit Requirements</option>
-                        <option value="6">Others</option>
-                    </select>
-                </div>
-                <div class="form-group" id="otherReason">
+        html: `<div class="form-group" id="otherReason">
                     <label for="otherReason">Other Reason</label>
                     <input type="text" class="form-control" id="otherReason">
                 </div>`,
@@ -1009,10 +998,9 @@ function reasonForRejection(val, accountViewId) {
         confirmButtonText: "Submit",
         cancelButtonText: "Cancel",
         preConfirm: () => {
-            let reason = $('#reason').val();
             let otherReason = $('#otherReason').val();
 
-            if (reason == 6 && otherReason == '') {
+            if (otherReason == '') {
                 Swal.showValidationMessage(
                     `Please fill up the reason field.`
                 )
@@ -1020,7 +1008,7 @@ function reasonForRejection(val, accountViewId) {
                 return;
             }
 
-            let fullReason = (reason == 6 ? otherReason : $('#reason option:selected').text());
+            let fullReason = otherReason;
 
             return fullReason;
         }

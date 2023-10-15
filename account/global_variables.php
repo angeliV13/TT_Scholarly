@@ -62,6 +62,8 @@ if (isset($_SESSION))
 
 $website_info = get_website_info();
 $website_other = get_website_info(1);
+$website_scholar_text = get_website_info(2);
+$website_slider = get_website_info(3);
 $website_socials = get_website_socials();
 $website_testimony = get_website_testimonials(0);
 $gen_req = get_scholarship_requirements(2);

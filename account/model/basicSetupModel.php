@@ -1821,3 +1821,31 @@ function deleteAlumni($id)
 
     return ($query) ? "success" : $conn->error;
 }
+
+function updateScholarText($data)
+{
+    include("dbconnection.php");
+
+    foreach ($data as $key => $value)
+    {
+        $sql = "UPDATE website_scholar_text SET scholarText = ";
+
+        if ($key == 'shs')
+        {
+            $sql .= "'$value' WHERE type = 1";
+        }
+        else if ($key == 'cea')
+        {
+            $sql .= "'$value' WHERE type = 2";
+        }
+        else if ($key == 'cfs')
+        {
+            $sql .= "'$value' WHERE type = 3";
+        }
+
+        $query = $conn->query($sql);
+
+    }
+
+    return ($query) ? "success" : $conn->error;
+}
