@@ -1088,10 +1088,10 @@ function set_applicant_status($data)
         'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
     ];
 
-    $notif = insert_notification($notifData);
-    if ($notif !== 'success') return 'Error Admin Notification: ' . $notif;
+    $notifAdmin = insert_notification($notifData);
+    if ($notifAdmin !== 'success') return 'Error Admin Notification: ' . $notifAdmin;
 
-    $notifData = [
+    $notifUserData = [
         'user_id'       => $id,
         // 'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => $msgType,
@@ -1099,8 +1099,8 @@ function set_applicant_status($data)
         'notif_link'    => '?nav=dashboard',
     ];
 
-    $notif = insert_notification($notifData);
-    if ($notif !== 'success') return 'Error User Notification: ' . $notif;
+    $notifUser = insert_notification($notifUserData);
+    if ($notifUser !== 'success') return 'Error User Notification: ' . $notifUser;
 
     $updateStatus = update_applicant_status($id, $decision, $date, $endDate, $reason);
     if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
