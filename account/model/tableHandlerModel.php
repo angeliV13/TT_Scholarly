@@ -819,7 +819,7 @@ function websiteSocials()
     echo json_encode($json_data);
 }
 
-function graduatesTable()
+function graduatesTable() //CHECKING CK
 {
     include("dbconnection.php");
 
@@ -843,6 +843,9 @@ function graduatesTable()
     {
         while ($row = $query->fetch_assoc()) 
         {
+            $education  = get_user_education($account_id, 1);
+            $scholarType = check_status($account_id);
+
             extract($row);
 
             $education  = get_user_education($account_id, 1);
@@ -864,7 +867,7 @@ function graduatesTable()
                 (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
                 (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
                 (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course,
-                'ACTIONS NOT SPECIFIED YET',
+                $button,
             ];
 
             $totalData++;
@@ -881,7 +884,7 @@ function graduatesTable()
     echo json_encode($json_data);
 }
 
-function graduatingTable()
+function graduatingTable() // CHECKING CK
 {
     include("dbconnection.php");
 

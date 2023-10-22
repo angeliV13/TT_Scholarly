@@ -58,9 +58,21 @@ function createTable($report, $data)
 {
     $array =  [0, 'applicant_report', 'beneficiary_report', 'graduate_report', 'examination_report', 'performance_report'];
     $returnData = [];
+    $tableBodyTmp = [];
 
     $tableHeader = getTableHeader($array[$report]);
     $tableBody   = getTableBody($array[$report], $data);
+
+    // Send to Temp
+    $tableBodyTmp = $tableBody;
+    $tableBody = [];
+    foreach($tableBodyTmp as $key => $value){
+        // Get the position
+        // if position and $array is match apply changes of value for school
+        // Use get_school_name($id) of function model
+        // Push Changes
+    }
+
 
     $returnData = [$tableHeader, $tableBody];
 
