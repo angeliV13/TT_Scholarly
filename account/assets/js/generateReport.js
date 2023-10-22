@@ -26,6 +26,7 @@ $(document).ready(function () {
 
   $("#genrep_applicant_btn").on("click", function (e) {
     let ay = $("#app_ay option:selected").text();
+    let sem = $("#app_sem option:selected").text();
     let scholarType = $("#app_scholarType option:selected").text();
     let educLevel = $("#app_educLevel option:selected").text();
     let schoolName = $("#app_schoolName option:selected").val(); // ?
@@ -39,6 +40,7 @@ $(document).ready(function () {
       data: {
         action: 1,
         ay: ay,
+        sem: sem,
         scholarType: scholarType,
         educLevel: educLevel,
         schoolName: schoolName,
@@ -69,13 +71,14 @@ $(document).ready(function () {
   });
 
   $("#genrep_bene_btn").on("click", function (e) {
-    let ay = $("#app_ay option:selected").text();
-    let scholarType = $("#app_scholarType option:selected").text();
-    let educLevel = $("#app_educLevel option:selected").text();
-    let schoolName = $("#app_schoolName option:selected").val(); // ?
-    let yearLevel = $("#app_yearLevel option:selected").text();
-    let courseStrand = $("#app_courseStrand option:selected").val(); // ?
-    let status = $("#app_status option:selected").val(); //?
+    let ay = $("#bene_ay option:selected").text();
+    let sem = $("#bene_sem option:selected").text();
+    let scholarType = $("#bene_scholarType option:selected").text();
+    let educLevel = $("#bene_educLevel option:selected").text();
+    let schoolName = $("#bene_schoolName option:selected").val(); // ?
+    let yearLevel = $("#bene_yearLevel option:selected").text();
+    let courseStrand = $("#bene_courseStrand option:selected").val(); // ?
+    let status = $("#bene_status option:selected").val(); //?
 
     $.ajax({
       type: "POST",
@@ -83,6 +86,7 @@ $(document).ready(function () {
       data: {
         action: 1,
         ay: ay,
+        sem: sem,
         scholarType: scholarType,
         educLevel: educLevel,
         schoolName: schoolName,
@@ -113,13 +117,14 @@ $(document).ready(function () {
   });
 
   $("#genrep_graduating_btn").on("click", function (e) {
-    let ay = $("#app_ay option:selected").text();
-    let scholarType = $("#app_scholarType option:selected").text();
-    let educLevel = $("#app_educLevel option:selected").text();
-    let schoolName = $("#app_schoolName option:selected").val(); // ?
-    let yearLevel = $("#app_yearLevel option:selected").text();
-    let courseStrand = $("#app_courseStrand option:selected").val(); // ?
-    let status = $("#app_status option:selected").val(); //?
+    let ay = $("#graduating_ay option:selected").text();
+    let sem = $("#graduating_sem option:selected").text();
+    let scholarType = $("#graduating_scholarType option:selected").text();
+    let educLevel = $("#graduating_educLevel option:selected").text();
+    let schoolName = $("#graduating_schoolName option:selected").val(); // ?
+    let yearLevel = $("#graduating_yearLevel option:selected").text();
+    let courseStrand = $("#graduating_courseStrand option:selected").val(); // ?
+    let status = $("#graduating_status option:selected").val(); //?
 
     $.ajax({
       type: "POST",
@@ -127,6 +132,7 @@ $(document).ready(function () {
       data: {
         action: 2,
         ay: ay,
+        sem: sem,
         scholarType: scholarType,
         educLevel: educLevel,
         schoolName: schoolName,

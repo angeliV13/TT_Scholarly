@@ -222,7 +222,7 @@ $(document).ready(function () {
         "paging": false,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
         "bInfo": false,
         "ajax": {
@@ -245,14 +245,20 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
+        "columnDefs": [
+            { className: "text-center", "targets": [0] }, 
+            { visible: false, targets: [12, 13, 14, 15] }, 
+            { width: "200px", "targets": [0, 1, 2, 3] } ,
+            { width: "200px", "targets": [4, 5, 6, 7] } 
+        ],
         language: {
             processing: "<span class='loader'></span>"
         },
-        fixedColumns: {
-            leftColumns: 0
-        },
+        // fixedColumns: {
+        //     leftColumns: 0
+        // },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false

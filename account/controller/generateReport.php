@@ -11,7 +11,7 @@ if (isset($_REQUEST['action']))
         case 0.1:
             echo getAcadYearOptions();
             break;
-        case 1:
+        case 1: //applicant generate report
             $data = [
                 "Academic Year"     => (isset($_POST['ay'])           ? $_POST['ay']          : ''),
                 "Semester"          => (isset($_POST['sem'])          ? $_POST['sem']         : ''),
@@ -24,7 +24,7 @@ if (isset($_REQUEST['action']))
             ];
             echo createTable($report = 1, $data = $data);
             break;
-        case 2:
+        case 2: //beneficiaries generate report
             $data = [
                 "Academic Year"     => (isset($_POST['ay'])           ? $_POST['ay']          : ''),
                 "Semester"          => (isset($_POST['sem'])          ? $_POST['sem']         : ''),
@@ -37,7 +37,7 @@ if (isset($_REQUEST['action']))
             ];
             echo createTable($report = 2, $data = $data);
             break;
-        case 3:
+        case 3: //graduating generate report
             $data = [
                 "Academic Year"     => (isset($_POST['ay'])           ? $_POST['ay']          : ''),
                 "Semester"          => (isset($_POST['sem'])          ? $_POST['sem']         : ''),
