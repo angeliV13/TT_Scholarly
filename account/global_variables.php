@@ -13,6 +13,9 @@ $bootstrapIcons = ['Circle' => 'bi bi-check-circle-fill', 'User' => 'bi bi-peopl
 'File Earmark Excel' => 'bi bi-file-earmark-excel', 'File Earmark Text' => 'bi bi-file-earmark-text', 'Person Check' => 'bi bi-person-check',
 'Person Dash' => 'bi bi-person-dash', 'Person Plus' => 'bi bi-person-plus', 'Person X' => 'bi bi-person-x', 'Person' => 'bi bi-person',
 'Info Cirle' => 'bi bi-info-circle', 'Question Circle' => 'bi bi-question-circle', 'X Circle' => 'bi bi-x-circle', 'X' => 'bi bi-x'];
+$barangayArr = ['Barangay I (Pob.)', 'Barangay II (Pob.)', 'Barangay III (Pob.)', 'Barangay IV (Pob.)', 'San Agustin', 'San Antonio', 'San Bartolome', 'San Felix', 'San Fernando',
+'San Francisco', 'San Isidro Norte', 'San Isidro Sur', 'San Joaquin', 'San Jose', 'San Juan', 'San Luis', 'San Miguel', 'San Pablo', 'San Pedro', 'San Rafael', 'San Roque', 'San Vicente',
+'Santa Ana', 'Santa Anastacia', 'Santa Clara', 'Santa Cruz', 'Santa Elena', 'Santa Maria', 'Santa Teresita', 'Santiago'];
 
 $accountTypeArr = ['0' => 'Super Admin', '1' => 'Admin', '2' => 'Beneficiaries', '3' => 'Applicant'];
 $relationshipArr = ['Brother' => 'Brother', 'Sister' => 'Sister', 'Grandfather' => 'Grandfather', 'Grandmother' => 'Grandmother', 'Uncle' => 'Uncle', 'Aunt' => 'Aunt', 
