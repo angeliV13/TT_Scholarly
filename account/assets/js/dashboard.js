@@ -6,7 +6,21 @@ $(document).ready(function ($) {
       height: 350,
       type: "area",
       toolbar: {
-        show: false,
+        show: true,
+        export: {
+          csv: {
+            filename: 'Scholar Trends',
+            headerCategory: 'Academic Year',
+            columnDelimiter: ';',
+            dateFormatter: function(timestamp) {
+              var date = dayjs(new Date(timestamp));
+              var format = 'ddd D. MMM;HH:mm'  // sic: Delimiter in here on purpose
+              var nextHour = Number(date.hour()) + 1;
+              var text = date.format(format) + ' - ' + nextHour + ':00';
+              return text;
+            },
+          }
+        },
       },
     },
     markers: {

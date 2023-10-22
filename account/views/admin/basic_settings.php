@@ -27,7 +27,6 @@
                             </div>
                         </div>
                         <div id="acad_table_view" class="table-responsive nav-content ">
-
                             <!-- Table with stripped rows -->
                             <table id="acadYearTable" class="table table-bordered table-condensed table-striped datatable" width="100%">
                                 <thead>
