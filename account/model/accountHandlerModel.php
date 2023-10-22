@@ -907,8 +907,8 @@ function updateFamily($data, $type, $userId)
         } 
         else 
         {
-            $sql = "INSERT INTO user_family (user_id, ay_id, sem_id fam_type, firstName, middleName, lastName, suffix, age, birth_date, birth_place, contact_number, living_flag, occupation, company_name, company_address, income_flag, attainment_flag, relationship) VALUES
-                    ('$userId', '$userId', '$acadYear', '$defaultYear', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
+            $sql = "INSERT INTO user_family (user_id, ay_id, sem_id, fam_type, firstName, middleName, lastName, suffix, age, birth_date, birth_place, contact_number, living_flag, occupation, company_name, company_address, income_flag, attainment_flag, relationship) VALUES
+                    ('$userId', '$acadYear', '$type', '$defaultYear', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
         }
 
         $query = $conn->query($sql);
