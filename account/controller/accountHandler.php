@@ -49,7 +49,7 @@ if (isset($_REQUEST['action']))
             'citizenship'       => isset($_POST['citizenship']) ? $_POST['citizenship'] : 0,
             'years'             => isset($_POST['years']) ? $_POST['years'] : 0,
             'language'          => isset($_POST['language']) ? $_POST['language'] : 'NA',
-            'username'          => isset($_POST['username']) ? $_POST['username'] : '',
+            // 'username'          => isset($_POST['username']) ? $_POST['username'] : '',
             'email'             => isset($_POST['email']) ? $_POST['email'] : '',
             'password'          => isset($_POST['password']) ? $_POST['password'] : '',
             'fbName'            => isset($_POST['fbName']) ? $_POST['fbName'] : '',
@@ -277,6 +277,10 @@ if (isset($_REQUEST['action']))
     else if ($action == 25) // Cancel Submission
     {
         echo cancelSubmitApplication(isset($_POST['userId']) ? $_POST['userId'] : '');
+    }
+    else if ($action == 26) // Update to Graduate
+    {
+        echo updateToGraduate(isset($_POST['id']) ? $_POST['id'] : '');
     }
 }
 

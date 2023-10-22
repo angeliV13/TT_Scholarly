@@ -14,7 +14,7 @@
           <div class="card">
             <input type="hidden" id="userId" value="<?= $_SESSION['id'] ?>">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="<?= $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Profile" class="rounded-pill">
+              <img src="<?= $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Profile" class="rounded-pill">
               <h2><?= $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
               <h3><?= $accType ?></h3>
             </div>

@@ -34,7 +34,7 @@ function getProfile($account_id)
     $religion = $user_info['religion'];
     $gender = $user_info['gender'];
     $civil_status = $user_info['civil_status'];
-    $profile_img = $user_info['profile_img'];
+    $profile_img = $user_info['fbImage'];
     $years_of_residency = $user_info['years_of_residency'];
 
     $education = get_user_education($account_id);

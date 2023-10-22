@@ -24,7 +24,7 @@
                     </label>
                     <input id="file" type="file" onchange="loadFile(event)" />
                     <!-- <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" /> -->
-                    <img id="output" src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                    <img id="output" src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                   </div>
                   <div class="flex-grow-1 ms-4 mt-3">
                     <h5 class="mb-1 fw-bold">JUAN DELA CRUZ</h5>

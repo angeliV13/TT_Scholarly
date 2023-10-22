@@ -176,23 +176,23 @@ function registerAccount($data)
     ];
 
 
-    $userCheck = [
-        'table'     => 'account',
-        'column'    => 'user_name',
-        'value'     => $data['username'],
-    ];
+    // $userCheck = [
+    //     'table'     => 'account',
+    //     'column'    => 'user_name',
+    //     'value'     => $data['username'],
+    // ];
 
     $emailCount = check_exist($emailCheck);
-    $userCount = check_exist($userCheck);
+    // $userCount = check_exist($userCheck);
 
     if ($emailCount > 0) 
     {
         return 'Email Already Exist';
     } 
-    else if ($userCount > 0) 
-    {
-        return 'Username Already Exist';
-    }
+    // else if ($userCount > 0) 
+    // {
+    //     return 'Username Already Exist';
+    // }
 
     do {
         $eacNumber = generateEacNumber();
@@ -205,13 +205,18 @@ function registerAccount($data)
         $eaCount = check_exist($eacCheck);
     } while ($eaCount > 0);
 
+    $website_header = get_website_info(0)['header'];
+
     $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
-    $msg .= '<p> Your account has been created. Enter the code below to verify your account. This code will expire in 5 minutes. </p>';
+    $msg .= '<p> Your account has been created. </p>';
+    $msg .= '<p> Here is your unique EAC Number which you will use to login to the system. </p>';
+    $msg .= '<p> <b> EAC Number: ' . $eacNumber . ' </b> </p>';
+    $msg .= '<p> Here is your verification code. This code will expire in 5 minutes. </p>';
     $msg .= '<p> <b> Code: ' . $randomString . ' </b> </p>';
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -232,7 +237,7 @@ function registerAccount($data)
 
     if ($notif !== 'success') return 'Error: ' . $notif;
 
-    $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . hashPassword($data['password']) . "', '" . $data['email'] . "', 3, 0)";
+    $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $eacNumber . "', '" . hashPassword($data['password']) . "', '" . $data['email'] . "', 3, 0)";
     $query = mysqli_query($conn, $sql) or die("Error RQ001: " . mysqli_error($conn));
 
     if ($query) 
@@ -343,13 +348,14 @@ function resend_email($data)
     include("dbconnection.php");
 
     $randomToken = generateRandomString(5);
+    $website_header = get_website_info(0)['header'];
 
     $msg = '<p> Here is your new code. This code will expire in 5 minutes. </p>';
     $msg .= '<p> <b> Code: ' . $randomToken . ' </b> </p>';
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -403,6 +409,7 @@ function forgot_password($email, $type)
         $user_name = $row['user_name'];
 
         $randomToken = generateRandomString(5);
+        $website_header = get_website_info(0)['header'];
 
         $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -412,7 +419,7 @@ function forgot_password($email, $type)
         $msg .= '<p>This is a system generated email. Please do not reply.</p>';
         $msg .= '<p>Thank you! <br></p>';
         $msg .= '<p>Best regards,</p>';
-        $msg .= '<p>Youth Development Scholarship</p>';
+        $msg .= '<p>' .$website_header . '</p>';
 
         $sendEmail = sendEmail($email, $text, $msg, $emailType);
 
@@ -456,13 +463,15 @@ function password_reset($data)
 
             if ($query) 
             {
+                $website_header = get_website_info(0)['header'];
+
                 $msg = '<p> Hello ' . $user_name . ', </p> ';
                 $msg .= '<p> Your password has been reset. </p>';
                 $msg .= '<p> If you did not request a password reset, please contact us immediately. </p>';
                 $msg .= '<p>This is a system generated email. Please do not reply.</p>';
                 $msg .= '<p>Thank you! <br></p>';
                 $msg .= '<p>Best regards,</p>';
-                $msg .= '<p>Youth Development Scholarship</p>';
+                $msg .= '<p>' .$website_header . '</p>';
 
                 $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -525,8 +534,8 @@ function update_profile($data)
     session_start();
 
     $id = $_SESSION['id'];
-    $fileLocation = "assets/img/uploads/profileImg/";
-    $fileLocationQuery = "../assets/img/uploads/profileImg/";
+    $fileLocation = "assets/img/uploads/fbProfile/";
+    $fileLocationQuery = "../assets/img/uploads/fbProfile/";
 
     $sql = "UPDATE account SET email = '" . $data['email'] . "' WHERE id = '" . $id . "' LIMIT 1";
     $query = $conn->query($sql);
@@ -562,7 +571,7 @@ function update_profile($data)
         //         move_uploaded_file($fileTmpName, $fileDestinationQuery);
 
 
-        //         $sql .= ", profile_img = '" . $fileDestination . "'";
+        //         $sql .= ", fbImage = '" . $fileDestination . "'";
         //     }
         // }
 
@@ -576,7 +585,7 @@ function update_profile($data)
 
         $img = $profileImg['path'];
 
-        $sql .= ", profile_img = '" . $img . "'";
+        $sql .= ", fbImage = '" . $img . "'";
     }
 
     $sql .= " WHERE account_id = '" . $id . "' LIMIT 1";
@@ -957,12 +966,14 @@ function submitApplication($id)
     $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
 
+    $website_header = get_website_info(0)['header'];
+
     $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= '<p>Your scholarship application has been submitted. You will be notified once your application has been reviewed.</p>';
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
@@ -1005,7 +1016,7 @@ function changePFP($data)
     $userId = $data['userId'];
 
     $exists = check_exist_multiple(['table' => 'user_info', 'column' => ['account_id' => ['=', $data['userId']]]], 1);
-    $oldImg = $exists[0]['profile_img'];
+    $oldImg = $exists[0]['fbImage'];
 
     if ($fbImg != null) 
     {
@@ -1028,7 +1039,7 @@ function changePFP($data)
         $img = $uploadImg['path'];
     }
 
-    $sql = "UPDATE user_info SET profile_img = '$img' WHERE account_id = '$userId' LIMIT 1";
+    $sql = "UPDATE user_info SET fbImage = '$img' WHERE account_id = '$userId' LIMIT 1";
     $query = $conn->query($sql);
 
     return ($query) ? 'success' : 'Error: ' . $conn->error;
@@ -1065,13 +1076,14 @@ function set_applicant_status($data)
 
     $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $website_header = get_website_info(0)['header'];
 
     $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= $msgText;
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
@@ -1088,10 +1100,10 @@ function set_applicant_status($data)
         'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
     ];
 
-    $notif = insert_notification($notifData);
-    if ($notif !== 'success') return 'Error Admin Notification: ' . $notif;
+    $notifAdmin = insert_notification($notifData);
+    if ($notifAdmin !== 'success') return 'Error Admin Notification: ' . $notifAdmin;
 
-    $notifData = [
+    $notifUserData = [
         'user_id'       => $id,
         // 'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => $msgType,
@@ -1099,8 +1111,8 @@ function set_applicant_status($data)
         'notif_link'    => '?nav=dashboard',
     ];
 
-    $notif = insert_notification($notifData);
-    if ($notif !== 'success') return 'Error User Notification: ' . $notif;
+    $notifUser = insert_notification($notifUserData);
+    if ($notifUser !== 'success') return 'Error User Notification: ' . $notifUser;
 
     $updateStatus = update_applicant_status($id, $decision, $date, $endDate, $reason);
     if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
@@ -1143,6 +1155,7 @@ function deleteUserRequest($data)
 
     $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $website_header = get_website_info(0)['header'];
 
     $table = '<table style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -1172,7 +1185,7 @@ function deleteUserRequest($data)
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '5';
 
@@ -1244,6 +1257,8 @@ function addAdminAccount($data)
         $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '5';
         $name = $data['firstName'] . ' ' . $data['lastName'];
 
+        $website_header = get_website_info(0)['header'];
+
         $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
         $msg .= '<p> Your account has been created. Please use this password to navigate your account. </p>';
         $msg .= '<p> <b> Username: ' . $data['username'] . ' </b> </p>';
@@ -1252,7 +1267,7 @@ function addAdminAccount($data)
         $msg .= '<p>This is a system generated email. Please do not reply.</p>';
         $msg .= '<p>Thank you! <br></p>';
         $msg .= '<p>Best regards,</p>';
-        $msg .= '<p>Youth Development Scholarship</p>';
+        $msg .= '<p>' .$website_header . '</p>';
 
         $sendEmail = sendEmail($data['email'], $name . ' - Account Created Successfully', $msg, $emailType);
 
@@ -1426,4 +1441,14 @@ function cancelSubmitApplication($id)
     $query = $conn->query($sql);
 
     return ($query) ? 'success': $conn->error; $conn->rollback();
+}
+
+function updateToGraduate($id)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE account SET account_status = '4' WHERE id = '$id' LIMIT 1";
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success' : 'Error: ' . $conn->error;
 }

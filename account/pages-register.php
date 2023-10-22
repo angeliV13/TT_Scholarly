@@ -147,30 +147,21 @@ include('includes/main.php');
                     </div>
                     <div class="col-md-4 position-relative">
                       <label for="region" class="form-label">Region</label>
-                      <select class="form-select" id="region" name="Region">
-
-
-                      </select>
+                      <input class="form-control" id="region" name="Region" value="Region IV-A (Calabarzon)" readonly>
                       <div class="invalid-tooltip">
                         Please select a valid Region.
                       </div>
                     </div>
                     <div class="col-md-3 position-relative">
                       <label for="province" class="form-label">Province</label>
-                      <select class="form-select" id="province" name="Province">
-
-
-                      </select>
+                      <input class="form-control" id="province" name="Province" value="Batangas" readonly>
                       <div class="invalid-tooltip">
                         Please select a valid Province.
                       </div>
                     </div>
                     <div class="col-md-3 position-relative">
                       <label for="city" class="form-label">Municipality</label>
-                      <select class="form-select" id="city" name="Municipality">
-
-
-                      </select>
+                      <input class="form-control" id="city" name="Municipality" value="Santo Tomas" readonly>
                       <div class="invalid-tooltip">
                         Please select a valid Municipality.
                       </div>
@@ -178,8 +169,9 @@ include('includes/main.php');
                     <div class="col-md-3 position-relative">
                       <label for="barangay" class="form-label">Barangay</label>
                       <select class="form-select" id="barangay" name="Barangay">
-
-
+                        <?php foreach ($barangayArr AS $val): ?>
+                          <option value="<?php echo $val ?>"><?php echo $val ?></option>
+                        <?php endforeach; ?>
                       </select>
                       <div class="invalid-tooltip">
                         Please select a valid Barangay.
@@ -237,19 +229,19 @@ include('includes/main.php');
                     </div>
 
                     <div class="col-12">
-                      <label for="fbImg" class="form-label">Facebook Profile Image</label>
+                      <label for="fbImg" class="form-label">Profile Image</label>
                       <input type="file" name="Facebook Image" class="form-control" id="fbImg">
                       <div class="invalid-feedback">Please enter a valid Profile Image!</div>
                     </div>
 
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                       <label for="username" class="form-label">Username</label>
                       <input type="text" name="Username" class="form-control" id="username">
                       <div class="invalid-feedback">Please enter a valid Username!</div>
-                    </div>
+                    </div> -->
 
 
-                    <div class="col-6">
+                    <div class="col-12">
                       <label for="yourEmail" class="form-label">Email Address</label>
                       <input type="email" name="Email Address" class="form-control" id="yourEmail">
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>

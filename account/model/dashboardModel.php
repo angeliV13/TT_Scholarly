@@ -9,8 +9,8 @@ function getTotalCounts()
     $acadYearEnd = getDefaultAcadYearColumn('to_ay');
 
     $data = [
-        getAccounts(2, 1, 1),   // Applicant
-        getAccounts(3, 1, 1),    // Beneficiaries
+        getAccounts(3, 1, 1),   // Applicant
+        getAccounts(2, 1, 1),    // Beneficiaries
         getGraduating($acadYearEnd, 3, 1) // Graduating
 
     ];

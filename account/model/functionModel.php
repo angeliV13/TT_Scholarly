@@ -115,11 +115,52 @@ function verifyHashPW($pass, $hash)
     return password_verify($pass, $hash);
 }
 
+function get_current_sem()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT semester FROM semester WHERE default_sem = 1";
+    $query = $conn->query($sql);
+
+    $text = "";
+    $sem = ($query->num_rows > 0) ? $query->fetch_assoc()['semester'] : "Unknown";
+
+    if ($sem != "Unknown") 
+    {
+        $sql = "SELECT ay FROM acad_year WHERE default_ay = 1 LIMIT 1";
+        $query = $conn->query($sql);
+
+        $ay = ($query->num_rows > 0) ? $query->fetch_assoc()['ay'] : "Unknown";
+    }
+
+    if ($sem != "Unknown" && $ay != "Unknown") 
+    {
+        $text = $sem . " Semester, A.Y. " . $ay;
+    }
+
+    return $text;
+}
+
 function get_website_info($type = 0)
 {
     include("dbconnection.php");
 
-    $table = ($type == 0) ? "website_info" : "website_other_info";
+    if ($type == 0)
+    {
+        $table = "website_info";
+    }
+    else if ($type == 1)
+    {
+        $table = "website_other_info";
+    }
+    else if ($type == 2)
+    {
+        $table = "website_scholar_text";
+    }
+    else if ($type == 3)
+    {
+        $table = "website_slider";
+    }
 
     $sql = "SELECT * FROM $table";
     $query = $conn->query($sql);
@@ -128,9 +169,20 @@ function get_website_info($type = 0)
 
     if ($query->num_rows > 0) 
     {
-        $row = $query->fetch_assoc();
+        if (in_array($type, [0, 1]))
+        {
+            $row = $query->fetch_assoc();
 
-        $website_info = $row;
+            $website_info = $row;
+        }
+        else
+        {
+            while ($row = $query->fetch_assoc()) 
+            {
+                $website_info[] = $row;
+            }
+        }
+        
     }
 
     return $website_info;

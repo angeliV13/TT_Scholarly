@@ -19,19 +19,20 @@
                                     <div class="d-flex text-black">
                                         <div class="profile-pic d-flex flex-column" style="width: 160px; height:180px;  border-radius: 10px;">
                                             <?php if ($finishFlag) : ?>
-                                                <img src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" id="output" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
+                                                <img src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" id="output" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
                                             <?php else: ?>
                                                 <label class="-label" for="file">
                                                     <span class="glyphicon glyphicon-camera"></span>
                                                     <span>Change Image</span>
                                                 </label>
                                                 <input id="file" type="file" onchange="loadFile(event)" />
-                                                <img id="output" src="<?php echo $user_info['profile_img'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['profile_img'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                                <img id="output" src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                                             <?php endif; ?>
                                         </div>
                                       <div class="flex-grow-1 ms-4 mt-3">
                                           <h5 class="mb-1 fw-bold"><?= $user_info['first_name'] . " " . $user_info['middle_name'] . " " . $user_info['last_name']  ?></h5>
                                           <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;"><?= $latestEd ?></p>
+                                          <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;"><?= $user_data[1] ?></p>
                                           <p class="mb-2 pb-1" style="color: #2b2a2a;"><?= $latestSchoolName ?></p>
 
                                           <div class="d-flex justify-content-between align-items-center rounded-3 gap-2 p-2 mb-2" style="background-color: #efefef;">
@@ -49,7 +50,7 @@
                                               </div>
                                               <div>
                                                   <p class="small text-muted mb-1">Semester:</p>
-                                                  <p class="mb-0 fw-bold">FIRST SEMESTER AY 2023-2024</p>
+                                                  <p class="mb-0 fw-bold"><?= $currentAy ?></p>
                                               </div>
                                           </div>
                                         </div>

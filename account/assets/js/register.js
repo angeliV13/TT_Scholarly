@@ -1,52 +1,52 @@
-let my_handlers = {
+// let my_handlers = {
 
-    fill_provinces: function() {
+//     fill_provinces: function() {
 
-      let region_code = $(this).val();
-      $('#province').ph_locations('fetch_list', [{
-        "region_code": region_code
-      }]);
+//       let region_code = $(this).val();
+//       $('#province').ph_locations('fetch_list', [{
+//         "region_code": region_code
+//       }]);
 
-    },
+//     },
 
-    fill_cities: function() {
+//     fill_cities: function() {
 
-      let province_code = $(this).val();
-      $('#city').ph_locations('fetch_list', [{
-        "province_code": province_code
-      }]);
-    },
+//       let province_code = $(this).val();
+//       $('#city').ph_locations('fetch_list', [{
+//         "province_code": province_code
+//       }]);
+//     },
 
 
-    fill_barangays: function() {
+//     fill_barangays: function() {
 
-      let city_code = $(this).val();
-      $('#barangay').ph_locations('fetch_list', [{
-        "city_code": city_code
-      }]);
-    }
-  };
+//       let city_code = $(this).val();
+//       $('#barangay').ph_locations('fetch_list', [{
+//         "city_code": city_code
+//       }]);
+//     }
+//   };
 
-  $(function() {
-    $('#region').on('change click', my_handlers.fill_provinces);
-    $('#province').on('change click', my_handlers.fill_cities);
-    $('#city').on('change click', my_handlers.fill_barangays);
+//   $(function() {
+//     $('#region').on('change click', my_handlers.fill_provinces);
+//     $('#province').on('change click', my_handlers.fill_cities);
+//     $('#city').on('change click', my_handlers.fill_barangays);
 
-    $('#region').ph_locations({
-      'location_type': 'regions'
-    });
-    $('#province').ph_locations({
-      'location_type': 'provinces'
-    });
-    $('#city').ph_locations({
-      'location_type': 'cities'
-    });
-    $('#barangay').ph_locations({
-      'location_type': 'barangays'
-    });
+//     $('#region').ph_locations({
+//       'location_type': 'regions'
+//     });
+//     $('#province').ph_locations({
+//       'location_type': 'provinces'
+//     });
+//     $('#city').ph_locations({
+//       'location_type': 'cities'
+//     });
+//     $('#barangay').ph_locations({
+//       'location_type': 'barangays'
+//     });
 
-    $('#region').ph_locations('fetch_list');
-  });
+//     $('#region').ph_locations('fetch_list');
+//   });
 
 
   // Register Account
@@ -76,7 +76,7 @@ let my_handlers = {
     let middleName = $("#inputMiddleName").val();
     let lastName = check_error(document.getElementById("inputLastName")); if (lastName == undefined) return;
     let suffix = $("#inputSuffix").val();
-    let username = check_error(document.getElementById("username")); if (username == undefined) return;
+    // let username = check_error(document.getElementById("username")); if (username == undefined) return;
 
     let birthDate = check_error(document.getElementById("inputDate"), options = {
       type: "date",
@@ -97,14 +97,8 @@ let my_handlers = {
       text: "Contact Number"
     }); if (contactNo == undefined) return;
     let address = check_error(document.getElementById("inputAddress")); if (address == undefined) return;
-    let provice = check_error(document.getElementById("province"), options = {
-      type: "select",
-      returnVal: "text"
-    }); if (provice == undefined) return;
-    let city = check_error(document.getElementById("city"), options = {
-      type: "select",
-      returnVal: "text"
-    }); if (city == undefined) return;
+    let provice = check_error(document.getElementById("province")); if (provice == undefined) return;
+    let city = check_error(document.getElementById("city")); if (city == undefined) return;
     let barangay = check_error(document.getElementById("barangay"), options = {
       type: "select",
       returnVal: "text"
@@ -159,12 +153,9 @@ let my_handlers = {
       return false;
     }
 
-    let region = check_error(document.getElementById("region"), options = {
-      type: "select",
-      returnVal: "text"
-    }); if (region == undefined) return;
+    let region = check_error(document.getElementById("region")); if (region == undefined) return;
 
-    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
+    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
       let formData = new FormData();
       formData.append("scholarType", scholarType);
       formData.append("firstName", firstName);
@@ -186,7 +177,7 @@ let my_handlers = {
       formData.append("citizenship", citizenship);
       formData.append("years", years);
       formData.append("language", language);
-      formData.append("username", username);
+      // formData.append("username", username);
       formData.append("email", email);
       formData.append("password", password);
       formData.append("fbName", fbName);

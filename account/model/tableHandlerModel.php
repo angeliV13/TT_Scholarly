@@ -731,6 +731,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             $none = ($acc_status == 4) ? "d-none" : "";
 
             $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                        <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2 '.$none.'" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
                         <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
 
             $course     = (isset($education['course']) ? get_education_courses('', $education['course']) : '');
@@ -819,7 +820,7 @@ function websiteSocials()
     echo json_encode($json_data);
 }
 
-function graduatesTable()
+function graduatesTable() //CHECKING CK
 {
     include("dbconnection.php");
 
@@ -843,6 +844,9 @@ function graduatesTable()
     {
         while ($row = $query->fetch_assoc()) 
         {
+            $education  = get_user_education($account_id, 1);
+            $scholarType = check_status($account_id);
+
             extract($row);
 
             $education  = get_user_education($account_id, 1);
@@ -864,7 +868,7 @@ function graduatesTable()
                 (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
                 (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
                 (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course,
-                'ACTIONS NOT SPECIFIED YET',
+                $button,
             ];
 
             $totalData++;
@@ -881,7 +885,7 @@ function graduatesTable()
     echo json_encode($json_data);
 }
 
-function graduatingTable()
+function graduatingTable() // CHECKING CK
 {
     include("dbconnection.php");
 

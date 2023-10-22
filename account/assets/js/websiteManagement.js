@@ -292,15 +292,15 @@ $("#setOtherInfo").on("keydown", "td", function(e){
 
         console.log(tdDataArr);
 
-        if (tdDataArr.length == 3){
+        if (tdDataArr.length == 1){
             $.ajax({
                 url: "controller/basicSetup.php",
                 type: "POST",
                 data: {
                     "action"        : 18,
                     "welcome"       : tdDataArr[0],
-                    "url"           : tdDataArr[1],
-                    "aboutUrl"      : tdDataArr[2]
+                    "url"           : tdDataArr[0],
+                    "aboutUrl"      : tdDataArr[0]
                 },
                 beforeSend: function(){
                     showBeforeSend("Updating Website Info...");
@@ -312,6 +312,68 @@ $("#setOtherInfo").on("keydown", "td", function(e){
                             icon: "success",
                             title: "Success!",
                             text: `Website Info successfully updated!`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `Something went wrong! Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Please fill all the fields!`,
+            })
+        }
+    }
+})
+
+$("#setScholarText").on("keydown", "td", function(e){
+    if (e.which == 13){
+        e.preventDefault();
+        let tdDataArr = [];
+
+        let id = $(this).closest("table").attr("id"); 
+        
+        for (instance of document.querySelectorAll("[contenteditable=true]")){
+            if (instance.closest("table").id != id) continue;
+            instance.setAttribute("data-text", instance.innerText);
+
+            if (instance.innerText != ""){
+                tdDataArr.push(instance.innerText);
+            }
+        }
+
+        console.log(tdDataArr);
+
+        if (tdDataArr.length == 3){
+            $.ajax({
+                url: "controller/basicSetup.php",
+                type: "POST",
+                data: {
+                    "action"   : 24,
+                    "shs"      : tdDataArr[0],
+                    "cea"      : tdDataArr[1],
+                    "cfs"      : tdDataArr[2]
+                },
+                beforeSend: function(){
+                    showBeforeSend("Updating Website Scholarship Text...");
+                },
+                success: function(data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: `Website Scholarship Text successfully updated!`,
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 location.reload();

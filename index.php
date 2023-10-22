@@ -117,8 +117,8 @@
     <div class="container">
       <div class="row justify-content-between gy-5 ">
         <div class="col-lg-4 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <!-- <h2 data-aos="fade-up"><?= $website_other['welcome_text'] ?></h2> -->
-          <!-- <p data-aos="fade-up" data-aos-delay="100">Thrive Thomasino Scholarly .</p> -->
+          <h2 data-aos="fade-up"><?= $website_other['welcome_text'] ?></h2>
+          <p data-aos="fade-up" data-aos-delay="100"><?= $website_other['welcome_text'] ?></p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
             <a href="account/pages-register.php" class="btn-book-a-table">Apply Scholarship</a>
             <?php if ($website_other['url'] != null): ?>
@@ -127,7 +127,7 @@
           </div>
         </div>
         <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-          <!-- <img src="account/<?= $website_other['hero'] ?>" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300"> -->
+          <img src="account/<?= $website_other['hero'] ?>" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
         </div>
       </div>
     </div>
@@ -146,7 +146,6 @@
 
 
         <div class="row gy-4">
-          <!-- <div class="col-lg-7 position-relative about-img" style="background-image: url(account/<?= $website_other['cover'] ?>) ;" data-aos="fade-up" data-aos-delay="150"> -->
           <img src="account/<?= $website_other['cover'] ?>" class="col-lg-7 position-relative about-img" data-aos="fade-up" data-aos-delay="150">
           </img>
           <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
@@ -154,82 +153,19 @@
               <p class="fst-italic">
               <?= $website_info['descr'] ?>
               </p>
-              <!-- <ul>
-                <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="bi bi-check2-all"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-              </ul>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-              </p> -->
 
-              <?php if ($website_other['about_url'] != ''): ?>
+              <!-- <?php if ($website_other['about_url'] != ''): ?>
                 <div class="position-relative mt-4">
                   <img src="assets/img/white.jpg" class="img-fluid" alt="">
                   <a href="<?= $website_other['about_url'] ?>" class="glightbox play-btn"></a>
                 </div>
-              <?php endif; ?>
+              <?php endif; ?> -->
             </div>
           </div>
         </div>
 
       </div>
     </section> <!-- End About Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <!-- <section id="why-us" class="why-us section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="why-box">
-              <h3>Why Choose Yummy?</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
-              </p>
-              <div class="text-center">
-                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-8 d-flex align-items-center">
-            <div class="row gy-4">
-
-              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-clipboard-data"></i>
-                  <h4>Corporis voluptates officia eiusmod</h4>
-                  <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
-                </div>
-              </div>
-
-              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-gem"></i>
-                  <h4>Ullamco laboris ladore pan</h4>
-                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-                </div>
-              </div>
-
-              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-inboxes"></i>
-                  <h4>Labore consequatur incidid dolore</h4>
-                  <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section> -->
 
     <!-- ======= SCHOLARSHIP Section ======= -->
     <section id="scholarship" class="menu">
@@ -270,7 +206,7 @@
                 <div class="card d-flex justify-content-center">
                   <div class="card-body">
                     <h5 class="card-title">Senior High School</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                    <p><?= $website_scholar_text[0]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>
@@ -284,8 +220,8 @@
                 <div class="card d-flex justify-content-center">
                   <div class="card-body">
                     <h5 class="card-title">College Educational Assistance</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p><?= $website_scholar_text[1]['scholarText'] ?></p>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                   </div>
                 </div>
               </div>
@@ -299,7 +235,7 @@
                 <div class="card d-flex justify-content-center">
                   <div class="card-body">
                     <h5 class="card-title">College Full Scholarship</h5>
-                    <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+                    <p><?= $website_scholar_text[2]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>

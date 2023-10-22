@@ -996,18 +996,7 @@ function approveApplicant(val, accountViewId) {
 function reasonForRejection(val, accountViewId) {
     Swal.fire({
         title: "Reason for Rejection",
-        html: `<div class="form-group mb-3">
-                    <label for="reason">Reason</label>
-                    <select class="form-control" id="reason">
-                        <option value="1">With Failed Grades</option>
-                        <option value="2">Did Not Meet Maintaining GWA 2.50</option>
-                        <option value="3">Did Not Meet Deadline</option>
-                        <option value="4">With Dropped Subject</option>
-                        <option value="5">Did Not Submit Requirements</option>
-                        <option value="6">Others</option>
-                    </select>
-                </div>
-                <div class="form-group" id="otherReason">
+        html: `<div class="form-group" id="otherReason">
                     <label for="otherReason">Other Reason</label>
                     <input type="text" class="form-control" id="otherReason">
                 </div>`,
@@ -1015,10 +1004,9 @@ function reasonForRejection(val, accountViewId) {
         confirmButtonText: "Submit",
         cancelButtonText: "Cancel",
         preConfirm: () => {
-            let reason = $('#reason').val();
             let otherReason = $('#otherReason').val();
 
-            if (reason == 6 && otherReason == '') {
+            if (otherReason == '') {
                 Swal.showValidationMessage(
                     `Please fill up the reason field.`
                 )
@@ -1026,7 +1014,7 @@ function reasonForRejection(val, accountViewId) {
                 return;
             }
 
-            let fullReason = (reason == 6 ? otherReason : $('#reason option:selected').text());
+            let fullReason = otherReason;
 
             return fullReason;
         }
@@ -1208,3 +1196,52 @@ function swalReasonDeletion(id, status) {
         }
     })
 }
+
+$(document).on("click", ".updateToGraduate", function(){
+    let id = $(this).attr("data-id");
+    let status = $(this).attr("data-status");
+    
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You are about to update this " + status + " to Graduate. You cannot undo this action.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                    action: 26,
+                    id: id,
+                },
+                beforeSend: function () {
+                    showBeforeSend("Submitting Update Request...");
+                },
+                success: function (data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Update request for " + status + " has been successful!",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `An error occured while updating request. Please try again. Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+})

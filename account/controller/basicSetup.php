@@ -496,5 +496,15 @@ if (isset($_REQUEST['action']))
             }
 
             break;
+        case 24: // Update Scholar Text
+            $data = [
+                'shs'           => isset($_POST['shs']) ? $_POST['shs'] : '',
+                'cea'           => isset($_POST['cea']) ? $_POST['cea'] : '',
+                'cfs'           => isset($_POST['cfs']) ? $_POST['cfs'] : '',
+            ];
+
+            echo updateScholarText($data);
+
+            break;
     }
 }
