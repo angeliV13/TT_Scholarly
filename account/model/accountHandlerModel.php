@@ -1442,3 +1442,13 @@ function cancelSubmitApplication($id)
 
     return ($query) ? 'success': $conn->error; $conn->rollback();
 }
+
+function updateToGraduate($id)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE account SET account_status = '4' WHERE id = '$id' LIMIT 1";
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success' : 'Error: ' . $conn->error;
+}

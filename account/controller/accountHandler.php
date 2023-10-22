@@ -278,6 +278,10 @@ if (isset($_REQUEST['action']))
     {
         echo cancelSubmitApplication(isset($_POST['userId']) ? $_POST['userId'] : '');
     }
+    else if ($action == 26) // Update to Graduate
+    {
+        echo updateToGraduate(isset($_POST['id']) ? $_POST['id'] : '');
+    }
 }
 
 

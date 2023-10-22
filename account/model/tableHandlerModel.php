@@ -731,6 +731,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             $none = ($acc_status == 4) ? "d-none" : "";
 
             $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                        <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success '.$none.'" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
                         <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
 
             $course     = (isset($education['course']) ? get_education_courses('', $education['course']) : '');

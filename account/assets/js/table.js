@@ -1190,3 +1190,52 @@ function swalReasonDeletion(id, status) {
         }
     })
 }
+
+$(document).on("click", ".updateToGraduate", function(){
+    let id = $(this).attr("data-id");
+    let status = $(this).attr("data-status");
+    
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You are about to update this " + status + " to Graduate. You cannot undo this action.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                    action: 26,
+                    id: id,
+                },
+                beforeSend: function () {
+                    showBeforeSend("Submitting Update Request...");
+                },
+                success: function (data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Update request for " + status + " has been successful!",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `An error occured while updating request. Please try again. Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+})
