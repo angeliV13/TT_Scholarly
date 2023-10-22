@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <a class="mx-3" data-bs-target="#genrep_applicant" data-bs-toggle="collapse" href="#" aria-expanded="false">
-                                    <h5 class="card-title">Generate Filter</h5>
+                                    <h5 class="card-title">Generate List</h5>
                                     <div class="d-flex justify-content-ce align-items-center">
                                         <a class="collapsed mx-3" data-bs-target="#genrep_applicant" data-bs-toggle="collapse" href="#">
                                             <i class="bi bi-chevron-down ms-auto"></i>
