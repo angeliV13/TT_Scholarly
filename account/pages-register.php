@@ -237,19 +237,19 @@ include('includes/main.php');
                     </div>
 
                     <div class="col-12">
-                      <label for="fbImg" class="form-label">Facebook Profile Image</label>
+                      <label for="fbImg" class="form-label">Profile Image</label>
                       <input type="file" name="Facebook Image" class="form-control" id="fbImg">
                       <div class="invalid-feedback">Please enter a valid Profile Image!</div>
                     </div>
 
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                       <label for="username" class="form-label">Username</label>
                       <input type="text" name="Username" class="form-control" id="username">
                       <div class="invalid-feedback">Please enter a valid Username!</div>
-                    </div>
+                    </div> -->
 
 
-                    <div class="col-6">
+                    <div class="col-12">
                       <label for="yourEmail" class="form-label">Email Address</label>
                       <input type="email" name="Email Address" class="form-control" id="yourEmail">
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>

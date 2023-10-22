@@ -76,7 +76,7 @@ let my_handlers = {
     let middleName = $("#inputMiddleName").val();
     let lastName = check_error(document.getElementById("inputLastName")); if (lastName == undefined) return;
     let suffix = $("#inputSuffix").val();
-    let username = check_error(document.getElementById("username")); if (username == undefined) return;
+    // let username = check_error(document.getElementById("username")); if (username == undefined) return;
 
     let birthDate = check_error(document.getElementById("inputDate"), options = {
       type: "date",
@@ -164,7 +164,7 @@ let my_handlers = {
       returnVal: "text"
     }); if (region == undefined) return;
 
-    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && username && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
+    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
       let formData = new FormData();
       formData.append("scholarType", scholarType);
       formData.append("firstName", firstName);
@@ -186,7 +186,7 @@ let my_handlers = {
       formData.append("citizenship", citizenship);
       formData.append("years", years);
       formData.append("language", language);
-      formData.append("username", username);
+      // formData.append("username", username);
       formData.append("email", email);
       formData.append("password", password);
       formData.append("fbName", fbName);

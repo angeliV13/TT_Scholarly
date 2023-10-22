@@ -32,6 +32,7 @@
                                       <div class="flex-grow-1 ms-4 mt-3">
                                           <h5 class="mb-1 fw-bold"><?= $user_info['first_name'] . " " . $user_info['middle_name'] . " " . $user_info['last_name']  ?></h5>
                                           <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;"><?= $latestEd ?></p>
+                                          <p class="mb-2 pb-1 fw-bold" style="color: #2b2a2a;"><?= $user_data[1] ?></p>
                                           <p class="mb-2 pb-1" style="color: #2b2a2a;"><?= $latestSchoolName ?></p>
 
                                           <div class="d-flex justify-content-between align-items-center rounded-3 gap-2 p-2 mb-2" style="background-color: #efefef;">

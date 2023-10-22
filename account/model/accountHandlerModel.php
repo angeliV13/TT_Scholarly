@@ -176,23 +176,23 @@ function registerAccount($data)
     ];
 
 
-    $userCheck = [
-        'table'     => 'account',
-        'column'    => 'user_name',
-        'value'     => $data['username'],
-    ];
+    // $userCheck = [
+    //     'table'     => 'account',
+    //     'column'    => 'user_name',
+    //     'value'     => $data['username'],
+    // ];
 
     $emailCount = check_exist($emailCheck);
-    $userCount = check_exist($userCheck);
+    // $userCount = check_exist($userCheck);
 
     if ($emailCount > 0) 
     {
         return 'Email Already Exist';
     } 
-    else if ($userCount > 0) 
-    {
-        return 'Username Already Exist';
-    }
+    // else if ($userCount > 0) 
+    // {
+    //     return 'Username Already Exist';
+    // }
 
     do {
         $eacNumber = generateEacNumber();
@@ -206,7 +206,10 @@ function registerAccount($data)
     } while ($eaCount > 0);
 
     $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
-    $msg .= '<p> Your account has been created. Enter the code below to verify your account. This code will expire in 5 minutes. </p>';
+    $msg .= '<p> Your account has been created. </p>';
+    $msg .= '<p> Here is your EAC Number which you will use to login to the system. </p>';
+    $msg .= '<p> <b> EAC Number: ' . $eacNumber . ' </b> </p>';
+    $msg .= '<p> Here is your verification code. This code will expire in 5 minutes. </p>';
     $msg .= '<p> <b> Code: ' . $randomString . ' </b> </p>';
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
@@ -232,7 +235,7 @@ function registerAccount($data)
 
     if ($notif !== 'success') return 'Error: ' . $notif;
 
-    $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $data['username'] . "', '" . hashPassword($data['password']) . "', '" . $data['email'] . "', 3, 0)";
+    $sql = "INSERT INTO account (user_name, password, email, account_type, access_level) VALUES ('" . $eacNumber . "', '" . hashPassword($data['password']) . "', '" . $data['email'] . "', 3, 0)";
     $query = mysqli_query($conn, $sql) or die("Error RQ001: " . mysqli_error($conn));
 
     if ($query) 
