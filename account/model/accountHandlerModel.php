@@ -649,17 +649,17 @@ function updateGenInfo($data, $type = 0, $userId = "")
         $honor_flag = ($data['honor_flag'] == '0') ? 0 : 1;
         $honor_type = ($data['honor_type'] == '') ? 4 : $data['honor_type'];
         $other_honor = ($data['other_honor'] == '') ? "" : $data['other_honor'];
-        $gwa = ($data['gwa'] == '') ? '' : $data['gwa'];
+        // $gwa = ($data['gwa'] == '') ? '' : $data['gwa'];
 
         if ($exists == 0) 
         {
-            $sql = "INSERT INTO gen_info (user_id, ay_id, sem_id, graduating_flag, honor_flag, honor_type, other_honor, graduation_year, gwa) VALUES
-                ('$userId', '$acadYear', '$defaultYear', '$graduating_flag', '$honor_flag', '$honor_type', '$other_honor', '$graduation_year', '$gwa')";
+            $sql = "INSERT INTO gen_info (user_id, ay_id, sem_id, graduating_flag, honor_flag, honor_type, other_honor, graduation_year) VALUES
+                ('$userId', '$acadYear', '$defaultYear', '$graduating_flag', '$honor_flag', '$honor_type', '$other_honor', '$graduation_year')";
         } 
         else 
         {
             $sql = "UPDATE gen_info SET graduating_flag = '$graduating_flag', honor_flag = '$honor_flag', honor_type = '$honor_type',
-                other_honor = '$other_honor', graduation_year = '$graduation_year', gwa = '$gwa' WHERE user_id = '$userId' AND ay_id = '$acadYear'
+                other_honor = '$other_honor', graduation_year = '$graduation_year' WHERE user_id = '$userId' AND ay_id = '$acadYear'
                 AND sem_id = '$defaultYear' LIMIT 1";
         }
     } 
@@ -690,13 +690,18 @@ function updateEducationalInfo($data)
 
     // $college = $jhs = $shs = $elem = '';
 
-    if ($data['college'] != null) $college = updateSchool($data['college'], $data['userId'], $data['college']['collegeAwards'], 0);
+    $collegeAwards = (!isset($data['college']['collegeAwards'])) ? [] : $data['college']['collegeAwards'];
+    $shsAwards = (!isset($data['shs']['shsAwards'])) ? [] : $data['shs']['shsAwards'];
+    $jhsAwards = (!isset($data['jhs']['jhsAwards'])) ? [] : $data['jhs']['jhsAwards'];
+    $elemAwards = (!isset($data['elem']['elemAwards'])) ? [] : $data['elem']['elemAwards'];
+
+    if ($data['college'] != null) $college = updateSchool($data['college'], $data['userId'], $collegeAwards, 0);
     if ($college != 'success') return 'Update College Error: ' . $college;
-    if ($data['shs'] != null) $shs = updateSchool($data['shs'], $data['userId'], $data['shs']['shsAwards'], 1);
+    if ($data['shs'] != null) $shs = updateSchool($data['shs'], $data['userId'], $shsAwards, 1);
     if ($shs != 'success') return 'Update SHS Error: ' . $shs;
-    if ($data['jhs'] != null) $jhs = updateSchool($data['jhs'], $data['userId'], $data['jhs']['jhsAwards'], 2);
+    if ($data['jhs'] != null) $jhs = updateSchool($data['jhs'], $data['userId'], $jhsAwards, 2);
     if ($jhs != 'success') return 'Update JHS Error: ' . $jhs;
-    if ($data['elem'] != null) $elem = updateSchool($data['elem'], $data['userId'], $data['elem']['elemAwards'], 3);
+    if ($data['elem'] != null) $elem = updateSchool($data['elem'], $data['userId'], $elemAwards, 3);
     if ($elem != 'success') return 'Update Elem Error: ' . $elem;
 
     return 'success';
@@ -709,7 +714,9 @@ function updateSchool($data, $userId, $awards = [], $type)
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
-    $exists = check_exist_multiple(['table' => 'education', 'column' => ['educ_id' => ['=', $data['educ_id']], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
+    $exists = 0;
+
+    if ($data['educ_id'] != "") $exists = check_exist_multiple(['table' => 'education', 'column' => ['educ_id' => ['=', $data['educ_id']], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
     // $exists = check_exist(['table' => 'education', 'column' => 'educ_id', 'value' => $data['educ_id']]);
     $course = ($data['courseText'] == "Others") ? $data['otherCourse'] : $data['course'];
     $major = $data['major'];
@@ -735,8 +742,15 @@ function updateSchool($data, $userId, $awards = [], $type)
 
     if ($exists == 0) $educ_id = $conn->insert_id;
 
-    return ($query) ? updateAwards($awards, $educ_id) : 'Error Educational Information: ' . $conn->error;
-    $conn->rollback();
+    if ($query)
+    {
+        return ($awards != null) ? $awards : 'success';
+    }
+    else
+    {
+        return 'Error Educational Information: ' . $conn->error;
+        $conn->rollback();
+    }
 }
 
 function updateAwards($data, $educId)
