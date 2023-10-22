@@ -205,16 +205,18 @@ function registerAccount($data)
         $eaCount = check_exist($eacCheck);
     } while ($eaCount > 0);
 
+    $website_header = get_website_info(0)['header'];
+
     $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
     $msg .= '<p> Your account has been created. </p>';
-    $msg .= '<p> Here is your EAC Number which you will use to login to the system. </p>';
+    $msg .= '<p> Here is your unique EAC Number which you will use to login to the system. </p>';
     $msg .= '<p> <b> EAC Number: ' . $eacNumber . ' </b> </p>';
     $msg .= '<p> Here is your verification code. This code will expire in 5 minutes. </p>';
     $msg .= '<p> <b> Code: ' . $randomString . ' </b> </p>';
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -346,13 +348,14 @@ function resend_email($data)
     include("dbconnection.php");
 
     $randomToken = generateRandomString(5);
+    $website_header = get_website_info(0)['header'];
 
     $msg = '<p> Here is your new code. This code will expire in 5 minutes. </p>';
     $msg .= '<p> <b> Code: ' . $randomToken . ' </b> </p>';
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -406,6 +409,7 @@ function forgot_password($email, $type)
         $user_name = $row['user_name'];
 
         $randomToken = generateRandomString(5);
+        $website_header = get_website_info(0)['header'];
 
         $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -415,7 +419,7 @@ function forgot_password($email, $type)
         $msg .= '<p>This is a system generated email. Please do not reply.</p>';
         $msg .= '<p>Thank you! <br></p>';
         $msg .= '<p>Best regards,</p>';
-        $msg .= '<p>Youth Development Scholarship</p>';
+        $msg .= '<p>' .$website_header . '</p>';
 
         $sendEmail = sendEmail($email, $text, $msg, $emailType);
 
@@ -459,13 +463,15 @@ function password_reset($data)
 
             if ($query) 
             {
+                $website_header = get_website_info(0)['header'];
+
                 $msg = '<p> Hello ' . $user_name . ', </p> ';
                 $msg .= '<p> Your password has been reset. </p>';
                 $msg .= '<p> If you did not request a password reset, please contact us immediately. </p>';
                 $msg .= '<p>This is a system generated email. Please do not reply.</p>';
                 $msg .= '<p>Thank you! <br></p>';
                 $msg .= '<p>Best regards,</p>';
-                $msg .= '<p>Youth Development Scholarship</p>';
+                $msg .= '<p>' .$website_header . '</p>';
 
                 $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
 
@@ -960,12 +966,14 @@ function submitApplication($id)
     $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
 
+    $website_header = get_website_info(0)['header'];
+
     $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= '<p>Your scholarship application has been submitted. You will be notified once your application has been reviewed.</p>';
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
@@ -1068,13 +1076,14 @@ function set_applicant_status($data)
 
     $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $website_header = get_website_info(0)['header'];
 
     $msg = '<p>Hi ' . $name . ',<br></p>';
     $msg .= $msgText;
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
@@ -1146,6 +1155,7 @@ function deleteUserRequest($data)
 
     $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $website_header = get_website_info(0)['header'];
 
     $table = '<table style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -1175,7 +1185,7 @@ function deleteUserRequest($data)
     $msg .= '<p>This is a system generated email. Please do not reply.</p>';
     $msg .= '<p>Thank you! <br></p>';
     $msg .= '<p>Best regards,</p>';
-    $msg .= '<p>Youth Development Scholarship</p>';
+    $msg .= '<p>' .$website_header . '</p>';
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '5';
 
@@ -1247,6 +1257,8 @@ function addAdminAccount($data)
         $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '5';
         $name = $data['firstName'] . ' ' . $data['lastName'];
 
+        $website_header = get_website_info(0)['header'];
+
         $msg = '<p> Hello ' . $data['firstName'] . ' ' . $data['lastName'] . ', </p> ';
         $msg .= '<p> Your account has been created. Please use this password to navigate your account. </p>';
         $msg .= '<p> <b> Username: ' . $data['username'] . ' </b> </p>';
@@ -1255,7 +1267,7 @@ function addAdminAccount($data)
         $msg .= '<p>This is a system generated email. Please do not reply.</p>';
         $msg .= '<p>Thank you! <br></p>';
         $msg .= '<p>Best regards,</p>';
-        $msg .= '<p>Youth Development Scholarship</p>';
+        $msg .= '<p>' .$website_header . '</p>';
 
         $sendEmail = sendEmail($data['email'], $name . ' - Account Created Successfully', $msg, $emailType);
 
