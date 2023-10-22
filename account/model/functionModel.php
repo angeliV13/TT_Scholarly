@@ -1074,7 +1074,7 @@ function insert_notification($data)
     } 
     else 
     {
-        $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link) VALUES ($notif_type', '$lastId', '$notif_body', '$notif_link')";
+        $sql = "INSERT INTO notification (user_id, notif_type, notificationId, notif_body, notif_link, notif_date) VALUES ('$user_id', '$notif_type', '$lastId', '$notif_body', '$notif_link', NOW())";
     }
 
     $query = $conn->query($sql) or die("Error LC002: " . mysqli_error($conn));

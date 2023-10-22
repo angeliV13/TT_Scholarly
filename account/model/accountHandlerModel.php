@@ -954,6 +954,8 @@ function submitApplication($id)
 {
     include("dbconnection.php");
 
+    if ($id == "") session_start(); $id = $_SESSION['id'];
+
     $res = check_application_data($id);
     if ($res != "success") return $res;
 
@@ -973,12 +975,12 @@ function submitApplication($id)
         'table' => 'account',
         'return' => 'email',
         'column' => [
-            'account_type' => ['=', 1],
+            'account_type' => ['IN', '(0, 1)'],
         ]
     ];
 
     $adEmail = check_exist_multiple($adminEmail, 1);
-    if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    if (!is_array($adEmail)) return 'Error Admin Email: ' . $adEmail;
 
     $website_header = get_website_info(0)['header'];
 
@@ -992,7 +994,7 @@ function submitApplication($id)
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
     $sendEmail = sendEmail($email, $name . ' - Scholarship Application Submission', $msg, $emailType, $adEmail);
-    if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+    if ($sendEmail != "Success") return 'Error Sending Email: ' . $sendEmail;
 
     $notifiedUsers = get_notif_type(2);
 
@@ -1006,14 +1008,14 @@ function submitApplication($id)
     $notif = insert_notification($notifData);
     if ($notif !== 'success') return 'Error Admin Notification: ' . $notif;
 
-    $notifData = [
+    $notifUserData = [
         'user_id'       => $id,
         'notif_type'    => 12,
         'notif_body'    => 'You have successfully submitted your scholarship application. You will be notified once your application has been reviewed.',
         'notif_link'    => '?nav=dashboard',
     ];
 
-    $notif = insert_notification($notifData);
+    $notif = insert_notification($notifUserData);
     if ($notif !== 'success') return 'Error User Notification: ' . $notif;
 
     $app = updateApplication(0, $id);
