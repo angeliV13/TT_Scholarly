@@ -72,3 +72,4 @@ $website_testimony = get_website_testimonials(0);
 $gen_req = get_scholarship_requirements(2);
 $coa = get_calendar_of_activites();
 $ofc = website_officials();
+$currentAy = get_current_sem();

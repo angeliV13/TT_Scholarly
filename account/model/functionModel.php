@@ -115,6 +115,32 @@ function verifyHashPW($pass, $hash)
     return password_verify($pass, $hash);
 }
 
+function get_current_sem()
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT semester FROM semester WHERE default_sem = 1";
+    $query = $conn->query($sql);
+
+    $text = "";
+    $sem = ($query->num_rows > 0) ? $query->fetch_assoc()['semester'] : "Unknown";
+
+    if ($sem != "Unknown") 
+    {
+        $sql = "SELECT ay FROM acad_year WHERE default_ay = 1 LIMIT 1";
+        $query = $conn->query($sql);
+
+        $ay = ($query->num_rows > 0) ? $query->fetch_assoc()['ay'] : "Unknown";
+    }
+
+    if ($sem != "Unknown" && $ay != "Unknown") 
+    {
+        $text = $sem . " Semester, A.Y. " . $ay;
+    }
+
+    return $text;
+}
+
 function get_website_info($type = 0)
 {
     include("dbconnection.php");

@@ -50,7 +50,7 @@
                                               </div>
                                               <div>
                                                   <p class="small text-muted mb-1">Semester:</p>
-                                                  <p class="mb-0 fw-bold">FIRST SEMESTER AY 2023-2024</p>
+                                                  <p class="mb-0 fw-bold"><?= $currentAy ?></p>
                                               </div>
                                           </div>
                                         </div>
