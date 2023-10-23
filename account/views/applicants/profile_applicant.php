@@ -1736,15 +1736,15 @@
 
                     <!-- GUARDIAN'S INFORMATION -->
                     <h5 class="card-title">Guardian's Information</h5>
+                    <div class="col-md-3 position-relative py-4">
+                      <label for="inputGuardian" class="form-label"> Do you have a Guardian? </label>
+                      <select class="form-select" id="inputGuardian" <?= $finishFlag ? "disabled" : "" ?>>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="0" <?php echo isset($family['guardian']) ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?php echo !isset($family['guardian']) ? "selected" : "" ?>>No</option>
+                      </select>
+                    </div>
                     <?php if (isset($family['guardian'])) : ?>
-                      <div class="col-md-3 position-relative py-4">
-                        <label for="inputGuardian" class="form-label"> Do you have a Guardian? </label>
-                        <select class="form-select" id="inputGuardian" <?= $finishFlag ? "disabled" : "" ?>>
-                          <option selected disabled value="">Choose...</option>
-                          <option value="0" <?php echo $family['guardian'] != null ? "selected" : "" ?>>Yes</option>
-                          <option value="1" <?php echo $family['guardian'] == null ? "selected" : "" ?>>No</option>
-                        </select>
-                      </div>
                       <!-- Custom Styled Validation with Tooltips -->
                       <div class="row g-4 <?php echo $family['guardian'] != null ? "" : "d-none" ?>" id="guardianInfo">
                         <!-- FULL NAME -->
@@ -1856,14 +1856,6 @@
                         <!-- END FULL NAME -->
                       </div><!-- End Custom Styled Validation with Tooltips -->
                     <?php else : ?>
-                      <div class="col-md-3 position-relative py-4">
-                        <label for="inputGuardian" class="form-label"> Do you have a Guardian? </label>
-                        <select class="form-select" id="inputGuardian">
-                          <option selected disabled value="">Choose...</option>
-                          <option value="0">Yes</option>
-                          <option value="1">No</option>
-                        </select>
-                      </div>
                       <!-- Custom Styled Validation with Tooltips -->
                       <div class="row g-4 d-none" id="guardianInfo">
                         <!-- FULL NAME -->
@@ -1979,15 +1971,15 @@
 
                     <!-- SPOUSE INFORMATION -->
                     <h5 class="card-title">Spouse's Information</h5>
+                    <div class="col-md-3 position-relative py-4">
+                      <label for="inputSpouse" class="form-label"> Do you have a Spouse? </label>
+                      <select class="form-select" id="inputSpouse" name="Spouse's Flag" <?= $finishFlag ? "disabled" : "" ?>>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="0" <?= isset($family['spouse']) ? "selected" : "" ?>>Yes</option>
+                        <option value="1" <?= !isset($family['spouse']) ? "selected" : "" ?>>No</option>
+                      </select>
+                    </div>
                     <?php if (isset($family['spouse'])) : ?>
-                      <div class="col-md-3 position-relative py-4">
-                        <label for="inputSpouse" class="form-label"> Do you have a Spouse? </label>
-                        <select class="form-select" id="inputSpouse" name="Spouse's Flag" <?= $finishFlag ? "disabled" : "" ?>>
-                          <option selected disabled value="">Choose...</option>
-                          <option value="0" <?= $family['spouse'] != null ? "selected" : "" ?>>Yes</option>
-                          <option value="1" <?= $family['spouse'] == null ? "selected" : "" ?>>No</option>
-                        </select>
-                      </div>
                       <!-- Custom Styled Validation with Tooltips -->
                       <div class="row g-4 <?= $family['spouse'] == null ? "d-none" : "" ?>" id="spouseInfo">
                         <!-- FULL NAME -->
@@ -2090,14 +2082,6 @@
                         <!-- END FULL NAME -->
                       </div><!-- End Custom Styled Validation with Tooltips -->
                     <?php else : ?>
-                      <div class="col-md-3 position-relative py-4">
-                        <label for="inputSpouse" class="form-label"> Do you have a Spouse? </label>
-                        <select class="form-select" id="inputSpouse">
-                          <option selected disabled value="">Choose...</option>
-                          <option value="0">Yes</option>
-                          <option value="1">No</option>
-                        </select>
-                      </div>
                       <!-- Custom Styled Validation with Tooltips -->
                       <div class="row g-4 d-none" id="spouseInfo">
                         <!-- FULL NAME -->
