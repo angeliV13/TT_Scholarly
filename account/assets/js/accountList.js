@@ -166,7 +166,7 @@ $("#saveAdminProfile").on("click", function(e){
   let emailAddress = check_error(document.getElementById("emailAddress"), options = {
   type: "email",
   verifyFlag: 1,
-  regex: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+  regex: /^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
   text: "Email"
   }); if (emailAddress == undefined) return;
 
