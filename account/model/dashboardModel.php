@@ -36,10 +36,10 @@ function getUserCount($ay_id, $sem_id, $account_type, $scholarType){
     include("dbconnection.php");
     $sql = "SELECT COUNT(userId) AS 'value'
             FROM scholarship_application 
-            WHERE ay_id = {$ay_id}
-            AND sem_id = {$sem_id}
-            AND account_type = {$account_type}
-            AND scholarType = {$scholarType}";
+            WHERE ay_id = '{$ay_id}'
+            AND sem_id = '{$sem_id}'
+            AND account_type = '{$account_type}'
+            AND scholarType = '{$scholarType}'";
 
     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
