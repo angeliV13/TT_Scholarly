@@ -295,7 +295,7 @@ $(document).ready(function ($) {
               rotate: -45,
             },
             type: "category",
-            categories: barangayTrends.categories,
+            categories: barangayTrends.barangay,
             // categories: [
               // "Barangay I (Pob.)",
               // "Barangay II (Pob.)",
