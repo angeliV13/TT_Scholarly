@@ -200,7 +200,7 @@ $(document).ready(function ($) {
     {
       series: [],
       chart: {
-        height: 1200,
+        height: 'auto',
         type: "bar",
         stacked: true,
         toolbar: {
