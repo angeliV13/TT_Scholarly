@@ -106,7 +106,7 @@
     let email = check_error(document.getElementById("yourEmail"), options = {
       type: "email",
       verifyFlag: 1,
-      regex: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+      regex: /^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
       text: "Email"
     }); if (email == undefined) return;
 
