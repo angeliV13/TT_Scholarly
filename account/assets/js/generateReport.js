@@ -8,7 +8,7 @@ $(document).ready(function () {
         },
         success: function (data) {
             let ay = (JSON.parse(data));
-            console.log(ay);
+            // console.log(ay);
             ay.forEach(ayOption => {
                 $("#app_ay").append(
                     '<option value='+ ayOption[0] +'>' + ayOption[1] +'</option>'
@@ -20,7 +20,7 @@ $(document).ready(function () {
                     '<option value='+ ayOption[0] +'>' + ayOption[1] +'</option>'
                 );
             });
-            console.log(data);
+            // console.log(data);
         },
       });
 

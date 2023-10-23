@@ -52,7 +52,7 @@ $("#filterScholar :input").on("change", function () {
       yearLevel       : yearLevel,
     },
     success: function (data) {
-      console.log(data);
+      // console.log(data);
       let filters = JSON.parse(data);
 
       if($("#filterScholarType").val() == "0"){
@@ -106,7 +106,7 @@ function reset_filter(){
     success: function (data) {
       // console.log(data);
       let filters = JSON.parse(data);
-      console.log(filters);
+      // console.log(filters);
 
       $('#filterScholarType option').each(function() { $(this).remove() ; });
       for (var i in filters.scholarType){

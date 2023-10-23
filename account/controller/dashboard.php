@@ -19,5 +19,11 @@ if (isset($_REQUEST['action']))
         case 3: // Chart of Scholar Trends;
             echo getRecentActivity();
             break;
+        case 4: // Chart Count for Application Trends
+            echo getApplicantCount();
+            break;
+        case 5: // Chart Count for Application Trends
+            echo getBarangayTrends();
+            break;
     }
 }

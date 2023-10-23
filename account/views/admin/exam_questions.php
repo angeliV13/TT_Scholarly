@@ -12,7 +12,7 @@
     <section class="section">
         <div class="column">
             <div class="col-lg-30">
-                <!-- Academic Year -->
+                <!-- Examination Scope -->
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">

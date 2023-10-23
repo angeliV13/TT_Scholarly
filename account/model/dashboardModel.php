@@ -18,6 +18,38 @@ function getTotalCounts()
     return json_encode($data);
 }
 
+function getApplicantCount()
+{
+    $ay_id  = getDefaultAcadYearId();
+    $sem_id = getDefaultSemesterId();
+
+    $data = [
+        "colEA" => getUserCount($ay_id, $sem_id, 3, 2), //College EA
+        "colSc" => getUserCount($ay_id, $sem_id, 3, 1), //College SC
+        "shs"   => getUserCount($ay_id, $sem_id, 3, 3) // SHS EA
+    ];
+
+    return json_encode($data);
+}
+
+function getUserCount($ay_id, $sem_id, $account_type, $scholarType){
+    include("dbconnection.php");
+    $sql = "SELECT COUNT(userId) AS 'value'
+            FROM scholarship_application 
+            WHERE ay_id = {$ay_id}
+            AND sem_id = {$sem_id}
+            AND account_type = {$account_type}
+            AND scholarType = {$scholarType}";
+
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    while($row = $query->fetch_assoc()) {
+        extract($row);
+    }
+
+    return $value;
+}
+
 function getChartTrends()
 {
     include("dbconnection.php");
@@ -58,6 +90,43 @@ function getChartTrends()
             'shs'        => $shsArray,
             'colEA'      => $colEAArray,
             'colSc'      => $colScArray
+        ];
+    }
+
+    return json_encode($data);
+}
+
+function getBarangayTrends()
+{
+    include("dbconnection.php");
+
+    $data       = [];
+    $barangay   = [];
+    $male_arr   = [];
+    $female_arr = [];
+
+
+    $sql = "SELECT barangay, 
+            COUNT( CASE WHEN gender = 0 THEN 1 END ) AS 'male', 
+            COUNT( CASE WHEN gender = 1 THEN 1 END ) AS 'female' 
+            FROM `user_info` 
+            WHERE barangay IS NOT NULL GROUP BY barangay;";
+
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+
+            extract($row);
+            // Data
+            $categories[]   =   $barangay;
+            $male_arr[]     =   $male;
+            $female_arr[]   =   $female;
+        }
+        $data = [
+            'barangay'   => $categories,
+            'male'       => $male_arr,
+            'female'     => $female_arr
         ];
     }
 
