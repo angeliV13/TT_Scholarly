@@ -695,7 +695,7 @@ function updateEducationalInfo($data)
     $jhsAwards = (!isset($data['jhs']['jhsAwards'])) ? [] : $data['jhs']['jhsAwards'];
     $elemAwards = (!isset($data['elem']['elemAwards'])) ? [] : $data['elem']['elemAwards'];
 
-    if ($data['college']['gwa'] != "" OR $data['college']['gwa'] != 0 OR $data['college']['gwa'] != null)
+    if ($data['college']['gwa'] != null)
     {
         if ($data['college'] != null) $college = updateSchool($data['college'], $data['userId'], $collegeAwards, 0);
         if ($college != 'success') return 'Update College Error: ' . $college;
