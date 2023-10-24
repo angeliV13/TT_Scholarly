@@ -274,7 +274,7 @@ function registerAccount($data)
 
             if ($query) 
             {
-                $sql = "INSERT INTO scholarship_application (ay_id, sem_id, userId, scholarType, account_type, dateApplied, status, current_active) VALUES ('$acadYear', '$semId', '$last_id', '$data[scholarType]', '1', NOW(), 0, 'info_flag')";
+                $sql = "INSERT INTO scholarship_application (ay_id, sem_id, userId, scholarType, account_type, dateApplied, status, current_active) VALUES ('$acadYear', '$semId', '$last_id', '$data[scholarType]', '3', NOW(), 0, 'info_flag')";
                 $query = mysqli_query($conn, $sql) or die("Error RQ004: " . mysqli_error($conn));
 
                 if ($query) 
