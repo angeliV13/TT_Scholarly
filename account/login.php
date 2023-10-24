@@ -58,8 +58,9 @@ include('includes/main.php')
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="password" required>
+                      <input type="password" name="password" class="form-control mb-2" id="password" required>
                       <div class="invalid-feedback">Please enter your password!</div>
+                      <input type="checkbox" onclick="showPassword()"> Show Password
                     </div>
 
                     <div class="col-12">
@@ -99,6 +100,16 @@ include('includes/main.php')
   <!-- Login JS -->
   <script src="assets/js/login.js"></script>
   <script src="assets/js/forgot.js"></script>
+  <script>
+    function showPassword() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "input";
+      } else {
+        x.type = "password";
+      }
+    }
+  </script>
 
 </body>
 

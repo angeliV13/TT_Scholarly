@@ -250,6 +250,8 @@ include('includes/main.php');
 
                     <div class="col-6">
                       <label for="yourPassword" class="form-label">Password</label>
+                      <input type="checkbox" name="showPW" id="showPW" class="form-check-input">
+                      <label for="showPW" class="form-check-label">Show Password</label>
                       <input type="password" name="Password" class="form-control" id="yourPassword">
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
@@ -356,6 +358,19 @@ include('includes/main.php');
 
 
   <script src="assets/js/register.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#showPW').click(function() {
+        if ($(this).is(':checked')) {
+          $('#yourPassword').attr('type', 'text');
+          $('#verifyPassword').attr('type', 'text');
+        } else {
+          $('#yourPassword').attr('type', 'password');
+          $('#verifyPassword').attr('type', 'password');
+        }
+      });
+    });
+  </script>
 
 
 </body>
