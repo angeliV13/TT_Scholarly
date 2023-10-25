@@ -1583,8 +1583,8 @@
                           <label for="motherLivingFlag" class="form-label"> Living or Deceased? </label>
                           <select class="form-select" id="motherLivingFlag" name="Mother's Living Flag" <?= $finishFlag ? "disabled" : "" ?>>
                             <option selected disabled value="">Choose...</option>
-                            <o value="0" <?= $family['mother']['living_flag'] == 0 ? "selected" : "" ?>>Living</option>
-                              <o value="1" <?= $family['mother']['living_flag'] == 1 ? "selected" : "" ?>>Deceased</option>
+                            <option value="0" <?= $family['mother']['living_flag'] == 0 ? "selected" : "" ?>>Living</option>
+                            <option value="1" <?= $family['mother']['living_flag'] == 1 ? "selected" : "" ?>>Deceased</option>
                           </select>
                         </div>
 
