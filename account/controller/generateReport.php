@@ -11,6 +11,9 @@ if (isset($_REQUEST['action']))
         case 0.1:
             echo getAcadYearOptions();
             break;
+        case 0.2:
+            echo json_encode(getSchoolsDetailsArray(0, 4, 3, 0));
+            break;
         case 1: //applicant generate report
             $data = [
                 "Academic Year"     => (isset($_POST['ay'])           ? $_POST['ay']          : ''),

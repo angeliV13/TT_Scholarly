@@ -65,7 +65,8 @@ function createTable($report, $data)
 
     // Send to Temp
     $tableBodyTmp = $tableBody;
-    $tableBody = [];
+    // TEST
+    // $tableBody = [];
     foreach($tableBodyTmp as $key => $value){
         // Get the position
         // if position and $array is match apply changes of value for school

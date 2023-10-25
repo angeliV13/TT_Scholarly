@@ -135,35 +135,4 @@ function filter($data, $id = 0, $scholarType = 0, $educationLevel = 0, $school =
     return json_encode($data);
 }
 
-function getSchoolsDetailsArray($blank, $school_type, $class_type, $partner){
 
-    include("dbconnection.php");
-
-    ($blank == 1) ? $data = [['0', '--']] : $data = [];
-
-    $sql = "SELECT * FROM school";
-    if($school_type < 4 || $class_type < 3 || $partner <> 0){
-        $sql .= " WHERE 1 ";
-        if($school_type < 4){
-            $sql .= "AND school_type = '{$school_type}'";
-        }
-        if($class_type < 3){
-            $sql .= "AND class_type = '{$class_type}'";
-        }
-        if($partner == 1){
-            $sql .= "AND partner = '{$partner}'";
-        }
-    }    
-    
-    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
-
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
-            extract($row);
-            $data[] = [$id , $school_name];
-        }
-    }
-
-    return $data;
-    
-}
