@@ -1032,10 +1032,12 @@ function changePFP($data)
 {
     include("dbconnection.php");
 
-    $fbImg = $data['image'];
-    $userId = $data['userId'];
+    session_start();
 
-    $exists = check_exist_multiple(['table' => 'user_info', 'column' => ['account_id' => ['=', $data['userId']]]], 1);
+    $fbImg = $data['image'];
+    $userId = $_SESSION['id'];
+
+    $exists = check_exist_multiple(['table' => 'user_info', 'column' => ['account_id' => ['=', $userId]]], 1);
     $oldImg = $exists[0]['fbImage'];
 
     if ($fbImg != null) 
