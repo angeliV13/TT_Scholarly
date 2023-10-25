@@ -1035,7 +1035,7 @@ function changePFP($data)
     session_start();
 
     $fbImg = $data['image'];
-    $userId = ($data['userId'] == "") ? $_SESSION['id'] : $data['userId'];
+    $userId = $_SESSION['id'];
 
     $exists = check_exist_multiple(['table' => 'user_info', 'column' => ['account_id' => ['=', $userId]]], 1);
     $oldImg = $exists[0]['fbImage'];
