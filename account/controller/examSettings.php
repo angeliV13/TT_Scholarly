@@ -1,7 +1,8 @@
 <?php
 
 require("../model/examSettingsModel.php");
-require("../model/basicSetupModel.php");
+require("../model/functionModel.php");
+// require("../model/basicSetupModel.php");
 
 
 if (isset($_REQUEST['action'])) {

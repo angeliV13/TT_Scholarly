@@ -1912,10 +1912,10 @@ function getApplicantUserId($acadYearId, $semId, $shs, $colEAPub, $colEAPriv, $c
             JOIN scholarship_application sca ON acc.id = sca.userId ";
 
     $sql .= "WHERE sca.ay_id = '{$acadYearId}' AND sca.sem_id = '{$semId}' AND acc.account_status != 0";
-    $sql .= ($shs       == 1) ? "AND sca.scholarType = 3" : "";
-    $sql .= ($colEAPub  == 1) ? "AND sca.scholarType = 2" : "";
-    $sql .= ($colEAPriv == 1) ? "AND sca.scholarType = 2" : "";
-    $sql .= ($colSc     == 1) ? "AND sca.scholarType = 1" : "";
+    $sql .= ($shs       == 'true') ? " AND sca.scholarType = 3 " : "";
+    $sql .= ($colEAPub  == 'true') ? " AND sca.scholarType = 2 " : "";
+    $sql .= ($colEAPriv == 'true') ? " AND sca.scholarType = 2 " : "";
+    $sql .= ($colSc     == 'true') ? " AND sca.scholarType = 1 " : "";
     
     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
