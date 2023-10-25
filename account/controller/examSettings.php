@@ -26,7 +26,8 @@ if (isset($_REQUEST['action'])) {
             echo addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnswer);
             break;
         case 3:
-            echo startExam();
+            // echo startExam();
+            echo ("Success");
             break;   
         case 4:
             echo getExam();
