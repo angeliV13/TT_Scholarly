@@ -56,7 +56,7 @@ function getTableBody($report, $data)
 
 function createTable($report, $data)
 {
-    $array =  [0, 'applicant_report', 'beneficiary_report', 'graduate_report', 'examination_report', 'performance_report'];
+    $array =  [0, 'applicant_report', 'beneficiary_report', 'graduate_report', 'exam_report', 'performance_report'];
     $returnData = [];
     $tableBodyTmp = [];
 
@@ -65,7 +65,8 @@ function createTable($report, $data)
 
     // Send to Temp
     $tableBodyTmp = $tableBody;
-    $tableBody = [];
+    // TEST
+    // $tableBody = [];
     foreach($tableBodyTmp as $key => $value){
         // Get the position
         // if position and $array is match apply changes of value for school

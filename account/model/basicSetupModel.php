@@ -3,6 +3,7 @@
 session_start();
 include("validationModel.php");
 include("functionModel.php");
+include("examSettingsModel.php");
 
 // Connection to Account Handler
 function accountHandlerAccess($access, $id)
@@ -789,7 +790,24 @@ function addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $c
             VALUES (NULL, '" . $acadYearId . "', '" . $semId . "',  '" . $startDate . "', '" . $endDate . "','" . $time . "', " . $shs . "," . $colEAPub . "," . $colEAPriv . "," . $colSc . ", '" . $sessionId . "', '" . $date . "', '" . $sessionId . "', '" . $date . "')";
     $query = $conn->query($sql) or die("Error BSQ016: " . $conn->error);
 
+    // return 'Exam Date Added';
+
+
+    // Get All users that should take the examination
+    $applicants = getApplicantUserId($acadYearId, $semId, $shs, $colEAPub, $colEAPriv, $colSc, 1);
+    foreach($applicants as $applicant){
+
+        // Check if Examination Already Exists in DB
+        $examExists     = checkExamExist($acadYearId, $semId, $applicant);
+
+        if ($examExists->num_rows == 0) {
+            // Sets the User for Examination
+            startExam($applicant);
+        }
+        
+    }
     return 'Exam Date Added';
+
 }
 
 function editSetExam($id, $startDate, $time, $endDate, $shs, $colEAPub, $colEAPriv, $colSc)

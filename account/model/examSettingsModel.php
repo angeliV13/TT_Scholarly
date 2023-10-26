@@ -107,10 +107,10 @@ function deleteExamItems($id)
 }
 
 // Inserting the Examination
-function startExam()
+function startExam($userId)
 {
     include("dbconnection.php");
-    session_start();
+    // session_start();
 
     $answers        = "";
     $questions      = [];
@@ -119,7 +119,7 @@ function startExam()
 
     $ay             = getDefaultAcadYearId();
     $sem            = getDefaultSemesterId();
-    $userId         = $_SESSION['id'];
+    // $userId         = $_SESSION['id'];
     $examItems      = getExamTotalItems();
     $questions      = json_encode(getRandomQuestions($examItems));
     $answersArray   = json_decode($questions);

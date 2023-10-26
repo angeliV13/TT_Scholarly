@@ -35,7 +35,7 @@ if (isset($_REQUEST['action']))
                 {
                     echo getSetRenewalTable();
                 } 
-                elseif ($getTable == 4)                  //Generate Renewal Table
+                elseif ($getTable == 4)                  //Generate Examination Table
                 {
                     echo getSetExamTable();
                 } 

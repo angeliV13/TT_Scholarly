@@ -1,166 +1,190 @@
 $(document).ready(function () {
-    // AJAX for AY
+  // AJAX for AY
+  $.ajax({
+      type: "POST",
+      url: "controller/generateReport.php",
+      data: {
+        action: 0.1,
+      },
+      success: function (data) {
+          let ay = (JSON.parse(data));
+          // console.log(ay);
+          ay.forEach(ayOption => {
+              $("#app_ay").append(
+                  '<option value='+ ayOption[0] +'>' + ayOption[1] +'</option>'
+              );
+          });
+          // console.log(data);
+      },
+    });
+
+    // AJAX for School
     $.ajax({
+      type: "POST",
+      url: "controller/generateReport.php",
+      data: {
+        action: 0.2,
+      },
+      success: function (data) {
+          console.log(data)
+          let school = (JSON.parse(data));
+          console.log(school);
+          school.forEach(ayOption => {
+              $("#app_SchoolName").append(
+                  '<option value='+ ayOption[0] +'>' + ayOption[1] +'</option>'
+              );
+          });
+          // console.log(data);
+      },
+    });
+
+
+
+  $("#genrep_list_btn").on("click", function (e) {
+    let action = $("#app_generate option:selected").val();
+
+    // Check if the Action is for generating
+    // Applicant, Beneficiary or Graduating Data
+    if(action <= 3){
+      let ay = $("#app_ay option:selected").text();
+      let sem = $("#app_sem option:selected").text();
+      let scholarType = $("#app_scholarType option:selected").text();
+      let educLevel = $("#app_educLevel option:selected").text();
+      let schoolName = $("#app_schoolName option:selected").val(); // ?
+      let yearLevel = $("#app_yearLevel option:selected").text();
+      let courseStrand = $("#app_courseStrand option:selected").val(); // ?
+      let status = $("#app_status option:selected").val(); //?
+
+      $.ajax({
         type: "POST",
         url: "controller/generateReport.php",
         data: {
-          action: 0.1,
+          action: action,
+          ay: ay,
+          sem: sem,
+          scholarType: scholarType,
+          educLevel: educLevel,
+          schoolName: schoolName,
+          yearLevel: yearLevel,
+          courseStrand: courseStrand,
+          status: status,
         },
         success: function (data) {
-            let ay = (JSON.parse(data));
-            // console.log(ay);
-            ay.forEach(ayOption => {
-                $("#app_ay").append(
-                    '<option value='+ ayOption[0] +'>' + ayOption[1] +'</option>'
-                );
-                $("#bene_ay").append(
-                    '<option value='+ ayOption[0] +'>' + ayOption[1] +'</option>'
-                );
-                $("#graduating_ay").append(
-                    '<option value='+ ayOption[0] +'>' + ayOption[1] +'</option>'
-                );
-            });
-            // console.log(data);
+          console.log(data);
+
+          let theadtr = JSON.parse(data)[0];
+          let tbodytr = JSON.parse(data)[1];
+
+          console.log(theadtr);
+          console.log(tbodytr);
+
+          $("#dynamic_table thead tr").empty();
+          $("#dynamic_table tbody tr").empty();
+
+          theadtr.forEach((headtr) => {
+            $("#dynamic_table thead tr").append(
+              '<th scope="col">' + headtr + "</th>"
+            );
+          });
+          reportTable(tbodytr, "Applicants Information");
         },
       });
+    }else{
 
-  $("#genrep_applicant_btn").on("click", function (e) {
-    let ay = $("#app_ay option:selected").text();
-    let sem = $("#app_sem option:selected").text();
-    let scholarType = $("#app_scholarType option:selected").text();
-    let educLevel = $("#app_educLevel option:selected").text();
-    let schoolName = $("#app_schoolName option:selected").val(); // ?
-    let yearLevel = $("#app_yearLevel option:selected").text();
-    let courseStrand = $("#app_courseStrand option:selected").val(); // ?
-    let status = $("#app_status option:selected").val(); //?
-
-    $.ajax({
-      type: "POST",
-      url: "controller/generateReport.php",
-      data: {
-        action: 1,
-        ay: ay,
-        sem: sem,
-        scholarType: scholarType,
-        educLevel: educLevel,
-        schoolName: schoolName,
-        yearLevel: yearLevel,
-        courseStrand: courseStrand,
-        status: status,
-      },
-      success: function (data) {
-        console.log(data);
-
-        let theadtr = JSON.parse(data)[0];
-        let tbodytr = JSON.parse(data)[1];
-
-        console.log(theadtr);
-        console.log(tbodytr);
-
-        $("#dynamic_table thead tr").empty();
-        $("#dynamic_table tbody tr").empty();
-
-        theadtr.forEach((headtr) => {
-          $("#dynamic_table thead tr").append(
-            '<th scope="col">' + headtr + "</th>"
-          );
-        });
-        reportTable(tbodytr, "Applicants Information");
-      },
-    });
+    }
   });
 
-  $("#genrep_bene_btn").on("click", function (e) {
-    let ay = $("#bene_ay option:selected").text();
-    let sem = $("#bene_sem option:selected").text();
-    let scholarType = $("#bene_scholarType option:selected").text();
-    let educLevel = $("#bene_educLevel option:selected").text();
-    let schoolName = $("#bene_schoolName option:selected").val(); // ?
-    let yearLevel = $("#bene_yearLevel option:selected").text();
-    let courseStrand = $("#bene_courseStrand option:selected").val(); // ?
-    let status = $("#bene_status option:selected").val(); //?
+  // $("#genrep_bene_btn").on("click", function (e) {
+  //   let ay = $("#bene_ay option:selected").text();
+  //   let sem = $("#bene_sem option:selected").text();
+  //   let scholarType = $("#bene_scholarType option:selected").text();
+  //   let educLevel = $("#bene_educLevel option:selected").text();
+  //   let schoolName = $("#bene_schoolName option:selected").val(); // ?
+  //   let yearLevel = $("#bene_yearLevel option:selected").text();
+  //   let courseStrand = $("#bene_courseStrand option:selected").val(); // ?
+  //   let status = $("#bene_status option:selected").val(); //?
 
-    $.ajax({
-      type: "POST",
-      url: "controller/generateReport.php",
-      data: {
-        action: 1,
-        ay: ay,
-        sem: sem,
-        scholarType: scholarType,
-        educLevel: educLevel,
-        schoolName: schoolName,
-        yearLevel: yearLevel,
-        courseStrand: courseStrand,
-        status: status,
-      },
-      success: function (data) {
-        console.log(data);
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "controller/generateReport.php",
+  //     data: {
+  //       action: 1,
+  //       ay: ay,
+  //       sem: sem,
+  //       scholarType: scholarType,
+  //       educLevel: educLevel,
+  //       schoolName: schoolName,
+  //       yearLevel: yearLevel,
+  //       courseStrand: courseStrand,
+  //       status: status,
+  //     },
+  //     success: function (data) {
+  //       console.log(data);
 
-        let theadtr = JSON.parse(data)[0];
-        let tbodytr = JSON.parse(data)[1];
+  //       let theadtr = JSON.parse(data)[0];
+  //       let tbodytr = JSON.parse(data)[1];
 
-        console.log(theadtr);
-        console.log(tbodytr);
+  //       console.log(theadtr);
+  //       console.log(tbodytr);
 
-        $("#dynamic_table thead tr").empty();
-        $("#dynamic_table tbody tr").empty();
+  //       $("#dynamic_table thead tr").empty();
+  //       $("#dynamic_table tbody tr").empty();
 
-        theadtr.forEach((headtr) => {
-          $("#dynamic_table thead tr").append(
-            '<th scope="col">' + headtr + "</th>"
-          );
-        });
-        reportTable(tbodytr, "Applicants Information");
-      },
-    });
-  });
+  //       theadtr.forEach((headtr) => {
+  //         $("#dynamic_table thead tr").append(
+  //           '<th scope="col">' + headtr + "</th>"
+  //         );
+  //       });
+  //       reportTable(tbodytr, "Applicants Information");
+  //     },
+  //   });
+  // });
 
-  $("#genrep_graduating_btn").on("click", function (e) {
-    let ay = $("#graduating_ay option:selected").text();
-    let sem = $("#graduating_sem option:selected").text();
-    let scholarType = $("#graduating_scholarType option:selected").text();
-    let educLevel = $("#graduating_educLevel option:selected").text();
-    let schoolName = $("#graduating_schoolName option:selected").val(); // ?
-    let yearLevel = $("#graduating_yearLevel option:selected").text();
-    let courseStrand = $("#graduating_courseStrand option:selected").val(); // ?
-    let status = $("#graduating_status option:selected").val(); //?
+  // $("#genrep_graduating_btn").on("click", function (e) {
+  //   let ay = $("#graduating_ay option:selected").text();
+  //   let sem = $("#graduating_sem option:selected").text();
+  //   let scholarType = $("#graduating_scholarType option:selected").text();
+  //   let educLevel = $("#graduating_educLevel option:selected").text();
+  //   let schoolName = $("#graduating_schoolName option:selected").val(); // ?
+  //   let yearLevel = $("#graduating_yearLevel option:selected").text();
+  //   let courseStrand = $("#graduating_courseStrand option:selected").val(); // ?
+  //   let status = $("#graduating_status option:selected").val(); //?
 
-    $.ajax({
-      type: "POST",
-      url: "controller/generateReport.php",
-      data: {
-        action: 2,
-        ay: ay,
-        sem: sem,
-        scholarType: scholarType,
-        educLevel: educLevel,
-        schoolName: schoolName,
-        yearLevel: yearLevel,
-        courseStrand: courseStrand,
-        status: status,
-      },
-      success: function (data) {
-        console.log(data);
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "controller/generateReport.php",
+  //     data: {
+  //       action: 2,
+  //       ay: ay,
+  //       sem: sem,
+  //       scholarType: scholarType,
+  //       educLevel: educLevel,
+  //       schoolName: schoolName,
+  //       yearLevel: yearLevel,
+  //       courseStrand: courseStrand,
+  //       status: status,
+  //     },
+  //     success: function (data) {
+  //       console.log(data);
 
-        let theadtr = JSON.parse(data)[0];
-        let tbodytr = JSON.parse(data)[1];
+  //       let theadtr = JSON.parse(data)[0];
+  //       let tbodytr = JSON.parse(data)[1];
 
-        console.log(theadtr);
-        console.log(tbodytr);
+  //       console.log(theadtr);
+  //       console.log(tbodytr);
 
-        $("#dynamic_table thead tr").empty();
-        $("#dynamic_table tbody tr").empty();
+  //       $("#dynamic_table thead tr").empty();
+  //       $("#dynamic_table tbody tr").empty();
 
-        theadtr.forEach((headtr) => {
-          $("#dynamic_table thead tr").append(
-            '<th scope="col">' + headtr + "</th>"
-          );
-        });
-        reportTable(tbodytr, "Applicants Information");
-      },
-    });
-  });
+  //       theadtr.forEach((headtr) => {
+  //         $("#dynamic_table thead tr").append(
+  //           '<th scope="col">' + headtr + "</th>"
+  //         );
+  //       });
+  //       reportTable(tbodytr, "Applicants Information");
+  //     },
+  //   });
+  // });
 });
 
 function reportTable(data, title) {

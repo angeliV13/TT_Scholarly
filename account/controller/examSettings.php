@@ -1,7 +1,8 @@
 <?php
 
 require("../model/examSettingsModel.php");
-require("../model/basicSetupModel.php");
+require("../model/functionModel.php");
+// require("../model/basicSetupModel.php");
 
 
 if (isset($_REQUEST['action'])) {
@@ -26,7 +27,8 @@ if (isset($_REQUEST['action'])) {
             echo addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnswer);
             break;
         case 3:
-            echo startExam();
+            // echo startExam();
+            echo ("Success");
             break;   
         case 4:
             echo getExam();
