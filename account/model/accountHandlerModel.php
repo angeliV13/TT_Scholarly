@@ -325,7 +325,7 @@ function email_confirmation($data)
         {
             return 'Error EQ003: Token Expired';
         }
-        else if ($$data['code'] != $token) 
+        else if ($data['code'] != $token) 
         {
             return 'Invalid Token';
         }
