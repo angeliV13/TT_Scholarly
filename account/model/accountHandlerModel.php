@@ -306,7 +306,7 @@ function email_confirmation($data)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT id, user_id, date_generated FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' ORDER BY date_generated DESC LIMIT 1";
+    $sql = "SELECT id, user_id, date_generated FROM email_token WHERE email = '" . $data['email'] . "' ORDER BY date_generated DESC LIMIT 1";
     $query = $conn->query($sql);
 
     if ($query->num_rows > 0) {
