@@ -306,7 +306,7 @@ function email_confirmation($data)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT id, user_id, date_generated FROM email_token WHERE email = '" . $data['email'] . "' ORDER BY date_generated DESC LIMIT 1";
+    $sql = "SELECT id, user_id, date_generated, token FROM email_token WHERE email = '" . $data['email'] . "' ORDER BY date_generated DESC LIMIT 1";
     $query = $conn->query($sql);
 
     if ($query->num_rows > 0) {
@@ -314,6 +314,7 @@ function email_confirmation($data)
         $id = $row['id'];
         $user_id = $row['user_id'];
         $date_generated = $row['date_generated'];
+        $token = $row['token'];
 
         // add 5 minutes to date_generated
         $date_countdown = date("Y-m-d H:i:s", strtotime('+5 minutes', strtotime($date_generated)));
@@ -323,7 +324,11 @@ function email_confirmation($data)
         if ($timeLeft <= 0) 
         {
             return 'Error EQ003: Token Expired';
-        } 
+        }
+        else if ($$data['code'] != $token) 
+        {
+            return 'Invalid Token';
+        }
         else 
         {
             $sql = "UPDATE account SET account_status = 1 WHERE id = '" . $user_id . "' AND account_status = 0 LIMIT 1";
