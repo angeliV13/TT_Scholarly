@@ -1101,6 +1101,17 @@ function set_applicant_status($data)
         ]
     ];
 
+    $adminText = ($decision == 2 OR $decision == 3) ? $name . " is " . $decisionText : $decisionText;
+
+    if ($decision == 4)
+    {
+        $adminText = $name . "'s scholarship application has been approved.";
+    }
+    else if ($decision == 5)
+    {
+        $adminText = $name . "'s scholarship application has been rejected.";
+    }
+
     $adEmail = check_exist_multiple($adminEmail, 1);
     if (!is_array($adEmail)) return 'Error: ' . $adEmail;
     $website_header = get_website_info(0)['header'];
@@ -1123,7 +1134,7 @@ function set_applicant_status($data)
         // 'user_id'       => $id,
         'user_id'       => get_user_id_notification($notifiedUsers),
         'notif_type'    => $msgType,
-        'notif_body'    => $decisionText,
+        'notif_body'    => $adminText,
         'notif_link'    => '?nav=new-applicants&applicationId=' . $id,
     ];
 

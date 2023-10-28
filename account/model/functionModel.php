@@ -105,6 +105,11 @@ function static_count()
     return $count;
 }
 
+function get_age($birthday)
+{
+    return floor((time() - strtotime($birthday)) / 31556926);
+}
+
 function hashPassword($pass)
 {
     return password_hash($pass, PASSWORD_DEFAULT);

@@ -38,9 +38,13 @@
                         <thead>
                             <tr class="text-center small">
                                 <th>No.</th>
+                                <th>Application Number<th>
                                 <th>Last Name</th>
                                 <th>First Name</th>
                                 <th>Middle Name</th>
+                                <th>Extension Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
                                 <th>School</th>
                                 <th>School Type</th>
                                 <th>Scholarship Type</th>
@@ -49,6 +53,10 @@
                                 <th>Year Level</th>
                                 <th>Contact No.</th>
                                 <th>Barangay</th>
+                                <th>Examination Start Date</th>
+                                <th>Examination Start Date</th>
+                                <th>Interview Start Date</th>
+                                <th>Interview End Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

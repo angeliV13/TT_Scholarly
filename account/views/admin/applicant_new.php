@@ -27,11 +27,10 @@
                         <thead>
                             <tr class="text-center small">
                                 <th>No.</th>
-                                <th>Applicantion Number<th>
+                                <th>Application Number<th>
                                 <th>Last Name</th>
                                 <th>First Name</th>
                                 <th>Middle Name</th>
-                                <th>Middle Initial</th>
                                 <th>Extension Name</th>
                                 <th>Age</th>
                                 <th>Gender</th>
@@ -51,27 +50,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td></td>
-                            <td>
-                                <div class="button">
-                                    <button id="setFilter" class="btn btn-sm btn-danger shadow-sm">Set Filter </button>
-                                    <button class="btn btn-sm btn-danger" onclick="window.print()"> <i class="bi bi-printer"></i> Print List </button>
-                                </div>
-                            </td>
+                            
                         </tbody>
                     </table>
                 </div>

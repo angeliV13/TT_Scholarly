@@ -19,19 +19,19 @@
                 </div>
                 <div class="d-flex justify-content-center align-items-center gap-3">
                     <div class="">
-                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="2">
+                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="2" id="decisionRadio1">
                         <label class="form-check-label" for="qualiExamRadio">For Qualification Exam</label>
                     </div>
                     <div class="">
-                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="3">
+                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="3" id="decisionRadio2">
                         <label class="form-check-label" for="interviewRadio">For Interview</label>
                     </div>
                     <div class="">
-                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="4">
+                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="4" id="decisionRadio3">
                         <label class="form-check-label" for="interviewRadio">Approve Application</label>
                     </div>
                     <div class="">
-                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="5">
+                        <input class="form-check-input me-2" type="radio" name="decisionRadio" value="5" id="decisionRadio4">
                         <label class="form-check-label" for="interviewRadio">Reject Application</label>
                     </div>
                     <div class="">

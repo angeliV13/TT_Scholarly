@@ -691,6 +691,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
     // acc_type = account account_type
 
     include("dbconnection.php");
+    include("../global_variables.php");
 
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
@@ -739,9 +740,14 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
 
             $data[] = [
                 static_count(),
+                $eac_number,
+                '',
                 $last_name,
                 $first_name,
                 $middle_name,
+                $suffix,
+                get_age($birth_date),
+                $genderArr[$gender],
                 (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name
                 (isset($schoolDetails['class_type']))    ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($scholarType['scholarType'])                 ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type

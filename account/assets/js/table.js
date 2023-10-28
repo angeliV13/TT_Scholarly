@@ -247,9 +247,7 @@ $(document).ready(function () {
         "createdRow": function (row, data, index) { },
         "columnDefs": [
             { className: "text-center", "targets": [0] }, 
-            { visible: false, targets: [12, 13, 14, 15] }, 
-            { width: "200px", "targets": [0, 1, 2, 3] } ,
-            { width: "200px", "targets": [4, 5, 6, 7] } 
+            { visible: false, targets: [2, 17, 18, 19, 20] }, 
         ],
         language: {
             processing: "<span class='loader'></span>"
@@ -349,6 +347,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -393,6 +392,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -424,7 +424,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -432,6 +432,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -511,7 +512,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -519,6 +520,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -554,7 +556,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [14, 15] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 19, 20] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -562,6 +564,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -597,7 +600,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -605,6 +608,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -640,7 +644,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [14, 15] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 19, 20] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -648,6 +652,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -683,7 +688,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -691,6 +696,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -726,7 +732,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [12, 13, 14, 15] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -734,6 +740,7 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -839,11 +846,33 @@ $(document).on("click", ".viewInfoClass", function () {
             "id": id
         },
         success: function (data) {
-            // console.log(data);
             $("#accountViewId").val(id);
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
             $("#currentStatus").html($("#scholarStatus").val());
+            if ($("#scholarStatus").val() == "For Assesment Exam")
+            {
+                $("#decisionRadio1").prop("disabled", true);
+            }
+            else if ($("#scholarStatus").val() == "For Interview")
+            {
+                $("#decisionRadio1").prop("disabled", true);
+                $("#decisionRadio2").prop("disabled", true);
+            }
+            else if ($("#scholarStatus").val() == "Application Approved")
+            {
+                $("#decisionRadio1").prop("disabled", true);
+                $("#decisionRadio2").prop("disabled", true);
+                $("#decisionRadio3").prop("disabled", true);
+                $("#decisionRadio4").prop("disabled", true);
+            }
+            else if ($("#scholarStatus").val() == "Application Rejected")
+            {
+                $("#decisionRadio1").prop("disabled", true);
+                $("#decisionRadio2").prop("disabled", true);
+                $("#decisionRadio3").prop("disabled", true);
+                $("#decisionRadio4").prop("disabled", true);
+            }
         }
     })
 })

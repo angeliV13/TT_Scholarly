@@ -33,7 +33,7 @@ switch ($action) {
         echo graduatesTable();
         break;
     case 8:
-        echo userTables(4, "", 2);
+        echo userTables("", "", 2);
         break;
     case 9:
         echo viewNotificationTable();
