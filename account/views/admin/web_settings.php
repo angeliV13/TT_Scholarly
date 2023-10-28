@@ -117,7 +117,7 @@
                                 </tbody>
                             </table>
 
-                            <table id="setSlider" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
+                            <!-- <table id="setSlider" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class="small text-center">
                                         <th class="text-center">Slider Image</th>
@@ -132,8 +132,8 @@
                                         <td contenteditable="true"><?= $website_scholar_text[1]['scholarText'] ?></td>
                                         <td contenteditable="true"><?= $website_scholar_text[2]['scholarText'] ?></td>
                                     </tr>
-                                </tbody>
-                            </table>
+                                </tbody> -->
+                            <!-- </table> -->
                             <!-- End Table with stripped rows -->
                         </div>
                     </div>

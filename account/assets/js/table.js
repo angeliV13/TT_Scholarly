@@ -1025,27 +1025,21 @@ function approveApplicant(val, accountViewId) {
 function reasonForRejection(val, accountViewId) {
     Swal.fire({
         title: "Reason for Rejection",
-        html: `<div class="form-group" id="otherReason">
-                    <label for="otherReason">Other Reason</label>
-                    <input type="text" class="form-control" id="otherReason">
-                </div>`,
+        input: 'textarea',
+        inputLabel: 'Reason',
+        inputPlaceholder: 'Type your reason here...',
+        inputAttributes: {
+            'aria-label': 'Type your reason here'
+        },
         showCancelButton: true,
         confirmButtonText: "Submit",
         cancelButtonText: "Cancel",
-        preConfirm: () => {
-            let otherReason = $('#otherReason').val();
-
-            if (otherReason == '') {
+        preConfirm: (reason) => {
+            if (reason == '') {
                 Swal.showValidationMessage(
                     `Please fill up the reason field.`
                 )
-
-                return;
             }
-
-            let fullReason = otherReason;
-
-            return fullReason;
         }
     }).then((result) => {
         if (result.isConfirmed) {
@@ -1056,7 +1050,7 @@ function reasonForRejection(val, accountViewId) {
                     action: 18,
                     decision: val,
                     applicantId: accountViewId,
-                    reason: result.value
+                    reason: $('#swal2-input').val(),
                 },
                 beforeSend: function () {
                     showBeforeSend("Rejecting Applicant...");
@@ -1090,25 +1084,21 @@ function reasonForRejection(val, accountViewId) {
 function sendEmailNotification(val, accountViewId) {
     Swal.fire({
         title: "Send Notification to Applicant",
-        html: `<div class="form-group">
-                    <label for="otherReason">Reason</label>
-                    <textarea class="form-control" id="otherReason"></textarea>
-                </div>`,
+        input: 'textarea',
+        inputLabel: 'Reason',
+        inputPlaceholder: 'Type your reason here...',
+        inputAttributes: {
+            'aria-label': 'Type your reason here'
+        },
         showCancelButton: true,
         confirmButtonText: "Submit",
         cancelButtonText: "Cancel",
-        preConfirm: () => {
-            let otherReason = $('#otherReason').val();
-
-            if (otherReason == '') {
+        preConfirm: (reason) => {
+            if (reason == '') {
                 Swal.showValidationMessage(
                     `Please fill up the reason field.`
                 )
-
-                return;
             }
-
-            return otherReason;
         }
     }).then((result) => {
         if (result.isConfirmed) {
@@ -1119,7 +1109,7 @@ function sendEmailNotification(val, accountViewId) {
                     action: 18,
                     decision: val,
                     applicantId: accountViewId,
-                    reason: result.value
+                    reason: $('#swal2-input').val()
                 },
                 beforeSend: function () {
                     showBeforeSend("Sending Notification...");
