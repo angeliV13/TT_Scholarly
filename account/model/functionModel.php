@@ -1326,7 +1326,7 @@ function get_education_courses($type = '', $id = 0)
 
     return $sql;
 
-    return $data;
+    // return $data;
 }
 
 function get_course_name($id)
