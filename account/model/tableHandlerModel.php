@@ -752,7 +752,8 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
                 (isset($schoolDetails['class_type']))                                   ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($scholarType['scholarType'])                                     ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
                 (isset($schoolDetails['school_type']))                                  ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
-                (isset($education['course']) AND is_numeric($education['course']) )     ? $course[$education['course']] : '', //Course
+                // (isset($education['course']) AND is_numeric($education['course']) )     ? $course[$education['course']] : '', //Course
+                $education['course'],
                 (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $contact_number, //Contact Number
                 $barangay, //Barangay
