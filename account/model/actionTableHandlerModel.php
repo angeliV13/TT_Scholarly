@@ -160,7 +160,7 @@ function getProfile($account_id)
 
                                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                                         <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; height:300px">
-                                            <img id="output" src="'.$profile_img.'" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                            <img id="output" src="'.$profile_img.'" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; height: 150px">
                                         </div>
                                         <div class="ms-4 adjustable-line-spacing" style="margin-top: 115px;">
                                             <h5 class="fw-bold">
@@ -257,6 +257,10 @@ function getProfile($account_id)
                                                                     <label for="EmailAddress" class="form-label">Email Address</label>
                                                                     <input disabled type="text" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="' . $email . '">
                                                                 </div>
+                                                                <div class="col-md-12 position-relative">
+                                                                    <label for="EmailAddress" class="form-label">Facebook URL</label>
+                                                                    <input disabled type="text" class="form-control" id="url" aria-describedby="url" value="' . $fbUrl . '">
+                                                                </div>
                                                                 <!-- BIRTH -->
                                                                 <div class="col-md-4 position-relative">
                                                                     <label for="inputDate" class="form-label">Birth Date</label>
@@ -317,8 +321,8 @@ function getProfile($account_id)
                                                                     <input disabled type="text" class="form-control" id="civilStatus" aria-describedby="civilStatus" value="' . $civilArr[$civil_status] . '">
                                                                 </div>
                                                             </form>
-                                                        </div>
-    <div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">';
+                                                        </div>';
+    // <div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">';
     // DO NOT COMMENT THE ABOVE LINE
     // Educational Background 
     $profile .= '<div class="tab-pane fade" id="bordered-justified-educational-background' . $account_id . '" role="tabpanel" aria-labelledby="educational-background">
