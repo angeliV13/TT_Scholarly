@@ -260,7 +260,7 @@ function getProfile($account_id)
                                                                 </div>
                                                                 <div class="col-md-12 position-relative">
                                                                     <label for="EmailAddress" class="form-label">Facebook URL</label>
-                                                                    <input disabled type="text" class="form-control" id="inputFbUrl" aria-describedby="inputFbUrl" value="' . $fbUrl . '">
+                                                                    <input disabled type="text" class="form-control" id="inputFbUrl" aria-describedby="inputFbUrl" value="' . $fbUrl . '" onclick="window.open(this.value, \'_blank\');">
                                                                 </div>
                                                                 <!-- BIRTH -->
                                                                 <div class="col-md-4 position-relative">
