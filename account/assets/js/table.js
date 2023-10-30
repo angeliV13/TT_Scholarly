@@ -1264,3 +1264,7 @@ $(document).on("click", ".updateToGraduate", function(){
         }
     })
 })
+
+$(document).on("click", "#inputFbUrl", function(){
+    window.open("https://www.facebook.com/", '_blank');
+});
