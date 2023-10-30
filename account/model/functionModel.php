@@ -1324,6 +1324,8 @@ function get_education_courses($type = '', $id = 0)
         }
     }
 
+    return $sql;
+
     return $data;
 }
 
