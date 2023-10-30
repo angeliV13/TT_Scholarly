@@ -1333,7 +1333,7 @@ function get_course_name($id)
 
     $data = '';
 
-    $sql = "SELECT name FROM education_courses WHERE id = " . $id;
+    $sql = "SELECT name FROM education_courses WHERE id = '{$id}'";
     $query = $conn->query($sql);
 
     if ($query->num_rows > 0) 
@@ -1374,7 +1374,7 @@ function get_school_name($id)
 
     $data = [];
 
-    $sql = "SELECT * FROM school WHERE id = " . $id;
+    $sql = "SELECT * FROM school WHERE id =  '{$id}'";
     $query = $conn->query($sql);
 
     if ($query->num_rows > 0) 
@@ -1385,6 +1385,40 @@ function get_school_name($id)
     }
 
     return $data;
+}
+
+function get_school_name_id($id){
+    include("dbconnection.php");
+    $data = "";
+
+    $sql = "SELECT school_name FROM school WHERE id = '" . $id . "'";
+    $query = $conn->query($sql);
+    
+    if ($query->num_rows > 0) 
+    {
+        $row = $query->fetch_assoc();
+
+        return ($row['school_name']);
+    }else{
+        return 'No data found';
+    }
+}
+
+function get_school_classification($id){
+    include("dbconnection.php");
+    $data = "";
+
+    $sql = "SELECT class_type FROM school WHERE id = '" . $id . "'";
+    $query = $conn->query($sql);
+    
+    if ($query->num_rows > 0) 
+    {
+        $row = $query->fetch_assoc();
+
+        return get_school_class($row['class_type']);
+    }else{
+        return 'No data found';
+    }
 }
 
 function check_status($id)

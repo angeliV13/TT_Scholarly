@@ -60,19 +60,52 @@ function createTable($report, $data)
     $returnData = [];
     $tableBodyTmp = [];
 
-    $tableHeader = getTableHeader($array[$report]);
-    $tableBody   = getTableBody($array[$report], $data);
+    $tableHeader    = getTableHeader($array[$report]);
+    $tableBodyTmp   = getTableBody($array[$report], $data);
+    $tableBody      = [];
+    $tableRow       = [];
 
-    // Send to Temp
-    $tableBodyTmp = $tableBody;
-    // TEST
-    // $tableBody = [];
-    foreach($tableBodyTmp as $key => $value){
-        // Get the position
-        // if position and $array is match apply changes of value for school
-        // Use get_school_name($id) of function model
-        // Push Changes
-    }
+    // Get the Rows
+    foreach($tableBodyTmp as $row){
+        // Get the Rows
+        foreach($row as $key => $field){
+            // Check the Field if it is School Name and with School Type
+            if($report <= 3){
+                switch($key){
+                    case '14':
+                        $school_name = get_school_name_id($field);
+                        $tableRow[$key] = ($school_name <> 'No data found') ? $school_name : $field;
+                        break;
+                    case '15':
+                        $school_classification = get_school_classification($field);
+                        $tableRow[$key] = ($school_classification <> 'No data found') ? $school_classification : $field;
+                        break;
+                    case '16':
+                        $school_course = get_course_name($field);
+                        $tableRow[$key] = ($school_course <> '') ? $school_course : $field;
+                        break;
+                    default:
+                        $tableRow[$key] = $field;
+                        break;
+                } // End Switch
+            }elseif($report == 4){
+                switch($key){
+                    case '11':
+                        $school_name = get_school_name_id($field);
+                        $tableRow[$key] = ($school_name <> 'No data found') ? $school_name : $field;
+                        break;
+                    case '12':
+                        $school_classification = get_school_classification($field);
+                        $tableRow[$key] = ($school_classification <> 'No data found') ? $school_classification : $field;
+                        break;
+                    default:
+                        $tableRow[$key] = $field;
+                        break;
+                } // End Switch
+            }
+        } // End of Rows
+        array_push($tableBody, $tableRow);
+    } //End of Table
 
 
     $returnData = [$tableHeader, $tableBody];
