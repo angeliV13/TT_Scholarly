@@ -259,8 +259,8 @@ function getProfile($account_id)
                                                                     <input disabled type="text" class="form-control" id="inputEmailAddress" aria-describedby="inputEmailAddress" value="' . $email . '">
                                                                 </div>
                                                                 <div class="col-md-12 position-relative">
-                                                                    <label for="EmailAddress" class="form-label">Facebook URL</label>
-                                                                    <input disabled type="text" class="form-control" id="inputFbUrl" aria-describedby="inputFbUrl" value="' . $fbUrl . '" onclick="window.open(this.value, \'_blank\');">
+                                                                    <label for="EmailAddress" class="form-label">Facebook URL</label><a href="' . $fbUrl . '" target="_blank" class="btn btn-primary btn-sm ms-2">Go to Facebook</a>
+                                                                    <input disabled type="text" class="form-control" id="inputFbUrl" aria-describedby="inputFbUrl" value="' . $fbUrl . '">
                                                                 </div>
                                                                 <!-- BIRTH -->
                                                                 <div class="col-md-4 position-relative">
