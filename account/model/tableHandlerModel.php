@@ -735,8 +735,8 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
                         <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2 '.$none.'" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
                         <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
 
-            $course     = (isset($education['course']) ? get_education_courses('', $education['course']) : '');
-            $schoolDetails = (isset($education['school']) ? get_school_name($education['school']) :  '');
+            $course     = (is_numeric($education['course']) ? get_education_courses('', $education['course']) : '');
+            $schoolDetails = (is_numeric($education['school']) ? get_school_name($education['school']) :  '');
 
             $data[] = [
                 static_count(),
