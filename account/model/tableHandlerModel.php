@@ -748,12 +748,12 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
                 $suffix,
                 get_age($birth_date),
                 $genderArr[$gender],
-                (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name
-                (isset($schoolDetails['class_type']))    ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
-                (isset($scholarType['scholarType'])                 ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
-                (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
-                (isset($education['course']))                       ? $course[$education['course']] : '', //Course
-                (isset($education['year_level'])                    ? ($education['year_level']) : ''), // Year Level
+                (isset($schoolDetails['school_name']))                                  ? ($schoolDetails['school_name']) : '', //School Name
+                (isset($schoolDetails['class_type']))                                   ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
+                (isset($scholarType['scholarType'])                                     ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
+                (isset($schoolDetails['school_type']))                                  ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
+                (isset($education['course']) AND is_numeric($education['course']) )     ? $course[$education['course']] : '', //Course
+                (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $contact_number, //Contact Number
                 $barangay, //Barangay
                 $exam_start_date,
@@ -862,8 +862,8 @@ function graduatesTable() //CHECKING CK
                         </div>';
             $scholarType = check_status($account_id);
 
-            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
-            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
+            $course     = (isset($education[1]['course']) AND is_numeric($education[1]['course']))    ? get_education_courses('', $education[1]['course']) : '';
+            $schoolDetails = (isset($education[1]['school']) AND is_numeric($education[1]['school'])) ? get_school_name($education[1]['school']) :  '';
 
             $data[] = [
                 static_count(),
@@ -871,9 +871,9 @@ function graduatesTable() //CHECKING CK
                 $first_name,
                 $middle_name,
                 $email,                         //Email
-                (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
-                (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
-                (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course,
+                (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : '', //School Name,
+                (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education[1]['course']) AND is_numeric($education[1]['course']))    ? $course[$education[1]['course']] : '', //Course,
                 $button,
             ];
 
@@ -924,8 +924,8 @@ function graduatingTable() // CHECKING CK
                         </div>';
             $scholarType = check_status($account_id);
 
-            $course     = (isset($education[1]['course']) ? get_education_courses('', $education[1]['course']) : '');
-            $schoolDetails = (isset($education[1]['school']) ? get_school_name($education[1]['school']) :  '');
+            $course     = (isset($education[1]['course']) AND is_numeric($education[1]['course']))    ? get_education_courses('', $education[1]['course']) : '';
+            $schoolDetails = (isset($education[1]['school']) AND is_numeric($education[1]['school'])) ? get_school_name($education[1]['school']) :  '';
 
             $data[] = [
                 static_count(),
@@ -933,9 +933,9 @@ function graduatingTable() // CHECKING CK
                 $first_name,
                 $middle_name,
                 $email,                         //Email
-                (isset($schoolDetails['school_name']))                  ? ($schoolDetails['school_name']) : '', //School Name,
-                (isset($schoolDetails['school_type']))              ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
-                (isset($education[1]['course']))                    ? $course[$education[1]['course']] : '', //Course,
+                (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : '', //School Name,
+                (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education[1]['course']) AND is_numeric($education[1]['course']))    ? $course[$education[1]['course']] : '', //Course,
                 'ACTIONS NOT SPECIFIED YET',
             ];
 
