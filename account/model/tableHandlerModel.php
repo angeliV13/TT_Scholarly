@@ -859,9 +859,8 @@ function graduatesTable() //CHECKING CK
     $sql = "SELECT * FROM account acc 
             JOIN user_info inf ON acc.id = inf.account_id 
             JOIN gen_info gen ON acc.id = user_id
-            WHERE acc.account_type = '3' 
-            AND acc.account_status = '2'
-            AND gen.graduating_flag = '0'";
+            WHERE acc.account_type IN (2,3)
+            AND acc.account_status = '4'";
     $query = $conn->query($sql);
 
     $data = [];
@@ -944,12 +943,17 @@ function graduatingTable() // CHECKING CK
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
     $sql = "SELECT * FROM account acc 
             JOIN user_info inf ON acc.id = inf.account_id 
             JOIN gen_info gen ON acc.id = user_id
-            WHERE acc.account_type = '3' 
+            WHERE acc.account_type IN (2,3) 
             AND acc.account_status = '1'
-            AND gen.graduating_flag = '0'";
+            AND gen.graduating_flag = '0'
+            AND gen.ay_id = '$acadYear'
+            AND gen.sem_id = '$defaultYear'";
     $query = $conn->query($sql);
 
     $data = [];
@@ -965,6 +969,7 @@ function graduatingTable() // CHECKING CK
             $education  = get_user_education($account_id, 1);
             $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                             <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                            <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2 '.$none.'" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
                             <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Applicant</button>
                         </div>';
             $scholarType = check_status($account_id);
@@ -1004,7 +1009,7 @@ function graduatingTable() // CHECKING CK
                 (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : $school, //School Name,
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
                 $course, //Course,
-                'ACTIONS NOT SPECIFIED YET',
+                $button,
             ];
 
             $totalData++;

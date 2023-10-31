@@ -28,7 +28,7 @@ $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational As
 $awardArr = ['0' => 'With Highest Honors', '1' => 'With High Honors', '2' => 'With Honors', '3' => 'Others', '4' => 'N/A'];
 $gradYear = [];
 
-for ($i = 2012; $i <= date("Y") + 5; $i++)
+for ($i = date("Y"); $i <= date("Y") + 5; $i++)
 {
     $gradYear[$i] = $i;
 }

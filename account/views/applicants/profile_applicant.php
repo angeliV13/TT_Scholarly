@@ -336,7 +336,7 @@
                       <?php if ($gen_info != null) : ?>
                         <select class="form-select" name="Year of Graduation" id="graduation_year" <?= $finishFlag ? "disabled" : "" ?>>
                           <option selected disabled value="">Choose...</option>
-                          <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
+                          <?php for ($i = date("Y"); $i <= date("Y") + 5; $i++) : ?>
                             <option value="<?php echo $i ?>" <?php echo $gen_info['graduation_year'] == $i ? "selected" : "" ?>><?php echo $i ?></option>
                           <?php endfor; ?>
                         </select>
@@ -346,7 +346,7 @@
                       <?php else : ?>
                         <select class="form-select" id="graduation_year" name="Year of Graduation">
                           <option selected disabled value="">Choose...</option>
-                          <?php for ($i = 2012; $i <= date("Y") + 5; $i++) : ?>
+                          <?php for ($i = date("Y"); $i <= date("Y") + 5; $i++) : ?>
                             <option value="<?php echo $i ?>"><?php echo $i ?></option>
                           <?php endfor; ?>
                         </select>
