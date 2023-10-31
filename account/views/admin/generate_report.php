@@ -176,11 +176,11 @@
                 </div><!-- End Reports -->
             </div>
 
-            <!-- GRAPH -->
-            <div class="col-12">
+            <!-- Table -->
+            <div class="col-12 d-none" id="table_div">
                 <div class="card recent-sales overflow-auto">
                     <div class="card-body">
-                        <h5 class="card-title">Top Scorers</span></h5>
+                        <h5 class="card-title" id="table_name"></h5>
                         <table id="dynamic_table" class="table table-borderless datatable">
                             <thead>
                                 <tr>

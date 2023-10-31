@@ -42,6 +42,7 @@ $(document).ready(function () {
 
   $("#genrep_list_btn").on("click", function (e) {
     let action = $("#app_generate option:selected").val();
+    let actionText = $("#app_generate option:selected").text();
 
     // Check if the Action is for generating
     // Applicant, Beneficiary or Graduating Data
@@ -87,6 +88,8 @@ $(document).ready(function () {
             );
           });
           reportTable(tbodytr, "Applicants Information");
+          $("#table_div").removeClass("d-none");
+          $("#table_name").text(actionText);
         },
       });
     }else{
