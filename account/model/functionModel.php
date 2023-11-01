@@ -1428,6 +1428,8 @@ function check_status($id)
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
+    $status = ($_SESSION['account_type'] == 2) ? 3 : 0;
+
     $data = [];
 
     do
@@ -1446,7 +1448,7 @@ function check_status($id)
         }
         else
         {
-            $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, account_type, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', NOW())";
+            $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, account_type, status, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', '" . $status . "' NOW())";
             $query = $conn->query($sql);
         }
 
