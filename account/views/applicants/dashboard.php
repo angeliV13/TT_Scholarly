@@ -10,25 +10,24 @@
     <!-- End Page Title -->
     <section class="section dashboard">
         <!-- DASHBOARD PROFILE -->
-        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="card">
-                        <div class="card-body profile-card pt-4 d-flex flex-column">
-                            <div class="d-flex flex-row mb-2">
-                                <!-- Profile Pic -->
-                                <div class="d-flex justify-content-start align-items-center">
-                                    <div class="profile-pic mt-2 py-2 ms- d-flex flex-column" style="width: 150px; height: 170px">
-                                        <?php if ($finishFlag) : ?>
-                                            <img src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" id="output" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
-                                        <?php else : ?>
-                                            <!-- <label class="-label" for="file">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column">
+                        <div class="d-flex flex-row mb-2">
+                            <!-- Profile Pic -->
+                            <div class="d-flex justify-content-start align-items-center">
+                                <div class="profile-pic mt-2 py-2 ms- d-flex flex-column" style="width: 150px; height: 170px">
+                                    <?php if ($finishFlag) : ?>
+                                        <img src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" id="output" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1" />
+                                    <?php else : ?>
+                                        <!-- <label class="-label" for="file">
                                                 <span class="glyphicon glyphicon-camera"></span>
                                                 <span>Change Image</span>
                                             </label> -->
-                                            <input id="file" type="file" onchange="loadFile(event)" />
-                                            <img id="output" src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
-                                        <?php endif; ?>
+                                        <input id="file" type="file" onchange="loadFile(event)" />
+                                        <img id="output" src="<?php echo $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                                    <?php endif; ?>
                                     </Xdiv>
                                 </div>
                             </div>
@@ -50,37 +49,35 @@
                         </div>
                     </div>
                 </div>
-                <!-- status -->
-                <div class="col-xl-6">
-                    <div class="container">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">Dashboard</h5>
-                                <div class="xadjustable-line-spacing" style="margin-top: 5px;">
-                                    <div class="d-flex flex-column flex-md-column justify-content-between align-items-start rounded-2 p-2 mb-1" style="background-color: #efefef;">
-                                        <div class="p-2">
-                                            <p class="small text-muted mb-1">Status:</p>
-                                            <p class="mb-0 fw-bold"><?= getAccountType($_SESSION['account_type'])[0] ?></p>
-                                        </div>
-                                        <div class="p-2">
-                                            <p class="small text-muted mb-1">Scholarship Type:</p>
-                                            <p class="mb-0 fw-bold"><?= get_scholar_type($_SESSION['scholarType']) ?></p>
-                                        </div>
-                                        <div class="p-2">
-                                            <p class="small text-muted mb-1">Education Level:</p>
-                                            <p class="mb-0 fw-bold"><?= $latestSchoolType ?></p>
-                                        </div>
-                                        <div class="p-2">
-                                            <p class="small text-muted mb-1">Semester:</p>
-                                            <p class="mb-0 fw-bold truncate-text"><?= $currentAy ?></p>
-                                        </div>
+            </div>
+            <!-- status -->
+            <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Dashboard</h5>
+                            <div class="xadjustable-line-spacing" style="margin-top: 5px;">
+                                <div class="d-flex flex-column flex-md-column justify-content-between align-items-start rounded-2 p-2 mb-1" style="background-color: #efefef;">
+                                    <div class="p-2">
+                                        <p class="small text-muted mb-1">Status:</p>
+                                        <p class="mb-0 fw-bold"><?= getAccountType($_SESSION['account_type'])[0] ?></p>
+                                    </div>
+                                    <div class="p-2">
+                                        <p class="small text-muted mb-1">Scholarship Type:</p>
+                                        <p class="mb-0 fw-bold"><?= get_scholar_type($_SESSION['scholarType']) ?></p>
+                                    </div>
+                                    <div class="p-2">
+                                        <p class="small text-muted mb-1">Education Level:</p>
+                                        <p class="mb-0 fw-bold"><?= $latestSchoolType ?></p>
+                                    </div>
+                                    <div class="p-2">
+                                        <p class="small text-muted mb-1">Semester:</p>
+                                        <p class="mb-0 fw-bold truncate-text"><?= $currentAy ?></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <!-- USER'S DASHBOARD -->
             <div class="row">
@@ -182,6 +179,6 @@
                     </div>
                 </div><!-- End Left side columns -->
             </div>
-        </div>
+
     </section>
 </main><!-- End #main -->
