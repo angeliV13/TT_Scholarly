@@ -1105,11 +1105,11 @@ function set_applicant_status($data)
 
     if ($decision == 4)
     {
-        $adminText = $name . "'s scholarship application has been approved.";
+        $adminText = $name . "\'s scholarship application has been approved.";
     }
     else if ($decision == 5)
     {
-        $adminText = $name . "'s scholarship application has been rejected.";
+        $adminText = $name . "\'s scholarship application has been rejected.";
     }
 
     $adEmail = check_exist_multiple($adminEmail, 1);
@@ -1154,6 +1154,12 @@ function set_applicant_status($data)
 
     $updateStatus = update_applicant_status($id, $decision, $date, $endDate, $reason);
     if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
+
+    if ($decision == 4)
+    {
+        $updateType = update_account_type($id, 2);
+        if ($updateType != 'success') return 'Error: ' . $updateType;
+    }
 
     return 'success';
 }

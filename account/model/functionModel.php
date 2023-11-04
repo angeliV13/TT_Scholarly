@@ -1542,6 +1542,17 @@ function update_account_status($id, $status)
     $conn->rollback();
 }
 
+function update_account_type($id, $type)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE account SET account_type = " . $type . " WHERE id = " . $id;
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+    $conn->rollback();
+}
+
 function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'queryPath' => '', 'errorValidation' => ['0' => 'Invalid File Type']])
 {
     if ($file != "") 
