@@ -1967,8 +1967,7 @@ function getRequirementDesc($reqId){
 
     if($query->num_rows <> 0){
         while($row = $query->fetch_assoc()){
-            extract($row);
-            $data = $requirement_name;
+            $data = $row['requirement_name'];
         }
     }
     return ($data);
