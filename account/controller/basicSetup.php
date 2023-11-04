@@ -180,12 +180,13 @@ if (isset($_REQUEST['action']))
             $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
             $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
             $time       = $_POST['time'];
+            $end_time   = $_POST['end_time'];
             $shs        = $_POST['shs'];
             $colEAPub   = $_POST['colEAPub'];
             $colEAPriv  = $_POST['colEAPriv'];
             $colSc      = $_POST['colSc'];
 
-            echo addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $colSc);
+            echo addSetExam($startDate, $endDate, $time, $end_time, $shs, $colEAPub, $colEAPriv, $colSc);
 
             break;
         case 4.2:                           //Update Exam Date
@@ -194,13 +195,14 @@ if (isset($_REQUEST['action']))
                 $id         = $_POST['id'];
                 $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
+                $end_time   = $_POST['end_time'];
                 $time       = $_POST['time'];
                 $shs        = $_POST['shs'];
                 $colEAPub   = $_POST['colEAPub'];
                 $colEAPriv  = $_POST['colEAPriv'];
                 $colSc      = $_POST['colSc'];
 
-                echo editSetExam($id, $startDate, $time, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
+                echo editSetExam($id, $startDate, $time, $end_time, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
             }
 
             break;

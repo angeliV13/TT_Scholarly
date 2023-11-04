@@ -901,10 +901,7 @@ function account_credentials($type)
 function sms_verification($contact, $msg) // function that sends an OTP to the user's contact number
 {
     require_once('../vendor/autoload.php');
-
-
     include("dbconnection.php");
-
 
     $sql = "SELECT sid, token, number FROM sms_config";
     $query = $conn->query($sql);
@@ -913,25 +910,16 @@ function sms_verification($contact, $msg) // function that sends an OTP to the u
     $row = $query->fetch_assoc();
     $sid = $row['sid'];
     $token = $row['token'];
-    $twilio_number = $row['number'];
-
-    echo $sid . "<br>";
-    echo $token . "<br>";
-    echo $twilio_number . "<br>";
-
+    $twilioNumber = $row['number'];
 
     $client = new Twilio\Rest\Client($sid, $token);
 
-
     $send_number = $contact; // Add Number to Send To
-    $twilio_number = $twilio_number; // Add Your registered Twilio Number
-
+    $twilio_number = $twilioNumber; // Add Your registered Twilio Number
 
     $client->messages->create(
 
-
         $send_number,
-
 
         array(
             'from' => $twilio_number,
@@ -1428,6 +1416,8 @@ function check_status($id)
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
+    $status = ($_SESSION['account_type'] == 2) ? 3 : 0;
+
     $data = [];
 
     do
@@ -1446,7 +1436,7 @@ function check_status($id)
         }
         else
         {
-            $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, account_type, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', NOW())";
+            $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, account_type, status, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', '" . $status . "' NOW())";
             $query = $conn->query($sql);
         }
 
@@ -1546,6 +1536,17 @@ function update_account_status($id, $status)
     include("dbconnection.php");
 
     $sql = "UPDATE account SET account_status = " . $status . " WHERE id = " . $id;
+    $query = $conn->query($sql);
+
+    return ($query) ? "success" : $conn->error;
+    $conn->rollback();
+}
+
+function update_account_type($id, $type)
+{
+    include("dbconnection.php");
+
+    $sql = "UPDATE account SET account_type = " . $type . " WHERE id = " . $id;
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;
@@ -1913,7 +1914,7 @@ function getSchoolsDetailsArray($blank, $school_type, $class_type, $partner){
 
     include("dbconnection.php");
 
-    ($blank == 1) ? $data = [['0', '--']] : $data = [];
+    ($blank == 1) ? $data = [['0', '']] : $data = [];
 
     $sql = "SELECT * FROM school";
     if($school_type < 4 || $class_type < 3 || $partner <> 0){
@@ -1965,4 +1966,19 @@ function getApplicantUserId($acadYearId, $semId, $shs, $colEAPub, $colEAPriv, $c
         }
     }
     return($data);
+}
+
+function getRequirementDesc($reqId){
+    include("dbconnection.php");
+
+    $data = "";
+
+    $sql = "SELECT * FROM requirements WHERE id = '{$reqId}'";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    while($row = $query->fetch_assoc()){
+        $data = $row['requirement_name'];
+    }
+    
+    return ($data);
 }

@@ -54,6 +54,69 @@ function getProfile($account_id)
     $scholarTypeName = get_scholar_type($scholarType['scholarType']);
     $scholarStatus = get_scholar_status($scholarType['status']);
 
+    $workingFlag = $ofwFlag = $otherOfw = $pwdFlag = $otherPwd = $selfPwd = $rentFlag = $familyFlag = $honorFlag = $graduatingFlag = $familyFlag = "No";
+    $rentFlag = "Rent";
+
+    if (isset($gen_info['family_flag']))
+    {
+        if ($gen_info['family_flag'] == 0) $familyFlag = "Yes";
+    }
+
+    if (isset($gen_info['rent_flag']))
+    {
+        if ($gen_info['rent_flag'] == 0) $rentFlag = "Rent";
+    }
+
+    if (isset($gen_info['working_flag']))
+    {
+        if ($gen_info['working_flag'] == 0) $workingFlag = "Yes";
+    }
+
+    if (isset($gen_info['ofw_flag']))
+    {
+        if ($gen_info['ofw_flag'] == 0) $ofwFlag = "Yes";
+    }
+
+    if (isset($gen_info['other_ofw']))
+    {
+        if ($gen_info['other_ofw'] == 0) $otherOfw = "Yes";
+    }
+
+    if (isset($gen_info['pwd_flag']))
+    {
+        if ($gen_info['pwd_flag'] == 0) $pwdFlag = "Yes";
+    }
+
+    if (isset($gen_info['other_pwd']))
+    {
+        if ($gen_info['other_pwd'] == 0) $otherPwd = "Yes";
+    }
+
+    if (isset($gen_info['self_pwd_flag']))
+    {
+        if ($gen_info['self_pwd_flag'] == 0) $selfPwd = "Yes";
+    }
+
+    if (isset($gen_info['rent_flag']))
+    {
+        if ($gen_info['rent_flag'] == 0) $rentFlag = "Owned";
+    }
+
+    if (isset($gen_info['family_flag']))
+    {
+        if ($gen_info['family_flag'] == 0) $familyFlag = "Yes";
+    }
+
+    if (isset($gen_info['honor_flag']))
+    {
+        if ($gen_info['honor_flag'] == 0) $honorFlag = "Yes";
+    }
+
+    if (isset($gen_info['graduating_flag']))
+    {
+        if ($gen_info['graduating_flag'] == 0) $graduatingFlag = "Yes";
+    }
+
     $profile = '<div class="row" id="profile">';
     $profile .= '<input type="hidden" id="scholarStatus" value="' . $scholarStatus . '">';
 
@@ -338,11 +401,11 @@ function getProfile($account_id)
                         <!-- FULL NAME -->
                         <div class="col-md-6 position-relative">
                             <label for="inputGraduatingSem" class="form-label">Are you Graduating this Semester/Term?</label>
-                            <input type="text" class="form-control" id="inputGraduatingSem" aria-describedby="inputGraduatingSem" value="' . (isset($gen_info['graduating_flag']) AND $gen_info['graduating_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
+                            <input type="text" class="form-control" id="inputGraduatingSem" aria-describedby="inputGraduatingSem" value="' . $graduatingFlag . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputGraduatingHonors" class="form-label">Are you Graduating with Honors?</label>
-                            <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . (isset($gen_info['honor_flag']) AND $gen_info['honor_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
+                            <input type="text" class="form-control" id="inputGraduatingHonors" aria-describedby="inputGraduatingHonors" value="' . $honorFlag . '" disabled>
                         </div>
                         <div class="col-md-4 position-relative">
                             <label for="inputSpecifyAward" class="form-label">Specify your Award/Honor</label>
@@ -732,7 +795,7 @@ function getProfile($account_id)
                         <!-- GENERAL FAMILY INFORMATION -->
                         <div class="col-md-4 position-relative">
                             <label for="inputLivingFamily" class="form-label">Are you Living with Family?</label>
-                            <input type="text" class="form-control" id="inputLivingFamily" aria-describedby="inputLivingFamily" value="' . (isset($gen_info['family_flag']) AND $gen_info['family_flag'] == 0 ? 'Yes' : 'No') . '" disabled>
+                            <input type="text" class="form-control" id="inputLivingFamily" aria-describedby="inputLivingFamily" value="' . $familyFlag . '" disabled>
                         </div>
                         <div class="col-md-3 position-relative">
                             <label for="inputFamilyTotal" class="form-label">Total number of Family</label>
@@ -748,7 +811,7 @@ function getProfile($account_id)
                         </div>
                         <div class="col-md-5 position-relative">
                             <label for="inputHomeType" class="form-label"> Is your Home Rent or Owned?</label>
-                            <input type="text" class="form-control" id="inputHomeType" aria-describedby="inputHomeType" value="' . (isset($gen_info['rent_flag']) AND $gen_info['rent_flag'] == 0 ? 'Owned' : 'Rent') . '" disabled>
+                            <input type="text" class="form-control" id="inputHomeType" aria-describedby="inputHomeType" value="' . $rentFlag . '" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputRenting" class="form-label"> How much are you paying monthly?</label>
@@ -1165,27 +1228,27 @@ function getProfile($account_id)
                         <!-- WORKING STUDENT -->
                         <div class="col-md-4 position-relative">
                             <label for="inputWorkingStudent" class="form-label">Are you a Working Student?</label>
-                            <input type="text" class="form-control" id="inputWorkingStudent" value="'.(isset($gen_info['working_flag']) AND $gen_info['working_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputWorkingStudent" value="'.$workingFlag.'" disabled>
                         </div>
                         <!---OFW PARENTS -->
                         <div class="col-md-8 position-relative">
                             <label for="inputOfwParents" class="form-label">Do you have a Parent/s who is/are an OFW?</label>
-                            <input type="text" class="form-control" id="inputOfwParents" value="'.(isset($gen_info['ofw_flag']) AND $gen_info['ofw_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputOfwParents" value="'.$ofwFlag.'" disabled>
                         </div>
                         <!--OFW FAMILY MEMBERS -->
                         <div class="col-md-6 position-relative">
                             <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who are an OFW?</label>
-                            <input type="text" class="form-control" id="inputOfwParents" value="'.(isset($gen_info['other_ofw']) AND $gen_info['other_ofw'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputOfwParents" value="'.$otherOfw.'" disabled>
                         </div>
                         <!---PWD PARENTS -->
                         <div class="col-md-6 position-relative">
                             <label for="inputPwdParents" class="form-label">Do you have a Parent/s who have PWD?</label>
-                            <input type="text" class="form-control" id="inputPwdParents" value="'.(isset($gen_info['pwd_flag']) AND $gen_info['pwd_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputPwdParents" value="'.$pwdFlag.'" disabled>
                         </div>
                         <!---PWD FAMILY MEMBERS -->
                         <div class="col-md-6 position-relative">
                             <label for="inputOfwMembers" class="form-label">Do you have other Family member/s who have PWD?</label>
-                            <input type="text" class="form-control" id="inputPwdParents" value="'.(isset($gen_info['other_pwd']) AND $gen_info['other_pwd'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputPwdParents" value="'.$otherPwd.'" disabled>
                         </div>
                         <!---PARENTS STATUS -->
                         <div class="col-md-6 position-relative">
@@ -1195,7 +1258,7 @@ function getProfile($account_id)
                         <!---STUDENT PWD -->
                         <div class="col-md-6 position-relative">
                             <label for="inputStudentPwd" class="form-label">Are you a Student with PWD?</label>
-                            <input type="text" class="form-control" id="inputStudentPwd" value="'.(isset($gen_info['self_pwd_flag']) AND $gen_info['self_pwd_flag'] == 0 ? "Yes" : "No").'" disabled>
+                            <input type="text" class="form-control" id="inputStudentPwd" value="'.$selfPwd.'" disabled>
                         </div>
                     </div>
                 </div>';

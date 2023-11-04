@@ -147,19 +147,23 @@
                     </div>
                     <div class="row d-flex align-items-center mb-2">
                         <label for="examAddQuestion" class="form-label col-3">Question</label>
-                        <textarea class="form-control col" rows="2" id="examAddQuestion" aria-describedby="examAddQuestion" name="examAddQuestion">
-                        </textarea>
+                        <div class="col">
+                            <textarea class="form-control" rows="2" id="examAddQuestion" aria-describedby="examAddQuestion" name="examAddQuestion"></textarea>
+                        </div>
                     </div>
                     <div class="row d-flex align-items-center mb-2">
                         <label for="examAddChoices" class="form-label col-3">Choices</label>
-                        <textarea class="form-control col" rows="3" id="examAddChoices" aria-describedby="examAddChoices" name="examAddChoices">
-
-                        </textarea>
+                        <div class="col">
+                            <textarea class="form-control" rows="3" id="examAddChoices" aria-describedby="examAddChoices" name="examAddChoices"></textarea>
+                            <label for="examAddChoices" class="form-label small fst-italic">Choices should be separated by a new line</label>
+                        </div>
                     </div>
                     <div class="row d-flex align-items-center mb-2">
                         <label for="examAddAnswer" class="form-label col-3">Answer</label>
-                        <select class="form-select col" id="examAddAnswer" aria-label="Default select example">
-                        </select>
+                        <div class="col">
+                            <select class="form-select col" id="examAddAnswer" aria-label="Default select example">
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

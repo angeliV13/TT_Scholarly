@@ -28,14 +28,13 @@
                                 </a>
                             </div>
                             <!--  Report Content -->
-                            <div id="genrep_applicant" class="card-body collapse">
+                            <div id="genrep_applicant" class="card-body collapse show">
                                 <div class="col-lg-12">
                                     <!-- Filter options -->
                                     <div class="row mb-1 mt-2 justify-content-between">
-                                        <div class="column position-relative">
-
+                                        <div>
                                             <!-- REPORT  -->
-                                            <div class="row col-sm-12 mb-3">
+                                            <div class="row d-flex col-sm-12 mb-3">
                                                 <label for="app_generate" class="col-sm-12 col-form-label">Generate:</label>
                                                 <div class="col-sm-12">
                                                     <select class="form-select" id="app_generate" required> 
@@ -43,16 +42,17 @@
                                                         <option value="1">Applicant Report</option>
                                                         <option value="2">Beneficiaries Report</option>
                                                         <option value="3">Graduates Report</option>
+                                                        <option value="4">Examination Report</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <!-- Filter for Applicant / Beneficiaries / Graduates -->
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
+                                        <div class="row d-flex justify-content-between">
+                                            <!-- <div class="col-md-6"> -->
                                                 <!-- Academic Year -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_ay" class="col-sm-12 col-form-label">Academic Year:</label>
                                                     <div class="col-sm-12">
                                                         <select class="form-select" id="app_ay">
@@ -62,7 +62,7 @@
                                                 </div>
 
                                                 <!-- Semester -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_sem" class="col-sm-12 col-form-label">Semester:</label>
                                                     <div class="col-sm-12">
                                                         <select class="form-select" id="app_sem">
@@ -74,7 +74,7 @@
                                                 </div>
 
                                                 <!-- Scholarship Type -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_scholarType" class="col-sm-12 col-form-label">Scholarship Type:</label>
                                                     <div class="col-sm-12">
                                                         <select class="form-select" id="app_scholarType">
@@ -86,7 +86,7 @@
                                                 </div>
 
                                                 <!-- Education Level -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_educLevel" class="col-sm-12 col-form-label font-bold">Educational Level:</label>
                                                     <div class="col-sm-12">
                                                         <select class="form-select" id="app_educLevel">
@@ -97,11 +97,11 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
+                                            <!-- </div>
+                                            <div class="col-md-6"> -->
 
                                                 <!-- School Name -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_schoolName" class="col-sm-12 col-form-label font-bold">School Name:</label>
                                                     <div class="col-sm-12">
                                                         <select class="form-select" id="app_SchoolName">
@@ -111,7 +111,7 @@
                                                 </div>
 
                                                 <!-- Year Level -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_yearLevel" class="col-sm-12 col-form-label font-bold">Year Level :</label>
                                                     <div id="yearLevelContainer" class="col-sm-12">
                                                         <select class="form-select" id="app_yearLevel">
@@ -128,7 +128,7 @@
                                                 </div>
 
                                                 <!-- COURSE/STRAND -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_courseStrand" class="col-sm-12 col-form-label font-bold">Course/ Strand:</label>
                                                     <div class="col-sm-12">
                                                         <select class="form-select" id="app_courseStrand">
@@ -148,7 +148,7 @@
                                                 </div>
 
                                                 <!-- Application Status -->
-                                                <div class="row mb-3">
+                                                <div class="col-md-6 row mb-3">
                                                     <label for="app_status" class="col-sm-12 col-form-label">Status:</label>
                                                     <div class="col-sm-12" id="">
                                                         <select class="form-select" id="app_status">
@@ -162,7 +162,7 @@
                                                     </div>
                                                 </div>
 
-                                            </div>
+                                            <!-- </div> -->
                                             <!-- Set Query Filter button -->
                                             <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
                                                 <button id="genrep_list_btn" class="btn btn-sm btn-danger shadow-sm">Generate Report</button>

@@ -39,7 +39,7 @@ $(document).ready(function () {
         scroller: {
             loadingIndicator: false
         },
-        stateSave: false
+        stateSave: false,
     });
 
     let accountStudentManagementTable = $('#accountStudentManagementTable').DataTable({
@@ -87,13 +87,20 @@ $(document).ready(function () {
 
     // MANAGE EXAM -> EXAM QUESTIONS TABLE
     let examQuestionsTable = $('#examQuestionsTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        // "lengthChange": true,
+        // "paging": true,
+        // "searching": true,
+        // "processing": true,
+        // "ordering": true,
+        // "serverSide": false,
+        // "bInfo": true,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -131,13 +138,13 @@ $(document).ready(function () {
 
     // Notification Table
     let notifTable = $('#setNotifTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -175,13 +182,13 @@ $(document).ready(function () {
 
     // School Table
     let schoolTable = $('#schoolTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -218,13 +225,13 @@ $(document).ready(function () {
     });
 
     let collegeNewApplicantTable = $('#collegeNewApplicantTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
         "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -249,6 +256,25 @@ $(document).ready(function () {
             { className: "text-center", "targets": [0] }, 
             { visible: false, targets: [2, 17, 18, 19, 20] }, 
         ],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                collegeNewApplicantTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+                
+                collegeNewApplicantTable.columns(9).search(filterSchool).draw();
+                collegeNewApplicantTable.columns(11).search(filterScholarType).draw();
+                collegeNewApplicantTable.columns(12).search(filterEducationLevel).draw();
+                collegeNewApplicantTable.columns(15).search(filterYearLevel).draw();
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                collegeNewApplicantTable.ajax.reload();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -267,13 +293,13 @@ $(document).ready(function () {
 
     // Website Socials Table
     let socialTable = $('#setWebsiteSocials').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -312,13 +338,13 @@ $(document).ready(function () {
 
     // GRADUATES TABLE
     let graduatesTable = $('#graduatesTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -357,13 +383,13 @@ $(document).ready(function () {
 
     // GRADUATES TABLE
     let graduatingTable = $('#graduatingTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -402,13 +428,13 @@ $(document).ready(function () {
 
     // Benef List Table
     let benefListTable = $('#listOfBeneficiaries').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -425,6 +451,21 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefListTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+                
+                benefListTable.columns(9).search(filterSchool).draw();
+                benefListTable.columns(11).search(filterScholarType).draw();
+                benefListTable.columns(12).search(filterEducationLevel).draw();
+                benefListTable.columns(15).search(filterYearLevel).draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -442,13 +483,13 @@ $(document).ready(function () {
 
     // View Notification Table
     let viewNotif = $('#viewNotifTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -485,13 +526,13 @@ $(document).ready(function () {
     });
 
     let applicantInterviewTable = $('#applicantInterviewTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -513,6 +554,21 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                applicantInterviewTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+
+                applicantInterviewTable.columns(9).search(filterSchool).draw();
+                applicantInterviewTable.columns(11).search(filterScholarType).draw();
+                applicantInterviewTable.columns(12).search(filterEducationLevel).draw();
+                applicantInterviewTable.columns(15).search(filterYearLevel).draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -529,13 +585,13 @@ $(document).ready(function () {
     });
 
     let applicantExamTable = $('#applicantExamination').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -557,6 +613,21 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                applicantExamTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+
+                applicantExamTable.columns(9).search(filterSchool).draw();
+                applicantExamTable.columns(11).search(filterScholarType).draw();
+                applicantExamTable.columns(12).search(filterEducationLevel).draw();
+                applicantExamTable.columns(15).search(filterYearLevel).draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -573,13 +644,13 @@ $(document).ready(function () {
     });
 
     let removedApplicantTable = $('#applicantRemovedTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -601,6 +672,21 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                removedApplicantTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+
+                removedApplicantTable.columns(9).search(filterSchool).draw();
+                removedApplicantTable.columns(11).search(filterScholarType).draw();
+                removedApplicantTable.columns(12).search(filterEducationLevel).draw();
+                removedApplicantTable.columns(15).search(filterYearLevel).draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -617,13 +703,13 @@ $(document).ready(function () {
     });
 
     let benefAssessTable = $('#benefAssessmentTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -645,6 +731,21 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefAssessTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+
+                benefAssessTable.columns(9).search(filterSchool).draw();
+                benefAssessTable.columns(11).search(filterScholarType).draw();
+                benefAssessTable.columns(12).search(filterEducationLevel).draw();
+                benefAssessTable.columns(15).search(filterYearLevel).draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -661,13 +762,13 @@ $(document).ready(function () {
     });
 
     let benefRenewTable = $('#benefRenewTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -689,6 +790,21 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefRenewTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+
+                benefRenewTable.columns(9).search(filterSchool).draw();
+                benefRenewTable.columns(11).search(filterScholarType).draw();
+                benefRenewTable.columns(12).search(filterEducationLevel).draw();
+                benefRenewTable.columns(15).search(filterYearLevel).draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -705,13 +821,13 @@ $(document).ready(function () {
     });
 
     let benefRemovedTable = $('#benefRemovedTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -733,6 +849,21 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefRemovedTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel").val();
+
+                benefRemovedTable.columns(9).search(filterSchool).draw();
+                benefRemovedTable.columns(11).search(filterScholarType).draw();
+                benefRemovedTable.columns(12).search(filterEducationLevel).draw();
+                benefRemovedTable.columns(15).search(filterYearLevel).draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -749,13 +880,13 @@ $(document).ready(function () {
     });
 
     let officialTable = $('#setWebsiteOfficials').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -792,13 +923,13 @@ $(document).ready(function () {
     });
 
     let testimonialTable = $('#setWebsiteAlumni').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
