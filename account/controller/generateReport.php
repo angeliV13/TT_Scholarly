@@ -53,6 +53,19 @@ if (isset($_REQUEST['action']))
         ];
         echo createTable($report = 3, $data = $data);
         break;
+        case 4: //Examination generate report
+            $data = [
+                "Academic Year"     => (isset($_POST['ay'])           ? $_POST['ay']          : ''),
+                "Semester"          => (isset($_POST['sem'])          ? $_POST['sem']         : ''),
+                "Scholar Type"      => (isset($_POST['scholarType'])  ? $_POST['scholarType'] : ''),
+                "Educational Level" => (isset($_POST['educLevel'])    ? $_POST['educLevel']   : ''),
+                "School Name"       => (isset($_POST['schoolName'])   ? $_POST['schoolName']  : ''),
+                "Year Level"        => (isset($_POST['yearLevel'])    ? $_POST['yearLevel']   : ''),
+                "Course Strand"     => (isset($_POST['courseStrand']) ? $_POST['courseStrand']: ''),
+                "Status"            => (isset($_POST['status'])       ? $_POST['status']      : ''),
+        ];
+        echo createTable($report = 3, $data = $data);
+        break;
     }
 }
 

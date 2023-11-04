@@ -46,7 +46,7 @@ $(document).ready(function () {
 
     // Check if the Action is for generating
     // Applicant, Beneficiary or Graduating Data
-    if(action <= 3){
+    if(action <= 4){
       let ay = $("#app_ay option:selected").text();
       let sem = $("#app_sem option:selected").text();
       let scholarType = $("#app_scholarType option:selected").text();
@@ -55,6 +55,10 @@ $(document).ready(function () {
       let yearLevel = $("#app_yearLevel option:selected").text();
       let courseStrand = $("#app_courseStrand option:selected").val(); // ?
       let status = $("#app_status option:selected").val(); //?
+
+      if(action == 4){
+        let status = $("#app_status option:selected").text();
+      }
 
       $.ajax({
         type: "POST",
@@ -95,6 +99,7 @@ $(document).ready(function () {
     }else{
 
     }
+    $("#genrep_applicant").removeClass('show');
   });
 
   // $("#genrep_bene_btn").on("click", function (e) {
@@ -188,6 +193,70 @@ $(document).ready(function () {
   //     },
   //   });
   // });
+
+  $("#app_generate").on("change", function (e) {
+    let choice =  $("#app_generate option:selected").val();
+    console.log(choice);
+    switch(choice){
+      case '1':
+        $('#app_status')
+          .find('option')
+          .remove()
+          .end()
+          .append('<option selected value="">--</option>' 
+                + '<option value="whatever">Complete Requirements</option>' 
+                + '<option value="whatever">Incomplete Requirements</option>' 
+                + '<option value="whatever">Disqualified</option>' 
+                + '<option value="whatever">Approved</option>' 
+                );
+        break;
+      case '2':
+        $('#app_status')
+          .find('option')
+          .remove()
+          .end()
+          .append('<option selected value="">--</option>' 
+                + '<option value="0">Not yet Assessed</option>' 
+                + '<option value="1">For Renewal</option>' 
+                + '<option value="2">For Assessment</option>' 
+                + '<option value="3">Removed</option>' 
+                + '<option value="4">Current</option>' 
+                + '<option value="5">Transferred</option>' 
+                + '<option value="6">Did not submit requirements</option>' 
+                + '<option value="7">Waiting for Grades</option>' 
+                );
+        break;
+      case '3':
+        $('#app_status')
+          .find('option')
+          .remove()
+          .end()
+          .append('<option selected value="">--</option>' 
+                + '<option value="0">Graduating</option>' 
+                + '<option value="1">Graduated</option>' 
+                );
+        break;
+      case '4':
+        $('#app_status')
+          .find('option')
+          .remove()
+          .end()
+          .append('<option selected value="">--</option>' 
+                + '<option value="0">Passed</option>' 
+                + '<option value="1">Failed</option>' 
+                );
+        break;
+      default:
+        $('#app_status')
+          .find('option')
+          .remove()
+          .end()
+          .append('<option selected value="">--</option>' 
+                );
+    }
+    
+  });
+
 });
 
 function reportTable(data, title) {
