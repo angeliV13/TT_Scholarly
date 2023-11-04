@@ -1956,3 +1956,20 @@ function getApplicantUserId($acadYearId, $semId, $shs, $colEAPub, $colEAPriv, $c
     }
     return($data);
 }
+
+function getRequirementDesc($reqId){
+    include("dbconnection.php");
+
+    $data = "";
+
+    $sql = "SELECT * FROM requirements WHERE id = '{$reqId}'";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if($query->num_rows <> 0){
+        while($row = $query->fetch_assoc()){
+            extract($row);
+            $data = $requirement_name;
+        }
+    }
+    return ($data);
+}
