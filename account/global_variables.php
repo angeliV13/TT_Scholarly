@@ -1,7 +1,7 @@
 <?php
 
 $religionArr = ['0' => 'Roman Catholic', '1' => 'Islam', '2' => 'Iglesia ni Cristo', '3' => 'Born Again', '4' => 'Others', '5' => 'Prefer Not to Say'];
-$genderArr = ['0' => 'Male', '1' => 'Female', '2' => 'Nonbinary', '3' => 'Others', '4' => 'Prefer Not to Say'];
+$genderArr = ['0' => 'Male', '1' => 'Female'];
 $civilArr = ['0' => 'Single', '1' => 'Married', '2' => 'Widowed', '3' => 'Separated', '4' => 'Prefer Not to Say'];
 $citizenshipArr = ['0' => 'Filipino', '1' => 'Others'];
 $educAttainment = ['0' => 'Elementary', '1' => 'Junior High School', '2' => 'Senior High School', '3' => 'College', '4' => 'Vocational', '5' => 'Post Graduate'];
