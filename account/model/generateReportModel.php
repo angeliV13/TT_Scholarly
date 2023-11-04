@@ -95,8 +95,8 @@ function createTable($report, $data)
                         $tableRow[$key] = ($school_name <> 'No data found') ? $school_name : $field;
                         break;
                     case '12':
-                        $school_classification = get_school_classification($field);
-                        $tableRow[$key] = ($school_classification <> 'No data found') ? $school_classification : $field;
+                        $school_course = get_course_name($field);
+                        $tableRow[$key] = ($school_course <> 'No data found') ? $school_course : $field;
                         break;
                     default:
                         $tableRow[$key] = $field;
