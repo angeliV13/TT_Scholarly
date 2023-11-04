@@ -707,8 +707,12 @@ function getSetExamTable()
                                             <input type="date" class="form-control col" id="examEndDate_' . $id . '" aria-describedby="examEndDate" name="examEndDate" value="' . $end_date . '">
                                         </div>
                                         <div class="row d-flex align-items-center mb-2">
-                                            <label for="examTime" class="form-label col-3">Exam Time</label>
+                                            <label for="examTime" class="form-label col-3">Exam Start Time</label>
                                             <input type="time" class="form-control col" id="examTime_' . $id . '" aria-describedby="examTime" name="examTime" value="' . $time . '">
+                                        </div>
+                                        <div class="row d-flex align-items-center mb-2">
+                                            <label for="examEndTime" class="form-label col-3">Exam End Time</label>
+                                            <input type="time" class="form-control col" id="examEndTime_' . $id . '" aria-describedby="examEndTime" name="examEndTime" value="' . $time . '">
                                         </div>
                                         <div class="row d-flex align-items-center mb-2">
                                             <label for="examStartDate" class="form-label col-3">Audience</label>
@@ -753,6 +757,7 @@ function getSetExamTable()
                 $start_date,
                 $end_date,
                 $time,
+                $end_time,
                 getAudience($shs, $colEAPub, $colEAPriv, $colSc),
                 accountHandlerAccess(1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
                 accountHandlerAccess(1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
@@ -773,7 +778,7 @@ function getSetExamTable()
     echo json_encode($json_data);  // send data as json format
 }
 
-function addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $colSc)
+function addSetExam($startDate, $endDate, $time, $end_time, $shs, $colEAPub, $colEAPriv, $colSc)
 {
     include("dbconnection.php");
 
@@ -786,8 +791,8 @@ function addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $c
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
 
-    $sql = "INSERT INTO set_exam (`id`, `ay_id`, `sem_id`, `start_date`, `end_date`, `time`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
-            VALUES (NULL, '" . $acadYearId . "', '" . $semId . "',  '" . $startDate . "', '" . $endDate . "','" . $time . "', " . $shs . "," . $colEAPub . "," . $colEAPriv . "," . $colSc . ", '" . $sessionId . "', '" . $date . "', '" . $sessionId . "', '" . $date . "')";
+    $sql = "INSERT INTO set_exam (`id`, `ay_id`, `sem_id`, `start_date`, `end_date`, `time`, `end_time`, `shs`, `colEAPub`, `colEAPriv`, `colSc`, `created_by`, `created_date`, `modified_by`, `modified_date`) 
+            VALUES (NULL, '" . $acadYearId . "', '" . $semId . "',  '" . $startDate . "', '" . $endDate . "','" . $time . "' ,'" . $end_time . "', " . $shs . "," . $colEAPub . "," . $colEAPriv . "," . $colSc . ", '" . $sessionId . "', '" . $date . "', '" . $sessionId . "', '" . $date . "')";
     $query = $conn->query($sql) or die("Error BSQ016: " . $conn->error);
 
     // return 'Exam Date Added';
@@ -810,7 +815,7 @@ function addSetExam($startDate, $endDate, $time, $shs, $colEAPub, $colEAPriv, $c
 
 }
 
-function editSetExam($id, $startDate, $time, $endDate, $shs, $colEAPub, $colEAPriv, $colSc)
+function editSetExam($id, $startDate, $time, $end_time, $endDate, $shs, $colEAPub, $colEAPriv, $colSc)
 {
     include("dbconnection.php");
 
@@ -823,6 +828,7 @@ function editSetExam($id, $startDate, $time, $endDate, $shs, $colEAPub, $colEAPr
     $sql = "UPDATE set_exam SET   `start_date`= '" . $startDate . "',
                                         `end_date`= '" . $endDate . "' ,
                                         `time`= '" . $time . "' ,
+                                        `end_time`= '" . $end_time . "' ,
                                         `shs`= " . $shs . " ,
                                         `colEAPub`= " . $colEAPub . " ,
                                         `colEAPriv`= " . $colEAPriv . " ,

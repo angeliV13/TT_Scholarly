@@ -1136,6 +1136,7 @@ function addSetExam() {
   let startDate = $("#examStartDate").val();
   let endDate = $("#examEndDate").val();
   let time = $("#examTime").val();
+  let end_time = $("#examEndTime").val();
   let shs = $("#examShsCheckBox").prop("checked");
   let colEAPub = $("#examColEAPubCheckBox").prop("checked");
   let colEAPriv = $("#examColEAPrivCheckBox").prop("checked");
@@ -1157,6 +1158,7 @@ function addSetExam() {
           startDate: startDate,
           endDate: endDate,
           time: time,
+          end_time: end_time,
           shs: shs,
           colEAPub: colEAPub,
           colEAPriv: colEAPriv,
@@ -1188,6 +1190,7 @@ function updateSetExam(id) {
   let startDate = $("#examStartDate_" + id).val();
   let endDate = $("#examEndDate_" + id).val();
   let time = $("#examTime_" + id).val();
+  let end_time = $("#examEndTime_" + id).val();
   let shs = $("#examShsCheckBox_" + id).prop("checked");
   let colEAPub = $("#examColEAPubCheckBox_" + id).prop("checked");
   let colEAPriv = $("#examColEAPrivCheckBox_" + id).prop("checked");
@@ -1210,6 +1213,7 @@ function updateSetExam(id) {
           startDate: startDate,
           endDate: endDate,
           time: time,
+          end_time: end_time,
           shs: shs,
           colEAPub: colEAPub,
           colEAPriv: colEAPriv,

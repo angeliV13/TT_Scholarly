@@ -87,13 +87,20 @@ $(document).ready(function () {
 
     // MANAGE EXAM -> EXAM QUESTIONS TABLE
     let examQuestionsTable = $('#examQuestionsTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        // "lengthChange": true,
+        // "paging": true,
+        // "searching": true,
+        // "processing": true,
+        // "ordering": true,
+        // "serverSide": false,
+        // "bInfo": true,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -131,13 +138,13 @@ $(document).ready(function () {
 
     // Notification Table
     let notifTable = $('#setNotifTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -175,13 +182,13 @@ $(document).ready(function () {
 
     // School Table
     let schoolTable = $('#schoolTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -218,13 +225,13 @@ $(document).ready(function () {
     });
 
     let collegeNewApplicantTable = $('#collegeNewApplicantTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
         "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -293,13 +300,13 @@ $(document).ready(function () {
 
     // Website Socials Table
     let socialTable = $('#setWebsiteSocials').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -338,13 +345,13 @@ $(document).ready(function () {
 
     // GRADUATES TABLE
     let graduatesTable = $('#graduatesTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -383,13 +390,13 @@ $(document).ready(function () {
 
     // GRADUATES TABLE
     let graduatingTable = $('#graduatingTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -428,13 +435,13 @@ $(document).ready(function () {
 
     // Benef List Table
     let benefListTable = $('#listOfBeneficiaries').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -494,13 +501,13 @@ $(document).ready(function () {
 
     // View Notification Table
     let viewNotif = $('#viewNotifTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -537,13 +544,13 @@ $(document).ready(function () {
     });
 
     let applicantInterviewTable = $('#applicantInterviewTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -607,13 +614,13 @@ $(document).ready(function () {
     });
 
     let applicantExamTable = $('#applicantExamination').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -677,13 +684,13 @@ $(document).ready(function () {
     });
 
     let removedApplicantTable = $('#applicantRemovedTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -747,13 +754,13 @@ $(document).ready(function () {
     });
 
     let benefAssessTable = $('#benefAssessmentTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -817,13 +824,13 @@ $(document).ready(function () {
     });
 
     let benefRenewTable = $('#benefRenewTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -887,13 +894,13 @@ $(document).ready(function () {
     });
 
     let benefRemovedTable = $('#benefRemovedTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -957,13 +964,13 @@ $(document).ready(function () {
     });
 
     let officialTable = $('#setWebsiteOfficials').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -1000,13 +1007,13 @@ $(document).ready(function () {
     });
 
     let testimonialTable = $('#setWebsiteAlumni').DataTable({
-        "lengthChange": false,
-        "paging": false,
+        "lengthChange": true,
+        "paging": true,
         "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
