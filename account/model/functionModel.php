@@ -1976,11 +1976,9 @@ function getRequirementDesc($reqId){
     $sql = "SELECT * FROM requirements WHERE id = '{$reqId}'";
     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
-    if($query->num_rows <> 0){
-        while($row = $query->fetch_assoc()){
-            extract($row);
-            $data = $requirement_name;
-        }
+    while($row = $query->fetch_assoc()){
+        $data = $row['requirement_name'];
     }
+    
     return ($data);
 }

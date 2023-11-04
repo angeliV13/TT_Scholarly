@@ -571,8 +571,8 @@ function getApplicationTable($dashboard = 0)
                         </div>';
         } else {
             $button =   '<div class="btn-group-vertical d-flex">
-                            <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
-                            <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
+                            <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal'. $requirement .'"> View File</button>
+                            <div class="modal fade" id="viewUploadSchoolIdModal'. $requirement .'" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
