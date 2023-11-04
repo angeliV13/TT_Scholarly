@@ -270,6 +270,10 @@ $(document).ready(function () {
                 collegeNewApplicantTable.columns(12).search(filterEducationLevel).draw();
                 collegeNewApplicantTable.columns(15).search(filterYearLevel).draw();
             });
+
+            $(document).on("click", "#filter_reset", function () {
+                collegeNewApplicantTable.ajax.reload();
+            });
         },
         language: {
             processing: "<span class='loader'></span>"
