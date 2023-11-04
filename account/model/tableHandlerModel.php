@@ -558,8 +558,6 @@ function examQuestionsTable()
 
             $totalData++;
         }
-    } else {
-        $data[] = [];
     }
 
     $json_data = array(
