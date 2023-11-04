@@ -64,7 +64,7 @@ if (isset($_REQUEST['action']))
                 "Course Strand"     => (isset($_POST['courseStrand']) ? $_POST['courseStrand']: ''),
                 "Status"            => (isset($_POST['status'])       ? $_POST['status']      : ''),
         ];
-        echo createTable($report = 3, $data = $data);
+        echo createTable($report = 4, $data = $data);
         break;
     }
 }
