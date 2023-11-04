@@ -1292,7 +1292,7 @@
                           <?php endforeach; ?>
                         </select>
                       </div>
-                      
+
                       <div class="col-md-12 position-relative">
                         <label for="fatherOtherOccupation" class="form-label">If Occupation is not in the list,please specify here</label>
                         <input type="text" class="form-control" id="fatherOtherOccupation" aria-describedby="fatherOtherOccupation" name="Father's Other Occupation" <?= $finishFlag ? "disabled" : "" ?> value="<?= $family['father']['occupation'] != "others" ? "" : $family['father']['occupation'] ?>">
@@ -1485,8 +1485,8 @@
                         <label for="motherLivingFlag" class="form-label"> Living or Deceased? </label>
                         <select class="form-select" id="motherLivingFlag" name="Mother's Living Flag" <?= $finishFlag ? "disabled" : "" ?>>
                           <option selected disabled value="">Choose...</option>
-                          <o value="0" <?= $family['mother']['living_flag'] == 0 ? "selected" : "" ?>>Living</option>
-                            <o value="1" <?= $family['mother']['living_flag'] == 1 ? "selected" : "" ?>>Deceased</option>
+                          <option value="0" <?= $family['mother']['living_flag'] == 0 ? "selected" : "" ?>>Living</option>
+                          <option value="1" <?= $family['mother']['living_flag'] == 1 ? "selected" : "" ?>>Deceased</option>
                         </select>
                       </div>
 
