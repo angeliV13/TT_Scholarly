@@ -31,6 +31,8 @@ if (isset($_GET['notif']))
     echo update_notification($_GET['notif'], $_SESSION['id']);
 }
 
+// echo sms_verification('+639606880520', 'Sample Message Test');
+
 ?>
 
   <?php include('includes/main.php') ?>

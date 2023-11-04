@@ -901,10 +901,7 @@ function account_credentials($type)
 function sms_verification($contact, $msg) // function that sends an OTP to the user's contact number
 {
     require_once('../vendor/autoload.php');
-
-
     include("dbconnection.php");
-
 
     $sql = "SELECT sid, token, number FROM sms_config";
     $query = $conn->query($sql);
@@ -913,25 +910,16 @@ function sms_verification($contact, $msg) // function that sends an OTP to the u
     $row = $query->fetch_assoc();
     $sid = $row['sid'];
     $token = $row['token'];
-    $twilio_number = $row['number'];
-
-    echo $sid . "<br>";
-    echo $token . "<br>";
-    echo $twilio_number . "<br>";
-
+    $twilioNumber = $row['number'];
 
     $client = new Twilio\Rest\Client($sid, $token);
 
-
     $send_number = $contact; // Add Number to Send To
-    $twilio_number = $twilio_number; // Add Your registered Twilio Number
-
+    $twilio_number = $twilioNumber; // Add Your registered Twilio Number
 
     $client->messages->create(
 
-
         $send_number,
-
 
         array(
             'from' => $twilio_number,
