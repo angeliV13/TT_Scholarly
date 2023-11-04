@@ -143,6 +143,8 @@ $("#addQuestion").on("click", function () {
                 title: "Success!",
                 icon: "success",
                 html: "Question added successfully",
+              }).then((result) => {
+                location.reload();
               });
             } else {
               Swal.fire({
@@ -198,6 +200,8 @@ function editQuestion(id)
                 title: "Success!",
                 icon: "success",
                 html: "Question chenged successfully",
+              }).then((result) => {
+                location.reload();
               });
             } else {
               Swal.fire({
@@ -241,6 +245,8 @@ function deleteQuestion(id){
               title: "Success!",
               icon: "success",
               html: "Question deleted successfully",
+            }).then((result) => {
+              location.reload();
             });
           } else {
             Swal.fire({
