@@ -128,9 +128,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <object data="uploads/assessment/' . $file . '.pdf" type="application/pdf">>
-                                                        <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                                    </object>
+                                                    <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
                                                 </div>
 
                                             </div>
@@ -154,9 +152,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <object data="uploads/assessment/' . $file . '.pdf" type="application/pdf">>
-                                                        <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
-                                                    </object>
+                                                    <embed id="previewSchoolId" src="uploads/assessment/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
                                                 </div>
 
                                             </div>
@@ -584,7 +580,9 @@ function getApplicationTable($dashboard = 0)
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <embed id="previewSchoolId' . $requirement . '" src="uploads/application/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
+                                        <object data=""uploads/application/' . $file . '.pdf"" type="application/pdf" frameborder="0" width="100%" height="600px"
+                                            <embed id="previewSchoolId' . $requirement . '" src="uploads/application/' . $file . '.pdf" frameborder="0" width="100%" height="400px">
+                                        </object>
                                     </div>
 
                                 </div>
