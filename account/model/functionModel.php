@@ -1903,7 +1903,7 @@ function getSchoolsDetailsArray($blank, $school_type, $class_type, $partner){
 
     include("dbconnection.php");
 
-    ($blank == 1) ? $data = [['0', '--']] : $data = [];
+    ($blank == 1) ? $data = [['0', '']] : $data = [];
 
     $sql = "SELECT * FROM school";
     if($school_type < 4 || $class_type < 3 || $partner <> 0){

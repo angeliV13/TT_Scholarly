@@ -9,7 +9,7 @@
         </div>
         <!-- Filter options -->
         <div class="row mb-1 justify-content-between">
-            <form id="filterScholar" class="column position-relative">
+            <div class="column position-relative">
 
                 <!-- Scholarship Type -->
                 <div class="row mb-3">
@@ -51,9 +51,9 @@
                     </div>
                 </div>
                 <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
-                    <button id="setFilter" class="btn btn-sm btn-danger shadow-sm">Set Query Filter </button>
+                    <button type="button" id="setFilter" class="btn btn-sm btn-danger shadow-sm">Set Query Filter </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

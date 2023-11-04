@@ -7,10 +7,10 @@ if (isset($_REQUEST['action']))
     $action = $_REQUEST['action'];
 
     $data = [
-                "scholarType"       => [['0', '--'], ['1', 'Educational Assitance'], ['2', 'Full Scholarship']],
-                "educationLevel"    => [['0', '--'], ['1', 'Senior High School'], ['2', 'College - Private'], ['3', 'College - Public']],
+                "scholarType"       => [['0', ''], ['1', 'College Scholarship'], ['2', 'College Educational Assistance'], ['3', 'SHS Educational Assistance']],
+                "educationLevel"    => [['0', ''], ['1', 'Senior High School'], ['2', 'College']],
                 "school"            => getSchoolsDetailsArray(1, 4, 3, 0),
-                "yearLevel"         => [['0', '--'], ['1', 'Grade 11'], ['2', 'Grade 12'], ['3', 'First Year'], ['4', 'Second Year'], ['5', 'Third Year'], ['6', 'Fourth Year'], ['7', 'Fifth Year']],
+                "yearLevel"         => [['0', ''], ['11', 'Grade 11'], ['12', 'Grade 12'], ['1', 'First Year'], ['2', 'Second Year'], ['3', 'Third Year'], ['4', 'Fourth Year'], ['5', 'Fifth Year']],
             ];
 
     switch ($action) 
