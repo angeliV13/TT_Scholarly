@@ -273,7 +273,7 @@
                           Please select Yes or No.
                         </div>
                       </div>
-                      <div class="col-md-6 col-sm-12 position-relative grad_waiting">
+                      <div class="col-md-6 col-sm-12 position-relative grad_waiting <?php echo $gen_info['graduating_flag'] <> 0 ? "d-none" : "" ?>">
                         <label for="honor_flag" class="form-label">Are you Graduating with Honors?</label>
                         <?php if ($gen_info != null) : ?>
                           <select class="form-select" name="Graduating with Honor Flag" id="honor_flag" <?= $finishFlag ? "disabled" : "" ?>>
@@ -292,7 +292,7 @@
                           Please select Yes or No.
                         </div>
                       </div>
-                      <div class="col-md-4 col-sm-12 position-relative grad_waiting">
+                      <div class="col-md-4 col-sm-12 position-relative grad_waiting <?php echo $gen_info['graduating_flag'] <> 0 ? "d-none" : "" ?>">
                         <label for="honor_type" class="form-label">Specify your Award/Honor</label>
                         <?php if ($gen_info != null) : ?>
                           <select class="form-select" name="Honor Type" id="honor_type" <?= $finishFlag ? "disabled" : "" ?>>
@@ -305,7 +305,7 @@
                             Please select Awards/Honor.
                           </div>
                       </div>
-                      <div class="col-md-8 col-sm-12 position-relative grad_waiting">
+                      <div class="col-md-8 col-sm-12 position-relative grad_waiting <?php echo $gen_info['graduating_flag'] <> 0 ? "d-none" : "" ?>">
                         <label for="other_honor" class="form-label">Other Honor/Award</label>
                         <input type="text" class="form-control" id="other_honor" name="Other Honor" aria-describedby="other_honor" value="<?= $gen_info['other_honor'] ?>" <?= $finishFlag ? "disabled" : "" ?>>
                       </div>
@@ -320,7 +320,7 @@
                         Please select Awards/Honor.
                       </div>
                     </div>
-                    <div class="col-md-8 col-sm-12 position-relative grad_waiting">
+                    <div class="col-md-8 col-sm-12 position-relative grad_waiting <?php echo $gen_info['graduating_flag'] <> 0 ? "d-none" : "" ?>">
                       <label for="other_honor" class="form-label">If not specified in the list, kindly input your Honor/ Award here.</label>
                       <input type="text" class="form-control" id="other_honor" aria-describedby="other_honor" name="Other Honor">
                     </div>
