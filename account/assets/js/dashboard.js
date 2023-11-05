@@ -107,6 +107,7 @@ $(document).ready(function ($) {
       action: 1,
     },
     success: function (data) {
+      console.log(data);
       if (data != "") {
         let counts = JSON.parse(data);
         $("#totalApplicants").text(counts[0]);

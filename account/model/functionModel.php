@@ -1823,11 +1823,22 @@ function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0)
     }
 }
 
-function getAccounts($account_type, $account_status = 1, $count = 0)
+function getAccounts($account_type, $account_status = 1, $count = 0, $ay_sem = [])
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM account WHERE account_type = '{$account_type}' AND account_status = '{$account_status}' ORDER BY id ASC";
+    $sql = "SELECT * FROM scholarship_application sca
+            JOIN gen_info gin ON sca.userId = gin.user_id  
+                            AND sca.ay_id = gin.ay_id
+                            AND sca.sem_id = gin.sem_id
+            JOIN account acc ON gin.user_id = acc.id
+                AND gin.sem_id = sca.sem_id
+            WHERE sca.account_type ='{$account_type}' 
+            AND acc.account_status = '{$account_status}'
+            AND sca.ay_id = '{$ay_sem['ay']}' 
+            AND sca.sem_id = '{$ay_sem['sem']}'
+            GROUP BY sca.userId
+            ORDER BY acc.id ASC";
     $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
 
     if ($count == 1) 
@@ -1836,14 +1847,16 @@ function getAccounts($account_type, $account_status = 1, $count = 0)
     }
 }
 
-function getGraduating($graduation_year, $account_type, $count = 0)
+function getGraduating($graduation_year, $account_type, $count = 0, $ay_sem = [])
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM account acc 
-            JOIN gen_info gen ON acc.id = gen.user_id 
+    $sql = "SELECT * FROM gen_info gin 
+            JOIN account acc ON gin.user_id = acc.id 
             WHERE acc.account_type = '{$account_type}' 
-            AND gen.graduation_year < '{$graduation_year}';";
+            AND gin.graduation_year < '{$graduation_year}'
+            AND gin.ay_id = '{$ay_sem['ay']}' 
+            AND gin.sem_id = '{$ay_sem['sem']}'";
     $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
 
     if ($count == 1) 
