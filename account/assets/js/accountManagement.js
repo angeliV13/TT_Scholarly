@@ -157,10 +157,11 @@ $("#graduating_flag").on("change click", function(){
     let val = $(this).val();
 
     if (val == 0){
+        // $("#graduation_year").prop("readonly", true);
         // $("#honor_flag").prop("disabled", false);
         // $("#graduation_year").prop("disabled", true);
     } else {
-        // $("#graduation_year").prop("disabled", false);
+        // $("#graduation_year").prop("readonly", false);
         // $("#honor_flag").prop("disabled", true);
         // $("#honor_type").prop("disabled", true);
         // $("#other_honor").prop("disabled", true);

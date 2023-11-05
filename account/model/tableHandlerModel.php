@@ -731,7 +731,6 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             $school = $course = $schoolDetails = "";
 
             $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                        <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2 '.$none.'" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
                         <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
 
             if (isset($education['course']))
@@ -877,7 +876,6 @@ function graduatesTable() //CHECKING CK
             $education  = get_user_education($account_id, 1);
             $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                             <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                            <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Applicant</button>
                         </div>';
             $scholarType = check_status($account_id);
 
@@ -967,7 +965,7 @@ function graduatingTable() // CHECKING CK
             $education  = get_user_education($account_id, 1);
             $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                             <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                            <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2 '.$none.'" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
+                            <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
                             <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Applicant</button>
                         </div>';
             $scholarType = check_status($account_id);

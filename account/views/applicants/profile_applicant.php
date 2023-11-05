@@ -220,10 +220,7 @@
                       <div class="col-md-4 col-6 position-relative">
                         <label for="gender" class="form-label">Gender</label>
                         <select form="benefInfo" name="Gender" class="form-select" id="gender" disabled>
-                          <option selected disabled value="">Choose...</option>
-                          <?php for ($i = date("Y"); $i <= date("Y") + 5; $i++) : ?>
-                            <option value="<?php echo $i ?>" <?php echo $gen_info['graduation_year'] == $i ? "selected" : "" ?>><?php echo $i ?></option>
-                          <?php endfor; ?>
+                          <option value="<?php echo $genderArr[$user_info['gender']] ?>"><?php echo $genderArr[$user_info['gender']] ?></option>
                         </select>
                         <div class="invalid-tooltip">
                           Please select a valid Gender.
@@ -234,10 +231,7 @@
                       <div class="col-md-4 col-6 position-relative">
                         <label for="civil_status" class="form-label">Civil Status</label>
                         <select form="benefInfo" name="Civil Status" class="form-select" id="civil_status" disabled>
-                          <option selected disabled value="">Choose...</option>
-                          <?php for ($i = date("Y"); $i <= date("Y") + 5; $i++) : ?>
-                            <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                          <?php endfor; ?>
+                          <option value="<?php echo $civilArr[$user_info['civil_status']] ?>"><?php echo $civilArr[$user_info['civil_status']] ?></option>
                         </select>
                         <div class="invalid-tooltip">
                           Please select a valid Civil Status.
@@ -1222,7 +1216,7 @@
                     </div>
                   </div>
                   <!-- FATHER'S INFORMATION -->
-                  <?php if ($family != null) : ?>
+                  <?php if (isset($family['father'])) : ?>
                     <div class="row g-4">
                       <h5 class="card-title p-2">Father's Information</h5>
                       <!-- FULL NAME -->
@@ -1430,7 +1424,7 @@
                   <?php endif; ?>
 
                   <!-- MOTHER'S INFORMATION -->
-                  <?php if ($family != null) : ?>
+                  <?php if (isset($family['mother'])) : ?>
                     <div class="row g-3">
                       <h5 class="card-title p-2 pt-5">Mother's Information</h5>
                       <!-- FULL NAME -->

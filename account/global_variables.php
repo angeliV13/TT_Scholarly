@@ -56,7 +56,7 @@ if (isset($_SESSION))
     $defaultSem = getDefaultSemesterId();
     $defaultAy = getDefaultAcadYearId();
 
-    if ($_SESSION['account_type'] > 2)
+    if ($_SESSION['account_type'] >= 2)
     {
         $status = check_status($_SESSION['id']);
         if ($status != null) $finishFlag = ($status['status'] > 0) ? true : false;
