@@ -868,9 +868,6 @@ function graduatesTable() //CHECKING CK
     {
         while ($row = $query->fetch_assoc()) 
         {
-            $education  = get_user_education($account_id, 1);
-            $scholarType = check_status($account_id);
-
             extract($row);
 
             $education  = get_user_education($account_id, 1);
