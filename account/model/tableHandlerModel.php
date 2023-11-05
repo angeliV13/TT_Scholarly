@@ -854,10 +854,10 @@ function graduatesTable() //CHECKING CK
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
     $sql = "SELECT * FROM account acc 
-            JOIN user_info inf ON acc.id = inf.account_id 
-            JOIN gen_info gen ON acc.id = user_id
+            LEFT JOIN user_info inf ON acc.id = inf.account_id 
+            LEFT JOIN gen_info gen ON acc.id = user_id
             WHERE acc.account_type IN (2,3)
-            AND acc.account_status = '4'";
+            AND acc.account_status = '2'";
     $query = $conn->query($sql);
 
     $data = [];

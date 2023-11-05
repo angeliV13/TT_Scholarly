@@ -1398,11 +1398,11 @@ function deleteAccount($data)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM account WHERE id = '{$data['id']}'";
+    // $sql = "SELECT * FROM account WHERE id = '{$data['id']}'";
 
     // SQL SHOULD BE CHANGED
-    // $sql = "UPDATE `account_status`= '{$data['accountStatus']}' 
-    //         WHERE id = {$data['id']}";
+    $sql = "UPDATE `account_status`= '4' 
+            WHERE id = {$data['id']} LIMIT 1";
     $query = $conn->query($sql) or die($conn->error);
 
     if($query)
@@ -1491,7 +1491,7 @@ function updateToGraduate($id)
 {
     include("dbconnection.php");
 
-    $sql = "UPDATE account SET account_status = '4' WHERE id = '$id' LIMIT 1";
+    $sql = "UPDATE account SET account_status = '2' WHERE id = '$id' LIMIT 1";
     $query = $conn->query($sql);
 
     return ($query) ? 'success' : 'Error: ' . $conn->error;
