@@ -1447,3 +1447,53 @@ $(document).on("click", ".updateToGraduate", function(){
         }
     })
 })
+
+$(document).on("click", ".undoGraduate", function(){
+    let id = $(this).attr("data-id");
+    let status = $(this).attr("data-status");
+    
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Undoing this action will revert this user to its previous status. You cannot undo this action.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                    action: 27,
+                    id: id,
+                    status: status
+                },
+                beforeSend: function () {
+                    showBeforeSend("Undoing Update Request...");
+                },
+                success: function (data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Undo Request has been successful!",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `An error occured while undoing request. Please try again. Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+})

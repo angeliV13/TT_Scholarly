@@ -870,13 +870,16 @@ function graduatesTable() //CHECKING CK
         {
             extract($row);
 
+            $school = $course = $schoolDetails = $scholarStatus = "";
+            $scholarType = check_status($account_id);
+            if (isset($scholarType['scholarType'])) $scholarStatus = $scholarType['status'];
+
             $education  = get_user_education($account_id, 1);
             $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
-                            <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                            <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                            <button id="undoGraduate" type="button" class="undoGraduate btn btn-info" data-id="' . $account_id . ' data-status="' . $scholarStatus . '">Undo Graduate</button>
                         </div>';
-            $scholarType = check_status($account_id);
 
-            $school = $course = $schoolDetails = "";
 
             if (isset($education['course']))
             {

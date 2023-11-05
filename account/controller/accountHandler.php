@@ -282,6 +282,15 @@ if (isset($_REQUEST['action']))
     {
         echo updateToGraduate(isset($_POST['id']) ? $_POST['id'] : '');
     }
+    else if ($action == 27) // Undo Graduate
+    {
+        $data = [
+            'id'            => isset($_POST['id'])          ? $_POST['id'] : '',
+            'status'        => isset($_POST['status'])      ? $_POST['status'] : '',
+        ];
+
+        echo undoGraduate($data);
+    }
 }
 
 
