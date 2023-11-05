@@ -881,11 +881,11 @@ function graduatesTable() //CHECKING CK
 
             $school = $course = $schoolDetails = "";
 
-            if (isset($education[1]['course']))
+            if (isset($education['course']))
             {
-                if (is_numeric($education[1]['course']))
+                if (is_numeric($education['course']))
                 {
-                    $course = get_education_courses('', $education[1]['course']);
+                    $course = get_education_courses('', $education['course']);
                 }
                 else
                 {
@@ -893,15 +893,15 @@ function graduatesTable() //CHECKING CK
                 }
             }
 
-            if (isset($education[1]['school']))
+            if (isset($education['school']))
             {
-                if (is_numeric($education[1]['school']))
+                if (is_numeric($education['school']))
                 {
-                    $schoolDetails = get_school_name($education[1]['school']);
+                    $schoolDetails = get_school_name($education['school']);
                 }
                 else
                 {
-                    $school = $education[1]['school'];
+                    $school = $education['school'];
                 }
             }
 
@@ -972,11 +972,11 @@ function graduatingTable() // CHECKING CK
 
             $school = $course = $schoolDetails = "";
 
-            if (isset($education[1]['course']))
+            if (isset($education['course']))
             {
-                if (is_numeric($education[1]['course']))
+                if (is_numeric($education['course']))
                 {
-                    $course = get_education_courses('', $education[1]['course']);
+                    $course = get_education_courses('', $education['course']);
                 }
                 else
                 {
@@ -984,11 +984,11 @@ function graduatingTable() // CHECKING CK
                 }
             }
 
-            if (isset($education[1]['school']))
+            if (isset($education['school']))
             {
-                if (is_numeric($education[1]['school']))
+                if (is_numeric($education['school']))
                 {
-                    $schoolDetails = get_school_name($education[1]['school']);
+                    $schoolDetails = get_school_name($education['school']);
                 }
                 else
                 {
