@@ -272,7 +272,11 @@ $(document).ready(function () {
             });
 
             $(document).on("click", "#filter_reset", function () {
-                collegeNewApplicantTable.ajax.reload();
+                // remove the filter values in the table data
+                collegeNewApplicantTable.columns(9).search("").draw();
+                collegeNewApplicantTable.columns(11).search("").draw();
+                collegeNewApplicantTable.columns(12).search("").draw();
+                collegeNewApplicantTable.columns(15).search("").draw();
             });
         },
         language: {
