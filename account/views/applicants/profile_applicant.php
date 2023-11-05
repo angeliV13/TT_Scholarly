@@ -273,7 +273,7 @@
                           Please select Yes or No.
                         </div>
                       </div>
-                      <div class="col-md-6 col-sm-12 position-relative">
+                      <div class="col-md-6 col-sm-12 position-relative grad_waiting">
                         <label for="honor_flag" class="form-label">Are you Graduating with Honors?</label>
                         <?php if ($gen_info != null) : ?>
                           <select class="form-select" name="Graduating with Honor Flag" id="honor_flag" <?= $finishFlag ? "disabled" : "" ?>>
