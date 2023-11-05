@@ -1851,12 +1851,13 @@ function getGraduating($graduation_year, $account_type, $count = 0, $ay_sem = []
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM gen_info gin 
-            JOIN account acc ON gin.user_id = acc.id 
-            WHERE acc.account_type = '{$account_type}'
+    $sql = "SELECT * FROM account acc 
+            JOIN user_info inf ON acc.id = inf.account_id 
+            JOIN gen_info gin ON acc.id = gin.user_id
+            WHERE acc.account_type IN (2,3) 
+            AND acc.account_status = '1'
             AND gin.graduating_flag = '0'
-            -- AND gin.graduation_year <= '{$graduation_year}'
-            AND gin.ay_id = '{$ay_sem['ay']}' 
+            AND gin.ay_id = '{$ay_sem['ay']}'
             AND gin.sem_id = '{$ay_sem['sem']}'";
     $query = $conn->query($sql) or die("Error URQ007: " . $conn->error);
 
