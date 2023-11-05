@@ -995,9 +995,7 @@ function graduatingTable() // CHECKING CK
 
             $data[] = [
                 static_count(),
-                $last_name,
-                $first_name,
-                $middle_name,
+                $last_name . ", " . $first_name . " " . $middle_name,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : $school, //School Name,
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
