@@ -272,7 +272,6 @@ $(document).ready(function () {
             });
 
             $(document).on("click", "#filter_reset", function () {
-                // remove the filter values in the table data
                 collegeNewApplicantTable.columns(9).search("").draw();
                 collegeNewApplicantTable.columns(11).search("").draw();
                 collegeNewApplicantTable.columns(12).search("").draw();
@@ -469,6 +468,13 @@ $(document).ready(function () {
                 benefListTable.columns(12).search(filterEducationLevel).draw();
                 benefListTable.columns(15).search(filterYearLevel).draw();
             });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefListTable.columns(9).search("").draw();
+                benefListTable.columns(11).search("").draw();
+                benefListTable.columns(12).search("").draw();
+                benefListTable.columns(15).search("").draw();
+            });
         },
         language: {
             processing: "<span class='loader'></span>"
@@ -572,6 +578,13 @@ $(document).ready(function () {
                 applicantInterviewTable.columns(12).search(filterEducationLevel).draw();
                 applicantInterviewTable.columns(15).search(filterYearLevel).draw();
             });
+
+            $(document).on("click", "#filter_reset", function () {
+                applicantInterviewTable.columns(9).search("").draw();
+                applicantInterviewTable.columns(11).search("").draw();
+                applicantInterviewTable.columns(12).search("").draw();
+                applicantInterviewTable.columns(15).search("").draw();
+            });
         },
         language: {
             processing: "<span class='loader'></span>"
@@ -630,6 +643,13 @@ $(document).ready(function () {
                 applicantExamTable.columns(11).search(filterScholarType).draw();
                 applicantExamTable.columns(12).search(filterEducationLevel).draw();
                 applicantExamTable.columns(15).search(filterYearLevel).draw();
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                applicantExamTable.columns(9).search("").draw();
+                applicantExamTable.columns(11).search("").draw();
+                applicantExamTable.columns(12).search("").draw();
+                applicantExamTable.columns(15).search("").draw();
             });
         },
         language: {
@@ -690,6 +710,13 @@ $(document).ready(function () {
                 removedApplicantTable.columns(12).search(filterEducationLevel).draw();
                 removedApplicantTable.columns(15).search(filterYearLevel).draw();
             });
+
+            $(document).on("click", "#filter_reset", function () {
+                removedApplicantTable.columns(9).search("").draw();
+                removedApplicantTable.columns(11).search("").draw();
+                removedApplicantTable.columns(12).search("").draw();
+                removedApplicantTable.columns(15).search("").draw();
+            });
         },
         language: {
             processing: "<span class='loader'></span>"
@@ -748,6 +775,13 @@ $(document).ready(function () {
                 benefAssessTable.columns(11).search(filterScholarType).draw();
                 benefAssessTable.columns(12).search(filterEducationLevel).draw();
                 benefAssessTable.columns(15).search(filterYearLevel).draw();
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefAssessTable.columns(9).search("").draw();
+                benefAssessTable.columns(11).search("").draw();
+                benefAssessTable.columns(12).search("").draw();
+                benefAssessTable.columns(15).search("").draw();
             });
         },
         language: {
@@ -808,6 +842,13 @@ $(document).ready(function () {
                 benefRenewTable.columns(12).search(filterEducationLevel).draw();
                 benefRenewTable.columns(15).search(filterYearLevel).draw();
             });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefRenewTable.columns(9).search("").draw();
+                benefRenewTable.columns(11).search("").draw();
+                benefRenewTable.columns(12).search("").draw();
+                benefRenewTable.columns(15).search("").draw();
+            });
         },
         language: {
             processing: "<span class='loader'></span>"
@@ -866,6 +907,13 @@ $(document).ready(function () {
                 benefRemovedTable.columns(11).search(filterScholarType).draw();
                 benefRemovedTable.columns(12).search(filterEducationLevel).draw();
                 benefRemovedTable.columns(15).search(filterYearLevel).draw();
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefRemovedTable.columns(9).search("").draw();
+                benefRemovedTable.columns(11).search("").draw();
+                benefRemovedTable.columns(12).search("").draw();
+                benefRemovedTable.columns(15).search("").draw();
             });
         },
         language: {
