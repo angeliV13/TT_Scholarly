@@ -1286,7 +1286,7 @@
                           <?php endforeach; ?>
                         </select>
                       </div>
-                      
+
                       <div class="col-md-12 position-relative">
                         <label for="fatherOtherOccupation" class="form-label">If Occupation is not in the list,please specify here</label>
                         <input type="text" class="form-control" id="fatherOtherOccupation" aria-describedby="fatherOtherOccupation" name="Father's Other Occupation" <?= $finishFlag ? "disabled" : "" ?> value="<?= $family['father']['occupation'] != "others" ? "" : $family['father']['occupation'] ?>">
