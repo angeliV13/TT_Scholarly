@@ -48,7 +48,7 @@ if (currentActive == "info_flag"){
 } else if (currentActive == "family_flag"){
     $("#family-background").addClass("active");
     $("#bordered-justified-family-background").addClass("active show");
-} else if (currentActive == "add_flag"){
+} else if (currentActive == "add_flag" || currentActive == "" || currentActive == 'req_flag'){
     $("#additional-information").addClass("active");
     $("#bordered-justified-additional-information").addClass("active show");
 }
