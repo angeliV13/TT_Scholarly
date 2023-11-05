@@ -694,7 +694,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '2' => 'Public', '3' => 'Private'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
