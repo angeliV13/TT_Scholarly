@@ -1,9 +1,9 @@
 $("#schoolClass").on("change", function(){
-    ($(this).val() == 1) ? $("#partner").attr("disabled", false) : ( $("#partner").attr("disabled", true) , $("#partner").prop("checked", false) );
+    ($(this).val() == 1 || $(this).val() == 3) ? $("#partner").attr("disabled", false) : ( $("#partner").attr("disabled", true) , $("#partner").prop("checked", false) );
 });
 
 $("#editschoolClass").on("change", function(){
-    ($(this).val() == 1) ? $("#editpartner").attr("disabled", false) : ( $("#editpartner").attr("disabled", true) , $("#editpartner").prop("checked", false) );
+    ($(this).val() == 1 || $(this).val() == 3) ? $("#editpartner").attr("disabled", false) : ( $("#editpartner").attr("disabled", true) , $("#editpartner").prop("checked", false) );
 });
 
 
