@@ -66,12 +66,12 @@ function getChartTrends()
 
 
     $sql = "SELECT ay.ay, sem.short_name, 
-            COUNT(CASE WHEN ayd.shs = 1 THEN 1 END) AS shs, 
-            COUNT(CASE WHEN ayd.colEAPub = 1 THEN 1 END) AS colEAPub, 
-            COUNT(CASE WHEN ayd.colEAPriv = 1 THEN 1 END) AS colEAPriv, 
-            COUNT(CASE WHEN ayd.colSc = 1 THEN 1 END) AS colSc 
-            FROM acad_year_data ayd JOIN acad_year ay ON ayd.ay_id = ay.id 
-            JOIN semester sem ON ayd.sem_id = sem.id 
+            COUNT(CASE WHEN sca.scholarType = 3 THEN 1 END) AS shs, 
+            COUNT(CASE WHEN sca.scholarType = 2 THEN 1 END) AS colEA, 
+            COUNT(CASE WHEN sca.scholarType = 1 THEN 1 END) AS colSc 
+            FROM scholarship_application sca 
+            JOIN acad_year ay ON sca.ay_id = ay.id 
+            JOIN semester sem ON sca.sem_id = sem.id 
             GROUP BY ay_id, sem_id 
             ORDER BY ay_id ASC, sem_id ASC LIMIT 5";
 
@@ -86,7 +86,7 @@ function getChartTrends()
 
             // Data
             $shsArray[]     =   $shs;
-            $colEAArray[]   =   $colEAPub + $colEAPriv;
+            $colEAArray[]   =   $colEA;
             $colScArray[]   =   $colSc;
         }
         $data = [
@@ -103,6 +103,8 @@ function getChartTrends()
 function getBarangayTrends()
 {
     include("dbconnection.php");
+    $ay_id  = getDefaultAcadYearId();
+    $sem_id = getDefaultSemesterId();
 
     $data       = [];
     $barangay   = [];
@@ -110,11 +112,15 @@ function getBarangayTrends()
     $female_arr = [];
 
 
-    $sql = "SELECT barangay, 
+    $sql = "SELECT uin.barangay, 
             COUNT( CASE WHEN gender = 0 THEN 1 END ) AS 'male', 
             COUNT( CASE WHEN gender = 1 THEN 1 END ) AS 'female' 
-            FROM `user_info` 
-            WHERE barangay IS NOT NULL GROUP BY barangay;";
+            FROM user_info uin
+            JOIN scholarship_application sca ON uin.account_id = sca.userId
+            WHERE uin.barangay IS NOT NULL 
+            AND sca.ay_id = '{$ay_id}'
+            AND sca.sem_id = '{$sem_id}'
+            GROUP BY uin.barangay";
 
     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
@@ -195,4 +201,46 @@ function activityButton($count = 0, $notif_body="", $notif_link = "", $notif_dat
                 </div><!-- End activity item-->';
 
     return $data;
+}
+
+function getGenderTrends()
+{
+    include("dbconnection.php");
+    $ay_id  = getDefaultAcadYearId();
+    $sem_id = getDefaultSemesterId();
+
+    $data       = [];
+
+
+    $sql = "SELECT 
+            COUNT( CASE WHEN gender = 0 AND scholarType != 3 THEN 1 END ) AS 'col_male', 
+            COUNT( CASE WHEN gender = 0 AND scholarType = 3 THEN 1 END ) AS 'shs_male', 
+            COUNT( CASE WHEN gender = 1 AND scholarType != 3 THEN 1 END ) AS 'col_female', 
+            COUNT( CASE WHEN gender = 1 AND scholarType = 3 THEN 1 END ) AS 'shs_female' 
+            FROM user_info uin
+            JOIN scholarship_application sca ON uin.account_id = sca.userId
+            WHERE sca.ay_id = '{$ay_id}'
+            AND sca.sem_id = '{$sem_id}'";
+
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+
+            extract($row);
+            // Data
+            $shs_male_arr[]     =   $shs_male;
+            $col_male_arr[]     =   $col_male;
+            $shs_female_arr[]   =   $shs_female;
+            $col_female_arr[]   =   $col_female;
+        }
+        $data = [
+            'shs_male'       => $shs_male_arr,
+            'col_male'       => $col_male_arr,
+            'shs_female'     => $shs_female_arr,
+            'col_female'     => $col_female_arr,
+        ];
+    }
+
+    return json_encode($data);
 }
