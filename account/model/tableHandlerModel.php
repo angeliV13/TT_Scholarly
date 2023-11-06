@@ -733,7 +733,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             if($acc_type == 2){
                 $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
                             <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Beneficiary</button>';
-            }elseif($acc_type == 3)
+            }elseif($acc_type == 3){
                 $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
                             <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
             }
