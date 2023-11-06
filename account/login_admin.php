@@ -67,9 +67,10 @@ include('includes/main.php')
                     </div>
 
                     <div class="col-12">
-                      <button id="btn_login" class="btn btn-dark w-100" type="submit">Login</button>
-                      <a href="login.php" class="btn btn-secondary w-100">Back</a>
+                      <button id="btn_login" class="btn btn-small btn-dark w-100 mb-2" type="submit">Login</button>
+                      <a href="login.php" class="btn btn-dark btn-small w-100">Back</a>
                     </div>
+
                     <div class="col-12 text-center">
                       <!-- <p class="small row-cols-1 mb-0">Don't have account? <a href="pages-register.php">Create an Account now!</a></p> -->
                       <p class=" small mb-0"> <a href="#" id="forgotPass">Forgot Password</a> </p>
