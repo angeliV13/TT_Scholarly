@@ -1439,3 +1439,12 @@ $("#editInfoProfile").on("click", function(){
         }
     })
 })
+
+$("#graduating_flag").on("change", function(){
+    let graduating = $("#graduating_flag option:selected").val();
+    if(graduating == 0){
+        $(".grad_waiting").removeClass("d-none");
+    }else{
+        $(".grad_waiting").addClass("d-none");
+    }
+})

@@ -7,11 +7,15 @@ function getTotalCounts()
 {
     $acadYearId  = getDefaultAcadYearId();
     $acadYearEnd = getDefaultAcadYearColumn('to_ay');
+    $ay_sem = [
+        "ay"    => getDefaultAcadYearId(),
+        "sem"   => getDefaultSemesterId(),
+    ];
 
     $data = [
-        getAccounts(3, 1, 1),   // Applicant
-        getAccounts(2, 1, 1),    // Beneficiaries
-        getGraduating($acadYearEnd, 3, 1) // Graduating
+        getAccounts(3, 1, 1, $ay_sem),   // Applicant
+        getAccounts(2, 1, 1, $ay_sem),    // Beneficiaries
+        getGraduating($acadYearEnd, 2, 1, $ay_sem) // Graduating
 
     ];
 
