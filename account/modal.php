@@ -24,7 +24,7 @@
                     </div>
                     <div class="">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="3" id="decisionRadio2">
-                        <label class="form-check-label" for="interviewRadio">For Interview</label>
+                        <label class="form-check-label" for="interviewRadio" id="changeRadio">For Interview</label>
                     </div>
                     <div class="">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="4" id="decisionRadio3">

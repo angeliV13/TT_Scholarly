@@ -1033,6 +1033,11 @@ $(document).on("click", ".viewInfoClass", function () {
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
             $("#currentStatus").html($("#scholarStatus").val());
+            let accountType = $("#accountType").val();
+            let accountText = (accountType == 2) ? "For Renewal" : "For Interview";
+
+            $("#changeRadio").html(accountText);
+
             if ($("#scholarStatus").val() == "For Assesment Exam")
             {
                 $("#decisionRadio1").prop("disabled", true);
