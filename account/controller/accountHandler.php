@@ -291,6 +291,15 @@ if (isset($_REQUEST['action']))
 
         echo undoGraduate($data);
     }
+    else if ($action == 28) // Change Password
+    {
+        $data = [
+            'old_pass'      => isset($_POST['old_pass'])    ? $_POST['old_pass'] : '',
+            'new_pass'      => isset($_POST['new_pass'])    ? $_POST['new_pass'] : '',
+        ];
+
+        echo change_password($_POST['old_pass'], $_POST['new_pass'], 1);
+    }
 }
 
 

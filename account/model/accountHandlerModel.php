@@ -504,21 +504,37 @@ function password_reset($data)
 }
 
 
-function change_password($old, $new)
+function change_password($old, $new, $type = 0)
 {
     include("dbconnection.php");
 
     session_start();
 
-    $sql = "SELECT id FROM account WHERE id = '" . $_SESSION['id'] . "' AND password = '" . $old . "' LIMIT 1";
+    $sql = ($type == 0) ? "SELECT id, account_type FROM account WHERE id = '" . $_SESSION['id'] . "' AND password = '" . $old . "' LIMIT 1" : "SELECT id, password, account_type FROM account WHERE id = '" . $_SESSION['id'] . "' LIMIT 1";
     $query = $conn->query($sql);
 
     if ($query->num_rows > 0) 
     {
-        if ($old == $new) 
+        $row = $query->fetch_assoc();
+        $accountType = $row['account_type'];
+
+        if ($accountType < 2)
         {
-            echo 'New Password must be different from the Old Password';
-            return;
+            if ($old == $new) 
+            {
+                echo 'New Password must be different from the Old Password 1';
+                return;
+            }
+        }
+        else
+        {
+            if (verifyHashPW($old, $row['password']) == false)
+            {
+                echo 'New Password must be different from the Old Password 2';
+                return;
+            }
+
+            $new = hashPassword($new);
         }
 
         $sql = "UPDATE account SET password = '" . $new . "' WHERE id = '" . $_SESSION['id'] . "' LIMIT 1";
