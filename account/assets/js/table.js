@@ -1033,6 +1033,11 @@ $(document).on("click", ".viewInfoClass", function () {
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
             $("#currentStatus").html($("#scholarStatus").val());
+            let accountType = $("#accountType").val();
+            let accountText = (accountType == 2) ? "For Renewal" : "For Interview";
+
+            $("#changeRadio").html(accountText);
+
             if ($("#scholarStatus").val() == "For Assesment Exam")
             {
                 $("#decisionRadio1").prop("disabled", true);
@@ -1063,13 +1068,14 @@ $(document).on("click", ".viewInfoClass", function () {
 $("input[name='decisionRadio']").on('change', function () {
     let val = $("input[name='decisionRadio']:checked").val();
     let accountViewId = $('#accountViewId').val();
+    let accountText = $("#changeRadio").html();
     let text = icon = '';
 
     if (val == 2) {
         text = "Confirm Applicant for Assessment? You cannot undo this action.";
         icon = "question";
     } else if (val == 3) {
-        text = "Confirm Applicant for Interview? You cannot undo this action.";
+        text = (accountText == "For Interview") ? "Confirm Applicant for Interview? You cannot undo this action." : "Confirm Applicant for Renewal? You cannot undo this action.";
         icon = "question";
     } else if (val == 4) {
         text = "Approve Applicant? You cannot undo this action.";
