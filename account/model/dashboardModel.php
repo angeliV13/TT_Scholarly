@@ -244,3 +244,46 @@ function getGenderTrends()
 
     return json_encode($data);
 }
+
+function getSchoolTrends()
+{
+    include("dbconnection.php");
+    $ay_id  = getDefaultAcadYearId();
+    $sem_id = getDefaultSemesterId();
+
+    $data       = [];
+    $schools    = [];
+    $male_arr   = [];
+    $female_arr = [];
+
+
+    $sql = "SELECT uin.barangay, 
+            COUNT( CASE WHEN gender = 0 THEN 1 END ) AS 'male', 
+            COUNT( CASE WHEN gender = 1 THEN 1 END ) AS 'female' 
+            FROM user_info uin
+            JOIN scholarship_application sca ON uin.account_id = sca.userId
+            WHERE uin.barangay IS NOT NULL 
+            AND sca.ay_id = '{$ay_id}'
+            AND sca.sem_id = '{$sem_id}'
+            GROUP BY uin.barangay";
+
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    if ($query->num_rows <>  0) {
+        while ($row = $query->fetch_assoc()) {
+
+            extract($row);
+            // Data
+            $categories[]   =   $barangay;
+            $male_arr[]     =   $male;
+            $female_arr[]   =   $female;
+        }
+        $data = [
+            'barangay'   => $categories,
+            'male'       => $male_arr,
+            'female'     => $female_arr
+        ];
+    }
+
+    return json_encode($data);
+}

@@ -151,7 +151,7 @@
               </div>
             </div><!-- Exam Scopes -->
 
-            <!-- Top Scorers -->
+            <!-- Barangay Chart -->
             <div class="col-12">
               <div class="card top-selling overflow-auto">
 
@@ -165,7 +165,23 @@
                 </div>
 
               </div>
-            </div><!-- End Top Selling -->
+            </div><!-- Barangay Chart -->
+
+            <!-- School Chart -->
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
+
+                <div class="card-body">
+                  <h5 class="card-title">School Trends</h5>
+
+                  <!-- Bar Chart -->
+                  <div id="scholarTrendsV5"></div>
+                  <!-- End bar Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- School Chart -->
 
           </div>
         </div><!-- End Left side columns -->
