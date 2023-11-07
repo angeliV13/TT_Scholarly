@@ -972,7 +972,7 @@ function graduatingTable() // CHECKING CK
             $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                             <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
                             <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
-                            <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Beneficiary</button>
+                            <button id="removeApplicant" type="button" class="btn btn-danger deleteApplicant" data-id="' . $account_id . '">Remove Beneficiary</button>
                         </div>';
             $scholarType = check_status($account_id);
 
