@@ -851,7 +851,7 @@ function graduatesTable() //CHECKING CK
 {
     include("dbconnection.php");
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '3' => '', '4' => ''];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
@@ -941,7 +941,7 @@ function graduatingTable() // CHECKING CK
 {
     include("dbconnection.php");
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '3' => '', '4' => ''];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
