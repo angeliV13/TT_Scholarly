@@ -1292,8 +1292,8 @@ function addAdminAccount($data)
 
     $last_id = mysqli_insert_id($conn);
 
-    $sql = "INSERT INTO user_info (account_id, eac_number, first_name, middle_name, last_name, suffix, birth_date, birth_place, address_line, barangay, municipality, province, region, religion, gender, civil_status, contact_number, zip_code, citizenship, years_of_residency, language, fbName, fbUrl, fbImage)
-            VALUES ('$last_id', '', '$data[firstName]', '$data[middleName]', '$data[lastName]', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')";
+    $sql = "INSERT INTO user_info (account_id, eac_number, first_name, middle_name, last_name)
+            VALUES ('$last_id', '', '$data[firstName]', '$data[middleName]', '$data[lastName]')";
     $query = mysqli_query($conn, $sql) or die("Error RQ002: " . mysqli_error($conn));
 
     if ($query) 
@@ -1398,9 +1398,6 @@ function deleteAccount($data)
 {
     include("dbconnection.php");
 
-    // $sql = "SELECT * FROM account WHERE id = '{$data['id']}'";
-
-    // SQL SHOULD BE CHANGED
     $sql = "UPDATE account SET `account_status`= '4' 
             WHERE id = '{$data['id']}'";
     $query = $conn->query($sql) or die($conn->error);

@@ -27,6 +27,8 @@ function accountListingTable($acc_id, $acc_type, $view_type = 1) //View Type = 1
     if ($query->num_rows > 0) {
         while ($row = $query->fetch_assoc()) {
 
+            if($row['account_status'] == 4) {continue;} // Hides the Deleted Account
+
             extract($row);
 
             $id = $row['id'];
