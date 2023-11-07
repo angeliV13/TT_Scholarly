@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item active">Account Management</li>
-            <li class="breadcrumb-item active">Student Accounts</li>
+            <li class="breadcrumb-item active">Admin Accounts</li>
         </ol>
     </div>
     <!-- End Page Title -->
@@ -20,8 +20,6 @@
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#account_add_modal" class=" btn btn-sm btn-danger shadow-sm">
                                     <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Account</a>
                             </div>
-
-
                             <!-- Table with stripped rows -->
                             <table class="table table-bordered table-striped table-condensed" id="accountAdminManagementTable" width="200%" cellspacing="200%">
                                 <thead>

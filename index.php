@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- add icon link -->
-<link rel = "icon" href = "account/<?= $website_other['icon'] ?>"  type = "image/x-icon">
+<link rel="icon" href="account/<?= $website_other['icon'] ?>" type="image/x-icon">
 
 
 <title><?= $website_info['header'] ?></title>
@@ -103,7 +103,7 @@
           <li><a href="#calendarAct">Calendar of Activities </a></li>
           <li><a href="#headAd">Administrators</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a class="btn-book-a-table" href="account/index.php">Login</a></li>
+          <li><a class="#login" href="account/index.php">Login</a></li>
         </ul>
       </nav><!-- .navbar -->
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list" style="color: rgb(255, 255, 255);"></i>
@@ -114,22 +114,37 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero d-flex align-items-center section-bg">
+
     <div class="container">
+      <!-- Slides only carousel -->
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/img/slides-1.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/img/slides-3.jpg" class="d-block w-100" alt="...">
+          </div>
+        </div>
+      </div><!-- End Slides only carousel-->
       <div class="row justify-content-between gy-5 ">
-        <div class="col-lg-4 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+        <!-- <div class="col-lg-4 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
           <h2 data-aos="fade-up"><?= $website_other['welcome_text'] ?></h2>
           <p data-aos="fade-up" data-aos-delay="100"><?= $website_other['welcome_text'] ?></p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
             <a href="account/pages-register.php" class="btn-book-a-table">Apply Scholarship</a>
-            <?php if ($website_other['url'] != null): ?>
-              <!-- <a href="<?= $website_other['url'] ?>" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
-            <?php endif; ?>
-          </div>
-        </div>
-        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-          <img src="account/<?= $website_other['hero'] ?>" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
-        </div>
+            <?php if ($website_other['url'] != null) : ?> -->
+        <!-- <a href="<?= $website_other['url'] ?>" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
+      <?php endif; ?>
       </div>
+    </div>
+    <!-- <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+          <img src="account/<?= $website_other['hero'] ?>" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+        </div> -->
+    </div>
     </div>
   </section><!-- End Hero Section -->
 
@@ -143,18 +158,16 @@
           <h2>ABOUT</h2>
           <h3><span>LET'S GET TO KNOW ABOUT US!</span></h3>
         </div>
-
-
         <div class="row gy-4">
           <img src="account/<?= $website_other['cover'] ?>" class="col-lg-7 position-relative about-img" data-aos="fade-up" data-aos-delay="150">
           </img>
           <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
             <div class="content ps-0 ps-lg-5">
               <p class="fst-italic">
-              <?= $website_info['descr'] ?>
+                <?= $website_info['descr'] ?>
               </p>
 
-              <!-- <?php if ($website_other['about_url'] != ''): ?>
+              <!-- <?php if ($website_other['about_url'] != '') : ?>
                 <div class="position-relative mt-4">
                   <img src="assets/img/white.jpg" class="img-fluid" alt="">
                   <a href="<?= $website_other['about_url'] ?>" class="glightbox play-btn"></a>
@@ -249,11 +262,11 @@
                 <div class="card d-flex justify-content-center">
                   <div class="card-body">
                     <h5 class="card-title">General Requirements</h5>
-                    <?php if ($gen_req != null): ?>
-                      <?php foreach ($gen_req AS $key => $req): ?>
+                    <?php if ($gen_req != null) : ?>
+                      <?php foreach ($gen_req as $key => $req) : ?>
                         <p><?= $req['req'] ?></p>
                       <?php endforeach; ?>
-                    <?php else: ?>
+                    <?php else : ?>
                       <p>No General Requirements for Now</p>
                     <?php endif; ?>
                   </div>
@@ -273,41 +286,41 @@
           <h3><span>ALUMNI SCHOLARS</span></h3>
         </div>
 
-        <?php if ($website_testimony != null): ?>
+        <?php if ($website_testimony != null) : ?>
 
-        <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
+          <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
 
-          <?php foreach ($website_testimony AS $key => $web): ?>
+              <?php foreach ($website_testimony as $key => $web) : ?>
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="row gy-4 justify-content-center">
-                  <div class="col-lg-6">
-                    <div class="testimonial-content">
-                      <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <?= $web['description'] ?>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                      </p>
-                      <h3><?= $web['name'] ?></h3>
-                      <h4><?= $web['job_title'] ?></h4>
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row gy-4 justify-content-center">
+                      <div class="col-lg-6">
+                        <div class="testimonial-content">
+                          <p>
+                            <i class="bi bi-quote quote-icon-left"></i>
+                            <?= $web['description'] ?>
+                            <i class="bi bi-quote quote-icon-right"></i>
+                          </p>
+                          <h3><?= $web['name'] ?></h3>
+                          <h4><?= $web['job_title'] ?></h4>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 text-center">
+                        <img src="<?= $web['image'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : 'account/' . $web['image'] ?>" class="img-fluid testimonial-img" alt="">
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-2 text-center">
-                    <img src="<?= $web['image'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : 'account/' . $web['image'] ?>" class="img-fluid testimonial-img" alt="">
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+                </div><!-- End testimonial item -->
 
-          <?php endforeach; ?>
+              <?php endforeach; ?>
 
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-        </div>
 
-        <?php else: ?>
+        <?php else : ?>
 
           <div class="text-center mt-5">
             <h3>No Testimonials for Now</h3>
@@ -330,31 +343,31 @@
 
         <?php if ($coa != null) : ?>
 
-        <div class="slides swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
+          <div class="slides swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
 
-            <?php foreach ($coa AS $key => $ev): ?>
+              <?php foreach ($coa as $key => $ev) : ?>
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(account/<?= $ev['image'] ?>)"> 
-              <h3><?= $ev['title'] ?></h3>
-              <div class="price align-self-start"><?= $ev['date_start'] ?> to <?= $ev['date_end'] ?></div>
-              <p class="description">
-                <?= $ev['description'] ?>
-              </p>
-            </div><!-- End Event item -->
+                <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(account/<?= $ev['image'] ?>)">
+                  <h3><?= $ev['title'] ?></h3>
+                  <div class="price align-self-start"><?= $ev['date_start'] ?> to <?= $ev['date_end'] ?></div>
+                  <p class="description">
+                    <?= $ev['description'] ?>
+                  </p>
+                </div><!-- End Event item -->
 
-            <?php endforeach; ?>
+              <?php endforeach; ?>
 
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
-        </div>
 
-        <?php else: ?>
+        <?php else : ?>
 
           <div class="text-center mt-5">
             <h3>No Active Events for Now</h3>
             <p>Check back later for updates!</p>
-        </div>
+          </div>
 
         <?php endif; ?>
 
@@ -370,39 +383,39 @@
           <h3><span>HEAD AND ADMINISTRATORS</span></h3>
         </div>
 
-        <?php if ($ofc != null): ?>
+        <?php if ($ofc != null) : ?>
 
-        <div class="row gy-4">
+          <div class="row gy-4">
 
-          <?php foreach ($ofc AS $key => $of) : ?>
+            <?php foreach ($ofc as $key => $of) : ?>
 
-            <?php if ($of['active'] == 0) continue; ?>
+              <?php if ($of['active'] == 0) continue; ?>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="chef-member">
-              <div class="member-img">
-                <img src="account/<?= $of['image'] ?>" class="img-fluid" alt="">
-                <?php if ($of['socials'] != null): ?>
-                  <div class="social">
-                    <?php foreach ($of['socials'] AS $key => $soc): ?>
-                      <a href="<?= $soc['link'] ?>"><i class="<?= $soc['socType'] ?>"></i></a>
-                    <?php endforeach; ?>
+              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                <div class="chef-member">
+                  <div class="member-img">
+                    <img src="account/<?= $of['image'] ?>" class="img-fluid" alt="">
+                    <?php if ($of['socials'] != null) : ?>
+                      <div class="social">
+                        <?php foreach ($of['socials'] as $key => $soc) : ?>
+                          <a href="<?= $soc['link'] ?>"><i class="<?= $soc['socType'] ?>"></i></a>
+                        <?php endforeach; ?>
+                      </div>
+                    <?php endif; ?>
                   </div>
-                <?php endif; ?>
-              </div>
-              <div class="member-info">
-                <h4><?= $of['name'] ?></h4>
-                <span><?= $of['job_title'] ?></span>
-                <p><?= $of['description'] ?></p>
-              </div>
-            </div>
-          </div><!-- End Chefs Member -->
+                  <div class="member-info">
+                    <h4><?= $of['name'] ?></h4>
+                    <span><?= $of['job_title'] ?></span>
+                    <p><?= $of['description'] ?></p>
+                  </div>
+                </div>
+              </div><!-- End Chefs Member -->
 
-          <?php endforeach; ?>
+            <?php endforeach; ?>
 
-        </div>
+          </div>
 
-        <?php else: ?>
+        <?php else : ?>
 
           <div class="text-center mt-5">
             <h3>No Active Officials for Now</h3>
@@ -423,59 +436,59 @@
             <h3><span>Need Help? Contact Us</span></h3>
           </div>
 
-            <div class="mb-3">
-              <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.it/maps?q=<?= $website_info['address'] ?>&output=embed"></iframe> -->
-              <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13862.541561913424!2d121.13964054729786!3d14.110769102046062!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1693239727931!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
-              <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1020.051547302026!2d121.14238298971618!3d14.110124409799477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1685624357158!5m2!1sen!2sph&zoom=9" frameborder="0" allowfullscreen></iframe> -->
-            </div><!-- End Google Maps -->
-            
-            <div class="row gy-4">
+          <div class="mb-3">
+            <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.it/maps?q=<?= $website_info['address'] ?>&output=embed"></iframe> -->
+            <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13862.541561913424!2d121.13964054729786!3d14.110769102046062!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1693239727931!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
+            <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1020.051547302026!2d121.14238298971618!3d14.110124409799477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1685624357158!5m2!1sen!2sph&zoom=9" frameborder="0" allowfullscreen></iframe> -->
+          </div><!-- End Google Maps -->
 
-              <div class="col-md-6">
-                <div class="info-item  d-flex align-items-center">
-                  <i class="icon bi bi-map flex-shrink-0"></i>
-                  <div>
-                    <h3>Our Address</h3>
-                    <p><?= $website_info['address'] ?></p>
-                  </div>
+          <div class="row gy-4">
+
+            <div class="col-md-6">
+              <div class="info-item  d-flex align-items-center">
+                <i class="icon bi bi-map flex-shrink-0"></i>
+                <div>
+                  <h3>Our Address</h3>
+                  <p><?= $website_info['address'] ?></p>
                 </div>
-              </div><!-- End Info Item -->
+              </div>
+            </div><!-- End Info Item -->
 
-              <div class="col-md-6">
-                <div class="info-item d-flex align-items-center">
-                  <i class="icon bi bi-envelope flex-shrink-0"></i>
-                  <div>
-                    <h3>Email Us</h3>
-                    <a href="mailto:<?= $website_info['email'] ?>"><?= $website_info['email'] ?></a>
-                  </div>
+            <div class="col-md-6">
+              <div class="info-item d-flex align-items-center">
+                <i class="icon bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h3>Email Us</h3>
+                  <a href="mailto:<?= $website_info['email'] ?>"><?= $website_info['email'] ?></a>
                 </div>
-              </div><!-- End Info Item -->
+              </div>
+            </div><!-- End Info Item -->
 
-              <div class="col-md-6">
-                <div class="info-item  d-flex align-items-center">
-                  <i class="icon bi bi-telephone flex-shrink-0"></i>
-                  <div>
-                    <h3>Call Us</h3>
-                    <p><?= $website_info['telephone'] ?></p>
-                  </div>
+            <div class="col-md-6">
+              <div class="info-item  d-flex align-items-center">
+                <i class="icon bi bi-telephone flex-shrink-0"></i>
+                <div>
+                  <h3>Call Us</h3>
+                  <p><?= $website_info['telephone'] ?></p>
                 </div>
-              </div><!-- End Info Item -->
+              </div>
+            </div><!-- End Info Item -->
 
-              <div class="col-md-6">
-                <div class="info-item  d-flex align-items-center">
-                  <i class="icon bi bi-share flex-shrink-0"></i>
+            <div class="col-md-6">
+              <div class="info-item  d-flex align-items-center">
+                <i class="icon bi bi-share flex-shrink-0"></i>
+                <div>
+                  <h3>Opening Hours</h3>
                   <div>
-                    <h3>Opening Hours</h3>
-                    <div>
-                      <!-- <strong>Mon-Sat:</strong> 11AM - 23PM;
+                    <!-- <strong>Mon-Sat:</strong> 11AM - 23PM;
                       <strong>Sunday:</strong> Closed -->
-                      <?= $website_info['opening_hours'] ?>
-                    </div>
+                    <?= $website_info['opening_hours'] ?>
                   </div>
                 </div>
-              </div><!-- End Info Item -->
+              </div>
+            </div><!-- End Info Item -->
 
-            </div>
+          </div>
         </div>
       </section><!-- End Contact Section -->
     <?php endif; ?>

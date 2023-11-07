@@ -214,7 +214,18 @@
               <div id="applicantTrends" style="min-height: 400px;" class="echart"></div>
 
             </div>
-          </div><!-- End Website Traffic -->
+          </div><!-- End Application Trends -->
+
+          <!-- Gender Trends -->
+          <div class="card">
+
+            <div class="card-body pb-0">
+              <h5 class="card-title">Gender Trends</h5>
+
+              <div id="genderTrends" style="min-height: 400px;" class="echart"></div>
+
+            </div>
+          </div><!-- End Gender Trends -->
 
         </div><!-- End Right side columns -->
 

@@ -25,5 +25,8 @@ if (isset($_REQUEST['action']))
         case 5: // Chart Count for Application Trends
             echo getBarangayTrends();
             break;
+        case 6: // Chart of Gender Trends;
+            echo getGenderTrends();
+            break;
     }
 }

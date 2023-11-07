@@ -274,7 +274,6 @@ $(document).ready(function ($) {
       // console.log(data);
       if (data != "") {
         let barangayTrends = JSON.parse(data);
-        console.log(barangayTrends);
 
         scholarTrendsv3.updateSeries([
           {
@@ -334,4 +333,95 @@ $(document).ready(function ($) {
       }
     },
   });
+
+  // Data for Gender Trend Count
+  $.ajax({
+    type: "POST",
+    url: "controller/dashboard.php",
+    data: {
+      action: 6,
+    },
+    success: function (data) {
+      console.log(data);
+      if (data != "") {
+        let genderCount = JSON.parse(data);
+
+        // Scholar Trends for Applicant
+        let scholarTrendsV4 = echarts
+          .init(document.querySelector("#genderTrends"))
+          .setOption({
+            tooltip: {
+              trigger: "item",
+            },
+            legend: {
+              top: "5%",
+              left: "center",
+            },
+            series: [
+              {
+                name: "College Beneficiary",
+                type: "pie",
+                radius: ["50%", "70%"],
+                avoidLabelOverlap: false,
+                label: {
+                  show: false,
+                  position: "center",
+                },
+                emphasis: {
+                  label: {
+                    show: true,
+                    fontSize: "18",
+                    fontWeight: "bold",
+                  },
+                },
+                labelLine: {
+                  show: false,
+                },
+                data: [
+                  {
+                    value: genderCount.col_female,
+                    name: "College Female",
+                  },
+                  {
+                    value: genderCount.col_male,
+                    name: "College Male",
+                  },
+                ],
+              },
+              {
+                name: "SHS Beneficiary",
+                type: "pie",
+                radius: ["10%", "40%"],
+                avoidLabelOverlap: false,
+                label: {
+                  show: false,
+                  position: "center",
+                },
+                emphasis: {
+                  label: {
+                    show: true,
+                    fontSize: "18",
+                    fontWeight: "bold",
+                  },
+                },
+                labelLine: {
+                  show: false,
+                },
+                data: [
+                  {
+                    value: genderCount.shs_female,
+                    name: "SHS Female",
+                  },
+                  {
+                    value: genderCount.shs_male,
+                    name: "SHS Male",
+                  },
+                ],
+              },
+            ],
+          });
+      }
+    },
+  });
+
 });
