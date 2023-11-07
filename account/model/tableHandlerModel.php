@@ -725,13 +725,15 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             {
                 if (!isset($scholarType['status'])) continue;
                 if ($scholarType['status'] != $stat) continue;
-            } 
+            }
+            
+            $buttonText = ($acc_type == 2) ? "Remove Beneficiary" : "Remove Applicant";
 
             $none = ($acc_status == 4) ? "d-none" : "";
             $school = $course = $schoolDetails = "";
 
             $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                        <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
+                        <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">' . $buttonText . '</button>';
 
             if (isset($education['course']))
             {
@@ -907,7 +909,11 @@ function graduatesTable() //CHECKING CK
 
             $data[] = [
                 static_count(),
-                $last_name . ", " . $first_name . " " . $middle_name,
+                $eac_number,
+                $last_name,
+                $first_name,
+                $middle_name,
+                $suffix,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : $school, //School Name,
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
@@ -964,7 +970,7 @@ function graduatingTable() // CHECKING CK
             $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                             <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
                             <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
-                            <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Applicant</button>
+                            <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Beneficiary</button>
                         </div>';
             $scholarType = check_status($account_id);
 
@@ -990,7 +996,7 @@ function graduatingTable() // CHECKING CK
                 }
                 else
                 {
-                    $school = $education[1]['school'];
+                    $school = $education['school'];
                 }
             }
 
