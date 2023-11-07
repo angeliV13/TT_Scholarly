@@ -21,7 +21,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>EAC Number</th>
+                    <th>User Number</th>
                     <th>Last Name</th>
                     <th>First Name</th>
                     <th>Middle Name</th>

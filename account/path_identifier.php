@@ -106,6 +106,9 @@ function get_path($lv_path, $type = '99')
 
                         case 'tts_indicators_sc':
                                 return 'views/admin/basic_indicators_sc.php';
+                        
+                        case 'examinee_list':
+                                return 'views/admin/examinee_list';
 
                         default:
                                 return 'error.php';

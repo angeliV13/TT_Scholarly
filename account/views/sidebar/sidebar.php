@@ -106,6 +106,11 @@
                               <i class="bi bi-circle"></i><span>Examination Questions</span>
                           </a>
                       </li>
+                      <li>
+                          <a href="index.php?nav=examinee_list">
+                              <i class="bi bi-circle"></i><span>List of Examinees</span>
+                          </a>
+                      </li>
                   </ul>
               </li><!-- End Examination Nav -->
 

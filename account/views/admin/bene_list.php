@@ -26,7 +26,7 @@
                         <thead>
                             <tr class="text-center small">
                                 <th>No.</th>
-                                <th>Application Number<th>
+                                <th>User Number<th>
                                 <th>Last Name</th>
                                 <th>First Name</th>
                                 <th>Middle Name</th>
