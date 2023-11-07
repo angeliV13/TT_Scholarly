@@ -1402,7 +1402,7 @@ function deleteAccount($data)
 
     // SQL SHOULD BE CHANGED
     $sql = "UPDATE `account_status`= '4' 
-            WHERE id = {$data['id']} LIMIT 1";
+            WHERE id = '{$data['id']}'";
     $query = $conn->query($sql) or die($conn->error);
 
     if($query)
