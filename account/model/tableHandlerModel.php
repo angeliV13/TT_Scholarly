@@ -922,6 +922,7 @@ function graduatesTable() //CHECKING CK
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
                 (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $course, //Course,
+                $graduation_year, // Year Graduated
                 $button,
             ];
 
