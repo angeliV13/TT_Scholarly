@@ -28,6 +28,8 @@
                     <th>Extension Name</th>
                     <th>Email Address</th>
                     <th>School</th>
+                    <th>School Type</th>
+                    <th>Educational Level</th>
                     <th>Year Level</th>
                     <th>Course/Strand</th>
                     <th class="text-center">Actions</th>

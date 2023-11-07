@@ -916,7 +916,9 @@ function graduatesTable() //CHECKING CK
                 $suffix,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : $school, //School Name,
+                (isset($schoolDetails['class_type']))                                   ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $course, //Course,
                 $button,
             ];
@@ -1007,7 +1009,9 @@ function graduatingTable() // CHECKING CK
                 $middle_name,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : $school, //School Name,
+                (isset($schoolDetails['class_type']))                                   ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $course, //Course,
                 $button,
             ];
