@@ -21,7 +21,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>EAC Number</th>
+                    <th>User Number</th>
                     <th>Last Name</th>
                     <th>First Name</th>
                     <th>Middle Name</th>
@@ -32,6 +32,7 @@
                     <th>Educational Level</th>
                     <th>Year Level</th>
                     <th>Course/Strand</th>
+                    <th>Year Graduated</th>
                     <th class="text-center">Actions</th>
                   </tr>
                 </thead>

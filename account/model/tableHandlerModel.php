@@ -27,6 +27,8 @@ function accountListingTable($acc_id, $acc_type, $view_type = 1) //View Type = 1
     if ($query->num_rows > 0) {
         while ($row = $query->fetch_assoc()) {
 
+            if($row['account_status'] == 4) {continue;} // Hides the Deleted Account
+
             extract($row);
 
             $id = $row['id'];
@@ -921,6 +923,7 @@ function graduatesTable() //CHECKING CK
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
                 (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $course, //Course,
+                $graduation_year, // Year Graduated
                 $button,
             ];
 

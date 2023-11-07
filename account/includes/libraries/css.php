@@ -10,6 +10,8 @@
 
 <!-- Datatables CSS  -->
 <link href="assets/vendor/datatables/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="assets/vendor/datatables/css/dataTables.min.css" rel="stylesheet">
+
 
 
 
