@@ -26,54 +26,15 @@
                     <th>Middle Name</th>
                     <th>Email Address</th>
                     <th>School</th>
+                    <th>School Type</th>
+                    <th>Educational Level</th>
                     <th>Year Level</th>
                     <th>Course/Strand</th>
                     <th class="text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Dela Cruz</td>
-                    <td>Juan</td>
-                    <td>Sanchez</td>
-                    <td>brandon@gmail.com</td>
-                    <td>BSU </td>
-                    <td>1st Year </td>
-                    <td>BSIT </td>
-                    <td>
-                      <div class="row" button style="height:100px;width:200px">
-                        <button class="btn btn-primary rounded-pill" data-toggle="modal">View Profile</button>
-                        <button class="btn btn-info rounded-pill" data-toggle="modal">View Requirements</button>
-                        <button class="btn btn-success rounded-pill" data-toggle="modal">For Interview</button>
-                        <!-- <button class="btn btn-danger rounded-pill" data-toggle="modal">Danger</button>
-                            <button class="btn btn-warning rounded-pill" data-toggle="modal">Warning</button>
-                            <button class="btn btn-info rounded-pill" data-toggle="modal">Info</button> -->
-                        <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Brandon Jacob</td>
-                    <td>brandon@gmail.com</td>
-                    <td>BSU </td>
-                    <td>1st Year </td>
-                    <td>BSIT </td>
-                    <td>
-                      <div class="row" button style="height:100px;width:200px">
-                        <button class="btn btn-primary rounded-pill" data-toggle="modal">View Profile</button>
-                        <button class="btn btn-info rounded-pill" data-toggle="modal">View Requirements</button>
-                        <button class="btn btn-success rounded-pill" data-toggle="modal">For Interview</button>
-                        <!-- <button class="btn btn-danger rounded-pill" data-toggle="modal">Danger</button>
-                            <button class="btn btn-warning rounded-pill" data-toggle="modal">Warning</button>
-                            <button class="btn btn-info rounded-pill" data-toggle="modal">Info</button> -->
-                        <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editRoomModal">Edit</button>
-                              <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRoomModal">Delete</button> -->
-                      </div>
-                    </td>
-                  </tr>
+                  
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->

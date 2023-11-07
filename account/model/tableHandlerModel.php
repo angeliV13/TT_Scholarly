@@ -725,21 +725,15 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             {
                 if (!isset($scholarType['status'])) continue;
                 if ($scholarType['status'] != $stat) continue;
-            } 
+            }
+            
+            $buttonText = ($acc_type == 2) ? "Remove Beneficiary" : "Remove Applicant";
 
             $none = ($acc_status == 4) ? "d-none" : "";
             $school = $course = $schoolDetails = "";
 
-            if($acc_type == 2){
-                $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                            <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Beneficiary</button>';
-            }elseif($acc_type == 3){
-                $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                            <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
-            }else{
-                $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
-                            <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">Remove Applicant</button>';
-            }
+            $button = ' <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                        <button id="removeApplicant" type="button" class="deleteApplicant btn btn-danger '.$none.'" data-id="' . $account_id . '" data-status="Applicant">' . $buttonText . '</button>';
 
             if (isset($education['course']))
             {
@@ -857,7 +851,7 @@ function graduatesTable() //CHECKING CK
 {
     include("dbconnection.php");
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '3' => '', '4' => ''];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
@@ -915,10 +909,16 @@ function graduatesTable() //CHECKING CK
 
             $data[] = [
                 static_count(),
-                $last_name . ", " . $first_name . " " . $middle_name,
+                $eac_number,
+                $last_name,
+                $first_name,
+                $middle_name,
+                $suffix,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : $school, //School Name,
+                (isset($schoolDetails['class_type']))                                   ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $course, //Course,
                 $button,
             ];
@@ -941,7 +941,7 @@ function graduatingTable() // CHECKING CK
 {
     include("dbconnection.php");
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private'];
+    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '3' => '', '4' => ''];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
@@ -972,7 +972,7 @@ function graduatingTable() // CHECKING CK
             $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
                             <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
                             <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
-                            <button id="removeApplicant" type="button" class="btn btn-danger" data-id="' . $account_id . '">Remove Beneficiary</button>
+                            <button id="removeApplicant" type="button" class="btn btn-danger deleteApplicant" data-id="' . $account_id . '" data-status="Beneficiary">Remove Beneficiary</button>
                         </div>';
             $scholarType = check_status($account_id);
 
@@ -998,7 +998,7 @@ function graduatingTable() // CHECKING CK
                 }
                 else
                 {
-                    $school = $education[1]['school'];
+                    $school = $education['school'];
                 }
             }
 
@@ -1009,7 +1009,9 @@ function graduatingTable() // CHECKING CK
                 $middle_name,
                 $email,                         //Email
                 (isset($schoolDetails['school_name']))                                      ? ($schoolDetails['school_name']) : $school, //School Name,
+                (isset($schoolDetails['class_type']))                                   ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type
                 (isset($schoolDetails['school_type']))                                      ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level,
+                (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
                 $course, //Course,
                 $button,
             ];

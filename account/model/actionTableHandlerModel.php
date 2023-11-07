@@ -119,6 +119,7 @@ function getProfile($account_id)
 
     $profile = '<div class="row" id="profile">';
     $profile .= '<input type="hidden" id="scholarStatus" value="' . $scholarStatus . '">';
+    $profile .= '<input type="hidden" id="accountType" value="' . $accountType . '">';
 
     if ($accountType == 3)
     {
