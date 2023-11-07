@@ -66,10 +66,10 @@ $("#change_pass").on("click", function () {
               new_pass: new_pass,
             },
             success: function (data) {
-              if (data == "No Session Found") {
+              if (data == "Success") {
                 Swal.fire({
-                  title: "Alert!",
-                  html: data,
+                  title: "Success!",
+                  html: "Password changed successfully",
                   timer: 2500,
                   timerProgressBar: true,
                 }).then((result) => {
