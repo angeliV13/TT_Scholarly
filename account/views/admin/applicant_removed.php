@@ -57,6 +57,7 @@
                                 <th>Examination Start Date</th>
                                 <th>Interview Start Date</th>
                                 <th>Interview End Date</th>
+                                <th>Remarks</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

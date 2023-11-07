@@ -1502,7 +1502,6 @@ function undoGraduate($data)
     include("dbconnection.php");
 
     $id = $data['id'];
-    $status = $data['status'];
 
     $sql = "UPDATE account SET account_status = '1' WHERE id = '$id' LIMIT 1";
     $query = $conn->query($sql);

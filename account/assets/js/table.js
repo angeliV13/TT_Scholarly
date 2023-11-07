@@ -1032,29 +1032,30 @@ $(document).on("click", ".viewInfoClass", function () {
             $("#accountViewId").val(id);
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
-            $("#currentStatus").html($("#scholarStatus").val());
             let accountType = $("#accountType").val();
             let accountText = (accountType == 2) ? "For Renewal" : "For Interview";
-
+            let currentStatus = (accountType == 2 && $("#scholarStatus").val() == "For Interview") ? "For Renewal" : $("#scholarStatus").val();
+            
             $("#changeRadio").html(accountText);
+            $("#currentStatus").html(currentStatus);
 
-            if ($("#scholarStatus").val() == "For Assesment Exam")
+            if (currentStatus == "For Assesment Exam")
             {
                 $("#decisionRadio1").prop("disabled", true);
             }
-            else if ($("#scholarStatus").val() == "For Interview")
+            else if (currentStatus == "For Interview" || currentStatus == "For Renewal")
             {
                 $("#decisionRadio1").prop("disabled", true);
                 $("#decisionRadio2").prop("disabled", true);
             }
-            else if ($("#scholarStatus").val() == "Application Approved")
+            else if (currentStatus == "Application Approved")
             {
                 $("#decisionRadio1").prop("disabled", true);
                 $("#decisionRadio2").prop("disabled", true);
                 $("#decisionRadio3").prop("disabled", true);
                 $("#decisionRadio4").prop("disabled", true);
             }
-            else if ($("#scholarStatus").val() == "Application Rejected")
+            else if (currentStatus == "Application Rejected")
             {
                 $("#decisionRadio1").prop("disabled", true);
                 $("#decisionRadio2").prop("disabled", true);
@@ -1456,7 +1457,6 @@ $(document).on("click", ".updateToGraduate", function(){
 
 $(document).on("click", ".undoGraduate", function(){
     let id = $(this).attr("data-id");
-    let status = $(this).attr("data-status");
     
     Swal.fire({
         title: "Are you sure?",
@@ -1473,7 +1473,6 @@ $(document).on("click", ".undoGraduate", function(){
                 data: {
                     action: 27,
                     id: id,
-                    status: status
                 },
                 beforeSend: function () {
                     showBeforeSend("Undoing Update Request...");

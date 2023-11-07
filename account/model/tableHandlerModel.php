@@ -694,7 +694,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '3' => '', '4' => ''];
+    $schoolClassArr = ['0' => 'Public (Within Sto. Tomas, Batangas)', '1' => 'Private (Within Sto. Tomas, Batangas)', '2' => 'Public (Outside Sto. Tomas, Batangas)', '3' => 'Private (Outside Sto. Tomas, Batangas)'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
@@ -781,6 +781,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
                 $exam_end_date,
                 $interview_start_date,
                 $interview_end_date,
+                $reason_of_admin,
                 $button, // Buttons
             ];
 
@@ -851,7 +852,7 @@ function graduatesTable() //CHECKING CK
 {
     include("dbconnection.php");
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '3' => '', '4' => ''];
+    $schoolClassArr = ['0' => 'Public (Within Sto. Tomas, Batangas)', '1' => 'Private (Within Sto. Tomas, Batangas)', '2' => 'Public (Outside Sto. Tomas, Batangas)', '3' => 'Private (Outside Sto. Tomas, Batangas)'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
@@ -941,7 +942,7 @@ function graduatingTable() // CHECKING CK
 {
     include("dbconnection.php");
 
-    $schoolClassArr = ['0' => 'Public', '1' => 'Private', '3' => '', '4' => ''];
+    $schoolClassArr = ['0' => 'Public (Within Sto. Tomas, Batangas)', '1' => 'Private (Within Sto. Tomas, Batangas)', '2' => 'Public (Outside Sto. Tomas, Batangas)', '3' => 'Private (Outside Sto. Tomas, Batangas)'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
 
