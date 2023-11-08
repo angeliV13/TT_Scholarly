@@ -1182,9 +1182,10 @@ function set_applicant_status($data)
 
 function deleteUserRequest($data)
 {
-    session_start();
     include("dbconnection.php");
-
+    
+    session_start();
+    
     $id = $data['id'];
     $reason = $data['reason'];
     $userId = $_SESSION['id'];
