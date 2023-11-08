@@ -210,6 +210,25 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }],
+        initComplete: function () {
+            $(document).on("click", "#setSchoolFilter", function () {
+                schoolTable.ajax.reload();
+
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterSchoolType = $("#filterSchoolType option:selected").text();
+                let filterClass = $("#filterClass option:selected").text();
+                
+                schoolTable.columns(1).search(filterSchool).draw();
+                schoolTable.columns(3).search(filterSchoolType).draw();
+                schoolTable.columns(4).search(filterClass).draw();
+            });
+
+            $(document).on("click", "#resetSchoolFilter", function () {
+                schoolTable.columns(1).search("").draw();
+                schoolTable.columns(3).search("").draw();
+                schoolTable.columns(4).search("").draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },

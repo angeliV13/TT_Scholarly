@@ -690,7 +690,7 @@ function get_status_text($type)
 {
     switch ($type) {
         case 2:
-            return "For Assesment Exam";
+            return "For Qualification Exam";
         case 3:
             return "For Interview";
         case 4:
@@ -708,7 +708,7 @@ function get_message_text_status($type, $date = "", $endDate = "", $reason = "")
     switch ($type) 
     {
         case 2:
-            $text .= "<p>Your scholarship application has been reviewed. You are now scheduled for an Assesment Exam</p><br>";
+            $text .= "<p>Your scholarship application has been reviewed. You are now scheduled for a Qualification Exam</p><br>";
             $text .= "<p>Here are the details:</p>";
             $text .= "<p>Start Date: <b>" . date('F j,Y H:i:s', strtotime($date)) . "</b></p>";
             $text .= "<p>End Date: <b>" . date('F j,Y H:i:s', strtotime($endDate)) . "</b></p>";

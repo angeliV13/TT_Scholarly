@@ -666,8 +666,8 @@ function schoolTable()
                 // "<pre>" . print_r($addedBy, true) . "</pre>",
                 $name,
                 $dateAdded,
-                "<button type='button' class='editSchool btn btn-sm btn-warning' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . $schoolName . "' data-address='" . $schoolAddress . "' data-type='" . $row['school_type'] . "' data-class='" . $row['class_type'] . "' data-partner='" . $row['partner'] . "' >Edit</button>
-                <button type='button' class='deleteSchool btn btn-sm btn-danger' data-id='" . $id . "' data-name='" . $schoolName . "'>Delete</button>",
+                "<button type='button' class='editSchool btn btn-warning mb-2' data-bs-toggle='modal' data-bs-target='#update_school' data-id='" . $id . "' data-name='" . $schoolName . "' data-address='" . $schoolAddress . "' data-type='" . $row['school_type'] . "' data-class='" . $row['class_type'] . "' data-partner='" . $row['partner'] . "' >Edit</button>
+                <button type='button' class='deleteSchool btn btn-danger' data-id='" . $id . "' data-name='" . $schoolName . "'>Delete</button>",
             ];
 
             $totalData++;

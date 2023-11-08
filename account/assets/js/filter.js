@@ -31,6 +31,30 @@ $(document).ready(function (){
   // });
 });
 
+$.ajax({
+  url : "controller/filterHandler.php",
+  type : "POST",
+  data: {
+    action          : 0,
+  },
+  success : function(data){
+    let schoolFilters = JSON.parse(data);
+
+    for (var i in schoolFilters.educationLevel){
+      $('#filterSchoolType').append(
+        '<option value='+ schoolFilters.educationLevel[i][0] +'>' + schoolFilters.educationLevel[i][1] +'</option>');
+    }
+    for (var i in schoolFilters.school){
+      $('#filterSchool').append(
+        '<option value='+ schoolFilters.school[i][0] +'>' + schoolFilters.school[i][1] +'</option>');
+    }
+    for (var i in schoolFilters.classType){
+      $('#filterClass').append(
+        '<option value='+ schoolFilters.classType[i][0] +'>' + schoolFilters.classType[i][1] +'</option>');
+    }
+  },
+})
+
 $("#filterScholar :input").on("change", function () {
   let scholarType     = ($("#filterScholarType").val()    != "") ? $("#filterScholarType").val()    : 0;
   let educationLevel  = ($("#filterEducationLevel").val() != "") ? $("#filterEducationLevel").val() : 0;

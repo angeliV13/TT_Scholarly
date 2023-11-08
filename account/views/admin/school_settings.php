@@ -1,15 +1,62 @@
 <main id="main" class="main">
     <!-- Start of Page Title -->
     <div class="pagetitle">
-      <h1>School Settings</h1>
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Basic Setup</li>
-          <li class="breadcrumb-item active">School Settings</li>
+        <h1>School Settings</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item">Basic Setup</li>
+            <li class="breadcrumb-item active">School Settings</li>
         </ol>
     </div>
     <!-- End Page Title -->
     <section class="section">
+        <div class="column">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">Query Filter</h5>
+                            <div class="d-flex align-items-center">
+                                <button id="resetSchoolFilter" class="btn btn-sm btn-danger shadow-sm">Reset Filter</button>
+                            </div>
+                        </div>
+                        <!-- Filter options -->
+                        <div class="row mb-1 justify-content-between">
+                            <div class="column position-relative">
+                                <div class="row mb-3">
+                                    <label for="filterSchool" class="col-sm-2 col-form-label">School Name: </label>
+                                    <div class="col-sm-10" id="">
+                                        <select class="form-select" id="filterSchool">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="filterSchoolType" class="col-sm-2 col-form-label font-bold">School Type: </label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" id="filterSchoolType">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="filterClass" class="col-sm-2 col-form-label font-bold">School Class Type: </label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" id="filterClass">
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
+                                    <button type="button" id="setSchoolFilter" class="btn btn-sm btn-danger shadow-sm">Set Query Filter </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="column">
             <div class="col-lg-15">
 
@@ -38,7 +85,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="small text-center">
-                                    
+
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
@@ -77,7 +124,7 @@
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="1"  name="schoolType">
+                                <input class="form-check-input" type="radio" value="1" name="schoolType">
                                 <label class="mx-2 form-check-label">
                                     Senior High School
                                 </label>
@@ -151,7 +198,7 @@
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="1"  name="editschoolType">
+                                <input class="form-check-input" type="radio" value="1" name="editschoolType">
                                 <label class="mx-2 form-check-label">
                                     Senior High School
                                 </label>
