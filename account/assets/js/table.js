@@ -282,7 +282,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
                 
                 collegeNewApplicantTable.columns(9).search(filterSchool).draw();
                 collegeNewApplicantTable.columns(11).search(filterScholarType).draw();
@@ -388,6 +388,31 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }],
+        initComplete: function () {
+            $(document).on("click", "#setSchoolFilter", function () {
+                graduatesTable.ajax.reload();
+
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterSchoolType = $("#filterSchoolType option:selected").text();
+                let filterClass = $("#filterClass option:selected").text();
+                let filterLevel = $("#filterLevel option:selected").val();
+                let filterYear = $("#filterYear").val();
+                
+                graduatesTable.columns(7).search(filterSchool).draw();
+                graduatesTable.columns(8).search(filterSchoolType).draw();
+                graduatesTable.columns(9).search(filterClass).draw();
+                graduatesTable.columns(10).search(filterLevel).draw();
+                graduatesTable.columns(12).search(filterYear).draw();
+            });
+
+            $(document).on("click", "#resetSchoolFilter", function () {
+                graduatesTable.columns(7).search("").draw();
+                graduatesTable.columns(8).search("").draw();
+                graduatesTable.columns(9).search("").draw();
+                graduatesTable.columns(10).search("").draw();
+                graduatesTable.columns(12).search("").draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -480,7 +505,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
                 
                 benefListTable.columns(9).search(filterSchool).draw();
                 benefListTable.columns(11).search(filterScholarType).draw();
@@ -590,7 +615,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
 
                 applicantInterviewTable.columns(9).search(filterSchool).draw();
                 applicantInterviewTable.columns(11).search(filterScholarType).draw();
@@ -656,7 +681,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
 
                 applicantExamTable.columns(9).search(filterSchool).draw();
                 applicantExamTable.columns(11).search(filterScholarType).draw();
@@ -722,7 +747,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
 
                 removedApplicantTable.columns(9).search(filterSchool).draw();
                 removedApplicantTable.columns(11).search(filterScholarType).draw();
@@ -788,7 +813,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
 
                 benefAssessTable.columns(9).search(filterSchool).draw();
                 benefAssessTable.columns(11).search(filterScholarType).draw();
@@ -854,7 +879,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
 
                 benefRenewTable.columns(9).search(filterSchool).draw();
                 benefRenewTable.columns(11).search(filterScholarType).draw();
@@ -920,7 +945,7 @@ $(document).ready(function () {
                 let filterScholarType = $("#filterScholarType option:selected").text();
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel").val();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
 
                 benefRemovedTable.columns(9).search(filterSchool).draw();
                 benefRemovedTable.columns(11).search(filterScholarType).draw();

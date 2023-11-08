@@ -11,6 +11,74 @@
   <!-- End Page Title -->
   <section class="section">
     <div class="column">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title">Query Filter</h5>
+              <div class="d-flex align-items-center">
+                <button id="resetSchoolFilter" class="btn btn-sm btn-danger shadow-sm">Reset Filter</button>
+              </div>
+            </div>
+            <!-- Filter options -->
+            <div class="row mb-1 justify-content-between">
+              <div class="column position-relative">
+                <div class="row mb-3">
+                  <label for="filterSchool" class="col-sm-2 col-form-label">School Name: </label>
+                  <div class="col-sm-10" id="">
+                    <select class="form-select" id="filterSchool">
+
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="filterSchoolType" class="col-sm-2 col-form-label font-bold">School Type: </label>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="filterSchoolType">
+
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="filterClass" class="col-sm-2 col-form-label font-bold">School Class Type: </label>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="filterClass">
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="filterLevel" class="col-sm-2 col-form-label font-bold">School Year Level: </label>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="filterLevel">
+
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="filterYear" class="col-sm-2 col-form-label font-bold">Year Graduated: </label>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="filterYear">
+                      <option value=""></option>
+                      <?php for ($i = date("Y"); $i <= date("Y") + 5; $i++) : ?>
+                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                      <?php endfor; ?>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
+                  <button type="button" id="setSchoolFilter" class="btn btn-sm btn-danger shadow-sm">Set Query Filter </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
       <div class="col-lg-15">
         <div class="card">
           <div class="card-body ">
@@ -37,7 +105,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  
+
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->

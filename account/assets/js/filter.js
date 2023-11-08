@@ -52,6 +52,11 @@ $.ajax({
       $('#filterClass').append(
         '<option value='+ schoolFilters.classType[i][0] +'>' + schoolFilters.classType[i][1] +'</option>');
     }
+
+    for (var i in schoolFilters.yearLevel){
+      $('#filterLevel').append(
+        '<option value='+ schoolFilters.yearLevel[i][0] +'>' + schoolFilters.yearLevel[i][1] +'</option>');
+    }
   },
 })
 
