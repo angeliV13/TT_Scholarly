@@ -118,25 +118,25 @@
                         <label for="schoolType" class="form-label col-3">School Type</label>
                         <div class="col">
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="0" name="schoolType">
+                                <input class="form-check-input" type="checkbox" value="0" name="schoolType">
                                 <label class="mx-2 form-check-label">
                                     College
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="1" name="schoolType">
+                                <input class="form-check-input" type="checkbox" value="1"  name="schoolType">
                                 <label class="mx-2 form-check-label">
                                     Senior High School
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="2" name="schoolType">
+                                <input class="form-check-input" type="checkbox" value="2" name="schoolType">
                                 <label class="mx-2 form-check-label">
                                     Junior High School
                                 </label>
                             </div>
                             <div class="d-flex">
-                                <input class="form-check-input" type="radio" value="3" name="schoolType">
+                                <input class="form-check-input" type="checkbox" value="3" name="schoolType">
                                 <label class="mx-2 form-check-label">
                                     Elementary
                                 </label>
