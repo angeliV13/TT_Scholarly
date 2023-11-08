@@ -187,8 +187,8 @@
                                     <tr class="small">
                                         <th class="text-center">No</th>
                                         <th class="text-center">Residency</th>
-                                        <th class="text-center">Action</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
