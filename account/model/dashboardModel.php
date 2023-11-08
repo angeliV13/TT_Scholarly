@@ -251,39 +251,59 @@ function getSchoolTrends()
     $ay_id  = getDefaultAcadYearId();
     $sem_id = getDefaultSemesterId();
 
+    $school     = "";
+    $gender     = -1;
+    $male_ctr   = 0;
+    $female_ctr = 0;
+
     $data       = [];
-    $schools    = [];
+    $school_arr = [];
     $male_arr   = [];
     $female_arr = [];
 
 
-    $sql = "SELECT uin.barangay, 
-            COUNT( CASE WHEN gender = 0 THEN 1 END ) AS 'male', 
-            COUNT( CASE WHEN gender = 1 THEN 1 END ) AS 'female' 
-            FROM user_info uin
-            JOIN scholarship_application sca ON uin.account_id = sca.userId
-            WHERE uin.barangay IS NOT NULL 
-            AND sca.ay_id = '{$ay_id}'
-            AND sca.sem_id = '{$sem_id}'
-            GROUP BY uin.barangay";
-
+    $sql = "SELECT MIN(edu.education_level) AS educ_level, uin.gender, sch.school_name 
+            FROM education edu 
+            JOIN user_info uin ON edu.user_id = uin.account_id 
+            JOIN school sch ON edu.school = sch.id 
+            WHERE edu.ay_id = '{$ay_id}' 
+            AND edu.sem_id = '{$sem_id}'
+            GROUP BY edu.user_id, edu.ay_id, edu.sem_id 
+            ORDER BY edu.school, uin.gender";
     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
 
-    if ($query->num_rows <>  0) {
-        while ($row = $query->fetch_assoc()) {
-
-            extract($row);
-            // Data
-            $categories[]   =   $barangay;
-            $male_arr[]     =   $male;
-            $female_arr[]   =   $female;
+    if ($query->num_rows <> 0){
+        while($row = $query->fetch_assoc()){
+            if($school == "" || $school <> $row['school_name']){
+                if($school <> ""){
+                    $school_arr[]   = $school;
+                    $male_arr[]     = $male_ctr;
+                    $female_arr[]   = $female_ctr;     
+                }
+                $school = $row['school_name'];
+                $male_ctr   = 0;
+                $female_ctr = 0;
+            }
+            if($gender == -1 || $gender <> $row['gender']){ //Set to new Gender if it becomes different
+                $gender = $row['gender'];
+            }
+            if($gender == 0){       // Male
+                $male_ctr += 1;
+            }elseif($gender == 1){  // Female
+                $female_ctr +=1;
+            }
         }
-        $data = [
-            'barangay'   => $categories,
-            'male'       => $male_arr,
-            'female'     => $female_arr
-        ];
+        // Final Insert to Array
+        $school_arr[]   = $school;
+        $male_arr[]     = $male_ctr;
+        $female_arr[]   = $female_ctr;  
+
     }
+    $data = [
+        "school"    => $school_arr,
+        "male"      => $male_arr,
+        "female"    => $female_arr,
+    ];
 
     return json_encode($data);
 }

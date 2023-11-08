@@ -503,18 +503,18 @@ $(document).ready(function ($) {
     success: function (data) {
       // console.log(data);
       if (data != "") {
-        let barangayTrends = JSON.parse(data);
+        let scholarTrends = JSON.parse(data);
 
         scholarTrendsv5.updateSeries([
           {
             name: 'Male',
             group: 'Gender',
-            data: barangayTrends.male
+            data: scholarTrends.male
           },
           {
             name: 'Female',
             group: 'Gender',
-            data: barangayTrends.female
+            data: scholarTrends.female
           },
         ]);
 
@@ -525,7 +525,7 @@ $(document).ready(function ($) {
               rotate: -45,
             },
             type: "category",
-            categories: barangayTrends.barangay,
+            categories: scholarTrends.school,
           },
         });
       }
