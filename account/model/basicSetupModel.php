@@ -879,6 +879,7 @@ function getIndicatorEATable($indicatorCategory)
                     $indicatorLow,
                     $indicatorHigh,
                     $indicatorPoint,
+                    $indicatorDelete = '<button class="btn btn-danger" id="deleteIndicator_' . $id . '" onclick="indicatorDelete('. $id .')"> Delete </button>'
                 ];
             } else {
                 $indicatorExact = '<div id="editIndicator_1_' . $id . '">' . $indicator_exact . '</div><input type="text" class="editIndicatorText d-none form-control" value="' . $indicator_exact . '" id="ea_1_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 1)">';
@@ -888,6 +889,7 @@ function getIndicatorEATable($indicatorCategory)
                     $counter,
                     $indicatorExact,
                     $indicatorPoint,
+                    $indicatorDelete = '<button class="btn btn-danger" id="deleteIndicator_' . $id . '" onclick="indicatorDelete('. $id .')"> Delete </button>'
                 ];
             }
 
@@ -904,6 +906,35 @@ function getIndicatorEATable($indicatorCategory)
 
     echo json_encode($json_data);  // send data as json format
 
+}
+
+function getIndicatorCount($indicator = 0)
+{
+    include("dbconnection.php");
+
+    $data = [];
+
+    if ($indicator <> 0) {
+        $sql = "SELECT MAX(points) as max_point, indicator_category 
+                FROM `applicant_indicator` 
+                WHERE indicator_applicant = '{$indicator}'
+                GROUP BY indicator_category
+                ORDER BY indicator_category";
+        $query = $conn->query($sql) or die("Error BSQ020: " . $conn->error);
+
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                extract($row);
+
+                $data[] = [
+                    $indicator_category,
+                    $max_point,
+                ];
+
+            }
+        }
+        return(json_encode($data));
+    }
 }
 
 function updateIndicator($id, $type, $value, $category, $applicant = 0)
@@ -945,6 +976,16 @@ function updateIndicator($id, $type, $value, $category, $applicant = 0)
     }
 }
 
+function deleteIndicator($id)
+{
+    include("dbconnection.php");
+
+    $sql = "DELETE FROM `applicant_indicator` WHERE id = '{$id}'";
+    $query = $conn->query($sql) or die("Error BSQ020: " . $conn->error);
+
+    return (($query) ? 'Success' : "");
+}
+
 // SC Indicator Table
 function getIndicatorSCTable($indicatorCategory)
 {
@@ -972,6 +1013,7 @@ function getIndicatorSCTable($indicatorCategory)
                     $indicatorLow,
                     $indicatorHigh,
                     $indicatorPoint,
+                    $indicatorDelete = '<button class="btn btn-danger" id="deleteIndicator_' . $id . '" onclick="indicatorDelete('. $id .')"> Delete </button>'
                 ];
             } else {
                 $indicatorExact = '<div id="editIndicator_1_' . $id . '">' . $indicator_exact . '</div><input type="text" class="editIndicatorText d-none form-control" value="' . $indicator_exact . '" id="sc_1_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 1)">';
@@ -981,6 +1023,7 @@ function getIndicatorSCTable($indicatorCategory)
                     $counter,
                     $indicatorExact,
                     $indicatorPoint,
+                    $indicatorDelete = '<button class="btn btn-danger" id="deleteIndicator_' . $id . '" onclick="indicatorDelete('. $id .')"> Delete </button>'
                 ];
             }
 
