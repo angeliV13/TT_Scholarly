@@ -424,4 +424,112 @@ $(document).ready(function ($) {
     },
   });
 
+
+  // School Trend Chart
+  let scholarTrendsv5 = new ApexCharts(
+    document.querySelector("#scholarTrendsV5"),
+    {
+      series: [],
+      chart: {
+        height: 'auto',
+        type: "bar",
+        stacked: true,
+        toolbar: {
+          show: true,
+          export: {
+            csv: {
+              filename: "Scholar Trends",
+              headerCategory: "Academic Year",
+              columnDelimiter: ";",
+              dateFormatter: function (timestamp) {
+                var date = dayjs(new Date(timestamp));
+                var format = "ddd D. MMM;HH:mm"; // sic: Delimiter in here on purpose
+                var nextHour = Number(date.hour()) + 1;
+                var text = date.format(format) + " - " + nextHour + ":00";
+                return text;
+              },
+            },
+          },
+        },
+      },
+      markers: {
+        size: 4,
+      },
+      // colors: ["#4154f1", "#2eca6a", "#ff771d"],
+      fill: {
+        type: "gradient",
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.3,
+          opacityTo: 0.4,
+          stops: [0, 90, 100],
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          dataLabels: {
+            total: {
+              enabled: true,
+              offsetX: 0,
+              style: {
+                fontSize: '12px',
+                fontWeight: 750
+              }
+            }
+          }
+        },
+      },
+      stroke: {
+        curve: "smooth",
+        width: 2,
+      },
+      xaxis: {},
+    }
+  );
+
+  scholarTrendsv5.render();
+
+  // Data in Scholar Trend Chart
+  $.ajax({
+    type: "POST",
+    url: "controller/dashboard.php",
+    data: {
+      action: 7,
+    },
+    success: function (data) {
+      // console.log(data);
+      if (data != "") {
+        let barangayTrends = JSON.parse(data);
+
+        scholarTrendsv5.updateSeries([
+          {
+            name: 'Male',
+            group: 'Gender',
+            data: barangayTrends.male
+          },
+          {
+            name: 'Female',
+            group: 'Gender',
+            data: barangayTrends.female
+          },
+        ]);
+
+        scholarTrendsv5.updateOptions({
+          xaxis: {
+            labels: {
+              show: true,
+              rotate: -45,
+            },
+            type: "category",
+            categories: barangayTrends.barangay,
+          },
+        });
+      }
+    },
+  });
+
 });
