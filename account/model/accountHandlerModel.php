@@ -455,6 +455,8 @@ function password_reset($data)
         $id = $row['id'];
         $user_name = $row['user_name'];
 
+        $newPassword = hashPassword($data['newPassword']);
+
         $sql = "SELECT * FROM email_token WHERE email = '" . $data['email'] . "' AND token = '" . $data['code'] . "' AND type = 1 ORDER BY id DESC LIMIT 1";
         $query = $conn->query($sql);
 
@@ -463,7 +465,7 @@ function password_reset($data)
             $sql = "UPDATE email_token SET date_verified = NOW() WHERE user_id = '" . $id . "' AND token = '" . $data['code'] . "' AND type = 1 LIMIT 1";
             $query = $conn->query($sql);
 
-            $sql = "UPDATE account SET password = '" . $data['newPassword'] . "' WHERE id = '" . $id . "' LIMIT 1";
+            $sql = "UPDATE account SET password = '" . $newPassword . "' WHERE id = '" . $id . "' LIMIT 1";
             $query = $conn->query($sql);
 
             if ($query) 
