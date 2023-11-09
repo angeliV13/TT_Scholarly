@@ -1398,7 +1398,7 @@ function saveEAIndicator(category, id, type){
 
           for(let i = 0; i < tdCount; i++){
             if(i > 0){
-              if(category <= 2){
+              if(category <= 2 || category == 4){
                 if (i == 1){
                   $(parentTr).find('td:eq(1)').find('input').attr('id', 'ea_0_' + data);
                   $(parentTr).find('td:eq(1)').find('input').attr('onfocusout', "saveEAIndicator(" + category+ "," + data + "," + "0)");
@@ -1493,7 +1493,8 @@ function indicatorEAResidencyAdd(){
 
   let row = '<tr class="' + classRow + '">'+
       '<td>'+tableRowCount+'</td>'+
-      '<td><div id="editIndicator_1_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_0_0" value=" " onfocusout="saveEAIndicator(4,'+ 0 +', 1)"></td>'+
+      '<td><div id="editIndicator_0_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_0_0" value=" " onfocusout="saveEAIndicator(4,'+ 0 +', 0)"></td>'+
+      '<td><div id="editIndicator_2_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_2_0" value=" " onfocusout="saveEAIndicator(4,'+ 0 +', 2)"></td>'+
       '<td><div id="editIndicator_3_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_3_0" value="0" onfocusout="saveEAIndicator(4,'+ 0 +', 3)"></td>'+
       '</tr>';  
 
@@ -1549,7 +1550,7 @@ function saveSCIndicator(category, id, type){
 
           for(let i = 0; i < tdCount; i++){
             if(i > 0){
-              if(category <= 2){
+              if(category <= 2 || category == 4 || category == 5){
                 if (i == 1){
                   $(parentTr).find('td:eq(1)').find('input').attr('id', 'sc_0_' + data);
                   $(parentTr).find('td:eq(1)').find('input').attr('onfocusout', "saveSCIndicator(" + category+ "," + data + "," + "0)");
@@ -1646,7 +1647,8 @@ function indicatorSCResidencyAdd(){
 
   let row = '<tr class="' + classRow + '">'+
       '<td>'+tableRowCount+'</td>'+
-      '<td><div id="editIndicator_1_0"></div><input type="text" class="editIndicatorText d-none form-control" id="sc_0_0" value=" " onfocusout="saveSCIndicator(4,'+ 0 +', 1)"></td>'+
+      '<td><div id="editIndicator_0_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_0_0" value="0" onfocusout="saveSCIndicator(4 '+ 0 +', 0)"></td>'+
+      '<td><div id="editIndicator_2_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_2_0" value="0" onfocusout="saveSCIndicator(4,'+ 0 +', 2)"></td>'+
       '<td><div id="editIndicator_3_0"></div><input type="text" class="editIndicatorText d-none form-control" id="sc_3_0" value="0" onfocusout="saveSCIndicator(4,'+ 0 +', 3)"></td>'+
       '</tr>';  
 

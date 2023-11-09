@@ -868,7 +868,7 @@ function getIndicatorEATable($indicatorCategory)
         while ($row = $query->fetch_assoc()) {
             extract($row);
 
-            if ($indicatorCategory <= 2) {
+            if ($indicatorCategory <= 2 || $indicator_category == 4) {
                 // $indicatorLow   = '<div id="editIndicator_0_' . $id . '" onclick="editEAIndicator(' . $id . ', 0)">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="ea_0_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 0)">';
                 $indicatorLow   = '<div id="editIndicator_0_' . $id . '">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="ea_0_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 0)">';
                 $indicatorHigh  = '<div id="editIndicator_2_' . $id . '">' . $indicator_high . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_high . '" id="ea_2_' . $id . '" onfocusout="saveEAIndicator(' . $indicatorCategory . ',' . $id . ', 2)">';
@@ -1002,7 +1002,7 @@ function getIndicatorSCTable($indicatorCategory)
         while ($row = $query->fetch_assoc()) {
             extract($row);
 
-            if ($indicatorCategory <= 2 || $indicatorCategory == 5) {
+            if ($indicatorCategory <= 2 || $indicatorCategory == 4 || $indicatorCategory == 5) {
                 // $indicatorLow   = '<div id="editIndicator_0_' . $id . '" onclick="editEAIndicator(' . $id . ', 0)">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="ea_0_' . $id . '" onfocusout="saveEAIndicator('.$indicatorCategory.',' . $id . ', 0)">';
                 $indicatorLow   = '<div id="editIndicator_0_' . $id . '">' . $indicator_low . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_low . '" id="sc_0_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 0)">';
                 $indicatorHigh  = '<div id="editIndicator_2_' . $id . '">' . $indicator_high . '</div><input type="number" class="editIndicatorText d-none form-control" value="' . $indicator_high . '" id="sc_2_' . $id . '" onfocusout="saveSCIndicator(' . $indicatorCategory . ',' . $id . ', 2)">';
