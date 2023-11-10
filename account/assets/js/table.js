@@ -569,9 +569,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    benefListTable.columns(15).search("").draw();
+                    benefListTable.columns(14).search("").draw();
                 } else {
-                    benefListTable.columns(15).search(filterYearLevel).draw();
+                    benefListTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -579,7 +579,7 @@ $(document).ready(function () {
                 benefListTable.columns(9).search("").draw();
                 benefListTable.columns(11).search("").draw();
                 benefListTable.columns(12).search("").draw();
-                benefListTable.columns(15).search("").draw();
+                benefListTable.columns(14).search("").draw();
             });
         },
         language: {
@@ -698,9 +698,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    applicantInterviewTable.columns(15).search("").draw();
+                    applicantInterviewTable.columns(14).search("").draw();
                 } else {
-                    applicantInterviewTable.columns(15).search(filterYearLevel).draw();
+                    applicantInterviewTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -708,7 +708,7 @@ $(document).ready(function () {
                 applicantInterviewTable.columns(9).search("").draw();
                 applicantInterviewTable.columns(11).search("").draw();
                 applicantInterviewTable.columns(12).search("").draw();
-                applicantInterviewTable.columns(15).search("").draw();
+                applicantInterviewTable.columns(14).search("").draw();
             });
         },
         language: {
@@ -783,9 +783,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    applicantExamTable.columns(15).search("").draw();
+                    applicantExamTable.columns(14).search("").draw();
                 } else {
-                    applicantExamTable.columns(15).search(filterYearLevel).draw();
+                    applicantExamTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -793,7 +793,7 @@ $(document).ready(function () {
                 applicantExamTable.columns(9).search("").draw();
                 applicantExamTable.columns(11).search("").draw();
                 applicantExamTable.columns(12).search("").draw();
-                applicantExamTable.columns(15).search("").draw();
+                applicantExamTable.columns(14).search("").draw();
             });
         },
         language: {
@@ -868,9 +868,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    removedApplicantTable.columns(15).search("").draw();
+                    removedApplicantTable.columns(14).search("").draw();
                 } else {
-                    removedApplicantTable.columns(15).search(filterYearLevel).draw();
+                    removedApplicantTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -878,7 +878,7 @@ $(document).ready(function () {
                 removedApplicantTable.columns(9).search("").draw();
                 removedApplicantTable.columns(11).search("").draw();
                 removedApplicantTable.columns(12).search("").draw();
-                removedApplicantTable.columns(15).search("").draw();
+                removedApplicantTable.columns(14).search("").draw();
             });
         },
         language: {
@@ -953,9 +953,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    benefAssessTable.columns(15).search("").draw();
+                    benefAssessTable.columns(14).search("").draw();
                 } else {
-                    benefAssessTable.columns(15).search(filterYearLevel).draw();
+                    benefAssessTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -963,7 +963,7 @@ $(document).ready(function () {
                 benefAssessTable.columns(9).search("").draw();
                 benefAssessTable.columns(11).search("").draw();
                 benefAssessTable.columns(12).search("").draw();
-                benefAssessTable.columns(15).search("").draw();
+                benefAssessTable.columns(14).search("").draw();
             });
         },
         language: {
@@ -1038,9 +1038,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    benefRenewTable.columns(15).search("").draw();
+                    benefRenewTable.columns(14).search("").draw();
                 } else {
-                    benefRenewTable.columns(15).search(filterYearLevel).draw();
+                    benefRenewTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -1048,7 +1048,7 @@ $(document).ready(function () {
                 benefRenewTable.columns(9).search("").draw();
                 benefRenewTable.columns(11).search("").draw();
                 benefRenewTable.columns(12).search("").draw();
-                benefRenewTable.columns(15).search("").draw();
+                benefRenewTable.columns(14).search("").draw();
             });
         },
         language: {
@@ -1123,9 +1123,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    benefRemovedTable.columns(15).search("").draw();
+                    benefRemovedTable.columns(14).search("").draw();
                 } else {
-                    benefRemovedTable.columns(15).search(filterYearLevel).draw();
+                    benefRemovedTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -1133,7 +1133,7 @@ $(document).ready(function () {
                 benefRemovedTable.columns(9).search("").draw();
                 benefRemovedTable.columns(11).search("").draw();
                 benefRemovedTable.columns(12).search("").draw();
-                benefRemovedTable.columns(15).search("").draw();
+                benefRemovedTable.columns(14).search("").draw();
             });
         },
         language: {
