@@ -283,11 +283,30 @@ $(document).ready(function () {
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
-                
-                collegeNewApplicantTable.columns(9).search(filterSchool).draw();
-                collegeNewApplicantTable.columns(11).search(filterScholarType).draw();
-                collegeNewApplicantTable.columns(12).search(filterEducationLevel).draw();
-                collegeNewApplicantTable.columns(15).search(filterYearLevel).draw();
+
+                if (filterScholarType == ""){
+                    collegeNewApplicantTable.columns(11).search("").draw();
+                } else {
+                    collegeNewApplicantTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    collegeNewApplicantTable.columns(12).search("").draw();
+                } else {
+                    collegeNewApplicantTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    collegeNewApplicantTable.columns(9).search("").draw();
+                } else {
+                    collegeNewApplicantTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    collegeNewApplicantTable.columns(15).search("").draw();
+                } else {
+                    collegeNewApplicantTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
@@ -396,13 +415,37 @@ $(document).ready(function () {
                 let filterSchoolType = $("#filterSchoolType option:selected").text();
                 let filterClass = $("#filterClass option:selected").text();
                 let filterLevel = $("#filterLevel option:selected").val();
-                let filterYear = $("#filterYear").val();
-                
-                graduatesTable.columns(7).search(filterSchool).draw();
-                graduatesTable.columns(8).search(filterSchoolType).draw();
-                graduatesTable.columns(9).search(filterClass).draw();
-                graduatesTable.columns(10).search(filterLevel).draw();
-                graduatesTable.columns(12).search(filterYear).draw();
+                let filterYear = $("#filterYear option:selected").val();
+
+                if (filterSchool == "") {
+                    graduatesTable.columns(7).search("").draw();
+                } else {
+                    graduatesTable.columns(7).search(filterSchool).draw();
+                }
+
+                if (filterSchoolType == "") {
+                    graduatesTable.columns(8).search("").draw();
+                } else {
+                    graduatesTable.columns(8).search(filterSchoolType).draw();
+                }
+
+                if (filterClass == "") {
+                    graduatesTable.columns(9).search("").draw();
+                } else {
+                    graduatesTable.columns(9).search(filterClass).draw();
+                }
+
+                if (filterLevel == "") {
+                    graduatesTable.columns(10).search("").draw();
+                } else {
+                    graduatesTable.columns(10).search(filterLevel).draw();
+                }
+
+                if (filterYear == "") {
+                    graduatesTable.columns(12).search("").draw();
+                } else {
+                    graduatesTable.columns(12).search(filterYear).draw();
+                }
             });
 
             $(document).on("click", "#resetSchoolFilter", function () {
@@ -507,10 +550,29 @@ $(document).ready(function () {
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
                 
-                benefListTable.columns(9).search(filterSchool).draw();
-                benefListTable.columns(11).search(filterScholarType).draw();
-                benefListTable.columns(12).search(filterEducationLevel).draw();
-                benefListTable.columns(15).search(filterYearLevel).draw();
+                if (filterScholarType == ""){
+                    benefListTable.columns(11).search("").draw();
+                } else {
+                    benefListTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefListTable.columns(12).search("").draw();
+                } else {
+                    benefListTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefListTable.columns(9).search("").draw();
+                } else {
+                    benefListTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefListTable.columns(15).search("").draw();
+                } else {
+                    benefListTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
@@ -617,10 +679,29 @@ $(document).ready(function () {
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
 
-                applicantInterviewTable.columns(9).search(filterSchool).draw();
-                applicantInterviewTable.columns(11).search(filterScholarType).draw();
-                applicantInterviewTable.columns(12).search(filterEducationLevel).draw();
-                applicantInterviewTable.columns(15).search(filterYearLevel).draw();
+                if (filterScholarType == ""){
+                    applicantInterviewTable.columns(11).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    applicantInterviewTable.columns(12).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    applicantInterviewTable.columns(9).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    applicantInterviewTable.columns(15).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
@@ -683,10 +764,29 @@ $(document).ready(function () {
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
 
-                applicantExamTable.columns(9).search(filterSchool).draw();
-                applicantExamTable.columns(11).search(filterScholarType).draw();
-                applicantExamTable.columns(12).search(filterEducationLevel).draw();
-                applicantExamTable.columns(15).search(filterYearLevel).draw();
+                if (filterScholarType == ""){
+                    applicantExamTable.columns(11).search("").draw();
+                } else {
+                    applicantExamTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    applicantExamTable.columns(12).search("").draw();
+                } else {
+                    applicantExamTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    applicantExamTable.columns(9).search("").draw();
+                } else {
+                    applicantExamTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    applicantExamTable.columns(15).search("").draw();
+                } else {
+                    applicantExamTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
@@ -749,10 +849,29 @@ $(document).ready(function () {
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
 
-                removedApplicantTable.columns(9).search(filterSchool).draw();
-                removedApplicantTable.columns(11).search(filterScholarType).draw();
-                removedApplicantTable.columns(12).search(filterEducationLevel).draw();
-                removedApplicantTable.columns(15).search(filterYearLevel).draw();
+                if (filterScholarType == ""){
+                    removedApplicantTable.columns(11).search("").draw();
+                } else {
+                    removedApplicantTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    removedApplicantTable.columns(12).search("").draw();
+                } else {
+                    removedApplicantTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    removedApplicantTable.columns(9).search("").draw();
+                } else {
+                    removedApplicantTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    removedApplicantTable.columns(15).search("").draw();
+                } else {
+                    removedApplicantTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
@@ -815,10 +934,29 @@ $(document).ready(function () {
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
 
-                benefAssessTable.columns(9).search(filterSchool).draw();
-                benefAssessTable.columns(11).search(filterScholarType).draw();
-                benefAssessTable.columns(12).search(filterEducationLevel).draw();
-                benefAssessTable.columns(15).search(filterYearLevel).draw();
+                if (filterScholarType == ""){
+                    benefAssessTable.columns(11).search("").draw();
+                } else {
+                    benefAssessTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefAssessTable.columns(12).search("").draw();
+                } else {
+                    benefAssessTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefAssessTable.columns(9).search("").draw();
+                } else {
+                    benefAssessTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefAssessTable.columns(15).search("").draw();
+                } else {
+                    benefAssessTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
@@ -881,10 +1019,29 @@ $(document).ready(function () {
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
 
-                benefRenewTable.columns(9).search(filterSchool).draw();
-                benefRenewTable.columns(11).search(filterScholarType).draw();
-                benefRenewTable.columns(12).search(filterEducationLevel).draw();
-                benefRenewTable.columns(15).search(filterYearLevel).draw();
+                if (filterScholarType == ""){
+                    benefRenewTable.columns(11).search("").draw();
+                } else {
+                    benefRenewTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefRenewTable.columns(12).search("").draw();
+                } else {
+                    benefRenewTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefRenewTable.columns(9).search("").draw();
+                } else {
+                    benefRenewTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefRenewTable.columns(15).search("").draw();
+                } else {
+                    benefRenewTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
@@ -947,10 +1104,29 @@ $(document).ready(function () {
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
 
-                benefRemovedTable.columns(9).search(filterSchool).draw();
-                benefRemovedTable.columns(11).search(filterScholarType).draw();
-                benefRemovedTable.columns(12).search(filterEducationLevel).draw();
-                benefRemovedTable.columns(15).search(filterYearLevel).draw();
+                if (filterScholarType == ""){
+                    benefRemovedTable.columns(11).search("").draw();
+                } else {
+                    benefRemovedTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefRemovedTable.columns(12).search("").draw();
+                } else {
+                    benefRemovedTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefRemovedTable.columns(9).search("").draw();
+                } else {
+                    benefRemovedTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefRemovedTable.columns(15).search("").draw();
+                } else {
+                    benefRemovedTable.columns(15).search(filterYearLevel).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
