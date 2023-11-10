@@ -303,9 +303,9 @@ $(document).ready(function () {
                 }
 
                 if (filterYearLevel == ""){
-                    collegeNewApplicantTable.columns(15).search("").draw();
+                    collegeNewApplicantTable.columns(14).search("").draw();
                 } else {
-                    collegeNewApplicantTable.columns(15).search(filterYearLevel).draw();
+                    collegeNewApplicantTable.columns(14).search(filterYearLevel).draw();
                 }
             });
 
@@ -313,7 +313,7 @@ $(document).ready(function () {
                 collegeNewApplicantTable.columns(9).search("").draw();
                 collegeNewApplicantTable.columns(11).search("").draw();
                 collegeNewApplicantTable.columns(12).search("").draw();
-                collegeNewApplicantTable.columns(15).search("").draw();
+                collegeNewApplicantTable.columns(14).search("").draw();
             });
         },
         language: {
