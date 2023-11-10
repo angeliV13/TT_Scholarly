@@ -108,7 +108,7 @@ function get_path($lv_path, $type = '99')
                                 return 'views/admin/basic_indicators_sc.php';
                         
                         case 'examinee_list':
-                                return 'views/admin/examinee_list';
+                                return 'views/admin/examinee_list.php';
 
                         default:
                                 return 'error.php';

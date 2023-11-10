@@ -1034,6 +1034,99 @@ function graduatingTable() // CHECKING CK
     echo json_encode($json_data);
 }
 
+function examineeListTable()
+{
+    include("dbconnection.php");
+
+    $schoolClassArr = ['0' => 'Public (Within Sto. Tomas, Batangas)', '1' => 'Private (Within Sto. Tomas, Batangas)', '2' => 'Public (Outside Sto. Tomas, Batangas)', '3' => 'Private (Outside Sto. Tomas, Batangas)'];
+    $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
+    $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
+
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+
+    $sql = "SELECT * FROM account acc 
+            JOIN user_info inf ON acc.id = inf.account_id 
+            JOIN examination_applicant exa ON acc.id = exa.user_id
+            WHERE exa.ay_id = '{$acadYear}'
+            AND exa.sem_id = '{$defaultYear}'";
+    $query = $conn->query($sql);
+
+    $data = [];
+
+    $totalData = $totalFiltered = 0;
+
+    if ($query->num_rows > 0) 
+    {
+        while ($row = $query->fetch_assoc()) 
+        {
+            extract($row);
+
+            $education  = get_user_education($account_id, 1);
+            $button = ' <div class="btn-group-vertical d-flex justify-content-between align-items-center">
+                            <button id="viewInfo' . $account_id . '" type="button" class="viewInfoClass btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#viewInfoModal' . $account_id . '" data-id="' . $account_id . '">Check Information</button>
+                            <button id="updateToGraduate" type="button" class="updateToGraduate btn btn-success mb-2" data-id="' . $account_id . '" data-status="User">Already Graduated</button>
+                            <button id="removeApplicant" type="button" class="btn btn-danger deleteApplicant" data-id="' . $account_id . '" data-status="Beneficiary">Remove Beneficiary</button>
+                        </div>';
+            $scholarType = check_status($account_id);
+
+            $school = $course = $schoolDetails = "";
+
+            if (isset($education['course']))
+            {
+                if (is_numeric($education['course']))
+                {
+                    $course = get_education_courses('', $education['course']);
+                }
+                else
+                {
+                    $course = "";
+                }
+            }
+
+            if (isset($education['school']))
+            {
+                if (is_numeric($education['school']))
+                {
+                    $schoolDetails = get_school_name($education['school']);
+                }
+                else
+                {
+                    $school = $education['school'];
+                }
+            }
+
+            $data[] = [
+                static_count(),
+                $eac_number,
+                '',
+                $last_name,
+                $first_name,
+                $middle_name,
+                $suffix,                     
+                (isset($schoolDetails['school_name']))                                  ? ($schoolDetails['school_name']) : $school, //School Name
+                (isset($schoolDetails['class_type']))                                   ? $schoolClassArr[$schoolDetails['class_type']] : '', //School Type(isset($scholarType['scholarType'])                                     ? $scholarTypeArr[$scholarType['scholarType']] : ''), //Scholarship Type
+                (isset($schoolDetails['school_type']))                                  ? $schoolLevelArr[$schoolDetails['school_type']] : '', //Educational Level
+                $course, //Course
+                (isset($education['year_level'])                                        ? ($education['year_level']) : ''), // Year Level
+                $points,
+                (($start_exam == 2) ? (($percentage >= 75) ? 'Passed' : 'Failed') : 'Not Submitted'), // Buttons
+            ];
+
+            $totalData++;
+        }
+    }
+
+    $json_data = array(
+        "draw" => 1,
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalFiltered),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
 function viewNotificationTable()
 {
     $notifications = show_notification(1);

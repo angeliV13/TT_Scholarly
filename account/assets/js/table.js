@@ -896,6 +896,51 @@ $(document).ready(function () {
         stateSave: false,
     });
 
+    // EXAMINEES TABLE
+    let examineeListTable = $('#examineeListTable').DataTable({
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 20,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#examineeListTable').DataTable().columns().count();
+                $(".examineeListTable-error").html("");
+                $("#examineeListTable").append(`<tbody class="examineeListTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#examineeListTable").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2] }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+
     let benefAssessTable = $('#benefAssessmentTable').DataTable({
         "lengthChange": true,
         "paging": true,

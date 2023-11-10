@@ -68,4 +68,7 @@ switch ($action) {
     case 19:
         echo graduatingTable();
         break;
+    case 20:
+        echo examineeListTable();
+        break;
 }
