@@ -212,12 +212,12 @@
 
               <?php if ($_SESSION['account_type'] == 2) : ?>
 
-                  <?php $scholar_type = 2;
-                    $scholarType = 1 + $scholar_type; ?>
+                  <?php $access = 2;
+                    $access = 1 + $scholarType; ?>
 
                   <?php if ($assessmentAccess != null) : ?>
 
-                      <?php if ($assessmentAccess[$scholarType] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow) : ?>
+                      <?php if ($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow) : ?>
                           <!-- Start Assessment Requirements Nav -->
                           <li class="nav-item">
                               <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
@@ -231,7 +231,7 @@
 
                   <?php if ($renewalAccess != null) : ?>
 
-                      <?php if ($renewalAccess[$scholarType] == 1 && $renewalAccess[0] <= $dateNow && $renewalAccess[1] >= $dateNow) : ?>
+                      <?php if ($renewalAccess[$access] == 1 && $renewalAccess[0] <= $dateNow && $renewalAccess[1] >= $dateNow) : ?>
 
                           <li class="nav-item">
                               <a class="nav-link collapsed" href="index.php?nav=renewal-bene">
@@ -245,10 +245,10 @@
               <?php endif; ?>
 
               <?php if ($_SESSION['account_type'] == 3) : ?>
-                  <?php $scholar_type = 2;
-                    $scholarType = 1 + $scholar_type; ?>
+                  <?php $access = 2;
+                    $access = 1 + $scholarType; ?>
                   <?php if ($applicationAccess != null) : ?>
-                      <?php if ($applicationAccess[$scholarType] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) : ?>
+                      <?php if ($applicationAccess[$access] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) : ?>
                           <!--  -->
                           <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "") ?>">
                               <a class="nav-link collapsed" id="reqBtn" href="<?= (($status['add_flag'] == 0) ? "index.phps" : "index.php?nav=apply-applicant") ?>">
@@ -269,7 +269,9 @@
                   <?php endif; ?>
 
                   <?php if ($examAccess != null) : ?>
-                      <?php if ($examAccess[$scholarType] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow) : ?>
+                    <?php $access = 2;
+                        $access = 2 + $scholarType; ?>
+                      <?php if ($examAccess[$access] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow) : ?>
                           <!-- Start Exam Nav -->
                           <li class="nav-item">
                               <a class="nav-link collapsed" href="index.php?nav=examination">

@@ -20,6 +20,7 @@ if(isset($_SESSION['id']))
 
     if($user_data[3] >= 2)
     { //Checking Account Type if beneficiary or applicant
+        $scholarType        = scholarType();
         $assessmentAccess   = assessmentAccess();
         $renewalAccess      = renewalAccess();
 

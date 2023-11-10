@@ -22,8 +22,8 @@
                         <label for="inputIncomeIndicator" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Income</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputIncome" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputIncomeIndicator_Ea" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
@@ -33,8 +33,8 @@
                         <label for="inputGradeIndicator" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Grade</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputGradeIndicator" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputGradeIndicator_Ea" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
@@ -44,8 +44,8 @@
                         <label for="inputSchoolTypeIndicator" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">School Type</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputSchoolTypeIndicator" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputSchoolTypeIndicator_Ea" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
@@ -55,8 +55,8 @@
                         <label for="inputResidencyIndicator" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Residency</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputResidencyIndicator" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputResidencyIndicator_Ea" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
@@ -81,6 +81,7 @@
                                         <th class="text-center">Range from</th>
                                         <th class="text-center">Range to</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
@@ -116,6 +117,7 @@
                                         <th class="text-center">Range from</th>
                                         <th class="text-center">Range to</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
@@ -150,6 +152,7 @@
                                         <th class="text-center">No</th>
                                         <th class="text-center">School</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
@@ -181,8 +184,10 @@
                                 <thead>
                                     <tr class="small">
                                         <th class="text-center">No</th>
-                                        <th class="text-center">Residency</th>
+                                        <th class="text-center">Range from</th>
+                                        <th class="text-center">Range to</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">

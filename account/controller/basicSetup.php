@@ -229,7 +229,20 @@ if (isset($_REQUEST['action']))
 
                 echo updateIndicator($id, $type, $value, $category, $applicant);
             }
-
+            break;
+        case 5.3:                           //Delete Indicator
+            if (isset($_POST['id'])) 
+            {
+                $id         = $_POST['id'];
+                echo deleteIndicator($id);
+            }
+            break;
+        case 5.4:                           //View All Indicator
+            if (isset($_POST['indicator'])) 
+            {
+                $indicator = $_POST['indicator'];
+                echo getIndicatorCount($indicator);
+            }
             break;
         case 6: // Add Notification
             $data = [

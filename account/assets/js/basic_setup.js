@@ -500,6 +500,66 @@ $("#indicatorSCResidencyTable").on("click", "td", function (){
   $(this).find('div').addClass("d-none");
 });
 
+//SC and EA Indicator
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+if(urlParams.get('nav') == 'tts_indicators_sc' || urlParams.get('nav') == 'tts_indicators_ea'){
+  let indicator =  (urlParams.get('nav') == 'tts_indicators_sc') ? 1 : 2 ;
+  $.ajax({
+    type: "POST",
+    url: "controller/basicSetup.php",
+    data: {
+      action: 5.4,
+      indicator : indicator,
+    },
+    success: function (data) {
+      // console.log(data);
+      if (data != "") {
+        let records = JSON.parse(data);
+        if(indicator == 1){
+          records.forEach(record => {
+            switch (record[0]){
+              case "5":
+                $('#inputExamIndicator_Sc').val(record[1]);
+                break;
+              case "2":
+                $('#inputGradeIndicator_Sc').val(record[1]);
+                break;
+              case "1":
+                $('#inputIncomeIndicator_Sc').val(record[1]);
+                break;
+              case "4":
+                $('#inputResidencyIndicator_Sc').val(record[1]);
+                break;
+            }
+          });
+        }else if(indicator == 2){
+          records.forEach(record => {
+            switch (record[0]){
+              case "1":
+                $('#inputIncomeIndicator_Ea').val(record[1]);
+                break;
+              case "2":
+                $('#inputGradeIndicator_Ea').val(record[1]);
+                break;
+              case "3":
+                $('#inputSchoolTypeIndicator_Ea').val(record[1]);
+                break;
+              case "4":
+                $('#inputResidencyIndicator_Ea').val(record[1]);
+                break;
+            }
+          });
+        }
+        
+
+      }
+    },
+  });
+}
+
+
 //------------------------------------------------------------------
 // AcadYear
 $("#generate_ay").on("click", function (e) {
@@ -1338,7 +1398,7 @@ function saveEAIndicator(category, id, type){
 
           for(let i = 0; i < tdCount; i++){
             if(i > 0){
-              if(category <= 2){
+              if(category <= 2 || category == 4){
                 if (i == 1){
                   $(parentTr).find('td:eq(1)').find('input').attr('id', 'ea_0_' + data);
                   $(parentTr).find('td:eq(1)').find('input').attr('onfocusout', "saveEAIndicator(" + category+ "," + data + "," + "0)");
@@ -1433,7 +1493,8 @@ function indicatorEAResidencyAdd(){
 
   let row = '<tr class="' + classRow + '">'+
       '<td>'+tableRowCount+'</td>'+
-      '<td><div id="editIndicator_1_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_0_0" value=" " onfocusout="saveEAIndicator(4,'+ 0 +', 1)"></td>'+
+      '<td><div id="editIndicator_0_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_0_0" value=" " onfocusout="saveEAIndicator(4,'+ 0 +', 0)"></td>'+
+      '<td><div id="editIndicator_2_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_2_0" value=" " onfocusout="saveEAIndicator(4,'+ 0 +', 2)"></td>'+
       '<td><div id="editIndicator_3_0"></div><input type="text" class="editIndicatorText d-none form-control" id="ea_3_0" value="0" onfocusout="saveEAIndicator(4,'+ 0 +', 3)"></td>'+
       '</tr>';  
 
@@ -1468,6 +1529,7 @@ function saveSCIndicator(category, id, type){
         div.removeClass("d-none");
 
       } else {
+        // data = data.replace("Success", "");
         if(parseInt(data) === NaN){
           Swal.fire({
             title: "Error!",
@@ -1488,7 +1550,7 @@ function saveSCIndicator(category, id, type){
 
           for(let i = 0; i < tdCount; i++){
             if(i > 0){
-              if(category <= 2){
+              if(category <= 2 || category == 4 || category == 5){
                 if (i == 1){
                   $(parentTr).find('td:eq(1)').find('input').attr('id', 'sc_0_' + data);
                   $(parentTr).find('td:eq(1)').find('input').attr('onfocusout', "saveSCIndicator(" + category+ "," + data + "," + "0)");
@@ -1518,6 +1580,7 @@ function saveSCIndicator(category, id, type){
         }
         
       }
+      // data = "";
     },
   });
 
@@ -1533,9 +1596,9 @@ function indicatorSCExaminationAdd(){
 
   let row = '<tr class="' + classRow + '">'+
       '<td>'+tableRowCount+'</td>'+
-      '<td><div id="editIndicator_0_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_0_0" value="0" onfocusout="saveSCIndicator(1,'+ 0 +', 0)"></td>'+
-      '<td><div id="editIndicator_2_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_2_0" value="0" onfocusout="saveSCIndicator(1,'+ 0 +', 2)"></td>'+
-      '<td><div id="editIndicator_3_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_3_0" value="0" onfocusout="saveSCIndicator(1,'+ 0 +', 3)"></td>'+
+      '<td><div id="editIndicator_0_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_0_0" value="0" onfocusout="saveSCIndicator(5,'+ 0 +', 0)"></td>'+
+      '<td><div id="editIndicator_2_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_2_0" value="0" onfocusout="saveSCIndicator(5,'+ 0 +', 2)"></td>'+
+      '<td><div id="editIndicator_3_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_3_0" value="0" onfocusout="saveSCIndicator(5,'+ 0 +', 3)"></td>'+
       '</tr>';  
 
       $('#indicatorSCExaminationTable > tbody:last-child').append(row);
@@ -1584,7 +1647,8 @@ function indicatorSCResidencyAdd(){
 
   let row = '<tr class="' + classRow + '">'+
       '<td>'+tableRowCount+'</td>'+
-      '<td><div id="editIndicator_1_0"></div><input type="text" class="editIndicatorText d-none form-control" id="sc_0_0" value=" " onfocusout="saveSCIndicator(4,'+ 0 +', 1)"></td>'+
+      '<td><div id="editIndicator_0_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_0_0" value="0" onfocusout="saveSCIndicator(4 '+ 0 +', 0)"></td>'+
+      '<td><div id="editIndicator_2_0"></div><input type="number" class="editIndicatorText d-none form-control" id="sc_2_0" value="0" onfocusout="saveSCIndicator(4,'+ 0 +', 2)"></td>'+
       '<td><div id="editIndicator_3_0"></div><input type="text" class="editIndicatorText d-none form-control" id="sc_3_0" value="0" onfocusout="saveSCIndicator(4,'+ 0 +', 3)"></td>'+
       '</tr>';  
 
@@ -1596,4 +1660,42 @@ function transferInputToDiv(category, id, type){
   let div = $('#editIndicator_' + type + '_' + id);
   div.text(input.val());
   console.log(input);
+}
+
+function indicatorDelete(id){
+  Swal.fire({
+    title: "Delete this indicator?",
+    text: "Are you sure you want to delete this indicator? This cannot be undone",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Delete",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "controller/basicSetup.php",
+        data: {
+          action: 5.3,
+          id: id,
+        },
+        success: function (data) {
+          if (data == "Success") {
+            Swal.fire({
+              title: "Success!",
+              icon: "success",
+              html: data,
+            }).then((result) => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              icon: "error",
+              html: data,
+            });
+          }
+        },
+      });
+    }
+  });
 }

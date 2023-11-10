@@ -19,44 +19,44 @@
                     <div class="col-sm-6 row position-relative">
                         <!-- Examination -->
 
-                        <label for="inputExaminationSCIndicator" class="col-sm-4 col-form-label">
+                        <label for="inputExamIndicator_Sc" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Examination</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputIncome" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputExamIndicator_Sc" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
                     <div class="col-sm-6 row position-relative">
                         <!-- Grade -->
 
-                        <label for="inputGradeSCIndicator" class="col-sm-4 col-form-label">
+                        <label for="inputGradeIndicator_Sc" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Grade</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputGradeIndicator" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputGradeIndicator_Sc" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
                     <div class="col-sm-6 row position-relative">
                         <!-- Income -->
 
-                        <label for="inputIncomeSCIndicator" class="col-sm-4 col-form-label">
+                        <label for="inputIncomeIndicator_Sc" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Income</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputSchoolTypeIndicator" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputIncomeIndicator_Sc" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
                     <div class="col-sm-6 row position-relative">
                         <!-- Residency -->
 
-                        <label for="inputResidencySCIndicator" class="col-sm-4 col-form-label">
+                        <label for="inputResidencyIndicator_Sc" class="col-sm-4 col-form-label">
                             <h6 class="font-bold">Residency</h6>
                         </label>
-                        <div class="col-sm-2">
-                            <input type="number" id="inputResidencyIndicator" class="form-control" disabled>
+                        <div class="col-sm-3">
+                            <input type="number" id="inputResidencyIndicator_Sc" value="0" class="form-control" disabled>
                         </div>
 
                     </div>
@@ -67,7 +67,7 @@
                     <div class="card-body ">
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Income</h5>
+                                <h5 class="card-title">Examination</h5>
                                 <button id="indicatorExaminationAdd" onclick="indicatorSCExaminationAdd()" class=" btn btn-sm btn-danger shadow-sm">
                                     Add Examination Score
                                 </button>
@@ -81,6 +81,7 @@
                                         <th class="text-center">Range from</th>
                                         <th class="text-center">Range to</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
@@ -116,6 +117,7 @@
                                         <th class="text-center">Range from</th>
                                         <th class="text-center">Range to</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
@@ -151,6 +153,7 @@
                                         <th class="text-center">Range from</th>
                                         <th class="text-center">Range to</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
@@ -183,8 +186,10 @@
                                 <thead>
                                     <tr class="small">
                                         <th class="text-center">No</th>
-                                        <th class="text-center">Residency</th>
+                                        <th class="text-center">Range from</th>
+                                        <th class="text-center">Range to</th>
                                         <th class="text-center">Points</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">

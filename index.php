@@ -101,7 +101,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#scholarship">Scholarships</a></li>
           <li><a href="#calendarAct">Calendar of Activities </a></li>
-          <li><a href="#headAd">Administrators</a></li>
+          <li><a href="#adHead">Administrators</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a class="#login" href="account/index.php">Login</a></li>
         </ul>
@@ -126,7 +126,7 @@
             <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="assets/img/slides-3.jpg" class="d-block w-100" alt="...">
+            <img src="assets/img/slides-3.png" class="d-block w-100" alt="...">
           </div>
         </div>
       </div><!-- End Slides only carousel-->
@@ -375,7 +375,7 @@
     </section><!-- End CALENDAR ACTIVITIES Section -->
 
     <!-- ======= HEADS AND ADMINISTRATORS Section ======= -->
-    <section id="headAd" class="chefs section-bg">
+    <section id="adHead" class="chefs section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
