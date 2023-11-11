@@ -58,5 +58,6 @@
       
     </form>
     
-  </div><button id="submitExam" class="btn btn-success d-none" type="button" >Submit Examination</button>
+  </div>
+  <!-- <button id="submitExamv2" class="btn btn-success d-none" type="button" >Submit Examination</button> -->
 </main><!-- End #main -->

@@ -247,17 +247,19 @@ function examCreateDiv($questionArray)
 
     $allItem    = count($questionArray);
 
-    $counter    = 1;
+    $counter    = 1;    // Overall Counter
+    $btnPrv     = 0;    // Flag for Previous Button
     $item       = "";
     $header     = "";
     $categoryTmp = "";
-    $totalItems = "";
+    $totalItems = 0;    // Total Items per Header
+    $itemCtr    = 1;    // Item per Header
     $data       = [];
     $categories = ['N/A', 'English', 'Mathematics', 'General Information', 'Abstract Reasoning'];
 
     foreach ($questionArray as $questionItem) {
         $radBtn     = "";
-        $totaItems  = getExamTotalItems($questionItem[0]);
+        $totalItems  = getExamTotalItems($questionItem[0]);
         foreach ($questionItem[3] as $choice_key => $choices) {
             if ($questionItem[4] == $choices) {
                 $radBtn .= '
@@ -279,28 +281,27 @@ function examCreateDiv($questionArray)
                 ';
             }
         }
+        
+        // First Question
         if ($counter == 1) {
-            $btn = '
-                <!-- Next -->
-                <div class="py-3">
-                    <button class="btn btn-primary px-4">Next</button>
-                </div>
-            ';
 
-            $item = '<div id="question_' . $counter . '" class="align-items-center">';
+            // $item = '<div id="question_' . $counter . '" class="align-items-center">';
 
+            // Header for the First Time
             $header = '
                 <div id="question_' . $counter . '" class="align-items-center text-center bg-dark">
                     <h5 class="card-title text-light ">' . $categories[$questionItem[0]] . '</h5>
-                    <input type="number" class="d-none" id="totalItem_' . $questionItem[0] . '" name="totalItems" value="' . $totaItems . '" readonly>
+                    <input type="number" class="d-none" id="totalItem_' . $questionItem[0] . '" name="totalItems" value="' . $totalItems . '" readonly>
                 </div>
             ';
 
             $categoryTmp = $categories[$questionItem[0]];
-        } else {
+
+        // Following Questions
+        } else {                    
             if ($counter == $allItem) {
                 $btn = '
-                <!-- Next Previous-->
+                <!-- Next Submit-->
                 <div class="py-3">
                     <button class="btn btn-warning px-3">Previous</button>
                     <button class="btn btn-primary px-4">Submit</button>
@@ -316,11 +317,12 @@ function examCreateDiv($questionArray)
                 ';
             }
 
+            // Header
             if ($categoryTmp != $categories[$questionItem[0]]) {
                 $header = '
                     <div id="question_' . $counter . '" class="align-items-center text-center bg-dark">
                         <h5 class="card-title text-light ">' . $categories[$questionItem[0]] . '</h5>
-                        <input type="number" class="d-none" id="totalItem_' . $questionItem[0] . '" name="totalItems" value="' . $totaItems . '" readonly>
+                        <input type="number" class="d-none" id="totalItem_' . $questionItem[0] . '" name="totalItems" value="' . $totalItems . '" readonly>
                     </div>
                 ';
                 $categoryTmp = $categories[$questionItem[0]];
@@ -328,7 +330,55 @@ function examCreateDiv($questionArray)
                 $header = "";
             }
 
-            $item = '<div id="question_' . $counter . '" class="align-items-center">';
+            // $item = '<div id="question_' . $counter . '" class="align-items-center">';
+        }
+
+        // Exam Grouping
+        $item = '<div id="question_' . $counter . '" class="align-items-center question_group_'. $questionItem[0] .' '. (($btnPrv == 1) ? 'd-none' : '' ).'">';
+
+        // Buttons
+        if($itemCtr == $totalItems){
+            if($btnPrv == 1){
+                if($counter == $allItem){
+                    $btn = '
+                        <!-- Previous Next-->
+                        <div class="py-3">
+                            <button class="btn btn-warning px-3" onclick="btnAction(1, '. $questionItem[0] .')">Previous</button>
+                            <button id="submitExam" class="btn btn-success" onclick="btnAction(3, '. $questionItem[0] .')" type="button" >Submit Examination</button>
+                        </div>
+                    ';
+                }else{
+                    $btn = '
+                        <!-- Next Previous-->
+                        <div class="py-3">
+                            <button class="btn btn-warning px-3" onclick="btnAction(1, '. $questionItem[0] .')">Previous</button>
+                            <button class="btn btn-primary px-4" onclick="btnAction(2, '. $questionItem[0] .')">Next</button>
+                        </div>
+                    ';
+                }
+            }else{
+                if($counter == $allItem){
+                    $btn = '
+                        <!-- Next Submit-->
+                        <div class="py-3">
+                            <button id="submitExam" class="btn btn-success" onclick="btnAction(3, '. $questionItem[0] .')" type="button" >Submit Examination</button>
+                        </div>
+                    ';
+                }else{
+                    $btn = '
+                        <!-- Next -->
+                        <div class="py-3">
+                            <button class="btn btn-primary px-4" onclick="btnAction(2, '. $questionItem[0] .')">Next</button>
+                        </div>
+                    ';
+                }
+            }
+            
+            $btnPrv = 1;
+            $itemCtr = 1;
+        }else{
+            $btn = '';
+            $itemCtr += 1;
         }
 
         $item .= '
@@ -344,8 +394,7 @@ function examCreateDiv($questionArray)
                         <div id="choices_' . $counter . '" class="ms-5 pb-4">
                         ' . $radBtn . '
                         </div>
-                        ' . "" #$btn
-            . '
+                         ' . $btn . '
                     </div>
                 </div>
             </div>
