@@ -33,8 +33,7 @@
 
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/vendor/bootstrap-ic
-ons/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
@@ -75,6 +74,9 @@ ons/bootstrap-icons.css" rel="stylesheet">
 
 <!-- Template Main CSS File -->
 <link href="assets/css/main.css" rel="stylesheet">
+
+<!-- Override CSS -->
+<link href="assets/css/main_override.css" rel="stylesheet">
 
 <!-- x
   * Template Name: Yummy
@@ -165,7 +167,7 @@ ons/bootstrap-icons.css" rel="stylesheet">
           </div>
 
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
-            <h3>ABOUT US</h3>
+            <h3>About Us</h3>
             <p class="description">This esteemed scholarship initiative in the heart of Sto. Tomas, Batangas, is designed to empower deserving students through financial support,
               fostering educational opportunities for academic excellence. With a rigorous selection process, the Sto. Tomas Scholarship aims to identify and assist talented individuals,
               promoting their pursuit of higher education and contributing to the intellectual growth of the community. Through this program, the city underscores its commitment to nurturing future leaders
@@ -206,7 +208,7 @@ ons/bootstrap-icons.css" rel="stylesheet">
         <div class="row justify-content-between">
           <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center align-items-center mb-lg-0">
             <div class="scholarship-header">
-              <h2>Scholarships Program Offers</h2>
+              <h3 class="text-white fw-bold">Scholarships Program Offers</h3>
               <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
             </div>
           </div>
@@ -300,12 +302,12 @@ ons/bootstrap-icons.css" rel="stylesheet">
     </section><!-- End SCHOLARSHIP Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials section-bg">
+    <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
           <h2>Testimonials</h2>
-          <h3><span>ALUMNI SCHOLARS</span></h3>
+          <h3 class="fw-bold"><span>Alumni Scholars</span></h3>
         </div>
 
         <?php if ($website_testimony != null) : ?>
@@ -359,8 +361,8 @@ ons/bootstrap-icons.css" rel="stylesheet">
       <div class="container-fluid" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>YDO CALENDAR</h2>
-          <h3><span>CALENDAR OF ACTIVITIES</span></h3>
+          <h2 class="fw-bold">YDO Calendar</h2>
+          <h3><span>Calendar of Activities</span></h3>
         </div>
 
         <?php if ($coa != null) : ?>
@@ -401,8 +403,8 @@ ons/bootstrap-icons.css" rel="stylesheet">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>YDO OFFICIALS</h2>
-          <h3><span>HEAD AND ADMINISTRATORS</span></h3>
+          <h2 class="fw-bold">YDO Officials</h2>
+          <h3><span>Head and Administrators</span></h3>
         </div>
 
         <?php if ($ofc != null) : ?>
