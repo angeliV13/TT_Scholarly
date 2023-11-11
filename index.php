@@ -7,6 +7,8 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 
 <!-- add icon link -->
 <link rel="icon" href="account/<?= $website_other['icon'] ?>" type="image/x-icon">
@@ -31,11 +33,16 @@
 
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-ic
+ons/bootstrap-icons.css" rel="stylesheet">
 <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Add these links to include Bootstrap CSS and JavaScript -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
 
 <!--DRAGGABLE CARD -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -82,200 +89,308 @@
   <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 </div>
 
-
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex  justify-content-between">
-    <div class="container d-flex align-items-center justify-content-between">
+  <header id="header" class="header fixed-top d-flex justify-content-between header-transparent header-scrolled">
+    <div class="container-xxl d-flex align-items-center justify-content-between">
       <a href="index.php" class="logo d-flex align-items-center me-auto me-lg-3">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="images/apple-tts-icon.png" href="#hero" alt=""> -->
-        <!-- <h1><?= $website_info['header'] ?><span></span></h1> -->
+        <img src="images/apple-tts-icon.png" href="#hero" alt="">
+        <h1><?= $website_info['header'] ?><span></span></h1>
       </a>
-
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#scholarship">Scholarships</a></li>
-          <li><a href="#calendarAct">Calendar of Activities </a></li>
-          <li><a href="#adHead">Administrators</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a class="nav-link active" href="#about">About</a></li>
+          <li><a a class="nav-link" href="#scholarship">Scholarships</a></li>
+          <li><a a class="nav-link" href="#calendarAct">Calendar of Activities</a></li>
+          <li><a a class="nav-link" href="#headAd">Administrators</a></li>
+          <li><a a class="nav-link" href="#contact">Contact</a></li>
           <li><a class="#login" href="account/index.php">Login</a></li>
         </ul>
       </nav><!-- .navbar -->
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list" style="color: rgb(255, 255, 255);"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- ======= End Header ==== -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center section-bg">
-
+  <section id="hero" class="hero justify-content-start align-items-start section-bg">
     <div class="container">
-      <!-- Slides only carousel -->
-      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="assets/img/slides-1.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="assets/img/slides-3.png" class="d-block w-100" alt="...">
+      <div class="row justify-content-between">
+        <!-- Left Column -->
+        <div class="col-lg-7 pt-4 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center align-items-center mb-lg-0">
+          <div data-aos="zoom-out">
+            <h1>Youth Development Office</h1>
+            <h2>City of Santo Tomas Scholarship Program</h2>
+            <div class="d-flex button justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <a href="account/pages-register.php" class="btn btn-sm btn-primary btn-book-a-table">Apply Scholarship</a>
+            </div>
+            <!-- <h1><?= $website_other['welcome_text'] ?></h1>
+            <h2><?= $website_other['welcome_text'] ?></h2> -->
           </div>
         </div>
-      </div><!-- End Slides only carousel-->
-      <div class="row justify-content-between gy-5 ">
-        <!-- <div class="col-lg-4 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <h2 data-aos="fade-up"><?= $website_other['welcome_text'] ?></h2>
-          <p data-aos="fade-up" data-aos-delay="100"><?= $website_other['welcome_text'] ?></p>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="account/pages-register.php" class="btn-book-a-table">Apply Scholarship</a>
-            <?php if ($website_other['url'] != null) : ?> -->
-        <!-- <a href="<?= $website_other['url'] ?>" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
-      <?php endif; ?>
+        <!-- Image Column -->
+        <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
+          <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt="">
+        </div>
       </div>
     </div>
-    <!-- <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-          <img src="account/<?= $website_other['hero'] ?>" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
-        </div> -->
-    </div>
-    </div>
+
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+      </g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+      </g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+      </g>
+    </svg>
   </section><!-- End Hero Section -->
 
   <main id="main">
-
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="fade-right">
+            <a href="https://www.youtube.com/watch?v=StpBR2W8G5A" class="glightbox play-btn mb-4"></a>
+          </div>
 
-        <div class="section-header">
-          <h2>ABOUT</h2>
-          <h3><span>LET'S GET TO KNOW ABOUT US!</span></h3>
-        </div>
-        <div class="row gy-4">
-          <img src="account/<?= $website_other['cover'] ?>" class="col-lg-7 position-relative about-img" data-aos="fade-up" data-aos-delay="150">
-          </img>
-          <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
-            <div class="content ps-0 ps-lg-5">
-              <p class="fst-italic">
-                <?= $website_info['descr'] ?>
+          <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
+            <h3>ABOUT US</h3>
+            <p class="description">This esteemed scholarship initiative in the heart of Sto. Tomas, Batangas, is designed to empower deserving students through financial support,
+              fostering educational opportunities for academic excellence. With a rigorous selection process, the Sto. Tomas Scholarship aims to identify and assist talented individuals,
+              promoting their pursuit of higher education and contributing to the intellectual growth of the community. Through this program, the city underscores its commitment to nurturing future leaders
+              and professionals who will make impactful contributions to society.
+            </p>
+
+
+            <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+              <div class="icon"><i class="bx bxs-navigation"></i></div>
+              <h4 class="title"><a href="">Mission</a></h4>
+              <p class="description">Empowering Dreams, Enriching Futures - The City of Sto. Tomas Scholarship is dedicated to providing transformative
+                educational opportunities for qualified individuals in our community. Fueled by a commitment to excellence, we aim to break down financial barriers,
+                nurturing a generation of skilled and socially responsible leaders who will contribute meaningfully to the progress of Sto. Tomas and beyond.
               </p>
-
-              <!-- <?php if ($website_other['about_url'] != '') : ?>
-                <div class="position-relative mt-4">
-                  <img src="assets/img/white.jpg" class="img-fluid" alt="">
-                  <a href="<?= $website_other['about_url'] ?>" class="glightbox play-btn"></a>
-                </div>
-              <?php endif; ?> -->
             </div>
+
+            <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
+              <div class="icon"><i class="bx bx-gift"></i></div>
+              <h4 class="title"><a href="">Vision</a></h4>
+              <p class="description">Striving for Academic Brilliance, Cultivating Tomorrow's Leaders - The City of Sto. Tomas Scholarship envisions a future where every aspiring student has access to quality education,
+                regardless of financial constraints. By fostering a culture of learning and empowerment, we aspire to be a catalyst for positive change,
+                producing graduates who are not only academically proficient but also compassionate and proactive contributors to the betterment of society.</p>
+            </div>
+
+            <!-- <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
+              <div class="icon"><i class="bx bx-atom"></i></div>
+              <h4 class="title"><a href="">Dine Pad</a></h4>
+              <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
+            </div> -->
           </div>
         </div>
-
       </div>
-    </section> <!-- End About Section -->
+    </section><!-- End About Section -->
 
     <!-- ======= SCHOLARSHIP Section ======= -->
     <section id="scholarship" class="menu">
       <div class="container" data-aos="fade-up">
-
         <div class="section-header">
           <h2>Scholarships</h2>
           <h3><span>SCHOLARSHIP PROGRAM OFFERS</span></h3>
         </div>
 
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-          <li class="nav-tabs">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#senior-high">
-              <h4>Senior High-School</h4>
-            </a>
-          </li><!-- End tab nav item -->
-
-          <li class="nav-tabs">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeEA">
-              <h4>College Educational Assistance</h4>
-            </a> <!-- End tab nav item  -->
-
-          <li class="nav-tabs">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeFS">
-              <h4>College Full Scholarship</h4>
-            </a>
-          </li><!-- End tab nav item  -->
-          <li class="nav-tabs">
+          <li class="nav-item">
             <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#general-req">
               <h4>General Requirements</h4>
             </a>
-          </li><!-- End tab nav item -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#senior-high">
+              <h4>Educational Assistance Program</h4>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeEA">
+              <h4>Full Scholarship Program</h4>
+            </a>
+          </li>
+
         </ul>
-        <div class="tab-pane fade" id="senior-high">
-          <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card d-flex justify-content-center">
-                  <div class="card-body">
-                    <h5 class="card-title">Senior High School</h5>
-                    <p><?= $website_scholar_text[0]['scholarText'] ?></p>
+
+        <div class="tab-content">
+          <!-- GENERAL REQUIREMENTS  -->
+          <div class="tab-pane fade" id="senior-high">
+            <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h5 class="card-title">Senior High School</h5>
+                  <p><?= $website_scholar_text[0]['scholarText'] ?></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Educational Assistance Program -->
+          <div class="tab-pane fade" id="collegeEA">
+            <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card d-flex justify-content-center">
+                    <div class="card-body">
+                      <h5 class="card-title">College Educational Assistance</h5>
+                      <p><?= $website_scholar_text[1]['scholarText'] ?></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Full Scholarship Program -->
+          <div class="tab-pane fade" id="collegeFS">
+            <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card d-flex justify-content-center">
+                    <div class="card-body">
+                      <h5 class="card-title">College Full Scholarship</h5>
+                      <p><?= $website_scholar_text[2]['scholarText'] ?></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade active show" id="general-req">
+            <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card d-flex justify-content-center">
+                    <div class="card-body">
+                      <h5 class="card-title">General Requirements</h5>
+                      <?php if ($gen_req != null) : ?>
+                        <?php foreach ($gen_req as $key => $req) : ?>
+                          <p><?= $req['req'] ?></p>
+                        <?php endforeach; ?>
+                      <?php else : ?>
+                        <p>No General Requirements for Now</p>
+                      <?php endif; ?>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="collegeEA">
-          <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card d-flex justify-content-center">
-                  <div class="card-body">
-                    <h5 class="card-title">College Educational Assistance</h5>
-                    <p><?= $website_scholar_text[1]['scholarText'] ?></p>
-                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="collegeFS">
-          <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card d-flex justify-content-center">
-                  <div class="card-body">
-                    <h5 class="card-title">College Full Scholarship</h5>
-                    <p><?= $website_scholar_text[2]['scholarText'] ?></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane fade active show" id="general-req">
-          <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card d-flex justify-content-center">
-                  <div class="card-body">
-                    <h5 class="card-title">General Requirements</h5>
-                    <?php if ($gen_req != null) : ?>
-                      <?php foreach ($gen_req as $key => $req) : ?>
-                        <p><?= $req['req'] ?></p>
-                      <?php endforeach; ?>
-                    <?php else : ?>
-                      <p>No General Requirements for Now</p>
-                    <?php endif; ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
+      </div>
     </section><!-- End SCHOLARSHIP Section -->
+
+    <!-- ======= Details Section ======= -->
+    <section id="details" class="details">
+      <div class="container">
+
+        <div class="row content">
+          <div class="col-md-4" data-aos="fade-right">
+            <img src="assets/img/details-1.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-4" data-aos="fade-up">
+            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <p class="fst-italic">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+            <ul>
+              <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+              <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+              <li><i class="bi bi-check"></i> Iure at voluptas aspernatur dignissimos doloribus repudiandae.</li>
+              <li><i class="bi bi-check"></i> Est ipsa assumenda id facilis nesciunt placeat sed doloribus praesentium.</li>
+            </ul>
+            <p>
+              Voluptas nisi in quia excepturi nihil voluptas nam et ut. Expedita omnis eum consequatur non. Sed in asperiores aut repellendus. Error quisquam ab maiores. Quibusdam sit in officia
+            </p>
+          </div>
+        </div>
+
+        <div class="row content">
+          <div class="col-md-4 order-1 order-md-2" data-aos="fade-left">
+            <img src="assets/img/details-2.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
+            <h3>Corporis temporibus maiores provident</h3>
+            <p class="fst-italic">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+            <p>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum
+            </p>
+            <p>
+              Inventore id enim dolor dicta qui et magni molestiae. Mollitia optio officia illum ut cupiditate eos autem. Soluta dolorum repellendus repellat amet autem rerum illum in. Quibusdam occaecati est nisi esse. Saepe aut dignissimos distinctio id enim.
+            </p>
+          </div>
+        </div>
+
+        <div class="row content">
+          <div class="col-md-4" data-aos="fade-right">
+            <img src="assets/img/details-3.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-5" data-aos="fade-up">
+            <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
+            <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
+            <ul>
+              <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+              <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+              <li><i class="bi bi-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
+            </ul>
+            <p>
+              Qui consequatur temporibus. Enim et corporis sit sunt harum praesentium suscipit ut voluptatem. Et nihil magni debitis consequatur est.
+            </p>
+            <p>
+              Suscipit enim et. Ut optio esse quidem quam reiciendis esse odit excepturi. Vel dolores rerum soluta explicabo vel fugiat eum non.
+            </p>
+          </div>
+        </div>
+
+        <div class="row content">
+          <div class="col-md-4 order-1 order-md-2" data-aos="fade-left">
+            <img src="assets/img/details-4.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
+            <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
+            <p class="fst-italic">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+            <p>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum
+            </p>
+            <ul>
+              <li><i class="bi bi-check"></i> Et praesentium laboriosam architecto nam .</li>
+              <li><i class="bi bi-check"></i> Eius et voluptate. Enim earum tempore aliquid. Nobis et sunt consequatur. Aut repellat in numquam velit quo dignissimos et.</li>
+              <li><i class="bi bi-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Details Section -->
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials section-bg">
@@ -494,6 +609,7 @@
     <?php endif; ?>
 
   </main><!-- End #main -->
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer ">
