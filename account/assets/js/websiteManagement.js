@@ -292,15 +292,15 @@ $("#setOtherInfo").on("keydown", "td", function(e){
 
         console.log(tdDataArr);
 
-        if (tdDataArr.length == 1){
+        if (tdDataArr.length == 3){
             $.ajax({
                 url: "controller/basicSetup.php",
                 type: "POST",
                 data: {
-                    "action"        : 18,
-                    "welcome"       : tdDataArr[0],
-                    "url"           : tdDataArr[0],
-                    "aboutUrl"      : tdDataArr[0]
+                    "action"       : 18,
+                    "vision"       : tdDataArr[0],
+                    "mission"      : tdDataArr[1],
+                    "url"          : tdDataArr[2]
                 },
                 beforeSend: function(){
                     showBeforeSend("Updating Website Info...");

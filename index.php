@@ -125,18 +125,17 @@
         <!-- Left Column -->
         <div class="col-lg-7 pt-4 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center align-items-center mb-lg-0">
           <div data-aos="zoom-out">
-            <h1>Youth Development Office</h1>
+            <h1><?= $website_info['header'] ?></h1>
             <h2>City of Santo Tomas Scholarship Program</h2>
             <div class="d-flex button justify-content-center" data-aos="fade-up" data-aos-delay="200">
               <a href="account/pages-register.php" class="btn btn-sm btn-primary btn-book-a-table">Apply Scholarship</a>
             </div>
-            <!-- <h1><?= $website_other['welcome_text'] ?></h1>
-            <h2><?= $website_other['welcome_text'] ?></h2> -->
           </div>
         </div>
         <!-- Image Column -->
         <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-          <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt="">
+          <!-- <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt=""> -->
+          <img src="account/<?= $website_other['hero'] ?>" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -163,33 +162,24 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="fade-right">
-            <a href="https://www.youtube.com/watch?v=StpBR2W8G5A" class="glightbox play-btn mb-4"></a>
+            <a href="<?= $website_other['url'] ?>" class="glightbox play-btn mb-4"></a>
           </div>
 
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
             <h3>About Us</h3>
-            <p class="description">This esteemed scholarship initiative in the heart of Sto. Tomas, Batangas, is designed to empower deserving students through financial support,
-              fostering educational opportunities for academic excellence. With a rigorous selection process, the Sto. Tomas Scholarship aims to identify and assist talented individuals,
-              promoting their pursuit of higher education and contributing to the intellectual growth of the community. Through this program, the city underscores its commitment to nurturing future leaders
-              and professionals who will make impactful contributions to society.
-            </p>
+            <p class="description"><?= $website_info['descr'] ?></p>
 
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon"><i class="bx bxs-navigation"></i></div>
               <h4 class="title"><a href="">Mission</a></h4>
-              <p class="description">Empowering Dreams, Enriching Futures - The City of Sto. Tomas Scholarship is dedicated to providing transformative
-                educational opportunities for qualified individuals in our community. Fueled by a commitment to excellence, we aim to break down financial barriers,
-                nurturing a generation of skilled and socially responsible leaders who will contribute meaningfully to the progress of Sto. Tomas and beyond.
-              </p>
+              <p class="description"><?= $website_other['mission'] ?></p>
             </div>
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
               <div class="icon"><i class="bx bx-gift"></i></div>
               <h4 class="title"><a href="">Vision</a></h4>
-              <p class="description">Striving for Academic Brilliance, Cultivating Tomorrow's Leaders - The City of Sto. Tomas Scholarship envisions a future where every aspiring student has access to quality education,
-                regardless of financial constraints. By fostering a culture of learning and empowerment, we aspire to be a catalyst for positive change,
-                producing graduates who are not only academically proficient but also compassionate and proactive contributors to the betterment of society.</p>
+              <p class="description"><?= $website_other['vision'] ?></p>
             </div>
 
             <!-- <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
