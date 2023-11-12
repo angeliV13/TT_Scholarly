@@ -53,19 +53,20 @@
                             <table id="setOtherInfo" class="table table-bordered table-condensed table-striped" width="100%" cellspacing="100%">
                                 <thead>
                                     <tr class="small text-center">
-                                        <th class="text-center">Website Welcome Text</th>
-                                        <!-- <th class="text-center">Website Header URL</th>
-                                        <th class="text-center">Website About Us</th> -->
+                                        <th class="text-center">Website Vision</th>
+                                        <th class="text-center">Website Mission</th>
+                                        <th class="text-center">Website About Video URL</th>
+                                        <!-- <th class="text-center">Website About Us</th> -->
                                         <th class="text-center">Website Icon</th>
-                                        <th class="text-center">Website Header Cover Photo</th>
-                                        <th class="text-center">Website Hero Image</th>
+                                        <!-- <th class="text-center">Website Header Cover Photo</th> -->
+                                        <th class="text-center">Website Cover Image</th>
                                     </tr>
                                 </thead>
                                 <tbody class="small text-center">
                                     <tr>
-                                        <td contenteditable="true"><?= $website_other['welcome_text'] ?></td>
-                                        <!-- <td contenteditable="true"><?= $website_other['url'] ?></td>
-                                        <td contenteditable="true"><?= $website_other['about_url'] ?></td> -->
+                                        <td contenteditable="true"><?= $website_other['vision'] ?></td>
+                                        <td contenteditable="true"><?= $website_other['mission'] ?></td>
+                                        <td contenteditable="true"><?= $website_other['url'] ?></td>
                                         <td>
                                             <div class="profile-pic" style="width: auto;">
                                                 <label class="-label" for="icon">
@@ -76,7 +77,7 @@
                                                 <img id="ioutput" src="<?= $website_other['icon'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $website_other['icon'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                                             </div>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <div class="profile-pic" style="width: auto;">
                                                 <label class="-label" for="cover">
                                                     <span class="glyphicon glyphicon-camera"></span>
@@ -85,7 +86,7 @@
                                                 <input id="cover" type="file" onchange="loadFile(event, 2, 'foutput')" />
                                                 <img id="foutput" src="<?= $website_other['cover'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $website_other['cover'] ?>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                                             </div>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <div class="profile-pic" style="width: auto;">
                                                 <label class="-label" for="hero">

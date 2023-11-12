@@ -1733,15 +1733,15 @@ function updateOtherInfo($data)
     include("dbconnection.php");
 
     $type = $data['type'];
-    $welcome = $data['welcome'];
-    $url = $data['url'];
-    $aboutUrl = $data['aboutUrl'];
+    $vision = $conn->real_escape_string($data['vision']);
+    $url = $conn->real_escape_string($data['url']);
+    $mission = $conn->real_escape_string($data['mission']);
     $image = $data['image'];
     $imgType = $data['imgType'];
 
     if ($type == 1)
     {
-        $sql = "UPDATE website_other_info SET welcome_text = '$welcome', url = '$url', about_url = '$aboutUrl'";
+        $sql = "UPDATE website_other_info SET vision = '$vision', url = '$url', mission = '$mission'";
     }
     else
     {

@@ -421,9 +421,9 @@ if (isset($_REQUEST['action']))
             break;
         case 18: // Update Other Info Text
             $data = [
-                'welcome'       => isset($_POST['welcome']) ? $_POST['welcome'] : '',
+                'vision'        => isset($_POST['vision']) ? $_POST['vision'] : '',
+                'mission'       => isset($_POST['mission']) ? $_POST['mission'] : '',
                 'url'           => isset($_POST['url']) ? $_POST['url'] : '',
-                'aboutUrl'      => isset($_POST['aboutUrl']) ? $_POST['aboutUrl'] : '',
                 'image'         => isset($_FILES['image']) ? $_FILES['image'] : '',
                 'type'          => 1,
                 'imgType'       => ''
@@ -433,9 +433,9 @@ if (isset($_REQUEST['action']))
             break;
         case 19: // Update Icons
             $data = [
-                'welcome'       => isset($_POST['welcome']) ? $_POST['welcome'] : '',
+                'vision'        => isset($_POST['vision']) ? $_POST['vision'] : '',
+                'mission'       => isset($_POST['mission']) ? $_POST['mission'] : '',
                 'url'           => isset($_POST['url']) ? $_POST['url'] : '',
-                'aboutUrl'      => isset($_POST['aboutUrl']) ? $_POST['aboutUrl'] : '',
                 'image'         => isset($_FILES['image']) ? $_FILES['image'] : '',
                 'type'          => 2,
                 'imgType'       => isset($_POST['type']) ? $_POST['type'] : '',
