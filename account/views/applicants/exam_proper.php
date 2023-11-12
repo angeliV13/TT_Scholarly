@@ -12,7 +12,7 @@
 
   <div class="card">
 
-    <form id="exam_container">
+    <form id="exam_container" class="prevent-select">
       <!-- <div class="align-items-center text-center bg-dark">
         <h5 class="card-title text-light ">Mathematics</h5>
       </div>
