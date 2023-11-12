@@ -63,6 +63,9 @@ h6 {
 }
 
 
+/*--------------------------------------------------------------
+#  CAROUSEL
+--------------------------------------------------------------*/
 /* Add the following CSS to remove the white space */
 .carousel {
   overflow: hidden;
@@ -147,9 +150,6 @@ h6 {
   /* You can also specify a width and height in pixels or other units if needed */
   /* Example: background-size: 100% 100%; */
 }
-
-
-
 /*--------------------------------------------------------------
 # Sections & Section Header
 --------------------------------------------------------------*/

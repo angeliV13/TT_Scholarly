@@ -220,7 +220,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#senior-high">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeFS">
                 <h4>Educational Assistance Program</h4>
               </a>
             </li>
@@ -233,12 +233,37 @@
 
           <div class="tab-content col-lg-12 order-1 order-lg-2 hero-img">
             <!-- GENERAL REQUIREMENTS  -->
-            <div class="tab-pane fade" id="senior-high">
-              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <h5 class="card-title">Senior High School</h5>
-                    <p><?= $website_scholar_text[0]['scholarText'] ?></p>
+            <div class="tab-pane fade active show" id="general-req">
+              <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="row pt-5">
+                  <!-- <div class="col-lg-12">
+                    <div class="card d-flex justify-content-center">
+                      <div class="card-body">
+                        <h5 class="card-title">General Requirements</h5>
+                        <?php if ($gen_req != null) : ?>
+                          <?php foreach ($gen_req as $key => $req) : ?>
+                            <p><?= $req['req'] ?></p>
+                          <?php endforeach; ?>
+                        <?php else : ?>
+                          <p>No General Requirements for Now</p>
+                        <?php endif; ?>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="container" id="hero">
+                    <div class="row justify-content-between">
+                      <!-- Left Column -->
+                      <div class="col-lg-7 pt-4 pt-lg-0 order-1 order-lg-2 d-flex justify-content-center align-items-center mb-lg-0">
+                        <div data-aos="zoom-out">
+                          <!-- <h1><?= $website_other['welcome_text'] ?></h1>
+                          <h2><?= $website_other['welcome_text'] ?></h2> -->
+                        </div>
+                      </div>
+                      <!-- Image Column -->
+                      <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
+                        <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt="">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -269,6 +294,7 @@
                       <div class="card-body">
                         <h5 class="card-title">College Full Scholarship</h5>
                         <p><?= $website_scholar_text[2]['scholarText'] ?></p>
+
                       </div>
                     </div>
                   </div>
@@ -276,26 +302,7 @@
               </div>
             </div>
 
-            <div class="tab-pane fade active show" id="general-req">
-              <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card d-flex justify-content-center">
-                      <div class="card-body">
-                        <h5 class="card-title">General Requirements</h5>
-                        <?php if ($gen_req != null) : ?>
-                          <?php foreach ($gen_req as $key => $req) : ?>
-                            <p><?= $req['req'] ?></p>
-                          <?php endforeach; ?>
-                        <?php else : ?>
-                          <p>No General Requirements for Now</p>
-                        <?php endif; ?>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
