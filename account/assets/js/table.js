@@ -1767,3 +1767,63 @@ $(document).on("click", ".undoGraduate", function(){
         }
     })
 })
+
+$(document).on("click", "#saveRemarks", function(e){
+    e.preventDefault();
+
+    let scholarId = $("#scholarId").val();
+    let continuingStudentCheckBox = $("#continuingStudentCheckBox").is(":checked") ? 1 : 0;
+    let singleParentCheckBox = $("#singleParentCheckBox").is(":checked") ? 1 : 0;
+    let parentDeceasedCheckBox = $("#parentDeceasedCheckBox").is(":checked") ? 1 : 0;
+    let jobOrderCheckBox = $("#jobOrderCheckBox").is(":checked") ? 1 : 0;
+    let recommendedCheckBox = $("#recommendedCheckBox").is(":checked") ? 1 : 0;
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You are about to update this scholar's remarks. You cannot undo this action.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "controller/accountHandler.php",
+                type: "POST",
+                data: {
+                    action: 29,
+                    scholarId: scholarId,
+                    continuingStudentCheckBox: continuingStudentCheckBox,
+                    singleParentCheckBox: singleParentCheckBox,
+                    parentDeceasedCheckBox: parentDeceasedCheckBox,
+                    jobOrderCheckBox: jobOrderCheckBox,
+                    recommendedCheckBox: recommendedCheckBox,
+                },
+                beforeSend: function () {
+                    showBeforeSend("Updating Scholar Remarks...");
+                },
+                success: function (data) {
+                    hideBeforeSend();
+                    if (data == "success") {
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Scholar Remarks has been updated!",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `An error occured while updating scholar remarks. Please try again. Error: ${data}`,
+                        })
+                    }
+                }
+            })
+        }
+    })
+})

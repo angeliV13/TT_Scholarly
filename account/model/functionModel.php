@@ -120,6 +120,34 @@ function verifyHashPW($pass, $hash)
     return password_verify($pass, $hash);
 }
 
+function get_indicators($type, $min, $max = "", $operator = '>=<=')
+{
+    include("dbconnection.php");
+
+    $sql = "SELECT points FROM applicant_indicator WHERE indicator_category = '" . $type . "'";
+    if ($operator == '>=<=') $sql .= " AND indicator_low >= " . $min . " AND indicator_high <= " . $max . "";
+    if ($operator == 'bet') $sql .= "AND " . $min . " BETWEEN indicator_low AND indicator_high";
+
+    $sql .= " LIMIT 1";
+
+    $query = $conn->query($sql);
+
+    return ($query->num_rows > 0) ? $query->fetch_assoc()['points'] : 0;
+}
+
+function get_exam_scores($id)
+{
+    include("dbconnection.php");
+
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+    
+    $sql = "SELECT points FROM examination_applicant WHERE user_id = '" . $id . "' AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "' LIMIT 1";
+    $query = $conn->query($sql);
+
+    return ($query->num_rows > 0) ? $query->fetch_assoc()['points'] : 0;
+}
+
 function get_current_sem()
 {
     include("dbconnection.php");
