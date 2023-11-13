@@ -39,6 +39,15 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<!-- Vendor CSS Files -->
+<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
 <!-- Add these links to include Bootstrap CSS and JavaScript -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
@@ -161,8 +170,8 @@
     <section id="about" class="about">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="fade-right">
-            <a href="<?= $website_other['url'] ?>" class="glightbox play-btn mb-4"></a>
+          <div class="col-xl-5 col-lg-6  d-flex justify-content-center align-items-between" data-aos="fade-right">
+            <img src="assets/img/logoydo.png" class="img-fluid animated" alt="">
           </div>
 
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
@@ -196,7 +205,7 @@
     <section id="scholarship" class="menu section-bg">
       <div class="container" data-aos="fade-up">
         <div class="row justify-content-between">
-          <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
             <div class="scholarship-header">
               <h3 class="text-white fw-bold">Scholarships Program Offers</h3>
               <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
@@ -204,18 +213,23 @@
           </div>
 
           <ul class="nav nav-tabs d-flex justify-content-center col-lg-12 mt-4 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#general-req">
-                <h4>General Requirements</h4>
+                <h4>Qualification and General Requirements</h4>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeFS">
-                <h4>Educational Assistance Program</h4>
+              <a class="nav-link nav-link active show" data-bs-toggle="tab" data-bs-target="#senior-high">
+                <h4>Senior High-School</h4>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeEA">
+                <h4>Educational Assistance Program</h4>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeFS">
                 <h4>Full Scholarship Program</h4>
               </a>
             </li>
@@ -223,37 +237,39 @@
 
           <div class="tab-content col-lg-12 order-1 order-lg-2 hero-img">
             <!-- GENERAL REQUIREMENTS  -->
-            <div class="tab-pane fade active show" id="general-req">
-              <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="row pt-5">
-                  <!-- <div class="col-lg-12">
-                    <div class="card d-flex justify-content-center">
-                      <div class="card-body">
-                        <h5 class="card-title">General Requirements</h5>
-                        <?php if ($gen_req != null) : ?>
-                          <?php foreach ($gen_req as $key => $req) : ?>
-                            <p><?= $req['req'] ?></p>
-                          <?php endforeach; ?>
-                        <?php else : ?>
-                          <p>No General Requirements for Now</p>
-                        <?php endif; ?>
-                      </div>
-                    </div>
-                  </div> -->
-                  <div class="container" id="hero">
-                    <div class="row justify-content-between">
-                      <!-- Left Column -->
-                      <div class="col-lg-7 pt-4 pt-lg-0 order-1 order-lg-2 d-flex justify-content-center align-items-center mb-lg-0">
-                        <div data-aos="zoom-out">
-                          <!-- <h1><?= $website_other['welcome_text'] ?></h1>
-                          <h2><?= $website_other['welcome_text'] ?></h2> -->
-                        </div>
-                      </div>
-                      <!-- Image Column -->
-                      <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                        <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt="">
-                      </div>
-                    </div>
+            <!-- <div class="tab-pane fade active show" id="general-req">
+              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+                <div class="row">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-center" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/requirements.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-5 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="description pt-3"><?= $website_info['descr'] ?></p>
+                    <p class="description pt-3">
+                      <?php if ($gen_req != null) : ?>
+                        <?php foreach ($gen_req as $key => $req) : ?>
+                    <p style="color: white;"><?= $req['req'] ?></p>
+                  <?php endforeach; ?>
+                <?php else : ?>
+                  <p>No General Requirements for Now</p>
+                <?php endif; ?>
+                </p>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- SHS -->
+            <div class="tab-pane fade active show" id="senior-high">
+              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+                <div class="row pt-3">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="pt-2"><?= $website_scholar_text[0]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>
@@ -262,14 +278,13 @@
             <!-- Educational Assistance Program -->
             <div class="tab-pane fade" id="collegeEA">
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card d-flex justify-content-center">
-                      <div class="card-body">
-                        <h5 class="card-title">College Educational Assistance</h5>
-                        <p><?= $website_scholar_text[1]['scholarText'] ?></p>
-                      </div>
-                    </div>
+                <div class="row pt-3">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="pt-2"> <?= $website_scholar_text[1]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>
@@ -277,16 +292,14 @@
 
             <!-- Full Scholarship Program -->
             <div class="tab-pane fade" id="collegeFS">
-              <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card d-flex justify-content-center">
-                      <div class="card-body">
-                        <h5 class="card-title">College Full Scholarship</h5>
-                        <p><?= $website_scholar_text[2]['scholarText'] ?></p>
-
-                      </div>
-                    </div>
+              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+                <div class="row pt-3">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="pt-2"><?= $website_scholar_text[2]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>
