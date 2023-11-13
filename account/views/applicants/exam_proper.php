@@ -8,6 +8,9 @@
       <li class="breadcrumb-item active">Examination</li>
     </ol>
   </div>
+  <div class="timer-top d-flex align-items-center justify-content-center active">
+    <p class="mt-3">TIMER</p>
+  </div>
   <!-- End Page Title -->
 
   <div class="card">

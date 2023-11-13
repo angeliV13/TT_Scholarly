@@ -1369,6 +1369,23 @@ a {
     /* Add any other styles you want for the buttons */
   }
 
+/*--------------------------------------------------------------
+# Timer Top button
+--------------------------------------------------------------*/
+.timer-top {
+  position: fixed;
+  opacity: 100%;
+  right: 15px;
+  z-index: 999999;
+  background: #4154f1;
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+  transition: all 0.4s;
+}
 
-
-
+.timer-top p {
+  font-size: 24px;
+  color: #fff;
+  line-height: 0;
+}
