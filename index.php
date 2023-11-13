@@ -280,7 +280,7 @@
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
                   <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                    <img src="assets/img/colleges.png" class="img-fluid animated" alt="">
                   </div>
                   <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
                     <h3 style="color: white;">Qualification</h3>
@@ -295,7 +295,7 @@
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
                   <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                    <img src="assets/img/collegehs.png" class="img-fluid animated" alt="">
                   </div>
                   <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
                     <h3 style="color: white;">Qualification</h3>
@@ -321,10 +321,6 @@
             <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
           </div>
         </div>
-        <!-- <div class="scholarship-header">
-          <h2>Testimonials</h2>
-          <h3 class="fw-bold"><span>Alumni Scholars</span></h3>
-        </div> -->
 
         <?php if ($website_testimony != null) : ?>
 
@@ -539,7 +535,6 @@
     <?php endif; ?>
 
   </main><!-- End #main -->
-
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer ">
