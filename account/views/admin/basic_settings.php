@@ -373,7 +373,7 @@
                                         <th class="text-center">Exam Start Date</th>
                                         <th class="text-center">Exam End Date</th>
                                         <th class="text-center">Exam Start Time</th>
-                                        <th class="text-center">Exam End Time</th>
+                                        <!-- <th class="text-center">Exam End Time</th> -->
                                         <th class="text-center">Target Audience</th>
                                         <th class="text-center">Created by</th>
                                         <th class="text-center">Modified by</th>
@@ -616,13 +616,13 @@
                         <input type="date" class="form-control col" id="examEndDate" aria-describedby="examEndDate" name="examEndDate">
                     </div>
                     <div class="row d-flex align-items-center mb-2">
-                        <label for="examTime" class="form-label col-3">Exam Start Time</label>
+                        <label for="examTime" class="form-label col-3">Exam Duration Time</label>
                         <input type="time" class="form-control col" id="examTime" aria-describedby="examTime" name="examTime">
                     </div>
-                    <div class="row d-flex align-items-center mb-2">
+                    <!-- <div class="row d-flex align-items-center mb-2">
                         <label for="examTime" class="form-label col-3">Exam End Time</label>
                         <input type="time" class="form-control col" id="examEndTime" aria-describedby="examTime" name="examTime">
-                    </div>
+                    </div> -->
                     <div class="row d-flex align-items-center mb-2">
                         <label for="examStartDate" class="form-label col-3">Audience</label>
                         <div class="col">

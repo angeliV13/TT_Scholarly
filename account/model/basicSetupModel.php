@@ -707,13 +707,15 @@ function getSetExamTable()
                                             <input type="date" class="form-control col" id="examEndDate_' . $id . '" aria-describedby="examEndDate" name="examEndDate" value="' . $end_date . '">
                                         </div>
                                         <div class="row d-flex align-items-center mb-2">
-                                            <label for="examTime" class="form-label col-3">Exam Start Time</label>
+                                            <label for="examTime" class="form-label col-3">Exam Duration Time</label>
                                             <input type="time" class="form-control col" id="examTime_' . $id . '" aria-describedby="examTime" name="examTime" value="' . $time . '">
                                         </div>
+                                        <!--
                                         <div class="row d-flex align-items-center mb-2">
                                             <label for="examEndTime" class="form-label col-3">Exam End Time</label>
                                             <input type="time" class="form-control col" id="examEndTime_' . $id . '" aria-describedby="examEndTime" name="examEndTime" value="' . $time . '">
                                         </div>
+                                        -->
                                         <div class="row d-flex align-items-center mb-2">
                                             <label for="examStartDate" class="form-label col-3">Audience</label>
                                             <div class="col">
@@ -755,7 +757,7 @@ function getSetExamTable()
             $data[] = [
                 $counter,
                 $start_date,
-                $end_date,
+                // $end_date,
                 $time,
                 $end_time,
                 getAudience($shs, $colEAPub, $colEAPriv, $colSc),
