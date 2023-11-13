@@ -176,7 +176,8 @@
 
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
             <h3>About Us</h3>
-            <p class="description"><?= $website_info['descr'] ?></p>
+            <p class="description" style="text-align: justify;"><?= $website_info['descr'] ?></p>
+
 
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
