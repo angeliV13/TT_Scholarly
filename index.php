@@ -207,7 +207,7 @@
         <div class="row justify-content-between">
           <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
             <div class="scholarship-header">
-              <h3 class="text-white fw-bold">Scholarships Program Offers</h3>
+              <h3 class="text-white fw-bold">Scholarship Program Offers</h3>
               <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
             </div>
           </div>
@@ -315,10 +315,16 @@
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
+        <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h3 class="fw-bold">Alumni Scholars</h3>
+            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+          </div>
+        </div>
+        <!-- <div class="scholarship-header">
           <h2>Testimonials</h2>
           <h3 class="fw-bold"><span>Alumni Scholars</span></h3>
-        </div>
+        </div> -->
 
         <?php if ($website_testimony != null) : ?>
 
@@ -370,9 +376,11 @@
     <section id="calendarAct" class="events">
       <div class="container-fluid" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2 class="fw-bold">YDO Calendar</h2>
-          <h3><span>Calendar of Activities</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h3 class="fw-bold">Calendar of Activities</h3>
+            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+          </div>
         </div>
 
         <?php if ($coa != null) : ?>
@@ -412,11 +420,12 @@
     <section id="adHead" class="chefs section-bg">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2 class="fw-bold">YDO Officials</h2>
-          <h3><span>Head and Administrators</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0  py-3 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h2 class="fw-bold pt-2">YDO Head and Administrators</h2>
+          </div>
         </div>
-
+      
         <?php if ($ofc != null) : ?>
 
           <div class="row gy-4">
@@ -425,7 +434,7 @@
 
               <?php if ($of['active'] == 0) continue; ?>
 
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-4 col-md-6 pt-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                 <div class="chef-member">
                   <div class="member-img">
                     <img src="account/<?= $of['image'] ?>" class="img-fluid" alt="">
