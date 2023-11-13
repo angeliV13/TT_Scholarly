@@ -587,7 +587,7 @@ function get_user_education($id, $latest = 0)
 
             $sql = "SELECT * FROM user_awards WHERE school_id IN (" . implode(",", array_map(function ($el) {
                 return $el['educ_id'];
-            }, $education)) . ")";
+            }, $education)) . ") AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
 
             $query = $conn->query($sql);
 
