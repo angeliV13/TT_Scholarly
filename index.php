@@ -39,6 +39,15 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<!-- Vendor CSS Files -->
+<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
 <!-- Add these links to include Bootstrap CSS and JavaScript -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
@@ -161,13 +170,14 @@
     <section id="about" class="about">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="fade-right">
-            <a href="<?= $website_other['url'] ?>" class="glightbox play-btn mb-4"></a>
+          <div class="col-xl-5 col-lg-6  d-flex justify-content-center align-items-between" data-aos="fade-right">
+            <img src="assets/img/logoydo.png" class="img-fluid animated" alt="">
           </div>
 
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
             <h3>About Us</h3>
-            <p class="description"><?= $website_info['descr'] ?></p>
+            <p class="description" style="text-align: justify;"><?= $website_info['descr'] ?></p>
+
 
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
@@ -196,26 +206,31 @@
     <section id="scholarship" class="menu section-bg">
       <div class="container" data-aos="fade-up">
         <div class="row justify-content-between">
-          <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
             <div class="scholarship-header">
-              <h3 class="text-white fw-bold">Scholarships Program Offers</h3>
+              <h3 class="text-white fw-bold">Scholarship Program Offers</h3>
               <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
             </div>
           </div>
 
           <ul class="nav nav-tabs d-flex justify-content-center col-lg-12 mt-4 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#general-req">
-                <h4>General Requirements</h4>
+                <h4>Qualification and General Requirements</h4>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeFS">
-                <h4>Educational Assistance Program</h4>
+              <a class="nav-link nav-link active show" data-bs-toggle="tab" data-bs-target="#senior-high">
+                <h4>Senior High-School</h4>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeEA">
+                <h4>Educational Assistance Program</h4>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeFS">
                 <h4>Full Scholarship Program</h4>
               </a>
             </li>
@@ -223,37 +238,39 @@
 
           <div class="tab-content col-lg-12 order-1 order-lg-2 hero-img">
             <!-- GENERAL REQUIREMENTS  -->
-            <div class="tab-pane fade active show" id="general-req">
-              <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="row pt-5">
-                  <!-- <div class="col-lg-12">
-                    <div class="card d-flex justify-content-center">
-                      <div class="card-body">
-                        <h5 class="card-title">General Requirements</h5>
-                        <?php if ($gen_req != null) : ?>
-                          <?php foreach ($gen_req as $key => $req) : ?>
-                            <p><?= $req['req'] ?></p>
-                          <?php endforeach; ?>
-                        <?php else : ?>
-                          <p>No General Requirements for Now</p>
-                        <?php endif; ?>
-                      </div>
-                    </div>
-                  </div> -->
-                  <div class="container" id="hero">
-                    <div class="row justify-content-between">
-                      <!-- Left Column -->
-                      <div class="col-lg-7 pt-4 pt-lg-0 order-1 order-lg-2 d-flex justify-content-center align-items-center mb-lg-0">
-                        <div data-aos="zoom-out">
-                          <!-- <h1><?= $website_other['welcome_text'] ?></h1>
-                          <h2><?= $website_other['welcome_text'] ?></h2> -->
-                        </div>
-                      </div>
-                      <!-- Image Column -->
-                      <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                        <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt="">
-                      </div>
-                    </div>
+            <!-- <div class="tab-pane fade active show" id="general-req">
+              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+                <div class="row">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-center" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/requirements.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-5 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="description pt-3"><?= $website_info['descr'] ?></p>
+                    <p class="description pt-3">
+                      <?php if ($gen_req != null) : ?>
+                        <?php foreach ($gen_req as $key => $req) : ?>
+                    <p style="color: white;"><?= $req['req'] ?></p>
+                  <?php endforeach; ?>
+                <?php else : ?>
+                  <p>No General Requirements for Now</p>
+                <?php endif; ?>
+                </p>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- SHS -->
+            <div class="tab-pane fade active show" id="senior-high">
+              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+                <div class="row pt-3">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="pt-2"><?= $website_scholar_text[0]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>
@@ -262,14 +279,13 @@
             <!-- Educational Assistance Program -->
             <div class="tab-pane fade" id="collegeEA">
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card d-flex justify-content-center">
-                      <div class="card-body">
-                        <h5 class="card-title">College Educational Assistance</h5>
-                        <p><?= $website_scholar_text[1]['scholarText'] ?></p>
-                      </div>
-                    </div>
+                <div class="row pt-3">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/colleges.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="pt-2"> <?= $website_scholar_text[1]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>
@@ -277,16 +293,14 @@
 
             <!-- Full Scholarship Program -->
             <div class="tab-pane fade" id="collegeFS">
-              <div class="tab-header text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card d-flex justify-content-center">
-                      <div class="card-body">
-                        <h5 class="card-title">College Full Scholarship</h5>
-                        <p><?= $website_scholar_text[2]['scholarText'] ?></p>
-
-                      </div>
-                    </div>
+              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
+                <div class="row pt-3">
+                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="assets/img/collegehs.png" class="img-fluid animated" alt="">
+                  </div>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
+                    <h3 style="color: white;">Qualification</h3>
+                    <p class="pt-2"><?= $website_scholar_text[2]['scholarText'] ?></p>
                   </div>
                 </div>
               </div>
@@ -302,9 +316,11 @@
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2>Testimonials</h2>
-          <h3 class="fw-bold"><span>Alumni Scholars</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h3 class="fw-bold" style="color: #010483;">Alumni Scholars</h3>
+            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+          </div>
         </div>
 
         <?php if ($website_testimony != null) : ?>
@@ -357,9 +373,11 @@
     <section id="calendarAct" class="events">
       <div class="container-fluid" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2 class="fw-bold">YDO Calendar</h2>
-          <h3><span>Calendar of Activities</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h3 class="fw-bold" style="color: #010483;">Calendar of Activities</h3>
+            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+          </div>
         </div>
 
         <?php if ($coa != null) : ?>
@@ -399,9 +417,10 @@
     <section id="adHead" class="chefs section-bg">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2 class="fw-bold">YDO Officials</h2>
-          <h3><span>Head and Administrators</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0  py-3 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h2 class="fw-bold pt-2">YDO Head and Administrators</h2>
+          </div>
         </div>
 
         <?php if ($ofc != null) : ?>
@@ -412,7 +431,7 @@
 
               <?php if ($of['active'] == 0) continue; ?>
 
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-4 col-md-6 pt-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                 <div class="chef-member">
                   <div class="member-img">
                     <img src="account/<?= $of['image'] ?>" class="img-fluid" alt="">
@@ -452,12 +471,14 @@
       <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
-          <div class="section-header">
-            <h2>Contact</h2>
-            <h3><span>Need Help? Contact Us</span></h3>
+          <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
+            <div class="scholarship-header">
+              <h3 class="fw-bold" style="color: #010483;">Contact Information</h3>
+              <h5 class="pt-2"><span>Need help? Contact us!</span></h5>
+            </div>
           </div>
 
-          <div class="mb-3">
+          <div class="mb-3 pt-4">
             <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.it/maps?q=<?= $website_info['address'] ?>&output=embed"></iframe> -->
             <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13862.541561913424!2d121.13964054729786!3d14.110769102046062!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1693239727931!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
             <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1020.051547302026!2d121.14238298971618!3d14.110124409799477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1685624357158!5m2!1sen!2sph&zoom=9" frameborder="0" allowfullscreen></iframe> -->
@@ -515,7 +536,6 @@
     <?php endif; ?>
 
   </main><!-- End #main -->
-
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer ">

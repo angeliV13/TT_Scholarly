@@ -28,6 +28,7 @@
   --color-senary: #5b84c4;
   --color-septenary: #F98125;
   --color-octonary: #FB9B50;
+
 }
 
 /* Smooth scroll behavior */
@@ -873,11 +874,11 @@ body {
   text-align: justify;
 }
 
-.about .video-box {
-  background: url("../img/about.png") center center no-repeat;
+/* .about .video-box {
+  background: url center center no-repeat;
   background-size: contain;
   min-height: 300px;
-}
+} */
 
 .about .play-btn {
   width: 94px;
@@ -1151,6 +1152,13 @@ body {
   font-size: 24px;
 }
 
+.scholarship h3 span {
+  color: var(--color-primary);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  font-size: 14px;
+}
+
 .scholarship-header h2 {
   font-size: 30px;
   letter-spacing: 1px;
@@ -1158,7 +1166,18 @@ body {
   margin: 0;
   padding: 0;
   color: #ffffff;
-  text-transform: uppercase;
+  text-transform: none;
+  font-family: var(--font-default);
+}
+
+.scholarship-header h3 {
+  font-size: 30px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  text-transform: none;
   font-family: var(--font-default);
 }
 
@@ -1172,6 +1191,7 @@ body {
 .scholarship-header p span {
   color: var(--color-tertiary);
 }
+
 
 .scholarship-title h2 {
   font-size: 48px;
@@ -1237,7 +1257,7 @@ body {
 
 @media (max-width: 575px) {
   .scholarship .nav-link h4 {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
@@ -1516,9 +1536,10 @@ body {
 
 .menu .tab-content .tab-header p {
   font-size: 14px;
-  text-transform: uppercase;
-  color: #676775;
-  margin-bottom: 0;
+  text-transform: none;
+  color: #ffffff;
+  margin-bottom: 300px;
+  text-align: justify;
 }
 
 .menu .tab-content .tab-header h3 {
