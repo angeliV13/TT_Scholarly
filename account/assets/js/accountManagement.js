@@ -1341,7 +1341,7 @@ $("#otherInfo").on("submit", function(e){
                     text: "Other Information Saved Successfully. You may now upload your requirements."
                 }).then((result) => {
                     if (result.isConfirmed){
-                        window.location.href = '?nav=apply_applicant';
+                        window.location.href = '?nav=apply-applicant';
                     }
                 })
             } else {
