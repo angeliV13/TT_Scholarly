@@ -57,6 +57,10 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<!-- BOX ICONS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <!-- Add Bootstrap and DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -177,8 +181,6 @@
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
             <h3>About Us</h3>
             <p class="description" style="text-align: justify;"><?= $website_info['descr'] ?></p>
-
-
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon"><i class="bx bxs-navigation"></i></div>
