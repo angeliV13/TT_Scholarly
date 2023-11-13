@@ -873,11 +873,11 @@ body {
   text-align: justify;
 }
 
-.about .video-box {
-  background: url("../img/about.png") center center no-repeat;
+/* .about .video-box {
+  background: url center center no-repeat;
   background-size: contain;
   min-height: 300px;
-}
+} */
 
 .about .play-btn {
   width: 94px;
@@ -1516,9 +1516,10 @@ body {
 
 .menu .tab-content .tab-header p {
   font-size: 14px;
-  text-transform: uppercase;
-  color: #676775;
-  margin-bottom: 0;
+  text-transform: none;
+  color: #ffffff;
+  margin-bottom: 300px;
+  text-align: justify;
 }
 
 .menu .tab-content .tab-header h3 {
