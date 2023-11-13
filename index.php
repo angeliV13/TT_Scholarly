@@ -317,7 +317,7 @@
 
         <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
           <div class="scholarship-header">
-            <h3 class="fw-bold">Alumni Scholars</h3>
+            <h3 class="fw-bold" style="color: #010483;">Alumni Scholars</h3>
             <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
           </div>
         </div>
@@ -378,7 +378,7 @@
 
         <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
           <div class="scholarship-header">
-            <h3 class="fw-bold">Calendar of Activities</h3>
+            <h3 class="fw-bold" style="color: #010483;">Calendar of Activities</h3>
             <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
           </div>
         </div>
@@ -425,7 +425,7 @@
             <h2 class="fw-bold pt-2">YDO Head and Administrators</h2>
           </div>
         </div>
-      
+
         <?php if ($ofc != null) : ?>
 
           <div class="row gy-4">
@@ -474,12 +474,14 @@
       <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
-          <div class="section-header">
-            <h2>Contact</h2>
-            <h3><span>Need Help? Contact Us</span></h3>
+          <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
+            <div class="scholarship-header">
+              <h3 class="fw-bold" style="color: #010483;">Contact Information</h3>
+              <h5 class="pt-2"><span>Need help? Contact us!</span></h5>
+            </div>
           </div>
 
-          <div class="mb-3">
+          <div class="mb-3 pt-4">
             <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.it/maps?q=<?= $website_info['address'] ?>&output=embed"></iframe> -->
             <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13862.541561913424!2d121.13964054729786!3d14.110769102046062!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1693239727931!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
             <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1020.051547302026!2d121.14238298971618!3d14.110124409799477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1685624357158!5m2!1sen!2sph&zoom=9" frameborder="0" allowfullscreen></iframe> -->
