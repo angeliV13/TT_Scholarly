@@ -707,9 +707,20 @@ function getSetExamTable()
                                             <input type="date" class="form-control col" id="examEndDate_' . $id . '" aria-describedby="examEndDate" name="examEndDate" value="' . $end_date . '">
                                         </div>
                                         <div class="row d-flex align-items-center mb-2">
-                                            <label for="examTime" class="form-label col-3">Exam Duration Time</label>
-                                            <input type="time" class="form-control col" id="examTime_' . $id . '" aria-describedby="examTime" name="examTime" value="' . $time . '">
+                                            <label for="examTime' . $id . '" class="form-label col-3">Exam Duration Time</label>
+                                            <input type="text" class="form-control col" id="examTime_' . $id . '" aria-describedby="examTime" name="examTime" value="' . $time . '">
                                         </div>
+                                        <script>
+                                            $(function () {
+                                                $("#examTime_' . $id . '").timepicker({
+                                                    // format: "hh:ii:00",
+                                                    showMeridian: false,
+                                                    showInputs: true,
+                                                    showSeconds: true,
+                                                    defaultTime: "00:00:00"
+                                                });
+                                            });
+                                        </script>
                                         <!--
                                         <div class="row d-flex align-items-center mb-2">
                                             <label for="examEndTime" class="form-label col-3">Exam End Time</label>
@@ -757,9 +768,9 @@ function getSetExamTable()
             $data[] = [
                 $counter,
                 $start_date,
-                // $end_date,
+                $end_date,
                 $time,
-                $end_time,
+                // $end_time,
                 getAudience($shs, $colEAPub, $colEAPriv, $colSc),
                 accountHandlerAccess(1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
                 accountHandlerAccess(1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',

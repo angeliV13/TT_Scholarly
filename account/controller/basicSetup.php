@@ -180,7 +180,7 @@ if (isset($_REQUEST['action']))
             $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
             $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
             $time       = $_POST['time'];
-            $end_time   = (isset($_POST['end_time']) ? $_POST['end_time'] : NULL );
+            $end_time   = (isset($_POST['end_time']) ? $_POST['end_time'] : '00:00:00' );
             $shs        = $_POST['shs'];
             $colEAPub   = $_POST['colEAPub'];
             $colEAPriv  = $_POST['colEAPriv'];
@@ -195,7 +195,7 @@ if (isset($_REQUEST['action']))
                 $id         = $_POST['id'];
                 $startDate  = date('Y-m-d', strtotime($_POST['startDate']));
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
-                $end_time   = (isset($_POST['end_time']) ? $_POST['end_time'] : NULL );
+                $end_time   = (isset($_POST['end_time']) ? $_POST['end_time'] : '00:00:00' );
                 $time       = $_POST['time'];
                 $shs        = $_POST['shs'];
                 $colEAPub   = $_POST['colEAPub'];

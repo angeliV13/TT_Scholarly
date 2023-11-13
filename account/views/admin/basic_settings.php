@@ -616,8 +616,8 @@
                         <input type="date" class="form-control col" id="examEndDate" aria-describedby="examEndDate" name="examEndDate">
                     </div>
                     <div class="row d-flex align-items-center mb-2">
-                        <label for="examTime" class="form-label col-3">Exam Duration Time</label>
-                        <input type="time" class="form-control col" id="examTime" aria-describedby="examTime" name="examTime">
+                        <label for="examTime" class="form-label col-3">Exam Duration Time <small>(hh:mm:ss)</small></label>
+                        <input type="text" class="form-control col examTime" id="examTime" aria-describedby="examTime" name="examTime">
                     </div>
                     <!-- <div class="row d-flex align-items-center mb-2">
                         <label for="examTime" class="form-label col-3">Exam End Time</label>

@@ -1256,6 +1256,8 @@ function updateSetExam(id) {
   let colEAPriv = $("#examColEAPrivCheckBox_" + id).prop("checked");
   let colSc = $("#examColScCheckBox_" + id).prop("checked");
 
+  console.log(time);
+
   Swal.fire({
     title: "Update this record?",
     text: "Are you sure you want to update this exam date?",
@@ -1699,3 +1701,19 @@ function indicatorDelete(id){
     }
   });
 }
+
+function getDateFromHours(time) {
+  time = time.split(':');
+  let now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate(), ...time);
+}
+
+$(function () {
+  $('#examTime').timepicker({
+      // format: "hh:ii:00",
+      showMeridian: false,
+      showInputs: true,
+      showSeconds: true,
+      defaultTime: "00:00:00"
+  });
+});
