@@ -42,6 +42,9 @@
   <!-- Functions -->
   <script src="assets/js/functions.js"></script>
 
+  <!-- Print -->
+  <script src="assets/js/print.js"></script>
+
   <!-- Secure -->
   <script src="assets/js/secure.js"></script>
 

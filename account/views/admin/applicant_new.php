@@ -20,7 +20,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title">List of New Applicants</h5>
-                    <button class="btn btn-sm btn-danger" onclick="window.print()"> <i class="bi bi-printer"></i> Print List </button>
+                    <button class="btn btn-sm btn-danger" onclick="printData('collegeNewApplicantTable')"> <i class="bi bi-printer"></i> Print List </button>
                 </div>
                 <div class="table-responsive ">
                     <table id="collegeNewApplicantTable" class="table table-striped header-fixed" width="100%" cellspacing="100%">
