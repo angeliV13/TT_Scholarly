@@ -9,58 +9,36 @@
     </ol>
   </div>
   <div class="timer-top d-flex align-items-center justify-content-center active">
-    <p class="mt-3">TIMER</p>
+    <p id="time" class="mt-3">
+      <?php echo (isset($examAccess[2]) ? $examAccess[2] : "00:00:00" ); ?>
+    </p>
   </div>
   <!-- End Page Title -->
 
   <div class="card">
 
     <form id="exam_container" class="prevent-select">
-      <!-- <div class="align-items-center text-center bg-dark">
-        <h5 class="card-title text-light ">Mathematics</h5>
-      </div>
-      <div class="container">
-        <div id="question_1">
-          <div id="question_title_1" class="pt-4">
-            <h5 class="fw-bold"><span class="me-2">(1)</span>
-              Where have you been on my life?
-            </h5>
-          </div>
-          <div id="choices_1" class="ms-5 pb-4">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="choice_1" id="choice_1_1" value="1">
-              <label class="form-check-label" for="choice_1_1">
-                Rihhana
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="choice_1" id="choice_1_2" value="2">
-              <label class="form-check-label" for="choice_1_2">
-                Selena Gomez
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="choice_1" id="choice_1_3" value="3">
-              <label class="form-check-label" for="choice_1_3">
-                Taylor Swift
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="choice_1" id="choice_1_4" value="4">
-              <label class="form-check-label" for="choice_1_4">
-                Ariana Grande
-              </label>
-            </div>
-          </div>
-          <div class="py-3">
-            <button class="btn btn-warning px-3">Previous</button>
-            <button class="btn btn-primary px-4">Next</button>
-          </div>
-        </div>
-      </div> -->
       
     </form>
     
   </div>
-  <!-- <button id="submitExamv2" class="btn btn-success d-none" type="button" >Submit Examination</button> -->
+  
+  <!-- Instructions Modal -->
+  <div class="modal fade" id="instructionsModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">General Directions / Instructions</h5>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button id="start_exam" type="button" class="btn btn-warning">Start Exam</button>
+                    <button id="cancel_exam" type="button" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
 </main><!-- End #main -->
