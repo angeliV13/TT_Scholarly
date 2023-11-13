@@ -662,7 +662,7 @@ function updateGenInfo($data, $type = 0, $userId = "")
     {
         $sql = "UPDATE gen_info SET working_flag = '$data[working_flag]', ofw_flag = '$data[ofw_flag]', other_ofw = '$data[other_ofw]',
             pwd_flag = '$data[pwd_flag]', other_pwd = '$data[other_pwd]', status_flag = '$data[status_flag]', self_pwd_flag = '$data[self_pwd_flag]'
-            WHERE user_id = '" . $data['userId'] . "' AND ay_id = '$defaultYear' AND sem_id = '$acadYear' LIMIT 1";
+            WHERE user_id = '" . $data['userId'] . "' AND ay_id = '$acadYear' AND sem_id = '$defaultYear' LIMIT 1";
     } 
     else if ($type == 1) // Education
     {
@@ -771,7 +771,7 @@ function updateSchool($data, $userId, $awards = [], $type)
 
     if ($query)
     {
-        return ($awards != null) ? $awards : 'success';
+        return updateAwards($awards, $data['educ_id']);
     }
     else
     {
@@ -789,7 +789,7 @@ function updateAwards($data, $educId)
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
-    $sql = "SELECT id FROM user_awards WHERE school_id = '$educId' AND acad_year = '$acadYear' AND sem = '$defaultYear'";
+    $sql = "SELECT id FROM user_awards WHERE school_id = '$educId' AND ay_id = '$acadYear' AND sem_id = '$defaultYear'";
     $query = $conn->query($sql);
 
     $dataArr = $deleteArr = [];
@@ -802,44 +802,47 @@ function updateAwards($data, $educId)
         }
     }
 
-    if ($data != null) 
+    if ($dataArr != null) 
     {
-        if ($dataArr != null) 
+        foreach ($dataArr as $awardId) 
         {
-            foreach ($dataArr as $awardId) 
+            $awardArr = array_column($data, 'awardId');
+            if (!in_array($awardId, $awardArr)) 
             {
-                if (!in_array($awardId, $data['awardId'])) 
-                {
-                    $deleteArr[] = $awardId;
-                }
+                $deleteArr[] = $awardId;
             }
         }
+    }
 
-        if ($deleteArr != null) 
-        {
-            $sql = "DELETE FROM user_awards WHERE id IN (" . implode(',', $deleteArr) . ")";
-            $query = $conn->query($sql);
-        }
-
+    if ($deleteArr != null) 
+    {
+        $sql = "DELETE FROM user_awards WHERE id IN (" . implode(',', $deleteArr) . ")";
+        $query = $conn->query($sql);
+    }
+        
+    if ($data != null) 
+    {
         foreach ($data as $award) 
         {
             $awardId = $award['awardId'];
             $honor = $award['honor'];
-            $acadYear = $award['acadYear'];
+            $acadsYear = $award['acadYear'];
             $sem = $award['sem'];
             $yearLevel = $award['yearLevel'];
 
-            $exists = check_exist_multiple(['table' => 'user_awards', 'column' => ['id' => ['=', $awardId], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
+            $exists = 0;
+
+            if ($awardId != "") $exists = check_exist_multiple(['table' => 'user_awards', 'column' => ['id' => ['=', $awardId], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
             // $exists = check_exist(['table' => 'user_awards', 'column' => 'id', 'value' => $awardId]);
 
             if ($exists == 0) 
             {
-                $sql = "INSERT INTO user_awards (school_id, ay_id, sem_id acad_year, honor, sem, year_level) VALUES
-                    ('$educId', '$acadYear', '$defaultYear', '$acadYear', '$honor', '$sem', '$yearLevel')";
+                $sql = "INSERT INTO user_awards (school_id, ay_id, sem_id, acad_year, honor, sem, year_level) VALUES
+                    ('$educId', '$acadYear', '$defaultYear', '$acadsYear', '$honor', '$sem', '$yearLevel')";
             } 
             else 
             {
-                $sql = "UPDATE user_awards SET acad_year = '$acadYear', honor = '$honor', sem = '$sem', year_level = '$yearLevel'
+                $sql = "UPDATE user_awards SET acad_year = '$acadsYear', honor = '$honor', sem = '$sem', year_level = '$yearLevel'
                     WHERE id = '$awardId' AND school_id = '$educId' AND ay_id = '$acadYear' AND sem_id = '$defaultYear'";
             }
 
@@ -935,7 +938,7 @@ function updateFamily($data, $type, $userId)
         else 
         {
             $sql = "INSERT INTO user_family (user_id, ay_id, sem_id, fam_type, firstName, middleName, lastName, suffix, age, birth_date, birth_place, contact_number, living_flag, occupation, company_name, company_address, income_flag, attainment_flag, relationship) VALUES
-                    ('$userId', '$acadYear', '$defaultYear', '$type', '$defaultYear', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
+                    ('$userId', '$acadYear', '$defaultYear', '$type', '$data[firstName]', '$data[middleName]', '$data[lastName]', '$data[suffix]', '$data[age]', '$data[birthday]', '$data[birthplace]', '$data[contact]', '$data[living]', '$occupation', '$data[company]', '$data[companyAddress]', '$data[income]', '$data[education]', '$data[relationship]')";
         }
 
         $query = $conn->query($sql);

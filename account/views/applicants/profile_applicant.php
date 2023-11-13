@@ -1322,6 +1322,7 @@
                     <!-- FATHER'S INFO -->
                   <?php else : ?>
                     <div class="row g-4">
+                      <h5 class="card-title p-2">Father's Information</h5>
                       <!-- FULL NAME -->
                       <div class="col-md-3 position-relative">
                         <label for="fatherFN" class="form-label">First name</label>
@@ -1528,6 +1529,7 @@
                     </div><!-- End Custom Styled Validation with Tooltips -->
                   <?php else : ?>
                     <div class="row g-4">
+                      <h5 class="card-title p-2">Mother's Information</h5>
                       <!-- FULL NAME -->
                       <div class="col-md-3 position-relative">
                         <label for="motherFN" class="form-label">First name</label>

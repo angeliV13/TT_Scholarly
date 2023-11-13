@@ -176,7 +176,8 @@
 
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
             <h3>About Us</h3>
-            <p class="description"><?= $website_info['descr'] ?></p>
+            <p class="description" style="text-align: justify;"><?= $website_info['descr'] ?></p>
+
 
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
@@ -207,7 +208,7 @@
         <div class="row justify-content-between">
           <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
             <div class="scholarship-header">
-              <h3 class="text-white fw-bold">Scholarships Program Offers</h3>
+              <h3 class="text-white fw-bold">Scholarship Program Offers</h3>
               <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
             </div>
           </div>
@@ -280,7 +281,7 @@
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
                   <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                    <img src="assets/img/colleges.png" class="img-fluid animated" alt="">
                   </div>
                   <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
                     <h3 style="color: white;">Qualification</h3>
@@ -295,7 +296,7 @@
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
                   <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
+                    <img src="assets/img/collegehs.png" class="img-fluid animated" alt="">
                   </div>
                   <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
                     <h3 style="color: white;">Qualification</h3>
@@ -315,9 +316,11 @@
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2>Testimonials</h2>
-          <h3 class="fw-bold"><span>Alumni Scholars</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h3 class="fw-bold" style="color: #010483;">Alumni Scholars</h3>
+            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+          </div>
         </div>
 
         <?php if ($website_testimony != null) : ?>
@@ -370,9 +373,11 @@
     <section id="calendarAct" class="events">
       <div class="container-fluid" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2 class="fw-bold">YDO Calendar</h2>
-          <h3><span>Calendar of Activities</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h3 class="fw-bold" style="color: #010483;">Calendar of Activities</h3>
+            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+          </div>
         </div>
 
         <?php if ($coa != null) : ?>
@@ -412,9 +417,10 @@
     <section id="adHead" class="chefs section-bg">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2 class="fw-bold">YDO Officials</h2>
-          <h3><span>Head and Administrators</span></h3>
+        <div class="col-lg-12 pt-2 pt-lg-0  py-3 d-flex justify-content-center align-items-center mb-lg-0">
+          <div class="scholarship-header">
+            <h2 class="fw-bold pt-2">YDO Head and Administrators</h2>
+          </div>
         </div>
 
         <?php if ($ofc != null) : ?>
@@ -425,7 +431,7 @@
 
               <?php if ($of['active'] == 0) continue; ?>
 
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-4 col-md-6 pt-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                 <div class="chef-member">
                   <div class="member-img">
                     <img src="account/<?= $of['image'] ?>" class="img-fluid" alt="">
@@ -465,12 +471,14 @@
       <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
-          <div class="section-header">
-            <h2>Contact</h2>
-            <h3><span>Need Help? Contact Us</span></h3>
+          <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
+            <div class="scholarship-header">
+              <h3 class="fw-bold" style="color: #010483;">Contact Information</h3>
+              <h5 class="pt-2"><span>Need help? Contact us!</span></h5>
+            </div>
           </div>
 
-          <div class="mb-3">
+          <div class="mb-3 pt-4">
             <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.it/maps?q=<?= $website_info['address'] ?>&output=embed"></iframe> -->
             <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13862.541561913424!2d121.13964054729786!3d14.110769102046062!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1693239727931!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
             <!-- <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1020.051547302026!2d121.14238298971618!3d14.110124409799477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd6595d832b2d3%3A0x4feaa98ea02e3328!2sSanto%20Tomas%20City%20Hall!5e0!3m2!1sen!2sph!4v1685624357158!5m2!1sen!2sph&zoom=9" frameborder="0" allowfullscreen></iframe> -->
@@ -528,7 +536,6 @@
     <?php endif; ?>
 
   </main><!-- End #main -->
-
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer ">
