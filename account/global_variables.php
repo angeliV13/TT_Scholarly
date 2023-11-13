@@ -5,7 +5,7 @@ $genderArr = ['0' => 'Male', '1' => 'Female'];
 $civilArr = ['0' => 'Single', '1' => 'Married', '2' => 'Widowed', '3' => 'Separated', '4' => 'Prefer Not to Say'];
 $citizenshipArr = ['0' => 'Filipino', '1' => 'Others'];
 $educAttainment = ['0' => 'Elementary', '1' => 'Junior High School', '2' => 'Senior High School', '3' => 'College', '4' => 'Vocational', '5' => 'Post Graduate'];
-$incomeArr = ['0' => 'Less than 5000', '1' => '5001 - 10999', '2' => '11000 - 20999', '3' => 'Greater than 21000', '4' => 'N/A'];
+$incomeArr = ['0' => 'Less than 11,690', '1' => '11,691 - 23,831', '2' => '23,832 - 46,761', '3' => '46,762 - 81,832', '4' => '81,833 - 140,284', '5' => '140,285 - 233,806', '6' => 'Greater than 233,807', '7' => 'N/A'];
 $bootstrapIcons = ['Circle' => 'bi bi-check-circle-fill', 'User' => 'bi bi-people', 'Add User' => 'bi bi-person-plus', 
 'Add' => 'bi bi-plus-circle', 'Delete User' => 'bi bi-person-x', 'Delete' => 'bi bi-trash3', 'Submit 1' => 'bi bi-file-earmark-check', 
 'Submit 2' => 'bi bi-check-square', 'Archive' => 'bi bi-archive', 'Bar Graph' => 'bi bi-file-bar-graph', 'Card Image' => 'bi bi-card-image', 
