@@ -128,7 +128,8 @@ function getProfile($account_id)
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h5 class="card-title">Profile Checking</h5>
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center justify-content-end">
+                                        <input disabled type="inputIncomepoints" class="w-25 form-control" value="' . $source . '"/> <!-- INDICATOR TOTAL -->
                                     </div>
                                 </div>
                                 <!--SUB FORMS-->
@@ -144,7 +145,7 @@ function getProfile($account_id)
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-2">
                                                     <input disabled type="inputIncome" class="form-control" placeholder="Applicant\'s Income" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $source . '" />
-                                                    <input disabled type="inputIncomepoints" class="col form-control" />
+                                                    <input disabled type="inputIncomepoints" class="col form-control" value="' . $source . '"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,7 +154,7 @@ function getProfile($account_id)
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-2">
                                                     <input disabled type="inputSchooltype" class="form-control" placeholder="School Type" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $gwa . '"/>
-                                                    <input disabled type="inputSchooltype" class="col form-control" />
+                                                    <input disabled type="inputSchooltype" class="col form-control" value="' . $gwa . '"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,7 +163,7 @@ function getProfile($account_id)
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-2">
                                                     <input disabled type="inputPointsResidency" class="form-control" placeholder="Applicant\'s Year/s of Residency" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $years_of_residency . '"/>
-                                                    <input disabled type="inputPointsResidency" class="col form-control" />
+                                                    <input disabled type="inputPointsResidency" class="col form-control" value="' . $years_of_residency . '"/>
                                                 </div>
                                             </div>
                                         </div>
