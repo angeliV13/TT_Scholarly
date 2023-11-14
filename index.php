@@ -439,7 +439,7 @@
 
                 <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(account/<?= $ev['image'] ?>)">
                   <h3><?= $ev['title'] ?></h3>
-                  <div class="price align-self-start"><?= $ev['date_start'] ?> to <?= $ev['date_end'] ?></div>
+                  <div class="price align-self-start"><?= date("F d, Y", strtotime($ev['date_start'])) ?> to <?= date("F d, Y", strtotime($ev['date_end'])) ?></div>
                   <p class="description">
                     <?= $ev['description'] ?>
                   </p>
