@@ -1527,6 +1527,8 @@ function addEvents($data)
     $dateEnd = $data['dateEnd'];
     $active = $data['active'];
 
+    if (!file_exists('../assets/img/uploads/events/')) mkdir('../assets/img/uploads/events/', 0777, true);
+
     $eImg = upload_file($eventImg, 'assets/img/uploads/events/', '../assets/img/uploads/events/', $options = [
         'type' => ['jpg', 'jpeg', 'png'],
     ]);
