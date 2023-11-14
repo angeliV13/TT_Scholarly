@@ -1656,6 +1656,7 @@ function addOfficials($data)
 
             return ($query) ? "success" : 'Official Socials Error: ' . $conn->error;
         }
+        return ($query) ? "success" : 'Unknown Error';
     }
     else
     {
@@ -1730,6 +1731,7 @@ function updateOfficial($data)
 
             return ($query) ? "success" : 'Official Socials Error: ' . $conn->error;
         }
+        return ($query) ? "success" : 'Unknown Error';
     }
     else
     {
