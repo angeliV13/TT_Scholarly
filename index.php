@@ -242,14 +242,22 @@
                         <h4 class="title custom-link" style="font-size: 35px; color: white;"><a href="" class="white-link">Qualification and Application Requirements</a></h4>
                       </div>
                     </div>
-                    <p class="pt-3" style="text-align: justify;">
+                    <p class="pt-3" style="text-align: justify;" data-aos="zoom-out" data-aos-delay="300">
                       <?= $website_scholar_text[0]['scholarText'] ?>
                     </p>
-                    <div class="card-body pt-4">
-                      <h5 class="card-title text-white py-3 fw-bold" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
+                    <p class="pt-3" style="text-align: justify;">
+                    <ul style="list-style-type: none;" data-aos="zoom-out" data-aos-delay="300">
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill"></i> Must be a resident of the City of Santo Tomas, Batangas.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> Incoming Grade 11 & Grade 12.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> No Failing Grade Per Subject.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> The General Average must be 83% above.</li>
+                    </ul>
+                    </p>
+                    <div class="card-body pt-2">
+                      <h5 class="card-title text-center text-white py-3 fw-bold" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
                       <?php if ($gen_req != null) : ?>
                         <?php foreach ($gen_req as $key => $req) : ?>
-                          <p data-aos="zoom-in" data-aos-delay="100">
+                          <p class="text-center" data-aos="zoom-in" data-aos-delay="100">
                             <span class style="list-style-type: none;"><i class="bi bi-check" style="color:aquamarine"></i></span>
                             <?= $req['req'] ?>
                           </p>
@@ -277,14 +285,22 @@
                         <h4 class="title custom-link" style="font-size: 35px; color: white;"><a href="" class="white-link">Qualification and Application Requirements</a></h4>
                       </div>
                     </div>
-                    <p class="pt-3" style="text-align: justify;">
+                    <p class="pt-3" style="text-align: justify;" data-aos="zoom-out" data-aos-delay="300">
                       <?= $website_scholar_text[1]['scholarText'] ?>
                     </p>
-                    <div class="card-body pt-4">
-                      <h5 class="card-title text-white py-3" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
+                    <p class="pt-3" style="text-align: justify;">
+                    <ul style="list-style-type: none;" data-aos="zoom-out" data-aos-delay="300">
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill"></i> Must be a resident of the City of Santo Tomas, Batangas.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> Incoming 1st year to 5th year level.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> No Failing Grade Per Subject.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> The General Average must be 80% above.</li>
+                    </ul>
+                    </p>
+                    <div class="card-body pt-2">
+                      <h5 class="card-title text-center text-white py-3 fw-bold" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
                       <?php if ($gen_req != null) : ?>
                         <?php foreach ($gen_req as $key => $req) : ?>
-                          <p data-aos="zoom-in" data-aos-delay="100">
+                          <p class="text-center" data-aos="zoom-in" data-aos-delay="100">
                             <span class style="list-style-type: none;"><i class="bi bi-check" style="color:aquamarine"></i></span>
                             <?= $req['req'] ?>
                           </p>
@@ -312,14 +328,23 @@
                         <h4 class="title custom-link" style="font-size: 35px; color: white;"><a href="" class="white-link">Qualification and Application Requirements</a></h4>
                       </div>
                     </div>
-                    <p class="pt-3" style="text-align: justify;">
+                    <p class="pt-3" style="text-align: justify;" data-aos="zoom-out" data-aos-delay="300">
                       <?= $website_scholar_text[2]['scholarText'] ?>
                     </p>
-                    <div class="card-body pt-4">
-                      <h5 class="card-title text-white py-3" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
+                    <p class="pt-3" style="text-align: justify;">
+                    <ul style="list-style-type: none;" data-aos="zoom-out" data-aos-delay="300">
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill"></i> Must be a resident of the City of Santo Tomas, Batangas.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> Incoming Ist-year level ONLY.</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> Enrolled at FAITH Colleges, FIRST College, La Consolacion College Tanauan, Marcelino Fule Memorial College & Tanauan Institute</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> No Grade Below 80 Per Subject</li>
+                      <li style="color: white;"><i class="bi bi-arrow-right-circle-fill" style="color: white;"></i> No The General Average must be 85% above.</li>
+                    </ul>
+                    </p>
+                    <div class="card-body pt-2">
+                      <h5 class="card-title text-center text-white py-3 fw-bold" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
                       <?php if ($gen_req != null) : ?>
                         <?php foreach ($gen_req as $key => $req) : ?>
-                          <p data-aos="zoom-in" data-aos-delay="100">
+                          <p class="text-center" data-aos="zoom-in" data-aos-delay="100">
                             <span class style="list-style-type: none;"><i class="bi bi-check" style="color:aquamarine"></i></span>
                             <?= $req['req'] ?>
                           </p>

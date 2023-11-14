@@ -1928,15 +1928,15 @@ function updateScholarText($data)
 
         if ($key == 'shs')
         {
-            $sql .= "'$value' WHERE type = 1";
+            $sql .= "'" . $conn->real_escape_string($value) . "' WHERE type = '1'";
         }
         else if ($key == 'cea')
         {
-            $sql .= "'$value' WHERE type = 2";
+            $sql .= "'" . $conn->real_escape_string($value) . "' WHERE type = '2'";
         }
         else if ($key == 'cfs')
         {
-            $sql .= "'$value' WHERE type = 3";
+            $sql .= "'" . $conn->real_escape_string($value) . "' WHERE type = '3'";
         }
 
         $query = $conn->query($sql);
