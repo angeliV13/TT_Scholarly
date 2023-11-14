@@ -375,7 +375,7 @@
 
         <?php if ($website_testimony != null) : ?>
 
-          <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="slides-1 swiper pt-5" data-aos="fade-up" data-aos-delay="100">
             <div class="swiper-wrapper">
 
               <?php foreach ($website_testimony as $key => $web) : ?>
@@ -432,7 +432,7 @@
 
         <?php if ($coa != null) : ?>
 
-          <div class="slides swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="slides swiper pt-5" data-aos="fade-up" data-aos-delay="100">
             <div class="swiper-wrapper">
 
               <?php foreach ($coa as $key => $ev) : ?>
