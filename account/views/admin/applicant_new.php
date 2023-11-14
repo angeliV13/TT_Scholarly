@@ -21,6 +21,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title">List of New Applicants</h5>
                     <button class="btn btn-sm btn-danger" onclick="printData('collegeNewApplicantTable')"> <i class="bi bi-printer"></i> Print List </button>
+                    <!-- <button class="dt-button buttons-print btn btn-sm btn-danger" tabindex="0" aria-controls="collegeNewApplicantTable" type="button"><span>Print</span></button> -->
                 </div>
                 <div class="table-responsive ">
                     <table id="collegeNewApplicantTable" class="table table-striped header-fixed" width="100%" cellspacing="100%">
