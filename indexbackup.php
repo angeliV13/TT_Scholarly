@@ -285,7 +285,6 @@ ons/bootstrap-icons.css" rel="stylesheet">
                                     <div class="card d-flex justify-content-center">
                                         <div class="card-body">
                                             <h5 class="card-title">General Requirements</h5>
-                                            
                                             <?php if ($gen_req != null) : ?>
                                                 <?php foreach ($gen_req as $key => $req) : ?>
                                                     <p><?= $req['req'] ?></p>
@@ -613,3 +612,39 @@ ons/bootstrap-icons.css" rel="stylesheet">
                   <a href="account/pages-register.php" class="btn btn-sm btn-primary btn-book-a-table">Apply Scholarship</a>
                 </div> -->
 <!-- </div> -->
+
+
+<!-- <div class="col-lg-12">
+                    <div class="card d-flex justify-content-center">
+                      <div class="card-body">
+                        <h5 class="card-title">General Requirements</h5>
+                        <?php if ($gen_req != null) : ?>
+                          <?php foreach ($gen_req as $key => $req) : ?>
+                            <p><?= $req['req'] ?></p>
+                          <?php endforeach; ?>
+                        <?php else : ?>
+                          <p>No General Requirements for Now</p>
+                        <?php endif; ?>
+                      </div>
+                    </div>
+                  </div> -->
+<div class="container" id="hero">
+    <div class="row justify-content-between">
+        <!-- Left Column -->
+        <div class="col-lg-7 pt-4 pt-lg-0 order-1 order-lg-2 d-flex justify-content-center align-items-center mb-lg-0">
+            <div data-aos="zoom-out">
+                <?php if ($gen_req != null) : ?>
+                    <?php foreach ($gen_req as $key => $req) : ?>
+                        <p><?= $req['req'] ?></p>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p>No General Requirements for Now</p>
+                <?php endif; ?>
+            </div>
+        </div>
+        <!-- Image Column -->
+        <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="zoom-out" data-aos-delay="300">
+            <img src="assets/img/requirements.png" class="img-fluid animated" alt="">
+        </div>
+    </div>
+</div>
