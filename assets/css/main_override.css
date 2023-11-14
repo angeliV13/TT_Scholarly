@@ -573,7 +573,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 0 10px 30px;
+    padding: 10px 10px 10px 10px;
     font-family: var(--font-primary);
     font-size: 15px;
     font-weight: 500;
@@ -1497,7 +1497,7 @@ body {
 .menu {
   overflow: hidden;
   padding: 70px 0;
-  padding-bottom: 100px;
+  padding-bottom: 0px;
 }
 
 .menu .nav-tabs {

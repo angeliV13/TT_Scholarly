@@ -120,7 +120,7 @@
           <li><a class="nav-link active" href="#about">About</a></li>
           <li><a a class="nav-link" href="#scholarship">Scholarships</a></li>
           <li><a a class="nav-link" href="#calendarAct">Calendar of Activities</a></li>
-          <li><a a class="nav-link" href="#headAd">Administrators</a></li>
+          <li><a a class="nav-link" href="#adHead">Administrators</a></li>
           <li><a a class="nav-link" href="#contact">Contact</a></li>
           <li><a class="#login" href="account/index.php">Login</a></li>
         </ul>
