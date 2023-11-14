@@ -53,6 +53,9 @@ if (isset($_REQUEST['action'])) {
             $id              = $_POST['id'];
             echo deleteExamItems($id);
             break;
+        case 9:
+            echo setExamDate();
+            break;
         
     }
 }
