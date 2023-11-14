@@ -229,7 +229,7 @@
 
           <div class="tab-content col-lg-12 order-1 order-lg-2 hero-img">
             <!-- SHS -->
-            <div class="tab-pane fade active show" id="senior-high">
+            <div class="container tab-pane fade active show" id="senior-high">
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
                   <div class="col-xl-5 col-lg-6 d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
@@ -264,7 +264,7 @@
             </div>
 
             <!-- Educational Assistance Program -->
-            <div class="tab-pane fade" id="collegeEA">
+            <div class="container tab-pane fade" id="collegeEA">
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
                   <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
