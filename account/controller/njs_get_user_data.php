@@ -17,6 +17,7 @@ if(isset($_SESSION['id']))
 
     $accType = $accountType[0];
     $accAccess = $accountType[1];
+    $readOnly = checkReadOnlyStatus();
 
     if($user_data[3] >= 2)
     { //Checking Account Type if beneficiary or applicant
