@@ -254,23 +254,49 @@ $(document).ready(function () {
                     // logo: "../images/logo192.png",
                     // logoPosition: "left",
                     logoStyle: "height: 96px; width: 96px;",
-                    title:  '<p class="small mb-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                            '<p class="text-primary fw-bold h1 my-0">Youth Development Office</p>' + 
-                            '<p class="">Applicants List</p>',
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Applicants List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
                 },
                 customize: function ( win ) {
                     $(win.document.body)
                         .css( 'font-size', '9pt' );
  
                     $(win.document.body).find( 'table' )
-                        .addClass( 'compact' )
+                        .addClass( 'compact table table-striped')
                         .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
                     $(win.document.body).children("h1:first").remove();
                 },
                 exportOptions: {
                     columns: function (idx, data, node) {
-                        if (node.innerHTML == "Action")
-                            return false;
+                        switch(node.innerHTML){
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
                         return true;
                     }
                 }
