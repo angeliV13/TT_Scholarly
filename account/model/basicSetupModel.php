@@ -808,7 +808,13 @@ function addSetExam($startDate, $endDate, $time, $end_time, $shs, $colEAPub, $co
             VALUES (NULL, '" . $acadYearId . "', '" . $semId . "',  '" . $startDate . "', '" . $endDate . "','" . $time . "' ,'" . $end_time . "', " . $shs . "," . $colEAPub . "," . $colEAPriv . "," . $colSc . ", '" . $sessionId . "', '" . $date . "', '" . $sessionId . "', '" . $date . "')";
     $query = $conn->query($sql) or die("Error BSQ016: " . $conn->error);
 
-    // return 'Exam Date Added';
+    // Getting the ID set from Exam
+    $sql = "SELECT LAST_INSERT_ID() AS lastId";
+    $query = $conn->query($sql) or die("Error BSQ022: " . $conn->error);
+
+    while ($row = $query->fetch_assoc()) {
+        extract($row);
+    }
 
 
     // Get All users that should take the examination
@@ -820,7 +826,7 @@ function addSetExam($startDate, $endDate, $time, $end_time, $shs, $colEAPub, $co
 
         if ($examExists->num_rows == 0) {
             // Sets the User for Examination
-            startExam($applicant);
+            startExam($applicant, $lastId);
         }
         
     }
@@ -860,6 +866,9 @@ function deleteSetExam($id)
     include("dbconnection.php");
 
     $sql = "DELETE FROM set_exam WHERE id = '" . $id . "'";
+    $query = $conn->query($sql) or die("Error BSQ018: " . $conn->error);
+
+    $sql = "DELETE FROM examination_applicant WHERE exam_id = '" . $id . "'";
     $query = $conn->query($sql) or die("Error BSQ018: " . $conn->error);
 
     return 'Deleted Successfully';
