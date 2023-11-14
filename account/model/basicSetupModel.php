@@ -1730,6 +1730,8 @@ function updateOfficial($data)
 
             return ($query) ? "success" : 'Official Socials Error: ' . $conn->error;
         }
+
+        return 'success';
     }
     else
     {
