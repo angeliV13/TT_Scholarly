@@ -120,7 +120,7 @@
           <li><a class="nav-link active" href="#about">About</a></li>
           <li><a a class="nav-link" href="#scholarship">Scholarships</a></li>
           <li><a a class="nav-link" href="#calendarAct">Calendar of Activities</a></li>
-          <li><a a class="nav-link" href="#headAd">Administrators</a></li>
+          <li><a a class="nav-link" href="#adHead">Administrators</a></li>
           <li><a a class="nav-link" href="#contact">Contact</a></li>
           <li><a class="#login" href="account/index.php">Login</a></li>
         </ul>
@@ -174,7 +174,7 @@
     <section id="about" class="about">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xl-5 col-lg-6  d-flex justify-content-center align-items-between" data-aos="fade-right">
+          <div class="col-xl-5 col-lg-6  d-flex justify-content-center align-items-center" data-aos="fade-right">
             <img src="assets/img/logoydo.png" class="img-fluid animated" alt="">
           </div>
 
@@ -183,22 +183,17 @@
             <p class="description" style="text-align: justify;"><?= $website_info['descr'] ?></p>
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
-              <div class="icon"><i class="bx bxs-navigation"></i></div>
+              <div class="icon"><i class="bi bi-bookmark-check-fill"></i></div>
               <h4 class="title"><a href="">Mission</a></h4>
               <p class="description"><?= $website_other['mission'] ?></p>
             </div>
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
-              <div class="icon"><i class="bx bx-gift"></i></div>
+              <div class="icon"><i class="bi bi-bookmark-check-fill"></i></div>
               <h4 class="title"><a href="">Vision</a></h4>
               <p class="description"><?= $website_other['vision'] ?></p>
             </div>
 
-            <!-- <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
-              <div class="icon"><i class="bx bx-atom"></i></div>
-              <h4 class="title"><a href="">Dine Pad</a></h4>
-              <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
-            </div> -->
           </div>
         </div>
       </div>
@@ -206,32 +201,26 @@
 
     <!-- ======= SCHOLARSHIP Section ======= -->
     <section id="scholarship" class="menu section-bg">
-      <div class="container" data-aos="fade-up">
-        <div class="row justify-content-between">
-          <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-12 col-lg-6 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
             <div class="scholarship-header">
               <h3 class="text-white fw-bold">Scholarship Program Offers</h3>
-              <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
             </div>
           </div>
 
           <ul class="nav nav-tabs d-flex justify-content-center col-lg-12 mt-4 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-            <!-- <li class="nav-item">
-              <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#general-req">
-                <h4>Qualification and General Requirements</h4>
-              </a>
-            </li> -->
-            <li class="nav-item">
+            <li class="nav-item" style="margin-bottom: 10px;">
               <a class="nav-link nav-link active show" data-bs-toggle="tab" data-bs-target="#senior-high">
                 <h4>Senior High-School</h4>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-bottom: 10px;">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeEA">
                 <h4>Educational Assistance Program</h4>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="margin-bottom: 10px;">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#collegeFS">
                 <h4>Full Scholarship Program</h4>
               </a>
@@ -239,40 +228,36 @@
           </ul>
 
           <div class="tab-content col-lg-12 order-1 order-lg-2 hero-img">
-            <!-- GENERAL REQUIREMENTS  -->
-            <!-- <div class="tab-pane fade active show" id="general-req">
-              <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-center" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="assets/img/requirements.png" class="img-fluid animated" alt="">
-                  </div>
-                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-5 px-lg-5" data-aos="fade-left">
-                    <h3 style="color: white;">Qualification</h3>
-                    <p class="description pt-3"><?= $website_info['descr'] ?></p>
-                    <p class="description pt-3">
-                      <?php if ($gen_req != null) : ?>
-                        <?php foreach ($gen_req as $key => $req) : ?>
-                    <p style="color: white;"><?= $req['req'] ?></p>
-                  <?php endforeach; ?>
-                <?php else : ?>
-                  <p>No General Requirements for Now</p>
-                <?php endif; ?>
-                </p>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
             <!-- SHS -->
             <div class="tab-pane fade active show" id="senior-high">
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
-                  <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
+                  <div class="col-xl-5 col-lg-6 d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
                     <img src="assets/img/seniorhigh.png" class="img-fluid animated" alt="">
                   </div>
-                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
-                    <h3 style="color: white;">Qualification</h3>
-                    <p class="pt-2"><?= $website_scholar_text[0]['scholarText'] ?></p>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center px-lg-5" data-aos="fade-left">
+                    <div class="about" id="about">
+                      <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon"><i class="bi bi-check-circle-fill"></i></div>
+                        <h4 class="title custom-link" style="font-size: 35px; color: white;"><a href="" class="white-link">Qualification and Application Requirements</a></h4>
+                      </div>
+                    </div>
+                    <p class="pt-3" style="text-align: justify;">
+                      <?= $website_scholar_text[0]['scholarText'] ?>
+                    </p>
+                    <div class="card-body pt-4">
+                      <h5 class="card-title text-white py-3 fw-bold" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
+                      <?php if ($gen_req != null) : ?>
+                        <?php foreach ($gen_req as $key => $req) : ?>
+                          <p data-aos="zoom-in" data-aos-delay="100">
+                            <span class style="list-style-type: none;"><i class="bi bi-check" style="color:aquamarine"></i></span>
+                            <?= $req['req'] ?>
+                          </p>
+                        <?php endforeach; ?>
+                      <?php else : ?>
+                        <p>No General Requirements for Now</p>
+                      <?php endif; ?>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -285,30 +270,68 @@
                   <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
                     <img src="assets/img/colleges.png" class="img-fluid animated" alt="">
                   </div>
-                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
-                    <h3 style="color: white;">Qualification</h3>
-                    <p class="pt-2"> <?= $website_scholar_text[1]['scholarText'] ?></p>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-between justify-content-between px-lg-5" data-aos="fade-left">
+                    <div class="about" id="about">
+                      <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon"><i class="bi bi-check-circle-fill"></i></div>
+                        <h4 class="title custom-link" style="font-size: 35px; color: white;"><a href="" class="white-link">Qualification and Application Requirements</a></h4>
+                      </div>
+                    </div>
+                    <p class="pt-3" style="text-align: justify;">
+                      <?= $website_scholar_text[1]['scholarText'] ?>
+                    </p>
+                    <div class="card-body pt-4">
+                      <h5 class="card-title text-white py-3" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
+                      <?php if ($gen_req != null) : ?>
+                        <?php foreach ($gen_req as $key => $req) : ?>
+                          <p data-aos="zoom-in" data-aos-delay="100">
+                            <span class style="list-style-type: none;"><i class="bi bi-check" style="color:aquamarine"></i></span>
+                            <?= $req['req'] ?>
+                          </p>
+                        <?php endforeach; ?>
+                      <?php else : ?>
+                        <p>No General Requirements for Now</p>
+                      <?php endif; ?>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Full Scholarship Program -->
-            <div class="tab-pane fade" id="collegeFS">
+            <div class=" container tab-pane fade" id="collegeFS">
               <div class="tab-header" data-aos="fade-up" data-aos-delay="100">
                 <div class="row pt-3">
                   <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-between align-items-between" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="assets/img/collegehs.png" class="img-fluid animated" alt="">
+                    <img src="assets/img/shs.png" class="img-fluid animated" alt="">
                   </div>
-                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-between py-3 px-lg-5" data-aos="fade-left">
-                    <h3 style="color: white;">Qualification</h3>
-                    <p class="pt-2"><?= $website_scholar_text[2]['scholarText'] ?></p>
+                  <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-between justify-content-between px-lg-5" data-aos="fade-left">
+                    <div class="about" id="about">
+                      <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon"><i class="bi bi-check-circle-fill"></i></div>
+                        <h4 class="title custom-link" style="font-size: 35px; color: white;"><a href="" class="white-link">Qualification and Application Requirements</a></h4>
+                      </div>
+                    </div>
+                    <p class="pt-3" style="text-align: justify;">
+                      <?= $website_scholar_text[2]['scholarText'] ?>
+                    </p>
+                    <div class="card-body pt-4">
+                      <h5 class="card-title text-white py-3" data-aos="zoom-in" data-aos-delay="100"> Application Requirements:</h5>
+                      <?php if ($gen_req != null) : ?>
+                        <?php foreach ($gen_req as $key => $req) : ?>
+                          <p data-aos="zoom-in" data-aos-delay="100">
+                            <span class style="list-style-type: none;"><i class="bi bi-check" style="color:aquamarine"></i></span>
+                            <?= $req['req'] ?>
+                          </p>
+                        <?php endforeach; ?>
+                      <?php else : ?>
+                        <p>No General Requirements for Now</p>
+                      <?php endif; ?>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
