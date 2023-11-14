@@ -959,6 +959,47 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                examineeListTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                // if (filterScholarType == ""){
+                //     examineeListTable.columns(11).search("").draw();
+                // } else {
+                //     examineeListTable.columns(11).search(filterScholarType).draw();
+                // }
+
+                if (filterEducationLevel == ""){
+                    examineeListTable.columns(9).search("").draw();
+                } else {
+                    examineeListTable.columns(9).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    examineeListTable.columns(7).search("").draw();
+                } else {
+                    examineeListTable.columns(7).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    examineeListTable.columns(11).search("").draw();
+                } else {
+                    examineeListTable.columns(11).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                examineeListTable.columns(7).search("").draw();
+                examineeListTable.columns(9).search("").draw();
+                examineeListTable.columns(11).search("").draw();
+                // examineeListTable.columns(14).search("").draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
