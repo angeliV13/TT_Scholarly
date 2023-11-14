@@ -515,3 +515,24 @@ function getCorrectAnswer($questionId)
     }
     return $answer;
 }
+
+function setExamDate(){
+    include("dbconnection.php");
+    session_start();
+    date_default_timezone_set('Asia/Manila');
+
+    $ay             = getDefaultAcadYearId();
+    $sem            = getDefaultSemesterId();
+    $userId         = $_SESSION['id'];
+    $dateNow        = date('Y-m-d H:i:s');
+
+    $sql = "UPDATE `examination_applicant`  SET     `exam_start_date`= '{$dateNow}'
+                                            WHERE   `user_id`   = '{$userId}'
+                                            AND     `ay_id`     = '{$ay}'
+                                            AND     `sem_id`    = '{$sem}'";
+    $query = $conn->query($sql) or die("Error ESQ011: " . $conn->error);
+
+    if ($query) {
+        return 'Success';
+    }
+}
