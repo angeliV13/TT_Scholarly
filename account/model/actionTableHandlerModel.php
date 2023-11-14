@@ -51,8 +51,43 @@ function getProfile($account_id)
     $other_pwd_flag = (isset($gen_info['other_pwd']) AND $gen_info['other_pwd'] == 0) ? "checked" : "";
     
     $scholarType = check_status($account_id);
+    $scholarId = $scholarType['id'];
     $scholarTypeName = get_scholar_type($scholarType['scholarType']);
     $scholarStatus = get_scholar_status($scholarType['status']);
+    $parent_flag = $scholarType['parent_flag'];
+    $parent_deceased = $scholarType['parent_deceased'];
+    $employee_flag = $scholarType['employee_flag'];
+    $informed_flag = $scholarType['informed_flag'];
+    $continue_flag = $scholarType['continue_flag'];
+
+    $parentScore = $deceasedScore = $employeeScore = $informedScore = $sourceScore = $gradeScore = $typeScore = $residencyScore = $examScore = $maxScore =  $pwdScore = $workingScore = $otherPwdScore = 0;
+
+    $parentScore = ($parent_flag == 1) ? 1 : 0;
+    $deceasedScore = ($parent_deceased == 1) ? 1 : 0;
+    $employeeScore = ($employee_flag == 1) ? 1 : 0;
+    $informedScore = ($informed_flag == 1) ? 1 : 0;
+    
+    $gradeScore = get_indicators(2, $gwa, $gwa, 'bet');
+    $examScore = get_exam_scores($account_id);
+
+    $latestEducation = get_user_education($account_id, 1);
+    $latestSchool = get_school_name($latestEducation['school']);
+    $latestSchoolType = 0;
+    if ($latestSchool != null) $latestSchoolType = $latestSchool['school_type'];
+    $latestSchoolTypeText = get_school_class($latestSchoolType);
+    $typeScore = get_indicators(3, $latestSchoolType, $latestSchoolType);
+    $residencyScore = get_indicators(4, $years_of_residency, $years_of_residency, 'bet');
+
+    if ($source != "")
+    {
+        $splitSource = explode("-", $source);
+        $minSource = str_replace(' ', '', $splitSource[0]);
+        $maxSource = str_replace(' ', '', $splitSource[1]);
+        // remove the comma
+        $minSource = str_replace(',', '', $minSource);
+        $maxSource = str_replace(',', '', $maxSource);
+        $sourceScore = get_indicators(1, $minSource, $maxSource);
+    }
 
     $workingFlag = $ofwFlag = $otherOfw = $pwdFlag = $otherPwd = $selfPwd = $rentFlag = $familyFlag = $honorFlag = $graduatingFlag = $familyFlag = "No";
     $rentFlag = "Rent";
@@ -69,7 +104,7 @@ function getProfile($account_id)
 
     if (isset($gen_info['working_flag']))
     {
-        if ($gen_info['working_flag'] == 0) $workingFlag = "Yes";
+        if ($gen_info['working_flag'] == 0) $workingFlag = "Yes"; $workingScore = 1;
     }
 
     if (isset($gen_info['ofw_flag']))
@@ -89,12 +124,12 @@ function getProfile($account_id)
 
     if (isset($gen_info['other_pwd']))
     {
-        if ($gen_info['other_pwd'] == 0) $otherPwd = "Yes";
+        if ($gen_info['other_pwd'] == 0) $otherPwd = "Yes"; $otherPwdScore = 1;
     }
 
     if (isset($gen_info['self_pwd_flag']))
     {
-        if ($gen_info['self_pwd_flag'] == 0) $selfPwd = "Yes";
+        if ($gen_info['self_pwd_flag'] == 0) $selfPwd = "Yes"; $pwdScore = 1;
     }
 
     if (isset($gen_info['rent_flag']))
@@ -117,9 +152,12 @@ function getProfile($account_id)
         if ($gen_info['graduating_flag'] == 0) $graduatingFlag = "Yes";
     }
 
+    $maxScore = $gradeScore + $typeScore + $residencyScore + $sourceScore + $examScore + $pwdScore + $workingScore + $otherPwdScore + $parentScore + $deceasedScore + $employeeScore + $informedScore;
+
     $profile = '<div class="row" id="profile">';
     $profile .= '<input type="hidden" id="scholarStatus" value="' . $scholarStatus . '">';
     $profile .= '<input type="hidden" id="accountType" value="' . $accountType . '">';
+    $profile .= '<input type="hidden" id="scholarId" value="' . $scholarId . '">';
 
     if ($accountType == 3)
     {
@@ -129,7 +167,7 @@ function getProfile($account_id)
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h5 class="card-title">Profile Checking</h5>
                                     <div class="d-flex align-items-center justify-content-end">
-                                        <input disabled type="inputIncomepoints" class="w-25 form-control" value="' . $source . '"/> <!-- INDICATOR TOTAL -->
+                                        <input disabled type="inputIncomepoints" class="w-25 form-control" value="' . $maxScore . '"/> <!-- INDICATOR TOTAL -->
                                     </div>
                                 </div>
                                 <!--SUB FORMS-->
@@ -145,7 +183,7 @@ function getProfile($account_id)
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-2">
                                                     <input disabled type="inputIncome" class="form-control" placeholder="Applicant\'s Income" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $source . '" />
-                                                    <input disabled type="inputIncomepoints" class="col form-control" value="' . $source . '"/>
+                                                    <input disabled type="inputIncomepoints" class="col form-control" value="' . $sourceScore . '"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,8 +191,8 @@ function getProfile($account_id)
                                             <label for="inputSchooltype" class="col-sm-3 col-form-label">School Type:</label>
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-2">
-                                                    <input disabled type="inputSchooltype" class="form-control" placeholder="School Type" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $gwa . '"/>
-                                                    <input disabled type="inputSchooltype" class="col form-control" value="' . $gwa . '"/>
+                                                    <input disabled type="inputSchooltype" class="form-control" placeholder="School Type" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $latestSchoolTypeText . '"/>
+                                                    <input disabled type="inputSchooltype" class="col form-control" value="' . $typeScore . '"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,7 +201,7 @@ function getProfile($account_id)
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-2">
                                                     <input disabled type="inputPointsResidency" class="form-control" placeholder="Applicant\'s Year/s of Residency" style="width: 75%" aria-label="Recipient\'s username" aria-describedby="basic-addon2" value="' . $years_of_residency . '"/>
-                                                    <input disabled type="inputPointsResidency" class="col form-control" value="' . $years_of_residency . '"/>
+                                                    <input disabled type="inputPointsResidency" class="col form-control" value="' . $residencyScore . '"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,7 +217,7 @@ function getProfile($account_id)
                                         <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="selfSupportingCheckBox" ' . $working_flag . ' disabled>
                                             <label class="mx-2 form-check-label" for="selfSupportingCheckBox"> Self-Supporting </label>
                                         </div>
-                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="continuingStudentCheckBox">
+                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="1" id="continuingStudentCheckBox" ' . ($continue_flag == 1 ? "checked disabled" : "") . '>
                                             <label class="mx-2 form-check-label" for="continuingStudentCheckBox"> Continuing Student </label>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -191,10 +229,10 @@ function getProfile($account_id)
                                         <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="parFamPwdCheckBox" ' . $other_pwd_flag . ' disabled>
                                             <label class="mx-2 form-check-label" for="parFamPwdCheckBox"> Parents/Other family members PWD </label>
                                         </div>
-                                        <div class="d-flex "> <input class="form-check-input" type="checkbox" value="" id="singleParentCheckBox">
+                                        <div class="d-flex "> <input class="form-check-input" type="checkbox" value="1" id="singleParentCheckBox" ' . ($parent_flag == 1 ? "checked disabled" : "") . ' >
                                             <label class="mx-2 form-check-label" for="singleParentCheckBox"> Single Parent </label>
                                         </div>
-                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="" id="parentDeceasedCheckBox">
+                                        <div class="d-flex col-md-6"> <input class="form-check-input" type="checkbox" value="1" id="parentDeceasedCheckBox" ' . ($parent_deceased == 1 ? "checked disabled" : "") . '>
                                             <label class="mx-2 form-check-label" for="parentDeceasedCheckBox"> Parent Deceased </label>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -202,11 +240,15 @@ function getProfile($account_id)
                                                 Other Information</h4>
                                         </div>
                                         <hr class="my-2">
-                                        <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="jobOrderCheckBox">
+                                        <div class="d-flex"> <input class="form-check-input" type="checkbox" value="1" id="jobOrderCheckBox" ' . ($employee_flag == 1 ? "checked disabled" : "") . '>
                                             <label class="mx-2 form-check-label" for="jobOrderCheckBox"> City Employee Immediate Family Member <br>(Job Order)</br> </label>
                                         </div>
-                                        <div class="d-flex"> <input class="form-check-input" type="checkbox" value="" id="recommendedCheckBox">
+                                        <div class="d-flex"> <input class="form-check-input" type="checkbox" value="1" id="recommendedCheckBox" ' . ($informed_flag == 1 ? "checked disabled" : "") . '>
                                             <label class="mx-2 form-check-label" for="recommendedCheckBox"> Informed thru/Recommended by <br> Mayor/Vice Mayor/Councilor </br> </label>
+                                        </div>
+
+                                        <div class="d-grid gap-2 pt-3 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-warning btn-sm" id="saveRemarks">Save Remarks</button>
                                         </div>
                                     </form>
                                     <!-- End Multi Columns Form -->

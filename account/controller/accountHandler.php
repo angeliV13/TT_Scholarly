@@ -300,6 +300,19 @@ if (isset($_REQUEST['action']))
 
         echo change_password($_POST['old_pass'], $_POST['new_pass'], 1);
     }
+    else if ($action == 29) // Update Remarks
+    {
+        $data = [
+            'scholarId'                 => isset($_POST['scholarId'])   ? $_POST['scholarId'] : '',
+            'singleParentCheckBox'      => isset($_POST['singleParentCheckBox']) ? $_POST['singleParentCheckBox'] : '',
+            'continuingStudentCheckBox' => isset($_POST['continuingStudentCheckBox']) ? $_POST['continuingStudentCheckBox'] : '',
+            'parentDeceasedCheckBox'    => isset($_POST['parentDeceasedCheckBox']) ? $_POST['parentDeceasedCheckBox'] : '',
+            'jobOrderCheckBox'          => isset($_POST['jobOrderCheckBox']) ? $_POST['jobOrderCheckBox'] : '',
+            'recommendedCheckBox'       => isset($_POST['recommendedCheckBox']) ? $_POST['recommendedCheckBox'] : '',
+        ];
+
+        echo saveRemarks($data);
+    }
 }
 
 

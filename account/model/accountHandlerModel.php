@@ -1527,3 +1527,25 @@ function undoGraduate($data)
 
     return ($query) ? 'success' : 'Error: ' . $conn->error;
 }
+
+function saveRemarks($data)
+{
+    include("dbconnection.php");
+
+    $defaultYear = getDefaultSemesterId();
+    $acadYear = getDefaultAcadYearId();
+    $scholarId = $data['scholarId'];
+    $singleParentCheckBox = $data['singleParentCheckBox'];
+    $continuingStudentCheckBox = $data['continuingStudentCheckBox'];
+    $parentDeceasedCheckBox = $data['parentDeceasedCheckBox'];
+    $jobOrderCheckBox = $data['jobOrderCheckBox'];
+    $recommendedCheckBox = $data['recommendedCheckBox'];
+
+    $sql = "UPDATE scholarship_application SET parent_flag = '$singleParentCheckBox', 
+            continue_flag = '$continuingStudentCheckBox', parent_deceased = '$parentDeceasedCheckBox', 
+            employee_flag = '$jobOrderCheckBox', informed_flag = '$recommendedCheckBox' 
+            WHERE id = '$scholarId' AND ay_id = '$acadYear' AND sem_id = '$defaultYear' LIMIT 1";
+    $query = $conn->query($sql);
+
+    return ($query) ? 'success' : 'Error: ' . $conn->error;
+}
