@@ -107,7 +107,7 @@ function deleteExamItems($id)
 }
 
 // Inserting the Examination
-function startExam($userId)
+function startExam($userId, $lastId)
 {
     include("dbconnection.php");
     // session_start();
@@ -133,8 +133,8 @@ function startExam($userId)
     $answers        = json_encode($answersArray);
 
     if ($examExists->num_rows == 0) {
-        $sql = "INSERT INTO `examination_applicant`(`id`, `user_id`, `ay_id`, `sem_id`, `start_exam`, `questions`, `answers`, `points`, `total`, `percentage`) 
-                    VALUES ( 0 , '{$userId}', '{$ay}', '{$sem}', 1, '{$questions}', '{$answers}', 0, {$examTotal}, 0)";
+        $sql = "INSERT INTO `examination_applicant`(`id`, `user_id`, `ay_id`, `sem_id`, exam_id`, `start_exam`, `questions`, `answers`, `points`, `total`, `percentage`) 
+                    VALUES ( 0 , '{$userId}', '{$ay}', '{$sem}', '{$lastId}', 1, '{$questions}', '{$answers}', 0, {$examTotal}, 0)";
         $query = $conn->query($sql) or die("Error ESQ006: " . $conn->error);
 
         if ($query) {
