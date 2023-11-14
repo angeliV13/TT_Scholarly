@@ -285,6 +285,7 @@ ons/bootstrap-icons.css" rel="stylesheet">
                                     <div class="card d-flex justify-content-center">
                                         <div class="card-body">
                                             <h5 class="card-title">General Requirements</h5>
+                                            
                                             <?php if ($gen_req != null) : ?>
                                                 <?php foreach ($gen_req as $key => $req) : ?>
                                                     <p><?= $req['req'] ?></p>
