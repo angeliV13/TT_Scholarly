@@ -185,6 +185,8 @@ function getSetApplicationTable()
 
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
+    $readOnly = checkReadOnlyStatus();
+
 
     $sql = "SELECT * FROM set_application WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ007: " . $conn->error);
@@ -259,7 +261,7 @@ function getSetApplicationTable()
                 getAudience($shs, $colEAPub, $colEAPriv, $colSc),
                 accountHandlerAccess(1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
                 accountHandlerAccess(1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
-                $button,
+                ($readOnly == 0) ? $button : '',
             ];
 
             $counter++;
@@ -349,6 +351,7 @@ function getSetAssessmentTable()
 
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
+    $readOnly = checkReadOnlyStatus();
 
     $sql = "SELECT * FROM set_assessment WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ007: " . $conn->error);
@@ -423,7 +426,7 @@ function getSetAssessmentTable()
                 getAudience($shs, $colEAPub, $colEAPriv, $colSc),
                 accountHandlerAccess(1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
                 accountHandlerAccess(1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
-                $button,
+                ($readOnly == 0) ? $button : '',
             ];
 
             $counter++;
@@ -513,6 +516,7 @@ function getSetRenewalTable()
 
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
+    $readOnly = checkReadOnlyStatus();
 
     $sql = "SELECT * FROM set_renewal WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ011: " . $conn->error);
@@ -587,7 +591,7 @@ function getSetRenewalTable()
                 getAudience($shs, $colEAPub, $colEAPriv, $colSc),
                 accountHandlerAccess(1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
                 accountHandlerAccess(1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
-                $button,
+                ($readOnly == 0) ? $button : '',
             ];
 
             $counter++;
@@ -677,6 +681,7 @@ function getSetExamTable()
 
     $acadYearId = getDefaultAcadYearId();
     $semId = getDefaultSemesterId();
+    $readOnly = checkReadOnlyStatus();
 
     $sql = "SELECT * FROM set_exam WHERE ay_id = '" . $acadYearId . "' AND sem_id = '" . $semId . "' ORDER BY id DESC";
     $query = $conn->query($sql) or die("Error BSQ015: " . $conn->error);
@@ -774,7 +779,7 @@ function getSetExamTable()
                 getAudience($shs, $colEAPub, $colEAPriv, $colSc),
                 accountHandlerAccess(1, $created_by) . '<br><span class="small">' . $created_date . '</span>',
                 accountHandlerAccess(1, $modified_by) . '<br><span class="small">' . $modified_date . '</span>',
-                $button,
+                ($readOnly == 0) ? $button : '',
             ];
 
             $counter++;

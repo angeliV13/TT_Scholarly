@@ -18,9 +18,11 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title">Set Academic Year</h5>
                             <div class="d-flex align-items-center">
+                                <?php if($readOnly == 0) : ?>
                                 <button id="generate_ay" class="btn btn-sm btn-danger shadow-sm">
                                     <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Generate Academic Year
                                 </button>
+                                <?php endif; ?>
                                 <a class="collapsed mx-3" data-bs-target="#acad_table_view" data-bs-toggle="collapse" href="#">
                                     <i class="bi bi-chevron-down ms-auto"></i>
                                 </a>
@@ -69,8 +71,10 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Set Application</h5>
+                                <?php if($readOnly == 0) : ?>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#application_add_modal" class=" btn btn-sm btn-danger shadow-sm">
                                     <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Application Date</a>
+                                <?php endif; ?>
                             </div>
 
                             <!-- Table with stripped rows -->
@@ -180,8 +184,10 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Set Assessment</h5>
+                                <?php if($readOnly == 0) : ?>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#assessment_add_modal" class=" btn btn-sm btn-danger shadow-sm">
                                     <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Assessment Date</a>
+                                <?php endif; ?>
                             </div>
 
                             <!-- Table with stripped rows -->
@@ -291,8 +297,10 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Set Renewal</h5>
+                                <?php if($readOnly == 0) : ?>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#renewal_add_modal" class=" btn btn-sm btn-danger shadow-sm">
                                     <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Renewal Date</a>
+                                <?php endif; ?>
                             </div>
 
                             <!-- Table with stripped rows -->
@@ -361,8 +369,10 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Set Examination</h5>
+                                <?php if($readOnly == 0) : ?>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#exam_add_modal" class=" btn btn-sm btn-danger shadow-sm">
                                     <i class="fas fa-question fa-sm text-white-50 mr-2"></i>Add Examination Date</a>
+                                <?php endif; ?>
                             </div>
 
                             <!-- Table with stripped rows -->
