@@ -1737,7 +1737,7 @@ function updateOfficial($data)
     {
         return 'Official Info Error: ' . $conn->error;
     }
-}
+}      
 
 function deleteOfficial($id)
 {
@@ -1745,7 +1745,7 @@ function deleteOfficial($id)
 
     $exists = check_exist_multiple(['table' => 'website_officials', 'column' => ['id' => ['=', $id]]], 1);
     $oldImg = $exists[0]['img'];
-
+ 
     if ($oldImg != "")
     {
         if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
