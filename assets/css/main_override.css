@@ -1497,7 +1497,7 @@ body {
 .menu {
   overflow: hidden;
   padding: 70px 0;
-  padding-bottom: 0px;
+  padding-bottom: 40px;
 }
 
 .menu .nav-tabs {
@@ -1568,8 +1568,6 @@ body {
   margin-bottom: 0px;
   text-align: justify;
 }
-
-
 
 .menu .tab-content .tab-header h3 {
   font-size: 36px;
