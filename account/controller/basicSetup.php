@@ -101,7 +101,7 @@ if (isset($_REQUEST['action']))
             $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
             $shs        = $_POST['shs'];
             $colEAPub   = $_POST['colEAPub'];
-            $colEAPriv  = $_POST['colEAPriv'];
+            $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
             $colSc      = $_POST['colSc'];
 
             echo addSetAssessment($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
@@ -115,7 +115,7 @@ if (isset($_REQUEST['action']))
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
                 $shs        = $_POST['shs'];
                 $colEAPub   = $_POST['colEAPub'];
-                $colEAPriv  = $_POST['colEAPriv'];
+                $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
                 $colSc      = $_POST['colSc'];
 
                 echo editSetAssessment($id, $startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
@@ -141,7 +141,7 @@ if (isset($_REQUEST['action']))
             $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
             $shs        = $_POST['shs'];
             $colEAPub   = $_POST['colEAPub'];
-            $colEAPriv  = $_POST['colEAPriv'];
+            $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
             $colSc      = $_POST['colSc'];
 
             echo addSetRenewal($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
@@ -155,7 +155,7 @@ if (isset($_REQUEST['action']))
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
                 $shs        = $_POST['shs'];
                 $colEAPub   = $_POST['colEAPub'];
-                $colEAPriv  = $_POST['colEAPriv'];
+                $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
                 $colSc      = $_POST['colSc'];
 
                 echo editSetRenewal($id, $startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
@@ -183,7 +183,7 @@ if (isset($_REQUEST['action']))
             $end_time   = (isset($_POST['end_time']) ? $_POST['end_time'] : '00:00:00' );
             $shs        = $_POST['shs'];
             $colEAPub   = $_POST['colEAPub'];
-            $colEAPriv  = $_POST['colEAPriv'];
+            $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
             $colSc      = $_POST['colSc'];
 
             echo addSetExam($startDate, $endDate, $time, $end_time, $shs, $colEAPub, $colEAPriv, $colSc);
@@ -199,7 +199,7 @@ if (isset($_REQUEST['action']))
                 $time       = $_POST['time'];
                 $shs        = $_POST['shs'];
                 $colEAPub   = $_POST['colEAPub'];
-                $colEAPriv  = $_POST['colEAPriv'];
+                $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
                 $colSc      = $_POST['colSc'];
 
                 echo editSetExam($id, $startDate, $time, $end_time, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
@@ -477,7 +477,7 @@ if (isset($_REQUEST['action']))
             $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
             $shs        = $_POST['shs'];
             $colEAPub   = $_POST['colEAPub'];
-            $colEAPriv  = $_POST['colEAPriv'];
+            $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
             $colSc      = $_POST['colSc'];
 
             echo addSetApplication($startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
@@ -491,7 +491,7 @@ if (isset($_REQUEST['action']))
                 $endDate    = date('Y-m-d', strtotime($_POST['endDate']));
                 $shs        = $_POST['shs'];
                 $colEAPub   = $_POST['colEAPub'];
-                $colEAPriv  = $_POST['colEAPriv'];
+                $colEAPriv  = isset($_POST['colEAPriv']) ? $_POST['colEAPriv'] : '0';
                 $colSc      = $_POST['colSc'];
 
                 echo editSetApplication($id, $startDate, $endDate, $shs, $colEAPub, $colEAPriv, $colSc);
