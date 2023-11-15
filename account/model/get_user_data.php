@@ -122,7 +122,7 @@ function examAccess()
     return $exam_data;
 }
 
-function scholarType()
+function scholarType($id)
 {
     include("dbconnection.php");
 
@@ -130,7 +130,7 @@ function scholarType()
     $scholarType = "";
 
     // Checks if Account Exists
-    $query = "SELECT scholarType FROM scholarship_application WHERE ay_id = '{$ay}' ORDER BY id DESC LIMIT 1";
+    $query = "SELECT scholarType FROM scholarship_application WHERE ay_id = '{$ay}' AND userId = '{$id}' ORDER BY id DESC LIMIT 1";
     $sql = mysqli_query($conn, $query) or die("Error AQ001: " . mysqli_error($conn));
 
     if ($sql->num_rows > 0)
