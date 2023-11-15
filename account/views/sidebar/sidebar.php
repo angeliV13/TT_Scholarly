@@ -269,8 +269,8 @@
                   <?php endif; ?>
 
                   <?php if ($examAccess != null) : ?>
-                    <?php $access = 2;
-                        $access = 2 + $scholarType; ?>
+                    <?php $access = 3;
+                        $access = $access + $scholarType; ?>
                       <?php if (($examAccess[$access] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow ) && $status['status'] == 2) : ?>
                           <!-- Start Exam Nav -->
                           <li class="nav-item">
