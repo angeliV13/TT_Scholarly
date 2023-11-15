@@ -271,7 +271,7 @@
 
                   <?php if ($examAccess != null) : ?>
                     <?php $access = 2;
-                        $access = $access + $scholarType; print_r($examAccess)?>
+                        $access = $access + $scholarType; echo $scholarType?>
                       <?php if (($examAccess[$access] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow ) && $status['status'] == 2) : ?>
                           <!-- Start Exam Nav -->
                           <li class="nav-item">
