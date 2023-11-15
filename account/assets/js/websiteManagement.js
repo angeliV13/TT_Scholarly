@@ -926,11 +926,15 @@ document.addEventListener('DOMContentLoaded', function() {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
+        allDayDefault : true,
         events: {
             url: 'controller/basicSetup.php',
             method: 'POST',
             extraParams: {
                 action: 11,
+            },
+            success: function(data) {
+                // console.log(data);
             },
             failure: function() {
                 console.log('there was an error while fetching events!');
@@ -1135,6 +1139,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             eventStartToDate = new Date(eventStart);
             eventEndToDate = new Date(eventEnd);
+            
+            eventEndToDate.setDate(eventEndToDate.getDate() - 1);
 
             if (date >= eventStartToDate.toISOString().slice(0, 10) && date <= eventEndToDate.toISOString().slice(0, 10)){
                 desc = events[i]._def.extendedProps.desc;
@@ -1159,6 +1165,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let dateStart = info.startStr;
         let dateEnd = (info.endStr == null) ? info.startStr : info.endStr;
+        dateEnd = new Date(dateEnd);
+        dateEnd.setDate(dateEnd.getDate() - 1);
+        dateEnd = dateEnd.toISOString().slice(0, 10);
 
         Swal.fire({
             title: 'Add Event',
