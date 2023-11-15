@@ -2169,6 +2169,10 @@ body {
   padding: 100px 0 0px 0;
 }
 
+.hero .animated {
+  animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+
 .hero h1 {
   margin: 0 0 20px 0;
   font-size: 48px;
@@ -2277,13 +2281,13 @@ body {
   background: rgba(17, 34, 77);
   box-shadow: 0 8px 28px rgba(17, 34, 77);
 }
-
+/* 
 .hero .btn-watch-video {
   font-size: 16px;
   transition: 0.5s;
   margin-left: 25px;
   color: var(--font-secondary);
-  font-weight: 600;
+  font-weight: 600; 
 }
 
 .hero .btn-watch-video i {
@@ -2300,7 +2304,7 @@ body {
 
 .hero .btn-watch-video:hover i {
   color: rgba(206, 18, 18, 0.8);
-}
+} */
 
 @media (max-width: 640px) {
   .hero h2 {
