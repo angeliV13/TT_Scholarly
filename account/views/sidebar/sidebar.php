@@ -212,7 +212,7 @@
 
               <?php if ($_SESSION['account_type'] == 2) : ?>
 
-                  <?php $access = 2;
+                  <?php 
                     $access = 1 + $scholarType; ?>
 
                   <?php if ($assessmentAccess != null) : ?>
@@ -245,8 +245,9 @@
               <?php endif; ?>
 
               <?php if ($_SESSION['account_type'] == 3) : ?>
-                  <?php $access = 2;
-                    $access = 1 + $scholarType; ?>
+                  <?php 
+                    $access = 1 + $scholarType; 
+                  ?>
                   <?php if ($applicationAccess != null) : ?>
                       <?php if ($applicationAccess[$access] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) : ?>
                           <!--  -->
@@ -269,8 +270,8 @@
                   <?php endif; ?>
 
                   <?php if ($examAccess != null) : ?>
-                    <?php $access = 3;
-                        $access = $access + $scholarType; ?>
+                    <?php $access = 2;
+                        $access = $access + $scholarType; print_r($examAccess)?>
                       <?php if (($examAccess[$access] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow ) && $status['status'] == 2) : ?>
                           <!-- Start Exam Nav -->
                           <li class="nav-item">
