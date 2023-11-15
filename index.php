@@ -148,23 +148,23 @@
         <!-- Image Column -->
         <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
           <!-- <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt=""> -->
-          <img src="account/<?= $website_other['hero'] ?>" class="img-fluid animated" alt="">
+          <img src="<?= (isset($website_other['hero']) ? "account/" . $website_other['hero'] : "assets/img/tts logo with txt.png") ?>" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
 
-    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 28 150 29" preserveAspectRatio="none">
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
       <defs>
-        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18s 58-18 88-18s 58 18 88 18v44h-352z"></path>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
       </defs>
       <g class="wave1">
-        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)"></use>
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
       </g>
       <g class="wave2">
-        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"></use>
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
       </g>
       <g class="wave3">
-        <use xlink:href="#wave-path" x="50" y="9" fill="#fff"></use>
+        <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
       </g>
     </svg>
   </section><!-- End Hero Section -->
