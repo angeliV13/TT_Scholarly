@@ -535,16 +535,16 @@ function getApplicationTable($dashboard = 0)
         if ($dashboard == 0) {
             $sql = "INSERT INTO `applicant_file`
                             (`id`, `account_id`, `ay_id`, `sem_id`, `requirement`, `file`, `status`, `remarks`, `upload_date`, `modified_date`, `checked_date`) 
-                    VALUES  ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','3','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','4','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','5','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','6','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','7','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','8','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','9','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','10','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','11','',0, '', '', '', ''),
-                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','12','',0, '', '', '', '')";
+                    VALUES  ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','3','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','4','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','5','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','6','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','7','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','8','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','9','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','10','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','11','',0, '', '0000-00-00', '0000-00-00', '0000-00-00'),
+                            ( 0 ,'{$userid}', '{$acadYearId}', '{$semId}','12','',0, '', '0000-00-00', '0000-00-00', '0000-00-00')";
             $query = $conn->query($sql) or die("Error URQ006: " . $conn->error);
 
             $entries    = getFileEntries($acadYearId, $semId, $userid, 'applicant_file');
