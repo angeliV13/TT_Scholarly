@@ -297,24 +297,54 @@ function reportTable(data, title) {
       //     text        : 'Landscape PDF',
       // },
       {
+        // extend: "print",
+        // className: "btn btn-primary btn-small",
+        // title: "",
+        // //For repeating heading.
+        // repeatingHead: {
+        //   logo: "images/tts-chrome-192x192.png",
+        //   logoPosition: "center",
+        //   logoStyle: "height: 96px; width: 96px;",
+        //   title: '<h2 class="text-center">' + title + "</h2>",
+        // },
         extend: "print",
         className: "btn btn-primary btn-small",
-        title: "",
         //For repeating heading.
         repeatingHead: {
-          logo: "images/tts-chrome-192x192.png",
-          logoPosition: "center",
-          logoStyle: "height: 96px; width: 96px;",
-          title: '<h2 class="text-center">' + title + "</h2>",
+            // logo: "../images/logo192.png",
+            // logoPosition: "left",
+            logoStyle: "height: 96px; width: 96px;",
+            title:  '<div class="d-flex justify-content-between my-3">' + 
+                        '<div>' + 
+                            '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                            '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                            '<p class="">' + title + '</p>' +
+                        '</div>'+
+                        '<div>' + 
+                            '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                        '</div>' +
+                    '</div>',
+        },
+        customize: function ( win ) {
+            $(win.document.body)
+                .css( 'font-size', '9pt' );
+
+            $(win.document.body).find( 'table' )
+                .addClass( 'compact table table-striped')
+                .css( 'font-size', 'inherit' );
+            // $(win.document.body).find( 'thead' )
+            //     .addClass( 'thead-dark' )
+            //     .css( 'font-size', 'inherit' );
+            $(win.document.body).children("h1:first").remove();
         },
       },
       // 'copy', 'csv', 'excel', 'pdf', 'print'
     ],
-    lengthChange: false,
-    paging: false,
+    lengthChange: true,
+    paging: true,
     searching: true,
     processing: true,
-    ordering: false,
+    ordering: true,
     serverSide: false,
     bInfo: false,
     data: data,
