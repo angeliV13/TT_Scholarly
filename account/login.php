@@ -29,10 +29,11 @@ include('includes/main.php')
             <div class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center">
               <div class="d-flex justify-content-center">
                 <a href="index.php" class="logo text-center w-auto">
-                  <img class="mx-auto" src="<?= $website_other['icon'] ?>" alt="">
+                  <!-- <img class="mx-auto" src="<?= $website_other['icon'] ?>" alt=""> -->
                   <span id="logo" class="d-none d-lg-block py-3"><?= $website_info['header'] ?></span>
                 </a>
-              </div><!-- End Logo -->
+              </div>
+              <!-- End Logo -->
 
               <div class="card mb-3">
                 <div class="card-body">

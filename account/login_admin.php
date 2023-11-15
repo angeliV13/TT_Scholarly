@@ -15,7 +15,7 @@ include('includes/main.php')
 
 ?>
 
-<body class="bg-light">
+<body class="bg-light body-bg">
 
   <main>
     <!-- Start of Page Title -->
@@ -30,23 +30,23 @@ include('includes/main.php')
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-              <div class="d-flex justify-content-center py-4">
+              <div class="d-flex justify-content-center py-2">
                 <a href="index.php" class="logo text-center w-auto">
                   <img class="mx-auto" src="<?= $website_other['icon'] ?>" alt="">
-                  <span class="d-none d-lg-block py-3"><?= $website_info['header'] ?></span>
+                  <span id="logo" class="d-none d-lg-block py-3"><?= $website_info['header'] ?></span>
                 </a>
               </div><!-- End Logo -->
 
               <div class="card mb-3">
 
-                <div class="card-title pb-3 bg-dark">
-                  <h5 class="text-center text-white fs-3">Admin Login</h5>
+                <div class="card-title pb-3 blue-bg">
+                  <h5 class="text-center text-white fs-5 small fw-bold">Admin Login</h5>
                 </div>
                 <div class="card-body">
 
                   <div class="pt-3 pb-3">
                     <!-- <h5 class="card-title text-center pb-0 fs-3">Login</h5> -->
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <p class="text-center small">Enter your Admin Username & password to login</p>
                   </div>
 
                   <form id="login_form_a" method="post" class="row g-3 needs-validation">

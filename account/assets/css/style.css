@@ -1389,3 +1389,59 @@ a {
   color: #fff;
   line-height: 0;
 }
+
+/*--------------------------------------------------------------
+# body-bg
+------------------------------------------------------------- */
+.body-bg {
+  position: relative;
+  background: url("../../../assets/img/hero-bg.jpg");
+}
+
+.body-bg::before {
+  content: "";
+  background: rgba(2, 5, 161, 0.91);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.body-admin-bg::before {
+  content: "";
+  background: rgba(20, 21, 120, 0.91);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#logo {
+  position: relative;
+  color: white;
+}
+
+.blue-bg {
+  background-color: #cff4fc;
+  border-color: #cff4fc;
+  background-color: rgba(2, 5, 161, 0.91);
+}
+
+#btn_login, #registerBtn {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: rgba(2, 5, 161, 0.91);
+  --bs-btn-border-color: rgba(2, 5, 161, 0.91);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #0b5ed7;
+  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-focus-shadow-rgb: 49,132,253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0a58ca;
+  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: rgba(2, 5, 161, 0.91);
+  --bs-btn-disabled-border-color: rgba(2, 5, 161, 0.91);
+}

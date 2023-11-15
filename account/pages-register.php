@@ -12,7 +12,7 @@ include('includes/main.php');
 
 ?>
 
-<body>
+<body class="body-bg">
 
   <main>
     <!-- Start of Page Title -->

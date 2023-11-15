@@ -136,7 +136,7 @@
     <div class="container">
       <div class="row justify-content-between">
         <!-- Left Column -->
-        <div class="col-lg-7 pt-4 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center align-items-center mb-lg-0">
+        <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center align-items-center mb-lg-0">
           <div data-aos="zoom-out">
             <h1><?= $website_info['header'] ?></h1>
             <h2>City of Santo Tomas Scholarship Program</h2>
@@ -147,8 +147,8 @@
         </div>
         <!-- Image Column -->
         <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-          <!-- <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt=""> -->
-          <img src="<?= (isset($website_other['hero']) ? "account/" . $website_other['hero'] : "assets/img/tts logo with txt.png") ?>" class="img-fluid animated" alt="">
+          <img src="assets/img/tts logo with txt.png" class="img-fluid animated" alt="">
+          <!-- <img src="<?= (isset($website_other['hero']) ? "account/" . $website_other['hero'] : "assets/img/tts logo with txt.png") ?>" class="img-fluid animated" alt=""> -->
         </div>
       </div>
     </div>
