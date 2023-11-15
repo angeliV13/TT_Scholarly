@@ -103,6 +103,7 @@ function user_sign_out()
         // unset($_SESSION['id']);
         // unset($_SESSION['account_type']);
         // unset($_SESSION['name']);
+        session_unset();
         session_destroy();
         if ($account_type >= 2) 
         {
