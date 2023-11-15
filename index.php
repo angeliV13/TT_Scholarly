@@ -369,7 +369,7 @@
         <div class="col-lg-12 pt-2 pt-lg-0  d-flex justify-content-center align-items-center mb-lg-0">
           <div class="scholarship-header">
             <h3 class="fw-bold" style="color: #010483;">Alumni Scholars</h3>
-            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+            <h5 class="pt-3"><span>Youth Development Office</span></h5>
           </div>
         </div>
 
@@ -426,7 +426,7 @@
         <div class="col-lg-12 pt-2 pt-lg-0 d-flex justify-content-center align-items-center mb-lg-0">
           <div class="scholarship-header">
             <h3 class="fw-bold" style="color: #010483;">Calendar of Activities</h3>
-            <!-- <h1><span>SCHOLARSHIP PROGRAM OFFERS</span></h3> -->
+            <h5 class="pt-3"><span>Youth Development Office</span></h5>
           </div>
         </div>
 
@@ -469,7 +469,8 @@
 
         <div class="col-lg-12 pt-2 pt-lg-0  py-3 d-flex justify-content-center align-items-center mb-lg-0">
           <div class="scholarship-header">
-            <h2 class="fw-bold pt-2">YDO Head and Administrators</h2>
+            <h2 class="fw-bold pt-2">Head and Administrators</h2>
+            <h5 class="pt-3 text-white"><span>Youth Development Office</span></h5>
           </div>
         </div>
 
