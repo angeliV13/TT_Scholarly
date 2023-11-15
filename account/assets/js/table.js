@@ -438,6 +438,68 @@ $(document).ready(function () {
 
     // GRADUATES TABLE
     let graduatesTable = $('#graduatesTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Graduated List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -532,6 +594,68 @@ $(document).ready(function () {
 
     // GRADUATES TABLE
     let graduatingTable = $('#graduatingTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Graduating List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -577,6 +701,68 @@ $(document).ready(function () {
 
     // Benef List Table
     let benefListTable = $('#listOfBeneficiaries').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Beneficiaries List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -701,6 +887,68 @@ $(document).ready(function () {
     });
 
     let applicantInterviewTable = $('#applicantInterviewTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Applicants Inverview List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -786,6 +1034,68 @@ $(document).ready(function () {
     });
 
     let applicantExamTable = $('#applicantExamination').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Applicants Examinee List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -871,6 +1181,68 @@ $(document).ready(function () {
     });
 
     let removedApplicantTable = $('#applicantRemovedTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Removed Applicant List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -957,6 +1329,68 @@ $(document).ready(function () {
 
     // EXAMINEES TABLE
     let examineeListTable = $('#examineeListTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Examinee List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -1042,6 +1476,68 @@ $(document).ready(function () {
     });
 
     let benefAssessTable = $('#benefAssessmentTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Beneficiaries Assessment List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -1127,6 +1623,68 @@ $(document).ready(function () {
     });
 
     let benefRenewTable = $('#benefRenewTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Beneficiaries Renewal List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -1212,6 +1770,68 @@ $(document).ready(function () {
     });
 
     let benefRemovedTable = $('#benefRemovedTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Removed Beneficiaries List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,

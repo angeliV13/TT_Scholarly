@@ -21,17 +21,8 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="card-title">List of Beneficiaries for Assessment</h5>
-                    <div class="d-flex align-items-center">
-                        <!-- <div class="input-group mr-3">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Search">
-                            <button class="btn btn-danger" type="button" id="searchButton">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div> -->
-                        <a class="collapsed mx-3" data-bs-target="#shs_table_view" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-chevron-down ms-auto"></i>
-                        </a>
-                    </div>
+                    <button class="btn btn-sm btn-danger" onclick="printData('benefRenewTable')"> <i class="bi bi-printer"></i> Print List </button>
+                    <!-- <button class="dt-button buttons-print btn btn-sm btn-danger" tabindex="0" aria-controls="collegeNewApplicantTable" type="button"><span>Print</span></button> -->
                 </div>
                 <div class="table-responsive">
                     <table id="benefRenewTable" class="table table-striped header-fixed" width="100%" cellspacing="100%">
