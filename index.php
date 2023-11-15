@@ -1,5 +1,6 @@
 <?php include('account/model/functionModel.php') ?>
 <?php include('account/global_variables.php') ?>
+<?php header('Access-Control-Allow-Origin: *'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
