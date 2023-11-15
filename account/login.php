@@ -76,7 +76,7 @@ include('includes/main.php')
               </div>
             </div>
             <!-- Image Column (Hidden on Mobile) -->
-            <div class="col-xl-6 col-lg-6 d-flex justify-content-end align-items-center pt-2 px-lg-5">  
+            <div class="col-xl-6 col-lg-6 d-flex d-sm-none d-md-block justify-content-end align-items-center pt-2 px-lg-5">  
               <!-- Add your image code here -->
               <img src="assets/img/tts logo with txt.png" alt="" height="500px" width="500px" style="position: relative;">
             </div>

@@ -97,8 +97,8 @@ include('includes/main.php');
                       <select class="form-select" id="inputReligion" name="Religion">
                         <option selected disabled value="">Choose...</option>
                         <?php foreach ($religionArr as $key => $value) : ?>
-                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
-                      <?php endforeach; ?>
+                          <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                        <?php endforeach; ?>
                       </select>
                       <div class="invalid-tooltip">
                         Please select a Religion.
@@ -169,7 +169,7 @@ include('includes/main.php');
                     <div class="col-md-3 position-relative">
                       <label for="barangay" class="form-label">Barangay</label>
                       <select class="form-select" id="barangay" name="Barangay">
-                        <?php foreach ($barangayArr AS $val): ?>
+                        <?php foreach ($barangayArr as $val) : ?>
                           <option value="<?php echo $val ?>"><?php echo $val ?></option>
                         <?php endforeach; ?>
                       </select>
@@ -214,7 +214,7 @@ include('includes/main.php');
                       </div>
                     </div>
 
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                       <label for="fbName" class="form-label mr-2">Facebook Name</label> 
                       <input type="checkbox" name="sameAsName" id="sameAsName" class="form-check-input" disabled>
                       <label for="sameAsName" class="form-check-label">Same as Full Name</label>
@@ -226,13 +226,13 @@ include('includes/main.php');
                       <label for="fbUrl" class="form-label">Facebook URL</label>
                       <input type="url" name="Facebook URL" class="form-control" id="fbUrl">
                       <div class="invalid-feedback">Please enter a valid Facebook URL!</div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                       <label for="fbImg" class="form-label">Profile Image</label>
                       <input type="file" name="Facebook Image" class="form-control" id="fbImg">
                       <div class="invalid-feedback">Please enter a valid Profile Image!</div>
-                    </div>
+                    </div> -->
 
                     <!-- <div class="col-6">
                       <label for="username" class="form-label">Username</label>
@@ -271,49 +271,63 @@ include('includes/main.php');
                         <div class="modal fade" id="modalDialogTerms" tabindex="-1">
                           <div class="modal-dialog modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title">Policy and Terms</h5>
+                              <div class="modal-header blue-bg">
+                                <h5 class="modal-title" style="color: aliceblue;"><i class="bi bi-clipboard2-check-fill" style></i> <span style="margin: 2px;"></span>Terms and Policy</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
-                                <p class="small">
-                                  I declare that all information we provided is true,
-                                  correct and complete statement pursuant to the provisions of pertinent laws,
-                                  rules and regulations of the Republic of the Philippines.
-                                  I authorize the agency head/authorized representative to
-                                  verify/validate the contents stated herein.
-                                </p>
-                                <h6 class="fs-3 fw-bolder text-center my-3 text-">
-                                  Privacy Statement
+
+                                <!-- DECLARATION OF ACCURACY -->
+                                <h6 class="fw-bold" style="font-size: 20px; color: #010483;"><i class="bi bi-shield-lock-fill" style></i> <span style="margin: 2px;">
+                                    Declaration of Accuracy:
                                 </h6>
-                                <p class="small">
-                                  The City of Santo Tomas Batangas collects your personal information for the primary
-                                  purpose of providing our services to you, providing information to our clients/or
-                                  endorsing the same to other City of Santo Tomas Batangas department/government/private entities.
-                                  And in accordance with the law, you are entitled to access and rectify your personal data.
+                                <p class="small pb-3" style="text-align: justify;">
+                                  I hereby declare that all information provided in this statement is true, correct, and complete,
+                                  in accordance with the provisions of relevant laws, rules, and regulations of the Republic of the Philippines.
+                                  I authorize the agency head/authorized representative to verify and validate the contents stated herein.
+                                </p>
 
+                                <!-- AUTHORIZATION -->
+                                <h6 class="fw-bold" style="font-size: 20px; color: #010483;"><i class="bi bi-shield-lock-fill" style></i> <span style="margin: 2px;">
+                                    Authorization:
+                                </h6>
+                                <p class="small pb-3" style="text-align: justify;">
+                                  By providing this information, I authorize the scholarship head/authorized
+                                  representative to verify/validate the contents stated herein.
+                                </p>
 
-                                  Where reasonable and practicable to do so,
-                                  we will collect your personal information only from you.
-                                  However, in some circumstances we may be provided with information by third parties.
-                                  In such a case we will take reasonable steps to ensure that you are made aware
-                                  of the information provided to us by the third party.
+                                <!-- Collection of Personal Information -->
+                                <h6 class="fw-bold" style="font-size: 20px; color: #010483;"><i class="bi bi-shield-lock-fill" style></i> <span style="margin: 2px;">
+                                    Collection of Personal Information:
+                                </h6>
+                                <p class="small pb-3" style="text-align: justify;">
+                                  The City of Santo Tomas, Batangas, collects your personal information
+                                  for the primary purpose of providing services to you, sharing information with our clients,
+                                  or endorsing the same to other City of Santo Tomas Batangas departments, government agencies,
+                                  or private entities. In accordance with the law, you are entitled to access and rectify your personal data.
+                                </p>
 
+                                <!-- Information Sourcing -->
+                                <h6 class="fw-bold" style="font-size: 20px; color: #010483;"><i class="bi bi-shield-lock-fill" style></i> <span style="margin: 2px;">
+                                    Security Measures:
+                                </h6>
+                                <p class="small pb-3" style="text-align: justify;">
+                                  The City of Santo Tomas Batangas implements technical and organizational measures
+                                  to safeguard all information processed by the personal information controller from
+                                  unauthorized access, changes, or destruction.
+                                </p>
 
-                                  In terms of security, the City of Santo Tomas Batangas takes technical
-                                  and organizational measures to ensure that all information processed by
-                                  personal information controller is protected from unauthorized access,
-                                  changes or destruction.
-
-
-                                  By registering, you are are giving your consent to process your personal information
-                                  based on the Data Protection Policy.
-
-
+                                <!-- Information Sourcing -->
+                                <h6 class="fw-bold" style="font-size: 20px; color: #010483;"><i class="bi bi-shield-lock-fill" style></i> <span style="margin: 2px;">
+                                    Consent to Data Processing:
+                                </h6>
+                                <p class="small pb-3" style="text-align: justify;">
+                                  By registering, you are giving your consent to the processing of your personal information based on the Data Protection Policy.
+                                  This document is intended to comply with applicable legal requirements and ensure the proper handling of personal information.
                                 </p>
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" style="color: #010483;" data-bs-dismiss="modal">Close</button>
                               </div>
                             </div>
                           </div>
@@ -328,8 +342,6 @@ include('includes/main.php');
                       <p class="small row-cols-1 mb-0">Already have an account? <a href="login.php">Log in</a></p>
                     </div>
                   </form>
-
-
                 </div>
               </div>
 
@@ -377,4 +389,3 @@ include('includes/main.php');
 
 
 </html>
-
