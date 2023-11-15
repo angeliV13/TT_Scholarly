@@ -35,7 +35,8 @@ function assessmentAccess()
             extract($row);
         }  
 
-        array_push($assessment_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+        // array_push($assessment_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+        array_push($assessment_data, $start_date, $end_date, $colSc, $colEAPub, $shs);
     }
 
     return $assessment_data;
@@ -61,7 +62,8 @@ function applicationAccess()
             extract($row);
         }  
 
-        array_push($application_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+        // array_push($application_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+        array_push($application_data, $start_date, $end_date, $colSc, $colEAPub, $shs);
     }
 
     return $application_data;
@@ -87,7 +89,8 @@ function renewalAccess()
             extract($row);
         }  
 
-        array_push($renewal_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+        // array_push($renewal_data, $start_date, $end_date, $colSc, $colEAPriv, $colEAPub, $shs);
+        array_push($renewal_data, $start_date, $end_date, $colSc, $colEAPub, $shs);
     }
 
     return $renewal_data;
@@ -112,7 +115,8 @@ function examAccess()
             extract($row);
         }  
 
-        array_push($exam_data, $start_date, $end_date, $time, $colSc, $colEAPriv, $colEAPub, $shs);
+        // array_push($exam_data, $start_date, $end_date, $time, $colSc, $colEAPriv, $colEAPub, $shs);
+        array_push($exam_data, $start_date, $end_date, $time, $colSc, $colEAPub, $shs);
     }
 
     return $exam_data;

@@ -472,13 +472,7 @@
                             <div class="d-flex">
                                 <input class="form-check-input" type="checkbox" value="" id="applicationColEAPubCheckBox">
                                 <label class="mx-2 form-check-label" for="applicationColEACheckBox">
-                                    College Educational Assistance - Public
-                                </label>
-                            </div>
-                            <div class="d-flex">
-                                <input class="form-check-input" type="checkbox" value="" id="applicationColEAPrivCheckBox">
-                                <label class="mx-2 form-check-label" for="applicationColEACheckBox">
-                                    College Educational Assistance - Private
+                                    College Educational Assistance
                                 </label>
                             </div>
                             <div class="d-flex">
@@ -527,13 +521,7 @@
                             <div class="d-flex">
                                 <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPubCheckBox">
                                 <label class="mx-2 form-check-label" for="assessmentColEACheckBox">
-                                    College Educational Assistance - Public
-                                </label>
-                            </div>
-                            <div class="d-flex">
-                                <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPrivCheckBox">
-                                <label class="mx-2 form-check-label" for="assessmentColEACheckBox">
-                                    College Educational Assistance - Private
+                                    College Educational Assistance
                                 </label>
                             </div>
                             <div class="d-flex">
@@ -582,13 +570,7 @@
                             <div class="d-flex">
                                 <input class="form-check-input" type="checkbox" value="" id="renewalColEAPubCheckBox">
                                 <label class="mx-2 form-check-label" for="renewalColEACheckBox">
-                                    College Educational Assistance - Public
-                                </label>
-                            </div>
-                            <div class="d-flex">
-                                <input class="form-check-input" type="checkbox" value="" id="renewalColEAPrivCheckBox">
-                                <label class="mx-2 form-check-label" for="renewalColEACheckBox">
-                                    College Educational Assistance - Private
+                                    College Educational Assistance
                                 </label>
                             </div>
                             <div class="d-flex">
@@ -645,13 +627,7 @@
                             <div class="d-flex">
                                 <input class="form-check-input" type="checkbox" value="" id="examColEAPubCheckBox">
                                 <label class="mx-2 form-check-label" for="examColEACheckBox">
-                                    College Educational Assistance - Public
-                                </label>
-                            </div>
-                            <div class="d-flex">
-                                <input class="form-check-input" type="checkbox" value="" id="examColEAPrivCheckBox">
-                                <label class="mx-2 form-check-label" for="examColEACheckBox">
-                                    College Educational Assistance - Private
+                                    College Educational Assistance 
                                 </label>
                             </div>
                             <div class="d-flex">

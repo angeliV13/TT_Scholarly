@@ -228,13 +228,7 @@ function getSetApplicationTable()
                                                 <div class="d-flex">
                                                     <input class="form-check-input" type="checkbox" value="" id="applicationColEAPubCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPub) . '>
                                                     <label class="mx-2 form-check-label" for="applicationColEACheckBox_' . $id . '">
-                                                        College Educational Assistance - Public
-                                                    </label>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="applicationColEAPrivCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPriv) . '>
-                                                    <label class="mx-2 form-check-label" for="applicationColEACheckBox_' . $id . '">
-                                                        College Educational Assistance - Private
+                                                        College Educational Assistance
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
@@ -393,13 +387,7 @@ function getSetAssessmentTable()
                                                 <div class="d-flex">
                                                     <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPubCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPub) . '>
                                                     <label class="mx-2 form-check-label" for="assessmentColEACheckBox_' . $id . '">
-                                                        College Educational Assistance - Public
-                                                    </label>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="assessmentColEAPrivCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPriv) . '>
-                                                    <label class="mx-2 form-check-label" for="assessmentColEACheckBox_' . $id . '">
-                                                        College Educational Assistance - Private
+                                                        College Educational Assistance
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
@@ -558,13 +546,7 @@ function getSetRenewalTable()
                                                 <div class="d-flex">
                                                     <input class="form-check-input" type="checkbox" value="" id="renewalColEAPubCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPub) . '>
                                                     <label class="mx-2 form-check-label" for="renewalColEACheckBox_' . $id . '">
-                                                        College Educational Assistance - Public
-                                                    </label>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="renewalColEAPrivCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPriv) . '>
-                                                    <label class="mx-2 form-check-label" for="renewalColEACheckBox_' . $id . '">
-                                                        College Educational Assistance - Private
+                                                        College Educational Assistance
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
@@ -745,12 +727,6 @@ function getSetExamTable()
                                                     <input class="form-check-input" type="checkbox" value="" id="examColEAPubCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPub) . '>
                                                     <label class="mx-2 form-check-label" for="examColEACheckBox_' . $id . '">
                                                         College Educational Assistance - Public
-                                                    </label>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="examColEAPrivCheckBox_' . $id . '" ' . getCheckboxValueDB($colEAPriv) . '>
-                                                    <label class="mx-2 form-check-label" for="examColEACheckBox_' . $id . '">
-                                                        College Educational Assistance - Private
                                                     </label>
                                                 </div>
                                                 <div class="d-flex">
