@@ -181,7 +181,7 @@
                 <div class="card recent-sales overflow-auto">
                     <div class="card-body">
                         <h5 class="card-title" id="table_name"></h5>
-                        <table id="dynamic_table" class="table table-borderless datatable">
+                        <table id="dynamic_table" class="table table-striped datatable">
                             <thead>
                                 <tr>
                                     
