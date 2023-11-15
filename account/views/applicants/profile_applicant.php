@@ -13,7 +13,7 @@
       <div class="row justify-content-center align-items-center">
         <div class="col-lg col-xl-12 col-md-12 col-sm-12">
           <div class="card">
-            <div class="rounded-top text-white d-flex flex-row mb-3" style="background-color: #000; height: 200px;">
+            <div class="rounded-top text-white d-flex flex-row mb-3" style="background-color: #010483; height: 200px;">
               <!-- Profile Pic -->
               <div class="profile-pic ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 170px">
                 <?php if ($finishFlag) : ?>
