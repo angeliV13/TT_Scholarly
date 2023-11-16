@@ -155,7 +155,30 @@
 
     let region = check_error(document.getElementById("region")); if (region == undefined) return;
 
-    if (firstName !== undefined && lastName !== undefined && birthDate !== undefined && birthPlace !== undefined && religion !== undefined && gender !== undefined && civilStatus !== undefined && contactNo !== undefined && address !== undefined && provice !== undefined && city !== undefined && city !== undefined && barangay !== undefined && zipCode !== undefined && email !== undefined && password !== undefined && fbName !== undefined && fbUrl !== undefined && fbImg !== undefined && region !== undefined && years !== undefined && language !== undefined && citizenship !== undefined && scholarType !== undefined) {
+    if (firstName !== undefined 
+      && lastName !== undefined 
+      && birthDate !== undefined 
+      && birthPlace !== undefined 
+      && religion !== undefined 
+      && gender !== undefined 
+      && civilStatus !== undefined 
+      && contactNo !== undefined 
+      && address !== undefined 
+      && provice !== undefined 
+      && city !== undefined 
+      && city !== undefined 
+      && barangay !== undefined 
+      && zipCode !== undefined 
+      && email !== undefined 
+      && password !== undefined 
+      // && fbName !== undefined 
+      // && fbUrl !== undefined 
+      // && fbImg !== undefined 
+      && region !== undefined 
+      && years !== undefined 
+      && language !== undefined 
+      && citizenship !== undefined 
+      && scholarType !== undefined) {
       let formData = new FormData();
       formData.append("scholarType", scholarType);
       formData.append("firstName", firstName);
