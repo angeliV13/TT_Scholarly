@@ -60,7 +60,9 @@ include('includes/main.php')
 
                     <div class="col-12">
                       <button id="btn_login" class="btn btn-primary w-100" type="submit">Login</button>
+                      <a href="../index.php" class="btn btn-dark btn-small w-100">Home</a>
                     </div>
+
                     <div class="col-12 text-center" style="margin-bottom: 0px;">
                       <p class="small row-cols-1 mb-0">Don't have an account?</p>
                       <p class="small pt-2"><a href="pages-register.php">Create an Account now!</a></p>
