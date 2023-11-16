@@ -380,7 +380,7 @@ function getAssessmentBeneTable($dashboard = 0)
 }
 
 
-function uploadFile($target_dir, $file, $file_name, $extension_array = array("pdf", "jpg", "png", "jpeg"))
+function uploadFile($target_dir, $file, $file_name, $extension_array = array("pdf"))
 {
 
     $errors = "";
