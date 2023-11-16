@@ -118,21 +118,21 @@
       verifyFlag: 1,
     }); if (checkFlag == undefined) return;
 
-    let fbName = check_error(document.getElementById("fbName")); if (fbName == undefined) return;
-    let facebookProfileURLRegex = /^(https?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
-    let fbUrl = check_error(document.getElementById("fbUrl"), options = {
-      type: "input",
-      verifyFlag: 1,
-      regex: facebookProfileURLRegex,
-      text: "Facebook Profile URL"
-    }); if (fbUrl == undefined) return;
+    // let fbName = check_error(document.getElementById("fbName")); if (fbName == undefined) return;
+    // let facebookProfileURLRegex = /^(https?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
+    // let fbUrl = check_error(document.getElementById("fbUrl"), options = {
+    //   type: "input",
+    //   verifyFlag: 1,
+    //   regex: facebookProfileURLRegex,
+    //   text: "Facebook Profile URL"
+    // }); if (fbUrl == undefined) return;
 
-    let fbImg = check_error(document.getElementById("fbImg"), options = {
-      type: "file",
-      verifyFlag: 1,
-      condition: "jpg,png,jpeg",
-      text: "Facebook Profile Picture"
-    }); if (fbImg == undefined) return;
+    // let fbImg = check_error(document.getElementById("fbImg"), options = {
+    //   type: "file",
+    //   verifyFlag: 1,
+    //   condition: "jpg,png,jpeg",
+    //   text: "Facebook Profile Picture"
+    // }); if (fbImg == undefined) return;
 
     let citizenship = check_error(document.getElementById("citizenship")); if (citizenship == undefined) return;
     let years = check_error(document.getElementById("years")); if (years == undefined) return;
@@ -180,9 +180,9 @@
       // formData.append("username", username);
       formData.append("email", email);
       formData.append("password", password);
-      formData.append("fbName", fbName);
-      formData.append("fbUrl", fbUrl);
-      formData.append("fbImg", fbImg);
+      // formData.append("fbName", fbName);
+      // formData.append("fbUrl", fbUrl);
+      // formData.append("fbImg", fbImg);
       formData.append("action", 2);
 
       $.ajax({
