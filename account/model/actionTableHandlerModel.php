@@ -67,7 +67,7 @@ function getProfile($account_id)
     $employeeScore = ($employee_flag == 1) ? 1 : 0;
     $informedScore = ($informed_flag == 1) ? 1 : 0;
     
-    $gradeScore = get_indicators(2, $scholarType, $gwa, $gwa);
+    $gradeScore = get_indicators(2, $scholarType['scholarType'], $gwa, $gwa);
     $examScore = get_exam_scores($account_id);
 
     $latestEducation = get_user_education($account_id, 1);
@@ -75,8 +75,8 @@ function getProfile($account_id)
     $latestSchoolType = 0;
     if ($latestSchool != null) $latestSchoolType = $latestSchool['school_type'];
     $latestSchoolTypeText = get_school_class($latestSchoolType);
-    $typeScore = get_indicators(3, $scholarType, $latestSchoolTypeText, $latestSchoolTypeText, 'exa');
-    $residencyScore = get_indicators(4, $scholarType, $years_of_residency, $years_of_residency);
+    $typeScore = get_indicators(3, $scholarType['scholarType'], $latestSchoolTypeText, $latestSchoolTypeText, 'exa');
+    $residencyScore = get_indicators(4, $scholarType['scholarType'], $years_of_residency, $years_of_residency);
 
     if ($source != "")
     {
@@ -86,7 +86,7 @@ function getProfile($account_id)
         // remove the comma
         $minSource = str_replace(',', '', $minSource);
         $maxSource = str_replace(',', '', $maxSource);
-        $sourceScore = get_indicators(1, $scholarType, $minSource, $maxSource, 'bet');
+        $sourceScore = get_indicators(1, $scholarType['scholarType'], $minSource, $maxSource, 'bet');
     }
 
     $workingFlag = $ofwFlag = $otherOfw = $pwdFlag = $otherPwd = $selfPwd = $rentFlag = $familyFlag = $honorFlag = $graduatingFlag = $familyFlag = "No";
