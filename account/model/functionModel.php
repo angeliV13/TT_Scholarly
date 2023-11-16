@@ -1078,7 +1078,7 @@ function insert_notification($data)
     $notif_body = $data['notif_body'];
     $notif_link = $data['notif_link'];
 
-    $lastId = get_lastID(['table' => 'system_notification', 'column' => 'id']);
+    $lastId = get_lastID(['table' => 'notification', 'column' => 'id']);
     $lastId++;
 
     $new_link = (strpos($notif_link, '?') !== false) ? $notif_link . '&notif=' . $lastId : $notif_link . '?notif=' . $lastId;
