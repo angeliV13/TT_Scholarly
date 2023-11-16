@@ -67,7 +67,7 @@ function getProfile($account_id)
     $employeeScore = ($employee_flag == 1) ? 1 : 0;
     $informedScore = ($informed_flag == 1) ? 1 : 0;
     
-    $gradeScore = get_indicators(2, $gwa, $gwa, 'bet');
+    $gradeScore = get_indicators(2, $gwa, $gwa);
     $examScore = get_exam_scores($account_id);
 
     $latestEducation = get_user_education($account_id, 1);
@@ -75,8 +75,8 @@ function getProfile($account_id)
     $latestSchoolType = 0;
     if ($latestSchool != null) $latestSchoolType = $latestSchool['school_type'];
     $latestSchoolTypeText = get_school_class($latestSchoolType);
-    $typeScore = get_indicators(3, $latestSchoolType, $latestSchoolType);
-    $residencyScore = get_indicators(4, $years_of_residency, $years_of_residency, 'bet');
+    $typeScore = get_indicators(3, $latestSchoolType, $latestSchoolType, 'exa');
+    $residencyScore = get_indicators(4, $years_of_residency, $years_of_residency, 'exa');
 
     if ($source != "")
     {
