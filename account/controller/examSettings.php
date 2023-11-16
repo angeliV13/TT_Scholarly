@@ -44,10 +44,10 @@ if (isset($_REQUEST['action'])) {
         case 7:
             $id              = $_POST['id'];
             $category        = $_POST['category'];
-            $examAddQuestion = $_POST['examAddQuestion'];
-            $examAddChoices  = $_POST['examAddChoices'];
-            $examAddAnswer   = $_POST['examAddAnswer'];
-            echo editExamItems($id, $category, $examAddQuestion, $examAddChoices, $examAddAnswer);
+            $examEditQuestion = $_POST['examEditQuestion'];
+            $examEditChoices  = $_POST['examEditChoices'];
+            $examEditAnswer   = $_POST['examEditAnswer'];
+            echo editExamItems($id, $category, $examEditQuestion, $examEditChoices, $examEditAnswer);
             break;
         case 8:
             $id              = $_POST['id'];
