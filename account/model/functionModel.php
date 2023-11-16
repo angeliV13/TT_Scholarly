@@ -935,7 +935,7 @@ function account_credentials($type)
 
 function sms_verification($contact, $msg) // function that sends an OTP to the user's contact number
 {
-    require_once('../vendor/autoload.php');
+    require_once('../../vendor/autoload.php');
     include("dbconnection.php");
 
     $sql = "SELECT sid, token, number FROM sms_config";
