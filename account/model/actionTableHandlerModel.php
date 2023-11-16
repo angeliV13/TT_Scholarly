@@ -1739,7 +1739,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab' . $id . '" role="tablist" aria-orientation="vertical">
                                             <button class="nav-link active flex-fill" id="v-pills-schoolid-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-schoolid' . $id . '" type="button" role="tab" aria-controls="v-pills-schoolid' . $id . '" aria-selected="true">School Id</button>
                                             <button class="nav-link flex-fill" id="v-pills-clearance-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-clearance' . $id . '" type="button" role="tab" aria-controls="v-pills-clearance' . $id . '" aria-selected="false">School Clearance</button>
-                                            <button class="nav-link active flex-fill" id="v-pills-cor-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cor' . $id . '" type="button" role="tab" aria-controls="v-pills-cor' . $id . '" aria-selected="false">Certificate of Registration</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cor-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cor' . $id . '" type="button" role="tab" aria-controls="v-pills-cor' . $id . '" aria-selected="false">Certificate of Registration</button>
                                             <button class="nav-link flex-fill" id="v-pills-grades-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-grades' . $id . '" type="button" role="tab" aria-controls="v-pills-grades' . $id . '" aria-selected="false">Grade Report</button>
                                         </div>
                                     </div>
@@ -1775,7 +1775,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                <embed id="viewschoolid' . $account_id . '" frameborder="0" width="100%" height="400px"
                                                             ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
@@ -1786,7 +1786,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                             <!-- School Clearance -->
                                             <div class="tab-pane fade pt-3" id="v-pills-clearance' . $id . '" role="tabpanel" aria-labelledby="v-pills-clearance-tab' . $id . '">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h5 class="card-title">GRADE REPORT</h5>
+                                                    <h5 class="card-title">School Clearance</h5>
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
@@ -1807,7 +1807,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                     <div class="col-lg-12">
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
-                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                <embed id="viewclearance' . $account_id . '" frameborder="0" width="100%" height="400px"
                                                                 ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
@@ -1923,7 +1923,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                         <!-- Set a max width for the container -->
                                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab' . $id . '" role="tablist" aria-orientation="vertical">
                                             <button class="nav-link active flex-fill" id="v-pills-schoolid-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-schoolid' . $id . '" type="button" role="tab" aria-controls="v-pills-schoolid' . $id . '" aria-selected="true">School Id</button>
-                                            <button class="nav-link active flex-fill" id="v-pills-cor-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cor' . $id . '" type="button" role="tab" aria-controls="v-pills-cor' . $id . '" aria-selected="false">Certificate of Registration</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cor-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cor' . $id . '" type="button" role="tab" aria-controls="v-pills-cor' . $id . '" aria-selected="false">Certificate of Registration</button>
                                         </div>
                                     </div>
                                 </div>
