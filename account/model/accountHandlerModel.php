@@ -371,6 +371,20 @@ function resend_email($data)
 
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
+    $sql = "SELECT id FROM account WHERE email = '" . $data . "' AND account_status = 0 LIMIT 1";
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0)
+    {
+        $id = $query->fetch_assoc()['id'];
+        $sql = "SELECT contact_number FROM user_info WHERE account_id = '" . $id . "' LIMIT 1";
+        $query = $conn->query($sql);
+
+        $contact_number = $query->fetch_assoc()['contact_number'];
+
+        sms_verification('+' . $contact_number, 'Hi ' . getUserNameFromId($id) . ', your verification code is ' . $randomToken . '. This code will expire in 5 minutes.');
+    }
+
     $sql = "UPDATE email_token SET token = '" . $randomToken . "', date_generated = NOW() WHERE email = '" . $data . "' AND type = 0 ORDER BY date_generated DESC LIMIT 1";
     $query = $conn->query($sql);
 
