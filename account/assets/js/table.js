@@ -2119,91 +2119,69 @@ $("input[name='decisionRadio']").on('change', function () {
 function appointment(val, accountViewId, radioText = "") {
     // if val is 2 and 3, create two inputs for date and time
     if (radioText == "For Assessment"){
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Confirm Beneficiary for Assessment? You cannot undo this action.",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "controller/accountHandler.php",
-                    type: "POST",
-                    data: {
-                        action: 30,
-                        applicantId: accountViewId
-                    },
-                    beforeSend: function () {
-                        showBeforeSend("Confirming Beneficiary...");
-                    },
-                    success: function (data) {
-                        hideBeforeSend();
-                        if (data == "success") {
-                            Swal.fire({
-                                title: "Beneficiary Confirmed",
-                                text: "The beneficiary has been confirmed for assessment",
-                                icon: "success",
-                                confirmButtonText: "OK"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: `An error occured while confirming the beneficiary. Please try again. Error: ${data}`,
-                            })
+        $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+                action: 30,
+                applicantId: accountViewId
+            },
+            beforeSend: function () {
+                showBeforeSend("Confirming Beneficiary...");
+            },
+            success: function (data) {
+                hideBeforeSend();
+                if (data == "success") {
+                    Swal.fire({
+                        title: "Beneficiary Confirmed",
+                        text: "The beneficiary has been confirmed for assessment",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
                         }
-                    }
-                })
+                    })
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: `An error occured while confirming the beneficiary. Please try again. Error: ${data}`,
+                    })
+                }
             }
         })
     } else if (radioText == "For Renewal"){
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Confirm Beneficiary for Renewal? You cannot undo this action.",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "controller/accountHandler.php",
-                    type: "POST",
-                    data: {
-                        action: 31,
-                        applicantId: accountViewId
-                    },
-                    beforeSend: function () {
-                        showBeforeSend("Confirming Beneficiary...");
-                    },
-                    success: function (data) {
-                        hideBeforeSend();
-                        if (data == "success") {
-                            Swal.fire({
-                                title: "Beneficiary Confirmed",
-                                text: "The beneficiary has been confirmed for renewal",
-                                icon: "success",
-                                confirmButtonText: "OK"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: `An error occured while confirming the beneficiary. Please try again. Error: ${data}`,
-                            })
+        $.ajax({
+            url: "controller/accountHandler.php",
+            type: "POST",
+            data: {
+                action: 31,
+                applicantId: accountViewId
+            },
+            beforeSend: function () {
+                showBeforeSend("Confirming Beneficiary...");
+            },
+            success: function (data) {
+                hideBeforeSend();
+                if (data == "success") {
+                    Swal.fire({
+                        title: "Beneficiary Confirmed",
+                        text: "The beneficiary has been confirmed for renewal",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
                         }
-                    }
-                })
+                    })
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: `An error occured while confirming the beneficiary. Please try again. Error: ${data}`,
+                    })
+                }
             }
         })
     } else {

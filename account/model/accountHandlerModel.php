@@ -1235,6 +1235,8 @@ function assessment($data)
 
     $updateStatus = update_applicant_status($id, $decision);
     if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
+
+    return 'success';
 }
 
 function renewal($data)
@@ -1285,6 +1287,8 @@ function renewal($data)
 
     $updateStatus = update_applicant_status($id, $decision);
     if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
+
+    return 'success';
 }
 
 function deleteUserRequest($data)
