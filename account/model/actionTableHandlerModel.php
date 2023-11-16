@@ -71,7 +71,7 @@ function getProfile($account_id)
     $examScore = get_exam_scores($account_id);
 
     $latestEducation = get_user_education($account_id, 1);
-    $latestSchool = get_school_name($latestEducation['school']);
+    $latestSchool = get_school_name((isset($latestEducation['school']) ? $latestEducation['school'] : 0));
     $latestSchoolType = 0;
     if ($latestSchool != null) $latestSchoolType = $latestSchool['school_type'];
     $latestSchoolTypeText = get_school_class($latestSchoolType);
