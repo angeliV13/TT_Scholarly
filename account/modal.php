@@ -18,25 +18,25 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center gap-3">
-                    <div class="">
+                    <div id="qualiRadio">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="2" id="decisionRadio1">
-                        <label class="form-check-label" for="qualiExamRadio">For Qualification Exam</label>
+                        <label class="form-check-label" for="decisionRadio1" id="changeRadio1">For Qualification Exam</label>
                     </div>
-                    <div class="">
+                    <div id="intRadio">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="3" id="decisionRadio2">
-                        <label class="form-check-label" for="interviewRadio" id="changeRadio">For Interview</label>
+                        <label class="form-check-label" for="decisionRadio2" id="changeRadio">For Interview</label>
                     </div>
-                    <div class="">
+                    <div id="approveRadio">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="4" id="decisionRadio3">
-                        <label class="form-check-label" for="interviewRadio">Approve Application</label>
+                        <label class="form-check-label" for="decisionRadio3">Approve Application</label>
                     </div>
-                    <div class="">
+                    <div id="rejectRadio">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="5" id="decisionRadio4">
-                        <label class="form-check-label" for="interviewRadio">Reject Application</label>
+                        <label class="form-check-label" for="decisionRadio4">Reject Application</label>
                     </div>
-                    <div class="">
+                    <div id="emailRadio">
                         <input class="form-check-input me-2" type="radio" name="decisionRadio" value="6">
-                        <label class="form-check-label" for="interviewRadio">Send Email Notification</label>
+                        <label class="form-check-label" for="decisionRadio">Send Email Notification</label>
                     </div>
                 </div>
                 <div>

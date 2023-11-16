@@ -2018,11 +2018,21 @@ $(document).on("click", ".viewInfoClass", function () {
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
             let accountType = $("#accountType").val();
+            let scholarStatus = $("#scholarStatus").val();
             let scholarNum = $("#scholarNum").val();
             let accountText = (accountType == 2) ? "For Renewal" : "For Interview";
             let currentStatus = (accountType == 2 && $("#scholarStatus").val() == "For Interview") ? "For Renewal" : $("#scholarStatus").val();
-            
+            let qualificationText = (accountType == 2) ? "For Assessment" : "For Qualification Exam";
+
+            if (accountType == 2){
+                $("#approveRadio").addClass("d-none");
+            } else {
+                $("#approveRadio").removeClass("d-none");
+            }
+
             $("#changeRadio").html(accountText);
+            $("#changeRadio1").html(qualificationText);
+            $("#decisionRadio1").html(qualificationText);
             $("#currentStatus").html(currentStatus);
 
             if (currentStatus == "For Assesment Exam")
@@ -2054,15 +2064,24 @@ $(document).on("click", ".viewInfoClass", function () {
 
 $("input[name='decisionRadio']").on('change', function () {
     let val = $("input[name='decisionRadio']:checked").val();
+    // get the label text of the radio button
+    let radioText = $("label[for='" + $("input[name='decisionRadio']:checked").attr('id') + "']").html();
     let accountViewId = $('#accountViewId').val();
     let accountText = $("#changeRadio").html();
     let text = icon = '';
 
-    if (val == 2) {
+    console.log(radioText);
+    console.log(accountViewId);
+    console.log(accountText);
+
+    if (val == 2 && accountText == "For Qualification Exam") {
         text = "Confirm Applicant for Assessment? You cannot undo this action.";
         icon = "question";
+    } else if (val == 2 && accountText == "For Assessment") {
+        text = "Confirm Beneficiary for Assessment? You cannot undo this action.";
+        icon = "question";
     } else if (val == 3) {
-        text = (accountText == "For Interview") ? "Confirm Applicant for Interview? You cannot undo this action." : "Confirm Applicant for Renewal? You cannot undo this action.";
+        text = (accountText == "For Interview") ? "Confirm Applicant for Interview? You cannot undo this action." : "Confirm Beneficiary for Renewal? You cannot undo this action.";
         icon = "question";
     } else if (val == 4) {
         text = "Approve Applicant? You cannot undo this action.";
@@ -2085,7 +2104,7 @@ $("input[name='decisionRadio']").on('change', function () {
     }).then((result) => {
         if (result.isConfirmed) {
             if (val == 2 || val == 3) {
-                appointment(val, accountViewId);
+                appointment(val, accountViewId, radioText);
             } else if (val == 4) {
                 approveApplicant(val, accountViewId);
             } else if (val == 5) {
@@ -2097,69 +2116,159 @@ $("input[name='decisionRadio']").on('change', function () {
     })
 });
 
-function appointment(val, accountViewId) {
+function appointment(val, accountViewId, radioText = "") {
     // if val is 2 and 3, create two inputs for date and time
-    Swal.fire({
-        title: "Set Appointment for" + (val == 2 ? " Assessment" : " Interview"),
-        html: '<div class="form-group"><label for="date">Start Date and Time</label><input type="datetime-local" class="form-control" id="date"></div><div class="form-group"><label for="dateEnd">End Date and Time</label><input type="datetime-local" class="form-control" id="dateEnd"></div>',
-        showCancelButton: true,
-        confirmButtonText: "Set",
-        cancelButtonText: "Cancel",
-        preConfirm: () => {
-            let date = $('#date').val();
-            let dateEnd = $('#dateEnd').val();
-
-            if (date == '' || dateEnd == '' ) {
-                Swal.showValidationMessage(
-                    `Please fill up all fields.`
-                )
-            }
-
-            if (dateEnd < date) {
-                Swal.showValidationMessage(
-                    `End date and time cannot be earlier than the start date and time.`
-                )
-            }
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: "controller/accountHandler.php",
-                type: "POST",
-                data: {
-                    action: 18,
-                    date: $('#date').val(),
-                    dateEnd: $('#dateEnd').val(),
-                    decision: val,
-                    applicantId: accountViewId
-                },
-                beforeSend: function () {
-                    showBeforeSend("Setting Appointment...");
-                },
-                success: function (data) {
-                    hideBeforeSend();
-                    if (data == "success") {
-                        Swal.fire({
-                            title: "Appointment Submitted",
-                            text: "An appointment with the applicant has been created. Please be available on the date and time you set",
-                            icon: "success",
-                            confirmButtonText: "OK"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: `An error occured while setting an appointment. Please try again. Error: ${data}`,
-                        })
+    if (radioText == "For Assessment"){
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Confirm Beneficiary for Assessment? You cannot undo this action.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "controller/accountHandler.php",
+                    type: "POST",
+                    data: {
+                        action: 30,
+                        applicantId: accountViewId
+                    },
+                    beforeSend: function () {
+                        showBeforeSend("Confirming Beneficiary...");
+                    },
+                    success: function (data) {
+                        hideBeforeSend();
+                        if (data == "success") {
+                            Swal.fire({
+                                title: "Beneficiary Confirmed",
+                                text: "The beneficiary has been confirmed for assessment",
+                                icon: "success",
+                                confirmButtonText: "OK"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: `An error occured while confirming the beneficiary. Please try again. Error: ${data}`,
+                            })
+                        }
                     }
+                })
+            }
+        })
+    } else if (radioText == "For Renewal"){
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Confirm Beneficiary for Renewal? You cannot undo this action.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "controller/accountHandler.php",
+                    type: "POST",
+                    data: {
+                        action: 31,
+                        applicantId: accountViewId
+                    },
+                    beforeSend: function () {
+                        showBeforeSend("Confirming Beneficiary...");
+                    },
+                    success: function (data) {
+                        hideBeforeSend();
+                        if (data == "success") {
+                            Swal.fire({
+                                title: "Beneficiary Confirmed",
+                                text: "The beneficiary has been confirmed for renewal",
+                                icon: "success",
+                                confirmButtonText: "OK"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: `An error occured while confirming the beneficiary. Please try again. Error: ${data}`,
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    } else {
+        Swal.fire({
+            title: "Set Appointment for" + (val == 2 ? " Assessment" : " Interview"),
+            html: '<div class="form-group"><label for="date">Start Date and Time</label><input type="datetime-local" class="form-control" id="date"></div><div class="form-group"><label for="dateEnd">End Date and Time</label><input type="datetime-local" class="form-control" id="dateEnd"></div>',
+            showCancelButton: true,
+            confirmButtonText: "Set",
+            cancelButtonText: "Cancel",
+            preConfirm: () => {
+                let date = $('#date').val();
+                let dateEnd = $('#dateEnd').val();
+    
+                if (date == '' || dateEnd == '' ) {
+                    Swal.showValidationMessage(
+                        `Please fill up all fields.`
+                    )
                 }
-            })
-        }
-    })
+    
+                if (dateEnd < date) {
+                    Swal.showValidationMessage(
+                        `End date and time cannot be earlier than the start date and time.`
+                    )
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "controller/accountHandler.php",
+                    type: "POST",
+                    data: {
+                        action: 18,
+                        date: $('#date').val(),
+                        dateEnd: $('#dateEnd').val(),
+                        decision: val,
+                        applicantId: accountViewId
+                    },
+                    beforeSend: function () {
+                        showBeforeSend("Setting Appointment...");
+                    },
+                    success: function (data) {
+                        hideBeforeSend();
+                        if (data == "success") {
+                            Swal.fire({
+                                title: "Appointment Submitted",
+                                text: "An appointment with the applicant has been created. Please be available on the date and time you set",
+                                icon: "success",
+                                confirmButtonText: "OK"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: `An error occured while setting an appointment. Please try again. Error: ${data}`,
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
 }
 
 function approveApplicant(val, accountViewId) {

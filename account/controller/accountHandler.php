@@ -313,6 +313,24 @@ if (isset($_REQUEST['action']))
 
         echo saveRemarks($data);
     }
+    else if ($action == 30) // For Assessment
+    {
+        $data = [
+            'decision'          => 2,
+            'applicantId'       => isset($_POST['applicantId']) ? $_POST['applicantId'] : '',
+        ];
+
+        echo assessment($data);
+    }
+    else if ($action == 31) // For Renewal
+    {
+        $data = [
+            'decision'          => 4,
+            'applicantId'       => isset($_POST['applicantId']) ? $_POST['applicantId'] : '',
+        ];
+
+        echo renewal($data);
+    }
 }
 
 

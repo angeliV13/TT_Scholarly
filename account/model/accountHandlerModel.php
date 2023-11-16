@@ -1187,6 +1187,106 @@ function set_applicant_status($data)
     return 'success';
 }
 
+function assessment($data)
+{
+    include("dbconnection.php");
+
+    $id = $data['applicantId'];
+    $decision = $data['decision'];
+
+    $userInfo = get_user_info($id);
+    $userData = get_user_data($id);
+    $name = $userInfo['first_name'] . ' ' . $userInfo['last_name'];
+    $email = $userData[2];
+
+    $adminEmail = [
+        'table' => 'account',
+        'return' => 'email',
+        'column' => [
+            'account_type' => ['=', 1],
+        ]
+    ];
+
+    $adEmail = check_exist_multiple($adminEmail, 1);
+    if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $website_header = get_website_info(0)['header'];
+
+    $msg = '<p>Hi ' . $name . ',<br></p>';
+    $msg .= '<p>You are now for assessment. Please complete the requirements needed as soon as possible.</p>';
+    $msg .= '<p>This is a system generated email. Please do not reply.</p>';
+    $msg .= '<p>Thank you! <br></p>';
+    $msg .= '<p>Best regards,</p>';
+    $msg .= '<p>' .$website_header . '</p>';
+
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
+
+    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, $emailType, $adEmail);
+    if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+    $notifUserData = [
+        'user_id'       => $id,
+        'notif_type'    => 3,
+        'notif_body'    => 'You are now for assessment. Please complete the requirements needed as soon as possible.',
+        'notif_link'    => '?nav=dashboard',
+    ];
+
+    $notifUser = insert_notification($notifUserData);
+    if ($notifUser !== 'success') return 'Error User Notification: ' . $notifUser;
+
+    $updateStatus = update_applicant_status($id, $decision);
+    if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
+}
+
+function renewal($data)
+{
+    include("dbconnection.php");
+
+    $id = $data['applicantId'];
+    $decision = $data['decision'];
+
+    $userInfo = get_user_info($id);
+    $userData = get_user_data($id);
+    $name = $userInfo['first_name'] . ' ' . $userInfo['last_name'];
+    $email = $userData[2];
+
+    $adminEmail = [
+        'table' => 'account',
+        'return' => 'email',
+        'column' => [
+            'account_type' => ['=', 1],
+        ]
+    ];
+
+    $adEmail = check_exist_multiple($adminEmail, 1);
+    if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    $website_header = get_website_info(0)['header'];
+
+    $msg = '<p>Hi ' . $name . ',<br></p>';
+    $msg .= '<p>Your scholarship has been renewed!</p>';
+    $msg .= '<p>This is a system generated email. Please do not reply.</p>';
+    $msg .= '<p>Thank you! <br></p>';
+    $msg .= '<p>Best regards,</p>';
+    $msg .= '<p>' .$website_header . '</p>';
+
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
+
+    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, $emailType, $adEmail);
+    if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+    $notifUserData = [
+        'user_id'       => $id,
+        'notif_type'    => 3,
+        'notif_body'    => 'Your scholarship has been renewed!',
+        'notif_link'    => '?nav=dashboard',
+    ];
+
+    $notifUser = insert_notification($notifUserData);
+    if ($notifUser !== 'success') return 'Error User Notification: ' . $notifUser;
+
+    $updateStatus = update_applicant_status($id, $decision);
+    if ($updateStatus != 'success') return 'Error: ' . $updateStatus;
+}
+
 function deleteUserRequest($data)
 {
     include("dbconnection.php");
