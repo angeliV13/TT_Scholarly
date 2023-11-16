@@ -1312,12 +1312,12 @@ function getProfile($account_id)
 
 
     // Requirements
-    if($accountType == 3){
+    if($accountType == "3"){
         echo getRequirements($id, $account_id, $entries);
-    }else if($accountType == 2){
-        if($scholarType == 1){
+    }else if($accountType == "2"){
+        if($scholarType['scholarType'] == "1"){
             echo getRequirementsAssessment($id, $account_id, $entries_assessment);
-        }else if($scholarType == 2){
+        }else if($scholarType['scholarType'] == "2"){
             echo getRequirementsRenewal($id, $account_id, $entries_renewal);
         }
     }
