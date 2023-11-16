@@ -75,7 +75,7 @@ function getProfile($account_id)
     $latestSchoolType = 0;
     if ($latestSchool != null) $latestSchoolType = $latestSchool['school_type'];
     $latestSchoolTypeText = get_school_class($latestSchoolType);
-    $typeScore = get_indicators(3, $latestSchoolType, $latestSchoolType, 'exa');
+    $typeScore = get_indicators(3, get_school_class($latestSchoolType), $latestSchoolType, 'exa');
     $residencyScore = get_indicators(4, $years_of_residency, $years_of_residency, 'bet');
 
     if ($source != "")
