@@ -815,7 +815,7 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
             $value7      = uploadFile($target_dir, $brgyclearanceFile, $file_name);
 
             if ($value7 == 'Success') {
-                echo updateRequirement($ay, $sem, $userid, $brgyclearanceFile, $typeCount, 1, 'applicant_file');
+                echo updateRequirement($ay, $sem, $userid, $file_name, $typeCount, 1, 'applicant_file');
             } else {
                 return ($value7);
             }
