@@ -81,7 +81,7 @@ if (isset($_REQUEST['action']))
             }
 
             break;
-        case 1.4:                           //Read Only Academic Year
+        case 1.4:                           //Read Only Academic Year 
             if (isset($_POST['id'])) 
             {
                 $id     = $_POST['id'];

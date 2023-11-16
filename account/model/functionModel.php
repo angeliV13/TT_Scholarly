@@ -133,6 +133,7 @@ function get_indicators($type, $applicant, $min, $max = "", $operator = '>=<=')
     if ($operator == 'exa') $sql .= " AND indicator_exact = '" . $min . "'";
     if ($operator == 'bet') $sql .= "AND indicator_low  BETWEEN '{$min}' AND '{$max}'
                                     AND indicator_high BETWEEN '{$min}' AND '{$max}'";
+                                    
 
     $sql .= " LIMIT 1";
 
