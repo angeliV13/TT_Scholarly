@@ -1565,7 +1565,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 19, 20] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2,17,18,19,20] }],
         initComplete: function () {
             $(document).on("click", "#setFilter", function () {
                 benefAssessTable.ajax.reload();
