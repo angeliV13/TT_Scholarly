@@ -76,22 +76,16 @@ function getProfile($account_id)
     if ($latestSchool != null) $latestSchoolType = $latestSchool['school_type'];
     $latestSchoolTypeText = get_school_class($latestSchoolType);
     $typeScore = get_indicators(3, $scholarType['scholarType'], $latestSchoolTypeText, $latestSchoolTypeText, 'exa');
-    $residencyScore = get_indicators(4, $scholarType['scholarType'], $years_of_residency, $years_of_residency);
-     
-    if ($source != "" || $source == "7")
-    { //0 = Less than 11,690 6 = Greater than 233,807
-        if($source > "0" && $source < "5"){
-            $splitSource = explode("-", $source);
-            $minSource = str_replace(' ', '', $splitSource[0]);
-            $maxSource = str_replace(' ', '', $splitSource[1]);
-            // remove the comma
-            $minSource = str_replace(',', '', $minSource);
-            $maxSource = str_replace(',', '', $maxSource);
-        }else{
-            $minSource = ($source == "6") ?  233807 : 0;
-            $maxSource = ($source == "0") ?  11690 : 0;
-        }
-        
+    $residencyScore = get_indicators(4, $scholarType['scholarType'], $years_of_residency, $years_of_residency, '<=>');
+
+    if ($source != "")
+    {
+        $splitSource = explode("-", $source);
+        $minSource = str_replace(' ', '', $splitSource[0]);
+        $maxSource = str_replace(' ', '', $splitSource[1]);
+        // remove the comma
+        $minSource = str_replace(',', '', $minSource);
+        $maxSource = str_replace(',', '', $maxSource);
         $sourceScore = get_indicators(1, $scholarType['scholarType'], $minSource, $maxSource, 'bet');
     }
 
@@ -161,6 +155,7 @@ function getProfile($account_id)
     $maxScore = $gradeScore + $typeScore + $residencyScore + $sourceScore + $examScore + $pwdScore + $workingScore + $otherPwdScore + $parentScore + $deceasedScore + $employeeScore + $informedScore;
 
     $profile = '<div class="row" id="profile">';
+    $profile .= '<input type="hidden" id="scholarNum" value="' . $scholarType['status'] . '">';
     $profile .= '<input type="hidden" id="scholarStatus" value="' . $scholarStatus . '">';
     $profile .= '<input type="hidden" id="accountType" value="' . $accountType . '">';
     $profile .= '<input type="hidden" id="scholarId" value="' . $scholarId . '">';

@@ -2018,6 +2018,7 @@ $(document).on("click", ".viewInfoClass", function () {
             $("#viewInfoModal .modal-body").html(data);
             $("#viewInfoModal").modal("show");
             let accountType = $("#accountType").val();
+            let scholarNum = $("#scholarNum").val();
             let accountText = (accountType == 2) ? "For Renewal" : "For Interview";
             let currentStatus = (accountType == 2 && $("#scholarStatus").val() == "For Interview") ? "For Renewal" : $("#scholarStatus").val();
             
