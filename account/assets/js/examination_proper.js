@@ -61,6 +61,7 @@ $("form").on("change", function (event) {
 // Next Previous Submit button
 function btnAction(action, categ){
   let actionCateg = 0;
+  $(window).unbind('beforeunload');
   if(action == 1){
     actionCateg = categ - 1;
     $(".question_group_" + categ).addClass("d-none");
