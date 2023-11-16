@@ -1220,7 +1220,7 @@ function assessment($data)
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
-    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, $emailType, $adEmail);
+    $sendEmail = sendEmail($email, $name . ' - For Assessment', $msg, $emailType, $adEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $notifUserData = [
@@ -1270,7 +1270,7 @@ function renewal($data)
 
     $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "2" : '4';
 
-    $sendEmail = sendEmail($email, $name . ' - ' . $decisionText, $msg, $emailType, $adEmail);
+    $sendEmail = sendEmail($email, $name . ' - Scholarship Renewed', $msg, $emailType, $adEmail);
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
 
     $notifUserData = [
