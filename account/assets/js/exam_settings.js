@@ -169,12 +169,12 @@ $("#addQuestion").on("click", function () {
 
 function editQuestion(id)
 {
-  let category = $("input[name='radioAddCategory']:checked").val();
-  let examAddQuestion = $("#examAddQuestion").val();
-  let examAddChoices = $("#examAddChoices").val().split("\n");
-  let examAddAnswer = $("#examAddAnswer").find(":selected").text();
+  let category = $("input[name='radioEditCategory"+id+"']:checked").val();
+  let examEditQuestion = $("#examEditQuestion"+id+"").val();
+  let examEditChoices = $("#examEditChoices"+id+"").val().split("\n");
+  let examEditAnswer = $("#examEditAnswer"+id+"").find(":selected").text();
 
-  if(category != undefined && examAddQuestion != "" && examAddChoices != "" && examAddAnswer != "Select Answer"){
+  if(category != undefined && examEditQuestion != "" && examEditChoices != "" && examEditAnswer != "Select Answer"){
     Swal.fire({
       title: "Edit Question?",
       text: "Are you sure you want to edit this question to your list?",
@@ -190,9 +190,9 @@ function editQuestion(id)
             action          : 7,
             id              : id,
             category        : category,
-            examAddQuestion : examAddQuestion,
-            examAddChoices  : examAddChoices,
-            examAddAnswer   : examAddAnswer,
+            examEditQuestion : examEditQuestion,
+            examEditChoices  : examEditChoices,
+            examEditAnswer   : examEditAnswer,
           },
           success: function (data) {
               if (data == "Success") {

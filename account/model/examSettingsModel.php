@@ -70,22 +70,22 @@ function addExamItems($category, $examAddQuestion, $examAddChoices, $examAddAnsw
 }
 
 //Changing Examination Question
-function editExamItems($id, $category, $examAddQuestion, $examAddChoices, $examAddAnswer)
+function editExamItems($id, $category, $examEditQuestion, $examEditChoices, $examEditAnswer)
 {
 
     include("dbconnection.php");
     $examChoices = "";
 
-    $examAddChoices = array_filter($examAddChoices);
-    foreach ($examAddChoices as $choices) {
+    $examEditChoices = array_filter($examEditChoices);
+    foreach ($examEditChoices as $choices) {
         $examChoices .= $choices . "<br>";
     }
 
     $sql = "UPDATE `examination` 
             SET `category`  = '{$category}',
-                `question`  = '{$examAddQuestion}',
+                `question`  = '{$examEditQuestion}',
                 `choices`   = '{$examChoices}',
-                `answer`    = '{$examAddAnswer}'
+                `answer`    = '{$examEditAnswer}'
             WHERE id = '{$id}'";
 
     $query = $conn->query($sql) or die("Error ESQ005: " . $conn->error);
