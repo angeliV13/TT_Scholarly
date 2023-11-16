@@ -120,11 +120,12 @@ function verifyHashPW($pass, $hash)
     return password_verify($pass, $hash);
 }
 
-function get_indicators($type, $min, $max = "", $operator = '>=<=')
+function get_indicators($type, $applicant, $min, $max = "", $operator = '>=<=')
 {
     include("dbconnection.php");
+    if($applicant <= 2) $applicant = 2;
 
-    $sql = "SELECT points FROM applicant_indicator WHERE indicator_category = '" . $type . "'";
+    $sql = "SELECT points FROM applicant_indicator WHERE indicator_category = '{$type}' AND indicator_applicant = '{$applicant}'";
     // if ($operator == '>=<=') $sql .= " AND indicator_low >= " . $min . " AND indicator_high <= " . $max . "";
     // if ($operator == 'bet') $sql .= "AND " . $min . " BETWEEN indicator_low AND indicator_high";
     if ($operator == '>=<=') $sql .= " AND indicator_low >= '{$min}' AND indicator_high <= '{$max}'";
