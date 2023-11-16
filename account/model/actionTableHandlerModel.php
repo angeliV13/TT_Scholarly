@@ -67,7 +67,7 @@ function getProfile($account_id)
     $employeeScore = ($employee_flag == 1) ? 1 : 0;
     $informedScore = ($informed_flag == 1) ? 1 : 0;
     
-    $gradeScore = get_indicators(2, $gwa, $gwa, 'bet');
+    $gradeScore = get_indicators(2, $scholarType, $gwa, $gwa);
     $examScore = get_exam_scores($account_id);
 
     $latestEducation = get_user_education($account_id, 1);
@@ -86,7 +86,7 @@ function getProfile($account_id)
         // remove the comma
         $minSource = str_replace(',', '', $minSource);
         $maxSource = str_replace(',', '', $maxSource);
-        $sourceScore = get_indicators(1, $minSource, $maxSource, 'bet');
+        $sourceScore = get_indicators(1, $scholarType, $minSource, $maxSource, 'bet');
     }
 
     $workingFlag = $ofwFlag = $otherOfw = $pwdFlag = $otherPwd = $selfPwd = $rentFlag = $familyFlag = $honorFlag = $graduatingFlag = $familyFlag = "No";
