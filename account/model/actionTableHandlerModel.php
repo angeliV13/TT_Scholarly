@@ -1310,7 +1310,16 @@ function getProfile($account_id)
 
 
     // Requirements
-    echo getRequirements($id, $account_id, $entries);
+    if($accountType == 3){
+        echo getRequirements($id, $account_id, $entries);
+    }else if($accountType == 2){
+        if($scholarType == 1){
+            echo getRequirementsAssessment($id, $account_id, $entries);
+        }else if($scholarType == 2){
+            echo getRequirementsRenewal($id, $account_id, $entries);
+        }
+    }
+    
 
     
                                                     
@@ -1682,6 +1691,319 @@ function getRequirements($id, $account_id, $file)
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- QUILLO DRAGGABLE -->
+                                            <div class="col-lg-5">
+                                                <div id="mydiv">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <h5 class="card-title" id="mydivheader">Requirements Remarks</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="mydivheader" aria-label="Close" id="dismissButton"></button>
+                                                            </div>
+                                                            <!-- Quill Editor Full -->
+                                                            <div class="quill-editor-full" style="height: 300px">
+                                                            </div>
+                                                            <!-- End Quill Editor Full -->
+                                                            <div class="d-grid gap-2 pt-3 d-flex justify-content-end">
+                                                                <button type="button" class="btn btn-warning btn-sm">Save Remarks</button>
+                                                                <button type="button" class="btn btn-danger btn-sm">Edit Remarks</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+
+    return $requirements;
+}
+
+function getRequirementsAssessment($id, $account_id, $file)
+{
+    $requirements = '<!-- Requirements -->
+                    <div id="requirements" class="row d-none">
+                        <div class="col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">GENERAL REQUIREMENTS</h5>
+                                    </div>
+                                    <div class="max-width-100">
+                                        <!-- Set a max width for the container -->
+                                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab' . $id . '" role="tablist" aria-orientation="vertical">
+                                            <button class="nav-link active flex-fill" id="v-pills-schoolid-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-schoolid' . $id . '" type="button" role="tab" aria-controls="v-pills-schoolid' . $id . '" aria-selected="true">School Id</button>
+                                            <button class="nav-link flex-fill" id="v-pills-clearance-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-clearance' . $id . '" type="button" role="tab" aria-controls="v-pills-clearance' . $id . '" aria-selected="false">School Clearance</button>
+                                            <button class="nav-link active flex-fill" id="v-pills-cor-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cor' . $id . '" type="button" role="tab" aria-controls="v-pills-cor' . $id . '" aria-selected="false">Certificate of Registration</button>
+                                            <button class="nav-link flex-fill" id="v-pills-grades-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-grades' . $id . '" type="button" role="tab" aria-controls="v-pills-grades' . $id . '" aria-selected="false">Grade Report</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="row d-flex justify-content-center align-items-center h-500" style="width: 100%">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="tab-content" id="v-pills-tabContent">
+                                            <!-- School Id -->
+                                            <div class="tab-pane fade show active pt-3" id="v-pills-schoolid' . $id . '" role="tabpanel" aria-labelledby="v-pills-schoolid-tab' . $id . '" style="height: 00%; width: 100%">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6 class="card-title">School ID</h6>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="schoolidApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="schoolidReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="schoolidModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                            ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- School Clearance -->
+                                            <div class="tab-pane fade pt-3" id="v-pills-clearance' . $id . '" role="tabpanel" aria-labelledby="v-pills-clearance-tab' . $id . '">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h5 class="card-title">GRADE REPORT</h5>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="clearanceApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="clearanceReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="clearanceModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- CERT OF REGISTRATION -->
+                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6 class="card-title">Certificate of Registration</h6>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="corApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="corReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                               ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- GRADE REPORT -->
+                                            <div class="tab-pane fade pt-3" id="v-pills-grades' . $id . '" role="tabpanel" aria-labelledby="v-pills-grades-tab' . $id . '">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h5 class="card-title">GRADE REPORT</h5>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="gradesApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="gradesReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="gradesModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                                ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- QUILLO DRAGGABLE -->
+                                            <div class="col-lg-5">
+                                                <div id="mydiv">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <h5 class="card-title" id="mydivheader">Requirements Remarks</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="mydivheader" aria-label="Close" id="dismissButton"></button>
+                                                            </div>
+                                                            <!-- Quill Editor Full -->
+                                                            <div class="quill-editor-full" style="height: 300px">
+                                                            </div>
+                                                            <!-- End Quill Editor Full -->
+                                                            <div class="d-grid gap-2 pt-3 d-flex justify-content-end">
+                                                                <button type="button" class="btn btn-warning btn-sm">Save Remarks</button>
+                                                                <button type="button" class="btn btn-danger btn-sm">Edit Remarks</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+
+    return $requirements;
+}
+
+function getRequirementsRenewal($id, $account_id, $file)
+{
+    $requirements = '<!-- Requirements -->
+                    <div id="requirements" class="row d-none">
+                        <div class="col-lg-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">GENERAL REQUIREMENTS</h5>
+                                    </div>
+                                    <div class="max-width-100">
+                                        <!-- Set a max width for the container -->
+                                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab' . $id . '" role="tablist" aria-orientation="vertical">
+                                            <button class="nav-link active flex-fill" id="v-pills-cor-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cor' . $id . '" type="button" role="tab" aria-controls="v-pills-cor' . $id . '" aria-selected="true">Certificate of Registration</button>
+                                            <button class="nav-link flex-fill" id="v-pills-grades-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-grades' . $id . '" type="button" role="tab" aria-controls="v-pills-grades' . $id . '" aria-selected="false">Grade Report</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cob-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cob' . $id . '" type="button" role="tab" aria-controls="v-pills-cob' . $id . '" aria-selected="true">Certificate of Birth</button>
+                                            <button class="nav-link flex-fill" id="v-pills-cgmc-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-cgmc' . $id . '" type="button" role="tab" aria-controls="v-pills-cgmc' . $id . '" aria-selected="false">Certificate of Good Moral Character</button>
+                                            <button class="nav-link flex-fill" id="v-pills-idpic-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-idpic' . $id . '" type="button" role="tab" aria-controls="v-pills-idpic' . $id . '" aria-selected="false">ID Photo (2x2 size)</button>
+                                            <button class="nav-link flex-fill" id="v-pills-map-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-map' . $id . '" type="button" role="tab" aria-controls="v-pills-map' . $id . '" aria-selected="false">Vicinity Map</button>
+                                            <button class="nav-link flex-fill" id="v-pills-brgyclearance-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-brgyclearance' . $id . '" type="button" role="tab" aria-controls="v-pills-brgyclearance' . $id . '" aria-selected="false">Barangay Clearance</button>
+                                            <button class="nav-link flex-fill" id="v-pills-parvoteid-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-parvoteid' . $id . '" type="button" role="tab" aria-controls="v-pills-parvoteid' . $id . '" aria-selected="false">Parents Voter’s ID/ Voter’s Certification</button>
+                                            <button class="nav-link flex-fill" id="v-pills-appvoteid-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-appvoteid' . $id . '" type="button" role="tab" aria-controls="v-pills-appvoteid' . $id . '" aria-selected="false">Voter’s Certificate of the Applicant</button>
+                                            <button class="nav-link flex-fill" id="v-pills-itr-tab' . $id . '" data-bs-toggle="pill" data-bs-target="#v-pills-itr' . $id . '" type="button" role="tab" aria-controls="v-pills-itr' . $id . '" aria-selected="false">Income Tax Return or Certificate of Employment and Compensation (Parents)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="row d-flex justify-content-center align-items-center h-500" style="width: 100%">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="tab-content" id="v-pills-tabContent">
+                                            <!-- School Id -->
+                                            <div class="tab-pane fade show active pt-3" id="v-pills-schoolid' . $id . '" role="tabpanel" aria-labelledby="v-pills-schoolid-tab' . $id . '" style="height: 00%; width: 100%">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6 class="card-title">School ID</h6>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="schoolidApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="schoolidReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="schoolidModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                            ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- CERT OF REGISTRATION -->
+                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h6 class="card-title">Certificate of Registration</h6>
+                                                    <div class="d-flex align-items-center d-grid gap-3">
+                                                        <label class="form-check-label fw-bold">Remarks:</label>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="corApprove"> Approve </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corReview' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="corReview"> For Review </label>
+                                                        </div>
+                                                        <div class="form-check form-radio">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '">
+                                                            <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="card" style="height:100%">
+                                                            <div class="card-body">
+                                                                <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
+                                                               ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <!-- QUILLO DRAGGABLE -->
                                             <div class="col-lg-5">
                                                 <div id="mydiv">
