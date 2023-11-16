@@ -4,9 +4,11 @@ function getProfile($account_id)
 {
     include("../global_variables.php");
 
-    $acadYearId = getDefaultAcadYearId();
-    $semId      = getDefaultSemesterId();
-    $entries    = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
+    $acadYearId             = getDefaultAcadYearId();
+    $semId                  = getDefaultSemesterId();
+    $entries                = getFileEntries($acadYearId, $semId, $account_id, 'applicant_file', 1);
+    $entries_assessment     = getFileEntries($acadYearId, $semId, $account_id, 'assessment_file', 1);
+    $entries_renewal        = getFileEntries($acadYearId, $semId, $account_id, 'renewal_file', 1);
 
     $user_data = get_user_data($account_id);
     $id = $user_data[0];
@@ -1314,9 +1316,9 @@ function getProfile($account_id)
         echo getRequirements($id, $account_id, $entries);
     }else if($accountType == 2){
         if($scholarType == 1){
-            echo getRequirementsAssessment($id, $account_id, $entries);
+            echo getRequirementsAssessment($id, $account_id, $entries_assessment);
         }else if($scholarType == 2){
-            echo getRequirementsRenewal($id, $account_id, $entries);
+            echo getRequirementsRenewal($id, $account_id, $entries_renewal);
         }
     }
     
