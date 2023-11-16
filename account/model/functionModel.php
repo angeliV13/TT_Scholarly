@@ -126,7 +126,8 @@ function get_indicators($type, $min, $max = "", $operator = '>=<=')
 
     $sql = "SELECT points FROM applicant_indicator WHERE indicator_category = '" . $type . "'";
     if ($operator == '>=<=') $sql .= " AND indicator_low >= " . $min . " AND indicator_high <= " . $max . "";
-    if ($operator == 'bet') $sql .= "AND " . $min . " BETWEEN indicator_low AND indicator_high";
+    // if ($operator == 'bet') $sql .= "AND " . $min . " BETWEEN indicator_low AND indicator_high";
+    if ($operator == 'bet') $sql .= "AND indicator_exact = '" . $min . "'";
 
     $sql .= " LIMIT 1";
 
