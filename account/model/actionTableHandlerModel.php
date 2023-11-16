@@ -78,14 +78,20 @@ function getProfile($account_id)
     $typeScore = get_indicators(3, $scholarType['scholarType'], $latestSchoolTypeText, $latestSchoolTypeText, 'exa');
     $residencyScore = get_indicators(4, $scholarType['scholarType'], $years_of_residency, $years_of_residency);
      
-    if ($source != "")
-    {
-        $splitSource = explode("-", $source);
-        $minSource = str_replace(' ', '', $splitSource[0]);
-        $maxSource = str_replace(' ', '', $splitSource[1]);
-        // remove the comma
-        $minSource = str_replace(',', '', $minSource);
-        $maxSource = str_replace(',', '', $maxSource);
+    if ($source != "" || $source == "7")
+    { //0 = Less than 11,690 6 = Greater than 233,807
+        if($source > "0" && $source < "5"){
+            $splitSource = explode("-", $source);
+            $minSource = str_replace(' ', '', $splitSource[0]);
+            $maxSource = str_replace(' ', '', $splitSource[1]);
+            // remove the comma
+            $minSource = str_replace(',', '', $minSource);
+            $maxSource = str_replace(',', '', $maxSource);
+        }else{
+            $minSource = ($source == "6") ?  233807 : 0;
+            $maxSource = ($source == "0") ?  11690 : 0;
+        }
+        
         $sourceScore = get_indicators(1, $scholarType['scholarType'], $minSource, $maxSource, 'bet');
     }
 
