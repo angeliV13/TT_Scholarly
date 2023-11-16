@@ -1277,7 +1277,7 @@ function renewal($data)
 
     $notifUserData = [
         'user_id'       => $id,
-        'notif_type'    => 3,
+        'notif_type'    => 14,
         'notif_body'    => 'Your scholarship has been renewed!',
         'notif_link'    => '?nav=dashboard',
     ];
