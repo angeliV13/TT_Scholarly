@@ -199,7 +199,7 @@ function editQuestion(id)
               Swal.fire({
                 title: "Success!",
                 icon: "success",
-                html: "Question chenged successfully",
+                html: "Question changed successfully",
               }).then((result) => {
                 location.reload();
               });
