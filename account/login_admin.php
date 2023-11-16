@@ -68,7 +68,7 @@ include('includes/main.php')
 
                     <div class="col-12">
                       <button id="btn_login" class="btn btn-small btn-dark w-100 mb-2" type="submit">Login</button>
-                      <a href="../index.php" class="btn btn-dark btn-small w-100">Home</a>
+                      <a href="../index.php" class="btn btn-dark btn-small w-100">Back</a>
                     </div>
 
                     <div class="col-12 text-center">
