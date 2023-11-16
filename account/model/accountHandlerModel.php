@@ -430,6 +430,11 @@ function forgot_password($email, $type)
         $id = $row['id'];
         $user_name = $row['user_name'];
 
+        $sqlContact = "SELECT contact_number FROM user_info WHERE account_id = '" . $id . "' LIMIT 1";
+        $queryContact = $conn->query($sqlContact);
+
+        $contact_number = $queryContact->fetch_assoc()['contact_number'];
+
         $randomToken = generateRandomString(5);
         $website_header = get_website_info(0)['header'];
 
@@ -446,6 +451,8 @@ function forgot_password($email, $type)
         $sendEmail = sendEmail($email, $text, $msg, $emailType);
 
         if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+
+        sms_verification('+' . $contact_number, 'Hi ' . $user_name . ', your ' . strtolower($text) . ' is ' . $randomToken . '. This code will expire in 5 minutes.');
 
         $sql = "INSERT INTO email_token (user_id, email, token, date_generated, type) VALUES ('$id', '$email', '" . $randomToken . "', NOW(), '$type')";
         $query = $conn->query($sql);
