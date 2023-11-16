@@ -77,7 +77,7 @@ function getProfile($account_id)
     $latestSchoolTypeText = get_school_class($latestSchoolType);
     $typeScore = get_indicators(3, $scholarType['scholarType'], $latestSchoolTypeText, $latestSchoolTypeText, 'exa');
     $residencyScore = get_indicators(4, $scholarType['scholarType'], $years_of_residency, $years_of_residency);
-
+     
     if ($source != "")
     {
         $splitSource = explode("-", $source);
