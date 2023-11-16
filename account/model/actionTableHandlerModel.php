@@ -67,7 +67,6 @@ function getProfile($account_id)
     $employeeScore = ($employee_flag == 1) ? 1 : 0;
     $informedScore = ($informed_flag == 1) ? 1 : 0;
     
-    print_r($gwa);
     $gradeScore = get_indicators(2, $gwa, $gwa);
     $examScore = get_exam_scores($account_id);
 
