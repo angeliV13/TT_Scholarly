@@ -380,7 +380,7 @@ function getAssessmentBeneTable($dashboard = 0)
 }
 
 
-function uploadFile($target_dir, $file, $file_name, $extension_array = array("pdf"))
+function uploadFile($target_dir, $file, $file_name, $extension_array = array("pdf", "jpg", "png", "jpeg"))
 {
 
     $errors = "";
@@ -812,7 +812,7 @@ function submitApplication($target_dir, $corFile, $gradesFile, $cobFile, $cgmcFi
         if (is_array($brgyclearanceFile)) {
             $type       = $typeArray[$typeCount];
             $file_name  = $ay . "_" . $sem . "_" . $userid . "_" . $type;
-            $value7      = uploadFile($target_dir, $corFile, $file_name);
+            $value7      = uploadFile($target_dir, $brgyclearanceFile, $file_name);
 
             if ($value7 == 'Success') {
                 echo updateRequirement($ay, $sem, $userid, $brgyclearanceFile, $typeCount, 1, 'applicant_file');
