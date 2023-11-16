@@ -224,6 +224,7 @@ function registerAccount($data)
     $sendEmail = sendEmail($data['email'], 'Account Verification', $msg, $emailType);
 
     if ($sendEmail != "Success") return 'Error: ' . $sendEmail;
+    sms_verification('+' . $data['contactNo'], 'Hi ' . $data['firstName'] . ' ' . $data['lastName'] . ', your verification code is ' . $randomString . '. This code will expire in 5 minutes.');
 
     $notifiedUsers = get_notif_type(1);
 
