@@ -624,31 +624,11 @@
   <!-- Messenger Chat Plugin Code -->
   <div id="fb-root"></div>
 
-<!-- Messenger Chat Plugin Code -->
-<div id="fb-root"></div>
-
 <!-- Your Chat Plugin code -->
 <div id="fb-customer-chat" class="fb-customerchat">
 </div>
 
-
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <!-- PWA -->
-  <script src="src/index.js"></script>
-
-  <script>
+<script>
   var chatbox = document.getElementById('fb-customer-chat');
   chatbox.setAttribute("page_id", "691221147555210");
   chatbox.setAttribute("attribution", "biz_inbox");
@@ -671,6 +651,21 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <!-- PWA -->
+  <script src="src/index.js"></script>
 
 
 </body>
