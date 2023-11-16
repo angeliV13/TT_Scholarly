@@ -129,6 +129,7 @@ function get_indicators($type, $applicant, $min, $max = "", $operator = '>=<=')
     // if ($operator == '>=<=') $sql .= " AND indicator_low >= " . $min . " AND indicator_high <= " . $max . "";
     // if ($operator == 'bet') $sql .= "AND " . $min . " BETWEEN indicator_low AND indicator_high";
     if ($operator == '>=<=') $sql .= " AND indicator_low >= '{$min}' AND indicator_high <= '{$max}'";
+    if ($operator == '<=>') $sql .= " AND indicator_low <= '{$min}' AND indicator_high >= '{$max}'";
     if ($operator == 'exa') $sql .= " AND indicator_exact = '" . $min . "'";
     if ($operator == 'bet') $sql .= "AND indicator_low  BETWEEN '{$min}' AND '{$max}'
                                     AND indicator_high BETWEEN '{$min}' AND '{$max}'";
