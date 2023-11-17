@@ -1315,9 +1315,9 @@ function getProfile($account_id)
     if($accountType == "3"){
         echo getRequirements($id, $account_id, $entries);
     }else if($accountType == "2"){
-        if($scholarType['scholarType'] == "1"){
+        if($scholarType['status'] == "1"){
             echo getRequirementsAssessment($id, $account_id, $entries_assessment);
-        }else if($scholarType['scholarType'] == "2"){
+        }else if($scholarType['status'] == "2"){
             echo getRequirementsRenewal($id, $account_id, $entries_renewal);
         }
     }

@@ -217,7 +217,7 @@
 
                   <?php if ($assessmentAccess != null) : ?>
 
-                      <?php if ($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow) : ?>
+                      <?php if (($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)  && $status['status'] == 1) : ?>
                           <!-- Start Assessment Requirements Nav -->
                           <li class="nav-item">
                               <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
@@ -231,7 +231,7 @@
 
                   <?php if ($renewalAccess != null) : ?>
 
-                      <?php if ($renewalAccess[$access] == 1 && $renewalAccess[0] <= $dateNow && $renewalAccess[1] >= $dateNow) : ?>
+                      <?php if (($renewalAccess[$access] == 1 && $renewalAccess[0] <= $dateNow && $renewalAccess[1] >= $dateNow) && $status['status'] == 2) : ?>
 
                           <li class="nav-item">
                               <a class="nav-link collapsed" href="index.php?nav=renewal-bene">
