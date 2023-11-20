@@ -706,7 +706,19 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             WHERE sa.ay_id = '$acadYear' AND sa.sem_id = '$defaultYear'";
 
     $sql .= ($acc_type == "") ? " AND acc.account_type = '3'" : " AND acc.account_type = '$acc_type'";
-    $sql .= ($acc_status == "") ? " AND acc.account_status = '1'" : " AND acc.account_status = '$acc_status'";
+
+    if ($acc_status == "")
+    {
+        $sql .= " AND acc.account_status = '1'";
+    }
+    else if ($account_status == 4)
+    {
+        $sql .= " AND (acc.account_status = '4' OR sa.status = '5')";
+    }
+    else
+    {
+        $sql .= " AND acc.account_status = '$acc_status'";
+    }
 
     $query = $conn->query($sql);
 
