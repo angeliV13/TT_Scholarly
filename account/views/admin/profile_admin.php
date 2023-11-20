@@ -14,8 +14,7 @@
           <div class="card">
             <input type="hidden" id="userId" value="<?= $_SESSION['id'] ?>">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <div class="profile-pic ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 170px">
-
+              <div class="profile-pic d-flex flex-column">
                 <label class="-label" for="file">
                   <span class="glyphicon glyphicon-camera"></span>
                   <span>Change Image</span>
