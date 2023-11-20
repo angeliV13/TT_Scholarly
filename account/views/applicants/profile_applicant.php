@@ -328,6 +328,7 @@
                   <div class="col-md-6 col-sm-12 position-relative">
                     <label for="graduation_year" class="form-label">If not Graduating, what year are you Graduating?</label>
                     <?php if ($gen_info != null) : ?>
+                      Hello
                       <select class="form-select" name="Year of Graduation" id="graduation_year" <?= $finishFlag ? "disabled" : "" ?>>
                         <option selected disabled value="">Choose...</option>
                         <?php for ($i = date("Y"); $i <= date("Y") + 5; $i++) : ?>
