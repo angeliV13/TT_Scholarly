@@ -1459,7 +1459,7 @@ function check_status($id)
     do
     {
         $count = 0;
-        $sql = "SELECT * FROM scholarship_application WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "'";
+        $sql = "SELECT * FROM scholarship_application WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "' ORDER BY id DESC LIMIT 1";
         $query = $conn->query($sql);
         
         if ($query->num_rows > 0) 
