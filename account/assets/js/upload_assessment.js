@@ -235,7 +235,7 @@ $("#submitAssessment").submit(function (e) {
   form_data.append('corFile', corFile);
   form_data.append('gradeFile', gradeFile);
 
-  if(schoolIdFile === undefined || clearanceFile === undefined || corFile === undefined || gradesFile === undefined) {
+  if(schoolIdFile === undefined || clearanceFile === undefined || corFile === undefined || gradeFile === undefined) {
     Swal.fire({
       title: "Error!",
       icon: "error",

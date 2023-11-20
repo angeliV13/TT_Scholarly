@@ -217,7 +217,7 @@
 
                   <?php if ($assessmentAccess != null) : ?>
 
-                      <?php if (($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)  && $status['status'] == 1) : ?>
+                      <?php if (($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)  && $status['add_flag'] == 1) : ?>
                           <!-- Start Assessment Requirements Nav -->
                           <li class="nav-item">
                               <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
