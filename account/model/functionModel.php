@@ -1031,7 +1031,7 @@ function show_notification($view = 0, $limit = 0)
 
         foreach ($data as $key => $value) 
         {
-            $body .= '<a href="' . $value['notif_link'] . '">';
+            $body .= '<a href="' . $value['notif_link'] . '" class="w-100">';
             $body .= '<li class="notification-item">';
             $body .= '<i class="' . $value['notif_icon'] . '"></i>';
             $body .= '<div>';
