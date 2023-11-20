@@ -1103,7 +1103,7 @@ function changePFP($data)
             return 'Invalid File Type';
         }
 
-        if ($uploadImg['success'] == false) 
+        if (!isset($uploadImg['success']) OR $uploadImg['success'] == false)
         {
             return 'Error: ' . $uploadImg['error'];
         }
