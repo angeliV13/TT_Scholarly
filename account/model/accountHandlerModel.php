@@ -1092,7 +1092,7 @@ function changePFP($data)
 
     if ($fbImg != null) 
     {
-        if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
+        if ($oldImg != "") if (file_exists('../' . $oldImg)) unlink('../' . $oldImg);
 
         $uploadImg = upload_file($fbImg, 'assets/img/uploads/fbProfile/', '../assets/img/uploads/fbProfile/', $options = [
             'type' => ['jpg', 'jpeg', 'png'],
