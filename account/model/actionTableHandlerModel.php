@@ -1776,7 +1776,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewschoolid' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                            ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            ' . (isset($file[0]['file']) ? 'src="uploads/assessment/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1808,7 +1808,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewclearance' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                                ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
+                                                                ' . (isset($file[1]['file']) ? 'src="uploads/assessment/' . $file[1]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1839,7 +1839,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                               ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                               ' . (isset($file[0]['file']) ? 'src="uploads/assessment/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1871,7 +1871,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                                ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
+                                                                ' . (isset($file[1]['file']) ? 'src="uploads/assessment/' . $file[1]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1959,7 +1959,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                            ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            ' . (isset($file[0]['file']) ? 'src="uploads/renewal/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1991,7 +1991,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                               ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                               ' . (isset($file[0]['file']) ? 'src="uploads/renewal/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
