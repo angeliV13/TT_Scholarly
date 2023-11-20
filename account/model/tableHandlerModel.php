@@ -711,7 +711,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
     {
         $sql .= " AND acc.account_status = '1'";
     }
-    else if ($account_status == 4)
+    else if ($acc_status == 4)
     {
         $sql .= " AND (acc.account_status = '4' OR sa.status = '5')";
     }
