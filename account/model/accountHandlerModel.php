@@ -1348,7 +1348,21 @@ function deleteUserRequest($data)
     ];
 
     $adEmail = check_exist_multiple($adminEmail, 1);
-    if (!is_array($adEmail)) return 'Error 1: ' . $adEmail;
+    if (!is_array($adEmail))
+    {
+        $adminEmail = [
+            'table' => 'account',
+            'return' => 'email',
+            'column' => [
+                'account_type' => ['=', 1],
+            ]
+        ];
+
+        $adEmail = check_exist_multiple($adminEmail, 1);
+
+        if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    }
+
     $website_header = get_website_info(0)['header'];
 
     $table = '<table style="width: 100%; border-collapse: collapse;">
