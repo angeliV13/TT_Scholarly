@@ -1622,7 +1622,7 @@ function upload_file($file, $mainPath, $viewPath, $options = ['type' => [], 'que
         } 
         else 
         {
-            return "Invalid File Type! Only " . implode(", ", $options['type']) . " are allowed.";
+            return "Invalid File Type";
         }
     }
 }
