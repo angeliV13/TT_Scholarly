@@ -493,6 +493,7 @@
                     <?php else : ?>
                       <div class="row g-3">
                         <!-- College -->
+                        <h5 class="card-title p-2">College Level</h5>
                         <div class="col-md-6 position-relative">
                           <label for="c_school" class="form-label">Name of School Attended</label>
                           <select class="form-select" id="c_school" name="College Name">
@@ -711,6 +712,7 @@
                     <?php else : ?>
                       <div class="row g-3">
                         <!-- SENIOR HIGHSCHOOL -->
+                        <h5 class="card-title p-2">Senior High School Level</h5>
                         <div class="col-md-6 position-relative">
                           <label for="s_school" class="form-label">Name of School Attended</label>
                           <select class="form-select" id="s_school" name="Senior High School Name">
@@ -909,6 +911,7 @@
                     <?php else : ?>
                       <div class="row g-4">
                         <!-- HIGHSCHOOL AWARD TABLE 2 -->
+                        <h5 class="card-title p-2">Junior High School Level</h5>
                         <div class="col-md-3 position-relative">
                           <label for="j_school" class="form-label">Name of School Attended</label>
                           <select class="form-select" id="j_school" name="JHS Name">
@@ -1089,6 +1092,7 @@
                     <?php else : ?>
                       <div class="row g-4">
                         <!-- ELEMENTARY -->
+                        <h5 class="card-title p-2">Elementary School Level</h5>
                         <div class="col-md-3 position-relative">
                           <label for="e_school" class="form-label">Name of School Attended</label>
                           <select class="form-select" id="e_school" name="Elementary Name">
