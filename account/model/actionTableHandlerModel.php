@@ -1776,7 +1776,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewschoolid' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                            ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            ' . (isset($file[0]['file']) ? 'src="uploads/assessment/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1808,14 +1808,14 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewclearance' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                                ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
+                                                                ' . (isset($file[1]['file']) ? 'src="uploads/assessment/' . $file[1]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- CERT OF REGISTRATION -->
-                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
+                                            <div class="tab-pane fade active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6 class="card-title">Certificate of Registration</h6>
                                                     <div class="d-flex align-items-center d-grid gap-3">
@@ -1839,7 +1839,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                               ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                               ' . (isset($file[0]['file']) ? 'src="uploads/assessment/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1871,7 +1871,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                                ' . (isset($file[1]['file']) ? 'src="uploads/application/' . $file[1]['file'] . '.pdf"' : '') . '>
+                                                                ' . (isset($file[1]['file']) ? 'src="uploads/assessment/' . $file[1]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1959,7 +1959,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                            ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                            ' . (isset($file[0]['file']) ? 'src="uploads/renewal/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1967,7 +1967,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                             </div>
 
                                             <!-- CERT OF REGISTRATION -->
-                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
+                                            <div class="tab-pane fade active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6 class="card-title">Certificate of Registration</h6>
                                                     <div class="d-flex align-items-center d-grid gap-3">
@@ -1991,7 +1991,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                         <div class="card" style="height:100%">
                                                             <div class="card-body">
                                                                 <embed id="viewcor' . $account_id . '" frameborder="0" width="100%" height="400px"
-                                                               ' . (isset($file[0]['file']) ? 'src="uploads/application/' . $file[0]['file'] . '.pdf"' : '') . '>
+                                                               ' . (isset($file[0]['file']) ? 'src="uploads/renewal/' . $file[0]['file'] . '.pdf"' : '') . '>
                                                             </div>
                                                         </div>
                                                     </div>
