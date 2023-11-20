@@ -922,9 +922,9 @@ function updateFamily($data, $type, $userId)
             $birth_order = $fam['birthOrder'];
             $age = $fam['age'];
             $occupation = $fam['occupation'];
-            $firstName = ($nameArr[1] == "") ? "" : $nameArr[1]; 
-            $middleName = ($nameArr[2] == "") ? "" : $nameArr[2];
-            $lastName = ($nameArr[0] == "") ? "" : $nameArr[0];
+            $firstName = (isset($nameArr[1])) ? $nameArr[1] : ""; 
+            $middleName = (isset($nameArr[2])) ? $nameArr[2] : "";
+            $lastName = (isset($nameArr[0])) ? $nameArr[0] : "";
 
             $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
             // $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id]]]);
