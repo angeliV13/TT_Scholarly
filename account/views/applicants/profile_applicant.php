@@ -1271,7 +1271,7 @@
                         <div class="card-body">
                           <div class="table-responsive">
                             <div class="d-flex justify-content-between align-items-center">
-                              <h5 class="card-title">List of Awards</h5>
+                              <h5 class="card-title">List of Siblings</h5>
                               <button class="btn btn-warning" type="button" id="addSibling" <?= $finishFlag ? "disabled" : "" ?>>Add Siblings</button>
                             </div>
                             <!-- Table with stripped rows -->
