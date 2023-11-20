@@ -477,7 +477,8 @@ function submitAssessment($target_dir, $schoolIdFile, $clearanceFile, $corFile, 
     } else {
         echo updateRequirement($ay, $sem, $userid, 'Not Applicable', 1, 4, 'assessment_file');
     }
-    return 'Success';
+
+    return (update_applicant_status($userid, 2) == true ? 'Success' : 'Error');
 }
 
 function updateRequirement($ay, $sem, $userid, $file, $requirement, $status, $target)
