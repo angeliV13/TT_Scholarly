@@ -191,3 +191,37 @@ $("#editProfile").on("click", function(e){
         })
     }
 })
+
+var loadFile = function (event) {
+    var userId = document.getElementById("userId").value;
+    var image = document.getElementById("output");
+    image.src = URL.createObjectURL(event.target.files[0]);
+
+    let formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    formData.append("userId", userId);
+    formData.append("action", 17);
+
+    $.ajax({
+        url: "controller/accountHandler.php",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data == "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success!",
+                    text: `Profile Picture Successfully Updated!`,
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Something went wrong! Error: ${data}`,
+                })
+            }
+        },
+    });
+};
