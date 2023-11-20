@@ -1672,6 +1672,8 @@ function check_exist_multiple($data, $type = 0) // 0 - Num Rows, 1 - Data
         $sql = substr($sql, 0, -4);
     }
 
+    return $sql;
+
     $query = $conn->query($sql);
 
     if ($type == 0) 

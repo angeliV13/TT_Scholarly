@@ -1348,7 +1348,6 @@ function deleteUserRequest($data)
     ];
 
     $adEmail = check_exist_multiple($adminEmail, 1);
-    return $adEmail;
     if (!is_array($adEmail)) return 'Error 1: ' . $adEmail;
     $website_header = get_website_info(0)['header'];
 
