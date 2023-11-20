@@ -1815,7 +1815,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                 </div>
                                             </div>
                                             <!-- CERT OF REGISTRATION -->
-                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
+                                            <div class="tab-pane fade active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6 class="card-title">Certificate of Registration</h6>
                                                     <div class="d-flex align-items-center d-grid gap-3">
@@ -1967,7 +1967,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                             </div>
 
                                             <!-- CERT OF REGISTRATION -->
-                                            <div class="tab-pane fade show active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
+                                            <div class="tab-pane fade active pt-3" id="v-pills-cor' . $id . '" role="tabpanel" aria-labelledby="v-pills-cor-tab' . $id . '" style="height: 00%; width: 100%">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6 class="card-title">Certificate of Registration</h6>
                                                     <div class="d-flex align-items-center d-grid gap-3">
