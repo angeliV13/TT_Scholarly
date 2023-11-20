@@ -706,7 +706,19 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             WHERE sa.ay_id = '$acadYear' AND sa.sem_id = '$defaultYear'";
 
     $sql .= ($acc_type == "") ? " AND acc.account_type = '3'" : " AND acc.account_type = '$acc_type'";
-    $sql .= ($acc_status == "") ? " AND acc.account_status = '1'" : " AND acc.account_status = '$acc_status'";
+
+    if ($acc_status == "")
+    {
+        $sql .= " AND acc.account_status = '1'";
+    }
+    else if ($acc_status == 4)
+    {
+        $sql .= " AND (acc.account_status = '4' OR sa.status = '5')";
+    }
+    else
+    {
+        $sql .= " AND acc.account_status = '$acc_status'";
+    }
 
     $query = $conn->query($sql);
 
@@ -719,6 +731,19 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
         while ($row = $query->fetch_assoc()) 
         {
             extract($row);
+            
+            if ($account_status == 4)
+            {
+                $text = "Deleted";
+            }
+            else if ($status == 5)
+            {
+                $text = "Rejected";
+            }
+            else
+            {
+                $text = "Active";
+            }
 
             $education  = get_user_education($account_id, 1);
             $scholarType = check_status($account_id);
@@ -784,6 +809,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
                 $interview_start_date,
                 $interview_end_date,
                 $reason_of_admin,
+                $text,
                 $button, // Buttons
             ];
 
