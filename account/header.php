@@ -38,7 +38,23 @@
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="<?= $_SESSION['account_type'] < 2 ? "?nav=admin-profile" : "?nav=profile_applicant" ?>">
+          <?php 
+          $profileLink = "";
+          if ($_SESSION['account_type'] < 2)
+          {
+            $profileLink = "?nav=admin-profile";
+          }
+          else if ($_SESSION['account_type'] == 2)
+          {
+            $profileLink = "?nav=profile_bene";
+          }
+          else if ($_SESSION['account_type'] == 3)
+          {
+            $profileLink = "?nav=profile_applicant";
+          }
+          
+          ?>
+          <a class="dropdown-item d-flex align-items-center" href="<?= $profileLink ?>">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
           </a>
