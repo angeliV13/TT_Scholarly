@@ -252,7 +252,7 @@
                       <?php if (($applicationAccess[$access] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) && $status['status'] == 2) : ?>
                           <!--  -->
                           <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "") ?>">
-                              <a class="nav-link collapsed" id="reqBtn" href="<?= (($status['add_flag'] == 0) ? "index.phps" : "index.php?nav=apply-applicant") ?>">
+                              <a class="nav-link collapsed" id="reqBtn" href="<?= (($status['add_flag'] == 0) ? "index.php" : "index.php?nav=apply-applicant") ?>">
                                   <i class="bi bi-files"></i>
                                   <span>General Requirements</span>
                               </a>
