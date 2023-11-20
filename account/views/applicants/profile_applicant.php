@@ -519,13 +519,13 @@
                             <option selected disabled value="">Choose...</option>
                             <?php for ($i = 5; $i >= 1; $i--) : ?>
                               <?php if ($i == 1) : ?>
-                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>st Year</option>
+                                <option value="<?php echo $i ?>" ><?php echo $i ?>st Year</option>
                               <?php elseif ($i == 2) : ?>
-                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>nd Year</option>
+                                <option value="<?php echo $i ?>" ><?php echo $i ?>nd Year</option>
                               <?php elseif ($i == 3) : ?>
-                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>rd Year</option>
+                                <option value="<?php echo $i ?>" ><?php echo $i ?>rd Year</option>
                               <?php else : ?>
-                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>th Year</option>
+                                <option value="<?php echo $i ?>" ><?php echo $i ?>th Year</option>
                               <?php endif; ?>
                             <?php endfor; ?>
                           </select>
@@ -538,7 +538,7 @@
                           <select class="form-select" id="c_course" name="College Course" <?= $finishFlag ? "disabled" : "" ?>>
                             <option selected disabled value="">Choose...</option>
                             <?php foreach ($course as $key => $cr) : ?>
-                              <option value="<?php echo $key ?>" <?php echo $education[0]['course'] == $key ? "selected" : "" ?>><?php echo $cr ?></option>
+                              <option value="<?php echo $key ?>"><?php echo $cr ?></option>
                             <?php endforeach; ?>
                           </select>
                           <div class="invalid-tooltip">
