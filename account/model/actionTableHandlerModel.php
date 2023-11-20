@@ -82,12 +82,12 @@ function getProfile($account_id)
 
     if ($source != "")
     {
+        $maxSource = $minSource = 0;
         $splitSource = explode("-", $source);
         $minSource = str_replace(' ', '', $splitSource[0]);
-        $maxSource = str_replace(' ', '', $splitSource[1]);
-        // remove the comma
+        if (isset($splitSource[1])) $maxSource = str_replace(' ', '', $splitSource[1]);
         $minSource = str_replace(',', '', $minSource);
-        $maxSource = str_replace(',', '', $maxSource);
+        if (isset($splitSource[1])) $maxSource = str_replace(',', '', $maxSource);
         $sourceScore = get_indicators(1, $scholarType['scholarType'], $minSource, $maxSource, 'bet');
     }
 
