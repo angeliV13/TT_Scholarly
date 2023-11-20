@@ -495,7 +495,7 @@
                   <?php endif; ?>
 
                   <!-- SENIOR HIGHSCHOOL -->
-                  <?php if ($_SESSION['scholarType'] == "3") : ?>
+                  <?php if ($_SESSION['scholarType'] <= 3) : ?>
                     <?php if (isset($education[1])) : ?>
                       <div class="row g-3">
                         <!-- SENIOR HIGHSCHOOL -->
