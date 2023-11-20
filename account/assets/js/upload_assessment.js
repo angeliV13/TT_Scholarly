@@ -256,7 +256,9 @@ $("#submitAssessment").submit(function (e) {
           processData: false,
           contentType: false,
           data: form_data,
-
+          beforeSend: function(){
+            showBeforeSend("Uploading Requirements...");
+          },
           success: function (data) {
             if (data == "Success") {
               let timerInterval;
@@ -375,7 +377,9 @@ $("#submitApplicationFile").submit(function (e) {
           processData: false,
           contentType: false,
           data: form_data,
-
+          beforeSend: function(){
+            showBeforeSend("Uploading Requirements...");
+          },
           success: function (data) {
             if (data == "Success") {
               let timerInterval;
@@ -452,7 +456,9 @@ $("#submitRenewal").submit(function (e) {
           processData: false,
           contentType: false,
           data: form_data,
-
+          beforeSend: function(){
+            showBeforeSend("Uploading Requirements...");
+          },
           success: function (data) {
             if (data == "Success") {
               let timerInterval;
