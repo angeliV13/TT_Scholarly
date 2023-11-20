@@ -871,7 +871,7 @@ $("#educationBG").on("submit", function(e){
         'userId': userId
     }
 
-    // console.log(data);
+    console.log(data);
 
     $.ajax({
         url: "controller/accountHandler.php",
