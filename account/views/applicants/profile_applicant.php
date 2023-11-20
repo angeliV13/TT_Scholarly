@@ -492,6 +492,106 @@
                         </div>
                       </div>
                     <?php else : ?>
+                      <div class="row g-3">
+                        <!-- College -->
+                        <div class="col-md-6 position-relative">
+                          <label for="c_school" class="form-label">Name of School Attended</label>
+                          <select class="form-select" id="c_school" name="College Name">
+                            <option selected disabled value="">Choose...</option>
+                            <?php foreach ($school as $key => $col) : ?>
+                              <?php if ($col['school_type'] == 0) : ?>
+                                <option value="<?php echo $key ?>"><?php echo $col['school_name'] ?></option>
+                              <?php endif; ?>
+                            <?php endforeach; ?>
+                            <option value="Others">Others</option>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select School.
+                          </div>
+                        </div>
+                        <div class="col-md-6 position-relative">
+                          <label for="c_otherSchool" class="form-label">If not specified in the list, kindly input the School Name.</label>
+                          <input type="Others" name="Other College Name" class="form-control" id="c_otherSchool" aria-describedby="c_otherSchool">
+                        </div>
+                        <div class="col-md-2 position-relative">
+                          <label for="c_year_level" class="form-label">Year Level</label>
+                          <select class="form-select" id="c_year_level" name="College Year Level">
+                            <option selected disabled value="">Choose...</option>
+                            <?php for ($i = 5; $i >= 1; $i--) : ?>
+                              <?php if ($i == 1) : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>st Year</option>
+                              <?php elseif ($i == 2) : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>nd Year</option>
+                              <?php elseif ($i == 3) : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>rd Year</option>
+                              <?php else : ?>
+                                <option value="<?php echo $i ?>" <?php echo $education[0]['year_level'] == $i ? "selected" : "" ?>><?php echo $i ?>th Year</option>
+                              <?php endif; ?>
+                            <?php endfor; ?>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select Year Level.
+                          </div>
+                        </div>
+                        <div class="col-md-3 position-relative">
+                        <label for="c_course" class="form-label">Course Taken</label>
+                          <select class="form-select" id="c_course" name="College Course" <?= $finishFlag ? "disabled" : "" ?>>
+                            <option selected disabled value="">Choose...</option>
+                            <?php foreach ($course as $key => $cr) : ?>
+                              <option value="<?php echo $key ?>" <?php echo $education[0]['course'] == $key ? "selected" : "" ?>><?php echo $cr ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                          <div class="invalid-tooltip">
+                            Please select Course.
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 position-relative">
+                          <label for="c_otherCourse" class="form-label">If others, kindly input the Course.</label>
+                          <input type="text" name="Other College Course" class="form-control" id="c_otherCourse" aria-describedby="c_otherCourse" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                        <div class="col-md-6 col-sm-12 position-relative">
+                          <label for="c_major" class="form-label">Major</label>
+                          <input type="text" name="College Major" class="form-control" id="c_major" aria-describedby="c_major" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                        <div class="col-md-6 col-sm-12 position-relative">
+                          <label for="c_school_address" class="form-label">School Address</label>
+                          <input type="text" name="College Adddress" class="form-control" id="c_school_address" aria-describedby="c_school_address" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                        <div class="col-md-6 col-sm-12 position-relative">
+                          <label for="cgwa" class="form-label">GWA</label>
+                          <input type="number" name="GWA" id="cgwa" min="50" step="any" class="form-control col" <?= $finishFlag ? "disabled" : "" ?>>
+                        </div>
+                        <!-- College -->
+                        <div class="column">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <h5 class="card-title">List of Awards</h5>
+                                  <button class="btn btn-small btn-warning" type="button" id="addCollegeTable" <?= $finishFlag ? "disabled" : "" ?>>Add Awards/Honor</button>
+                                </div>
+                                <!-- Table with stripped rows -->
+                                <table class="table datatable table-striped header-fixed" id="collegeTable" width="100%" cellspacing="0">
+                                  <thead>
+                                    <tr class="text-center">
+                                      <th>No</th>
+                                      <th>Award ID</th>
+                                      <th>Honor/Award</th>
+                                      <th>Academic Year</th>
+                                      <th>Semester/Quarter</th>
+                                      <th>Year Level</th>
+                                      <th>Actions</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     <?php endif; ?>
                   <?php endif; ?>
 
