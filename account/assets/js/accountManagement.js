@@ -599,7 +599,7 @@ $("#educationBG").on("submit", function(e){
                 other_honor = check_error(document.getElementById("other_honor")); if (other_honor == undefined) return;
             }
         }
-    } else if (graduating_flag) {
+    } else if (graduating_flag == 1) {
         graduation_year = check_error(document.getElementById("graduation_year")); if (graduation_year == undefined) return;
     }
 
