@@ -733,6 +733,19 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
         while ($row = $query->fetch_assoc()) 
         {
             extract($row);
+            
+            if ($account_status == 4)
+            {
+                $text = "Deleted";
+            }
+            else if ($status == 5)
+            {
+                $text = "Rejected";
+            }
+            else
+            {
+                $text = "Active";
+            }
 
             $education  = get_user_education($account_id, 1);
             $scholarType = check_status($account_id);
@@ -798,6 +811,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
                 $interview_start_date,
                 $interview_end_date,
                 $reason_of_admin,
+                $text,
                 $button, // Buttons
             ];
 

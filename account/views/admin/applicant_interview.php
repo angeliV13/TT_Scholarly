@@ -47,6 +47,7 @@
                                     <th>Interview Start Date</th>
                                     <th>Interview End Date</th>
                                     <th>Remarks</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
