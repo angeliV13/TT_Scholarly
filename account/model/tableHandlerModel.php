@@ -720,8 +720,6 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
         $sql .= " AND acc.account_status = '$acc_status'";
     }
 
-    return $sql;
-
     $query = $conn->query($sql);
 
     $data = [];
