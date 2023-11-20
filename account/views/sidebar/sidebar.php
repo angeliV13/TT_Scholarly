@@ -249,7 +249,7 @@
                     $access = 1 + $scholarType; 
                   ?>
                   <?php if ($applicationAccess != null) : ?>
-                      <?php if (($applicationAccess[$access] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) && $status['status'] == 2) : ?>
+                      <?php if (($applicationAccess[$access] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) && $status['add_flag'] == 1) : ?>
                           <!--  -->
                           <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "") ?>">
                               <a class="nav-link collapsed" id="reqBtn" href="<?= (($status['add_flag'] == 0) ? "index.php" : "index.php?nav=apply-applicant") ?>">
