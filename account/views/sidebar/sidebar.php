@@ -248,7 +248,7 @@
                   <?php 
                     $access = 1 + $scholarType; 
                   ?>
-                  <?php if ($applicationAccess != null) : ?>
+                  <?php if (isset($applicationAccess)) : ?>
                       <?php if (($applicationAccess[$access] == 1 && $applicationAccess[0] <= $dateNow && $applicationAccess[1] >= $dateNow) && $status['add_flag'] == 1) : ?>
                           <!--  -->
                           <li class="nav-item" id="reqLi" data-status="<?= (($status['add_flag'] == 0) ? "disabled" : "") ?>">
@@ -269,7 +269,7 @@
                       </li><!-- End Dashboard Nav -->
                   <?php endif; ?>
 
-                  <?php if ($examAccess != null) : ?>
+                  <?php if (isset($applicationAccess)) : ?>
                     <?php $access = 2;
                         $access = $access + $scholarType;?>
                       <?php if (($examAccess[$access] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow ) && $status['status'] == 2) : ?>
