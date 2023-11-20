@@ -692,7 +692,7 @@ function updateGenInfo($data, $type = 0, $userId = "")
     {
         $exists = check_exist_multiple(['table' => 'gen_info', 'column' => ['user_id' => ['=', $userId], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
         $graduating_flag = ($data['graduating_flag'] == '0') ? 0 : 1;
-        $graduation_year = ($data['graduating_flag'] == '1') ? "" : $data['graduation_year'];
+        $graduation_year = ($data['graduating_flag'] == '0') ? "" : $data['graduation_year'];
         $honor_flag = ($data['honor_flag'] == '0') ? 0 : 1;
         $honor_type = ($data['honor_type'] == '') ? 4 : $data['honor_type'];
         $other_honor = ($data['other_honor'] == '') ? "" : $data['other_honor'];
