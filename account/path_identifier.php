@@ -234,6 +234,7 @@ function get_path($lv_path, $type = '99')
                                 return 'views/applicants/dashboard.php';
 
                         case 'assessment-bene':
+                        case 'apply-applicant':
                                 return 'views/beneficiaries/assessment_bene.php';
 
 
