@@ -891,12 +891,12 @@ function updateFamilyInfo($data)
 
     $father = $mother = $spouse = $siblings = $guardian = 'success';
 
-    if ($data['fatherArr'] != null) $father = updateFamily($data['fatherArr'], 0, $data['userId']);
-    if ($father != 'success') return 'Update Family Father Error: ' . $father;
-    if ($data['motherArr'] != null) $mother = updateFamily($data['motherArr'], 1, $data['userId']);
-    if ($mother != 'success') return 'Update Family Mother Error: ' . $mother;
-    if ($data['spouseArr']['firstName'] != '') $spouse = updateFamily($data['spouseArr'], 2, $data['userId']);
-    if ($spouse != 'success') return 'Update Family Spouse Error: ' . $spouse;
+    // if ($data['fatherArr'] != null) $father = updateFamily($data['fatherArr'], 0, $data['userId']);
+    // if ($father != 'success') return 'Update Family Father Error: ' . $father;
+    // if ($data['motherArr'] != null) $mother = updateFamily($data['motherArr'], 1, $data['userId']);
+    // if ($mother != 'success') return 'Update Family Mother Error: ' . $mother;
+    // if ($data['spouseArr']['firstName'] != '') $spouse = updateFamily($data['spouseArr'], 2, $data['userId']);
+    // if ($spouse != 'success') return 'Update Family Spouse Error: ' . $spouse;
     if ($data['siblings'] != null) $siblings = updateFamily($data['siblings'], 3, $data['userId']);
     if ($siblings != 'success') return 'Update Family Sibling Error: ' . $siblings;
     if ($data['guardianArr']['firstName'] != '') $guardian = updateFamily($data['guardianArr'], 4, $data['userId']);
@@ -929,6 +929,7 @@ function updateFamily($data, $type, $userId)
             $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id], 'ay_id' => ['=', $acadYear], 'sem_id' => ['=', $defaultYear]]]);
             // $exists = check_exist_multiple(['table' => 'user_family', 'column' => ['user_id' => ['=', $userId], 'id' => ['=', $id]]]);
 
+            return $exists;
             if ($exists > 0) 
             {
                 $sql = "UPDATE user_family SET firstName = '$firstName', middleName = '$middleName', lastName = '$lastName', age = '$age', occupation = '$occupation',
