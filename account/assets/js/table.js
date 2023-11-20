@@ -2030,18 +2030,14 @@ $(document).on("click", ".viewInfoClass", function () {
                 $("#approveRadio").removeClass("d-none");
             }
 
-            if (currentStatus == "For Assessment Exam")
-            {
-                currentStatus = "For Assessment";
-            }
-
             $("#changeRadio").html(accountText);
             $("#changeRadio1").html(qualificationText);
             $("#decisionRadio1").html(qualificationText);
             $("#currentStatus").html(currentStatus);
 
-            if (currentStatus == "For Assesment")
+            if (currentStatus == "For Assesment Exam")
             {
+                $("#currentStatus").html("For Assessment");
                 $("#decisionRadio1").prop("disabled", true);
             }
             else if (currentStatus == "For Interview" || currentStatus == "For Renewal")
