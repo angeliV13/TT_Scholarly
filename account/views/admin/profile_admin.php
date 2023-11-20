@@ -14,12 +14,15 @@
           <div class="card">
             <input type="hidden" id="userId" value="<?= $_SESSION['id'] ?>">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <label class="-label" for="file">
-                <span class="glyphicon glyphicon-camera"></span>
-                <span>Change Image</span>
-              </label>
-              <input id="file" type="file" onchange="loadFile(event)" />
-              <img id="output" src="<?= $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Profile" class="rounded-pill">
+              <div class="profile-pic ms-4 mt-5 d-flex flex-column" style="width: 150px; height: 170px">
+
+                <label class="-label" for="file">
+                  <span class="glyphicon glyphicon-camera"></span>
+                  <span>Change Image</span>
+                </label>
+                <input id="file" type="file" onchange="loadFile(event)" />
+                <img id="output" src="<?= $user_info['fbImage'] == null ? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" : $user_info['fbImage'] ?>" alt="Profile" class="rounded-pill">
+              </div>
               <h2><?= $user_info['first_name'] . " " . $user_info['last_name'] ?></h2>
               <h3><?= $accType ?></h3>
             </div>
