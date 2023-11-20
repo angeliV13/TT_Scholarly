@@ -363,7 +363,6 @@
                   <input type="hidden" id="elemId" value="<?= (!isset($education[3]['educ_id'])) ? "" : $education[3]['educ_id'] ?>">
 
                   <!-- COLLEGE LEVEL -->
-                  <?php print_r($education)?>
                   <?php if ($_SESSION['scholarType'] == "1" || $_SESSION['scholarType'] == "2") : ?>
                     <!-- Custom Styled Validation with Tooltips -->
                     <?php if (isset($education[0])) : ?>
