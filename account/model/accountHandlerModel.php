@@ -1348,7 +1348,7 @@ function deleteUserRequest($data)
     ];
 
     $adEmail = check_exist_multiple($adminEmail, 1);
-    if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    if (!is_array($adEmail)) return 'Error 1: ' . $adEmail;
     $website_header = get_website_info(0)['header'];
 
     $table = '<table style="width: 100%; border-collapse: collapse;">
@@ -1391,7 +1391,7 @@ function deleteUserRequest($data)
 
     $lastId = $conn->insert_id;
 
-    if (!$query) return 'Error: ' . $conn->error;
+    if (!$query) return 'Error 2: ' . $conn->error;
 
     $notifData = [
         'user_id'       => get_user_id_notification([0], $except),
@@ -1401,7 +1401,7 @@ function deleteUserRequest($data)
     ];
 
     $notif = insert_notification($notifData);
-    if ($notif !== 'success') return 'Error: ' . $notif;
+    if ($notif !== 'success') return 'Error 3: ' . $notif;
 
     return 'success';
 }
