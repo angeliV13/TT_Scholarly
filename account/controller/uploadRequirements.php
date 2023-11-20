@@ -57,7 +57,7 @@ if(isset($_REQUEST['action'])){
             $schoolIdFile    = isset($_FILES['schoolIdFile'])   ? $_FILES['schoolIdFile']   : $_POST['schoolIdFile'];
             $corFile         = isset($_FILES['corFile'])        ? $_FILES['corFile']        : $_POST['corFile'];
 
-            $target_dir .= "/assessment/";
+            $target_dir .= "/renewal/";
             // print_r(submitAssessment($target_dir, $schoolIdCheck, $clearanceCheck, $corCheck, $gradeCheck, $schoolIdFile, $clearanceFile, $corFile, $gradeFile));
             echo submitRenewal($target_dir, $schoolIdFile, $corFile);
 
