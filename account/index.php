@@ -28,7 +28,7 @@ $school = get_school();
 
 if (isset($_GET['notif'])) 
 {
-    echo update_notification($_GET['notif'], $_SESSION['id']);
+    echo update_notification($_GET['notif'], $_SESSION['id'], 1);
 }
 
 // echo sms_verification('+639205396542', 'Sample Message Test');

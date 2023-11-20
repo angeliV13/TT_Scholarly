@@ -1112,7 +1112,7 @@ function insert_notification($data)
 }
 
 
-function update_notification($notificationId, $id = 'NA')
+function update_notification($notificationId, $id = 'NA', $type = 0)
 {
     include("dbconnection.php");
 
@@ -1125,7 +1125,7 @@ function update_notification($notificationId, $id = 'NA')
 
     $query = $conn->query($sql) or die("Error LC001: " . mysqli_error($conn));
 
-    return ($query) ? 'success' : $conn->error;
+    if ($type == 0) return ($query) ? 'success' : $conn->error;
 }
 
 function get_notif_func($id = 0, $all = false, $queries = "")
