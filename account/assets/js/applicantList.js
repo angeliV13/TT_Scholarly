@@ -98,3 +98,60 @@ function infoRadio() {
   //     }
   //   },
   // });
+
+  function changeStat(uid, id, act, state){
+    // STATE IS APPLICATION ASSESSMENT RENEWAL
+    // ACT IS APPROVE OR TO MODIFY
+
+    if(act == "mod"){
+      Swal.fire({
+        title: "Set this to modify",
+        text: "Are you sure you want to set this file for modification?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            type: "POST",
+            url: "controller/uploadRequirements.php",
+            data: {
+              action: 5,
+              uid: uid,
+              id: id,
+              act : act,
+              state : state,
+            },
+            success: function (data) {
+              if (data == "Success") {
+                Swal.fire({
+                  title: data,
+                  html: "File has been set for Modification!",
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+              } else {
+                Swal.fire({
+                  title: "Error",
+                  html: data,
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+              }
+            },
+          });
+        }
+      });
+    }else if(act == "app"){
+      let url   = "controller/uploadRequirements.php";
+      let data  = new FormData();
+
+      data.append("action", 5);
+      data.append("id", id);
+      data.append("uid", uid);
+      data.append("act", act);
+      data.append("state", state);
+
+      navigator.sendBeacon(url, data);
+    }
+  }

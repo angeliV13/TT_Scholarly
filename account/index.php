@@ -37,7 +37,8 @@ if (isset($_GET['notif']))
 
   <?php include('includes/main.php') ?>
 
-  <body onload="<?php echo $user_data[3]?>" oncontextmenu="return false">
+  <!-- <body onload="<?php echo $user_data[3]?>" oncontextmenu="return false"> -->
+  <body onload="<?php echo $user_data[3]?>">
 
     <?php include('header.php'); ?>
 
