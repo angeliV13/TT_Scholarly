@@ -51,12 +51,12 @@ $(document).keydown(function(e){
  
 });
 
-$("body").on("contextmenu", function(e){
-    Swal.fire({
-        title: "Error!",
-        icon: "error",
-        html: "Right clicking is not Possible",
-      }).then((result) => {
-        e.preventDefault();
-      });
-});
+// $("body").on("contextmenu", function(e){
+//     Swal.fire({
+//         title: "Error!",
+//         icon: "error",
+//         html: "Right clicking is not Possible",
+//       }).then((result) => {
+//         e.preventDefault();
+//       });
+// });
