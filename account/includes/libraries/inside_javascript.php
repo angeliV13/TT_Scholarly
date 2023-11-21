@@ -18,6 +18,7 @@ switch($_SESSION['account_type'])
         echo '<script src="assets/js/accountList.js"></script>';
         echo '<script src="assets/js/filter.js"></script>';
         echo '<script src="assets/js/generateReport.js"></script>';
+        echo '<script src="assets/js/calendar.js"></script>';
         break;
     case 1:     //Admin
         echo '<script src="assets/js/basic_setup.js"></script>';
@@ -28,6 +29,7 @@ switch($_SESSION['account_type'])
         echo '<script src="assets/js/schoolSettings.js"></script>';
         echo '<script src="assets/js/websiteManagement.js"></script>';
         echo '<script src="assets/js/accountList.js"></script>';
+        echo '<script src="assets/js/calendar.js"></script>';
         break;
     case 2:     // Beneficiaries
         echo '<script src="assets/js/upload_assessment.js"></script>';
