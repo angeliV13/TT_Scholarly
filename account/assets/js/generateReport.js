@@ -54,7 +54,7 @@ $(document).ready(function () {
       let schoolName = $("#app_schoolName option:selected").val(); // ?
       let yearLevel = $("#app_yearLevel option:selected").text();
       let courseStrand = $("#app_courseStrand option:selected").val(); // ?
-      let status = $("#app_status option:selected").val(); //?
+      let status = $("#app_status option:selected").text(); //?
 
       if(action == 4){
         let status = $("#app_status option:selected").text();
@@ -204,10 +204,12 @@ $(document).ready(function () {
           .remove()
           .end()
           .append('<option selected value="">--</option>' 
-                + '<option value="whatever">Complete Requirements</option>' 
-                + '<option value="whatever">Incomplete Requirements</option>' 
-                + '<option value="whatever">Disqualified</option>' 
-                + '<option value="whatever">Approved</option>' 
+                + '<option value="0">Not Submitted</option>' 
+                + '<option value="1">Submitted</option>' 
+                + '<option value="2">For Assessment</option>' 
+                + '<option value="3">For Interview</option>' 
+                + '<option value="4">Approved</option>' 
+                + '<option value="5">Rejected</option>' 
                 );
         break;
       case '2':
@@ -216,14 +218,11 @@ $(document).ready(function () {
           .remove()
           .end()
           .append('<option selected value="">--</option>' 
-                + '<option value="0">Not yet Assessed</option>' 
-                + '<option value="1">For Renewal</option>' 
-                + '<option value="2">For Assessment</option>' 
+                + '<option value="0">Not Submitted</option>' 
+                + '<option value="1">For Assessment</option>' 
+                + '<option value="2">For Renewal</option>' 
+                + '<option value="2">Approved</option>' 
                 + '<option value="3">Removed</option>' 
-                + '<option value="4">Current</option>' 
-                + '<option value="5">Transferred</option>' 
-                + '<option value="6">Did not submit requirements</option>' 
-                + '<option value="7">Waiting for Grades</option>' 
                 );
         break;
       case '3':
