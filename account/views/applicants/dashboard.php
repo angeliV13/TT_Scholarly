@@ -59,7 +59,7 @@
                                 <div class="d-flex flex-column flex-md-column justify-content-between align-items-start rounded-2 p-2 mb-1" style="background-color: #efefef;">
                                     <div class="p-2">
                                         <p class="small text-muted mb-1">Status:</p>
-                                        <p class="mb-0 fw-bold"><?= getAccountType($_SESSION['account_type'])[0] ?> - <?php echo get_scholar_status($scholarStat['status']) ?></p>
+                                        <p class="mb-0 fw-bold"><?= getAccountType($_SESSION['account_type'])[0] ?>  <?php //echo get_scholar_status($scholarStat['status']) ?></p>
                                     </div>
                                     <div class="p-2">
                                         <p class="small text-muted mb-1">Scholarship Type:</p>
