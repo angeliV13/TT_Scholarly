@@ -1087,7 +1087,7 @@ function setRequirements($userid, $id, $act, $state){
     include("dbconnection.php");
     $ay         = getDefaultAcadYearId();
     $sem        = getDefaultSemesterId();
-    $entries    = getFileEntries($acadYearId, $semId, $userid, 'applicant_file', 0, 1);
+    $entries    = getFileEntries($ay, $sem, $userid, 'applicant_file', 0, 1);
 
     switch($state){
         case "app":
