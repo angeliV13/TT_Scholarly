@@ -1381,15 +1381,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="corApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="corReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1413,15 +1409,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="gradesApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="gradesReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="gradesModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1445,15 +1437,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="cobApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="cobReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="cobModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1477,15 +1465,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="cgmcApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="cgmcReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="cgmcModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1509,15 +1493,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="gradeReportApproveCheckBox"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="idpicReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="idpicModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1541,15 +1521,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="mapApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="mapReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="mapModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1573,15 +1549,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="bgryClearanceApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="bgryClearanceReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="bgryClearanceModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1605,15 +1577,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="parvoteidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="parvoteideview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="parvoteidModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1637,15 +1605,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="appvoteidApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="appvoteidApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="appvoteidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="appvoteidReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="appvoteidReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="votecertpaModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="votecertpaModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="appvoteidModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1669,15 +1633,11 @@ function getRequirements($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "app")">
                                                             <label class="mx-2 form-check-label" for="itrApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="itrReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "app")">
                                                             <label class="mx-2 form-check-label" for="itrModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1758,15 +1718,11 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "ass")">
                                                             <label class="mx-2 form-check-label" for="schoolidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="schoolidReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "ass")">
                                                             <label class="mx-2 form-check-label" for="schoolidModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1790,15 +1746,11 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "ass")">
                                                             <label class="mx-2 form-check-label" for="clearanceApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="clearanceReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "ass")">
                                                             <label class="mx-2 form-check-label" for="clearanceModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1821,15 +1773,11 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "ass")">
                                                             <label class="mx-2 form-check-label" for="corApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="corReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "ass")">
                                                             <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1853,15 +1801,11 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "ass")">
                                                             <label class="mx-2 form-check-label" for="gradesApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="gradesReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "ass")">
                                                             <label class="mx-2 form-check-label" for="gradesModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1941,15 +1885,11 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "ren")">
                                                             <label class="mx-2 form-check-label" for="schoolidApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="schoolidReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "ren")">
                                                             <label class="mx-2 form-check-label" for="schoolidModify"> For Modification </label>
                                                         </div>
                                                     </div>
@@ -1973,15 +1913,11 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                     <div class="d-flex align-items-center d-grid gap-3">
                                                         <label class="form-check-label fw-bold">Remarks:</label>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corApprove' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "app", "ren")">
                                                             <label class="mx-2 form-check-label" for="corApprove"> Approve </label>
                                                         </div>
                                                         <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corReview' . $id . '">
-                                                            <label class="mx-2 form-check-label" for="corReview"> For Review </label>
-                                                        </div>
-                                                        <div class="form-check form-radio">
-                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '">
+                                                            <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '" onclick="changeStat("' . $account_id . '", "' . $id . '", "mod", "ren")">
                                                             <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
                                                         </div>
                                                     </div>

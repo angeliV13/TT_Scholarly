@@ -62,6 +62,18 @@ if(isset($_REQUEST['action'])){
             echo submitRenewal($target_dir, $schoolIdFile, $corFile);
 
             break;
+        case 5:
+            $uid     = isset($_POST['uid'])    ? $_POST['uid']    : "";
+            $id     = isset($_POST['id'])    ? $_POST['id']    : "";
+            $act    = isset($_POST['act'])   ? $_POST['act']   : "";
+            $state  = isset($_POST['state']) ? $_POST['state'] : "";
+            if($act == 'app' ){
+                echo setRequirements($uid, $id, 2, $state);
+            }
+            else if($act == 'mod'){
+                echo setRequirements($uid, $id, 3, $state);
+            }
+
     }
 }
 

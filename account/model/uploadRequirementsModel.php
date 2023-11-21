@@ -1081,3 +1081,45 @@ function submitRenewal($target_dir, $schoolIdFile, $corFile)
 
     return 'Success';
 }
+
+function setRequirements($userid, $id, $act, $state){
+
+    include("dbconnection.php");
+    $ay         = getDefaultAcadYearId();
+    $sem        = getDefaultSemesterId();
+    $entries    = getFileEntries($acadYearId, $semId, $userid, 'applicant_file', 0, 1);
+
+    switch($state){
+        case "app":
+            // (update_applicant_status($userid, $act) == true ? 'Success' : 'Error');
+            updateRequirementStatus($id, $act, 'applicant_file');
+            break;
+        case "ass":
+            updateRequirementStatus($id, $act, 'assessment_file');
+            break;
+        case "ren":
+            updateRequirementStatus($id, $act, 'renewal_file');
+            break;
+    }
+    if($entries <> 0) {
+        return (update_applicant_status($userid, 1) == true ? 'Success' : 'Error');
+    }
+    return 'Success';
+
+}
+
+function updateRequirementStatus($id, $status, $target)
+{
+    $date = date("Y-m-d");
+
+    include("dbconnection.php");
+
+    $sql = "UPDATE  `{$target}` 
+            SET     `status`    = '{$status}' 
+            WHERE   `id`        = '{$id}'";
+    
+
+    $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
+
+    return ($query) ? "Success" : "Error Updating";
+}

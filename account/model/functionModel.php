@@ -1850,11 +1850,13 @@ function getAudience($shs, $colEAPub, $colEAPriv, $colSc)
     return $audience;
 }
 
-function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0)
+function getFileEntries($acadYearId, $semId, $userid, $file, $fetch = 0, $notSubmitted = 0)
 {
     include("dbconnection.php");
 
-    $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ORDER BY id ASC";
+    $sql = "SELECT * FROM {$file} WHERE ay_id = '{$acadYearId}' AND sem_id = '{$semId}' AND account_id = '{$userid}' ";
+    $sql .= ($notSubmitted == 1) ? "AND status != '1' " : " "; 
+    $sql .= "ORDER BY id ASC";
     $query = $conn->query($sql) or die("Error URQ005: " . $conn->error);
 
     if ($fetch == 0) 
