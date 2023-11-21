@@ -91,9 +91,8 @@
                                                     <div class="col-sm-12">
                                                         <select class="form-select" id="app_educLevel">
                                                             <option selected value="">--</option>
-                                                            <option value="1">College - Private</option>
-                                                            <option value="2">College - Public</option>
-                                                            <option value="2">Senior Highschool</option>
+                                                            <option value="1">College</option>
+                                                            <option value="2">Senior High School</option>
                                                         </select>
                                                     </div>
                                                 </div>
