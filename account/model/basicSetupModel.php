@@ -1346,7 +1346,18 @@ function updateRequest($data)
     $requesterEmail = (array)get_user_data($requestedBy)[2];
     $userEmail = (array)get_user_data($userId)[2];
 
-    $col = ['account_type' => ['=', 0], 'id' => ['!=', $requestedBy]];
+    if ($account_type == 0)
+    {
+        $except = [$requestedBy];
+        $col = ['account_type' => ['=', 0], 'id' => ['!=', $requestedBy]];
+        $typeArr = [1];
+    }
+    else
+    {
+        $except = [$requestedBy];
+        $col = ['account_type' => ['=', 0]];
+        $typeArr = [0, 1];
+    }
 
     $adminEmail = [
         'table' => 'account',
@@ -1355,7 +1366,21 @@ function updateRequest($data)
     ];
 
     $adEmail = check_exist_multiple($adminEmail, 1);
-    if (!is_array($adEmail)) return 'Error: ' . $adEmail;        
+
+    if (!is_array($adEmail))
+    {
+        $adminEmail = [
+            'table' => 'account',
+            'return' => 'email',
+            'column' => [
+                'account_type' => ['=', 1],
+            ]
+        ];
+
+        $adEmail = check_exist_multiple($adminEmail, 1);
+
+        if (!is_array($adEmail)) return 'Error: ' . $adEmail;
+    }
 
     if ($deleteRequestStatus == 1)
     {
