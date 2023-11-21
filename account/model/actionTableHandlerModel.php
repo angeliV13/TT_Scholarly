@@ -896,6 +896,15 @@ function getProfile($account_id)
 
     if (isset($family['father']))
     {
+        if (array_key_exists($family['father']['occupation'], $occupationArr))
+        {
+            $occupationFather = $occupationArr[$family['father']['occupation']];
+        }
+        else
+        {
+            $occupationFather = $family['father']['occupation'];
+        }
+
         if (strpos(strtolower($family['father']['firstName']), 'na') === false)
         {
             $profile .= '<div class="d-flex justify-content-between align-items-center py-3">
@@ -957,7 +966,7 @@ function getProfile($account_id)
                             <!-- FATHER\'S OCCUPATION  -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputOccupation" class="form-label"> Occupation</label>
-                                <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['father']['occupation']].'" disabled>
+                                <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationFather.'" disabled>
                             </div>
                             <div class="col-md-6 position-relative">
                                 <label for="inputOthers" class="form-label">If others, input occupation name</label>
@@ -988,6 +997,15 @@ function getProfile($account_id)
     // Mother's Information
     if (isset($family['mother']))
     {
+        if (array_key_exists($family['mother']['occupation'], $occupationArr))
+        {
+            $occupationMother = $occupationArr[$family['mother']['occupation']];
+        }
+        else
+        {
+            $occupationMother = $family['mother']['occupation'];
+        }
+
         if (strpos(strtolower($family['mother']['firstName']), 'na') === false)
         {
             $profile .= '<div class="d-flex justify-content-between align-items-center pt-3">
@@ -1049,7 +1067,7 @@ function getProfile($account_id)
                             <!-- MOTHER\'S OCCUPATION  -->
                             <div class="col-md-6 position-relative">
                                 <label for="inputOccupation" class="form-label"> Occupation</label>
-                                <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['mother']['occupation']].'" disabled>
+                                <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationMother.'" disabled>
                             </div>
                             <div class="col-md-6 position-relative">
                                 <label for="inputOthers" class="form-label">If others, input occupation name</label>
@@ -1079,6 +1097,15 @@ function getProfile($account_id)
     // Guardian
     if (isset($family['guardian']))
     {
+        if (array_key_exists($family['guardian']['occupation'], $occupationArr))
+        {
+            $occupationGuardian = $occupationArr[$family['guardian']['occupation']];
+        }
+        else
+        {
+            $occupationGuardian = $family['guardian']['occupation'];
+        }
+
         $profile .= '<div class="d-flex justify-content-between align-items- py-3">
                         <h5 class="card-title">
                             Guardian\'s
@@ -1144,7 +1171,7 @@ function getProfile($account_id)
                         <!-- GUARDIAN\'S INFORMATION  -->
                         <div class="col-md-6 position-relative">
                             <label for="inputOccupation" class="form-label"> Occupation</label>
-                            <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['guardian']['occupation']].'" disabled>
+                            <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationGuardian.'" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputOthers" class="form-label">If others, input occupation name</label>
@@ -1174,6 +1201,15 @@ function getProfile($account_id)
 
     if (isset($family['spouse']))
     {
+        if (array_key_exists($family['spouse']['occupation'], $occupationArr))
+        {
+            $occupationSpouse = $occupationArr[$family['spouse']['occupation']];
+        }
+        else
+        {
+            $occupationSpouse = $family['spouse']['occupation'];
+        }
+
         $profile .= '<div class="d-flex justify-content-between align-items- py-3">
                         <h5 class="card-title">
                             Spouse
@@ -1233,7 +1269,7 @@ function getProfile($account_id)
                         <!-- SPOUSE INFORMATION  -->
                         <div class="col-md-6 position-relative">
                             <label for="inputOccupation" class="form-label"> Occupation</label>
-                            <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationArr[$family['spouse']['occupation']].'" disabled>
+                            <input type="text" class="form-control" id="inputOccupation" aria-describedby="inputOccupation" value="'.$occupationSpouse.'" disabled>
                         </div>
                         <div class="col-md-6 position-relative">
                             <label for="inputOthers" class="form-label">If others, input occupation name</label>
