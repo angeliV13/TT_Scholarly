@@ -940,170 +940,170 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('there was an error while fetching events!');
             }
         },
-        // dateClick: function(info) {
-        //     // console.log(info);
+        dateClick: function(info) {
+            // console.log(info);
 
-        //     getEventDetails(info.dateStr).then(function(data) {
-        //         let events = JSON.parse(data);
+            getEventDetails(info.dateStr).then(function(data) {
+                let events = JSON.parse(data);
 
-        //         let eventId = events[0]["id"];
-        //         let eventName = events[0]["title"];
-        //         let eventDesc = events[0]["desc"];
-        //         let eventImg = events[0]["image"];
-        //         let eventStart = events[0]["start"];
-        //         let eventEnd = events[0]["end"];
-        //         let active = events[0]["active"];
+                let eventId = events[0]["id"];
+                let eventName = events[0]["title"];
+                let eventDesc = events[0]["desc"];
+                let eventImg = events[0]["image"];
+                let eventStart = events[0]["start"];
+                let eventEnd = events[0]["end"];
+                let active = events[0]["active"];
 
-        //         Swal.fire({
-        //             title: 'Edit Event',
-        //             html: `<input type="text" id="eeventName" class="form-control mb-2" placeholder="Event Name" value="${eventName}">
-        //                 <input type="text" id="eeventDesc" class="form-control mb-2" placeholder="Event Description" value="${eventDesc}">
-        //                 <input type="file" id="eeventImg" class="form-control" accept="image/*">
-        //                 <div class="text-center mt-2">
-        //                     <img src="${eventImg}" id="eeventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
-        //                 </div>
-        //                 <input type="checkbox" id="eactive" class="form-check-input" ${(active == 1) ? "checked" : ""}>
-        //                 <label for="eactive" class="form-check-label">Event Active?</label>
-        //                 <input type="hidden" id="eeventId" class="form-control" value="${eventId}">
-        //                 <input type="hidden" id="edateStart" class="form-control" value="${eventStart}">
-        //                 <input type="hidden" id="edateEnd" class="form-control" value="${eventEnd}">`,
-        //             confirmButtonText: 'Update',
-        //             showCancelButton: true,
-        //             cancelButtonText: 'Delete',
-        //             focusConfirm: false,
-        //             didOpen: function(){
-        //                 $("#eeventImg").on("change", function(){
-        //                     let reader = new FileReader();
-        //                     reader.onload = function(e){
-        //                         $("#eeventImgPreview").attr("src", e.target.result);
-        //                     }
+                Swal.fire({
+                    title: 'Edit Event',
+                    html: `<input type="text" id="eeventName" class="form-control mb-2" placeholder="Event Name" value="${eventName}">
+                        <input type="text" id="eeventDesc" class="form-control mb-2" placeholder="Event Description" value="${eventDesc}">
+                        <input type="file" id="eeventImg" class="form-control" accept="image/*">
+                        <div class="text-center mt-2">
+                            <img src="${eventImg}" id="eeventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
+                        </div>
+                        <input type="checkbox" id="eactive" class="form-check-input" ${(active == 1) ? "checked" : ""}>
+                        <label for="eactive" class="form-check-label">Event Active?</label>
+                        <input type="hidden" id="eeventId" class="form-control" value="${eventId}">
+                        <input type="hidden" id="edateStart" class="form-control" value="${eventStart}">
+                        <input type="hidden" id="edateEnd" class="form-control" value="${eventEnd}">`,
+                    confirmButtonText: 'Update',
+                    showCancelButton: true,
+                    cancelButtonText: 'Delete',
+                    focusConfirm: false,
+                    didOpen: function(){
+                        $("#eeventImg").on("change", function(){
+                            let reader = new FileReader();
+                            reader.onload = function(e){
+                                $("#eeventImgPreview").attr("src", e.target.result);
+                            }
                 
-        //                     reader.readAsDataURL(this.files[0]);
-        //                 })
-        //             },
-        //             preConfirm: function() {
-        //                 let eventId = $("#eeventId").val();
-        //                 let dateStart = $("#edateStart").val();
-        //                 let dateEnd = $("#edateEnd").val();
-        //                 let eventName = $("#eeventName").val();
-        //                 let eventDesc = $("#eeventDesc").val();
-        //                 let eventImg = $("#eeventImg").val();
-        //                 let active = ($("input#eactive").is(":checked")) ? 1 : 0;
+                            reader.readAsDataURL(this.files[0]);
+                        })
+                    },
+                    preConfirm: function() {
+                        let eventId = $("#eeventId").val();
+                        let dateStart = $("#edateStart").val();
+                        let dateEnd = $("#edateEnd").val();
+                        let eventName = $("#eeventName").val();
+                        let eventDesc = $("#eeventDesc").val();
+                        let eventImg = $("#eeventImg").val();
+                        let active = ($("input#eactive").is(":checked")) ? 1 : 0;
 
-        //                 return new Promise(function(resolve, reject) {
-        //                     if (eventName == ""){
-        //                         Swal.showValidationMessage(
-        //                             `Please enter the event name!`
-        //                         )
+                        return new Promise(function(resolve, reject) {
+                            if (eventName == ""){
+                                Swal.showValidationMessage(
+                                    `Please enter the event name!`
+                                )
 
-        //                         resolve();
+                                resolve();
                 
-        //                         return false;
-        //                     }
+                                return false;
+                            }
                 
-        //                     if (eventDesc == ""){
-        //                         Swal.showValidationMessage(
-        //                             `Please enter the event description!`
-        //                         )
+                            if (eventDesc == ""){
+                                Swal.showValidationMessage(
+                                    `Please enter the event description!`
+                                )
                 
-        //                         resolve();
+                                resolve();
 
-        //                         return false;
-        //                     }
+                                return false;
+                            }
                 
-        //                     let img = ($("#eeventImg")[0].files[0] == undefined) ? "" : $("#eeventImg")[0].files[0];
+                            let img = ($("#eeventImg")[0].files[0] == undefined) ? "" : $("#eeventImg")[0].files[0];
                 
-        //                     let formData = new FormData();
-        //                     formData.append("action", 13);
-        //                     formData.append("userId", userId);
-        //                     formData.append("eventId", eventId);
-        //                     formData.append("eventName", eventName);
-        //                     formData.append("eventDesc", eventDesc);
-        //                     formData.append("eventImg", img);
-        //                     formData.append("dateStart", dateStart);
-        //                     formData.append("dateEnd", dateEnd);
-        //                     formData.append("active", active);
+                            let formData = new FormData();
+                            formData.append("action", 13);
+                            formData.append("userId", userId);
+                            formData.append("eventId", eventId);
+                            formData.append("eventName", eventName);
+                            formData.append("eventDesc", eventDesc);
+                            formData.append("eventImg", img);
+                            formData.append("dateStart", dateStart);
+                            formData.append("dateEnd", dateEnd);
+                            formData.append("active", active);
                                 
-        //                     $.ajax({
-        //                         url: "controller/basicSetup.php",
-        //                         type: "POST",
-        //                         processData: false,
-        //                         contentType: false,
-        //                         type: "POST",
-        //                         data: formData,
-        //                         success: function(data) {
-        //                             if (data == "success") {
-        //                                 resolve();
-        //                             } else {
-        //                                 Swal.showValidationMessage(
-        //                                     `Something went wrong! Error: ${data}`
-        //                                 )
+                            $.ajax({
+                                url: "controller/basicSetup.php",
+                                type: "POST",
+                                processData: false,
+                                contentType: false,
+                                type: "POST",
+                                data: formData,
+                                success: function(data) {
+                                    if (data == "success") {
+                                        resolve();
+                                    } else {
+                                        Swal.showValidationMessage(
+                                            `Something went wrong! Error: ${data}`
+                                        )
 
-        //                                 resolve();
+                                        resolve();
 
-        //                                 return false;
-        //                             }
-        //                         }
-        //                     })
-        //                 });
-        //             }
-        //         }).then(function(result){
-        //             if (result.isConfirmed) {
-        //                 Swal.fire({
-        //                     icon: "success",
-        //                     title: "Success!",
-        //                     text: `Event successfully updated!`,
-        //                     allowOutsideClick: false,
-        //                     allowEscapeKey: false,
-        //                 }).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload();
-        //                     }
-        //                 });
-        //             } else if (result.dismiss === Swal.DismissReason.cancel) {
-        //                 let eventId = $("#eeventId").val();
+                                        return false;
+                                    }
+                                }
+                            })
+                        });
+                    }
+                }).then(function(result){
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: `Event successfully updated!`,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        let eventId = $("#eeventId").val();
                                 
-        //                 $.ajax({
-        //                     url: "controller/basicSetup.php",
-        //                     type: "POST",
-        //                     data: {
-        //                         "action"    : 14,
-        //                         "eventId"   : eventId
-        //                     },
-        //                     beforeSend: function(){
-        //                         showBeforeSend("Deleting Event...");
-        //                     },
-        //                     success: function(data) {
-        //                         hideBeforeSend();
-        //                         if (data == "success") {
-        //                             Swal.fire({
-        //                                 icon: "success",
-        //                                 title: "Success!",
-        //                                 text: `Event successfully deleted!`,
-        //                                 allowOutsideClick: false,
-        //                                 allowEscapeKey: false,
-        //                             }).then((result) => {
-        //                                 if (result.isConfirmed) {
-        //                                     location.reload();
-        //                                 }
-        //                             });
-        //                         } else {
-        //                             Swal.fire({
-        //                                 icon: "error",
-        //                                 title: "Oops...",
-        //                                 text: `Something went wrong! Error: ${data}`,
-        //                                 allowOutsideClick: false,
-        //                                 allowEscapeKey: false,
-        //                             })
-        //                         }
-        //                     }
-        //                 })
-        //             }
-        //         })
-        //     }).catch(function(error) {
-        //         console.error(error);
-        //     });
-        // }
+                        $.ajax({
+                            url: "controller/basicSetup.php",
+                            type: "POST",
+                            data: {
+                                "action"    : 14,
+                                "eventId"   : eventId
+                            },
+                            beforeSend: function(){
+                                showBeforeSend("Deleting Event...");
+                            },
+                            success: function(data) {
+                                hideBeforeSend();
+                                if (data == "success") {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Success!",
+                                        text: `Event successfully deleted!`,
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: `Something went wrong! Error: ${data}`,
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                    })
+                                }
+                            }
+                        })
+                    }
+                })
+            }).catch(function(error) {
+                console.error(error);
+            });
+        }
     });
 
     function getEventDetails(date) {
