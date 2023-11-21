@@ -1353,7 +1353,7 @@ function getProfile($account_id)
     }else if($accountType == "2"){
         if($scholarType['status'] == "2"){
             echo getRequirementsAssessment($id, $account_id, $entries_assessment);
-        }else if($scholarType['status'] == "3"){
+        }else if($scholarType['status'] >= "3"){
             echo getRequirementsRenewal($id, $account_id, $entries_renewal);
         }
     }
