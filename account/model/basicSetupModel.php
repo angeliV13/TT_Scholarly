@@ -1321,6 +1321,7 @@ function updateRequest($data)
     include("dbconnection.php");
 
     $id = $_SESSION['id'];
+    $account_type = $_SESSION['account_type'];
     $formId = $data['formId'];
     $userId = $data['userId'];
     $requestedBy = $data['requestedBy'];
