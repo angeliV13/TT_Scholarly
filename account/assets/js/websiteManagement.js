@@ -1,4 +1,4 @@
-// let userId = $("#userId").val();
+let userId = $("#userId").val();
 
 $("#addSocial").on("click", function(e){
     e.preventDefault();
