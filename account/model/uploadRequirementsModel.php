@@ -1082,23 +1082,26 @@ function submitRenewal($target_dir, $schoolIdFile, $corFile)
     return 'Success';
 }
 
-function setRequirements($userid, $id, $act, $state){
+function setRequirements($userid, $id, $status, $state){
 
     include("dbconnection.php");
     $ay         = getDefaultAcadYearId();
     $sem        = getDefaultSemesterId();
-    $entries    = getFileEntries($ay, $sem, $userid, 'applicant_file', 0, 1);
+    
 
     switch($state){
-        case "app":
+        case 'app':
             // (update_applicant_status($userid, $act) == true ? 'Success' : 'Error');
-            updateRequirementStatus($id, $act, 'applicant_file');
+            $entries    = getFileEntries($ay, $sem, $userid, 'applicant_file', 0, 1);
+            updateRequirementStatus($id, $status, 'applicant_file');
             break;
-        case "ass":
-            updateRequirementStatus($id, $act, 'assessment_file');
+        case 'ass':
+            $entries    = getFileEntries($ay, $sem, $userid, 'assessment_file', 0, 1);
+            updateRequirementStatus($id, $status, 'assessment_file');
             break;
-        case "ren":
-            updateRequirementStatus($id, $act, 'renewal_file');
+        case 'ren':
+            $entries    = getFileEntries($ay, $sem, $userid, 'renewal_file', 0, 1);
+            updateRequirementStatus($id, $status, 'renewal_file');
             break;
     }
     if($entries->num_rows <> 0) {
