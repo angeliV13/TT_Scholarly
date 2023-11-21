@@ -272,6 +272,7 @@
                   <?php if (isset($applicationAccess)) : ?>
                     <?php $access = 2;
                         $access = $access + $scholarType;?>
+                      <?php //if (($examAccess[$access] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow ) && $status['status'] == 2) : ?>
                       <?php if (($examAccess[$access] == 1 && $examAccess[0] <= $dateNow && $examAccess[1] >= $dateNow ) ) : ?>
                           <!-- Start Exam Nav -->
                           <li class="nav-item">

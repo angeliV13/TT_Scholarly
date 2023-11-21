@@ -2035,6 +2035,11 @@ $(document).on("click", ".viewInfoClass", function () {
             $("#decisionRadio1").html(qualificationText);
             $("#currentStatus").html(currentStatus);
 
+            $("#decisionRadio1").prop("disabled", false);
+            $("#decisionRadio2").prop("disabled", false);
+            $("#decisionRadio3").prop("disabled", false);
+            $("#decisionRadio4").prop("disabled", false);
+
             if (currentStatus == "For Assesment Exam")
             {
                 $("#currentStatus").html("For Assessment");
