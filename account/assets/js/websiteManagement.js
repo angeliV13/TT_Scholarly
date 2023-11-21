@@ -1,4 +1,4 @@
-let userId = $("#userId").val();
+// let userId = $("#userId").val();
 
 $("#addSocial").on("click", function(e){
     e.preventDefault();
@@ -934,7 +934,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 action: 11,
             },
             success: function(data) {
-                console.log(data);
+                // console.log(data);
             },
             failure: function() {
                 console.log('there was an error while fetching events!');
