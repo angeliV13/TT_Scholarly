@@ -222,7 +222,7 @@ $(document).ready(function () {
                 + '<option value="1">For Assessment</option>' 
                 + '<option value="2">For Renewal</option>' 
                 + '<option value="2">Approved</option>' 
-                + '<option value="3">Removed</option>' 
+                + '<option value="3">Rejected</option>' 
                 );
         break;
       case '3':
