@@ -23,7 +23,7 @@ if (isset($_REQUEST['action']))
                 "School Name"       => (isset($_POST['schoolName'])   ? $_POST['schoolName']  : ''),
                 "Year Level"        => (isset($_POST['yearLevel'])    ? $_POST['yearLevel']   : ''),
                 "Course Strand"     => (isset($_POST['courseStrand']) ? $_POST['courseStrand']: ''),
-                "Status"            => (isset($_POST['status'])       ? $_POST['status']      : ''),
+                "Scholar Status"    => (isset($_POST['status'])       ? $_POST['status']      : ''),
             ];
             echo createTable($report = 1, $data = $data);
             break;
@@ -36,7 +36,7 @@ if (isset($_REQUEST['action']))
                 "School Name"       => (isset($_POST['schoolName'])   ? $_POST['schoolName']  : ''),
                 "Year Level"        => (isset($_POST['yearLevel'])    ? $_POST['yearLevel']   : ''),
                 "Course Strand"     => (isset($_POST['courseStrand']) ? $_POST['courseStrand']: ''),
-                "Status"            => (isset($_POST['status'])       ? $_POST['status']      : ''),
+                "Scholar Status"    => (isset($_POST['status'])       ? $_POST['status']      : ''),
             ];
             echo createTable($report = 2, $data = $data);
             break;
@@ -49,7 +49,7 @@ if (isset($_REQUEST['action']))
                 "School Name"       => (isset($_POST['schoolName'])   ? $_POST['schoolName']  : ''),
                 "Year Level"        => (isset($_POST['yearLevel'])    ? $_POST['yearLevel']   : ''),
                 "Course Strand"     => (isset($_POST['courseStrand']) ? $_POST['courseStrand']: ''),
-                "Status"            => (isset($_POST['status'])       ? $_POST['status']      : ''),
+                "Graduation Status"    => (isset($_POST['status'])       ? $_POST['status']      : ''),
         ];
         echo createTable($report = 3, $data = $data);
         break;
@@ -62,7 +62,7 @@ if (isset($_REQUEST['action']))
                 "School Name"       => (isset($_POST['schoolName'])   ? $_POST['schoolName']  : ''),
                 "Year Level"        => (isset($_POST['yearLevel'])    ? $_POST['yearLevel']   : ''),
                 "Course Strand"     => (isset($_POST['courseStrand']) ? $_POST['courseStrand']: ''),
-                "Status"            => (isset($_POST['status'])       ? $_POST['status']      : ''),
+                "Remarks"            => (isset($_POST['status'])       ? $_POST['status']      : ''),
         ];
         echo createTable($report = 4, $data = $data);
         break;
