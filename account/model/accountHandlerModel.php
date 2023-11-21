@@ -1333,10 +1333,13 @@ function deleteUserRequest($data)
     {
         $except = [$userId];
         $col = ['account_type' => ['=', 0], 'id' => ['!=', $userId]];
+        $typeArr = [1];
     }
     else
     {
+        $except = [$userId];
         $col = ['account_type' => ['=', 0]];
+        $typeArr = [0, 1];
     }
 
     $applicantName = getUserNameFromId($id);
@@ -1410,7 +1413,7 @@ function deleteUserRequest($data)
     if (!$query) return 'Error 2: ' . $conn->error;
 
     $notifData = [
-        'user_id'       => get_user_id_notification([0, 1], $except),
+        'user_id'       => get_user_id_notification($typeArr, $except),
         'notif_type'    => 11,
         'notif_body'    => $requesterName . ' has submitted a deletion request.',
         'notif_link'    => '?nav=ntf_settings&id=' . $id . '&deleteFormId=' . $lastId,
