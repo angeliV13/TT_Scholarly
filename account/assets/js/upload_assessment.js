@@ -423,8 +423,8 @@ $("#submitApplicationFile").submit(function (e) {
 $("#submitRenewal").submit(function (e) {
   e.preventDefault();
 
-  // let schoolIdCheck       = ($("#btn_na_1").is(":checked") == true ? 1 : 0);
-  // let corCheck            = ($("#btn_na_3").is(":checked") == true ? 1 : 0);
+  let schoolIdCheck       = ($("#btn_na_1").is(":checked") == true ? 1 : 0);
+  let corCheck            = ($("#btn_na_3").is(":checked") == true ? 1 : 0);
  
   let schoolIdFile        = (schoolIdCheck      == 1) ? '0'  : ((document.getElementById("fileUpload1")   == null) ? '1' : (((document.getElementById("fileUpload1"))=== undefined)  ? '2' : document.getElementById("fileUpload1").files[0]));
   let corFile             = (corCheck           == 1) ? '0'  : ((document.getElementById("fileUpload3")   == null) ? '1' : (((document.getElementById("fileUpload3"))=== undefined)  ? '2' : document.getElementById("fileUpload3").files[0]));
