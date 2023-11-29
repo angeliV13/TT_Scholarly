@@ -332,7 +332,7 @@ $(document).ready(function () {
         "createdRow": function (row, data, index) { },
         "columnDefs": [
             { className: "text-center", "targets": [0] }, 
-            { visible: false, targets: [2, 17, 18, 19, 20] }, 
+            { visible: false, targets: [2, 7, 8, 12, 16, 17, 18, 19, 20, 21], searchable: true }, 
         ],
         initComplete: function () {
             $(document).on("click", "#setFilter", function () {
@@ -976,7 +976,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 7, 8, 12, 16, 17, 18, 21], searchable: true }],
         initComplete: function () {
             $(document).on("click", "#setFilter", function () {
                 applicantInterviewTable.ajax.reload();
@@ -1123,7 +1123,7 @@ $(document).ready(function () {
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 19, 20] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 7, 8, 12, 15, 16, 19, 20, 21], searchable: true }],
         initComplete: function () {
             $(document).on("click", "#setFilter", function () {
                 applicantExamTable.ajax.reload();
