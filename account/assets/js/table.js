@@ -4,13 +4,20 @@ $(document).ready(function () {
 // ----------------------------------------------------------------------------------------
     // Admin Account Management
     let accountAdminManagementTable = $('#accountAdminManagementTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
-        "searching": false,
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
+        // "lengthChange": false,
+        // "paging": false,
+        // "searching": false,
+        // "processing": true,
+        // "ordering": false,
+        // "serverSide": false,
+        // "bInfo": false,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
@@ -48,13 +55,20 @@ $(document).ready(function () {
 
     // Student Account Management
     let accountStudentManagementTable = $('#accountStudentManagementTable').DataTable({
-        "lengthChange": false,
-        "paging": false,
-        "searching": false,
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
         "processing": true,
-        "ordering": false,
+        "ordering": true,
         "serverSide": false,
-        "bInfo": false,
+        "bInfo": true,
+        // "lengthChange": false,
+        // "paging": false,
+        // "searching": false,
+        // "processing": true,
+        // "ordering": false,
+        // "serverSide": false,
+        // "bInfo": false,
         "ajax": {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
