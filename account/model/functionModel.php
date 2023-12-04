@@ -1593,9 +1593,10 @@ function update_account_type($id, $type)
 
     if (!$query) return $conn->error;
 
-    $sql2 = "UPDATE scholarship_application SET account_type = " . $type . " WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "' LIMIT 1";
-    $query2 = $conn->query($sql2);
-    return ($query2) ? "success" : $conn->error;
+    // $sql2 = "UPDATE scholarship_application SET account_type = " . $type . " WHERE userId = " . $id . " AND ay_id = '" . $acadYear . "' AND sem_id = '" . $defaultYear . "' LIMIT 1";
+    // $query2 = $conn->query($sql2);
+    // return ($query2) ? "success" : $conn->error;
+    return ($query) ? "success" : $conn->error;
     $conn->rollback();
 }
 
