@@ -1549,6 +1549,12 @@ function addEvents($data)
     if ($query){
         if($email == '1'){
             $emails = getAllEmails();
+            $msg .= '<p>Hi There! <br></p>';
+            $msg .= '<br>';
+            $msg = '<p> '. $description .' </p>';
+            $msg .= '<p>Thank you! <br></p>';
+            $msg .= '<p>Best regards,</p>';
+            $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
             return strtolower(sendEmail($emails, $eventName, $description));
         }
         return "success";
@@ -1605,6 +1611,12 @@ function updateEvents($data)
     if ($query){
         if($email == '1'){
             $emails = getAllEmails();
+            $msg .= '<p>Hi There! <br></p>';
+            $msg .= '<br>';
+            $msg = '<p> '. $description .' </p>';
+            $msg .= '<p>Thank you! <br></p>';
+            $msg .= '<p>Best regards,</p>';
+            $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
             return strtolower(sendEmail($emails, $eventName, $description));
         }
         return "success";
