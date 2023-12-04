@@ -1422,7 +1422,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="corModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1450,7 +1450,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="gradesModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="gradesModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1478,7 +1478,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="cobRadio' . $id . '" id="cobModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="cobModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="cobModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1506,7 +1506,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="cgmcRadio' . $id . '" id="cgmcModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="cgmcModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="cgmcModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1534,7 +1534,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="idpicRadio' . $id . '" id="idpicModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="idpicModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="idpicModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1562,7 +1562,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="mapRadio' . $id . '" id="mapModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="mapModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="mapModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1590,7 +1590,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="brgyclearanceRadio' . $id . '" id="bgryClearanceModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="bgryClearanceModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="bgryClearanceModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1618,7 +1618,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="parvoteidRadio' . $id . '" id="parvoteidModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="parvoteidModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="parvoteidModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1646,7 +1646,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="appvoteidRadio' . $id . '" id="votecertpaModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="appvoteidModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="appvoteidModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1674,7 +1674,7 @@ function getRequirements($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="itrRadio' . $id . '" id="itrModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'app\')">
-                                                            <label class="mx-2 form-check-label" for="itrModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="itrModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1759,7 +1759,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'ass\')">
-                                                            <label class="mx-2 form-check-label" for="schoolidModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="schoolidModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1787,7 +1787,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="clearanceRadio' . $id . '" id="clearanceModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'ass\')">
-                                                            <label class="mx-2 form-check-label" for="clearanceModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="clearanceModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1814,7 +1814,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'ass\')">
-                                                            <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="corModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1842,7 +1842,7 @@ function getRequirementsAssessment($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="gradesRadio' . $id . '" id="gradesModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'ass\')">
-                                                            <label class="mx-2 form-check-label" for="gradesModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="gradesModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1926,7 +1926,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="schoolidRadio' . $id . '" id="schoolidModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'ren\')">
-                                                            <label class="mx-2 form-check-label" for="schoolidModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="schoolidModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1954,7 +1954,7 @@ function getRequirementsRenewal($id, $account_id, $file)
                                                         </div>
                                                         <div class="form-check form-radio">
                                                             <input class="form-check-input" type="radio" name="corRadio' . $id . '" id="corModify' . $id . '" onclick="changeStat(\'' . $account_id . '\', \'' . $id . '\', \'mod\', \'ren\')">
-                                                            <label class="mx-2 form-check-label" for="corModify"> For Modification </label>
+                                                            <label class="mx-2 form-check-label" for="corModify"> Reject requirements </label>
                                                         </div>
                                                     </div>
                                                 </div>
