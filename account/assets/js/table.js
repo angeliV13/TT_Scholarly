@@ -1,4 +1,8 @@
 $(document).ready(function () {
+// ----------------------------------------------------------------------------------------
+// Account Management Tables
+// ----------------------------------------------------------------------------------------
+    // Admin Account Management
     let accountAdminManagementTable = $('#accountAdminManagementTable').DataTable({
         "lengthChange": false,
         "paging": false,
@@ -42,6 +46,7 @@ $(document).ready(function () {
         stateSave: false,
     });
 
+    // Student Account Management
     let accountStudentManagementTable = $('#accountStudentManagementTable').DataTable({
         "lengthChange": false,
         "paging": false,
@@ -84,8 +89,11 @@ $(document).ready(function () {
         },
         stateSave: false
     });
-
-    // MANAGE EXAM -> EXAM QUESTIONS TABLE
+    
+// ----------------------------------------------------------------------------------------
+// Examination Related Tables
+// ----------------------------------------------------------------------------------------
+    // Examination Question Table
     let examQuestionsTable = $('#examQuestionsTable').DataTable({
         // "lengthChange": true,
         // "paging": true,
@@ -135,7 +143,157 @@ $(document).ready(function () {
         },
         stateSave: false
     });
+    // Examinees List Table
+    let examineeListTable = $('#examineeListTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Examinee List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+    
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 20,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#examineeListTable').DataTable().columns().count();
+                $(".examineeListTable-error").html("");
+                $("#examineeListTable").append(`<tbody class="examineeListTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#examineeListTable").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                examineeListTable.ajax.reload();
 
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                // if (filterScholarType == ""){
+                //     examineeListTable.columns(11).search("").draw();
+                // } else {
+                //     examineeListTable.columns(11).search(filterScholarType).draw();
+                // }
+
+                if (filterEducationLevel == ""){
+                    examineeListTable.columns(9).search("").draw();
+                } else {
+                    examineeListTable.columns(9).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    examineeListTable.columns(7).search("").draw();
+                } else {
+                    examineeListTable.columns(7).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    examineeListTable.columns(11).search("").draw();
+                } else {
+                    examineeListTable.columns(11).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                examineeListTable.columns(7).search("").draw();
+                examineeListTable.columns(9).search("").draw();
+                examineeListTable.columns(11).search("").draw();
+                // examineeListTable.columns(14).search("").draw();
+            });
+        },
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+
+// ----------------------------------------------------------------------------------------
+// Basic Setup Tables
+// ----------------------------------------------------------------------------------------
     // Notification Table
     let notifTable = $('#setNotifTable').DataTable({
         "lengthChange": true,
@@ -179,7 +337,49 @@ $(document).ready(function () {
         },
         stateSave: false
     });
-
+    // View Notification Table
+    let viewNotif = $('#viewNotifTable').DataTable({
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 9,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#viewNotifTable').DataTable().columns().count();
+                $(".viewNotifTable-error").html("");
+                $("#viewNotifTable").append(`<tbody class="viewNotifTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#viewNotifTable_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false
+    });
     // School Table
     let schoolTable = $('#schoolTable').DataTable({
         "lengthChange": true,
@@ -242,7 +442,141 @@ $(document).ready(function () {
         },
         stateSave: false
     });
+    // Website Socials Table
+    let socialTable = $('#setWebsiteSocials').DataTable({
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 6,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                // get the number of columns
+                var columnCount = $('#setWebsiteSocials').DataTable().columns().count();
+                $(".setWebsiteSocials-error").html("");
+                $("#setWebsiteSocials").append(`<tbody class="setWebsiteSocials-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#setWebsiteSocials_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false
+    });
+    // Officials Table
+    let officialTable = $('#setWebsiteOfficials').DataTable({
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 17,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#setWebsiteOfficials').DataTable().columns().count();
+                $(".setWebsiteOfficials-error").html("");
+                $("#setWebsiteOfficials").append(`<tbody class="setWebsiteOfficials-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#setWebsiteOfficials_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+    // Testimonials Table
+    let testimonialTable = $('#setWebsiteAlumni').DataTable({
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 18,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#setWebsiteAlumni').DataTable().columns().count();
+                $(".setWebsiteAlumni-error").html("");
+                $("#setWebsiteAlumni").append(`<tbody class="setWebsiteAlumni-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#setWebsiteAlumni_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
 
+// ----------------------------------------------------------------------------------------
+// Applicants Tables
+// ----------------------------------------------------------------------------------------
+    // Applicant New Table
     let collegeNewApplicantTable = $('#collegeNewApplicantTable').DataTable({
         dom: "Bfrtip",
         buttons: [
@@ -389,10 +723,70 @@ $(document).ready(function () {
         },
         stateSave: false,
     });
-
-
-    // Website Socials Table
-    let socialTable = $('#setWebsiteSocials').DataTable({
+    // Applicant Interview Table
+    let applicantInterviewTable = $('#applicantInterviewTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Applicants Inverview List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         "lengthChange": true,
         "paging": true,
         "searching": true,
@@ -404,7 +798,7 @@ $(document).ready(function () {
             url: "controller/tableHandler.php", // json datasource
             type: "post",  // method  , by default get
             data: {
-                "action": 6,
+                "action": 11,
             },
             // success: function (row, data, index) {
             //   console.log(row);
@@ -413,15 +807,55 @@ $(document).ready(function () {
             // },
             error: function (data) {  // error handling
                 console.log(data);
-                // get the number of columns
-                var columnCount = $('#setWebsiteSocials').DataTable().columns().count();
-                $(".setWebsiteSocials-error").html("");
-                $("#setWebsiteSocials").append(`<tbody class="setWebsiteSocials-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#setWebsiteSocials_processing").css("display", "none");
+                var columnCount = $('#applicantInterviewTable').DataTable().columns().count();
+                $(".applicantInterviewTable-error").html("");
+                $("#applicantInterviewTable").append(`<tbody class="applicantInterviewTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#applicantInterviewTable_processing").css("display", "none");
             }
         },
         "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 7, 8, 12, 16, 17, 18, 21], searchable: true }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                applicantInterviewTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                if (filterScholarType == ""){
+                    applicantInterviewTable.columns(11).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    applicantInterviewTable.columns(12).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    applicantInterviewTable.columns(9).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    applicantInterviewTable.columns(14).search("").draw();
+                } else {
+                    applicantInterviewTable.columns(14).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                applicantInterviewTable.columns(9).search("").draw();
+                applicantInterviewTable.columns(11).search("").draw();
+                applicantInterviewTable.columns(12).search("").draw();
+                applicantInterviewTable.columns(14).search("").draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
@@ -429,6 +863,447 @@ $(document).ready(function () {
             leftColumns: 0
         },
         scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+    // Applicant Examination Table
+    let applicantExamTable = $('#applicantExamination').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Applicants Examinee List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 12,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#applicantExamination').DataTable().columns().count();
+                $(".applicantExamination-error").html("");
+                $("#applicantExamination").append(`<tbody class="applicantExamination-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#applicantExamination_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 7, 8, 12, 15, 16, 19, 20, 21], searchable: true }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                applicantExamTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                if (filterScholarType == ""){
+                    applicantExamTable.columns(11).search("").draw();
+                } else {
+                    applicantExamTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    applicantExamTable.columns(12).search("").draw();
+                } else {
+                    applicantExamTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    applicantExamTable.columns(9).search("").draw();
+                } else {
+                    applicantExamTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    applicantExamTable.columns(14).search("").draw();
+                } else {
+                    applicantExamTable.columns(14).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                applicantExamTable.columns(9).search("").draw();
+                applicantExamTable.columns(11).search("").draw();
+                applicantExamTable.columns(12).search("").draw();
+                applicantExamTable.columns(14).search("").draw();
+            });
+        },
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+    // Applicant Removed Table
+    let removedApplicantTable = $('#applicantRemovedTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Removed Applicant List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 13,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#applicantRemovedTable').DataTable().columns().count();
+                $(".applicantRemovedTable-error").html("");
+                $("#applicantRemovedTable").append(`<tbody class="applicantRemovedTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#applicantRemovedTable_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                removedApplicantTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                if (filterScholarType == ""){
+                    removedApplicantTable.columns(11).search("").draw();
+                } else {
+                    removedApplicantTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    removedApplicantTable.columns(12).search("").draw();
+                } else {
+                    removedApplicantTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    removedApplicantTable.columns(9).search("").draw();
+                } else {
+                    removedApplicantTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    removedApplicantTable.columns(14).search("").draw();
+                } else {
+                    removedApplicantTable.columns(14).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                removedApplicantTable.columns(9).search("").draw();
+                removedApplicantTable.columns(11).search("").draw();
+                removedApplicantTable.columns(12).search("").draw();
+                removedApplicantTable.columns(14).search("").draw();
+            });
+        },
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+
+// ----------------------------------------------------------------------------------------
+// Beneficiaries Tables
+// ----------------------------------------------------------------------------------------
+    // Beneficiaries List Table
+    let benefListTable = $('#listOfBeneficiaries').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Beneficiaries List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 8,
+            },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#listOfBeneficiaries').DataTable().columns().count();
+                $(".listOfBeneficiaries-error").html("");
+                $("#listOfBeneficiaries").append(`<tbody class="listOfBeneficiaries-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#listOfBeneficiaries_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefListTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+                
+                if (filterScholarType == ""){
+                    benefListTable.columns(11).search("").draw();
+                } else {
+                    benefListTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefListTable.columns(12).search("").draw();
+                } else {
+                    benefListTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefListTable.columns(9).search("").draw();
+                } else {
+                    benefListTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefListTable.columns(14).search("").draw();
+                } else {
+                    benefListTable.columns(14).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefListTable.columns(9).search("").draw();
+                benefListTable.columns(11).search("").draw();
+                benefListTable.columns(12).search("").draw();
+                benefListTable.columns(14).search("").draw();
+            });
+        },
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
         scrollCollapse: false,
         scroller: {
             loadingIndicator: false
@@ -436,7 +1311,452 @@ $(document).ready(function () {
         stateSave: false
     });
 
-    // GRADUATES TABLE
+    // Beneficiaries For Assessmenet Table
+    let benefAssessTable = $('#benefAssessmentTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Beneficiaries Assessment List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 14,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#benefAssessmentTable').DataTable().columns().count();
+                $(".benefAssessmentTable-error").html("");
+                $("#benefAssessmentTable").append(`<tbody class="benefAssessmentTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#benefAssessmentTable_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2,17,18,19,20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefAssessTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                if (filterScholarType == ""){
+                    benefAssessTable.columns(11).search("").draw();
+                } else {
+                    benefAssessTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefAssessTable.columns(12).search("").draw();
+                } else {
+                    benefAssessTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefAssessTable.columns(9).search("").draw();
+                } else {
+                    benefAssessTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefAssessTable.columns(14).search("").draw();
+                } else {
+                    benefAssessTable.columns(14).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefAssessTable.columns(9).search("").draw();
+                benefAssessTable.columns(11).search("").draw();
+                benefAssessTable.columns(12).search("").draw();
+                benefAssessTable.columns(14).search("").draw();
+            });
+        },
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+    // Beneficiaries For Renewal Table
+    let benefRenewTable = $('#benefRenewTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Beneficiaries Renewal List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 15,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#benefRenewTable').DataTable().columns().count();
+                $(".benefRenewTable-error").html("");
+                $("#benefRenewTable").append(`<tbody class="benefRenewTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#benefRenewTable_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefRenewTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                if (filterScholarType == ""){
+                    benefRenewTable.columns(11).search("").draw();
+                } else {
+                    benefRenewTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefRenewTable.columns(12).search("").draw();
+                } else {
+                    benefRenewTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefRenewTable.columns(9).search("").draw();
+                } else {
+                    benefRenewTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefRenewTable.columns(14).search("").draw();
+                } else {
+                    benefRenewTable.columns(14).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefRenewTable.columns(9).search("").draw();
+                benefRenewTable.columns(11).search("").draw();
+                benefRenewTable.columns(12).search("").draw();
+                benefRenewTable.columns(14).search("").draw();
+            });
+        },
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+    // Beneficiaries Removed Table
+    let benefRemovedTable = $('#benefRemovedTable').DataTable({
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "print",
+                className: "btn btn-primary btn-small d-none",
+                //For repeating heading.
+                repeatingHead: {
+                    // logo: "../images/logo192.png",
+                    // logoPosition: "left",
+                    logoStyle: "height: 96px; width: 96px;",
+                    title:  '<div class="d-flex justify-content-between my-3">' + 
+                                '<div>' + 
+                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
+                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
+                                    '<p class="">Removed Beneficiaries List</p>' +
+                                '</div>'+
+                                '<div>' + 
+                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
+                                '</div>' +
+                            '</div>',
+                },
+                customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '9pt' );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact table table-striped')
+                        .css( 'font-size', 'inherit' );
+                    // $(win.document.body).find( 'thead' )
+                    //     .addClass( 'thead-dark' )
+                    //     .css( 'font-size', 'inherit' );
+                    $(win.document.body).children("h1:first").remove();
+                },
+                exportOptions: {
+                    columns: function (idx, data, node) {
+                        switch(node.innerHTML){
+                            case "Actions":
+                                return false;
+                                break;
+                            case "Action":
+                                return false;
+                                break;
+                            case "Examination Start Date":
+                                return false;
+                                break;
+                            case "Examination End Date":
+                                return false;
+                                break;
+                            case "Interview Start Date":
+                                return false;
+                                break;
+                            case "Interview End Date":
+                                return false;
+                                break;
+                        }
+                            
+                        return true;
+                    }
+                }
+            },
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthChange": true,
+        "paging": true,
+        "searching": true,
+        "processing": true,
+        "ordering": true,
+        "serverSide": false,
+        "bInfo": true,
+        "ajax": {
+            url: "controller/tableHandler.php", // json datasource
+            type: "post",  // method  , by default get
+            data: {
+                "action": 16,
+            },
+            // success: function (row, data, index) {
+            //   console.log(row);
+            //   console.log(data);
+            //   console.log(index);
+            // },
+            error: function (data) {  // error handling
+                console.log(data);
+                var columnCount = $('#benefRemovedTable').DataTable().columns().count();
+                $(".benefRemovedTable-error").html("");
+                $("#benefRemovedTable").append(`<tbody class="benefRemovedTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
+                $("#benefRemovedTable_processing").css("display", "none");
+            }
+        },
+        "createdRow": function (row, data, index) { },
+        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
+        initComplete: function () {
+            $(document).on("click", "#setFilter", function () {
+                benefRemovedTable.ajax.reload();
+
+                let filterScholarType = $("#filterScholarType option:selected").text();
+                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterYearLevel = $("#filterYearLevel option:selected").val();
+
+                if (filterScholarType == ""){
+                    benefRemovedTable.columns(11).search("").draw();
+                } else {
+                    benefRemovedTable.columns(11).search(filterScholarType).draw();
+                }
+
+                if (filterEducationLevel == ""){
+                    benefRemovedTable.columns(12).search("").draw();
+                } else {
+                    benefRemovedTable.columns(12).search(filterEducationLevel).draw();
+                }
+
+                if (filterSchool == ""){
+                    benefRemovedTable.columns(9).search("").draw();
+                } else {
+                    benefRemovedTable.columns(9).search(filterSchool).draw();
+                }
+
+                if (filterYearLevel == ""){
+                    benefRemovedTable.columns(14).search("").draw();
+                } else {
+                    benefRemovedTable.columns(14).search(filterYearLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#filter_reset", function () {
+                benefRemovedTable.columns(9).search("").draw();
+                benefRemovedTable.columns(11).search("").draw();
+                benefRemovedTable.columns(12).search("").draw();
+                benefRemovedTable.columns(14).search("").draw();
+            });
+        },
+        language: {
+            processing: "<span class='loader'></span>"
+        },
+        fixedColumns: {
+            leftColumns: 0
+        },
+        scrollY: 505,
+        scrollX: true,
+        scrollCollapse: false,
+        scroller: {
+            loadingIndicator: false
+        },
+        stateSave: false,
+    });
+
+// ----------------------------------------------------------------------------------------
+// Graduates / Graduating Tables
+// ----------------------------------------------------------------------------------------
+    // Graduated Table
     let graduatesTable = $('#graduatesTable').DataTable({
         dom: "Bfrtip",
         buttons: [
@@ -592,7 +1912,7 @@ $(document).ready(function () {
         stateSave: false,
     });
 
-    // GRADUATES TABLE
+    // Graduating Table
     let graduatingTable = $('#graduatingTable').DataTable({
         dom: "Bfrtip",
         buttons: [
@@ -699,1308 +2019,7 @@ $(document).ready(function () {
         stateSave: false,
     });
 
-    // Benef List Table
-    let benefListTable = $('#listOfBeneficiaries').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Beneficiaries List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 8,
-            },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#listOfBeneficiaries').DataTable().columns().count();
-                $(".listOfBeneficiaries-error").html("");
-                $("#listOfBeneficiaries").append(`<tbody class="listOfBeneficiaries-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#listOfBeneficiaries_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                benefListTable.ajax.reload();
 
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-                
-                if (filterScholarType == ""){
-                    benefListTable.columns(11).search("").draw();
-                } else {
-                    benefListTable.columns(11).search(filterScholarType).draw();
-                }
-
-                if (filterEducationLevel == ""){
-                    benefListTable.columns(12).search("").draw();
-                } else {
-                    benefListTable.columns(12).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    benefListTable.columns(9).search("").draw();
-                } else {
-                    benefListTable.columns(9).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    benefListTable.columns(14).search("").draw();
-                } else {
-                    benefListTable.columns(14).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                benefListTable.columns(9).search("").draw();
-                benefListTable.columns(11).search("").draw();
-                benefListTable.columns(12).search("").draw();
-                benefListTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false
-    });
-
-    // View Notification Table
-    let viewNotif = $('#viewNotifTable').DataTable({
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 9,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#viewNotifTable').DataTable().columns().count();
-                $(".viewNotifTable-error").html("");
-                $("#viewNotifTable").append(`<tbody class="viewNotifTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#viewNotifTable_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false
-    });
-
-    let applicantInterviewTable = $('#applicantInterviewTable').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Applicants Inverview List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 11,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#applicantInterviewTable').DataTable().columns().count();
-                $(".applicantInterviewTable-error").html("");
-                $("#applicantInterviewTable").append(`<tbody class="applicantInterviewTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#applicantInterviewTable_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 7, 8, 12, 16, 17, 18, 21], searchable: true }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                applicantInterviewTable.ajax.reload();
-
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-
-                if (filterScholarType == ""){
-                    applicantInterviewTable.columns(11).search("").draw();
-                } else {
-                    applicantInterviewTable.columns(11).search(filterScholarType).draw();
-                }
-
-                if (filterEducationLevel == ""){
-                    applicantInterviewTable.columns(12).search("").draw();
-                } else {
-                    applicantInterviewTable.columns(12).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    applicantInterviewTable.columns(9).search("").draw();
-                } else {
-                    applicantInterviewTable.columns(9).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    applicantInterviewTable.columns(14).search("").draw();
-                } else {
-                    applicantInterviewTable.columns(14).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                applicantInterviewTable.columns(9).search("").draw();
-                applicantInterviewTable.columns(11).search("").draw();
-                applicantInterviewTable.columns(12).search("").draw();
-                applicantInterviewTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    let applicantExamTable = $('#applicantExamination').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Applicants Examinee List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 12,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#applicantExamination').DataTable().columns().count();
-                $(".applicantExamination-error").html("");
-                $("#applicantExamination").append(`<tbody class="applicantExamination-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#applicantExamination_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 7, 8, 12, 15, 16, 19, 20, 21], searchable: true }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                applicantExamTable.ajax.reload();
-
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-
-                if (filterScholarType == ""){
-                    applicantExamTable.columns(11).search("").draw();
-                } else {
-                    applicantExamTable.columns(11).search(filterScholarType).draw();
-                }
-
-                if (filterEducationLevel == ""){
-                    applicantExamTable.columns(12).search("").draw();
-                } else {
-                    applicantExamTable.columns(12).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    applicantExamTable.columns(9).search("").draw();
-                } else {
-                    applicantExamTable.columns(9).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    applicantExamTable.columns(14).search("").draw();
-                } else {
-                    applicantExamTable.columns(14).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                applicantExamTable.columns(9).search("").draw();
-                applicantExamTable.columns(11).search("").draw();
-                applicantExamTable.columns(12).search("").draw();
-                applicantExamTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    let removedApplicantTable = $('#applicantRemovedTable').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Removed Applicant List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 13,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#applicantRemovedTable').DataTable().columns().count();
-                $(".applicantRemovedTable-error").html("");
-                $("#applicantRemovedTable").append(`<tbody class="applicantRemovedTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#applicantRemovedTable_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                removedApplicantTable.ajax.reload();
-
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-
-                if (filterScholarType == ""){
-                    removedApplicantTable.columns(11).search("").draw();
-                } else {
-                    removedApplicantTable.columns(11).search(filterScholarType).draw();
-                }
-
-                if (filterEducationLevel == ""){
-                    removedApplicantTable.columns(12).search("").draw();
-                } else {
-                    removedApplicantTable.columns(12).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    removedApplicantTable.columns(9).search("").draw();
-                } else {
-                    removedApplicantTable.columns(9).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    removedApplicantTable.columns(14).search("").draw();
-                } else {
-                    removedApplicantTable.columns(14).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                removedApplicantTable.columns(9).search("").draw();
-                removedApplicantTable.columns(11).search("").draw();
-                removedApplicantTable.columns(12).search("").draw();
-                removedApplicantTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    // EXAMINEES TABLE
-    let examineeListTable = $('#examineeListTable').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Examinee List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 20,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#examineeListTable').DataTable().columns().count();
-                $(".examineeListTable-error").html("");
-                $("#examineeListTable").append(`<tbody class="examineeListTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#examineeListTable").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2] }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                examineeListTable.ajax.reload();
-
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-
-                // if (filterScholarType == ""){
-                //     examineeListTable.columns(11).search("").draw();
-                // } else {
-                //     examineeListTable.columns(11).search(filterScholarType).draw();
-                // }
-
-                if (filterEducationLevel == ""){
-                    examineeListTable.columns(9).search("").draw();
-                } else {
-                    examineeListTable.columns(9).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    examineeListTable.columns(7).search("").draw();
-                } else {
-                    examineeListTable.columns(7).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    examineeListTable.columns(11).search("").draw();
-                } else {
-                    examineeListTable.columns(11).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                examineeListTable.columns(7).search("").draw();
-                examineeListTable.columns(9).search("").draw();
-                examineeListTable.columns(11).search("").draw();
-                // examineeListTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    let benefAssessTable = $('#benefAssessmentTable').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Beneficiaries Assessment List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 14,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#benefAssessmentTable').DataTable().columns().count();
-                $(".benefAssessmentTable-error").html("");
-                $("#benefAssessmentTable").append(`<tbody class="benefAssessmentTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#benefAssessmentTable_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2,17,18,19,20] }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                benefAssessTable.ajax.reload();
-
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-
-                if (filterScholarType == ""){
-                    benefAssessTable.columns(11).search("").draw();
-                } else {
-                    benefAssessTable.columns(11).search(filterScholarType).draw();
-                }
-
-                if (filterEducationLevel == ""){
-                    benefAssessTable.columns(12).search("").draw();
-                } else {
-                    benefAssessTable.columns(12).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    benefAssessTable.columns(9).search("").draw();
-                } else {
-                    benefAssessTable.columns(9).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    benefAssessTable.columns(14).search("").draw();
-                } else {
-                    benefAssessTable.columns(14).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                benefAssessTable.columns(9).search("").draw();
-                benefAssessTable.columns(11).search("").draw();
-                benefAssessTable.columns(12).search("").draw();
-                benefAssessTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    let benefRenewTable = $('#benefRenewTable').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Beneficiaries Renewal List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 15,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#benefRenewTable').DataTable().columns().count();
-                $(".benefRenewTable-error").html("");
-                $("#benefRenewTable").append(`<tbody class="benefRenewTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#benefRenewTable_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                benefRenewTable.ajax.reload();
-
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-
-                if (filterScholarType == ""){
-                    benefRenewTable.columns(11).search("").draw();
-                } else {
-                    benefRenewTable.columns(11).search(filterScholarType).draw();
-                }
-
-                if (filterEducationLevel == ""){
-                    benefRenewTable.columns(12).search("").draw();
-                } else {
-                    benefRenewTable.columns(12).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    benefRenewTable.columns(9).search("").draw();
-                } else {
-                    benefRenewTable.columns(9).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    benefRenewTable.columns(14).search("").draw();
-                } else {
-                    benefRenewTable.columns(14).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                benefRenewTable.columns(9).search("").draw();
-                benefRenewTable.columns(11).search("").draw();
-                benefRenewTable.columns(12).search("").draw();
-                benefRenewTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    let benefRemovedTable = $('#benefRemovedTable').DataTable({
-        dom: "Bfrtip",
-        buttons: [
-            {
-                extend: "print",
-                className: "btn btn-primary btn-small d-none",
-                //For repeating heading.
-                repeatingHead: {
-                    // logo: "../images/logo192.png",
-                    // logoPosition: "left",
-                    logoStyle: "height: 96px; width: 96px;",
-                    title:  '<div class="d-flex justify-content-between my-3">' + 
-                                '<div>' + 
-                                    '<p class="fw-bold h1 my-0" style="color: #00008B;">Youth Development Office</p>' + 
-                                    '<p class="small my-0">THRIVE THOMASINO SCHOLARLY</p>' + 
-                                    '<p class="">Removed Beneficiaries List</p>' +
-                                '</div>'+
-                                '<div>' + 
-                                    '<img class="mx-auto" src="../images/logo192.png" width="96px" height="96px" alt="">' +
-                                '</div>' +
-                            '</div>',
-                },
-                customize: function ( win ) {
-                    $(win.document.body)
-                        .css( 'font-size', '9pt' );
- 
-                    $(win.document.body).find( 'table' )
-                        .addClass( 'compact table table-striped')
-                        .css( 'font-size', 'inherit' );
-                    // $(win.document.body).find( 'thead' )
-                    //     .addClass( 'thead-dark' )
-                    //     .css( 'font-size', 'inherit' );
-                    $(win.document.body).children("h1:first").remove();
-                },
-                exportOptions: {
-                    columns: function (idx, data, node) {
-                        switch(node.innerHTML){
-                            case "Actions":
-                                return false;
-                                break;
-                            case "Action":
-                                return false;
-                                break;
-                            case "Examination Start Date":
-                                return false;
-                                break;
-                            case "Examination End Date":
-                                return false;
-                                break;
-                            case "Interview Start Date":
-                                return false;
-                                break;
-                            case "Interview End Date":
-                                return false;
-                                break;
-                        }
-                            
-                        return true;
-                    }
-                }
-            },
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 16,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#benefRemovedTable').DataTable().columns().count();
-                $(".benefRemovedTable-error").html("");
-                $("#benefRemovedTable").append(`<tbody class="benefRemovedTable-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#benefRemovedTable_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }, { visible: false, targets: [2, 17, 18, 19, 20] }],
-        initComplete: function () {
-            $(document).on("click", "#setFilter", function () {
-                benefRemovedTable.ajax.reload();
-
-                let filterScholarType = $("#filterScholarType option:selected").text();
-                let filterEducationLevel = $("#filterEducationLevel option:selected").text();
-                let filterSchool = $("#filterSchool option:selected").text();
-                let filterYearLevel = $("#filterYearLevel option:selected").val();
-
-                if (filterScholarType == ""){
-                    benefRemovedTable.columns(11).search("").draw();
-                } else {
-                    benefRemovedTable.columns(11).search(filterScholarType).draw();
-                }
-
-                if (filterEducationLevel == ""){
-                    benefRemovedTable.columns(12).search("").draw();
-                } else {
-                    benefRemovedTable.columns(12).search(filterEducationLevel).draw();
-                }
-
-                if (filterSchool == ""){
-                    benefRemovedTable.columns(9).search("").draw();
-                } else {
-                    benefRemovedTable.columns(9).search(filterSchool).draw();
-                }
-
-                if (filterYearLevel == ""){
-                    benefRemovedTable.columns(14).search("").draw();
-                } else {
-                    benefRemovedTable.columns(14).search(filterYearLevel).draw();
-                }
-            });
-
-            $(document).on("click", "#filter_reset", function () {
-                benefRemovedTable.columns(9).search("").draw();
-                benefRemovedTable.columns(11).search("").draw();
-                benefRemovedTable.columns(12).search("").draw();
-                benefRemovedTable.columns(14).search("").draw();
-            });
-        },
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollX: true,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    let officialTable = $('#setWebsiteOfficials').DataTable({
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 17,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#setWebsiteOfficials').DataTable().columns().count();
-                $(".setWebsiteOfficials-error").html("");
-                $("#setWebsiteOfficials").append(`<tbody class="setWebsiteOfficials-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#setWebsiteOfficials_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
-
-    let testimonialTable = $('#setWebsiteAlumni').DataTable({
-        "lengthChange": true,
-        "paging": true,
-        "searching": true,
-        "processing": true,
-        "ordering": true,
-        "serverSide": false,
-        "bInfo": true,
-        "ajax": {
-            url: "controller/tableHandler.php", // json datasource
-            type: "post",  // method  , by default get
-            data: {
-                "action": 18,
-            },
-            // success: function (row, data, index) {
-            //   console.log(row);
-            //   console.log(data);
-            //   console.log(index);
-            // },
-            error: function (data) {  // error handling
-                console.log(data);
-                var columnCount = $('#setWebsiteAlumni').DataTable().columns().count();
-                $(".setWebsiteAlumni-error").html("");
-                $("#setWebsiteAlumni").append(`<tbody class="setWebsiteAlumni-error text-center"><tr><th colspan="${columnCount}">No data found in the server</th></tr></tbody>`);
-                $("#setWebsiteAlumni_processing").css("display", "none");
-            }
-        },
-        "createdRow": function (row, data, index) { },
-        "columnDefs": [{ className: "text-center", "targets": [0] }],
-        language: {
-            processing: "<span class='loader'></span>"
-        },
-        fixedColumns: {
-            leftColumns: 0
-        },
-        scrollY: 505,
-        scrollCollapse: false,
-        scroller: {
-            loadingIndicator: false
-        },
-        stateSave: false,
-    });
 });
 
 $(document).on("click", ".viewInfoClass", function () {
