@@ -1555,7 +1555,7 @@ function addEvents($data)
             $msg .= '<p>Thank you! <br></p>';
             $msg .= '<p>Best regards,</p>';
             $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
-            return strtolower(sendEmail($emails, $eventName, $description));
+            return strtolower(sendEmail($emails, $eventName, $msg));
         }
         return "success";
         
@@ -1617,7 +1617,7 @@ function updateEvents($data)
             $msg .= '<p>Thank you! <br></p>';
             $msg .= '<p>Best regards,</p>';
             $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
-            return strtolower(sendEmail($emails, $eventName, $description));
+            return strtolower(sendEmail($emails, $eventName, $msg));
         }
         return "success";
         
