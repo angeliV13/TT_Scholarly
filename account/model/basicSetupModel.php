@@ -1530,6 +1530,7 @@ function addEvents($data)
     $active = $data['active'];
     $email  = $data['email'];
     $emails = [];
+    $msg = "";
 
     if (!file_exists('../assets/img/uploads/events/')) mkdir('../assets/img/uploads/events/', 0777, true);
 
@@ -1551,7 +1552,7 @@ function addEvents($data)
             $emails = getAllEmails();
             $msg .= '<p>Hi There! <br></p>';
             $msg .= '<br>';
-            $msg = '<p> '. $description .' </p>';
+            $msg = '<p> '. $eventDesc .' </p>';
             $msg .= '<p>Thank you! <br></p>';
             $msg .= '<p>Best regards,</p>';
             $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
@@ -1579,6 +1580,8 @@ function updateEvents($data)
     $active = $data['active'];
     $email  = $data['email'];
     $emails = [];
+    $msg = "";
+
 
     $exists = check_exist_multiple(['table' => 'website_coa', 'column' => ['id' => ['=', $data['eventId']]]], 1);
     $oldImg = $exists[0]['image'];
@@ -1613,7 +1616,7 @@ function updateEvents($data)
             $emails = getAllEmails();
             $msg .= '<p>Hi There! <br></p>';
             $msg .= '<br>';
-            $msg = '<p> '. $description .' </p>';
+            $msg = '<p> '. $eventDesc .' </p>';
             $msg .= '<p>Thank you! <br></p>';
             $msg .= '<p>Best regards,</p>';
             $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
