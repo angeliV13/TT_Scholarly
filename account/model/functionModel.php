@@ -2043,3 +2043,18 @@ function getRequirementDesc($reqId){
     
     return ($data);
 }
+
+function getAllEmails($active = 1){
+    include("dbconnection.php");
+
+    $data = [];
+
+    $sql = "SELECT email FROM `account` WHERE account_status = '{$active}'";
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    while($row = $query->fetch_assoc()){
+        $data[] = $row['email'];
+    }
+    
+    return ($data);
+}

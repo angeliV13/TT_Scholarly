@@ -1528,6 +1528,8 @@ function addEvents($data)
     $dateStart = $data['dateStart'];
     $dateEnd = $data['dateEnd'];
     $active = $data['active'];
+    $email  = $data['email'];
+    $emails = [];
 
     if (!file_exists('../assets/img/uploads/events/')) mkdir('../assets/img/uploads/events/', 0777, true);
 
@@ -1544,9 +1546,18 @@ function addEvents($data)
     $sql = "INSERT INTO website_coa (title, description, image, date_start, date_end, date_added, added_by, active) VALUES ('$eventName', '$eventDesc', '$img', '$dateStart', '$dateEnd', NOW(), '$userId', $active)";
     $query = $conn->query($sql);
 
-    return ($query) ? "success" : $conn->error;
+    if ($query){
+        if($email == '1'){
+            $emails = getAllEmails();
+            return strtolower(sendEmail($emails, $eventName, $description));
+        }
+        return "success";
+        
+    }else{
+        return $conn->error;
+    }
 
-    // EXTEND ADD EMAIL FUNCTION HERE
+    // return ($query) ? "success" : $conn->error;
 }
 
 function updateEvents($data)
@@ -1560,6 +1571,8 @@ function updateEvents($data)
     $dateStart = $data['dateStart'];
     $dateEnd = $data['dateEnd'];
     $active = $data['active'];
+    $email  = $data['email'];
+    $emails = [];
 
     $exists = check_exist_multiple(['table' => 'website_coa', 'column' => ['id' => ['=', $data['eventId']]]], 1);
     $oldImg = $exists[0]['image'];
@@ -1589,9 +1602,18 @@ function updateEvents($data)
     $sql = "UPDATE website_coa SET title = '$eventName', description = '$eventDesc', image = '$img', date_start = '$dateStart', date_end = '$dateEnd', added_by = '$userId', active = $active WHERE id = '{$data['eventId']}'";
     $query = $conn->query($sql);
 
-    return ($query) ? "success" : $conn->error;
+    if ($query){
+        if($email == '1'){
+            $emails = getAllEmails();
+            return strtolower(sendEmail($emails, $eventName, $description));
+        }
+        return "success";
+        
+    }else{
+        return $conn->error;
+    }
 
-    // EXTEND ADD EMAIL FUNCTION HERE
+    // return ($query) ? "success" : $conn->error;
 
 }
 
