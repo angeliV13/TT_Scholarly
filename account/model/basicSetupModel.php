@@ -1531,6 +1531,8 @@ function addEvents($data)
     $email  = $data['email'];
     $emails = [];
     $msg = "";
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
+
 
     if (!file_exists('../assets/img/uploads/events/')) mkdir('../assets/img/uploads/events/', 0777, true);
 
@@ -1556,7 +1558,7 @@ function addEvents($data)
             $msg .= '<p>Thank you! <br></p>';
             $msg .= '<p>Best regards,</p>';
             $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
-            return strtolower(sendEmail($emails, $eventName, $msg));
+            return strtolower(sendEmail($emails, $eventName, $msg, $emailType));
         }
         return "success";
         
@@ -1581,6 +1583,8 @@ function updateEvents($data)
     $email  = $data['email'];
     $emails = [];
     $msg = "";
+    $emailType = ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') ? "1" : '3';
+
 
 
     $exists = check_exist_multiple(['table' => 'website_coa', 'column' => ['id' => ['=', $data['eventId']]]], 1);
@@ -1620,7 +1624,7 @@ function updateEvents($data)
             $msg .= '<p>Thank you! <br></p>';
             $msg .= '<p>Best regards,</p>';
             $msg .= '<p>' . get_website_info(0)['header'] . '</p>';
-            return strtolower(sendEmail($emails, $eventName, $msg));
+            return strtolower(sendEmail($emails, $eventName, $msg, $emailType));
         }
         return "success";
         
