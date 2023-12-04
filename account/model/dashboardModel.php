@@ -58,7 +58,7 @@ function getExaminationRate($ay_id, $sem_id, $status){
     include("dbconnection.php");
 
     $equation = (($status == 1) ? '>= 75' : '< 75');
-    $sql = "SELECT COUNT(user_id) AS 'value'
+    $sql = "SELECT COUNT(*) AS 'value'
             FROM scholarship_application 
             WHERE ay_id = '{$ay_id}'
             AND sem_id = '{$sem_id}'
