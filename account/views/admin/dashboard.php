@@ -249,7 +249,7 @@
             <div class="card-body pb-0">
               <h5 class="card-title">Examation Trends</h5>
 
-              <div id="aexaminationTrends" style="min-height: 400px;" class="echart"></div>
+              <div id="examinationTrends" style="min-height: 400px;" class="echart"></div>
 
             </div>
           </div><!-- End Application Trends -->
