@@ -16,7 +16,7 @@
                   <ul id="applicants-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                       <li>
                           <a href="index.php?nav=new-applicants">
-                              <i class="bi bi-circle"></i><span><Label>List of New Applicants</Label></span>
+                              <i class="bi bi-circle"></i><span><Label>For Checking</Label></span>
                           </a>
                       </li>
                       <li>

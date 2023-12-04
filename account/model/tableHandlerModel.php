@@ -684,7 +684,7 @@ function schoolTable()
     echo json_encode($json_data);
 }
 
-function userTables($stat = "", $acc_status = "", $acc_type = "")
+function userTables($stat = "", $acc_status = "", $acc_type = "", $app_benef = "")
 {
     // stat = scholarship_application status
     // acc_status = account account_status
@@ -693,9 +693,11 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
     include("dbconnection.php");
     include("../global_variables.php");
 
+    // Getting AcadYear and Semester
     $defaultYear = getDefaultSemesterId();
     $acadYear = getDefaultAcadYearId();
 
+    // Setting the Array
     $schoolClassArr = ['0' => 'Public (Within Sto. Tomas, Batangas)', '1' => 'Private (Within Sto. Tomas, Batangas)', '2' => 'Public (Outside Sto. Tomas, Batangas)', '3' => 'Private (Outside Sto. Tomas, Batangas)'];
     $schoolLevelArr = ['0' => 'College', '1' => 'Senior High School', '2' => 'High School', '3' => 'Elementary'];
     $scholarTypeArr  = ['1' => 'College Scholarship', '2' => 'College Educational Assitance', '3' => 'SHS Educational Assistance'];
@@ -705,19 +707,28 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             JOIN scholarship_application sa ON acc.id = sa.userId
             WHERE sa.ay_id = '$acadYear' AND sa.sem_id = '$defaultYear'";
 
-    $sql .= ($acc_type == "") ? " AND acc.account_type = '3'" : " AND acc.account_type = '$acc_type'";
-
-    if ($acc_status == "")
+    // Checking the Beneficiaries
+    if($app_benef == 1)
     {
-        $sql .= " AND acc.account_status = '1'";
-    }
-    else if ($acc_status == 4)
-    {
-        $sql .= " AND (acc.account_status = '4' OR sa.status = '5')";
+        $sql .= " AND acc.account_type = '2' OR ( acc.account_type = '3' AND sa.status = '4' )"; 
     }
     else
     {
-        $sql .= " AND acc.account_status = '$acc_status'";
+        $sql .= ($acc_type == "") ? " AND acc.account_type = '3'" : " AND acc.account_type = '$acc_type'";
+
+        // Checking the Account Status
+        if ($acc_status == "")
+        {
+            $sql .= " AND acc.account_status = '1'";
+        }
+        else if ($acc_status == 4)
+        {
+            $sql .= " AND (acc.account_status = '4' OR sa.status = '5')";
+        }
+        else
+        {
+            $sql .= " AND acc.account_status = '$acc_status'";
+        }
     }
 
     $query = $conn->query($sql);
@@ -751,9 +762,15 @@ function userTables($stat = "", $acc_status = "", $acc_type = "")
             if ($stat != "")
             {
                 if (!isset($scholarType['status'])) continue;
-                if ($scholarType['status'] != $stat) continue;
+                if ($app_benef == 1){
+                    if ($scholarType['status'] != 2 || $scholarType['status'] != 4) continue;
+                }else{
+                    if ($scholarType['status'] != $stat) continue;
+                }
+                
             }
-            
+
+            // Button for Remove Applicant  / Beneficiary
             $buttonText = ($acc_type == 2) ? "Remove Beneficiary" : "Remove Applicant";
 
             $none = ($acc_status == 4) ? "d-none" : "";

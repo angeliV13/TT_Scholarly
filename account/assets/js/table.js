@@ -1325,7 +1325,7 @@ $(document).ready(function () {
         stateSave: false
     });
 
-    // Beneficiaries For Assessmenet Table
+    // Beneficiaries For Assessment Table
     let benefAssessTable = $('#benefAssessmentTable').DataTable({
         dom: "Bfrtip",
         buttons: [
