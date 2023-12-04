@@ -584,6 +584,10 @@ $(document).ready(function ($) {
                     value: examinationCount.failed,
                     name: "Failed",
                   },
+                  {
+                    value: examinationCount.no_exam,
+                    name: "No Exam",
+                  },
                 ],
               },
             ],

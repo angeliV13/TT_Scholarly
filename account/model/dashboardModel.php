@@ -54,7 +54,7 @@ function getUserCount($ay_id, $sem_id, $account_type, $scholarType){
     return $value;
 }
 
-function getExaminationRate($ay_id, $sem_id, $status){
+function getExaminationRate($ay_id, $sem_id, $status, $finished){
     include("dbconnection.php");
 
     $equation = (($status == 1) ? '>= 75' : '< 75');
@@ -62,6 +62,7 @@ function getExaminationRate($ay_id, $sem_id, $status){
             FROM examination_applicant 
             WHERE ay_id = '{$ay_id}'
             AND sem_id = '{$sem_id}'
+            AND start_exam = '{$finished}'
             AND percentage {$equation}";
 
     $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
@@ -333,8 +334,9 @@ function getExaminationCount()
     $sem_id = getDefaultSemesterId();
 
     $data = [
-        "passed" => getExaminationRate($ay_id, $sem_id, 1), //Passed
-        "failed" => getExaminationRate($ay_id, $sem_id, 0), //Failed
+        "passed"    => getExaminationRate($ay_id, $sem_id, 1, 2), //Passed
+        "failed"    => getExaminationRate($ay_id, $sem_id, 0, 2), //Failed
+        "no_exam"   => getExaminationRate($ay_id, $sem_id, 0, 1), //No Exam
     ];
 
     return json_encode($data);
