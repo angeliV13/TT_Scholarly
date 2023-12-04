@@ -537,12 +537,12 @@ $(document).ready(function ($) {
     type: "POST",
     url: "controller/dashboard.php",
     data: {
-      action: 4,
+      action: 8,
     },
     success: function (data) {
       console.log(data);
       if (data != "") {
-        let applicantCount = JSON.parse(data);
+        let examinationCount = JSON.parse(data);
 
         // Scholar Trends for Applicant
         let examinationTrendsV2 = echarts
@@ -577,11 +577,11 @@ $(document).ready(function ($) {
                 },
                 data: [
                   {
-                    value: applicantCount.passed,
+                    value: examinationCount.passed,
                     name: "Passed",
                   },
                   {
-                    value: applicantCount.failed,
+                    value: examinationCount.failed,
                     name: "Failed",
                   },
                 ],
