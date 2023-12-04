@@ -545,7 +545,7 @@ $(document).ready(function ($) {
         let applicantCount = JSON.parse(data);
 
         // Scholar Trends for Applicant
-        let scholarTrendsV2 = echarts
+        let examinationTrendsV2 = echarts
           .init(document.querySelector("#examinationTrends"))
           .setOption({
             tooltip: {
