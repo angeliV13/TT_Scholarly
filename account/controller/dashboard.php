@@ -31,5 +31,8 @@ if (isset($_REQUEST['action']))
         case 7: // Chart of Gender Trends;
             echo getSchoolTrends();
             break;
+        case 8: // Chart Count for Examiation Trends
+            echo getExaminationCount();
+            break;
     }
 }

@@ -243,6 +243,17 @@
             </div>
           </div><!-- End Gender Trends -->
 
+          <!-- Examination Trends -->
+          <div class="card">
+
+            <div class="card-body pb-0">
+              <h5 class="card-title">Examation Trends</h5>
+
+              <div id="aexaminationTrends" style="min-height: 400px;" class="echart"></div>
+
+            </div>
+          </div><!-- End Application Trends -->
+
         </div><!-- End Right side columns -->
 
       </div>

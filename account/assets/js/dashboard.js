@@ -532,4 +532,64 @@ $(document).ready(function ($) {
     },
   });
 
+  // Data for Applicants Count
+  $.ajax({
+    type: "POST",
+    url: "controller/dashboard.php",
+    data: {
+      action: 4,
+    },
+    success: function (data) {
+      console.log(data);
+      if (data != "") {
+        let applicantCount = JSON.parse(data);
+
+        // Scholar Trends for Applicant
+        let scholarTrendsV2 = echarts
+          .init(document.querySelector("#examinationTrends"))
+          .setOption({
+            tooltip: {
+              trigger: "item",
+            },
+            legend: {
+              top: "5%",
+              left: "center",
+            },
+            series: [
+              {
+                name: "Examination Status",
+                type: "pie",
+                radius: ["40%", "70%"],
+                avoidLabelOverlap: false,
+                label: {
+                  show: false,
+                  position: "center",
+                },
+                emphasis: {
+                  label: {
+                    show: true,
+                    fontSize: "18",
+                    fontWeight: "bold",
+                  },
+                },
+                labelLine: {
+                  show: false,
+                },
+                data: [
+                  {
+                    value: applicantCount.passed,
+                    name: "Passed",
+                  },
+                  {
+                    value: applicantCount.failed,
+                    name: "Failed",
+                  },
+                ],
+              },
+            ],
+          });
+      }
+    },
+  });
+
 });

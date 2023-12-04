@@ -54,6 +54,25 @@ function getUserCount($ay_id, $sem_id, $account_type, $scholarType){
     return $value;
 }
 
+function getExaminationRate($ay_id, $sem_id, $status){
+    include("dbconnection.php");
+
+    $equation = (($status == 1) ? '>= 75' : '< 75');
+    $sql = "SELECT COUNT(user_id) AS 'value'
+            FROM scholarship_application 
+            WHERE ay_id = '{$ay_id}'
+            AND sem_id = '{$sem_id}'
+            AND percentage {$equation}";
+
+    $query = $conn->query($sql) or die("Error BSQ000: " . $conn->error);
+
+    while($row = $query->fetch_assoc()) {
+        extract($row);
+    }
+
+    return $value;
+}
+
 function getChartTrends()
 {
     include("dbconnection.php");
@@ -303,6 +322,19 @@ function getSchoolTrends()
         "school"    => $school_arr,
         "male"      => $male_arr,
         "female"    => $female_arr,
+    ];
+
+    return json_encode($data);
+}
+
+function getExaminationCount()
+{
+    $ay_id  = getDefaultAcadYearId();
+    $sem_id = getDefaultSemesterId();
+
+    $data = [
+        "passed" => getExaminationRate($ay_id, $sem_id, 1), //Passed
+        "failed" => getExaminationRate($ay_id, $sem_id, 0), //Failed
     ];
 
     return json_encode($data);
