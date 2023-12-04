@@ -209,25 +209,25 @@
                       <span>Profile</span>
                   </a>
               </li><!-- End Dashboard Nav -->
+              <?php 
+                $access = 1 + $scholarType; 
+              ?>
+
+              <?php if ($assessmentAccess != null) : ?>
+
+                <?php if (($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)  && (( $status['status'] == 1 && $status['account_type'] == 2) || ($status['status'] == 4 && $status['account_type'] == 3))) : ?>
+                    <!-- Start Assessment Requirements Nav -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
+                            <i class="bi bi-person"></i>
+                            <span>Assessment</span>
+                        </a>
+                    </li><!-- Applicants Nav -->
+                <?php endif; ?>
+
+              <?php endif; ?>
 
               <?php if ($_SESSION['account_type'] == 2) : ?>
-
-                  <?php 
-                    $access = 1 + $scholarType; ?>
-
-                  <?php if ($assessmentAccess != null) : ?>
-
-                      <?php if (($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)  && $status['add_flag'] == 1) : ?>
-                          <!-- Start Assessment Requirements Nav -->
-                          <li class="nav-item">
-                              <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
-                                  <i class="bi bi-person"></i>
-                                  <span>Assessment</span>
-                              </a>
-                          </li><!-- Applicants Nav -->
-                      <?php endif; ?>
-
-                  <?php endif; ?>
 
                   <?php if ($renewalAccess != null) : ?>
 

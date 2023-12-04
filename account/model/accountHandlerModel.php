@@ -1204,7 +1204,8 @@ function set_applicant_status($data)
 
     if ($decision == 4)
     {
-        $updateType = update_account_type($id, 2);
+        $updateType   = update_account_type($id, 2);
+        $updateStatus = update_applicant_status($id, 0); // Setting the Account Status Back to 0
         if ($updateType != 'success') return 'Error: ' . $updateType;
     }
 
