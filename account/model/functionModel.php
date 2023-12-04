@@ -1474,7 +1474,7 @@ function check_status($id)
         {
             // $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, account_type, status, dateApplied) VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', '" . $status . "', NOW())";
             $sql = "INSERT INTO scholarship_application (userId, ay_id, sem_id, scholarType, account_type, status, dateApplied) 
-                    VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', '" . 0 . "', NOW())"; //Status is Set to 0 (Reset)
+                    VALUES (" . $id . ", '" . $acadYear . "', '" . $defaultYear . "', '" . $_SESSION['scholarType'] . "', '" . $_SESSION['account_type'] . "', '" . $status . "', NOW())"; //Status is Set to 3 (Renewal)
 
             $query = $conn->query($sql);
         }

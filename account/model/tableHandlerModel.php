@@ -711,7 +711,8 @@ function userTables($stat = "", $acc_status = "", $acc_type = "", $app_benef = "
     if($app_benef == 1)
     {
         // $sql .= " AND acc.account_type = '2' OR ( acc.account_type = '2' AND sa.status = '4' )"; 
-        $sql .= " AND ( acc.account_type = '2' AND sa.status = '4' )"; 
+        // $sql .= " AND ( acc.account_type = '2' AND sa.status = '4' )"; 
+        $sql .= " AND (( acc.account_type = '2' AND sa.status = '4' ) OR ( acc.account_type = '2' AND sa.account_type = '3' AND sa.status = '0' ))"; 
     }
     else
     {
@@ -764,7 +765,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "", $app_benef = "
             {
                 if (!isset($scholarType['status'])) continue;
                 if ($app_benef == 1){
-                    if ($scholarType['status'] != 2 || $scholarType['status'] != 4) continue;
+                    if ($scholarType['status'] != 2 || $scholarType['status'] != 0) continue;
                 }else{
                     if ($scholarType['status'] != $stat) continue;
                 }
