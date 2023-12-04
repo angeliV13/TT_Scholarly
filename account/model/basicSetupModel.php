@@ -1545,6 +1545,8 @@ function addEvents($data)
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;
+
+    // EXTEND ADD EMAIL FUNCTION HERE
 }
 
 function updateEvents($data)
@@ -1588,6 +1590,9 @@ function updateEvents($data)
     $query = $conn->query($sql);
 
     return ($query) ? "success" : $conn->error;
+
+    // EXTEND ADD EMAIL FUNCTION HERE
+
 }
 
 function deleteEvents($id)

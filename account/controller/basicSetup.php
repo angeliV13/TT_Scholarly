@@ -368,6 +368,7 @@ if (isset($_REQUEST['action']))
                 'dateStart'     => isset($_POST['dateStart']) ? $_POST['dateStart'] : '',
                 'dateEnd'       => isset($_POST['dateEnd']) ? $_POST['dateEnd'] : '',
                 'active'        => isset($_POST['active']) ? $_POST['active'] : '',
+                'email'         => isset($_POST['email']) ? $_POST['email'] : '',
             ];
 
             echo addEvents($data);
@@ -382,6 +383,7 @@ if (isset($_REQUEST['action']))
                 'dateStart'     => isset($_POST['dateStart']) ? $_POST['dateStart'] : '',
                 'dateEnd'       => isset($_POST['dateEnd']) ? $_POST['dateEnd'] : '',
                 'active'        => isset($_POST['active']) ? $_POST['active'] : '',
+                'email'         => isset($_POST['email']) ? $_POST['email'] : '',
             ];
 
             echo updateEvents($data);

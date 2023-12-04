@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         <input type="checkbox" id="eactive" class="form-check-input" ${(active == 1) ? "checked" : ""}>
                         <label for="eactive" class="form-check-label">Event Active?</label>
+                        <input type="checkbox" id="eemailToAll" class="form-check-input mb-2" checked>
+                        <label for="eemailToAll" class="form-check-label mb-2">Send Email</label>
                         <input type="hidden" id="eeventId" class="form-control" value="${eventId}">
                         <input type="hidden" id="edateStart" class="form-control" value="${eventStart}">
                         <input type="hidden" id="edateEnd" class="form-control" value="${eventEnd}">`,
@@ -71,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         let eventDesc = $("#eeventDesc").val();
                         let eventImg = $("#eeventImg").val();
                         let active = ($("input#eactive").is(":checked")) ? 1 : 0;
+                        let email = ($("input#eemailToAll").is(":checked")) ? 1 : 0;
 
                         return new Promise(function(resolve, reject) {
                             if (eventName == ""){
@@ -105,6 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             formData.append("dateStart", dateStart);
                             formData.append("dateEnd", dateEnd);
                             formData.append("active", active);
+                            formData.append("email", email);
+
                                 
                             $.ajax({
                                 url: "controller/basicSetup.php",
@@ -260,6 +265,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="" id="eventImgPreview" class="img-fluid" style="max-height: 200px; max-width: 200px;">
                 </div>
                 <label for="active" class="form-check-label mb-2">Event Active?</label>
+                <input type="checkbox" id="emailToAll" class="form-check-input mb-2" checked>
+                <label for="emailToAll" class="form-check-label mb-2">Send Email</label>
                 <input type="file" id="eventImg" class="form-control" accept="image/*">
                 <input type="hidden" id="dateStart" class="form-control" value="${dateStart}">
                 <input type="hidden" id="dateEnd" class="form-control" value="${dateEnd}">`,
@@ -279,7 +286,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 let eventName = $("#eventName").val();
                 let eventDesc = $("#eventDesc").val();
                 let eventImg = $("#eventImg").val();
-                let active = $("input[type='checkbox']").is(":checked") ? 1 : 0;
+                let active = $("input#active").is(":checked") ? 1 : 0;
+                let email = ($("input#emailToAll").is(":checked")) ? 1 : 0;
+
 
                 if (eventName == ""){
                     Swal.showValidationMessage(
@@ -316,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append("dateStart", dateStart);
                 formData.append("dateEnd", dateEnd);
                 formData.append("active", active);
+                formData.append("email", email);
 
                 $.ajax({
                     url: "controller/basicSetup.php",
