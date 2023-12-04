@@ -59,7 +59,7 @@ function getExaminationRate($ay_id, $sem_id, $status){
 
     $equation = (($status == 1) ? '>= 75' : '< 75');
     $sql = "SELECT COUNT(*) AS 'value'
-            FROM scholarship_application 
+            FROM examination_applicant 
             WHERE ay_id = '{$ay_id}'
             AND sem_id = '{$sem_id}'
             AND percentage {$equation}";
