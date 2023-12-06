@@ -108,10 +108,16 @@ function infoRadio() {
         title: "Reject File?",
         text: "Are you sure you want to reject this file?",
         icon: "question",
+        input: 'textarea',
+        inputLabel: 'Reason',
+        inputPlaceholder: 'Type your reason here...',
+        inputAttributes: {
+            'aria-label': 'Type your reason here'
+        },
         showCancelButton: true,
         confirmButtonText: "Yes",
-        preConfirm: (reason) => {
-          if (reason == '') {
+        preConfirm: (remarks) => {
+          if (remarks == '') {
               Swal.showValidationMessage(
                   `Please fill up the reason field.`
               )
