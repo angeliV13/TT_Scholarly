@@ -138,7 +138,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                         <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
                                     </div>';
             } elseif ($status == 4) {
-                $button =   '<div class="btn-group-vertical d-flex">
+                $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
                                 <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
                             </div>';
             } else {
@@ -190,7 +190,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                     <p id="textUploadClearance" class="small mx-auto">' . $file . '</p>
                                 </div>';
             } elseif ($status == 4) {
-                $button =   '<div class="btn-group-vertical d-flex">
+                $buttonClearance =   '<div class="btn-group-vertical d-flex">
                                 <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
                             </div>';
             } else {
@@ -241,7 +241,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                     <p id="textUploadCor" class="small mx-auto">' . $file . '</p>
                                 </div>';
             } elseif ($status == 4) {
-                $button =   '<div class="btn-group-vertical d-flex">
+                $buttonCor =   '<div class="btn-group-vertical d-flex">
                                 <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
                             </div>';
             } else {
@@ -293,7 +293,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                     <p id="textUploadGrade" class="small mx-auto">' . $file . '</p>
                                 </div>';
             } elseif ($status == 4) {
-                $button =   '<div class="btn-group-vertical d-flex">
+                $buttonGrade =   '<div class="btn-group-vertical d-flex">
                                 <p id="textUploadSchoolId" class="small mx-auto">' . $file . '</p>
                             </div>';
             } else {
