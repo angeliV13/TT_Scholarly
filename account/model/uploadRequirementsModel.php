@@ -1105,6 +1105,7 @@ function setRequirements($userid, $id, $status, $state, $remarks){
             break;
     }
     if($entries->num_rows <> 0) {
+        return($remarks);
         return (update_applicant_status($userid, 1) == true ? 'Success' : 'Error');
     }
     return 'Success';

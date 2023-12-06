@@ -63,11 +63,11 @@ if(isset($_REQUEST['action'])){
 
             break;
         case 5:
-            $uid     = isset($_POST['uid'])    ? $_POST['uid']    : "";
-            $id     = isset($_POST['id'])    ? $_POST['id']    : "";
-            $act    = isset($_POST['act'])   ? $_POST['act']   : "";
-            $state  = isset($_POST['state']) ? $_POST['state'] : "";
-            $remarks  = isset($_POST['remarks']) ? $_POST['remarks'] : "";
+            $uid     = isset($_POST['uid'])         ? $_POST['uid']    : "";
+            $id     = isset($_POST['id'])           ? $_POST['id']    : "";
+            $act    = isset($_POST['act'])          ? $_POST['act']   : "";
+            $state  = isset($_POST['state'])        ? $_POST['state'] : "";
+            $remarks  = isset($_POST['remarks'])    ? $_POST['remarks'] : "";
             if($act == 'app' ){
                 echo setRequirements($uid, $id, 2, $state, $remarks);
             }
