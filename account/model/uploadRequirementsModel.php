@@ -1125,6 +1125,6 @@ function updateRequirementStatus($id, $status, $target, $remarks = "")
     
 
     $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
-    return($query);
+    return($sql);
     return ($query) ? "Success" : "Error Updating";
 }
