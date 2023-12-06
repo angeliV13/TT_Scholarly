@@ -711,8 +711,9 @@ function userTables($stat = "", $acc_status = "", $acc_type = "", $app_benef = "
     if($app_benef == 1)
     {
         // $sql .= " AND acc.account_type = '2' OR ( acc.account_type = '2' AND sa.status = '4' )"; 
+        $sql .= " AND acc.account_type = '2'"; 
         // $sql .= " AND ( acc.account_type = '2' AND sa.status = '4' )"; 
-        $sql .= " AND (( acc.account_type = '2' AND sa.status = '4' ) OR ( acc.account_type = '2' AND sa.account_type = '3' AND sa.status = '0' ))"; 
+        // $sql .= " AND (( acc.account_type = '2' AND sa.status = '2' ) OR ( acc.account_type = '2' AND sa.account_type = '2' AND sa.status = '0' ))"; 
     }
     else
     {
