@@ -765,7 +765,7 @@ function userTables($stat = "", $acc_status = "", $acc_type = "", $app_benef = "
             {
                 if (!isset($scholarType['status'])) continue;
                 if ($app_benef == 1){
-                    if ($scholarType['status'] != 2 || $scholarType['status'] != 0) continue;
+                    if ($scholarType['status'] != 2) continue;
                 }else{
                     if ($scholarType['status'] != $stat) continue;
                 }
