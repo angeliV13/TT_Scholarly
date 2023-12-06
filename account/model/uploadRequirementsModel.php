@@ -121,7 +121,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                         </div>
                                         <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
                                         <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                 <h5 class="modal-title">School ID</h5>
@@ -145,7 +145,7 @@ function getAssessmentBeneTable($dashboard = 0)
                 $buttonSchoolId =   '<div class="btn-group-vertical d-flex">
                                         <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
                                         <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                 <h5 class="modal-title">School ID</h5>
@@ -174,7 +174,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                     </div>
                                     <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
                                     <div class="modal fade" id="fileUploadClearanceModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                             <h5 class="modal-title">School Clearance</h5>
@@ -197,7 +197,7 @@ function getAssessmentBeneTable($dashboard = 0)
                 $buttonClearance =  '<div class="btn-group-vertical d-flex">
                                     <button id="viewUploadClearance" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fileUploadClearanceModal"> View File</button>
                                     <div class="modal fade" id="fileUploadClearanceModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                             <h5 class="modal-title">School Clearance</h5>
@@ -225,7 +225,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                     </div>
                                     <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
                                     <div class="modal fade" id="viewUploadCorModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                             <h5 class="modal-title">Certificate of Registration</h5>
@@ -248,7 +248,7 @@ function getAssessmentBeneTable($dashboard = 0)
                 $buttonCor =        '<div class="btn-group-vertical d-flex">
                                     <button id="viewUploadCor" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadCorModal"> View File</button>
                                     <div class="modal fade" id="viewUploadCorModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                             <h5 class="modal-title">Certificate of Registration</h5>
@@ -277,7 +277,7 @@ function getAssessmentBeneTable($dashboard = 0)
                                     </div>
                                     <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
                                     <div class="modal fade" id="viewUploadGradeModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                             <h5 class="modal-title">Grade</h5>
@@ -300,7 +300,7 @@ function getAssessmentBeneTable($dashboard = 0)
                 $buttonGrade =         '<div class="btn-group-vertical d-flex">
                                     <button id="viewUploadGrade" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadGradeModal"> View File</button>
                                     <div class="modal fade" id="viewUploadGradeModal" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                             <h5 class="modal-title">Grade</h5>
@@ -574,7 +574,7 @@ function getApplicationTable($dashboard = 0)
             $button =   '<div class="btn-group-vertical d-flex">
                             <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal'. $requirement .'"> View File</button>
                             <div class="modal fade" id="viewUploadSchoolIdModal'. $requirement .'" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                     <h5 class="modal-title">'. getRequirementDesc($requirement) .'</h5>
@@ -670,7 +670,7 @@ function getUploadButton($row, $category = 'assessment')
                         </div>
                         <button id="viewUpload' . $requirement . '" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUpload' . $requirement . 'Modal"> View File</button>
                         <div class="modal fade" id="viewUpload' . $requirement . 'Modal" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">School ID</h5>
@@ -956,7 +956,7 @@ function getRenewalTable($dashboard = 0)
             $button =   '<div class="btn-group-vertical d-flex">
                             <button id="viewUploadSchoolId" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#viewUploadSchoolIdModal"> View File</button>
                             <div class="modal fade" id="viewUploadSchoolIdModal" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                     <h5 class="modal-title">School ID</h5>
