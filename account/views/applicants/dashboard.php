@@ -89,8 +89,19 @@
                             <div class="card recent-sales overflow-auto">
                                 <div class="card-body">
                                     <h5 class="card-title">General Requirements<span> | Progress</span></h5>
-
-                                    <table id="applicationFileTable" class="table table-borderless text-center">
+                                    <?php 
+                                        if($_SESSION['account_type'] == 3){
+                                            $tabName = 'applicationFileTable';
+                                        }elseif($_SESSION['account_type'] == 2){
+                                            if($status['status'] == 3){ 
+                                                $tabName = 'renewalFileTable';
+                                            }else{
+                                                $tabName = 'assessmentFileTable';
+                                            }
+                                        }
+                                    ?>
+                                    
+                                    <table id="<?php echo $tabName; ?>" class="table table-borderless text-center">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">No.</th>
