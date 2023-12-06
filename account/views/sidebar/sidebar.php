@@ -215,7 +215,7 @@
 
               <?php if ($assessmentAccess != null) : ?>
 
-                <?php if (($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)  && (( $status['status'] == 1 && $status['account_type'] == 2) || ($status['status'] == 4 && $status['account_type'] == 3))) : ?>
+                <?php if (($assessmentAccess[$access] == 1 && $assessmentAccess[0] <= $dateNow && $assessmentAccess[1] >= $dateNow)  && (( $status['status'] == 1 && $status['account_type'] == 2) || ($status['status'] == 1 && $status['account_type'] == 3))) : ?>
                     <!-- Start Assessment Requirements Nav -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="index.php?nav=assessment-bene">
