@@ -1093,18 +1093,18 @@ function setRequirements($userid, $id, $status, $state, $remarks){
         case 'app':
             // (update_applicant_status($userid, $act) == true ? 'Success' : 'Error');
             $entries    = getFileEntries($ay, $sem, $userid, 'applicant_file', 0, 1);
-            updateRequirementStatus($id, $status, 'applicant_file', $remarks);
+            $val        = updateRequirementStatus($id, $status, 'applicant_file', $remarks);
             break;
         case 'ass':
             $entries    = getFileEntries($ay, $sem, $userid, 'assessment_file', 0, 1);
-            updateRequirementStatus($id, $status, 'assessment_file', $remarks);
+            $val        = updateRequirementStatus($id, $status, 'assessment_file', $remarks);
             break;
         case 'ren':
             $entries    = getFileEntries($ay, $sem, $userid, 'renewal_file', 0, 1);
-            updateRequirementStatus($id, $status, 'renewal_file', $remarks);
+            $val        = updateRequirementStatus($id, $status, 'renewal_file', $remarks);
             break;
     }
-    return $entries;
+    return $val;
     if($entries->num_rows <> 0) {
         return (update_applicant_status($userid, 1) == true ? 'Success' : 'Error');
     }
