@@ -134,7 +134,7 @@ function infoRadio() {
               id: id,
               act : act,
               state : state,
-              remarks: $('#swal2-input').val(),
+              remarks: result.value,
             },
             success: function (data) {
               if (data == "Success") {
