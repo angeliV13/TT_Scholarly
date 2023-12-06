@@ -1093,18 +1093,17 @@ function setRequirements($userid, $id, $status, $state, $remarks){
         case 'app':
             // (update_applicant_status($userid, $act) == true ? 'Success' : 'Error');
             $entries    = getFileEntries($ay, $sem, $userid, 'applicant_file', 0, 1);
-            $val        = updateRequirementStatus($id, $status, 'applicant_file', $remarks);
+            $val        = updateRequirementStatus($userid, $id, $status, 'applicant_file', $remarks);
             break;
         case 'ass':
             $entries    = getFileEntries($ay, $sem, $userid, 'assessment_file', 0, 1);
-            $val        = updateRequirementStatus($id, $status, 'assessment_file', $remarks);
+            $val        = updateRequirementStatus($userid, $id, $status, 'assessment_file', $remarks);
             break;
         case 'ren':
             $entries    = getFileEntries($ay, $sem, $userid, 'renewal_file', 0, 1);
-            $val        = updateRequirementStatus($id, $status, 'renewal_file', $remarks);
+            $val        = updateRequirementStatus($userid, $id, $status, 'renewal_file', $remarks);
             break;
     }
-    return $val;
     if($entries->num_rows <> 0) {
         return (update_applicant_status($userid, 1) == true ? 'Success' : 'Error');
     }
@@ -1112,19 +1111,24 @@ function setRequirements($userid, $id, $status, $state, $remarks){
 
 }
 
-function updateRequirementStatus($id, $status, $target, $remarks = "")
+function updateRequirementStatus($userid, $id, $status, $target, $remarks = "")
 {
     $date = date("Y-m-d");
 
     include("dbconnection.php");
+    $ay         = getDefaultAcadYearId();
+    $sem        = getDefaultSemesterId();
 
     $sql = "UPDATE  `{$target}` 
-            SET     `status`    = '{$status}',  
-                    `remarks`   = '{$remarks}'
-            WHERE   `id`        = '{$id}'";
+            SET     `status`     = '{$status}',  
+                    `remarks`    = '{$remarks}'
+            WHERE   `account_id` = '{$userid}'
+            AND     `ay_id`      = '{$ay}'
+            AND     `sem_id`     = '{$sem}'
+            AND     `requirement`= '{$id}'";
+            // WHERE   `id`        = '{$id}'";
 
     $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
-    return($sql);
     
     return ($query) ? "Success" : "Error Updating";
 }
