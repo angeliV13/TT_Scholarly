@@ -1105,7 +1105,6 @@ function setRequirements($userid, $id, $status, $state, $remarks){
             break;
     }
     if($entries->num_rows <> 0) {
-        return($remarks);
         return (update_applicant_status($userid, 1) == true ? 'Success' : 'Error');
     }
     return 'Success';
@@ -1119,11 +1118,12 @@ function updateRequirementStatus($id, $status, $target, $remarks = "")
     include("dbconnection.php");
 
     $sql = "UPDATE  `{$target}` 
-            SET     `status`    = '{$status}',  `remarks`    = '{$remarks}'
+            SET     `status`    = '{$status}',  
+                    `remarks`   = '{$remarks}'
             WHERE   `id`        = '{$id}'";
     
 
     $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
-
+    return($query);
     return ($query) ? "Success" : "Error Updating";
 }
