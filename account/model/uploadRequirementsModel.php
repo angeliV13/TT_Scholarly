@@ -1104,7 +1104,7 @@ function setRequirements($userid, $id, $status, $state, $remarks){
             updateRequirementStatus($id, $status, 'renewal_file', $remarks);
             break;
     }
-    return json_encode($entries);
+    return $entries;
     if($entries->num_rows <> 0) {
         return (update_applicant_status($userid, 1) == true ? 'Success' : 'Error');
     }
@@ -1122,9 +1122,10 @@ function updateRequirementStatus($id, $status, $target, $remarks = "")
             SET     `status`    = '{$status}',  
                     `remarks`   = '{$remarks}'
             WHERE   `id`        = '{$id}'";
-    
+
+    return($sql);
 
     $query = $conn->query($sql) or die("Error URQ004: " . $conn->error);
-    return($sql);
+    
     return ($query) ? "Success" : "Error Updating";
 }
