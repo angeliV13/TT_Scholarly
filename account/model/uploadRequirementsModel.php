@@ -1104,6 +1104,7 @@ function setRequirements($userid, $id, $status, $state, $remarks){
             updateRequirementStatus($id, $status, 'renewal_file', $remarks);
             break;
     }
+    return $entries;
     if($entries->num_rows <> 0) {
         return (update_applicant_status($userid, 1) == true ? 'Success' : 'Error');
     }
