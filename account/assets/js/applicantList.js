@@ -105,11 +105,18 @@ function infoRadio() {
 
     if(act == "mod"){
       Swal.fire({
-        title: "Set this to modify",
-        text: "Are you sure you want to set this file for modification?",
+        title: "Reject File?",
+        text: "Are you sure you want to reject this file?",
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Yes",
+        preConfirm: (reason) => {
+          if (reason == '') {
+              Swal.showValidationMessage(
+                  `Please fill up the reason field.`
+              )
+          }
+        }
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
@@ -121,6 +128,7 @@ function infoRadio() {
               id: id,
               act : act,
               state : state,
+              remarks: $('#swal2-input').val(),
             },
             success: function (data) {
               if (data == "Success") {

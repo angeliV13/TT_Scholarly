@@ -1082,7 +1082,7 @@ function submitRenewal($target_dir, $schoolIdFile, $corFile)
     return 'Success';
 }
 
-function setRequirements($userid, $id, $status, $state){
+function setRequirements($userid, $id, $status, $state, $remarks){
 
     include("dbconnection.php");
     $ay         = getDefaultAcadYearId();
@@ -1093,15 +1093,15 @@ function setRequirements($userid, $id, $status, $state){
         case 'app':
             // (update_applicant_status($userid, $act) == true ? 'Success' : 'Error');
             $entries    = getFileEntries($ay, $sem, $userid, 'applicant_file', 0, 1);
-            updateRequirementStatus($id, $status, 'applicant_file');
+            updateRequirementStatus($id, $status, 'applicant_file', $remarks);
             break;
         case 'ass':
             $entries    = getFileEntries($ay, $sem, $userid, 'assessment_file', 0, 1);
-            updateRequirementStatus($id, $status, 'assessment_file');
+            updateRequirementStatus($id, $status, 'assessment_file', $remarks);
             break;
         case 'ren':
             $entries    = getFileEntries($ay, $sem, $userid, 'renewal_file', 0, 1);
-            updateRequirementStatus($id, $status, 'renewal_file');
+            updateRequirementStatus($id, $status, 'renewal_file', $remarks);
             break;
     }
     if($entries->num_rows <> 0) {
@@ -1111,14 +1111,14 @@ function setRequirements($userid, $id, $status, $state){
 
 }
 
-function updateRequirementStatus($id, $status, $target)
+function updateRequirementStatus($id, $status, $target, $remarks = "")
 {
     $date = date("Y-m-d");
 
     include("dbconnection.php");
 
     $sql = "UPDATE  `{$target}` 
-            SET     `status`    = '{$status}' 
+            SET     `status`    = '{$status}',  `remarks`    = '{$remarks}'
             WHERE   `id`        = '{$id}'";
     
 

@@ -67,11 +67,12 @@ if(isset($_REQUEST['action'])){
             $id     = isset($_POST['id'])    ? $_POST['id']    : "";
             $act    = isset($_POST['act'])   ? $_POST['act']   : "";
             $state  = isset($_POST['state']) ? $_POST['state'] : "";
+            $remarks  = isset($_POST['remarks']) ? $_POST['remarks'] : "";
             if($act == 'app' ){
-                echo setRequirements($uid, $id, 2, $state);
+                echo setRequirements($uid, $id, 2, $state, $remarks);
             }
             else if($act == 'mod'){
-                echo setRequirements($uid, $id, 3, $state);
+                echo setRequirements($uid, $id, 3, $state, $remarks);
             }
 
     }
