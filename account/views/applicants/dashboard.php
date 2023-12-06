@@ -101,76 +101,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row"><a href="#">1</a></th>
-                                                <td>Certificate of Birth</td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">2</a></th>
-                                                <td>Certificate of Good Moral Character</td>
-                                                <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-warning">Pending</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">3</a></th>
-                                                <td>Report of Grades</td>
-                                                <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">4</a></th>
-                                                <td>ID Photo (2X2 size)</td>
-                                                <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-danger">Rejected</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">5</a></th>
-                                                <td>Vicinity Map</td>
-                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">6</a></th>
-                                                <td>Barangay Clearance</td>
-                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">7</a></th>
-                                                <td>Parents Voter's ID/Voter's Certification</td>
-                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">8</a></th>
-                                                <td>Voter's Certificate of the Applicant</td>
-                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">9</a></th>
-                                                <td>Income Tax Return or Certificate of Employment and Compensation (Parents)</td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">10</a></th>
-                                                <td>Certificate of Indigency or Certificate of Unemployment for the Parents or other Household who are not employed.</td>
-                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                                <td><a href="#" class="text-primary">At praesentium minuzn</a></td>
-                                                <td><span class="badge bg-success">Approved</span></td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>

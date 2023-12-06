@@ -91,87 +91,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>College EA - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="#application_edit_modal">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="#application_delete_modal">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>College SC - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="">Delete</button>
-                                            </div>
-                                            <!-- Assessement Edit Modal -->
-                                            <div class="modal fade" id="application_edit_modal" tabindex="-1">
-                                                <div class="modal-dialog modal-dialog-scrollable">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Edit Application</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>
-                                                                Are you sure you want to make this academic year as default?
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-warning">Make it default</button>
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Application Delete Modal -->
-                                            <div class="modal fade" id="application_delete_modal" tabindex="-1">
-                                                <div class="modal-dialog modal-dialog-scrollable">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Delete Application?</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>
-                                                                Are you sure you want to delete this academic year?
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger">Delete</button>
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
@@ -204,87 +124,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>College EA - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="#assessment_edit_modal">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="#assessment_delete_modal">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>College SC - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="">Delete</button>
-                                            </div>
-                                            <!-- Assessement Edit Modal -->
-                                            <div class="modal fade" id="assessment_edit_modal" tabindex="-1">
-                                                <div class="modal-dialog modal-dialog-scrollable">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Edit Assessment</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>
-                                                                Are you sure you want to make this academic year as default?
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-warning">Make it default</button>
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Assessment Delete Modal -->
-                                            <div class="modal fade" id="assessment_delete_modal" tabindex="-1">
-                                                <div class="modal-dialog modal-dialog-scrollable">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Delete Assessment?</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>
-                                                                Are you sure you want to delete this academic year?
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger">Delete</button>
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
@@ -317,46 +157,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>College EA - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>College SC - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
@@ -391,48 +192,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class=" small text-center">
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>30 Mins</td>
-                                        <td>College EA - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>June 30, 2023</td>
-                                        <td>July 31, 2023</td>
-                                        <td>30 Mins</td>
-                                        <td>College SC - Private</td>
-                                        <td>Super Admin 1
-                                            <br>
-                                            <span class="small">May 6, 2023</span>
-                                        </td>
-                                        <td>Admin
-                                            <br>
-                                            <span class="small">May 7, 2023</span>
-                                        </td>
-                                        <td>
-                                            <div class="row mx-auto"> <!--style="height:100px;width:200px" > -->
-                                                <button class="col-6 btn btn-warning" data-bs-toggle="modal" data-bs-target="">Edit</button>
-                                                <button class="col-6 btn btn-danger" data-bs-toggle="modal" data-bs-target="">Delete</button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
