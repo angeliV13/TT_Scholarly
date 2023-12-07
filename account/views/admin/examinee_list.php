@@ -4,8 +4,8 @@
         <h1>Beneficiaries</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active">Beneficiaries</li>
-            <li class="breadcrumb-item active">List of Beneficiaries</li>
+            <li class="breadcrumb-item active">Examiantion</li>
+            <li class="breadcrumb-item active">List of Examinees</li>
         </ol>
     </div>
     <section class="section">
