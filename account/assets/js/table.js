@@ -2026,6 +2026,47 @@ $(document).ready(function () {
         },
         "createdRow": function (row, data, index) { },
         "columnDefs": [{ className: "text-center", "targets": [0] }],
+        initComplete: function () {
+            $(document).on("click", "#setSchoolFilter", function () {
+                graduatingTable.ajax.reload();
+
+                let filterSchool = $("#filterSchool option:selected").text();
+                let filterSchoolType = $("#filterSchoolType option:selected").text();
+                let filterClass = $("#filterClass option:selected").text();
+                let filterLevel = $("#filterLevel option:selected").val();
+
+                if (filterSchool == "") {
+                    graduatingTable.columns(7).search("").draw();
+                } else {
+                    graduatingTable.columns(7).search(filterSchool).draw();
+                }
+
+                if (filterSchoolType == "") {
+                    graduatingTable.columns(8).search("").draw();
+                } else {
+                    graduatingTable.columns(8).search(filterSchoolType).draw();
+                }
+
+                if (filterClass == "") {
+                    graduatingTable.columns(9).search("").draw();
+                } else {
+                    graduatingTable.columns(9).search(filterClass).draw();
+                }
+
+                if (filterLevel == "") {
+                    graduatingTable.columns(10).search("").draw();
+                } else {
+                    graduatingTable.columns(10).search(filterLevel).draw();
+                }
+            });
+
+            $(document).on("click", "#resetSchoolFilter", function () {
+                graduatingTable.columns(7).search("").draw();
+                graduatingTable.columns(8).search("").draw();
+                graduatingTable.columns(9).search("").draw();
+                graduatingTable.columns(10).search("").draw();
+            });
+        },
         language: {
             processing: "<span class='loader'></span>"
         },
