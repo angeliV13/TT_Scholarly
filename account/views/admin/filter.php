@@ -59,7 +59,8 @@
                             <select class="form-select" id="filterStatus">
                                 <option value=''> </option>
                                 <option value='1'> Passed</option>
-                                <option value='2'> Passed</option>
+                                <option value='2'> Failed</option>
+                                <option value='3'> Not Submitted</option>
                             </select>
                         </div>
                     </div>
