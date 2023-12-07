@@ -257,6 +257,7 @@ $(document).ready(function () {
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
+                let filterStatus = $("#filterStatus option:selected").val();
 
                 // if (filterScholarType == ""){
                 //     examineeListTable.columns(11).search("").draw();
@@ -281,12 +282,19 @@ $(document).ready(function () {
                 } else {
                     examineeListTable.columns(11).search(filterYearLevel).draw();
                 }
+
+                if (filterStatus == ""){
+                    examineeListTable.columns(13).search("").draw();
+                } else {
+                    examineeListTable.columns(13).search(filterStatus).draw();
+                }
             });
 
             $(document).on("click", "#filter_reset", function () {
                 examineeListTable.columns(7).search("").draw();
                 examineeListTable.columns(9).search("").draw();
                 examineeListTable.columns(11).search("").draw();
+                examineeListTable.columns(13).search("").draw();
                 // examineeListTable.columns(14).search("").draw();
             });
         },
