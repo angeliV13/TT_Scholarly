@@ -257,7 +257,7 @@ $(document).ready(function () {
                 let filterEducationLevel = $("#filterEducationLevel option:selected").text();
                 let filterSchool = $("#filterSchool option:selected").text();
                 let filterYearLevel = $("#filterYearLevel option:selected").val();
-                let filterStatus = $("#filterStatus option:selected").val();
+                let filterStatus = $("#filterStatus option:selected").text();
 
                 // if (filterScholarType == ""){
                 //     examineeListTable.columns(11).search("").draw();

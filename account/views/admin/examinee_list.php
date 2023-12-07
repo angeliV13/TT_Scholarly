@@ -1,7 +1,7 @@
 <main id="main" class="main">
     <!-- Start of Page Title -->
     <div class="pagetitle">
-        <h1>Beneficiaries</h1>
+        <h1>Examination</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item active">Examiantion</li>
