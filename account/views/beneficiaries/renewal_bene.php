@@ -29,64 +29,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>School ID</td>
-                  <td>Approved/Rejected</td>
-                  <td>BSU </td>
-                  <td>
-                    <div class="btn-group-vertical d-flex">
-                      <!--BUTTON FOR "NOT APPLICABLE"-->
-                      <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
-                      <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                        <div class="upload_file file btn btn-primary">Upload
-                          <input id="fileUploadSchoolId" type="file" name="schoolIdFile" onchange="getFileData(this);" />
-                        </div>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
-                        <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                          <div class="modal-dialog modal-dialog-scrollable">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title">SCHOOL ID</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Certificate of Registration</td>
-                  <td>Approved/Rejected</td>
-                  <td>BSU </td>
-                  <td>
-                    <div class="btn-group-vertical d-flex">
-                      <!--BUTTON FOR "NOT APPLICABLE"-->
-                      <input type="checkbox" class="btn-check" id="btn-check-dark" autocomplete="off">
-                      <label class="btn btn-dark" for="btn-check-dark">Not Applicable</label>
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                        <div class="upload_file file btn btn-primary">Upload
-                          <input id="fileUploadClearance" type="file" name="clearanceFile" onchange="getFileData(this);" />
-                        </div>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable"> View File</button>
-                        <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                          <div class="modal-dialog modal-dialog-scrollable">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title">School Clearance</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                
               </tbody>
             </table>
             <div class="d-grid gap-2 col-6 mx-auto">
