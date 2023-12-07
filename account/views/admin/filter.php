@@ -50,6 +50,21 @@
                         </select>
                     </div>
                 </div>
+
+                <?php if(isset($withStatus)): ?>
+                    <!-- Status -->
+                    <div class="row mb-3">
+                        <label for="filterStatus" class="col-sm-2 col-form-label font-bold">Year Level:</label>
+                        <div id="statusContainer" class="col-sm-10">
+                            <select class="form-select" id="filterStatus">
+                                <option value=''> </option>
+                                <option value='1'> Passed</option>
+                                <option value='2'> Passed</option>
+                            </select>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <div class="d-grid pt-3 gap-2 d-flex justify-content-end">
                     <button type="button" id="setFilter" class="btn btn-sm btn-danger shadow-sm">Set Query Filter </button>
                 </div>

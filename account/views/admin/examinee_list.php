@@ -13,6 +13,7 @@
         <!-- QUERY OPTION -->
         <div class="column">
             <div class="col-lg-12">
+                <?php $withStatus = 1; ?>
                 <?php include("views/admin/filter.php"); ?>
             </div>
         </div> <!-- TAB FOR COLLEGE LEVEL-->
