@@ -54,13 +54,13 @@
                 <?php if(isset($withStatus)): ?>
                     <!-- Status -->
                     <div class="row mb-3">
-                        <label for="filterStatus" class="col-sm-2 col-form-label font-bold">Year Level:</label>
+                        <label for="filterStatus" class="col-sm-2 col-form-label font-bold">Status:</label>
                         <div id="statusContainer" class="col-sm-10">
                             <select class="form-select" id="filterStatus">
                                 <option value=''> </option>
-                                <option value='1'> Passed</option>
-                                <option value='2'> Failed</option>
-                                <option value='3'> Not Submitted</option>
+                                <option value='1'>Passed</option>
+                                <option value='2'>Failed</option>
+                                <option value='3'>Not Submitted</option>
                             </select>
                         </div>
                     </div>
