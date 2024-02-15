@@ -380,7 +380,8 @@ function examCreateDiv($questionArray)
                 }
             }
             
-            $btnPrv = 1;
+            // [<====BUG====>]
+            // $btnPrv = 1; 
             $itemCtr = 1;
         }else{
             $btn = '';
