@@ -32,6 +32,7 @@ $(document).ready(function () {
 });
 
 $("form").on("change", function (event) {
+  event.preventDefault();
   let id = event.target.id.split("_")[1];
   let val = $("#" + event.target.id).val();
 
