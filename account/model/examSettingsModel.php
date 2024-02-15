@@ -298,24 +298,25 @@ function examCreateDiv($questionArray)
             $categoryTmp = $categories[$questionItem[0]];
 
         // Following Questions
-        } else {                    
-            if ($counter == $allItem) {
-                $btn = '
-                <!-- Next Submit-->
-                <div class="py-3">
-                    <button class="btn btn-warning px-3">Previous</button>
-                    <button class="btn btn-primary px-4">Submit</button>
-                </div>
-                ';
-            } else {
-                $btn = '
-                <!-- Next Previous-->
-                <div class="py-3">
-                    <button class="btn btn-warning px-3">Previous</button>
-                    <button class="btn btn-primary px-4">Next</button>
-                </div>
-                ';
-            }
+        } else {  
+            // THIS BUTTON NOT SUPPORTED ANYMORE                  
+            // if ($counter == $allItem) {
+            //     $btn = '
+            //     <!-- Next Submit-->
+            //     <div class="py-3">
+            //         <button class="btn btn-warning px-3">Previous</button>
+            //         <button class="btn btn-primary px-4">Submit</button>
+            //     </div>
+            //     ';
+            // } else {
+            //     $btn = '
+            //     <!-- Next Previous-->
+            //     <div class="py-3">
+            //         <button class="btn btn-warning px-3">Previous</button>
+            //         <button class="btn btn-primary px-4">Next</button>
+            //     </div>
+            //     ';
+            // }
 
             // Header
             if ($categoryTmp != $categories[$questionItem[0]]) {
