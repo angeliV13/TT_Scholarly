@@ -336,50 +336,51 @@ function examCreateDiv($questionArray)
         // Exam Grouping
         $item = '<div id="question_' . $counter . '" class="align-items-center question_group_'. $questionItem[0] .' '. (($btnPrv == 1) ? 'd-none' : '' ).'">';
 
-        // Buttons
-        if($itemCtr == $totalItems){
-            if($btnPrv == 1){
-                if($counter == $allItem){
-                    $btn = '
-                        <!-- Previous Next-->
-                        <div class="py-3">
-                            <button class="btn btn-warning px-3" onclick="btnAction(1, '. $questionItem[0] .')">Previous</button>
-                            <button id="submitExam" class="btn btn-success" onclick="btnAction(3, '. $questionItem[0] .')" type="button" >Submit Examination</button>
-                        </div>
-                    ';
-                }else{
-                    $btn = '
-                        <!-- Next Previous-->
-                        <div class="py-3">
-                            <button class="btn btn-warning px-3" onclick="btnAction(1, '. $questionItem[0] .')">Previous</button>
-                            <button class="btn btn-primary px-4" onclick="btnAction(2, '. $questionItem[0] .')">Next</button>
-                        </div>
-                    ';
-                }
-            }else{
-                if($counter == $allItem){
-                    $btn = '
-                        <!-- Next Submit-->
-                        <div class="py-3">
-                            <button id="submitExam" class="btn btn-success" onclick="btnAction(3, '. $questionItem[0] .')" type="button" >Submit Examination</button>
-                        </div>
-                    ';
-                }else{
-                    $btn = '
-                        <!-- Next -->
-                        <div class="py-3">
-                            <button class="btn btn-primary px-4" onclick="btnAction(2, '. $questionItem[0] .')">Next</button>
-                        </div>
-                    ';
-                }
-            }
+        // [REMOVED] JQuery BUG
+        // // Buttons
+        // if($itemCtr == $totalItems){
+        //     if($btnPrv == 1){
+        //         if($counter == $allItem){
+        //             $btn = '
+        //                 <!-- Previous Next-->
+        //                 <div class="py-3">
+        //                     <button class="btn btn-warning px-3" onclick="btnAction(1, '. $questionItem[0] .')">Previous</button>
+        //                     <button id="submitExam" class="btn btn-success" onclick="btnAction(3, '. $questionItem[0] .')" type="button" >Submit Examination</button>
+        //                 </div>
+        //             ';
+        //         }else{
+        //             $btn = '
+        //                 <!-- Next Previous-->
+        //                 <div class="py-3">
+        //                     <button class="btn btn-warning px-3" onclick="btnAction(1, '. $questionItem[0] .')">Previous</button>
+        //                     <button class="btn btn-primary px-4" onclick="btnAction(2, '. $questionItem[0] .')">Next</button>
+        //                 </div>
+        //             ';
+        //         }
+        //     }else{
+        //         if($counter == $allItem){
+        //             $btn = '
+        //                 <!-- Next Submit-->
+        //                 <div class="py-3">
+        //                     <button id="submitExam" class="btn btn-success" onclick="btnAction(3, '. $questionItem[0] .')" type="button" >Submit Examination</button>
+        //                 </div>
+        //             ';
+        //         }else{
+        //             $btn = '
+        //                 <!-- Next -->
+        //                 <div class="py-3">
+        //                     <button class="btn btn-primary px-4" onclick="btnAction(2, '. $questionItem[0] .')">Next</button>
+        //                 </div>
+        //             ';
+        //         }
+        //     }
             
-            $btnPrv = 1;
-            $itemCtr = 1;
-        }else{
-            $btn = '';
-            $itemCtr += 1;
-        }
+        //     $btnPrv = 1;
+        //     $itemCtr = 1;
+        // }else{
+        //     $btn = '';
+        //     $itemCtr += 1;
+        // }
 
         $item .= '
             <!-- <div id="question_' . $counter . '" class="align-items-center text-center bg-dark"> -->
