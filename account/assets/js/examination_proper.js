@@ -120,15 +120,15 @@ $(window).bind('beforeunload', function(e) {
   return "You have some unsaved changes";
 });
 
-$(window).on('unload', function(e) {
-  let url   = "controller/examSettings.php";
-  let data  = new FormData();
+// $(window).on('unload', function(e) {
+//   let url   = "controller/examSettings.php";
+//   let data  = new FormData();
 
-  data.append("action", 6);
+//   data.append("action", 6);
 
-  navigator.sendBeacon(url, data);
+//   navigator.sendBeacon(url, data);
 
-});
+// });
 
 // Start Exam
 $("#start_exam").on("click", function(e){
