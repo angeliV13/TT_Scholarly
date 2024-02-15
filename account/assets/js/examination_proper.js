@@ -115,10 +115,11 @@ $(window).on('load', function() {
   $('#instructionsModal').modal('show');
 });
 
-// Modal on UnLoad
-$(window).bind('beforeunload', function(e) {
-  return "You have some unsaved changes";
-});
+// Remove the UNLOAD FEATURE
+// // Modal on UnLoad
+// $(window).bind('beforeunload', function(e) {
+//   return "You have some unsaved changes";
+// });
 
 // $(window).on('unload', function(e) {
 //   let url   = "controller/examSettings.php";
