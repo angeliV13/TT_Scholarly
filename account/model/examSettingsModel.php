@@ -335,7 +335,9 @@ function examCreateDiv($questionArray)
         }
 
         // Exam Grouping
-        $item = '<div id="question_' . $counter . '" class="align-items-center question_group_'. $questionItem[0] .' '. (($btnPrv == 1) ? 'd-none' : '' ).'">';
+        $item = '<div id="question_' . $counter . '" class="align-items-center question_group_'. $questionItem[0] .'   ">';
+        // [<====BUG====>]
+        // '. (($btnPrv == 1) ? 'd-none' : '' ).'">';
 
         // Buttons
         if($itemCtr == $totalItems){
