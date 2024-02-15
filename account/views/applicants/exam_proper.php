@@ -17,7 +17,7 @@
 
   <div class="card">
 
-    <form id="exam_container" class="prevent-select" method="post">
+    <form id="exam_container" class="prevent-select">
 
     </form>
 
