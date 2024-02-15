@@ -64,12 +64,16 @@ function btnAction(action, categ){
   $(window).unbind('beforeunload');
   if(action == 1){
     actionCateg = categ - 1;
-    $(".question_group_" + categ).addClass("d-none");
-    $(".question_group_" + actionCateg).removeClass("d-none");
+    // $(".question_group_" + categ).addClass("d-none");
+    // $(".question_group_" + actionCateg).removeClass("d-none");
+    $(".question_group_" + categ).classList.add("d-none");
+    $(".question_group_" + actionCateg).classList.remove("d-none");
   }else if(action == 2){
     actionCateg = categ + 1;
-    $(".question_group_" + categ).addClass("d-none");
-    $(".question_group_" + actionCateg).removeClass("d-none");
+    $(".question_group_" + categ).classList.add("d-none");
+    $(".question_group_" + actionCateg).classList.remove("d-none");
+    // $(".question_group_" + categ).addClass("d-none");
+    // $(".question_group_" + actionCateg).removeClass("d-none");
   }else if(action == 3){
     Swal.fire({
       title: "Submit Examination?",
